@@ -5,7 +5,7 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 ═══════════════════════════════════════════════════════════════ */
 const STORAGE_KEY = 'atlas_formations_v2'
 const API_KEY     = import.meta.env.VITE_ANTHROPIC_API_KEY || ''
-const MODEL       = 'claude-sonnet-4-20250514'
+const MODEL       = 'claude-haiku-4-5-20251001'
 
 const ROLES = [
   { id:'dir',         icon:'◈', label:'Direction des programmes', desc:'Toutes formations · Ingestion · Supervision' },
