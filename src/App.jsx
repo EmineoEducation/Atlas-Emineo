@@ -30,7 +30,7 @@ async function streamClaude(messages, onToken) {
       'anthropic-version': '2023-06-01',
       'anthropic-dangerous-direct-browser-access': 'true',
     },
-    body: JSON.stringify({ model: MODEL, max_tokens: 4000, stream: true, messages }),
+    body: JSON.stringify({ model: MODEL, max_tokens: 16000, stream: true, messages }),
   })
   if (!res.ok) throw new Error('HTTP ' + res.status)
   const reader = res.body.getReader()
@@ -54,7 +54,7 @@ async function streamClaude(messages, onToken) {
 }
 
 async function ingererDocuments(textes, campus, onProgress) {
-  const corpus = textes.map((t, i) => `--- DOCUMENT ${i+1} ---\n${t.slice(0, 5000)}`).join('\n\n')
+  const corpus = textes.map((t, i) => `--- DOCUMENT ${i+1} ---\n${t.slice(0, 20000)}`).join('\n\n')
   const prompt = `Tu es un expert en ingénierie pédagogique. Analyse ces documents et extrais la structure pédagogique complète.
 
 ${corpus}
@@ -85,12 +85,23 @@ Retourne UNIQUEMENT ce JSON (sans markdown) :
   await streamClaude([{ role: 'user', content: prompt }], tok => { full += tok })
   onProgress('Structuration…')
   try {
-    const json = JSON.parse(full.replace(/```json|```/g, '').trim())
+    // Nettoyage robuste : retire ```json, ```, et tout texte autour
+    let cleaned = full.trim()
+    // Retire les fences markdown
+    cleaned = cleaned.replace(/^```(?:json)?\s*/i, '').replace(/```\s*$/, '')
+    // Trouve le premier { et le dernier } pour extraire le JSON
+    const firstBrace = cleaned.indexOf('{')
+    const lastBrace  = cleaned.lastIndexOf('}')
+    if (firstBrace === -1 || lastBrace === -1) {
+      throw new Error('Aucun JSON trouvé')
+    }
+    cleaned = cleaned.slice(firstBrace, lastBrace + 1)
+    const json = JSON.parse(cleaned)
     json._campus = campus
     json._id = 'f_' + Date.now()
     return json
-  } catch (_) {
-    throw new Error('Parsing échoué : ' + full.slice(0, 200))
+  } catch (e) {
+    throw new Error('Parsing échoué : ' + e.message + ' — Début réponse : ' + full.slice(0, 150))
   }
 }
 
