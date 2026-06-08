@@ -4,9 +4,8 @@ const { hashPassword } = require('./_lib/auth');
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'POST only' });
 
-  const db = getDB();
-
   try {
+    const db = getDB();
     // Créer les tables
     await db.execute(`CREATE TABLE IF NOT EXISTS users (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
