@@ -1,6 +1,6 @@
 {
-  "name": "atlas-emineo-generique",
-  "version": "1.0.0",
+  "name": "atlas-emineo",
+  "version": "2.0.0",
   "private": true,
   "scripts": {
     "dev": "vite",

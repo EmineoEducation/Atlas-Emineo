@@ -1,83 +1,41 @@
-# Atlas des compétences — Éminéo (bêta générique)
+# Atlas des compétences — Éminéo (vierge)
 
-Outil de coordination pédagogique inter-intervenants. 4 rôles : Direction des programmes, Responsable pédagogique, Intervenant, Étudiant.
+Outil de coordination pédagogique inter-intervenants.  
+**Aucune donnée de formation n'est codée en dur.** Le graphe se construit uniquement à partir des documents que vous y déposez.
 
-## Déploiement Vercel (recommandé)
+## Déploiement Vercel
 
-### 1. Cloner et préparer
-```bash
-git clone <votre-repo>
-cd atlas-emineo-generique
-npm install
-```
+### 1. GitHub Desktop
+- File → Add Local Repository → pointer ce dossier
+- Commit : `init atlas vierge`
+- Publish repository
 
-### 2. Variables d'environnement Vercel
-Dans Vercel > Settings > Environment Variables, ajouter :
+### 2. Vercel
+- Add New Project → importer le repo
+- Framework : **Vite** (détecté automatiquement)
+- Environment Variables → ajouter :
 
-| Nom | Valeur | Environnements |
-|-----|--------|----------------|
-| `VITE_ANTHROPIC_API_KEY` | `sk-ant-…` | Production, Preview |
+| Nom | Valeur |
+|-----|--------|
+| `VITE_ANTHROPIC_API_KEY` | `sk-ant-…` |
 
-⚠️ **Ne jamais committer la clé API.** Elle doit uniquement être définie dans Vercel.
+- Deploy
 
-### 3. Push → déploiement automatique
-```bash
-git add .
-git commit -m "feat: atlas emineo beta"
-git push origin main
-```
-Vercel détecte automatiquement Vite et déploie.
+### 3. Utilisation
+1. Se connecter en **Direction des programmes**
+2. Onglet **Ingestion** → déposer les fichiers texte (.txt .md)
+3. Cliquer **Analyser avec Claude**
+4. La formation est chargée — les 4 rôles sont actifs
 
-### 4. Framework preset Vercel
-- **Framework** : Vite
-- **Build command** : `npm run build`
-- **Output directory** : `dist`
-- **Install command** : `npm install`
+## Format des fichiers acceptés
 
----
+Texte brut `.txt` ou `.md` — copier-coller le contenu des syllabi Word/PDF dedans si nécessaire.  
+Le moteur Claude lit : intitulés de blocs, compétences, modules, intervenants, notions clés, volumes horaires.
 
 ## Développement local
+
 ```bash
-cp .env.example .env
-# Remplir VITE_ANTHROPIC_API_KEY dans .env (ne pas committer)
+cp .env.example .env   # remplir la clé
+npm install
 npm run dev
 ```
-
----
-
-## Configuration de la formation
-
-Éditer `src/App.jsx`, section `CONFIG` (ligne ~1) :
-
-```js
-const CONFIG = {
-  nomReseau:  "Éminéo Éducation",
-  nomAtlas:   "Atlas des compétences",
-  annee:      "2026–27",
-  campus:     ["Paris", "Bordeaux", ...],
-  promos:     ["BUT 1", "BUT 2", ...],
-  groupes:    ["Groupe A", "Groupe B", ...],
-}
-```
-
-Les blocs, compétences et modules (section `BLOCS_MOCK`, `COMP_ETUDIANT_MOCK`, etc.) sont des données de démonstration — à remplacer par les vraies données issues de l'ingestion syllabi une fois la bêta validée.
-
----
-
-## Architecture
-
-```
-src/
-├── App.jsx        # Tout : données, logique, vues, Claude API
-├── index.css      # Tokens Charte Éminéo V.1 Mars 2026
-└── main.jsx       # Entry point React
-index.html         # Shell HTML, fonts Google
-vite.config.js     # Config Vite
-.env.example       # Template variables d'environnement
-```
-
-## Stack
-- React 18 + Vite 5
-- Pas de dépendance tierce (graphe en Canvas pur)
-- Claude API : `claude-sonnet-4-20250514`, streaming SSE
-- Charte Éminéo : Playfair Display + Inter, palette Vert Abysse / Vert Menthe / Menthe Givrée / Saumon
