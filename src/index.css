@@ -1,94 +1,66 @@
-/* ── RESET ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* ── CHARTE ÉMINÉO ÉDUCATION — V.1 Mars 2026 ── */
 :root {
-  /* Couleurs principales */
-  --abysse:    #0B2B2D;   /* Vert Abysse — 35% respiration/fond */
-  --petrole:   #134547;   /* Bleu Pétrole — fonds sombres */
-  --menthe:    #5DE298;   /* Vert Menthe — 7% interaction */
-  --givre:     #E3FFF0;   /* Menthe Givrée — 55% dominante */
-  --eau:       #9DF0C4;   /* Vert Eau */
-  --saumon:    #E89B77;   /* Saumon — 3% accent/CTA */
+  --abysse:   #0B2B2D;
+  --petrole:  #134547;
+  --menthe:   #5DE298;
+  --givre:    #E3FFF0;
+  --eau:      #9DF0C4;
+  --saumon:   #E89B77;
 
-  /* Dégradé officiel fond */
   --grad-fond: linear-gradient(160deg, var(--petrole) 0%, var(--abysse) 100%);
 
-  /* Déclinaisons */
-  --menthe-10: rgba(93,226,152,0.10);
-  --menthe-20: rgba(93,226,152,0.20);
-  --menthe-40: rgba(93,226,152,0.40);
-  --givre-50:  rgba(227,255,240,0.50);
-  --abysse-80: rgba(11,43,45,0.80);
+  --surface:  #FFFFFF;
+  --surface2: #F5FDF8;
+  --border:   rgba(19,69,71,0.12);
+  --borderm:  rgba(93,226,152,0.28);
+  --textm:    #4A706E;
+  --textl:    rgba(11,43,45,0.40);
 
-  /* Sémantique UI */
-  --surface:   #FFFFFF;
-  --surface-2: #F5FDF8;   /* légère teinte menthe givrée */
-  --border:    rgba(19,69,71,0.12);
-  --border-m:  rgba(93,226,152,0.25);
-  --text-main: var(--abysse);
-  --text-mute: #4A706E;
-  --text-light: rgba(11,43,45,0.45);
+  --amber:    #EF9F27;
+  --amberbg:  #FFF8ED;
+  --red:      #E24B4A;
+  --redbg:    #FEF2F2;
 
-  /* Alertes (conservées de la v4 pour la logique pédagogique) */
-  --amber:     #EF9F27;
-  --amber-bg:  #FFF8ED;
-  --red:       #E24B4A;
-  --red-bg:    #FEF2F2;
-
-  /* Typographie */
-  --font-titre: 'Playfair Display', Georgia, serif;
-  --font-corps: 'Inter', system-ui, sans-serif;
-
-  /* Espacements */
-  --r-sm: 8px;
-  --r-md: 12px;
-  --r-lg: 16px;
-  --r-xl: 20px;
+  --font-t: 'Playfair Display', Georgia, serif;
+  --font-b: 'Inter', system-ui, sans-serif;
 }
 
 body {
-  font-family: var(--font-corps);
+  font-family: var(--font-b);
   background: var(--givre);
-  color: var(--text-main);
+  color: var(--abysse);
   min-height: 100vh;
   line-height: 1.5;
 }
+button { font-family: var(--font-b); cursor: pointer; border: none; background: none; }
+textarea, input, select { font-family: var(--font-b); }
 
-button { font-family: var(--font-corps); cursor: pointer; border: none; background: none; }
-textarea, select, input { font-family: var(--font-corps); }
+@keyframes fadeUp  { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:none} }
+@keyframes fadeIn  { from{opacity:0} to{opacity:1} }
+@keyframes spin    { to{transform:rotate(360deg)} }
+@keyframes pulse   { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(2.2);opacity:0} }
+@keyframes floatA  { 0%,100%{transform:translateY(0) rotate(-3deg)} 50%{transform:translateY(-16px) rotate(-1deg)} }
+@keyframes floatB  { 0%,100%{transform:translateY(0) rotate(5deg)}  50%{transform:translateY(-10px) rotate(7deg)} }
+@keyframes floatC  { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-20px)} }
+@keyframes blink   { 0%,100%{opacity:1} 50%{opacity:0} }
+@keyframes progress{ from{width:0} }
 
-/* ── ANIMATIONS ── */
-@keyframes fadeUp   { from { opacity:0; transform:translateY(14px) } to { opacity:1; transform:none } }
-@keyframes fadeIn   { from { opacity:0 }                             to { opacity:1 } }
-@keyframes spin     { to   { transform:rotate(360deg) } }
-@keyframes pulse    { 0%,100%{ transform:scale(1);opacity:1 } 50%{ transform:scale(2.2);opacity:0 } }
-@keyframes floatA   { 0%,100%{ transform:translateY(0) rotate(-3deg) } 50%{ transform:translateY(-16px) rotate(-1deg) } }
-@keyframes floatB   { 0%,100%{ transform:translateY(0) rotate(5deg) }  50%{ transform:translateY(-10px) rotate(7deg) } }
-@keyframes floatC   { 0%,100%{ transform:translateY(0) }               50%{ transform:translateY(-20px) } }
-@keyframes blink    { 0%,100%{ opacity:1 } 50%{ opacity:0 } }
-@keyframes shimmer  { from{ background-position:200% 0 } to{ background-position:-200% 0 } }
+.fu { animation: fadeUp 0.38s ease both; }
+.fi { animation: fadeIn 0.25s ease; }
 
-.fu { animation: fadeUp  0.38s ease both; }
-.fi { animation: fadeIn  0.25s ease; }
-
-/* ── SCROLLBAR ── */
 ::-webkit-scrollbar       { width: 5px; }
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
 
-/* ── TOOLTIP GRAPHE ── */
 #gtip {
   position: fixed; background: var(--abysse); color: #fff;
   padding: 8px 12px; border-radius: 8px; font-size: 12px;
   pointer-events: none; opacity: 0; transition: opacity 0.15s;
   max-width: 240px; line-height: 1.6; z-index: 9999;
-  border: 1px solid var(--border-m);
+  border: 1px solid var(--borderm);
 }
-
-/* ── STREAM CURSOR ── */
 .stream-cursor {
   display: inline-block; width: 6px; height: 13px;
   background: var(--menthe); margin-left: 2px;
-  animation: blink 0.9s infinite; vertical-align: text-bottom;
-  border-radius: 1px;
+  animation: blink 0.9s infinite; vertical-align: text-bottom; border-radius: 1px;
 }
