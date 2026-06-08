@@ -15,7 +15,11 @@ export async function apiFetch(path, opts = {}) {
   if (token) headers['Authorization'] = 'Bearer ' + token
 
   const res = await fetch('/api' + path, { ...opts, headers, body: opts.body ? JSON.stringify(opts.body) : undefined })
-  const data = await res.json()
+  const text = await res.text()
+  let data
+  try { data = JSON.parse(text) } catch (_) {
+    throw new Error(res.ok ? 'Réponse non-JSON du serveur' : `Erreur serveur ${res.status} — ${text.slice(0, 100)}`)
+  }
   if (!res.ok) throw new Error(data.error || 'Erreur ' + res.status)
   return data
 }
