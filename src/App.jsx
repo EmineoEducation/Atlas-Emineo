@@ -9,8 +9,8 @@ const P = {
   surface:'#FFFFFF',surface2:'#F5FDF8',border:'rgba(19,69,71,0.12)',borderm:'rgba(93,226,152,0.28)',
   textm:'#4A706E',textl:'rgba(11,43,45,0.40)',amber:'#EF9F27',amberbg:'#FFF8ED',red:'#E24B4A',redbg:'#FEF2F2',
 }
-const SCOL={nominal:'#5DE298',coordination:'#EF9F27',incoherence:'#E24B4A',vide:'#8EADA8'}
-const SFIL={nominal:'rgba(93,226,152,0.12)',coordination:'rgba(239,159,39,0.10)',incoherence:'rgba(226,75,74,0.08)',vide:'rgba(19,69,71,0.04)'}
+const SCOL={nominal:'#5DE298',signal:'#9DF0C4',coordination:'#EF9F27',incoherence:'#E24B4A',vide:'#8EADA8'}
+const SFIL={nominal:'rgba(93,226,152,0.12)',signal:'rgba(157,240,196,0.14)',coordination:'rgba(239,159,39,0.10)',incoherence:'rgba(226,75,74,0.08)',vide:'rgba(19,69,71,0.04)'}
 const ROLE_LABELS={dir:'Direction des programmes',rp:'Responsable pédagogique',intervenant:'Intervenant',etudiant:'Étudiant'}
 
 function Tag({label,color='blue',small}){
@@ -44,9 +44,10 @@ function GrapheCanvas({blocs,alertes,onClickBloc,showAlerts=true}){
     const angle=(2*Math.PI*i/Math.max(arr.length,1))-Math.PI/2
     const r=arr.length<=3?0.28:0.30
     const ids=(b.modules||[]).map(m=>m.id)
+    const h1=(alertes||[]).some(a=>a.niveau===1&&(a.modules||[]).some(m=>ids.includes(m)))
     const h2=(alertes||[]).some(a=>a.niveau===2&&(a.modules||[]).some(m=>ids.includes(m)))
     const h3=(alertes||[]).some(a=>a.niveau===3&&(a.modules||[]).some(m=>ids.includes(m)))
-    return{...b,x:0.5+r*Math.cos(angle),y:0.45+r*0.75*Math.sin(angle),status:h2?'incoherence':h3?'coordination':'nominal',comp:(b.competences||[]).length,mc:(b.modules||[]).length}
+    return{...b,x:0.5+r*Math.cos(angle),y:0.45+r*0.75*Math.sin(angle),status:h1?'incoherence':h2?'coordination':h3?'signal':'nominal',comp:(b.competences||[]).length,mc:(b.modules||[]).length}
   })
   const links=nodes.map((n,i)=>({a:n.id,b:nodes[(i+1)%nodes.length].id,w:2}))
   const draw=useCallback(()=>{
@@ -55,7 +56,7 @@ function GrapheCanvas({blocs,alertes,onClickBloc,showAlerts=true}){
     const ctx=cv.getContext('2d');ctx.clearRect(0,0,w,h)
     if(!nodes.length){ctx.fillStyle='rgba(19,69,71,0.25)';ctx.font="400 14px 'Inter',system-ui";ctx.textAlign='center';ctx.fillText('Aucune formation chargée',w/2,h/2);return}
     links.forEach(l=>{const a=nodes.find(n=>n.id===l.a),b=nodes.find(n=>n.id===l.b);if(!a||!b)return;ctx.beginPath();ctx.moveTo(a.x*w,a.y*h);ctx.lineTo(b.x*w,b.y*h);ctx.strokeStyle='rgba(93,226,152,0.18)';ctx.lineWidth=l.w;ctx.stroke()})
-    nodes.forEach(n=>{const x=n.x*w,y=n.y*h,r=28+n.comp*3.5+n.mc*1.5
+    nodes.forEach(n=>{const x=n.x*w,y=n.y*h,r=26+n.comp*7
       if(n.status==='incoherence'){ctx.beginPath();ctx.arc(x,y,r+7,0,Math.PI*2);ctx.strokeStyle='rgba(226,75,74,0.22)';ctx.lineWidth=4;ctx.stroke()}
       ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fillStyle=SFIL[n.status]||SFIL.vide;ctx.fill();ctx.strokeStyle=SCOL[n.status]||SCOL.vide;ctx.lineWidth=n.status==='incoherence'?2.5:1.5;ctx.stroke()
       const fs=Math.max(9,r*0.20);ctx.fillStyle=P.abysse;ctx.font=`600 ${fs}px 'Inter',system-ui`;ctx.textAlign='center';ctx.textBaseline='middle'
@@ -64,7 +65,7 @@ function GrapheCanvas({blocs,alertes,onClickBloc,showAlerts=true}){
     })
   },[nodes])
   useEffect(()=>{draw();window.addEventListener('resize',draw);return()=>window.removeEventListener('resize',draw)},[draw])
-  function getHit(e){const cv=cvRef.current;if(!cv)return null;const rect=cv.getBoundingClientRect(),mx=(e.clientX-rect.left)*(cv.width/rect.width),my=(e.clientY-rect.top)*(cv.height/rect.height);return nodes.find(n=>{const r=28+n.comp*3.5+n.mc*1.5,dx=mx-n.x*cv.width,dy=my-n.y*cv.height;return Math.sqrt(dx*dx+dy*dy)<=r})}
+  function getHit(e){const cv=cvRef.current;if(!cv)return null;const rect=cv.getBoundingClientRect(),mx=(e.clientX-rect.left)*(cv.width/rect.width),my=(e.clientY-rect.top)*(cv.height/rect.height);return nodes.find(n=>{const r=26+n.comp*7,dx=mx-n.x*cv.width,dy=my-n.y*cv.height;return Math.sqrt(dx*dx+dy*dy)<=r})}
   return(
     <div style={{position:'relative',borderRadius:12,border:`1px solid ${P.border}`,overflow:'hidden',background:'rgba(227,255,240,0.30)'}}>
       <canvas ref={cvRef} style={{display:'block',cursor:'default'}}
@@ -72,7 +73,7 @@ function GrapheCanvas({blocs,alertes,onClickBloc,showAlerts=true}){
         onMouseLeave={()=>{const tip=document.getElementById('gtip');if(tip)tip.style.opacity='0'}}
         onClick={e=>{const tip=document.getElementById('gtip');if(tip)tip.style.opacity='0';const n=getHit(e);if(!n){setPanel(null);return};if(n.status==='incoherence'&&onClickBloc){onClickBloc(n);return};setPanel(prev=>prev?.id===n.id?null:n)}}
       />
-      {nodes.length>0&&<div style={{position:'absolute',top:10,left:10,background:'rgba(11,43,45,0.88)',borderRadius:8,padding:'7px 11px',border:`1px solid ${P.borderm}`,fontSize:10,color:P.givre}}>{[['#5DE298','Nominal'],['#EF9F27','Coordination'],['#E24B4A','Incohérence'],['#8EADA8','Non déclaré']].map(([c,l])=><div key={l} style={{display:'flex',alignItems:'center',marginBottom:3}}><span style={{width:8,height:8,borderRadius:'50%',background:c,display:'inline-block',marginRight:5}}/>{l}</div>)}</div>}
+      {nodes.length>0&&<div style={{position:'absolute',top:10,left:10,background:'rgba(11,43,45,0.88)',borderRadius:8,padding:'7px 11px',border:`1px solid ${P.borderm}`,fontSize:10,color:P.givre}}>{[['#5DE298','Nominal'],['#9DF0C4','Signal doux'],['#EF9F27','Coordination'],['#E24B4A','Incohérence'],['#8EADA8','Non déclaré']].map(([c,l])=><div key={l} style={{display:'flex',alignItems:'center',marginBottom:3}}><span style={{width:8,height:8,borderRadius:'50%',background:c,display:'inline-block',marginRight:5}}/>{l}</div>)}</div>}
       {panel&&<div style={{position:'absolute',right:0,top:0,width:250,height:'100%',background:'rgba(11,43,45,0.96)',borderLeft:`1px solid ${P.borderm}`,padding:'0.9rem',overflowY:'auto',animation:'fadeIn 0.2s ease'}}>
         <div style={{display:'flex',justifyContent:'space-between',marginBottom:'0.75rem'}}><div><div style={{fontFamily:'var(--font-t)',fontSize:14,color:P.givre}}>{panel.titre}</div><div style={{fontSize:10,color:'rgba(227,255,240,0.4)',marginTop:3}}>{panel.comp}C · {panel.mc}M</div></div><button onClick={()=>setPanel(null)} style={{color:P.textm,fontSize:16}}>×</button></div>
         {(panel.competences||[]).map(c=><div key={c.id} style={{fontSize:11,color:P.givre,padding:'3px 0',borderBottom:'1px solid rgba(93,226,152,0.08)'}}><span style={{color:P.menthe,fontWeight:600,marginRight:5}}>{c.id}</span>{c.libelle}</div>)}

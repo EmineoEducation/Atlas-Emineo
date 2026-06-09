@@ -101,8 +101,13 @@ RÈGLES STRICTES :
 - Descriptions courtes (max 10 mots par libellé)
 - Messages d'alerte : 1 phrase max
 
+NIVEAUX D'ALERTE (état des lieux du corpus) :
+- niveau 1 = incohérence franche : une même notion centrale est couverte par plusieurs intervenants sur la même compétence sans articulation, OU contradiction manifeste entre modules. Signal fort.
+- niveau 2 = coordination à établir : recoupement entre intervenants différents sur une notion proche. À coordonner.
+- niveau 3 = signal doux : résonance sémantique transversale, simple mise en relation informative.
+
 JSON :
-{"formation":{"titre":"...","etablissement":"...","annee":"..."},"blocs":[{"id":"B1","titre":"...","competences":[{"id":"C1","libelle":"max 10 mots"}],"modules":[{"id":"M1","titre":"...","intervenant":"...","competences_liees":["C1"],"notions_cles":["max 5"],"volume":"Xh"}]}],"intervenants":["noms"],"notions_transversales":["notions multi-blocs"],"alertes_detectees":[{"niveau":2,"notion":"...","modules":["M1","M2"],"message":"1 phrase"}]}`
+{"formation":{"titre":"...","etablissement":"...","annee":"..."},"blocs":[{"id":"B1","titre":"...","competences":[{"id":"C1","libelle":"max 10 mots"}],"modules":[{"id":"M1","titre":"...","intervenant":"...","competences_liees":["C1"],"notions_cles":["max 5"],"volume":"Xh"}]}],"intervenants":["noms"],"notions_transversales":["notions multi-blocs"],"alertes_detectees":[{"niveau":1,"notion":"...","modules":["M1","M2"],"message":"1 phrase"}]}`
   onProgress('Analyse du corpus…')
   let full = ''
   await streamClaude([{ role:'user', content:prompt }], tok => { full += tok })
