@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
-import { api, setToken, clearToken, getToken, ingererDocuments, genererFicheJ1, API_KEY } from './api.js'
+import { api, setToken, clearToken, getToken, ingererDocuments, genererFicheJ1 } from './api.js'
 
 /* ═══════════════════════════════════════════════════════════════
    COULEURS & UTILS UI
@@ -271,7 +271,7 @@ function VueDir({user,onLogout}){
   async function lireTexte(file){return new Promise((res,rej)=>{const r=new FileReader();r.onload=e=>res(e.target.result);r.onerror=rej;r.readAsText(file,'utf-8')})}
 
   async function handleIngestion(){
-    if(!files.length||!campus.trim())return;if(!API_KEY){setError('Clé API manquante');return}
+    if(!files.length||!campus.trim())return
     setIngLoading(true);setError('');setProgress('Lecture…')
     try{
       const textes=await Promise.all(files.map(f=>lireTexte(f)))
@@ -280,7 +280,7 @@ function VueDir({user,onLogout}){
       await api.createFormation(campus.trim(),data)
       setProgress('Formation chargée ✓');setFiles([]);setCampus('')
       await loadFormations();setOnglet('formations')
-    }catch(e){setError('Erreur : '+e.message)}finally{setIngLoading(false)}
+    }catch(e){setError('Erreur : '+(e&&e.message?e.message:String(e)))}finally{setIngLoading(false)}
   }
 
   async function handleDelete(id){
@@ -338,13 +338,12 @@ function VueDir({user,onLogout}){
               <div style={{fontSize:12,color:P.textm}}>Syllabi · Plan de formation · RACE</div>
             </div>
             {files.length>0&&<div style={{marginBottom:'1rem'}}>{files.map((f,i)=><div key={i} style={{display:'flex',alignItems:'center',justifyContent:'space-between',padding:'0.5rem 0.75rem',background:P.surface,borderRadius:8,border:`1px solid ${P.border}`,marginBottom:'0.35rem'}}><div style={{fontSize:13,fontWeight:500,color:P.abysse}}>{f.name} <span style={{fontSize:11,color:P.textm}}>({(f.size/1024).toFixed(1)} Ko)</span></div><button onClick={()=>setFiles(prev=>prev.filter((_,j)=>j!==i))} style={{color:P.red,fontSize:16,cursor:'pointer'}}>×</button></div>)}</div>}
-            <button onClick={handleIngestion} disabled={ingLoading||!files.length||!campus.trim()||!API_KEY}
-              style={{width:'100%',padding:'0.9rem',borderRadius:10,fontSize:14,fontWeight:600,border:'none',transition:'all 0.2s',cursor:(!ingLoading&&files.length&&campus.trim()&&API_KEY)?'pointer':'not-allowed',
-                background:(!ingLoading&&files.length&&campus.trim()&&API_KEY)?`linear-gradient(135deg,${P.petrole},${P.menthe})`:'rgba(19,69,71,0.08)',color:(!ingLoading&&files.length&&campus.trim()&&API_KEY)?P.abysse:P.textm}}>
+            <button onClick={handleIngestion} disabled={ingLoading||!files.length||!campus.trim()}
+              style={{width:'100%',padding:'0.9rem',borderRadius:10,fontSize:14,fontWeight:600,border:'none',transition:'all 0.2s',cursor:(!ingLoading&&files.length&&campus.trim())?'pointer':'not-allowed',
+                background:(!ingLoading&&files.length&&campus.trim())?`linear-gradient(135deg,${P.petrole},${P.menthe})`:'rgba(19,69,71,0.08)',color:(!ingLoading&&files.length&&campus.trim())?P.abysse:P.textm}}>
               {ingLoading?<span style={{display:'flex',alignItems:'center',justifyContent:'center',gap:'0.5rem'}}><Spinner size={16}/>{progress}</span>:'Analyser avec Claude →'}
             </button>
             {error&&<div style={{marginTop:'1rem',padding:'0.75rem 1rem',background:P.redbg,border:`1px solid ${P.red}`,borderRadius:8,fontSize:12,color:'#8B1A1A'}}>{error}</div>}
-            {!API_KEY&&<div style={{marginTop:'1rem',padding:'0.75rem 1rem',background:P.amberbg,border:`1px solid ${P.amber}`,borderRadius:8,fontSize:12,color:'#7A4A00'}}>⚠ Clé API non configurée.</div>}
           </div>
         )}
 
