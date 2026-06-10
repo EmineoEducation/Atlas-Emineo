@@ -1,48 +1,66 @@
 const { getDB } = require('./_lib/db');
 const { requireAuth, requireRole } = require('./_lib/auth');
 
+// Normalise une ville : trim + lowercase
+function normCampus(s) {
+  return (s || '').trim().toLowerCase();
+}
+
+// Vérifie si le campus du user est dans la liste de campus de la formation
+// campus_field peut être "Paris" ou '["Paris","Bordeaux"]'
+function campusMatch(campusField, userCampus) {
+  if (!campusField || !userCampus) return false;
+  const norm = normCampus(userCampus);
+  try {
+    const arr = JSON.parse(campusField);
+    if (Array.isArray(arr)) {
+      return arr.some(c => normCampus(c) === norm);
+    }
+  } catch (_) {}
+  return normCampus(campusField) === norm;
+}
+
 module.exports = async function handler(req, res) {
   const db = getDB();
 
-  // GET — lister les formations (filtrées selon rôle)
+  // GET — lister les formations
   if (req.method === 'GET') {
     const user = await requireAuth(req);
     if (!user) return res.status(401).json({ error: 'Non authentifié.' });
 
-    let rows;
-    if (user.role === 'dir') {
-      // Dir voit tout
-      const result = await db.execute('SELECT id, campus, titre, data_json, created_at FROM formations ORDER BY created_at DESC');
-      rows = result.rows;
-    } else if (user.role === 'rp') {
-      // RP voit les formations de son campus
-      const result = await db.execute({
-        sql: 'SELECT id, campus, titre, data_json, created_at FROM formations WHERE campus LIKE ? ORDER BY created_at DESC',
-        args: [`%${user.campus}%`],
-      });
-      rows = result.rows;
-    } else {
-      // Intervenant et étudiant voient toutes les formations (filtre côté front)
-      const result = await db.execute('SELECT id, campus, titre, data_json, created_at FROM formations ORDER BY created_at DESC');
-      rows = result.rows;
+    const all = await db.execute(
+      'SELECT id, campus, titre, data_json, created_at FROM formations ORDER BY created_at DESC'
+    );
+
+    let rows = all.rows;
+    // RP : filtrer par campus avec matching robuste
+    if (user.role === 'rp') {
+      rows = rows.filter(r => campusMatch(r.campus, user.campus));
     }
 
     const formations = rows.map(r => {
+      let data = {};
       try {
-        const data = JSON.parse(r.data_json);
-        data._id = r.id;
-        data._campus = r.campus;
-        data._created_at = r.created_at;
-        return data;
+        data = JSON.parse(r.data_json || '{}');
       } catch (_) {
-        return { _id: r.id, _campus: r.campus, formation: { titre: r.titre || 'Erreur' }, blocs: [] };
+        data = { formation: { titre: r.titre || 'Erreur de parsing' }, blocs: [] };
       }
+      // Garantir les clés minimales attendues par le front
+      if (!data.formation) data.formation = { titre: r.titre || 'Sans titre' };
+      if (!data.blocs) data.blocs = [];
+      if (!data.alertes_detectees) data.alertes_detectees = [];
+      if (!data.intervenants) data.intervenants = [];
+      // Métadonnées
+      data._id = r.id;
+      data._campus = r.campus;
+      data._created_at = r.created_at;
+      return data;
     });
 
     return res.status(200).json({ formations });
   }
 
-  // POST — ajouter une formation (dir ou rp)
+  // POST — ajouter une formation
   if (req.method === 'POST') {
     const user = await requireRole(req, ['dir', 'rp']);
     if (!user) return res.status(403).json({ error: 'Accès réservé.' });
@@ -50,8 +68,15 @@ module.exports = async function handler(req, res) {
     const { campus, data } = req.body || {};
     if (!data) return res.status(400).json({ error: 'Données de formation requises.' });
 
-    const titre = data.formation?.titre || 'Sans titre';
-    const campusVal = campus || data._campus || '';
+    // campus peut être string ou array (multi-campus)
+    let campusVal = '';
+    if (Array.isArray(campus)) {
+      campusVal = JSON.stringify(campus.map(c => c.trim()));
+    } else {
+      campusVal = (campus || data._campus || '').trim();
+    }
+
+    const titre = (data.formation && data.formation.titre) || 'Sans titre';
 
     await db.execute({
       sql: 'INSERT INTO formations (campus, titre, data_json, created_by) VALUES (?, ?, ?, ?)',
@@ -61,7 +86,7 @@ module.exports = async function handler(req, res) {
     return res.status(201).json({ ok: true, titre });
   }
 
-  // DELETE — supprimer une formation (dir uniquement)
+  // DELETE
   if (req.method === 'DELETE') {
     const user = await requireRole(req, ['dir']);
     if (!user) return res.status(403).json({ error: 'Accès réservé à la Direction.' });
