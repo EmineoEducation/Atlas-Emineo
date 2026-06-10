@@ -509,26 +509,34 @@ function VueDir({user,onLogout}){
             </div>
             {loading?<div style={{textAlign:'center',padding:'2rem'}}><Spinner/></div>:
               formations.length===0?<Empty icon="🎓" titre="Aucune formation" msg="Utilisez l'onglet Ingestion pour analyser vos documents." action="Aller à l'ingestion →" onClick={()=>setOnglet('ingestion')}/>:
-              formations.map(f=>(
-                <div key={f._id} style={card()}>
+              formations.map(f=>{
+                const isSel=fCarto?._id===f._id
+                return(
+                <div key={f._id} onClick={()=>setSelF(f)}
+                  style={{...card(),cursor:'pointer',
+                    background:isSel?P.petrole:P.surface,
+                    border:`1px solid ${isSel?P.petrole:P.border}`,
+                    boxShadow:isSel?'0 4px 18px rgba(19,69,71,0.25)':'0 1px 6px rgba(11,43,45,0.06)',
+                    transition:'all 0.18s'}}>
                   <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start'}}>
                     <div style={{flex:1,minWidth:0}}>
-                      <div style={{fontSize:14,fontWeight:600,color:P.abysse}}>{f.formation?.titre||'Sans titre'}</div>
-                      <div style={{fontSize:11,color:P.textm,marginTop:3}}>
+                      <div style={{fontSize:14,fontWeight:600,color:isSel?P.menthe:P.abysse}}>{f.formation?.titre||'Sans titre'}</div>
+                      <div style={{fontSize:11,color:isSel?'rgba(227,255,240,0.55)':P.textm,marginTop:3}}>
                         {f._campus&&`📍 ${Array.isArray(f._campus)?f._campus.join(', '):(()=>{try{const p=JSON.parse(f._campus);return Array.isArray(p)?p.join(', '):f._campus}catch{return f._campus}})()}`}
                         {f._campus&&' · '}{(f.blocs||[]).length}B · {(f.blocs||[]).flatMap(b=>b.competences||[]).length}C · {(f.blocs||[]).flatMap(b=>b.modules||[]).length}M
                       </div>
-                      {(f.alertes_detectees||[]).length>0&&<div style={{fontSize:11,color:P.amber,marginTop:3}}>{(f.alertes_detectees||[]).length} alerte{(f.alertes_detectees||[]).length>1?'s':''}</div>}
+                      {(f.alertes_detectees||[]).length>0&&<div style={{fontSize:11,color:isSel?P.eau:P.amber,marginTop:3}}>{(f.alertes_detectees||[]).length} alerte{(f.alertes_detectees||[]).length>1?'s':''}</div>}
                     </div>
-                    <div style={{display:'flex',gap:'0.35rem',flexShrink:0,marginLeft:'0.75rem'}}>
-                      <button onClick={()=>setEditCampus(editCampus===f._id?null:f._id)} style={{fontSize:11,color:P.petrole,border:`1px solid ${P.border}`,borderRadius:6,padding:'3px 9px',background:editCampus===f._id?'rgba(93,226,152,0.12)':P.surface2,cursor:'pointer'}}>📍</button>
-                      <button onClick={()=>{setSelF(f);setOnglet('cartographie')}} style={{fontSize:11,color:P.petrole,border:`1px solid ${P.border}`,borderRadius:6,padding:'3px 9px',background:P.surface2,cursor:'pointer'}}>Voir</button>
-                      <button onClick={()=>handleDelete(f._id)} style={{fontSize:11,color:P.red,border:`1px solid ${P.red}`,borderRadius:6,padding:'3px 9px',background:P.redbg,cursor:'pointer'}}>×</button>
+                    <div style={{display:'flex',gap:'0.35rem',flexShrink:0,marginLeft:'0.75rem'}} onClick={e=>e.stopPropagation()}>
+                      <button onClick={()=>setEditCampus(editCampus===f._id?null:f._id)} style={{fontSize:11,color:isSel?P.menthe:P.petrole,border:`1px solid ${isSel?'rgba(93,226,152,0.3)':P.border}`,borderRadius:6,padding:'3px 9px',background:isSel?'rgba(93,226,152,0.12)':P.surface2,cursor:'pointer'}}>📍</button>
+                      <button onClick={()=>{setSelF(f);setOnglet('cartographie')}} style={{fontSize:11,color:isSel?P.menthe:P.petrole,border:`1px solid ${isSel?'rgba(93,226,152,0.3)':P.border}`,borderRadius:6,padding:'3px 9px',background:isSel?'rgba(93,226,152,0.12)':P.surface2,cursor:'pointer'}}>Voir →</button>
+                      <button onClick={()=>handleDelete(f._id)} style={{fontSize:11,color:isSel?'#FFB8B8':P.red,border:`1px solid ${isSel?'rgba(226,75,74,0.4)':P.red}`,borderRadius:6,padding:'3px 9px',background:isSel?'rgba(226,75,74,0.15)':P.redbg,cursor:'pointer'}}>×</button>
                     </div>
                   </div>
                   {editCampus===f._id&&<CampusEditor formation={f} onSave={async()=>{await loadFormations();setEditCampus(null)}}/>}
                 </div>
-              ))
+                )
+              })
             }
           </div>
         )}
@@ -619,7 +627,7 @@ function VueRP({user,onLogout}){
         onglets={[{id:'formations',label:'Mes formations'},{id:'cartographie',label:'Cartographie'},{id:'blocs',label:'Blocs'},{id:'alertes',label:`Alertes (${alertes.length})`},{id:'comptes',label:'Comptes'}]}/>
       <div style={{maxWidth:960,margin:'0 auto',padding:'1.5rem'}}>
         {loading?<div style={{textAlign:'center',padding:'2rem'}}><Spinner/></div>:!f?<Empty icon="🎓" titre="Aucune formation" msg="Aucune formation sur votre campus. Contacter la Direction des programmes."/>:<>
-          {onglet==='formations'&&<div className="fi"><h2 style={{fontFamily:'Georgia,serif',fontWeight:400,color:P.abysse,marginTop:0,fontSize:22,marginBottom:'1rem'}}>Mes formations — {user.campus}</h2>{formations.map(fo=><div key={fo._id} onClick={()=>setSelF(fo)} style={{...card({cursor:'pointer',borderLeft:`3px solid ${selF?._id===fo._id?P.menthe:P.border}`})}}><div style={{fontSize:14,fontWeight:600,color:P.abysse}}>{fo.formation?.titre}</div><div style={{fontSize:11,color:P.textm,marginTop:3}}>{(fo.blocs||[]).length}B · {(fo.blocs||[]).flatMap(b=>b.modules||[]).length}M</div></div>)}</div>}
+          {onglet==='formations'&&<div className="fi"><h2 style={{fontFamily:'Georgia,serif',fontWeight:400,color:P.abysse,marginTop:0,fontSize:22,marginBottom:'1rem'}}>Mes formations — {user.campus}</h2>{formations.map(fo=>{const isSel=selF?._id===fo._id;return<div key={fo._id} onClick={()=>setSelF(fo)} style={{...card({cursor:'pointer'}),background:isSel?P.petrole:P.surface,border:`1px solid ${isSel?P.petrole:P.border}`,boxShadow:isSel?'0 4px 18px rgba(19,69,71,0.25)':'0 1px 6px rgba(11,43,45,0.06)',transition:'all 0.18s'}}><div style={{fontSize:14,fontWeight:600,color:isSel?P.menthe:P.abysse}}>{fo.formation?.titre}</div><div style={{fontSize:11,color:isSel?'rgba(227,255,240,0.55)':P.textm,marginTop:3}}>{(fo.blocs||[]).length}B · {(fo.blocs||[]).flatMap(b=>b.modules||[]).length}M</div></div>})}</div>}
           {onglet==='cartographie'&&<div className="fi"><h2 style={{fontFamily:'Georgia,serif',fontWeight:400,color:P.abysse,marginTop:0,fontSize:22,marginBottom:'1rem'}}>{f.formation?.titre}</h2><GrapheCanvas blocs={f.blocs||[]} alertes={alertes} showAlerts/></div>}
           {onglet==='blocs'&&<div className="fi"><h2 style={{fontFamily:'Georgia,serif',fontWeight:400,color:P.abysse,marginTop:0,fontSize:22,marginBottom:'1rem'}}>Blocs</h2>{(f.blocs||[]).map(b=><details key={b.id} style={{...card(),marginBottom:'0.6rem'}}><summary style={{listStyle:'none',display:'flex',justifyContent:'space-between',cursor:'pointer'}}><div><Tag label={b.id} small/><span style={{marginLeft:'0.5rem',fontSize:14,fontWeight:600,color:P.abysse}}>{b.titre}</span><div style={{fontSize:11,color:P.textm,marginTop:3}}>{(b.competences||[]).length}C · {(b.modules||[]).length}M</div></div><span style={{fontSize:18,color:P.textm}}>▾</span></summary><div style={{marginTop:'0.75rem',paddingTop:'0.75rem',borderTop:`1px solid ${P.border}`}}>{(b.modules||[]).map(m=><div key={m.id} style={{background:P.surface2,borderRadius:8,padding:'0.5rem 0.75rem',marginBottom:'0.35rem',border:`1px solid ${P.border}`}}><div style={{fontSize:13,fontWeight:500,color:P.abysse}}>{m.titre}</div>{m.intervenant&&<div style={{fontSize:11,color:P.textm}}>{m.intervenant}</div>}{m.notions_cles?.length>0&&<div style={{display:'flex',flexWrap:'wrap',gap:'0.25rem',marginTop:'0.3rem'}}>{m.notions_cles.map(n=><Tag key={n} label={n} small/>)}</div>}</div>)}</div></details>)}</div>}
           {onglet==='alertes'&&<div className="fi"><h2 style={{fontFamily:'Georgia,serif',fontWeight:400,color:P.abysse,marginTop:0,fontSize:22,marginBottom:'0.5rem'}}>Alertes</h2><p style={{fontSize:12,color:P.textm,marginBottom:'1.25rem'}}>Ignorez les alertes non pertinentes — elles restent réactivables.</p><AlertesList formations={[f]} showFormationTitle={false}/></div>}
