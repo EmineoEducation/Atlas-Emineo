@@ -3,16 +3,14 @@ const { requireRole } = require('./_lib/auth');
 const MODEL = 'claude-haiku-4-5-20251001';
 const MAX_TOKENS = 16000;
 
-// Repair JSON tronqué (brackets non fermés)
+// Repair JSON tronque (brackets non fermes)
 function repairJSON(raw) {
   let s = (raw || '').trim();
-  // Supprimer les fences markdown
   s = s.replace(/^```(?:json)?\s*/i, '').replace(/```\s*$/, '');
   const first = s.indexOf('{');
-  if (first === -1) throw new Error('Aucun JSON trouvé dans la réponse Claude');
+  if (first === -1) throw new Error('Aucun JSON trouve dans la reponse Claude');
   const last = s.lastIndexOf('}');
   s = s.slice(first, last > first ? last + 1 : undefined);
-  // Compter les brackets ouverts
   let open = 0, arr = 0;
   for (const ch of s) {
     if (ch === '{') open++;
@@ -20,7 +18,6 @@ function repairJSON(raw) {
     if (ch === '[') arr++;
     if (ch === ']') arr--;
   }
-  // Si déséquilibré : couper au dernier objet complet et refermer
   if (open > 0 || arr > 0) {
     const lc = Math.max(s.lastIndexOf(',{'), s.lastIndexOf(',"'));
     if (lc > s.length * 0.5) s = s.slice(0, lc);
@@ -37,138 +34,129 @@ function repairJSON(raw) {
   return JSON.parse(s);
 }
 
+// Appel Claude (non-streame) — renvoie le texte concatene
+async function callClaude(apiKey, prompt) {
+  const r = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-api-key': apiKey,
+      'anthropic-version': '2023-06-01',
+    },
+    body: JSON.stringify({
+      model: MODEL,
+      max_tokens: MAX_TOKENS,
+      messages: [{ role: 'user', content: prompt }],
+    }),
+  });
+
+  const raw = await r.json();
+  if (!r.ok) {
+    const msg = (raw && raw.error && raw.error.message) || ('Claude HTTP ' + r.status);
+    const err = new Error(msg);
+    err.status = 502;
+    throw err;
+  }
+  return (raw.content || [])
+    .filter(b => b.type === 'text')
+    .map(b => b.text)
+    .join('');
+}
+
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Méthode non supportée.' });
+    return res.status(405).json({ error: 'Methode non supportee.' });
   }
 
-  const user = await requireRole(req, ['dir', 'rp']);
-  if (!user) return res.status(403).json({ error: 'Accès réservé.' });
+  const user = await requireRole(req, ['dir', 'rp', 'intervenant']);
+  if (!user) return res.status(403).json({ error: 'Acces reserve.' });
 
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) {
-    return res.status(500).json({ error: 'ANTHROPIC_API_KEY non configurée sur le serveur.' });
+    return res.status(500).json({ error: 'ANTHROPIC_API_KEY non configuree sur le serveur.' });
   }
 
-  const { textes, campus } = req.body || {};
+  const { textes, campus, prompt } = req.body || {};
+
+  // ─── MODE 1 : prompt direct (fiche J-1 intervenant) ───────────────────────
+  // Renvoie { text } — le front parse lui-meme.
+  if (prompt && typeof prompt === 'string') {
+    try {
+      const text = await callClaude(apiKey, prompt);
+      return res.status(200).json({ text });
+    } catch (e) {
+      return res.status(e.status || 502).json({
+        error: 'Appel Claude echoue : ' + (e && e.message ? e.message : String(e)),
+      });
+    }
+  }
+
+  // ─── MODE 2 : ingestion de documents (textes + campus) ────────────────────
+  // Renvoie { data } — structure pedagogique parsee.
   if (!textes || !Array.isArray(textes) || textes.length === 0) {
-    return res.status(400).json({ error: 'textes[] requis.' });
+    return res.status(400).json({ error: 'Body invalide : fournir { prompt } ou { textes[], campus }.' });
   }
 
-  // Construire le corpus (limité à 12 000 chars par doc pour rester sous max_tokens)
   const corpus = textes
-    .map((t, i) => `--- DOCUMENT ${i + 1} ---\n${(t || '').slice(0, 12000)}`)
+    .map((t, i) => '--- DOCUMENT ' + (i + 1) + ' ---\n' + (t || '').slice(0, 12000))
     .join('\n\n');
 
   const campusLabel = Array.isArray(campus)
     ? campus.join(', ')
-    : (campus || 'non précisé');
+    : (campus || 'non precise');
 
-  const prompt = `Tu es expert en ingénierie pédagogique. Analyse ces documents de formation et extrais leur structure pédagogique.
+  const ingestPrompt =
+    'Tu es expert en ingenierie pedagogique. Analyse ces documents de formation et extrais leur structure pedagogique.\n\n' +
+    'Campus concerne(s) : ' + campusLabel + '\n\n' +
+    corpus + '\n\n' +
+    'REGLES IMPERATIVES :\n' +
+    '- Retourne UNIQUEMENT du JSON brut, aucun texte avant ou apres, aucun backtick\n' +
+    '- Maximum 5 notions_cles par module (les plus importantes)\n' +
+    '- Libelles de competences : max 12 mots\n' +
+    '- Message d\'alerte : 1 phrase max, formule positivement (opportunite de coordination)\n' +
+    '- Si un champ est inconnu, utilise une chaine vide "" ou un tableau vide []\n\n' +
+    'Structure JSON exacte a retourner :\n' +
+    '{\n' +
+    '  "formation": { "titre": "Titre de la formation", "etablissement": "Nom", "rncp": "Numero RNCP si trouve sinon vide", "annee": "2025-26" },\n' +
+    '  "blocs": [\n' +
+    '    {\n' +
+    '      "id": "B1",\n' +
+    '      "titre": "Titre du bloc",\n' +
+    '      "competences": [ { "id": "C1", "libelle": "Libelle court" } ],\n' +
+    '      "modules": [ { "id": "M1", "titre": "Titre du module", "intervenant": "Nom ou vide", "competences_liees": ["C1"], "notions_cles": ["notion 1"], "volume": "12h" } ]\n' +
+    '    }\n' +
+    '  ],\n' +
+    '  "intervenants": ["noms trouves"],\n' +
+    '  "notions_transversales": ["notions presentes dans plusieurs blocs"],\n' +
+    '  "alertes_detectees": [ { "niveau": 2, "notion": "Notion", "modules": ["M1","M3"], "message": "Phrase positive sur la coordination." } ]\n' +
+    '}';
 
-Campus concerné(s) : ${campusLabel}
-
-${corpus}
-
-RÈGLES IMPÉRATIVES :
-- Retourne UNIQUEMENT du JSON brut, aucun texte avant ou après, aucun backtick
-- Maximum 5 notions_cles par module (les plus importantes)
-- Libellés de compétences : max 12 mots
-- Message d'alerte : 1 phrase max, formulé positivement (opportunité de coordination)
-- Si un champ est inconnu, utilise une chaîne vide "" ou un tableau vide []
-
-Structure JSON exacte à retourner :
-{
-  "formation": {
-    "titre": "Titre de la formation",
-    "etablissement": "Nom de l'établissement",
-    "rncp": "Numéro RNCP si trouvé, sinon vide",
-    "annee": "2025-26"
-  },
-  "blocs": [
-    {
-      "id": "B1",
-      "titre": "Titre du bloc",
-      "competences": [
-        { "id": "C1", "libelle": "Libellé court de la compétence" }
-      ],
-      "modules": [
-        {
-          "id": "M1",
-          "titre": "Titre du module",
-          "intervenant": "Nom de l'intervenant ou vide",
-          "competences_liees": ["C1"],
-          "notions_cles": ["notion 1", "notion 2"],
-          "volume": "12h"
-        }
-      ]
-    }
-  ],
-  "intervenants": ["liste des noms trouvés dans les docs"],
-  "notions_transversales": ["notions présentes dans plusieurs blocs"],
-  "alertes_detectees": [
-    {
-      "niveau": 2,
-      "notion": "Notion concernée",
-      "modules": ["M1", "M3"],
-      "message": "Une phrase positive sur la coordination à établir."
-    }
-  ]
-}`;
-
+  let text;
   try {
-    const r = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': apiKey,
-        'anthropic-version': '2023-06-01',
-      },
-      body: JSON.stringify({
-        model: MODEL,
-        max_tokens: MAX_TOKENS,
-        messages: [{ role: 'user', content: prompt }],
-      }),
-    });
-
-    const raw = await r.json();
-
-    if (!r.ok) {
-      const msg = (raw && raw.error && raw.error.message) || `Claude HTTP ${r.status}`;
-      return res.status(502).json({ error: msg });
-    }
-
-    const text = (raw.content || [])
-      .filter(b => b.type === 'text')
-      .map(b => b.text)
-      .join('');
-
-    let parsed;
-    try {
-      parsed = repairJSON(text);
-    } catch (e) {
-      // Retourner le texte brut pour debug
-      return res.status(422).json({
-        error: 'JSON invalide retourné par Claude',
-        raw_preview: text.slice(0, 500),
-      });
-    }
-
-    // Garantir les clés minimales
-    if (!parsed.formation) parsed.formation = { titre: 'Formation importée', annee: '' };
-    if (!parsed.blocs) parsed.blocs = [];
-    if (!parsed.alertes_detectees) parsed.alertes_detectees = [];
-    if (!parsed.intervenants) parsed.intervenants = [];
-    if (!parsed.notions_transversales) parsed.notions_transversales = [];
-
-    // Attacher le campus
-    parsed._campus = Array.isArray(campus) ? JSON.stringify(campus) : (campus || '');
-
-    return res.status(200).json({ data: parsed });
-
+    text = await callClaude(apiKey, ingestPrompt);
   } catch (e) {
-    return res.status(502).json({
-      error: 'Appel Claude échoué : ' + (e && e.message ? e.message : String(e)),
+    return res.status(e.status || 502).json({
+      error: 'Appel Claude echoue : ' + (e && e.message ? e.message : String(e)),
     });
   }
+
+  let parsed;
+  try {
+    parsed = repairJSON(text);
+  } catch (e) {
+    return res.status(422).json({
+      error: 'JSON invalide retourne par Claude',
+      raw_preview: text.slice(0, 500),
+    });
+  }
+
+  if (!parsed.formation) parsed.formation = { titre: 'Formation importee', annee: '' };
+  if (!parsed.blocs) parsed.blocs = [];
+  if (!parsed.alertes_detectees) parsed.alertes_detectees = [];
+  if (!parsed.intervenants) parsed.intervenants = [];
+  if (!parsed.notions_transversales) parsed.notions_transversales = [];
+
+  parsed._campus = Array.isArray(campus) ? JSON.stringify(campus) : (campus || '');
+
+  return res.status(200).json({ data: parsed });
 };
