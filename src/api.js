@@ -66,3 +66,22 @@ export async function logout() {
 export async function getMe() {
   return apiFetch('/api/auth/me');
 }
+
+// ─── Token helpers ────────────────────────────────────────────────────────────
+const TOKEN_KEY = 'atlas_token'
+export function getToken() { return localStorage.getItem(TOKEN_KEY) }
+export function setToken(t) { localStorage.setItem(TOKEN_KEY, t) }
+export function clearToken() { localStorage.removeItem(TOKEN_KEY) }
+
+// ─── Objet api — compatibilité avec App.jsx ───────────────────────────────────
+export const api = {
+  login:           (email, password) => apiFetch('/api/auth/login', { method:'POST', body: JSON.stringify({ email, password }) }),
+  logout:          ()                => apiFetch('/api/auth/logout', { method:'POST' }),
+  me:              ()                => apiFetch('/api/auth/me'),
+  getUsers:        ()                => apiFetch('/api/users'),
+  createUser:      (form)            => apiFetch('/api/users', { method:'POST', body: JSON.stringify(form) }),
+  deleteUser:      (id)              => apiFetch('/api/users', { method:'DELETE', body: JSON.stringify({ id }) }),
+  getFormations:   ()                => apiFetch('/api/formations'),
+  createFormation: (campus, data)    => apiFetch('/api/formations', { method:'POST', body: JSON.stringify({ campus, data }) }),
+  deleteFormation: (id)              => apiFetch('/api/formations', { method:'DELETE', body: JSON.stringify({ id }) }),
+}
