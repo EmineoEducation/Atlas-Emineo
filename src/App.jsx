@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
-import { api, setToken, clearToken, getToken, ingererDocuments, genererFicheJ1 } from './api.js'
+import { api, apiFetch, setToken, clearToken, getToken, ingererDocuments, genererFicheJ1 } from './api.js'
 
 const P = {
   abysse:'#0B2B2D',petrole:'#134547',menthe:'#5DE298',givre:'#E3FFF0',eau:'#9DF0C4',saumon:'#E89B77',
@@ -160,136 +160,327 @@ function LoginPage({onLogin}){
   )
 }
 
-/* ═══ IMPORT EXCEL — composant partagé Dir + RP ═══════════════════════════════
-   Colonnes attendues (insensible casse / ordre) : nom, prenom, mail/email, statut
-   statut : "intervenant" ou "etudiant" (ou "étudiant")
-   Génère un mdp aléatoire 8 chars alphanum par compte.
-   Affiche un récapitulatif avec les mots de passe en clair (à transmettre).
-*/
+/* ═══════════════════════════════════════════════════════════════════════════
+   IMPORT CSV — deux modes : étudiants / intervenants
+   Format CRM Éminéo : CSV séparateur ";" UTF-8 BOM
+   Étudiants  : Nom;Prénom;Email école
+   Intervenants : Nom;Prénom;Matières;Email école
+     → pour les intervenants : Claude apparie les matières CRM aux modules Atlas
+═══════════════════════════════════════════════════════════════════════════ */
+
 function genPassword(){
   const chars='abcdefghjkmnpqrstuvwxyz23456789'
   return Array.from({length:8},()=>chars[Math.floor(Math.random()*chars.length)]).join('')
 }
 
-function ImportExcel({campus,onDone}){
-  const [rows,setRows]=useState([])   // [{nom,prenom,email,statut,mdp,status:'pending'|'ok'|'err',msg:''}]
+// Parser CSV séparateur ";" — gère les champs entre guillemets et le BOM UTF-8
+function parseCSV(text){
+  const lines=text.replace(/^\uFEFF/,'').split('\n').map(l=>l.trim()).filter(Boolean)
+  if(!lines.length)return[]
+  function splitLine(line){
+    const cols=[];let cur='',inQ=false
+    for(let i=0;i<line.length;i++){
+      const c=line[i]
+      if(c==='"'&&!inQ){inQ=true}
+      else if(c==='"'&&inQ&&line[i+1]==='"'){cur+='"';i++}
+      else if(c==='"'&&inQ){inQ=false}
+      else if(c===';'&&!inQ){cols.push(cur.trim());cur=''}
+      else cur+=c
+    }
+    cols.push(cur.trim())
+    return cols
+  }
+  const headers=splitLine(lines[0]).map(h=>h.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]/g,'_'))
+  return lines.slice(1).map(l=>{
+    const cols=splitLine(l)
+    const obj={}
+    headers.forEach((h,i)=>{obj[h]=cols[i]||''})
+    return obj
+  })
+}
+
+function ResultTable({rows,onReset}){
+  const ok=rows.filter(r=>r.status==='ok')
+  const err=rows.filter(r=>r.status==='err')
+  return(
+    <div>
+      <div style={{padding:'0.75rem 1rem',background:'rgba(93,226,152,0.1)',border:`1px solid ${P.borderm}`,borderRadius:8,fontSize:13,color:P.petrole,marginBottom:'0.75rem',fontWeight:500}}>
+        ✓ {ok.length} compte{ok.length>1?'s':''} créé{ok.length>1?'s':''}
+        {err.length>0&&<span style={{color:P.red}}> · {err.length} erreur{err.length>1?'s':''}</span>}
+      </div>
+      <div style={{padding:'0.65rem 0.9rem',background:P.amberbg,border:`1px solid ${P.amber}`,borderRadius:8,fontSize:12,color:'#7A4A00',marginBottom:'1rem',lineHeight:1.6}}>
+        ⚠ Conservez impérativement cette liste — les mots de passe ne seront plus affichés.
+      </div>
+      <div style={{overflowX:'auto',border:`1px solid ${P.border}`,borderRadius:8,marginBottom:'0.75rem'}}>
+        <table style={{width:'100%',borderCollapse:'collapse',fontSize:12}}>
+          <thead><tr style={{background:P.surface2}}>{['Prénom','Nom','Email','Mot de passe','Ok'].map(h=><th key={h} style={{padding:'6px 8px',textAlign:'left',fontWeight:600,color:P.textm,borderBottom:`1px solid ${P.border}`}}>{h}</th>)}</tr></thead>
+          <tbody>{rows.map((r,i)=><tr key={i} style={{background:r.status==='err'?P.redbg:'transparent'}}>
+            <td style={{padding:'5px 8px',borderBottom:`1px solid ${P.border}`,color:P.abysse}}>{r.prenom}</td>
+            <td style={{padding:'5px 8px',borderBottom:`1px solid ${P.border}`,color:P.abysse}}>{r.nom}</td>
+            <td style={{padding:'5px 8px',borderBottom:`1px solid ${P.border}`,color:P.abysse,fontSize:11}}>{r.email}</td>
+            <td style={{padding:'5px 8px',borderBottom:`1px solid ${P.border}`,fontFamily:'monospace',fontWeight:600,color:r.status==='ok'?P.petrole:P.red}}>{r.status==='ok'?r.mdp:r.msg}</td>
+            <td style={{padding:'5px 8px',borderBottom:`1px solid ${P.border}`,textAlign:'center'}}>{r.status==='ok'?'✓':'✗'}</td>
+          </tr>)}</tbody>
+        </table>
+      </div>
+      <button onClick={onReset} style={{border:`1px solid ${P.border}`,color:P.textm,borderRadius:6,padding:'5px 14px',fontSize:12,background:P.surface,cursor:'pointer'}}>Nouvel import</button>
+    </div>
+  )
+}
+
+/* ── Import étudiants ─────────────────────────────────────────────────────── */
+function ImportEtudiants({campus,onDone}){
+  const [rows,setRows]=useState([])
   const [importing,setImporting]=useState(false)
   const [done,setDone]=useState(false)
-  const [parseErr,setParseErr]=useState('')
+  const [err,setErr]=useState('')
 
-  async function parseFile(file){
-    setParseErr('');setRows([]);setDone(false)
-    // Lecture binaire via FileReader
-    const buf=await new Promise((res,rej)=>{const r=new FileReader();r.onload=e=>res(e.target.result);r.onerror=rej;r.readAsArrayBuffer(file)})
-    try{
-      // SheetJS disponible globalement via import dynamique CDN ou via npm (inclus dans package.json)
-      const XLSX=await import('https://cdn.sheetjs.com/xlsx-0.20.2/package/xlsx.mjs')
-      const wb=XLSX.read(buf,{type:'array'})
-      const ws=wb.Sheets[wb.SheetNames[0]]
-      const raw=XLSX.utils.sheet_to_json(ws,{defval:''})
-      if(!raw.length){setParseErr('Fichier vide ou format non reconnu.');return}
-      // Normaliser les clés
-      const norm=raw.map(r=>{
-        const e={}
-        Object.keys(r).forEach(k=>{e[k.toLowerCase().trim().replace(/é/g,'e').replace(/è/g,'e')]=String(r[k]).trim()})
-        return e
-      })
-      const parsed=norm.map(r=>({
-        nom:r.nom||r['name']||'',
-        prenom:r.prenom||r['prénom']||r['firstname']||'',
-        email:r.email||r.mail||r['e-mail']||'',
-        statut:(r.statut||r['rôle']||r['role']||'').toLowerCase().replace('é','e'),
-        mdp:genPassword(),
-        status:'pending',msg:''
-      }))
-      const errors=parsed.filter(r=>!r.nom||!r.email||!['intervenant','etudiant'].includes(r.statut))
-      if(errors.length){
-        setParseErr(`${errors.length} ligne(s) invalides (nom, email ou statut manquant/incorrect). Vérifiez le fichier.`)
-        return
-      }
-      setRows(parsed)
-    }catch(e){setParseErr('Erreur de lecture : '+e.message)}
+  function parseFile(file){
+    setErr('');setRows([]);setDone(false)
+    const r=new FileReader()
+    r.onload=e=>{
+      try{
+        const parsed=parseCSV(e.target.result)
+        if(!parsed.length){setErr('Fichier vide.');return}
+        // Colonnes CRM : nom / prenom / email_ecole (ou email)
+        const rows=parsed.map(p=>({
+          nom:(p.nom||'').toUpperCase(),
+          prenom:p.prenom||p['pr_nom']||'',
+          email:p.email_ecole||p.email||p.mail||'',
+          mdp:genPassword(),status:'pending',msg:''
+        })).filter(r=>r.nom&&r.email)
+        if(!rows.length){setErr('Aucune ligne valide (nom + email requis).');return}
+        setRows(rows)
+      }catch(e){setErr('Erreur : '+e.message)}
+    }
+    r.readAsText(file,'utf-8')
   }
 
   async function handleImport(){
     setImporting(true)
     const updated=[...rows]
     for(let i=0;i<updated.length;i++){
-      const r=updated[i]
       try{
-        await api.createUser({
-          nom:r.nom,prenom:r.prenom,email:r.email,
-          role:r.statut==='etudiant'?'etudiant':'intervenant',
-          campus:campus||'',
-          password:r.mdp
-        })
-        updated[i]={...r,status:'ok'}
-      }catch(e){updated[i]={...r,status:'err',msg:e.message}}
+        await api.createUser({nom:updated[i].nom,prenom:updated[i].prenom,email:updated[i].email,role:'etudiant',campus:campus||'',password:updated[i].mdp})
+        updated[i]={...updated[i],status:'ok'}
+      }catch(e){updated[i]={...updated[i],status:'err',msg:e.message}}
       setRows([...updated])
     }
     setImporting(false);setDone(true)
-    if(onDone)onDone(updated.filter(r=>r.status==='ok').length)
+    if(onDone)onDone()
   }
 
-  if(done){
-    const ok=rows.filter(r=>r.status==='ok')
-    const err=rows.filter(r=>r.status==='err')
-    return(
-      <div>
-        <div style={{padding:'0.75rem 1rem',background:'rgba(93,226,152,0.1)',border:`1px solid ${P.borderm}`,borderRadius:8,fontSize:13,color:P.petrole,marginBottom:'1rem',fontWeight:500}}>
-          ✓ {ok.length} compte{ok.length>1?'s':''} créé{ok.length>1?'s':''}
-          {err.length>0&&` · ${err.length} erreur${err.length>1?'s':''}`}
-        </div>
-        <div style={{padding:'0.75rem 1rem',background:P.amberbg,border:`1px solid ${P.amber}`,borderRadius:8,fontSize:12,color:'#7A4A00',marginBottom:'1rem',lineHeight:1.6}}>
-          ⚠ Conservez impérativement cette liste — les mots de passe ne seront plus affichés.
-        </div>
-        <div style={{overflowX:'auto'}}>
-          <table style={{width:'100%',borderCollapse:'collapse',fontSize:12}}>
-            <thead><tr style={{background:P.surface2}}>{['Prénom','Nom','Email','Rôle','Mot de passe','Statut'].map(h=><th key={h} style={{padding:'6px 8px',textAlign:'left',fontWeight:600,color:P.textm,borderBottom:`1px solid ${P.border}`}}>{h}</th>)}</tr></thead>
-            <tbody>{rows.map((r,i)=><tr key={i} style={{background:r.status==='err'?P.redbg:'transparent'}}>
-              <td style={{padding:'5px 8px',borderBottom:`1px solid ${P.border}`,color:P.abysse}}>{r.prenom}</td>
-              <td style={{padding:'5px 8px',borderBottom:`1px solid ${P.border}`,color:P.abysse}}>{r.nom}</td>
-              <td style={{padding:'5px 8px',borderBottom:`1px solid ${P.border}`,color:P.abysse}}>{r.email}</td>
-              <td style={{padding:'5px 8px',borderBottom:`1px solid ${P.border}`}}><Tag label={r.statut} small/></td>
-              <td style={{padding:'5px 8px',borderBottom:`1px solid ${P.border}`,fontFamily:'monospace',fontWeight:600,color:r.status==='ok'?P.petrole:P.red}}>{r.status==='ok'?r.mdp:r.msg}</td>
-              <td style={{padding:'5px 8px',borderBottom:`1px solid ${P.border}`}}>{r.status==='ok'?'✓':'✗'}</td>
-            </tr>)}</tbody>
-          </table>
-        </div>
-        <button onClick={()=>{setRows([]);setDone(false)}} style={{marginTop:'1rem',border:`1px solid ${P.border}`,color:P.textm,borderRadius:6,padding:'5px 14px',fontSize:12,background:P.surface,cursor:'pointer'}}>Nouvel import</button>
-      </div>
-    )
-  }
-
+  if(done)return <ResultTable rows={rows} onReset={()=>{setRows([]);setDone(false)}}/>
   return(
     <div>
-      <p style={{fontSize:12,color:P.textm,marginBottom:'1rem',lineHeight:1.7}}>
-        Fichier Excel (.xlsx) avec colonnes : <strong>nom · prenom · email · statut</strong><br/>
-        Statut : <code>intervenant</code> ou <code>etudiant</code>
+      <p style={{fontSize:12,color:P.textm,marginBottom:'0.75rem',lineHeight:1.7}}>
+        Export CRM → fichier <strong>.csv</strong> avec colonnes : <strong>Nom · Prénom · Email école</strong>
       </p>
-      <div onClick={()=>document.getElementById('xl-input').click()}
-        style={{border:`2px dashed ${P.borderm}`,borderRadius:12,padding:'2rem',textAlign:'center',cursor:'pointer',background:'rgba(93,226,152,0.03)',marginBottom:'0.75rem'}}>
-        <input id="xl-input" type="file" accept=".xlsx,.xls" style={{display:'none'}} onChange={e=>e.target.files[0]&&parseFile(e.target.files[0])}/>
-        <div style={{fontSize:24,opacity:0.4,marginBottom:'0.4rem'}}>📊</div>
-        <div style={{fontSize:13,fontWeight:500,color:P.petrole}}>Cliquer pour choisir le fichier</div>
-        <div style={{fontSize:11,color:P.textm}}>.xlsx · .xls</div>
+      <div onClick={()=>document.getElementById('csv-etu').click()}
+        style={{border:`2px dashed ${P.borderm}`,borderRadius:12,padding:'1.75rem',textAlign:'center',cursor:'pointer',background:'rgba(93,226,152,0.03)',marginBottom:'0.75rem'}}>
+        <input id="csv-etu" type="file" accept=".csv,.xlsx,.xls" style={{display:'none'}} onChange={e=>e.target.files[0]&&parseFile(e.target.files[0])}/>
+        <div style={{fontSize:22,opacity:0.4,marginBottom:'0.35rem'}}>🎓</div>
+        <div style={{fontSize:13,fontWeight:500,color:P.petrole}}>Fichier étudiants (.csv)</div>
       </div>
-      {parseErr&&<div style={{padding:'0.6rem 0.8rem',background:P.redbg,border:`1px solid ${P.red}`,borderRadius:8,fontSize:12,color:'#8B1A1A',marginBottom:'0.75rem'}}>{parseErr}</div>}
+      {err&&<div style={{padding:'0.6rem 0.8rem',background:P.redbg,border:`1px solid ${P.red}`,borderRadius:8,fontSize:12,color:'#8B1A1A',marginBottom:'0.75rem'}}>{err}</div>}
+      {rows.length>0&&<>
+        <div style={{fontSize:12,color:P.textm,marginBottom:'0.5rem'}}>{rows.length} étudiant{rows.length>1?'s':''} détecté{rows.length>1?'s':''}</div>
+        <div style={{maxHeight:160,overflowY:'auto',marginBottom:'0.75rem',border:`1px solid ${P.border}`,borderRadius:8}}>
+          <table style={{width:'100%',borderCollapse:'collapse',fontSize:12}}>
+            <thead><tr style={{background:P.surface2}}>{['Prénom','Nom','Email'].map(h=><th key={h} style={{padding:'5px 8px',textAlign:'left',fontWeight:600,color:P.textm,borderBottom:`1px solid ${P.border}`}}>{h}</th>)}</tr></thead>
+            <tbody>{rows.map((r,i)=><tr key={i}><td style={{padding:'4px 8px',color:P.abysse}}>{r.prenom}</td><td style={{padding:'4px 8px',color:P.abysse}}>{r.nom}</td><td style={{padding:'4px 8px',color:P.abysse,fontSize:11}}>{r.email}</td></tr>)}</tbody>
+          </table>
+        </div>
+        <button onClick={handleImport} disabled={importing}
+          style={{width:'100%',padding:'0.75rem',borderRadius:10,fontSize:13,fontWeight:600,border:'none',cursor:importing?'not-allowed':'pointer',background:importing?'rgba(19,69,71,0.08)':`linear-gradient(135deg,${P.petrole},${P.menthe})`,color:importing?P.textm:P.abysse}}>
+          {importing?<span style={{display:'flex',alignItems:'center',justifyContent:'center',gap:'0.5rem'}}><Spinner size={14}/>Création…</span>:`Créer ${rows.length} compte${rows.length>1?'s':''} étudiant${rows.length>1?'s':''} →`}
+        </button>
+      </>}
+    </div>
+  )
+}
+
+/* ── Import intervenants + appariement Claude ─────────────────────────────── */
+function ImportIntervenants({campus,formation,onDone}){
+  const [rows,setRows]=useState([])       // [{nom,prenom,email,matieres[],modules_appareis[],mdp,status,msg}]
+  const [appLoading,setAppLoading]=useState(false)
+  const [appDone,setAppDone]=useState(false)
+  const [importing,setImporting]=useState(false)
+  const [done,setDone]=useState(false)
+  const [err,setErr]=useState('')
+
+  // Tous les modules de la formation pour l'appariement
+  const allModules=formation?(formation.blocs||[]).flatMap(b=>(b.modules||[]).map(m=>({id:m.id,titre:m.titre,bloc:b.id}))):[  ]
+
+  function parseFile(file){
+    setErr('');setRows([]);setAppDone(false);setDone(false)
+    const r=new FileReader()
+    r.onload=e=>{
+      try{
+        const parsed=parseCSV(e.target.result)
+        if(!parsed.length){setErr('Fichier vide.');return}
+        // Colonnes CRM intervenants : Nom;Prénom;Matières;Email école
+        // Après parsing CSV, clés normalisées : nom / prenom / mati_res / email__cole
+        const rows=parsed.map(p=>{
+          // Récupérer la clé matières (peut varier selon normalisation)
+          const matiereRaw=p.mati_res||p.matieres||p['mati_res']||p['matire']||''
+          const matieres=matiereRaw.split(',').map(m=>m.trim()).filter(Boolean)
+          const email=p.email__cole||p.email_ecole||p.email||p.mail||''
+          return{
+            nom:(p.nom||'').toUpperCase(),
+            prenom:p.prenom||'',
+            email,
+            matieres,
+            modules_appareis:[],
+            mdp:genPassword(),
+            status:'pending',msg:''
+          }
+        }).filter(r=>r.nom&&r.email)
+        if(!rows.length){setErr('Aucune ligne valide.');return}
+        setRows(rows)
+      }catch(e){setErr('Erreur : '+e.message)}
+    }
+    r.readAsText(file,'utf-8')
+  }
+
+  // Appariement sémantique via Claude (passe par /api/ingest mode prompt)
+  async function apparier(){
+    if(!allModules.length){setErr('Aucune formation sélectionnée — impossible d\'apparier les modules.');return}
+    setAppLoading(true);setErr('')
+    try{
+      const modulesStr=allModules.map(m=>`${m.id}|${m.titre} (${m.bloc})`).join('\n')
+      const intervenantsStr=rows.map((r,i)=>`[${i}] ${r.prenom} ${r.nom} — matières CRM : ${r.matieres.join(' / ')}`).join('\n')
+      const prompt=
+        'Tu es expert en ingénierie pédagogique. Apparie chaque intervenant à ses modules dans la formation.\n\n'+
+        'MODULES DE LA FORMATION (id|titre):\n'+modulesStr+'\n\n'+
+        'INTERVENANTS ET LEURS MATIÈRES (issues du CRM, libellés approximatifs):\n'+intervenantsStr+'\n\n'+
+        'RÈGLES:\n'+
+        '- Fais une correspondance sémantique entre les libellés CRM et les titres de modules\n'+
+        '- Un intervenant peut être affecté à plusieurs modules\n'+
+        '- Si aucun module ne correspond, retourne un tableau vide\n'+
+        '- Retourne UNIQUEMENT ce JSON, sans texte ni backtick:\n'+
+        '{"affectations":[{"index":0,"modules":["M1","M3"]},{"index":1,"modules":["M2"]}]}'
+      const result=await apiFetch('/api/ingest',{method:'POST',body:{prompt}})
+      const text=result.text||''
+      let parsed
+      try{
+        const clean=text.replace(/^```(?:json)?\s*/i,'').replace(/```\s*$/,'').trim()
+        const first=clean.indexOf('{'),last=clean.lastIndexOf('}')
+        parsed=JSON.parse(first>=0?clean.slice(first,last+1):clean)
+      }catch{setErr('Claude n\'a pas retourné un JSON valide. Réessayez.');setAppLoading(false);return}
+      const updated=rows.map((r,i)=>{
+        const aff=(parsed.affectations||[]).find(a=>a.index===i)
+        return{...r,modules_appareis:aff?aff.modules:[]}
+      })
+      setRows(updated);setAppDone(true)
+    }catch(e){setErr('Erreur appariement : '+(e&&e.message?e.message:String(e)))}
+    finally{setAppLoading(false)}
+  }
+
+  async function handleImport(){
+    setImporting(true)
+    const updated=[...rows]
+    for(let i=0;i<updated.length;i++){
+      try{
+        await api.createUser({nom:updated[i].nom,prenom:updated[i].prenom,email:updated[i].email,role:'intervenant',campus:campus||'',password:updated[i].mdp})
+        updated[i]={...updated[i],status:'ok'}
+      }catch(e){updated[i]={...updated[i],status:'err',msg:e.message}}
+      setRows([...updated])
+    }
+    // Mettre à jour les modules avec le nom des intervenants
+    if(formation&&updated.some(r=>r.status==='ok'&&r.modules_appareis.length)){
+      try{
+        const updatedFormation=JSON.parse(JSON.stringify(formation))
+        updated.filter(r=>r.status==='ok').forEach(r=>{
+          r.modules_appareis.forEach(mid=>{
+            updatedFormation.blocs.forEach(b=>{
+              b.modules=(b.modules||[]).map(m=>m.id===mid?{...m,intervenant:`${r.prenom} ${r.nom}`}:m)
+            })
+          })
+        })
+        await api.updateFormation(formation._id,{data:updatedFormation})
+      }catch(e){console.warn('Mise à jour modules intervenants échouée:',e.message)}
+    }
+    setImporting(false);setDone(true)
+    if(onDone)onDone()
+  }
+
+  if(done)return <ResultTable rows={rows} onReset={()=>{setRows([]);setDone(false);setAppDone(false)}}/>
+  return(
+    <div>
+      <p style={{fontSize:12,color:P.textm,marginBottom:'0.75rem',lineHeight:1.7}}>
+        Export CRM → fichier <strong>.csv</strong> avec colonnes : <strong>Nom · Prénom · Matières · Email école</strong><br/>
+        Claude apparie automatiquement les matières aux modules de la formation.
+      </p>
+      {!formation&&<div style={{padding:'0.6rem 0.8rem',background:P.amberbg,border:`1px solid ${P.amber}`,borderRadius:8,fontSize:12,color:'#7A4A00',marginBottom:'0.75rem'}}>⚠ Sélectionnez d'abord une formation dans l'onglet "Mes formations" pour activer l'appariement.</div>}
+      <div onClick={()=>document.getElementById('csv-int').click()}
+        style={{border:`2px dashed ${P.borderm}`,borderRadius:12,padding:'1.75rem',textAlign:'center',cursor:'pointer',background:'rgba(93,226,152,0.03)',marginBottom:'0.75rem'}}>
+        <input id="csv-int" type="file" accept=".csv,.xlsx,.xls" style={{display:'none'}} onChange={e=>e.target.files[0]&&parseFile(e.target.files[0])}/>
+        <div style={{fontSize:22,opacity:0.4,marginBottom:'0.35rem'}}>👨‍🏫</div>
+        <div style={{fontSize:13,fontWeight:500,color:P.petrole}}>Fichier intervenants (.csv)</div>
+      </div>
+      {err&&<div style={{padding:'0.6rem 0.8rem',background:P.redbg,border:`1px solid ${P.red}`,borderRadius:8,fontSize:12,color:'#8B1A1A',marginBottom:'0.75rem'}}>{err}</div>}
+
       {rows.length>0&&(
         <>
-          <div style={{fontSize:12,color:P.textm,marginBottom:'0.5rem'}}>{rows.length} compte{rows.length>1?'s':''} détecté{rows.length>1?'s':''} · {rows.filter(r=>r.statut==='intervenant').length} intervenant{rows.filter(r=>r.statut==='intervenant').length>1?'s':''} · {rows.filter(r=>r.statut==='etudiant').length} étudiant{rows.filter(r=>r.statut==='etudiant').length>1?'s':''}</div>
-          <div style={{maxHeight:180,overflowY:'auto',marginBottom:'0.75rem',border:`1px solid ${P.border}`,borderRadius:8}}>
+          <div style={{fontSize:12,color:P.textm,marginBottom:'0.5rem'}}>{rows.length} intervenant{rows.length>1?'s':''} détecté{rows.length>1?'s':''}</div>
+          <div style={{maxHeight:200,overflowY:'auto',marginBottom:'0.75rem',border:`1px solid ${P.border}`,borderRadius:8}}>
             <table style={{width:'100%',borderCollapse:'collapse',fontSize:12}}>
-              <thead><tr style={{background:P.surface2,position:'sticky',top:0}}>{['Prénom','Nom','Email','Rôle'].map(h=><th key={h} style={{padding:'5px 8px',textAlign:'left',fontWeight:600,color:P.textm,borderBottom:`1px solid ${P.border}`}}>{h}</th>)}</tr></thead>
-              <tbody>{rows.map((r,i)=><tr key={i}><td style={{padding:'4px 8px',borderBottom:`1px solid rgba(19,69,71,0.06)`,color:P.abysse}}>{r.prenom}</td><td style={{padding:'4px 8px',borderBottom:`1px solid rgba(19,69,71,0.06)`,color:P.abysse}}>{r.nom}</td><td style={{padding:'4px 8px',borderBottom:`1px solid rgba(19,69,71,0.06)`,color:P.abysse}}>{r.email}</td><td style={{padding:'4px 8px',borderBottom:`1px solid rgba(19,69,71,0.06)`}}><Tag label={r.statut} small/></td></tr>)}</tbody>
+              <thead><tr style={{background:P.surface2}}>
+                {['Prénom','Nom','Matières CRM',appDone?'Modules Atlas':''].filter(Boolean).map(h=><th key={h} style={{padding:'5px 8px',textAlign:'left',fontWeight:600,color:P.textm,borderBottom:`1px solid ${P.border}`}}>{h}</th>)}
+              </tr></thead>
+              <tbody>{rows.map((r,i)=><tr key={i}>
+                <td style={{padding:'4px 8px',color:P.abysse,verticalAlign:'top'}}>{r.prenom}</td>
+                <td style={{padding:'4px 8px',color:P.abysse,verticalAlign:'top'}}>{r.nom}</td>
+                <td style={{padding:'4px 8px',color:P.textm,fontSize:11,verticalAlign:'top',maxWidth:200}}>
+                  <div style={{display:'flex',flexWrap:'wrap',gap:2}}>{r.matieres.slice(0,3).map((m,j)=><span key={j} style={{background:'rgba(19,69,71,0.07)',borderRadius:4,padding:'1px 5px',fontSize:10}}>{m}</span>)}{r.matieres.length>3&&<span style={{fontSize:10,color:P.textl}}>+{r.matieres.length-3}</span>}</div>
+                </td>
+                {appDone&&<td style={{padding:'4px 8px',verticalAlign:'top'}}>
+                  {r.modules_appareis.length>0
+                    ?<div style={{display:'flex',flexWrap:'wrap',gap:2}}>{r.modules_appareis.map(m=><span key={m} style={{background:'rgba(93,226,152,0.15)',color:P.petrole,borderRadius:4,padding:'1px 6px',fontSize:10,fontWeight:600}}>{m}</span>)}</div>
+                    :<span style={{fontSize:10,color:P.textl,fontStyle:'italic'}}>Non apparié</span>}
+                </td>}
+              </tr>)}</tbody>
             </table>
           </div>
-          <button onClick={handleImport} disabled={importing}
-            style={{width:'100%',padding:'0.75rem',borderRadius:10,fontSize:13,fontWeight:600,border:'none',cursor:importing?'not-allowed':'pointer',background:importing?'rgba(19,69,71,0.08)':`linear-gradient(135deg,${P.petrole},${P.menthe})`,color:importing?P.textm:P.abysse}}>
-            {importing?<span style={{display:'flex',alignItems:'center',justifyContent:'center',gap:'0.5rem'}}><Spinner size={14}/>Création des comptes…</span>:`Créer ${rows.length} compte${rows.length>1?'s':''} →`}
-          </button>
+
+          {!appDone&&(
+            <button onClick={apparier} disabled={appLoading||!formation}
+              style={{width:'100%',padding:'0.75rem',borderRadius:10,fontSize:13,fontWeight:600,border:`1px solid ${P.borderm}`,cursor:(!appLoading&&formation)?'pointer':'not-allowed',background:(!appLoading&&formation)?'rgba(93,226,152,0.1)':'rgba(19,69,71,0.05)',color:(!appLoading&&formation)?P.petrole:P.textm,marginBottom:'0.5rem'}}>
+              {appLoading?<span style={{display:'flex',alignItems:'center',justifyContent:'center',gap:'0.5rem'}}><Spinner size={14}/>Claude apparie les modules…</span>:'✦ Apparier les modules avec Claude →'}
+            </button>
+          )}
+
+          {appDone&&(
+            <button onClick={handleImport} disabled={importing}
+              style={{width:'100%',padding:'0.75rem',borderRadius:10,fontSize:13,fontWeight:600,border:'none',cursor:importing?'not-allowed':'pointer',background:importing?'rgba(19,69,71,0.08)':`linear-gradient(135deg,${P.petrole},${P.menthe})`,color:importing?P.textm:P.abysse}}>
+              {importing?<span style={{display:'flex',alignItems:'center',justifyContent:'center',gap:'0.5rem'}}><Spinner size={14}/>Création des comptes…</span>:`Créer ${rows.length} compte${rows.length>1?'s':''} intervenant${rows.length>1?'s':''} →`}
+            </button>
+          )}
         </>
       )}
+    </div>
+  )
+}
+
+/* ── ImportCSV : conteneur avec onglets Étudiants / Intervenants ─────────── */
+function ImportCSV({campus,formation,onDone}){
+  const [tab,setTab]=useState('etudiants')
+  return(
+    <div>
+      <div style={{display:'flex',gap:'0.4rem',marginBottom:'1.25rem'}}>
+        {[{id:'etudiants',l:'🎓 Étudiants'},{id:'intervenants',l:'👨‍🏫 Intervenants'}].map(t=>(
+          <button key={t.id} onClick={()=>setTab(t.id)}
+            style={{padding:'6px 16px',borderRadius:8,fontSize:13,fontWeight:500,cursor:'pointer',
+              border:`1px solid ${tab===t.id?P.borderm:P.border}`,
+              background:tab===t.id?P.petrole:P.surface,
+              color:tab===t.id?P.menthe:P.textm}}>
+            {t.l}
+          </button>
+        ))}
+      </div>
+      {tab==='etudiants'&&<ImportEtudiants campus={campus} onDone={onDone}/>}
+      {tab==='intervenants'&&<ImportIntervenants campus={campus} formation={formation} onDone={onDone}/>}
     </div>
   )
 }
@@ -353,7 +544,7 @@ function UserManagement(){
 
       {tab==='excel'&&(
         <div style={card({marginBottom:'1.5rem'})}>
-          <ImportExcel campus="" onDone={n=>{api.getUsers().then(d=>setUsers(d.users)).catch(()=>{})}}/>
+          <ImportCSV campus="" formation={null} onDone={()=>{api.getUsers().then(d=>setUsers(d.users)).catch(()=>{})}}/>
         </div>
       )}
 
@@ -634,9 +825,9 @@ function VueRP({user,onLogout}){
           {onglet==='comptes'&&(
             <div className="fi">
               <h2 style={{fontFamily:'Georgia,serif',fontWeight:400,color:P.abysse,marginTop:0,fontSize:22,marginBottom:'0.75rem'}}>Import de comptes</h2>
-              <p style={{fontSize:13,color:P.textm,marginBottom:'1.25rem',lineHeight:1.7}}>Importez les intervenants et étudiants de votre campus via un fichier Excel.</p>
+              <p style={{fontSize:13,color:P.textm,marginBottom:'1.25rem',lineHeight:1.7}}>Importez les intervenants et étudiants de votre campus. Pour les intervenants, Claude apparie automatiquement leurs matières aux modules de la formation sélectionnée.</p>
               <div style={card()}>
-                <ImportExcel campus={user.campus} onDone={()=>{}}/>
+                <ImportCSV campus={user.campus} formation={f} onDone={()=>{}}/>
               </div>
             </div>
           )}
