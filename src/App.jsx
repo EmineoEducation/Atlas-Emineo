@@ -257,7 +257,7 @@ function VueDir({user,onLogout}){
   const [formations,setFormations]=useState([])
   const [loading,setLoading]=useState(true)
   const [files,setFiles]=useState([])
-  const [campus,setCampus]=useState('')
+  const [campusSel,setCampusSel]=useState([])
   const [ingLoading,setIngLoading]=useState(false)
   const [progress,setProgress]=useState('')
   const [error,setError]=useState('')
@@ -271,14 +271,16 @@ function VueDir({user,onLogout}){
   async function lireTexte(file){return new Promise((res,rej)=>{const r=new FileReader();r.onload=e=>res(e.target.result);r.onerror=rej;r.readAsText(file,'utf-8')})}
 
   async function handleIngestion(){
-    if(!files.length||!campus.trim())return
-    setIngLoading(true);setError('');setProgress('Lecture…')
+    if(!files.length||!campusSel.length)return
+    setIngLoading(true);setError('');setProgress('Envoi au serveur…')
     try{
       const textes=await Promise.all(files.map(f=>lireTexte(f)))
-      const data=await ingererDocuments(textes,campus.trim(),setProgress)
+      // Passe par /api/ingest (clé côté serveur, pas de CORS)
+      const campusVal=campusSel.length===1?campusSel[0]:campusSel
+      const data=await ingererDocuments(textes,campusVal,setProgress)
       setProgress('Enregistrement…')
-      await api.createFormation(campus.trim(),data)
-      setProgress('Formation chargée ✓');setFiles([]);setCampus('')
+      await api.createFormation(campusVal,data)
+      setProgress('Formation chargée ✓');setFiles([]);setCampusSel([])
       await loadFormations();setOnglet('formations')
     }catch(e){setError('Erreur : '+(e&&e.message?e.message:String(e)))}finally{setIngLoading(false)}
   }
@@ -325,22 +327,35 @@ function VueDir({user,onLogout}){
         {onglet==='ingestion'&&(
           <div className="fi">
             <h2 style={{fontFamily:'var(--font-t)',fontWeight:400,color:P.abysse,marginTop:0,fontSize:24,marginBottom:'0.4rem'}}>Nouvelle formation</h2>
-            <p style={{fontSize:13,color:P.textm,marginBottom:'2rem',lineHeight:1.7}}>Déposez les fichiers (.txt .md) — syllabi, plan de formation, RACE.</p>
+            <p style={{fontSize:13,color:P.textm,marginBottom:'2rem',lineHeight:1.7}}>Déposez vos documents (.md .txt .pdf .docx .xlsx) — syllabi, plan de formation, RACE.</p>
+
+            {/* Campus multi-sélection */}
             <div style={card({marginBottom:'1rem'})}>
-              <div style={{fontSize:12,fontWeight:600,color:P.abysse,marginBottom:'0.5rem'}}>Campus de rattachement</div>
-              <input value={campus} onChange={e=>setCampus(e.target.value)} placeholder="Bordeaux, Paris…" style={{width:'100%',border:`1px solid ${P.border}`,borderRadius:8,padding:'0.55rem 0.75rem',fontSize:13,color:P.abysse,outline:'none'}}/>
+              <div style={{fontSize:12,fontWeight:600,color:P.abysse,marginBottom:'0.6rem'}}>Campus de rattachement</div>
+              <div style={{display:'flex',flexWrap:'wrap',gap:'0.4rem'}}>
+                {['Paris','Nantes','Bordeaux','Rennes','Le Mans','Vannes','Poitiers','La Rochelle'].map(c=>{
+                  const sel=campusSel.includes(c)
+                  return <button key={c} onClick={()=>setCampusSel(p=>sel?p.filter(x=>x!==c):[...p,c])}
+                    style={{padding:'5px 14px',borderRadius:20,fontSize:13,border:`1px solid ${sel?P.borderm:P.border}`,background:sel?'rgba(93,226,152,0.12)':P.surface,color:sel?P.petrole:P.textm,fontWeight:sel?600:400,cursor:'pointer',transition:'all 0.15s'}}>{c}</button>
+                })}
+              </div>
+              {campusSel.length>1&&<div style={{fontSize:11,color:P.textm,marginTop:'0.5rem'}}>ℹ️ Formation visible par les RP de : {campusSel.join(', ')}</div>}
             </div>
+
+            {/* Zone de dépôt */}
             <div onDragOver={e=>e.preventDefault()} onDrop={e=>{e.preventDefault();setFiles(prev=>[...prev,...Array.from(e.dataTransfer.files)])}} onClick={()=>document.getElementById('fi2').click()}
               style={{border:`2px dashed ${P.borderm}`,borderRadius:16,padding:'2.5rem 2rem',textAlign:'center',background:'rgba(93,226,152,0.04)',marginBottom:'1rem',cursor:'pointer'}}>
-              <input id="fi2" type="file" multiple accept=".txt,.md,.csv" style={{display:'none'}} onChange={e=>setFiles(prev=>[...prev,...Array.from(e.target.files)])}/>
+              <input id="fi2" type="file" multiple accept=".txt,.md,.csv,.pdf,.docx,.xlsx" style={{display:'none'}} onChange={e=>setFiles(prev=>[...prev,...Array.from(e.target.files)])}/>
               <div style={{fontSize:28,marginBottom:'0.6rem',opacity:0.45}}>📄</div>
               <div style={{fontSize:14,fontWeight:500,color:P.petrole}}>Glisser-déposer ou cliquer</div>
-              <div style={{fontSize:12,color:P.textm}}>Syllabi · Plan de formation · RACE</div>
+              <div style={{fontSize:12,color:P.textm}}>Syllabi · Plan de formation · RACE · .md .txt .pdf .docx .xlsx</div>
             </div>
+
             {files.length>0&&<div style={{marginBottom:'1rem'}}>{files.map((f,i)=><div key={i} style={{display:'flex',alignItems:'center',justifyContent:'space-between',padding:'0.5rem 0.75rem',background:P.surface,borderRadius:8,border:`1px solid ${P.border}`,marginBottom:'0.35rem'}}><div style={{fontSize:13,fontWeight:500,color:P.abysse}}>{f.name} <span style={{fontSize:11,color:P.textm}}>({(f.size/1024).toFixed(1)} Ko)</span></div><button onClick={()=>setFiles(prev=>prev.filter((_,j)=>j!==i))} style={{color:P.red,fontSize:16,cursor:'pointer'}}>×</button></div>)}</div>}
-            <button onClick={handleIngestion} disabled={ingLoading||!files.length||!campus.trim()}
-              style={{width:'100%',padding:'0.9rem',borderRadius:10,fontSize:14,fontWeight:600,border:'none',transition:'all 0.2s',cursor:(!ingLoading&&files.length&&campus.trim())?'pointer':'not-allowed',
-                background:(!ingLoading&&files.length&&campus.trim())?`linear-gradient(135deg,${P.petrole},${P.menthe})`:'rgba(19,69,71,0.08)',color:(!ingLoading&&files.length&&campus.trim())?P.abysse:P.textm}}>
+
+            <button onClick={handleIngestion} disabled={ingLoading||!files.length||!campusSel.length}
+              style={{width:'100%',padding:'0.9rem',borderRadius:10,fontSize:14,fontWeight:600,border:'none',transition:'all 0.2s',cursor:(!ingLoading&&files.length&&campusSel.length)?'pointer':'not-allowed',
+                background:(!ingLoading&&files.length&&campusSel.length)?`linear-gradient(135deg,${P.petrole},${P.menthe})`:'rgba(19,69,71,0.08)',color:(!ingLoading&&files.length&&campusSel.length)?P.abysse:P.textm}}>
               {ingLoading?<span style={{display:'flex',alignItems:'center',justifyContent:'center',gap:'0.5rem'}}><Spinner size={16}/>{progress}</span>:'Analyser avec Claude →'}
             </button>
             {error&&<div style={{marginTop:'1rem',padding:'0.75rem 1rem',background:P.redbg,border:`1px solid ${P.red}`,borderRadius:8,fontSize:12,color:'#8B1A1A'}}>{error}</div>}
