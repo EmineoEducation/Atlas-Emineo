@@ -69,23 +69,29 @@ module.exports = async function handler(req, res) {
       return res.status(201).json({ ok: true });
     }
 
-    // ─── PATCH : modifier le campus d'une formation ────────────────────────────
+    // ─── PATCH : modifier campus et/ou data d'une formation ───────────────────
     if (req.method === 'PATCH') {
       const user = await requireRole(req, ['dir', 'rp']);
       if (!user) return res.status(403).json({ error: 'Accès réservé.' });
 
-      const { id, campus } = req.body || {};
+      const { id, campus, data: dataOverride } = req.body || {};
       if (!id) return res.status(400).json({ error: 'id requis.' });
 
-      // Récupérer la formation existante
-      const existing = await db.execute({ sql: 'SELECT data_json FROM formations WHERE id = ?', args: [id] });
+      const existing = await db.execute({ sql: 'SELECT campus, data_json FROM formations WHERE id = ?', args: [id] });
       if (!existing.rows || !existing.rows.length) return res.status(404).json({ error: 'Formation introuvable.' });
 
-      const campusStr = Array.isArray(campus) ? JSON.stringify(campus) : (campus || '');
-
-      // Mettre à jour le champ campus ET data_json._campus
       let data = {};
       try { data = JSON.parse(existing.rows[0].data_json || '{}'); } catch (_) {}
+
+      // Mise à jour campus si fourni
+      const campusStr = campus !== undefined
+        ? (Array.isArray(campus) ? JSON.stringify(campus) : (campus || ''))
+        : existing.rows[0].campus;
+
+      // Mise à jour data si fourni (ex: intervenants dans modules)
+      if (dataOverride && typeof dataOverride === 'object') {
+        Object.assign(data, dataOverride);
+      }
       data._campus = campusStr;
 
       await db.execute({
