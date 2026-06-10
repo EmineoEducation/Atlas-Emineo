@@ -1,9 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { api, setToken, clearToken, getToken, ingererDocuments, genererFicheJ1 } from './api.js'
 
-/* ═══════════════════════════════════════════════════════════════
-   COULEURS & UTILS UI
-═══════════════════════════════════════════════════════════════ */
 const P = {
   abysse:'#0B2B2D',petrole:'#134547',menthe:'#5DE298',givre:'#E3FFF0',eau:'#9DF0C4',saumon:'#E89B77',
   surface:'#FFFFFF',surface2:'#F5FDF8',border:'rgba(19,69,71,0.12)',borderm:'rgba(93,226,152,0.28)',
@@ -11,7 +8,7 @@ const P = {
 }
 const SCOL={nominal:'#5DE298',signal:'#9DF0C4',coordination:'#EF9F27',incoherence:'#E24B4A',vide:'#8EADA8'}
 const SFIL={nominal:'rgba(93,226,152,0.12)',signal:'rgba(157,240,196,0.14)',coordination:'rgba(239,159,39,0.10)',incoherence:'rgba(226,75,74,0.08)',vide:'rgba(19,69,71,0.04)'}
-const ROLE_LABELS={dir:'Direction des programmes',rp:'Responsable pédagogique',intervenant:'Intervenant',etudiant:'Étudiant'}
+const CAMPUS_LIST=['Paris','Nantes','Bordeaux','Rennes','Le Mans','Vannes','Poitiers','La Rochelle']
 
 function Tag({label,color='blue',small}){
   const m={blue:{bg:'rgba(93,226,152,0.15)',fg:P.petrole},amber:{bg:P.amberbg,fg:'#7A4A00'},teal:{bg:'rgba(157,240,196,0.25)',fg:P.abysse},red:{bg:P.redbg,fg:'#8B1A1A'},gray:{bg:'rgba(19,69,71,0.07)',fg:P.textm}}
@@ -34,19 +31,18 @@ function Empty({icon,titre,msg,action,onClick}){
   return <div style={{padding:'4rem 2rem',textAlign:'center'}}><div style={{fontSize:40,opacity:0.35,marginBottom:'0.75rem'}}>{icon}</div><div style={{fontSize:15,fontWeight:600,color:P.petrole,marginBottom:'0.3rem'}}>{titre}</div><div style={{fontSize:13,color:P.textm,lineHeight:1.6,maxWidth:320,margin:'0 auto'}}>{msg}</div>{action&&<button onClick={onClick} style={{marginTop:'1.25rem',background:P.petrole,color:P.givre,border:'none',borderRadius:8,padding:'8px 20px',fontSize:13,cursor:'pointer'}}>{action}</button>}</div>
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   GRAPHE CANVAS
-═══════════════════════════════════════════════════════════════ */
+/* GRAPHE */
 function GrapheCanvas({blocs,alertes,onClickBloc,showAlerts=true}){
   const cvRef=useRef(null)
   const [panel,setPanel]=useState(null)
-  const nodes=(blocs||[]).map((b,i,arr)=>{
+  const blocsComp=(blocs||[]).filter(b=>(b.competences||[]).length>0)
+  const nodes=blocsComp.map((b,i,arr)=>{
     const angle=(2*Math.PI*i/Math.max(arr.length,1))-Math.PI/2
     const r=arr.length<=3?0.28:0.30
     const ids=(b.modules||[]).map(m=>m.id)
-    const h1=(alertes||[]).some(a=>a.niveau===1&&(a.modules||[]).some(m=>ids.includes(m)))
-    const h2=(alertes||[]).some(a=>a.niveau===2&&(a.modules||[]).some(m=>ids.includes(m)))
-    const h3=(alertes||[]).some(a=>a.niveau===3&&(a.modules||[]).some(m=>ids.includes(m)))
+    const h1=(alertes||[]).some(a=>a.niveau===1&&!(a._dismissed)&&(a.modules||[]).some(m=>ids.includes(m)))
+    const h2=(alertes||[]).some(a=>a.niveau===2&&!(a._dismissed)&&(a.modules||[]).some(m=>ids.includes(m)))
+    const h3=(alertes||[]).some(a=>a.niveau===3&&!(a._dismissed)&&(a.modules||[]).some(m=>ids.includes(m)))
     return{...b,x:0.5+r*Math.cos(angle),y:0.45+r*0.75*Math.sin(angle),status:h1?'incoherence':h2?'coordination':h3?'signal':'nominal',comp:(b.competences||[]).length,mc:(b.modules||[]).length}
   })
   const links=nodes.map((n,i)=>({a:n.id,b:nodes[(i+1)%nodes.length].id,w:2}))
@@ -54,103 +50,103 @@ function GrapheCanvas({blocs,alertes,onClickBloc,showAlerts=true}){
     const cv=cvRef.current;if(!cv)return
     const w=cv.width=cv.parentElement.clientWidth,h=cv.height=400
     const ctx=cv.getContext('2d');ctx.clearRect(0,0,w,h)
-    if(!nodes.length){ctx.fillStyle='rgba(19,69,71,0.25)';ctx.font="400 14px 'Inter',system-ui";ctx.textAlign='center';ctx.fillText('Aucune formation chargée',w/2,h/2);return}
-    links.forEach(l=>{const a=nodes.find(n=>n.id===l.a),b=nodes.find(n=>n.id===l.b);if(!a||!b)return;ctx.beginPath();ctx.moveTo(a.x*w,a.y*h);ctx.lineTo(b.x*w,b.y*h);ctx.strokeStyle='rgba(93,226,152,0.18)';ctx.lineWidth=l.w;ctx.stroke()})
-    nodes.forEach(n=>{const x=n.x*w,y=n.y*h,r=26+n.comp*7
-      if(n.status==='incoherence'){ctx.beginPath();ctx.arc(x,y,r+7,0,Math.PI*2);ctx.strokeStyle='rgba(226,75,74,0.22)';ctx.lineWidth=4;ctx.stroke()}
-      ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fillStyle=SFIL[n.status]||SFIL.vide;ctx.fill();ctx.strokeStyle=SCOL[n.status]||SCOL.vide;ctx.lineWidth=n.status==='incoherence'?2.5:1.5;ctx.stroke()
-      const fs=Math.max(9,r*0.20);ctx.fillStyle=P.abysse;ctx.font=`600 ${fs}px 'Inter',system-ui`;ctx.textAlign='center';ctx.textBaseline='middle'
-      ctx.fillText(n.id,x,y-fs*0.6);ctx.font=`400 ${Math.max(8,r*0.165)}px 'Inter',system-ui`;ctx.fillText(n.titre.length>18?n.titre.slice(0,16)+'…':n.titre,x,y+fs*0.5)
-      ctx.fillStyle=SCOL[n.status]||SCOL.vide;ctx.font=`400 ${Math.max(7,r*0.155)}px 'Inter',system-ui`;ctx.fillText(`${n.comp}C · ${n.mc}M`,x,y+fs*0.5+Math.max(8,r*0.165)*1.3)
+    links.forEach(l=>{
+      const a=nodes.find(n=>n.id===l.a),b=nodes.find(n=>n.id===l.b);if(!a||!b)return
+      ctx.beginPath();ctx.moveTo(a.x*w,a.y*h);ctx.lineTo(b.x*w,b.y*h)
+      ctx.strokeStyle='rgba(19,69,71,0.10)';ctx.lineWidth=l.w;ctx.stroke()
     })
-  },[nodes])
+    nodes.forEach(n=>{
+      const x=n.x*w,y=n.y*h,rc=18+n.comp*4
+      if(n.status==='incoherence'){ctx.beginPath();ctx.arc(x,y,rc+7,0,Math.PI*2);ctx.strokeStyle='rgba(226,75,74,0.18)';ctx.lineWidth=5;ctx.stroke()}
+      ctx.beginPath();ctx.arc(x,y,rc,0,Math.PI*2);ctx.fillStyle=SFIL[n.status]||SFIL.vide;ctx.fill()
+      ctx.strokeStyle=SCOL[n.status]||SCOL.vide;ctx.lineWidth=showAlerts?2:1.5;ctx.stroke()
+      ctx.fillStyle=P.abysse;ctx.textAlign='center';ctx.textBaseline='middle'
+      const fs=Math.max(9,rc*0.22);ctx.font=`600 ${fs}px Inter,system-ui`
+      ctx.fillText(n.id,x,y-4)
+      ctx.font=`400 ${Math.max(8,fs*0.85)}px Inter,system-ui`;ctx.fillStyle=P.textm
+      const short=n.titre?n.titre.split(' ').slice(0,2).join(' '):'';ctx.fillText(short,x,y+8)
+    })
+  },[nodes,links,showAlerts])
   useEffect(()=>{draw();window.addEventListener('resize',draw);return()=>window.removeEventListener('resize',draw)},[draw])
-  function getHit(e){const cv=cvRef.current;if(!cv)return null;const rect=cv.getBoundingClientRect(),mx=(e.clientX-rect.left)*(cv.width/rect.width),my=(e.clientY-rect.top)*(cv.height/rect.height);return nodes.find(n=>{const r=26+n.comp*7,dx=mx-n.x*cv.width,dy=my-n.y*cv.height;return Math.sqrt(dx*dx+dy*dy)<=r})}
+  function getHit(e){
+    const cv=cvRef.current;if(!cv)return null
+    const rect=cv.getBoundingClientRect()
+    const mx=(e.clientX-rect.left)*(cv.width/rect.width),my=(e.clientY-rect.top)*(cv.height/rect.height)
+    return nodes.find(n=>{const dx=mx-n.x*cv.width,dy=my-n.y*cv.height;return Math.sqrt(dx*dx+dy*dy)<=18+n.comp*4})
+  }
   return(
-    <div style={{position:'relative',borderRadius:12,border:`1px solid ${P.border}`,overflow:'hidden',background:'rgba(227,255,240,0.30)'}}>
+    <div style={{position:'relative',borderRadius:12,border:`1px solid ${P.border}`,overflow:'hidden',background:'rgba(227,255,240,0.3)'}}>
       <canvas ref={cvRef} style={{display:'block',cursor:'default'}}
-        onMouseMove={e=>{const n=getHit(e),tip=document.getElementById('gtip');if(n&&tip){e.currentTarget.style.cursor='pointer';tip.style.opacity='1';tip.style.left=(e.clientX+14)+'px';tip.style.top=Math.max(8,e.clientY-12)+'px';tip.innerHTML=`<strong style="color:${SCOL[n.status]}">${n.id}</strong> · ${n.comp}C · ${n.mc}M<br><span style="opacity:.6;font-size:11px">${n.titre}</span>`}else{e.currentTarget.style.cursor='default';if(tip)tip.style.opacity='0'}}}
-        onMouseLeave={()=>{const tip=document.getElementById('gtip');if(tip)tip.style.opacity='0'}}
-        onClick={e=>{const tip=document.getElementById('gtip');if(tip)tip.style.opacity='0';const n=getHit(e);if(!n){setPanel(null);return};if(n.status==='incoherence'&&onClickBloc){onClickBloc(n);return};setPanel(prev=>prev?.id===n.id?null:n)}}
+        onMouseMove={e=>{const n=getHit(e);e.currentTarget.style.cursor=n?'pointer':'default'}}
+        onClick={e=>{const n=getHit(e);if(!n){setPanel(null);return}if(onClickBloc&&n.status==='incoherence'){onClickBloc(n);return}setPanel(prev=>prev?.id===n.id?null:n)}}
       />
-      {nodes.length>0&&<div style={{position:'absolute',top:10,left:10,background:'rgba(11,43,45,0.88)',borderRadius:8,padding:'7px 11px',border:`1px solid ${P.borderm}`,fontSize:10,color:P.givre}}>{[['#5DE298','Nominal'],['#9DF0C4','Signal doux'],['#EF9F27','Coordination'],['#E24B4A','Incohérence'],['#8EADA8','Non déclaré']].map(([c,l])=><div key={l} style={{display:'flex',alignItems:'center',marginBottom:3}}><span style={{width:8,height:8,borderRadius:'50%',background:c,display:'inline-block',marginRight:5}}/>{l}</div>)}</div>}
-      {panel&&<div style={{position:'absolute',right:0,top:0,width:250,height:'100%',background:'rgba(11,43,45,0.96)',borderLeft:`1px solid ${P.borderm}`,padding:'0.9rem',overflowY:'auto',animation:'fadeIn 0.2s ease'}}>
-        <div style={{display:'flex',justifyContent:'space-between',marginBottom:'0.75rem'}}><div><div style={{fontFamily:'var(--font-t)',fontSize:14,color:P.givre}}>{panel.titre}</div><div style={{fontSize:10,color:'rgba(227,255,240,0.4)',marginTop:3}}>{panel.comp}C · {panel.mc}M</div></div><button onClick={()=>setPanel(null)} style={{color:P.textm,fontSize:16}}>×</button></div>
-        {(panel.competences||[]).map(c=><div key={c.id} style={{fontSize:11,color:P.givre,padding:'3px 0',borderBottom:'1px solid rgba(93,226,152,0.08)'}}><span style={{color:P.menthe,fontWeight:600,marginRight:5}}>{c.id}</span>{c.libelle}</div>)}
-        <div style={{marginTop:'0.5rem',fontSize:10,fontWeight:600,color:'rgba(93,226,152,0.6)',textTransform:'uppercase',marginBottom:'0.3rem'}}>Modules</div>
-        {(panel.modules||[]).map(m=><div key={m.id} style={{fontSize:11,color:'rgba(227,255,240,0.7)',padding:'3px 0',borderBottom:'1px solid rgba(93,226,152,0.08)'}}>{m.titre}{m.intervenant?` · ${m.intervenant}`:''}</div>)}
-      </div>}
+      {panel&&(
+        <div style={{position:'absolute',right:0,top:0,width:220,height:'100%',background:'rgba(255,255,255,0.97)',borderLeft:`1px solid ${P.border}`,padding:'0.9rem',overflowY:'auto'}}>
+          <div style={{display:'flex',justifyContent:'space-between',marginBottom:'0.5rem'}}>
+            <span style={{fontWeight:600,fontSize:13,color:P.abysse}}>{panel.id} — {panel.titre}</span>
+            <button onClick={()=>setPanel(null)} style={{color:P.textm,fontSize:16}}>×</button>
+          </div>
+          <div style={{fontSize:11,color:P.textm,marginBottom:'0.5rem'}}>{panel.comp}C · {panel.mc}M</div>
+          {(panel.competences||[]).map(c=><div key={c.id} style={{fontSize:11,padding:'3px 0',borderBottom:`1px solid ${P.border}`,color:P.abysse}}>{c.id} — {c.libelle}</div>)}
+        </div>
+      )}
+      <div style={{position:'absolute',bottom:8,left:10,fontSize:10,color:P.textl}}>Clic = détail · Rouge = incohérence</div>
     </div>
   )
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   TOPBAR — avec info user + déconnexion
-═══════════════════════════════════════════════════════════════ */
+/* TOPBAR */
 function Topbar({user,formationTitre,onLogout,onglet,setOnglet,onglets}){
   return(
-    <div style={{height:52,display:'flex',alignItems:'center',gap:'0.65rem',padding:'0 1.25rem',position:'sticky',top:0,zIndex:100,background:P.surface,borderBottom:`1px solid ${P.border}`,boxShadow:'0 1px 8px rgba(11,43,45,0.06)'}}>
+    <div style={{height:52,background:P.surface,borderBottom:`1px solid ${P.border}`,padding:'0 1.25rem',display:'flex',alignItems:'center',gap:'0.75rem',position:'sticky',top:0,zIndex:100,boxShadow:'0 1px 8px rgba(11,43,45,0.06)'}}>
       <div style={{display:'flex',alignItems:'center',gap:6,paddingRight:10,borderRight:`1px solid ${P.border}`}}>
-        <div style={{width:24,height:24,borderRadius:'50%',background:P.petrole,display:'flex',alignItems:'center',justifyContent:'center'}}><span style={{color:P.menthe,fontSize:11,fontWeight:700,fontFamily:'var(--font-t)',fontStyle:'italic'}}>e</span></div>
-        <span style={{fontSize:10,fontWeight:600,color:P.petrole,letterSpacing:'0.06em',textTransform:'uppercase'}}>Éminéo</span>
+        <div style={{width:24,height:24,borderRadius:'50%',background:P.petrole,display:'flex',alignItems:'center',justifyContent:'center'}}>
+          <span style={{color:P.menthe,fontSize:11,fontWeight:700,fontFamily:'Georgia,serif',fontStyle:'italic'}}>e</span>
+        </div>
       </div>
       <div style={{flex:1,minWidth:0}}>
-        <div style={{fontSize:12,fontWeight:600,color:P.abysse,lineHeight:1.2}}>{ROLE_LABELS[user.role]}{user.campus?` · ${user.campus}`:''}</div>
-        <div style={{fontSize:10,color:P.textl}}>{formationTitre||'Atlas des compétences'}</div>
+        <div style={{fontSize:12,fontWeight:600,color:P.abysse,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{formationTitre||'Atlas des compétences'}</div>
+        <div style={{fontSize:10,color:P.textm}}>{user.prenom} {user.nom}</div>
       </div>
       <div style={{display:'flex',gap:'0.3rem'}}>
-        {(onglets||[]).map(t=><button key={t.id} onClick={()=>setOnglet(t.id)} style={{borderRadius:6,padding:'4px 12px',fontSize:12,fontWeight:500,background:onglet===t.id?'rgba(93,226,152,0.15)':'transparent',border:`1px solid ${onglet===t.id?P.borderm:'transparent'}`,color:onglet===t.id?P.petrole:P.textm,transition:'all 0.15s',cursor:'pointer'}}>{t.label}</button>)}
+        {onglets.map(t=><button key={t.id} onClick={()=>setOnglet(t.id)} style={{padding:'4px 11px',borderRadius:6,fontSize:12,fontWeight:500,cursor:'pointer',border:`1px solid ${onglet===t.id?P.borderm:'transparent'}`,background:onglet===t.id?'rgba(93,226,152,0.12)':'transparent',color:onglet===t.id?P.petrole:P.textm}}>{t.label}</button>)}
       </div>
       <div style={{display:'flex',alignItems:'center',gap:'0.5rem',paddingLeft:10,borderLeft:`1px solid ${P.border}`}}>
-        <Avatar name={`${user.prenom} ${user.nom}`} size={26}/>
-        <div><div style={{fontSize:11,fontWeight:500,color:P.abysse}}>{user.prenom} {user.nom}</div><div style={{fontSize:9,color:P.textl}}>{user.email}</div></div>
-        <button onClick={onLogout} title="Se déconnecter" style={{color:P.textm,fontSize:14,padding:'2px 6px',marginLeft:4,cursor:'pointer'}}>⏻</button>
+        <Avatar name={`${user.prenom} ${user.nom}`} size={24}/>
+        <button onClick={onLogout} title="Déconnexion" style={{color:P.textm,fontSize:14,cursor:'pointer'}}>⏻</button>
       </div>
     </div>
   )
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   LOGIN PAGE
-═══════════════════════════════════════════════════════════════ */
+/* LOGIN */
 function LoginPage({onLogin}){
   const [email,setEmail]=useState('')
   const [password,setPassword]=useState('')
-  const [error,setError]=useState('')
   const [loading,setLoading]=useState(false)
-
-  async function handleSubmit(e){
-    e.preventDefault(); setError(''); setLoading(true)
-    try {
-      const data = await api.login(email.trim().toLowerCase(), password)
-      setToken(data.token)
-      onLogin(data.user)
-    } catch(err) { setError(err.message) }
-    finally { setLoading(false) }
+  const [error,setError]=useState('')
+  async function handleSubmit(){
+    setLoading(true);setError('')
+    try{const d=await api.login(email,password);setToken(d.token);onLogin(d.user)}
+    catch(e){setError(e.message)}finally{setLoading(false)}
   }
-
   return(
-    <div style={{minHeight:'100vh',background:'var(--grad-fond)',display:'flex',alignItems:'center',justifyContent:'center',position:'relative',overflow:'hidden'}}>
-      <div style={{position:'absolute',inset:0,opacity:0.04,pointerEvents:'none',backgroundImage:"url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",backgroundSize:'180px'}}/>
-      <div style={{width:'100%',maxWidth:380,background:'rgba(227,255,240,0.04)',border:'1px solid rgba(93,226,152,0.12)',borderRadius:20,padding:'2.5rem',backdropFilter:'blur(12px)',animation:'fadeUp 0.5s ease both'}}>
-        {/* Logo */}
-        <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:'2rem',justifyContent:'center'}}>
-          <div style={{width:40,height:40,borderRadius:'50%',background:P.givre,display:'flex',alignItems:'center',justifyContent:'center'}}><span style={{color:P.abysse,fontSize:20,fontWeight:700,fontFamily:'var(--font-t)',fontStyle:'italic',lineHeight:1}}>e</span></div>
-          <div><div style={{color:P.givre,fontSize:18,fontFamily:'var(--font-t)',fontWeight:600,lineHeight:1}}>emineo</div><div style={{color:P.menthe,fontSize:9,fontWeight:600,letterSpacing:'0.18em',textTransform:'uppercase',marginTop:1}}>ÉDUCATION</div></div>
+    <div style={{minHeight:'100vh',background:`linear-gradient(135deg,${P.abysse} 0%,${P.petrole} 100%)`,display:'flex',alignItems:'center',justifyContent:'center',padding:'1rem'}}>
+      <div style={{background:'rgba(227,255,240,0.06)',border:'1px solid rgba(93,226,152,0.18)',borderRadius:20,padding:'2.5rem',width:'100%',maxWidth:400,backdropFilter:'blur(8px)'}}>
+        <div style={{textAlign:'center',marginBottom:'2rem'}}>
+          <div style={{width:48,height:48,borderRadius:'50%',background:'rgba(93,226,152,0.15)',border:`1px solid ${P.borderm}`,display:'flex',alignItems:'center',justifyContent:'center',margin:'0 auto 1rem'}}>
+            <span style={{color:P.menthe,fontSize:20,fontFamily:'Georgia,serif',fontStyle:'italic',fontWeight:700}}>e</span>
+          </div>
+          <h1 style={{fontFamily:'Georgia,serif',color:'#fff',fontSize:22,fontWeight:400,margin:0}}>Atlas des compétences</h1>
+          <p style={{color:'rgba(227,255,240,0.45)',fontSize:12,marginTop:'0.3rem'}}>Éminéo · Coordination pédagogique</p>
         </div>
-        <h2 style={{fontFamily:'var(--font-t)',color:P.givre,fontSize:22,fontWeight:400,textAlign:'center',marginBottom:'0.3rem'}}>Atlas des compétences</h2>
-        <p style={{fontSize:12,color:'rgba(227,255,240,0.35)',textAlign:'center',marginBottom:'2rem'}}>Connexion à votre espace</p>
-
-        <div style={{marginBottom:'1rem'}}>
-          <label style={{fontSize:11,fontWeight:600,color:'rgba(227,255,240,0.4)',letterSpacing:'0.08em',textTransform:'uppercase',display:'block',marginBottom:'0.4rem'}}>Identifiant</label>
-          <input value={email} onChange={e=>setEmail(e.target.value)} placeholder="prenom.nom@emineo-education.fr"
-            style={{width:'100%',background:'rgba(93,226,152,0.06)',border:'1px solid rgba(93,226,152,0.18)',borderRadius:8,padding:'0.6rem 0.75rem',fontSize:14,color:P.givre,outline:'none'}} autoFocus/>
+        <div style={{marginBottom:'0.75rem'}}>
+          <label style={{fontSize:10,fontWeight:600,color:'rgba(227,255,240,0.5)',textTransform:'uppercase',letterSpacing:'0.08em',display:'block',marginBottom:'0.3rem'}}>Identifiant</label>
+          <input value={email} onChange={e=>setEmail(e.target.value)} onKeyDown={e=>e.key==='Enter'&&handleSubmit()} placeholder="prenom.nom@emineo-education.fr" style={{width:'100%',background:'rgba(227,255,240,0.07)',border:'1px solid rgba(93,226,152,0.2)',borderRadius:8,padding:'0.65rem 0.85rem',fontSize:13,color:'#fff',outline:'none',boxSizing:'border-box'}}/>
         </div>
-        <div style={{marginBottom:'1.5rem'}}>
-          <label style={{fontSize:11,fontWeight:600,color:'rgba(227,255,240,0.4)',letterSpacing:'0.08em',textTransform:'uppercase',display:'block',marginBottom:'0.4rem'}}>Mot de passe</label>
-          <input value={password} onChange={e=>setPassword(e.target.value)} type="password" placeholder="••••••••"
-            onKeyDown={e=>e.key==='Enter'&&handleSubmit(e)}
-            style={{width:'100%',background:'rgba(93,226,152,0.06)',border:'1px solid rgba(93,226,152,0.18)',borderRadius:8,padding:'0.6rem 0.75rem',fontSize:14,color:P.givre,outline:'none'}}/>
+        <div style={{marginBottom:'1.25rem'}}>
+          <label style={{fontSize:10,fontWeight:600,color:'rgba(227,255,240,0.5)',textTransform:'uppercase',letterSpacing:'0.08em',display:'block',marginBottom:'0.3rem'}}>Mot de passe</label>
+          <input type="password" value={password} onChange={e=>setPassword(e.target.value)} onKeyDown={e=>e.key==='Enter'&&handleSubmit()} style={{width:'100%',background:'rgba(227,255,240,0.07)',border:'1px solid rgba(93,226,152,0.2)',borderRadius:8,padding:'0.65rem 0.85rem',fontSize:13,color:'#fff',outline:'none',boxSizing:'border-box'}}/>
         </div>
         {error&&<div style={{marginBottom:'1rem',padding:'0.6rem 0.8rem',background:'rgba(226,75,74,0.15)',border:'1px solid rgba(226,75,74,0.3)',borderRadius:8,fontSize:12,color:'#FFB8B8'}}>{error}</div>}
         <button onClick={handleSubmit} disabled={loading||!email||!password}
@@ -164,70 +160,203 @@ function LoginPage({onLogin}){
   )
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   GESTION DES COMPTES — Dir péda uniquement
-═══════════════════════════════════════════════════════════════ */
+/* ═══ IMPORT EXCEL — composant partagé Dir + RP ═══════════════════════════════
+   Colonnes attendues (insensible casse / ordre) : nom, prenom, mail/email, statut
+   statut : "intervenant" ou "etudiant" (ou "étudiant")
+   Génère un mdp aléatoire 8 chars alphanum par compte.
+   Affiche un récapitulatif avec les mots de passe en clair (à transmettre).
+*/
+function genPassword(){
+  const chars='abcdefghjkmnpqrstuvwxyz23456789'
+  return Array.from({length:8},()=>chars[Math.floor(Math.random()*chars.length)]).join('')
+}
+
+function ImportExcel({campus,onDone}){
+  const [rows,setRows]=useState([])   // [{nom,prenom,email,statut,mdp,status:'pending'|'ok'|'err',msg:''}]
+  const [importing,setImporting]=useState(false)
+  const [done,setDone]=useState(false)
+  const [parseErr,setParseErr]=useState('')
+
+  async function parseFile(file){
+    setParseErr('');setRows([]);setDone(false)
+    // Lecture binaire via FileReader
+    const buf=await new Promise((res,rej)=>{const r=new FileReader();r.onload=e=>res(e.target.result);r.onerror=rej;r.readAsArrayBuffer(file)})
+    try{
+      // SheetJS disponible globalement via import dynamique CDN ou via npm (inclus dans package.json)
+      const XLSX=await import('https://cdn.sheetjs.com/xlsx-0.20.2/package/xlsx.mjs')
+      const wb=XLSX.read(buf,{type:'array'})
+      const ws=wb.Sheets[wb.SheetNames[0]]
+      const raw=XLSX.utils.sheet_to_json(ws,{defval:''})
+      if(!raw.length){setParseErr('Fichier vide ou format non reconnu.');return}
+      // Normaliser les clés
+      const norm=raw.map(r=>{
+        const e={}
+        Object.keys(r).forEach(k=>{e[k.toLowerCase().trim().replace(/é/g,'e').replace(/è/g,'e')]=String(r[k]).trim()})
+        return e
+      })
+      const parsed=norm.map(r=>({
+        nom:r.nom||r['name']||'',
+        prenom:r.prenom||r['prénom']||r['firstname']||'',
+        email:r.email||r.mail||r['e-mail']||'',
+        statut:(r.statut||r['rôle']||r['role']||'').toLowerCase().replace('é','e'),
+        mdp:genPassword(),
+        status:'pending',msg:''
+      }))
+      const errors=parsed.filter(r=>!r.nom||!r.email||!['intervenant','etudiant'].includes(r.statut))
+      if(errors.length){
+        setParseErr(`${errors.length} ligne(s) invalides (nom, email ou statut manquant/incorrect). Vérifiez le fichier.`)
+        return
+      }
+      setRows(parsed)
+    }catch(e){setParseErr('Erreur de lecture : '+e.message)}
+  }
+
+  async function handleImport(){
+    setImporting(true)
+    const updated=[...rows]
+    for(let i=0;i<updated.length;i++){
+      const r=updated[i]
+      try{
+        await api.createUser({
+          nom:r.nom,prenom:r.prenom,email:r.email,
+          role:r.statut==='etudiant'?'etudiant':'intervenant',
+          campus:campus||'',
+          password:r.mdp
+        })
+        updated[i]={...r,status:'ok'}
+      }catch(e){updated[i]={...r,status:'err',msg:e.message}}
+      setRows([...updated])
+    }
+    setImporting(false);setDone(true)
+    if(onDone)onDone(updated.filter(r=>r.status==='ok').length)
+  }
+
+  if(done){
+    const ok=rows.filter(r=>r.status==='ok')
+    const err=rows.filter(r=>r.status==='err')
+    return(
+      <div>
+        <div style={{padding:'0.75rem 1rem',background:'rgba(93,226,152,0.1)',border:`1px solid ${P.borderm}`,borderRadius:8,fontSize:13,color:P.petrole,marginBottom:'1rem',fontWeight:500}}>
+          ✓ {ok.length} compte{ok.length>1?'s':''} créé{ok.length>1?'s':''}
+          {err.length>0&&` · ${err.length} erreur${err.length>1?'s':''}`}
+        </div>
+        <div style={{padding:'0.75rem 1rem',background:P.amberbg,border:`1px solid ${P.amber}`,borderRadius:8,fontSize:12,color:'#7A4A00',marginBottom:'1rem',lineHeight:1.6}}>
+          ⚠ Conservez impérativement cette liste — les mots de passe ne seront plus affichés.
+        </div>
+        <div style={{overflowX:'auto'}}>
+          <table style={{width:'100%',borderCollapse:'collapse',fontSize:12}}>
+            <thead><tr style={{background:P.surface2}}>{['Prénom','Nom','Email','Rôle','Mot de passe','Statut'].map(h=><th key={h} style={{padding:'6px 8px',textAlign:'left',fontWeight:600,color:P.textm,borderBottom:`1px solid ${P.border}`}}>{h}</th>)}</tr></thead>
+            <tbody>{rows.map((r,i)=><tr key={i} style={{background:r.status==='err'?P.redbg:'transparent'}}>
+              <td style={{padding:'5px 8px',borderBottom:`1px solid ${P.border}`,color:P.abysse}}>{r.prenom}</td>
+              <td style={{padding:'5px 8px',borderBottom:`1px solid ${P.border}`,color:P.abysse}}>{r.nom}</td>
+              <td style={{padding:'5px 8px',borderBottom:`1px solid ${P.border}`,color:P.abysse}}>{r.email}</td>
+              <td style={{padding:'5px 8px',borderBottom:`1px solid ${P.border}`}}><Tag label={r.statut} small/></td>
+              <td style={{padding:'5px 8px',borderBottom:`1px solid ${P.border}`,fontFamily:'monospace',fontWeight:600,color:r.status==='ok'?P.petrole:P.red}}>{r.status==='ok'?r.mdp:r.msg}</td>
+              <td style={{padding:'5px 8px',borderBottom:`1px solid ${P.border}`}}>{r.status==='ok'?'✓':'✗'}</td>
+            </tr>)}</tbody>
+          </table>
+        </div>
+        <button onClick={()=>{setRows([]);setDone(false)}} style={{marginTop:'1rem',border:`1px solid ${P.border}`,color:P.textm,borderRadius:6,padding:'5px 14px',fontSize:12,background:P.surface,cursor:'pointer'}}>Nouvel import</button>
+      </div>
+    )
+  }
+
+  return(
+    <div>
+      <p style={{fontSize:12,color:P.textm,marginBottom:'1rem',lineHeight:1.7}}>
+        Fichier Excel (.xlsx) avec colonnes : <strong>nom · prenom · email · statut</strong><br/>
+        Statut : <code>intervenant</code> ou <code>etudiant</code>
+      </p>
+      <div onClick={()=>document.getElementById('xl-input').click()}
+        style={{border:`2px dashed ${P.borderm}`,borderRadius:12,padding:'2rem',textAlign:'center',cursor:'pointer',background:'rgba(93,226,152,0.03)',marginBottom:'0.75rem'}}>
+        <input id="xl-input" type="file" accept=".xlsx,.xls" style={{display:'none'}} onChange={e=>e.target.files[0]&&parseFile(e.target.files[0])}/>
+        <div style={{fontSize:24,opacity:0.4,marginBottom:'0.4rem'}}>📊</div>
+        <div style={{fontSize:13,fontWeight:500,color:P.petrole}}>Cliquer pour choisir le fichier</div>
+        <div style={{fontSize:11,color:P.textm}}>.xlsx · .xls</div>
+      </div>
+      {parseErr&&<div style={{padding:'0.6rem 0.8rem',background:P.redbg,border:`1px solid ${P.red}`,borderRadius:8,fontSize:12,color:'#8B1A1A',marginBottom:'0.75rem'}}>{parseErr}</div>}
+      {rows.length>0&&(
+        <>
+          <div style={{fontSize:12,color:P.textm,marginBottom:'0.5rem'}}>{rows.length} compte{rows.length>1?'s':''} détecté{rows.length>1?'s':''} · {rows.filter(r=>r.statut==='intervenant').length} intervenant{rows.filter(r=>r.statut==='intervenant').length>1?'s':''} · {rows.filter(r=>r.statut==='etudiant').length} étudiant{rows.filter(r=>r.statut==='etudiant').length>1?'s':''}</div>
+          <div style={{maxHeight:180,overflowY:'auto',marginBottom:'0.75rem',border:`1px solid ${P.border}`,borderRadius:8}}>
+            <table style={{width:'100%',borderCollapse:'collapse',fontSize:12}}>
+              <thead><tr style={{background:P.surface2,position:'sticky',top:0}}>{['Prénom','Nom','Email','Rôle'].map(h=><th key={h} style={{padding:'5px 8px',textAlign:'left',fontWeight:600,color:P.textm,borderBottom:`1px solid ${P.border}`}}>{h}</th>)}</tr></thead>
+              <tbody>{rows.map((r,i)=><tr key={i}><td style={{padding:'4px 8px',borderBottom:`1px solid rgba(19,69,71,0.06)`,color:P.abysse}}>{r.prenom}</td><td style={{padding:'4px 8px',borderBottom:`1px solid rgba(19,69,71,0.06)`,color:P.abysse}}>{r.nom}</td><td style={{padding:'4px 8px',borderBottom:`1px solid rgba(19,69,71,0.06)`,color:P.abysse}}>{r.email}</td><td style={{padding:'4px 8px',borderBottom:`1px solid rgba(19,69,71,0.06)`}}><Tag label={r.statut} small/></td></tr>)}</tbody>
+            </table>
+          </div>
+          <button onClick={handleImport} disabled={importing}
+            style={{width:'100%',padding:'0.75rem',borderRadius:10,fontSize:13,fontWeight:600,border:'none',cursor:importing?'not-allowed':'pointer',background:importing?'rgba(19,69,71,0.08)':`linear-gradient(135deg,${P.petrole},${P.menthe})`,color:importing?P.textm:P.abysse}}>
+            {importing?<span style={{display:'flex',alignItems:'center',justifyContent:'center',gap:'0.5rem'}}><Spinner size={14}/>Création des comptes…</span>:`Créer ${rows.length} compte${rows.length>1?'s':''} →`}
+          </button>
+        </>
+      )}
+    </div>
+  )
+}
+
+/* ═══ GESTION COMPTES — Dir péda (formulaire manuel) ═══════════════════════ */
 function UserManagement(){
   const [users,setUsers]=useState([])
   const [loading,setLoading]=useState(true)
   const [form,setForm]=useState({role:'rp',nom:'',prenom:'',email:'',password:'',campus:''})
   const [msg,setMsg]=useState('')
   const [err,setErr]=useState('')
+  const [tab,setTab]=useState('manuel')
 
   useEffect(()=>{api.getUsers().then(d=>{setUsers(d.users);setLoading(false)}).catch(()=>setLoading(false))},[])
 
   async function handleCreate(){
     setErr('');setMsg('')
-    try {
-      const data = await api.createUser(form)
+    try{
+      const data=await api.createUser(form)
       setMsg(`Compte créé : ${data.email}`)
       setForm({role:'rp',nom:'',prenom:'',email:'',password:'',campus:''})
-      const d = await api.getUsers(); setUsers(d.users)
-    } catch(e) { setErr(e.message) }
+      const d=await api.getUsers();setUsers(d.users)
+    }catch(e){setErr(e.message)}
   }
 
   async function handleDelete(id,nom){
-    if(!confirm(`Supprimer le compte de ${nom} ?`)) return
-    try { await api.deleteUser(id); const d=await api.getUsers(); setUsers(d.users) }
-    catch(e) { setErr(e.message) }
+    if(!confirm(`Supprimer le compte de ${nom} ?`))return
+    try{await api.deleteUser(id);const d=await api.getUsers();setUsers(d.users)}
+    catch(e){setErr(e.message)}
   }
 
   return(
     <div className="fi">
-      <h2 style={{fontFamily:'var(--font-t)',fontWeight:400,color:P.abysse,marginTop:0,fontSize:22,marginBottom:'1rem'}}>Gestion des comptes</h2>
-
-      {/* Formulaire création */}
-      <div style={card({marginBottom:'1.5rem'})}>
-        <div style={{fontSize:13,fontWeight:600,color:P.abysse,marginBottom:'0.75rem'}}>Nouveau compte</div>
-        <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'0.5rem',marginBottom:'0.5rem'}}>
-          <div>
-            <label style={{fontSize:10,fontWeight:600,color:P.textm,textTransform:'uppercase',letterSpacing:'0.06em'}}>Rôle</label>
-            <select value={form.role} onChange={e=>setForm({...form,role:e.target.value})} style={{width:'100%',border:`1px solid ${P.border}`,borderRadius:6,padding:'0.45rem',fontSize:13,color:P.abysse,background:P.surface}}>
-              <option value="rp">Responsable pédagogique</option>
-              <option value="intervenant">Intervenant</option>
-              <option value="etudiant">Étudiant</option>
-              <option value="dir">Direction des programmes</option>
-            </select>
-          </div>
-          <div>
-            <label style={{fontSize:10,fontWeight:600,color:P.textm,textTransform:'uppercase',letterSpacing:'0.06em'}}>Campus</label>
-            <input value={form.campus} onChange={e=>setForm({...form,campus:e.target.value})} placeholder="Bordeaux, Nantes…" style={{width:'100%',border:`1px solid ${P.border}`,borderRadius:6,padding:'0.45rem',fontSize:13,color:P.abysse,outline:'none'}}/>
-          </div>
-        </div>
-        <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'0.5rem',marginBottom:'0.5rem'}}>
-          <div><label style={{fontSize:10,fontWeight:600,color:P.textm,textTransform:'uppercase',letterSpacing:'0.06em'}}>Nom</label><input value={form.nom} onChange={e=>setForm({...form,nom:e.target.value})} style={{width:'100%',border:`1px solid ${P.border}`,borderRadius:6,padding:'0.45rem',fontSize:13,color:P.abysse,outline:'none'}}/></div>
-          <div><label style={{fontSize:10,fontWeight:600,color:P.textm,textTransform:'uppercase',letterSpacing:'0.06em'}}>Prénom</label><input value={form.prenom} onChange={e=>setForm({...form,prenom:e.target.value})} style={{width:'100%',border:`1px solid ${P.border}`,borderRadius:6,padding:'0.45rem',fontSize:13,color:P.abysse,outline:'none'}}/></div>
-        </div>
-        <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'0.5rem',marginBottom:'0.75rem'}}>
-          <div><label style={{fontSize:10,fontWeight:600,color:P.textm,textTransform:'uppercase',letterSpacing:'0.06em'}}>Email</label><input value={form.email} onChange={e=>setForm({...form,email:e.target.value})} placeholder="auto si vide" style={{width:'100%',border:`1px solid ${P.border}`,borderRadius:6,padding:'0.45rem',fontSize:13,color:P.abysse,outline:'none'}}/></div>
-          <div><label style={{fontSize:10,fontWeight:600,color:P.textm,textTransform:'uppercase',letterSpacing:'0.06em'}}>Mot de passe</label><input value={form.password} onChange={e=>setForm({...form,password:e.target.value})} style={{width:'100%',border:`1px solid ${P.border}`,borderRadius:6,padding:'0.45rem',fontSize:13,color:P.abysse,outline:'none'}}/></div>
-        </div>
-        <button onClick={handleCreate} disabled={!form.nom||!form.password} style={{background:P.petrole,color:P.givre,border:'none',borderRadius:8,padding:'8px 20px',fontSize:13,fontWeight:500,cursor:(form.nom&&form.password)?'pointer':'not-allowed',opacity:(form.nom&&form.password)?1:0.5}}>Créer le compte</button>
-        {msg&&<div style={{marginTop:'0.5rem',fontSize:12,color:P.petrole}}>{msg}</div>}
-        {err&&<div style={{marginTop:'0.5rem',fontSize:12,color:P.red}}>{err}</div>}
+      <h2 style={{fontFamily:'Georgia,serif',fontWeight:400,color:P.abysse,marginTop:0,fontSize:22,marginBottom:'1rem'}}>Gestion des comptes RP</h2>
+      <div style={{display:'flex',gap:'0.4rem',marginBottom:'1.25rem'}}>
+        {[{id:'manuel',l:'Création manuelle'},{id:'excel',l:'Import Excel'}].map(t=><button key={t.id} onClick={()=>setTab(t.id)} style={{padding:'5px 14px',borderRadius:8,fontSize:12,fontWeight:500,cursor:'pointer',border:`1px solid ${tab===t.id?P.borderm:P.border}`,background:tab===t.id?'rgba(93,226,152,0.12)':P.surface,color:tab===t.id?P.petrole:P.textm}}>{t.l}</button>)}
       </div>
 
-      {/* Liste des comptes */}
+      {tab==='manuel'&&(
+        <div style={card({marginBottom:'1.5rem'})}>
+          <div style={{fontSize:13,fontWeight:600,color:P.abysse,marginBottom:'0.75rem'}}>Nouveau compte RP</div>
+          <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'0.5rem',marginBottom:'0.5rem'}}>
+            <div><label style={{fontSize:10,fontWeight:600,color:P.textm,textTransform:'uppercase',letterSpacing:'0.06em'}}>Campus</label>
+            <input value={form.campus} onChange={e=>setForm({...form,campus:e.target.value})} placeholder="Bordeaux" style={{width:'100%',border:`1px solid ${P.border}`,borderRadius:6,padding:'0.45rem',fontSize:13,color:P.abysse,outline:'none'}}/></div>
+            <div><label style={{fontSize:10,fontWeight:600,color:P.textm,textTransform:'uppercase',letterSpacing:'0.06em'}}>Email</label>
+            <input value={form.email} onChange={e=>setForm({...form,email:e.target.value})} style={{width:'100%',border:`1px solid ${P.border}`,borderRadius:6,padding:'0.45rem',fontSize:13,color:P.abysse,outline:'none'}}/></div>
+          </div>
+          <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'0.5rem',marginBottom:'0.5rem'}}>
+            <div><label style={{fontSize:10,fontWeight:600,color:P.textm,textTransform:'uppercase',letterSpacing:'0.06em'}}>Nom</label><input value={form.nom} onChange={e=>setForm({...form,nom:e.target.value})} style={{width:'100%',border:`1px solid ${P.border}`,borderRadius:6,padding:'0.45rem',fontSize:13,color:P.abysse,outline:'none'}}/></div>
+            <div><label style={{fontSize:10,fontWeight:600,color:P.textm,textTransform:'uppercase',letterSpacing:'0.06em'}}>Prénom</label><input value={form.prenom} onChange={e=>setForm({...form,prenom:e.target.value})} style={{width:'100%',border:`1px solid ${P.border}`,borderRadius:6,padding:'0.45rem',fontSize:13,color:P.abysse,outline:'none'}}/></div>
+          </div>
+          <div style={{marginBottom:'0.75rem'}}>
+            <label style={{fontSize:10,fontWeight:600,color:P.textm,textTransform:'uppercase',letterSpacing:'0.06em'}}>Mot de passe</label>
+            <input value={form.password} onChange={e=>setForm({...form,password:e.target.value})} style={{width:'100%',border:`1px solid ${P.border}`,borderRadius:6,padding:'0.45rem',fontSize:13,color:P.abysse,outline:'none'}}/>
+          </div>
+          <button onClick={handleCreate} disabled={!form.nom||!form.password} style={{background:P.petrole,color:P.givre,border:'none',borderRadius:8,padding:'8px 20px',fontSize:13,fontWeight:500,cursor:(form.nom&&form.password)?'pointer':'not-allowed',opacity:(form.nom&&form.password)?1:0.5}}>Créer le compte</button>
+          {msg&&<div style={{marginTop:'0.5rem',fontSize:12,color:P.petrole}}>{msg}</div>}
+          {err&&<div style={{marginTop:'0.5rem',fontSize:12,color:P.red}}>{err}</div>}
+        </div>
+      )}
+
+      {tab==='excel'&&(
+        <div style={card({marginBottom:'1.5rem'})}>
+          <ImportExcel campus="" onDone={n=>{api.getUsers().then(d=>setUsers(d.users)).catch(()=>{})}}/>
+        </div>
+      )}
+
       {loading?<div style={{textAlign:'center',padding:'2rem'}}><Spinner/></div>:
         users.map(u=>(
           <div key={u.id} style={{...card({display:'flex',justifyContent:'space-between',alignItems:'center',padding:'0.75rem 1rem'})}}>
@@ -239,8 +368,8 @@ function UserManagement(){
               </div>
             </div>
             <div style={{display:'flex',alignItems:'center',gap:'0.5rem'}}>
-              <Tag label={ROLE_LABELS[u.role]||u.role} color={u.role==='dir'?'teal':u.role==='rp'?'blue':u.role==='intervenant'?'amber':'gray'} small/>
-              <button onClick={()=>handleDelete(u.id,u.nom)} style={{color:P.red,fontSize:14,cursor:'pointer'}} title="Supprimer">×</button>
+              <Tag label={u.role} small/>
+              {u.role!=='dir'&&<button onClick={()=>handleDelete(u.id,u.nom)} style={{fontSize:11,color:P.red,border:`1px solid ${P.red}`,borderRadius:6,padding:'2px 8px',background:P.redbg,cursor:'pointer'}}>×</button>}
             </div>
           </div>
         ))
@@ -249,25 +378,97 @@ function UserManagement(){
   )
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   VUE DIRECTION DES PROGRAMMES
-═══════════════════════════════════════════════════════════════ */
+/* ═══ ÉDITEUR CAMPUS (inline sur une carte formation) ══════════════════════ */
+function CampusEditor({formation,onSave}){
+  const [sel,setSel]=useState(()=>{
+    const c=formation._campus||''
+    try{const p=JSON.parse(c);return Array.isArray(p)?p:[c].filter(Boolean)}
+    catch{return c?c.split(',').map(x=>x.trim()).filter(Boolean):[]}
+  })
+  const [saving,setSaving]=useState(false)
+  async function save(){
+    setSaving(true)
+    try{await api.updateFormation(formation._id,{campus:sel})}
+    catch(e){alert('Erreur : '+e.message)}
+    finally{setSaving(false)}
+    if(onSave)onSave(sel)
+  }
+  return(
+    <div style={{marginTop:'0.6rem',paddingTop:'0.6rem',borderTop:`1px solid ${P.border}`}}>
+      <div style={{fontSize:11,fontWeight:600,color:P.textm,marginBottom:'0.4rem',textTransform:'uppercase',letterSpacing:'0.07em'}}>Campus</div>
+      <div style={{display:'flex',flexWrap:'wrap',gap:'0.3rem',marginBottom:'0.5rem'}}>
+        {CAMPUS_LIST.map(c=>{
+          const on=sel.includes(c)
+          return <button key={c} onClick={()=>setSel(p=>on?p.filter(x=>x!==c):[...p,c])}
+            style={{padding:'3px 10px',borderRadius:20,fontSize:11,border:`1px solid ${on?P.borderm:P.border}`,background:on?'rgba(93,226,152,0.12)':P.surface,color:on?P.petrole:P.textm,cursor:'pointer',fontWeight:on?600:400}}>{c}</button>
+        })}
+      </div>
+      <button onClick={save} disabled={saving||!sel.length} style={{fontSize:11,background:sel.length?P.petrole:'rgba(19,69,71,0.08)',color:sel.length?P.givre:P.textm,border:'none',borderRadius:6,padding:'4px 12px',cursor:(!saving&&sel.length)?'pointer':'not-allowed'}}>
+        {saving?'…':'Enregistrer'}
+      </button>
+    </div>
+  )
+}
+
+/* ═══ ALERTES avec dismissal ══════════════════════════════════════════════ */
+function AlertesList({formations,showFormationTitle=true}){
+  const [dismissed,setDismissed]=useState({})   // {formId_idx: true}
+  const toggle=(fid,i)=>setDismissed(p=>({...p,[fid+'_'+i]:!p[fid+'_'+i]}))
+  const allDismissed=formations.every(f=>(f.alertes_detectees||[]).every((_,i)=>dismissed[f._id+'_'+i]))
+  return(
+    <div>
+      {formations.every(f=>!(f.alertes_detectees||[]).length)?
+        <Empty icon="✅" titre="Aucune alerte" msg="Aucune redondance détectée."/>:
+        formations.map(f=>{
+          const al=f.alertes_detectees||[]
+          if(!al.length)return null
+          return(
+            <div key={f._id} style={{marginBottom:'1.5rem'}}>
+              {showFormationTitle&&<div style={{fontSize:11,fontWeight:600,color:P.textm,textTransform:'uppercase',letterSpacing:'0.08em',marginBottom:'0.5rem'}}>{f.formation?.titre}{f._campus?` · ${f._campus}`:''}</div>}
+              {al.map((a,i)=>{
+                const key=f._id+'_'+i
+                const dis=!!dismissed[key]
+                return(
+                  <div key={i} style={{...card({borderLeft:`3px solid ${dis?P.border:a.niveau===2?P.amber:P.menthe}`}),opacity:dis?0.45:1,transition:'opacity 0.2s'}}>
+                    <div style={{display:'flex',gap:'0.4rem',marginBottom:'0.4rem',flexWrap:'wrap',alignItems:'center'}}>
+                      <Tag label={`Niveau ${a.niveau}`} color={dis?'gray':a.niveau===2?'amber':'blue'} small/>
+                      <span style={{fontSize:13,fontWeight:600,color:dis?P.textm:P.abysse,flex:1}}>{a.notion}</span>
+                      <button onClick={()=>toggle(f._id,i)}
+                        style={{fontSize:11,padding:'2px 9px',borderRadius:6,border:`1px solid ${P.border}`,background:dis?'rgba(93,226,152,0.08)':P.surface,color:dis?P.petrole:P.textm,cursor:'pointer',flexShrink:0}}>
+                        {dis?'Réactiver':'Ignorer'}
+                      </button>
+                    </div>
+                    {!dis&&<p style={{fontSize:12,color:P.textm,margin:0,lineHeight:1.6}}>{a.message}</p>}
+                    {dis&&<p style={{fontSize:11,color:P.textl,margin:0,fontStyle:'italic'}}>Alerte ignorée — cliquez Réactiver pour la rétablir.</p>}
+                  </div>
+                )
+              })}
+            </div>
+          )
+        })
+      }
+    </div>
+  )
+}
+
+/* ═══ VUE DIRECTION DES PROGRAMMES ════════════════════════════════════════ */
 function VueDir({user,onLogout}){
   const [onglet,setOnglet]=useState('formations')
   const [formations,setFormations]=useState([])
   const [loading,setLoading]=useState(true)
   const [files,setFiles]=useState([])
   const [campusSel,setCampusSel]=useState([])
+  const [nomFormation,setNomFormation]=useState('')
   const [ingLoading,setIngLoading]=useState(false)
   const [progress,setProgress]=useState('')
   const [error,setError]=useState('')
   const [selF,setSelF]=useState(null)
+  const [editCampus,setEditCampus]=useState(null)   // _id de la formation en cours d'édition campus
 
   useEffect(()=>{loadFormations()},[])
   async function loadFormations(){
     try{const d=await api.getFormations();setFormations(d.formations);setLoading(false)}catch(e){setError(e.message);setLoading(false)}
   }
-
   async function lireTexte(file){return new Promise((res,rej)=>{const r=new FileReader();r.onload=e=>res(e.target.result);r.onerror=rej;r.readAsText(file,'utf-8')})}
 
   async function handleIngestion(){
@@ -275,12 +476,13 @@ function VueDir({user,onLogout}){
     setIngLoading(true);setError('');setProgress('Envoi au serveur…')
     try{
       const textes=await Promise.all(files.map(f=>lireTexte(f)))
-      // Passe par /api/ingest (clé côté serveur, pas de CORS)
       const campusVal=campusSel.length===1?campusSel[0]:campusSel
       const data=await ingererDocuments(textes,campusVal,setProgress)
+      // Surcharge du titre si renseigné
+      if(nomFormation.trim()&&data.formation)data.formation.titre=nomFormation.trim()
       setProgress('Enregistrement…')
       await api.createFormation(campusVal,data)
-      setProgress('Formation chargée ✓');setFiles([]);setCampusSel([])
+      setProgress('Formation chargée ✓');setFiles([]);setCampusSel([]);setNomFormation('')
       await loadFormations();setOnglet('formations')
     }catch(e){setError('Erreur : '+(e&&e.message?e.message:String(e)))}finally{setIngLoading(false)}
   }
@@ -302,22 +504,29 @@ function VueDir({user,onLogout}){
         {onglet==='formations'&&(
           <div className="fi">
             <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:'1.25rem'}}>
-              <div><h2 style={{fontFamily:'var(--font-t)',fontWeight:400,color:P.abysse,margin:0,fontSize:24}}>Formations chargées</h2><p style={{fontSize:13,color:P.textm,marginTop:'0.25rem'}}>{formations.length} formation{formations.length>1?'s':''}</p></div>
+              <div><h2 style={{fontFamily:'Georgia,serif',fontWeight:400,color:P.abysse,margin:0,fontSize:24}}>Formations chargées</h2><p style={{fontSize:13,color:P.textm,marginTop:'0.25rem'}}>{formations.length} formation{formations.length>1?'s':''}</p></div>
               <button onClick={()=>setOnglet('ingestion')} style={{background:P.petrole,color:P.givre,border:'none',borderRadius:8,padding:'8px 16px',fontSize:13,fontWeight:500,cursor:'pointer'}}>+ Ajouter</button>
             </div>
             {loading?<div style={{textAlign:'center',padding:'2rem'}}><Spinner/></div>:
               formations.length===0?<Empty icon="🎓" titre="Aucune formation" msg="Utilisez l'onglet Ingestion pour analyser vos documents." action="Aller à l'ingestion →" onClick={()=>setOnglet('ingestion')}/>:
               formations.map(f=>(
-                <div key={f._id} style={card({display:'flex',justifyContent:'space-between',alignItems:'flex-start'})}>
-                  <div style={{flex:1,minWidth:0}}>
-                    <div style={{fontSize:14,fontWeight:600,color:P.abysse}}>{f.formation?.titre||'Sans titre'}</div>
-                    <div style={{fontSize:11,color:P.textm,marginTop:3}}>{f._campus&&`📍 ${f._campus} · `}{(f.blocs||[]).length}B · {(f.blocs||[]).flatMap(b=>b.competences||[]).length}C · {(f.blocs||[]).flatMap(b=>b.modules||[]).length}M</div>
-                    {(f.alertes_detectees||[]).length>0&&<div style={{fontSize:11,color:P.amber,marginTop:3}}>{(f.alertes_detectees||[]).length} alerte{(f.alertes_detectees||[]).length>1?'s':''}</div>}
+                <div key={f._id} style={card()}>
+                  <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start'}}>
+                    <div style={{flex:1,minWidth:0}}>
+                      <div style={{fontSize:14,fontWeight:600,color:P.abysse}}>{f.formation?.titre||'Sans titre'}</div>
+                      <div style={{fontSize:11,color:P.textm,marginTop:3}}>
+                        {f._campus&&`📍 ${Array.isArray(f._campus)?f._campus.join(', '):(()=>{try{const p=JSON.parse(f._campus);return Array.isArray(p)?p.join(', '):f._campus}catch{return f._campus}})()}`}
+                        {f._campus&&' · '}{(f.blocs||[]).length}B · {(f.blocs||[]).flatMap(b=>b.competences||[]).length}C · {(f.blocs||[]).flatMap(b=>b.modules||[]).length}M
+                      </div>
+                      {(f.alertes_detectees||[]).length>0&&<div style={{fontSize:11,color:P.amber,marginTop:3}}>{(f.alertes_detectees||[]).length} alerte{(f.alertes_detectees||[]).length>1?'s':''}</div>}
+                    </div>
+                    <div style={{display:'flex',gap:'0.35rem',flexShrink:0,marginLeft:'0.75rem'}}>
+                      <button onClick={()=>setEditCampus(editCampus===f._id?null:f._id)} style={{fontSize:11,color:P.petrole,border:`1px solid ${P.border}`,borderRadius:6,padding:'3px 9px',background:editCampus===f._id?'rgba(93,226,152,0.12)':P.surface2,cursor:'pointer'}}>📍</button>
+                      <button onClick={()=>{setSelF(f);setOnglet('cartographie')}} style={{fontSize:11,color:P.petrole,border:`1px solid ${P.border}`,borderRadius:6,padding:'3px 9px',background:P.surface2,cursor:'pointer'}}>Voir</button>
+                      <button onClick={()=>handleDelete(f._id)} style={{fontSize:11,color:P.red,border:`1px solid ${P.red}`,borderRadius:6,padding:'3px 9px',background:P.redbg,cursor:'pointer'}}>×</button>
+                    </div>
                   </div>
-                  <div style={{display:'flex',gap:'0.35rem',flexShrink:0,marginLeft:'0.75rem'}}>
-                    <button onClick={()=>{setSelF(f);setOnglet('cartographie')}} style={{fontSize:11,color:P.petrole,border:`1px solid ${P.border}`,borderRadius:6,padding:'3px 9px',background:P.surface2,cursor:'pointer'}}>Voir</button>
-                    <button onClick={()=>handleDelete(f._id)} style={{fontSize:11,color:P.red,border:`1px solid ${P.red}`,borderRadius:6,padding:'3px 9px',background:P.redbg,cursor:'pointer'}}>×</button>
-                  </div>
+                  {editCampus===f._id&&<CampusEditor formation={f} onSave={async()=>{await loadFormations();setEditCampus(null)}}/>}
                 </div>
               ))
             }
@@ -326,14 +535,21 @@ function VueDir({user,onLogout}){
 
         {onglet==='ingestion'&&(
           <div className="fi">
-            <h2 style={{fontFamily:'var(--font-t)',fontWeight:400,color:P.abysse,marginTop:0,fontSize:24,marginBottom:'0.4rem'}}>Nouvelle formation</h2>
-            <p style={{fontSize:13,color:P.textm,marginBottom:'2rem',lineHeight:1.7}}>Déposez vos documents (.md .txt .pdf .docx .xlsx) — syllabi, plan de formation, RACE.</p>
+            <h2 style={{fontFamily:'Georgia,serif',fontWeight:400,color:P.abysse,marginTop:0,fontSize:24,marginBottom:'0.4rem'}}>Nouvelle formation</h2>
+            <p style={{fontSize:13,color:P.textm,marginBottom:'1.5rem',lineHeight:1.7}}>Déposez vos documents — syllabi, plan de formation, RACE.</p>
+
+            {/* Nom de la formation */}
+            <div style={card({marginBottom:'1rem'})}>
+              <div style={{fontSize:12,fontWeight:600,color:P.abysse,marginBottom:'0.5rem'}}>Nom de la formation <span style={{fontWeight:400,color:P.textm}}>(optionnel — prioritaire sur le nom extrait)</span></div>
+              <input value={nomFormation} onChange={e=>setNomFormation(e.target.value)} placeholder="Ex : MSMC 2025-26 — Bordeaux"
+                style={{width:'100%',border:`1px solid ${P.border}`,borderRadius:8,padding:'0.6rem 0.8rem',fontSize:13,color:P.abysse,outline:'none',boxSizing:'border-box'}}/>
+            </div>
 
             {/* Campus multi-sélection */}
             <div style={card({marginBottom:'1rem'})}>
               <div style={{fontSize:12,fontWeight:600,color:P.abysse,marginBottom:'0.6rem'}}>Campus de rattachement</div>
               <div style={{display:'flex',flexWrap:'wrap',gap:'0.4rem'}}>
-                {['Paris','Nantes','Bordeaux','Rennes','Le Mans','Vannes','Poitiers','La Rochelle'].map(c=>{
+                {CAMPUS_LIST.map(c=>{
                   const sel=campusSel.includes(c)
                   return <button key={c} onClick={()=>setCampusSel(p=>sel?p.filter(x=>x!==c):[...p,c])}
                     style={{padding:'5px 14px',borderRadius:20,fontSize:13,border:`1px solid ${sel?P.borderm:P.border}`,background:sel?'rgba(93,226,152,0.12)':P.surface,color:sel?P.petrole:P.textm,fontWeight:sel?600:400,cursor:'pointer',transition:'all 0.15s'}}>{c}</button>
@@ -366,7 +582,7 @@ function VueDir({user,onLogout}){
           <div className="fi">
             {formations.length===0?<Empty icon="🗺" titre="Aucune formation" msg="Chargez une formation d'abord." action="Ingestion →" onClick={()=>setOnglet('ingestion')}/>:<>
               {formations.length>1&&<div style={{display:'flex',gap:'0.4rem',marginBottom:'1rem',flexWrap:'wrap'}}>{formations.map(f=><button key={f._id} onClick={()=>setSelF(f)} style={{padding:'5px 14px',borderRadius:8,fontSize:12,fontWeight:500,cursor:'pointer',border:`1px solid ${fCarto?._id===f._id?P.borderm:P.border}`,background:fCarto?._id===f._id?'rgba(93,226,152,0.12)':P.surface,color:fCarto?._id===f._id?P.petrole:P.textm}}>{f.formation?.titre||'?'}</button>)}</div>}
-              <h2 style={{fontFamily:'var(--font-t)',fontWeight:400,color:P.abysse,marginTop:0,fontSize:22,marginBottom:'1rem'}}>{fCarto?.formation?.titre||'Cartographie'}</h2>
+              <h2 style={{fontFamily:'Georgia,serif',fontWeight:400,color:P.abysse,marginTop:0,fontSize:22,marginBottom:'1rem'}}>{fCarto?.formation?.titre||'Cartographie'}</h2>
               <GrapheCanvas blocs={fCarto?.blocs||[]} alertes={fCarto?.alertes_detectees||[]} showAlerts/>
             </>}
           </div>
@@ -374,14 +590,9 @@ function VueDir({user,onLogout}){
 
         {onglet==='alertes'&&(
           <div className="fi">
-            <h2 style={{fontFamily:'var(--font-t)',fontWeight:400,color:P.abysse,marginTop:0,fontSize:22,marginBottom:'0.5rem'}}>Alertes réseau</h2>
-            <p style={{fontSize:12,color:P.textm,marginBottom:'1.25rem'}}>Signaux de coordination — opportunités pédagogiques, pas des sanctions.</p>
-            {totalAlertes===0?<Empty icon="✅" titre="Aucune alerte" msg="Aucune redondance détectée."/>:
-              formations.map(f=>(f.alertes_detectees||[]).length?<div key={f._id} style={{marginBottom:'1.5rem'}}>
-                <div style={{fontSize:11,fontWeight:600,color:P.textm,textTransform:'uppercase',letterSpacing:'0.08em',marginBottom:'0.5rem'}}>{f.formation?.titre}{f._campus?` · ${f._campus}`:''}</div>
-                {(f.alertes_detectees||[]).map((a,i)=><div key={i} style={card({borderLeft:`3px solid ${a.niveau===2?P.amber:P.menthe}`})}><div style={{display:'flex',gap:'0.4rem',marginBottom:'0.5rem',flexWrap:'wrap'}}><Tag label={`Niveau ${a.niveau}`} color={a.niveau===2?'amber':'blue'} small/><span style={{fontSize:13,fontWeight:600,color:P.abysse}}>{a.notion}</span></div><p style={{fontSize:12,color:P.textm,margin:0,lineHeight:1.6}}>{a.message}</p></div>)}
-              </div>:null)
-            }
+            <h2 style={{fontFamily:'Georgia,serif',fontWeight:400,color:P.abysse,marginTop:0,fontSize:22,marginBottom:'0.5rem'}}>Alertes réseau</h2>
+            <p style={{fontSize:12,color:P.textm,marginBottom:'1.25rem'}}>Signaux de coordination — opportunités pédagogiques. Vous pouvez ignorer les alertes non pertinentes.</p>
+            <AlertesList formations={formations} showFormationTitle/>
           </div>
         )}
 
@@ -391,9 +602,7 @@ function VueDir({user,onLogout}){
   )
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   VUE RP
-═══════════════════════════════════════════════════════════════ */
+/* ═══ VUE RP ════════════════════════════════════════════════════════════════ */
 function VueRP({user,onLogout}){
   const [onglet,setOnglet]=useState('formations')
   const [formations,setFormations]=useState([])
@@ -407,22 +616,29 @@ function VueRP({user,onLogout}){
   return(
     <div style={{minHeight:'100vh',background:P.givre}}>
       <Topbar user={user} formationTitre={f?.formation?.titre||''} onLogout={onLogout} onglet={onglet} setOnglet={setOnglet}
-        onglets={[{id:'formations',label:'Mes formations'},{id:'cartographie',label:'Cartographie'},{id:'blocs',label:'Blocs'},{id:'alertes',label:`Alertes (${alertes.length})`}]}/>
+        onglets={[{id:'formations',label:'Mes formations'},{id:'cartographie',label:'Cartographie'},{id:'blocs',label:'Blocs'},{id:'alertes',label:`Alertes (${alertes.length})`},{id:'comptes',label:'Comptes'}]}/>
       <div style={{maxWidth:960,margin:'0 auto',padding:'1.5rem'}}>
         {loading?<div style={{textAlign:'center',padding:'2rem'}}><Spinner/></div>:!f?<Empty icon="🎓" titre="Aucune formation" msg="Aucune formation sur votre campus. Contacter la Direction des programmes."/>:<>
-          {onglet==='formations'&&<div className="fi"><h2 style={{fontFamily:'var(--font-t)',fontWeight:400,color:P.abysse,marginTop:0,fontSize:22,marginBottom:'1rem'}}>Mes formations — {user.campus}</h2>{formations.map(fo=><div key={fo._id} onClick={()=>setSelF(fo)} style={{...card({cursor:'pointer',borderLeft:`3px solid ${selF?._id===fo._id?P.menthe:P.border}`})}}><div style={{fontSize:14,fontWeight:600,color:P.abysse}}>{fo.formation?.titre}</div><div style={{fontSize:11,color:P.textm,marginTop:3}}>{(fo.blocs||[]).length}B · {(fo.blocs||[]).flatMap(b=>b.modules||[]).length}M</div></div>)}</div>}
-          {onglet==='cartographie'&&<div className="fi"><h2 style={{fontFamily:'var(--font-t)',fontWeight:400,color:P.abysse,marginTop:0,fontSize:22,marginBottom:'1rem'}}>{f.formation?.titre}</h2><GrapheCanvas blocs={f.blocs||[]} alertes={alertes} showAlerts/></div>}
-          {onglet==='blocs'&&<div className="fi"><h2 style={{fontFamily:'var(--font-t)',fontWeight:400,color:P.abysse,marginTop:0,fontSize:22,marginBottom:'1rem'}}>Blocs</h2>{(f.blocs||[]).map(b=><details key={b.id} style={{...card(),marginBottom:'0.6rem'}}><summary style={{listStyle:'none',display:'flex',justifyContent:'space-between',cursor:'pointer'}}><div><Tag label={b.id} small/><span style={{marginLeft:'0.5rem',fontSize:14,fontWeight:600,color:P.abysse}}>{b.titre}</span><div style={{fontSize:11,color:P.textm,marginTop:3}}>{(b.competences||[]).length}C · {(b.modules||[]).length}M</div></div><span style={{fontSize:18,color:P.textm}}>▾</span></summary><div style={{marginTop:'0.75rem',paddingTop:'0.75rem',borderTop:`1px solid ${P.border}`}}>{(b.modules||[]).map(m=><div key={m.id} style={{background:P.surface2,borderRadius:8,padding:'0.5rem 0.75rem',marginBottom:'0.35rem',border:`1px solid ${P.border}`}}><div style={{fontSize:13,fontWeight:500,color:P.abysse}}>{m.titre}</div>{m.intervenant&&<div style={{fontSize:11,color:P.textm}}>{m.intervenant}</div>}{m.notions_cles?.length>0&&<div style={{display:'flex',flexWrap:'wrap',gap:'0.25rem',marginTop:'0.3rem'}}>{m.notions_cles.map(n=><Tag key={n} label={n} small/>)}</div>}</div>)}</div></details>)}</div>}
-          {onglet==='alertes'&&<div className="fi"><h2 style={{fontFamily:'var(--font-t)',fontWeight:400,color:P.abysse,marginTop:0,fontSize:22,marginBottom:'0.5rem'}}>Alertes</h2>{alertes.length===0?<Empty icon="✅" titre="Aucune alerte" msg="Aucune redondance."/>:alertes.map((a,i)=><div key={i} style={card({borderLeft:`3px solid ${a.niveau===2?P.amber:P.menthe}`})}><div style={{display:'flex',gap:'0.4rem',marginBottom:'0.5rem'}}><Tag label={`Niveau ${a.niveau}`} color={a.niveau===2?'amber':'blue'} small/><span style={{fontSize:13,fontWeight:600,color:P.abysse}}>{a.notion}</span></div><p style={{fontSize:12,color:P.textm,margin:0,lineHeight:1.6}}>{a.message}</p></div>)}</div>}
+          {onglet==='formations'&&<div className="fi"><h2 style={{fontFamily:'Georgia,serif',fontWeight:400,color:P.abysse,marginTop:0,fontSize:22,marginBottom:'1rem'}}>Mes formations — {user.campus}</h2>{formations.map(fo=><div key={fo._id} onClick={()=>setSelF(fo)} style={{...card({cursor:'pointer',borderLeft:`3px solid ${selF?._id===fo._id?P.menthe:P.border}`})}}><div style={{fontSize:14,fontWeight:600,color:P.abysse}}>{fo.formation?.titre}</div><div style={{fontSize:11,color:P.textm,marginTop:3}}>{(fo.blocs||[]).length}B · {(fo.blocs||[]).flatMap(b=>b.modules||[]).length}M</div></div>)}</div>}
+          {onglet==='cartographie'&&<div className="fi"><h2 style={{fontFamily:'Georgia,serif',fontWeight:400,color:P.abysse,marginTop:0,fontSize:22,marginBottom:'1rem'}}>{f.formation?.titre}</h2><GrapheCanvas blocs={f.blocs||[]} alertes={alertes} showAlerts/></div>}
+          {onglet==='blocs'&&<div className="fi"><h2 style={{fontFamily:'Georgia,serif',fontWeight:400,color:P.abysse,marginTop:0,fontSize:22,marginBottom:'1rem'}}>Blocs</h2>{(f.blocs||[]).map(b=><details key={b.id} style={{...card(),marginBottom:'0.6rem'}}><summary style={{listStyle:'none',display:'flex',justifyContent:'space-between',cursor:'pointer'}}><div><Tag label={b.id} small/><span style={{marginLeft:'0.5rem',fontSize:14,fontWeight:600,color:P.abysse}}>{b.titre}</span><div style={{fontSize:11,color:P.textm,marginTop:3}}>{(b.competences||[]).length}C · {(b.modules||[]).length}M</div></div><span style={{fontSize:18,color:P.textm}}>▾</span></summary><div style={{marginTop:'0.75rem',paddingTop:'0.75rem',borderTop:`1px solid ${P.border}`}}>{(b.modules||[]).map(m=><div key={m.id} style={{background:P.surface2,borderRadius:8,padding:'0.5rem 0.75rem',marginBottom:'0.35rem',border:`1px solid ${P.border}`}}><div style={{fontSize:13,fontWeight:500,color:P.abysse}}>{m.titre}</div>{m.intervenant&&<div style={{fontSize:11,color:P.textm}}>{m.intervenant}</div>}{m.notions_cles?.length>0&&<div style={{display:'flex',flexWrap:'wrap',gap:'0.25rem',marginTop:'0.3rem'}}>{m.notions_cles.map(n=><Tag key={n} label={n} small/>)}</div>}</div>)}</div></details>)}</div>}
+          {onglet==='alertes'&&<div className="fi"><h2 style={{fontFamily:'Georgia,serif',fontWeight:400,color:P.abysse,marginTop:0,fontSize:22,marginBottom:'0.5rem'}}>Alertes</h2><p style={{fontSize:12,color:P.textm,marginBottom:'1.25rem'}}>Ignorez les alertes non pertinentes — elles restent réactivables.</p><AlertesList formations={[f]} showFormationTitle={false}/></div>}
+          {onglet==='comptes'&&(
+            <div className="fi">
+              <h2 style={{fontFamily:'Georgia,serif',fontWeight:400,color:P.abysse,marginTop:0,fontSize:22,marginBottom:'0.75rem'}}>Import de comptes</h2>
+              <p style={{fontSize:13,color:P.textm,marginBottom:'1.25rem',lineHeight:1.7}}>Importez les intervenants et étudiants de votre campus via un fichier Excel.</p>
+              <div style={card()}>
+                <ImportExcel campus={user.campus} onDone={()=>{}}/>
+              </div>
+            </div>
+          )}
         </>}
       </div>
     </div>
   )
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   VUE INTERVENANT
-═══════════════════════════════════════════════════════════════ */
+/* ═══ VUE INTERVENANT ══════════════════════════════════════════════════════ */
 function VueIntervenant({user,onLogout}){
   const [formations,setFormations]=useState([])
   const [selF,setSelF]=useState(null)
@@ -436,8 +652,7 @@ function VueIntervenant({user,onLogout}){
 
   useEffect(()=>{api.getFormations().then(d=>{setFormations(d.formations);setLoading(false)}).catch(()=>setLoading(false))},[])
   useEffect(()=>{if(formations.length&&!selF)setSelF(formations[0])},[formations])
-
-  const mesModules=selF?(selF.blocs||[]).flatMap(b=>(b.modules||[]).map(m=>({...m,bloc_id:b.id,bloc_titre:b.titre}))):[]
+  const mesModules=selF?(selF.blocs||[]).flatMap(b=>(b.modules||[]).map(m=>({...m,bloc_id:b.id,bloc_titre:b.titre}))):[  ]
 
   async function chargerFiche(mod){
     setSelMod(mod);setFiche(null);setStream('');setFicheLoading(true)
@@ -451,56 +666,47 @@ function VueIntervenant({user,onLogout}){
       <div style={{maxWidth:700,margin:'0 auto',padding:'2rem 1.5rem'}}>
         {loading?<div style={{textAlign:'center',padding:'2rem'}}><Spinner/></div>:!selF?<Empty icon="📋" titre="Aucune formation" msg="Aucune formation disponible."/>:<>
           {formations.length>1&&<div style={{display:'flex',gap:'0.4rem',marginBottom:'1.25rem',flexWrap:'wrap'}}>{formations.map(f=><button key={f._id} onClick={()=>{setSelF(f);setSelMod(null);setFiche(null)}} style={{padding:'5px 12px',borderRadius:8,fontSize:12,cursor:'pointer',border:`1px solid ${selF?._id===f._id?P.borderm:P.border}`,background:selF?._id===f._id?'rgba(93,226,152,0.12)':P.surface,color:selF?._id===f._id?P.petrole:P.textm}}>{f.formation?.titre||'?'}</button>)}</div>}
-
-          {onglet==='avant'&&!selMod&&<div className="fi"><h2 style={{fontFamily:'var(--font-t)',fontWeight:400,color:P.abysse,marginTop:0,fontSize:22,marginBottom:'0.5rem'}}>Choisir un module</h2><p style={{fontSize:13,color:P.textm,marginBottom:'1rem'}}>Sélectionnez le module pour générer la fiche J‑1.</p>
+          {onglet==='avant'&&!selMod&&<div className="fi"><h2 style={{fontFamily:'Georgia,serif',fontWeight:400,color:P.abysse,marginTop:0,fontSize:22,marginBottom:'0.5rem'}}>Choisir un module</h2><p style={{fontSize:13,color:P.textm,marginBottom:'1rem'}}>Sélectionnez le module pour générer la fiche J‑1.</p>
             {(selF.blocs||[]).map(b=>{const bM=mesModules.filter(m=>m.bloc_id===b.id);if(!bM.length)return null;return<div key={b.id} style={{marginBottom:'1rem'}}><div style={{fontSize:11,fontWeight:600,color:P.textm,textTransform:'uppercase',letterSpacing:'0.08em',marginBottom:'0.4rem'}}>{b.id} — {b.titre}</div>{bM.map(m=><button key={m.id} onClick={()=>chargerFiche(m)} style={{width:'100%',textAlign:'left',padding:'0.75rem 1rem',borderRadius:10,border:`1px solid ${P.border}`,background:P.surface,marginBottom:'0.35rem',cursor:'pointer',display:'flex',justifyContent:'space-between',alignItems:'center'}} onMouseEnter={e=>e.currentTarget.style.boxShadow='0 3px 12px rgba(11,43,45,0.08)'} onMouseLeave={e=>e.currentTarget.style.boxShadow='none'}><div><div style={{fontSize:13,fontWeight:500,color:P.abysse}}>{m.titre}</div>{m.intervenant&&<div style={{fontSize:11,color:P.textm,marginTop:2}}>{m.intervenant}</div>}</div><span style={{fontSize:11,color:P.textm}}>Générer →</span></button>)}</div>})}
           </div>}
-
           {onglet==='avant'&&selMod&&<div className="fi">
             <div style={{display:'flex',alignItems:'center',gap:'0.5rem',marginBottom:'1.5rem'}}>
               <button onClick={()=>{setSelMod(null);setFiche(null)}} style={{fontSize:12,color:P.petrole,border:`1px solid ${P.border}`,borderRadius:6,padding:'3px 10px',background:P.surface,cursor:'pointer'}}>← Modules</button>
               <span style={{fontSize:13,fontWeight:600,color:P.abysse}}>{selMod.titre}</span>
             </div>
-            {ficheLoading?<div style={{padding:'1.25rem',background:P.abysse,borderRadius:12,border:`1px solid ${P.borderm}`}}><div style={{fontSize:10,fontWeight:600,color:'rgba(93,226,152,0.5)',letterSpacing:'0.1em',textTransform:'uppercase',marginBottom:'0.5rem',display:'flex',alignItems:'center',gap:'0.5rem'}}><Spinner size={14}/>Claude génère la fiche…</div><div style={{fontSize:11,color:P.eau,fontFamily:'monospace',lineHeight:1.7,whiteSpace:'pre-wrap',wordBreak:'break-word',minHeight:60}}>{stream}<span className="stream-cursor"/></div></div>:fiche&&<>
+            {ficheLoading?<div style={{padding:'1.25rem',background:P.abysse,borderRadius:12,border:`1px solid ${P.borderm}`}}><div style={{fontSize:10,fontWeight:600,color:'rgba(93,226,152,0.5)',letterSpacing:'0.1em',textTransform:'uppercase',marginBottom:'0.5rem',display:'flex',alignItems:'center',gap:'0.5rem'}}><Spinner size={14}/>Claude génère la fiche…</div><div style={{fontSize:11,color:P.eau,fontFamily:'monospace',lineHeight:1.7,whiteSpace:'pre-wrap',wordBreak:'break-word',minHeight:60}}>{stream}</div></div>:fiche&&<>
               <div style={card()}><div style={{fontSize:10,fontWeight:600,color:P.textm,textTransform:'uppercase',letterSpacing:'0.08em',marginBottom:'0.5rem'}}>Ancrage</div><div style={{display:'flex',gap:'0.5rem',alignItems:'flex-start',marginBottom:'0.5rem'}}><Tag label={selMod.bloc_id}/><div><div style={{fontSize:13,fontWeight:600,color:P.abysse}}>{selMod.titre}</div><div style={{fontSize:11,color:P.textm,marginTop:2}}>{selMod.bloc_titre}</div></div></div><p style={{fontSize:12,color:P.textm,margin:0,lineHeight:1.6,fontStyle:'italic'}}>{fiche.ancrage}</p></div>
               {fiche.dejavu?.length>0&&<div style={card()}><div style={{fontSize:10,fontWeight:600,color:P.textm,textTransform:'uppercase',letterSpacing:'0.08em',marginBottom:'0.5rem'}}>Déjà vu par vos étudiants</div>{fiche.dejavu.map((it,i)=><div key={i} style={{background:P.surface2,borderRadius:8,padding:'0.55rem 0.8rem',marginBottom:'0.4rem'}}><div style={{display:'flex',alignItems:'center',gap:'0.35rem',marginBottom:'0.3rem'}}>{it.intervenant&&<Avatar name={it.intervenant} size={20}/>}<span style={{fontSize:12,fontWeight:600,color:P.abysse}}>{it.intervenant||'—'}</span><span style={{fontSize:11,color:P.textm}}>· {it.module}</span></div><div style={{display:'flex',flexWrap:'wrap',gap:'0.25rem',marginBottom:'0.3rem'}}>{(it.concepts||[]).map(c=><Tag key={c} label={c} small/>)}</div><p style={{fontSize:11,color:P.textm,margin:0,fontStyle:'italic'}}>{it.lien}</p></div>)}</div>}
               {fiche.apres?.length>0&&<div style={card()}><div style={{fontSize:10,fontWeight:600,color:P.textm,textTransform:'uppercase',letterSpacing:'0.08em',marginBottom:'0.5rem'}}>Ce qui arrive après</div>{fiche.apres.map((it,i)=><div key={i} style={{display:'flex',gap:'0.6rem',padding:'0.4rem 0',borderBottom:i<fiche.apres.length-1?`1px solid rgba(19,69,71,0.06)`:'none'}}><div style={{fontSize:11,color:P.textl,flexShrink:0,width:60}}>{it.date}</div><div style={{flex:1}}><span style={{fontSize:12,fontWeight:600,color:P.abysse}}>{it.module}</span>{it.intervenant&&<span style={{fontSize:11,color:P.textm}}> · {it.intervenant}</span>}<div style={{display:'flex',flexWrap:'wrap',gap:'0.25rem',marginTop:'0.25rem'}}>{(it.concepts||[]).map(c=><Tag key={c} label={c} small/>)}</div></div></div>)}</div>}
             </>}
           </div>}
-
-          {onglet==='declaration'&&(sent?<div style={{textAlign:'center',padding:'4rem 2rem'}}><div style={{fontSize:48,color:P.menthe}}>✓</div><h2 style={{fontFamily:'var(--font-t)',fontWeight:400,color:P.abysse,fontSize:21,marginTop:'0.5rem'}}>Déclaration enregistrée</h2><button onClick={()=>setSent(false)} style={{marginTop:'1rem',border:`1px solid ${P.border}`,color:P.textm,borderRadius:6,padding:'6px 16px',fontSize:12,background:P.surface,cursor:'pointer'}}>Nouvelle déclaration</button></div>:!selMod?<div style={{padding:'2rem',textAlign:'center',color:P.textm}}>Sélectionnez un module dans l'onglet Fiche J-1.</div>:<div className="fi"><h1 style={{fontFamily:'var(--font-t)',fontWeight:400,fontSize:21,color:P.abysse,margin:0,marginBottom:'1.25rem'}}>Déclaration — {selMod.titre}</h1><button onClick={async()=>{await new Promise(r=>setTimeout(r,700));setSent(true)}} style={{width:'100%',background:P.petrole,color:P.givre,border:'none',borderRadius:10,padding:'12px',fontSize:14,fontWeight:500,cursor:'pointer'}}>Envoyer la déclaration</button></div>)}
-
-          {onglet==='graphe'&&<div className="fi"><h2 style={{fontFamily:'var(--font-t)',fontWeight:400,color:P.abysse,marginTop:0,fontSize:22,marginBottom:'0.5rem'}}>Vue d'ensemble</h2><p style={{fontSize:12,color:P.textm,marginBottom:'1rem'}}>Lecture seule.</p><GrapheCanvas blocs={selF?.blocs||[]} alertes={[]} showAlerts={false}/></div>}
+          {onglet==='declaration'&&(sent?<div style={{textAlign:'center',padding:'4rem 2rem'}}><div style={{fontSize:48,color:P.menthe}}>✓</div><h2 style={{fontFamily:'Georgia,serif',fontWeight:400,color:P.abysse,fontSize:21,marginTop:'0.5rem'}}>Déclaration enregistrée</h2><button onClick={()=>setSent(false)} style={{marginTop:'1rem',border:`1px solid ${P.border}`,color:P.textm,borderRadius:6,padding:'6px 16px',fontSize:12,background:P.surface,cursor:'pointer'}}>Nouvelle déclaration</button></div>:!selMod?<div style={{padding:'2rem',textAlign:'center',color:P.textm,fontSize:13}}>Sélectionnez un module dans l'onglet Fiche J-1.</div>:<div className="fi"><h1 style={{fontFamily:'Georgia,serif',fontWeight:400,fontSize:21,color:P.abysse,margin:0,marginBottom:'1.25rem'}}>Déclaration — {selMod.titre}</h1><button onClick={async()=>{await new Promise(r=>setTimeout(r,700));setSent(true)}} style={{width:'100%',background:P.petrole,color:P.givre,border:'none',borderRadius:10,padding:'12px',fontSize:14,fontWeight:500,cursor:'pointer'}}>Envoyer la déclaration</button></div>)}
+          {onglet==='graphe'&&<div className="fi"><h2 style={{fontFamily:'Georgia,serif',fontWeight:400,color:P.abysse,marginTop:0,fontSize:22,marginBottom:'0.5rem'}}>Vue d'ensemble</h2><p style={{fontSize:12,color:P.textm,marginBottom:'1rem'}}>Lecture seule.</p><GrapheCanvas blocs={selF?.blocs||[]} alertes={[]} showAlerts={false}/></div>}
         </>}
       </div>
     </div>
   )
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   VUE ÉTUDIANT
-═══════════════════════════════════════════════════════════════ */
+/* ═══ VUE ÉTUDIANT ══════════════════════════════════════════════════════════ */
 function VueEtudiant({user,onLogout}){
   const [formations,setFormations]=useState([])
   const [loading,setLoading]=useState(true)
   const [saved,setSaved]=useState(false)
-
   useEffect(()=>{api.getFormations().then(d=>{setFormations(d.formations);setLoading(false)}).catch(()=>setLoading(false))},[])
   const f=formations[0]||null
   const allComps=f?(f.blocs||[]).flatMap(b=>(b.competences||[]).map(c=>({...c,bloc_id:b.id,bloc_titre:b.titre,module:(b.modules||[])[0]?.titre||'',statut:null,retex:''}))):[  ]
   const [comps,setComps]=useState([])
   useEffect(()=>{if(allComps.length&&!comps.length)setComps(allComps)},[allComps])
-
   const update=(id,field,val)=>{setComps(p=>p.map(c=>c.id===id?{...c,[field]:val}:c));setSaved(false)}
   const pct=allComps.length?Math.round(comps.filter(c=>c.statut).length/allComps.length*100):0
   const sCol={acquis:P.menthe,voie:P.amber,nonacquis:P.red}
   const sBg={acquis:'rgba(93,226,152,0.12)',voie:P.amberbg,nonacquis:P.redbg}
   const sFg={acquis:P.petrole,voie:'#7A4A00',nonacquis:'#8B1A1A'}
-
   return(
     <div style={{minHeight:'100vh',background:P.givre}}>
       <div style={{height:52,background:P.surface,borderBottom:`1px solid ${P.border}`,padding:'0 1.25rem',display:'flex',alignItems:'center',gap:'0.75rem',position:'sticky',top:0,zIndex:100,boxShadow:'0 1px 8px rgba(11,43,45,0.06)'}}>
-        <div style={{display:'flex',alignItems:'center',gap:6,paddingRight:10,borderRight:`1px solid ${P.border}`}}><div style={{width:24,height:24,borderRadius:'50%',background:P.petrole,display:'flex',alignItems:'center',justifyContent:'center'}}><span style={{color:P.menthe,fontSize:11,fontWeight:700,fontFamily:'var(--font-t)',fontStyle:'italic'}}>e</span></div></div>
+        <div style={{display:'flex',alignItems:'center',gap:6,paddingRight:10,borderRight:`1px solid ${P.border}`}}><div style={{width:24,height:24,borderRadius:'50%',background:P.petrole,display:'flex',alignItems:'center',justifyContent:'center'}}><span style={{color:P.menthe,fontSize:11,fontWeight:700,fontFamily:'Georgia,serif',fontStyle:'italic'}}>e</span></div></div>
         <div style={{flex:1}}><div style={{fontSize:13,fontWeight:600,color:P.abysse}}>Mon parcours</div><div style={{fontSize:11,color:P.textm}}>{f?.formation?.titre||'—'}</div></div>
         <div style={{display:'flex',alignItems:'center',gap:'0.5rem'}}><span style={{fontSize:11,color:P.textm}}>{pct}%</span><div style={{width:60,height:4,background:'rgba(19,69,71,0.10)',borderRadius:99,overflow:'hidden'}}><div style={{width:`${pct}%`,height:'100%',background:P.menthe,borderRadius:99,transition:'width 0.4s'}}/></div></div>
         <div style={{display:'flex',alignItems:'center',gap:'0.5rem',paddingLeft:10,borderLeft:`1px solid ${P.border}`}}><Avatar name={`${user.prenom} ${user.nom}`} size={24}/><span style={{fontSize:11,color:P.abysse}}>{user.prenom}</span><button onClick={onLogout} title="Déconnexion" style={{color:P.textm,fontSize:14,cursor:'pointer'}}>⏻</button></div>
@@ -523,30 +729,21 @@ function VueEtudiant({user,onLogout}){
   )
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   APP ROOT — auth gate
-═══════════════════════════════════════════════════════════════ */
+/* ═══ APP ROOT ══════════════════════════════════════════════════════════════ */
 export default function App(){
   const [user,setUser]=useState(null)
   const [checking,setChecking]=useState(true)
-
   useEffect(()=>{
     const token=getToken()
     if(!token){setChecking(false);return}
     api.me().then(d=>setUser(d.user)).catch(()=>clearToken()).finally(()=>setChecking(false))
   },[])
-
-  function handleLogout(){
-    api.logout().catch(()=>{})
-    clearToken();setUser(null)
-  }
-
-  if(checking) return <div style={{minHeight:'100vh',background:'var(--grad-fond)',display:'flex',alignItems:'center',justifyContent:'center'}}><Spinner size={32}/></div>
-  if(!user) return <LoginPage onLogin={u=>setUser(u)}/>
-
-  if(user.role==='dir')         return <VueDir user={user} onLogout={handleLogout}/>
-  if(user.role==='rp')          return <VueRP user={user} onLogout={handleLogout}/>
-  if(user.role==='intervenant') return <VueIntervenant user={user} onLogout={handleLogout}/>
-  if(user.role==='etudiant')    return <VueEtudiant user={user} onLogout={handleLogout}/>
+  function handleLogout(){api.logout().catch(()=>{});clearToken();setUser(null)}
+  if(checking)return <div style={{minHeight:'100vh',background:`linear-gradient(135deg,${P.abysse},${P.petrole})`,display:'flex',alignItems:'center',justifyContent:'center'}}><Spinner size={32}/></div>
+  if(!user)return <LoginPage onLogin={u=>setUser(u)}/>
+  if(user.role==='dir')        return <VueDir user={user} onLogout={handleLogout}/>
+  if(user.role==='rp')         return <VueRP user={user} onLogout={handleLogout}/>
+  if(user.role==='intervenant')return <VueIntervenant user={user} onLogout={handleLogout}/>
+  if(user.role==='etudiant')   return <VueEtudiant user={user} onLogout={handleLogout}/>
   return <div>Rôle inconnu : {user.role}</div>
 }

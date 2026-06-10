@@ -129,4 +129,5 @@ export const api = {
   getFormations:   ()                => apiFetch('/api/formations'),
   createFormation: (campus, data)    => apiFetch('/api/formations',  { method: 'POST',   body: { campus, data } }),
   deleteFormation: (id)              => apiFetch('/api/formations',  { method: 'DELETE', body: { id } }),
+  updateFormation: (id, patch)       => apiFetch('/api/formations',  { method: 'PATCH',  body: { id, ...patch } }),
 }
