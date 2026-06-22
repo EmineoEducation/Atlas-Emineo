@@ -48,26 +48,64 @@ module.exports = async function handler(req, res) {
 
       if (!nom || !password) return res.status(400).json({ error: 'nom et password requis.' });
 
+      // formation_id (+ promo/groupe optionnels) : si fourni, on rattache la
+      // personne à ce titre via la table inscription.
+      const { formation_id, promo, groupe, annee_scolaire } = req.body || {};
+
       // Générer email si absent : prenom.nom@emineo-education.fr
       const finalEmail = (email || '').trim() ||
         `${(prenom||'x').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,'-')}.${nom.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,'-')}@emineo-education.fr`;
 
-      // Vérifier doublon email
-      const existing = await db.execute({ sql: 'SELECT id FROM users WHERE email = ?', args: [finalEmail] });
-      if (existing.rows && existing.rows.length) {
-        return res.status(409).json({ error: `Email déjà utilisé : ${finalEmail}` });
-      }
-
-      const hash = hashPassword(password);
       // Campus : RP hérite son propre campus si non précisé
       const finalCampus = (campus || '').trim() || (user.role === 'rp' ? (user.campus || '') : '');
 
-      await db.execute({
-        sql: 'INSERT INTO users (role, nom, prenom, email, password_hash, campus) VALUES (?, ?, ?, ?, ?, ?)',
-        args: [role, nom, prenom || '', finalEmail, hash, finalCampus],
-      });
+      // 1 personne = 1 compte. Si l'email existe déjà, on réutilise le compte
+      // (au lieu de renvoyer une erreur) et on se contente d'ajouter l'inscription.
+      let userId;
+      let reused = false;
+      const existing = await db.execute({ sql: 'SELECT id, role FROM users WHERE email = ?', args: [finalEmail] });
+      if (existing.rows && existing.rows.length) {
+        userId = existing.rows[0].id;
+        reused = true;
+      } else {
+        const hash = hashPassword(password);
+        const ins = await db.execute({
+          sql: 'INSERT INTO users (role, nom, prenom, email, password_hash, campus) VALUES (?, ?, ?, ?, ?, ?)',
+          args: [role, nom, prenom || '', finalEmail, hash, finalCampus],
+        });
+        userId = Number(ins.lastInsertRowid);
+      }
 
-      return res.status(201).json({ ok: true, email: finalEmail });
+      // Création de l'inscription au titre (si un formation_id est fourni).
+      // INSERT OR IGNORE : l'index unique évite les doublons silencieusement.
+      let inscriptionCreated = false;
+      if (formation_id) {
+        try {
+          await db.execute({
+            sql: `INSERT OR IGNORE INTO inscription
+                    (user_id, formation_id, campus, role, promo, groupe, annee_scolaire)
+                  VALUES (?, ?, ?, ?, ?, ?, ?)`,
+            args: [
+              userId, formation_id, finalCampus, role,
+              (promo || '').trim(), (groupe || '').trim(),
+              (annee_scolaire || '2026-27'),
+            ],
+          });
+          inscriptionCreated = true;
+        } catch (e) {
+          // Table inscription absente (migration v3 non lancée) : on ne bloque
+          // pas la création du compte, on signale juste l'info.
+          inscriptionCreated = false;
+        }
+      }
+
+      return res.status(201).json({
+        ok: true,
+        email: finalEmail,
+        user_id: userId,
+        reused,                 // true si le compte existait déjà
+        inscription: inscriptionCreated,
+      });
     }
 
     // ─── DELETE : supprimer un compte ─────────────────────────────────────────
