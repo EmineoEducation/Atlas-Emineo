@@ -147,4 +147,14 @@ export const api = {
     return apiFetch('/api/previsionnel?' + q.toString())
   },
   savePrevisionnel: (body) => apiFetch('/api/previsionnel', { method: 'POST', body }),
+
+  // ─── Inscriptions (rattachement personne ↔ titre) ───
+  getInscriptions: (params) => {
+    const q = new URLSearchParams()
+    if (params.formationId)    q.set('formation_id', String(params.formationId))
+    if (params.userId)         q.set('user_id', String(params.userId))
+    if (params.role)           q.set('role', params.role)
+    if (params.anneeScolaire)  q.set('annee_scolaire', params.anneeScolaire)
+    return apiFetch('/api/inscription?' + q.toString())
+  },
 }

@@ -229,7 +229,7 @@ function ResultTable({rows,onReset}){
 }
 
 /* ── Import étudiants ─────────────────────────────────────────────────────── */
-function ImportEtudiants({campus,onDone}){
+function ImportEtudiants({campus,formationId,onDone}){
   const [rows,setRows]=useState([])
   const [importing,setImporting]=useState(false)
   const [done,setDone]=useState(false)
@@ -261,7 +261,7 @@ function ImportEtudiants({campus,onDone}){
     const updated=[...rows]
     for(let i=0;i<updated.length;i++){
       try{
-        await api.createUser({nom:updated[i].nom,prenom:updated[i].prenom,email:updated[i].email,role:'etudiant',campus:campus||'',password:updated[i].mdp})
+        await api.createUser({nom:updated[i].nom,prenom:updated[i].prenom,email:updated[i].email,role:'etudiant',campus:campus||'',password:updated[i].mdp,formation_id:formationId||undefined})
         updated[i]={...updated[i],status:'ok'}
       }catch(e){updated[i]={...updated[i],status:'err',msg:e.message}}
       setRows([...updated])
@@ -382,7 +382,7 @@ function ImportIntervenants({campus,formation,onDone}){
     const updated=[...rows]
     for(let i=0;i<updated.length;i++){
       try{
-        await api.createUser({nom:updated[i].nom,prenom:updated[i].prenom,email:updated[i].email,role:'intervenant',campus:campus||'',password:updated[i].mdp})
+        await api.createUser({nom:updated[i].nom,prenom:updated[i].prenom,email:updated[i].email,role:'intervenant',campus:campus||'',password:updated[i].mdp,formation_id:(formation&&formation._id)||undefined})
         updated[i]={...updated[i],status:'ok'}
       }catch(e){updated[i]={...updated[i],status:'err',msg:e.message}}
       setRows([...updated])
@@ -463,11 +463,37 @@ function ImportIntervenants({campus,formation,onDone}){
   )
 }
 
-/* ── ImportCSV : conteneur avec onglets Étudiants / Intervenants ─────────── */
-function ImportCSV({campus,formation,onDone}){
+/* ── ImportCSV : conteneur avec sélecteur de titre + onglets Étudiants / Intervenants ─ */
+function ImportCSV({campus,formations,formation:formationProp,onDone}){
   const [tab,setTab]=useState('etudiants')
+  // Liste des titres disponibles (déjà filtrée au campus du RP par l'appelant)
+  const titres=formations||(formationProp?[formationProp]:[])
+  const [selId,setSelId]=useState(()=>{
+    if(formationProp&&formationProp._id) return formationProp._id
+    return titres[0]?._id||null
+  })
+  const formation=titres.find(t=>t._id===selId)||formationProp||null
+
   return(
     <div>
+      {/* Bandeau de contexte — lève toute ambiguïté : où vont les comptes importés */}
+      <div style={{display:'flex',alignItems:'center',gap:'0.75rem',flexWrap:'wrap',padding:'0.7rem 0.9rem',background:'rgba(93,226,152,0.08)',border:`1px solid ${P.borderm}`,borderRadius:10,marginBottom:'1.25rem'}}>
+        <span style={{fontSize:12,fontWeight:600,color:P.petrole}}>Vous importez vers</span>
+        {titres.length>1?(
+          <select value={selId||''} onChange={e=>setSelId(Number(e.target.value))}
+            style={{border:`1px solid ${P.border}`,borderRadius:7,padding:'5px 10px',fontSize:13,fontWeight:600,color:P.abysse,background:P.surface,outline:'none'}}>
+            {titres.map(t=><option key={t._id} value={t._id}>{t.formation?.titre||`Formation ${t._id}`}</option>)}
+          </select>
+        ):(
+          <span style={{fontSize:13,fontWeight:600,color:P.abysse}}>{formation?.formation?.titre||'— aucun titre —'}</span>
+        )}
+        {campus&&<span style={{fontSize:12,color:P.textm}}>· campus <strong style={{color:P.abysse}}>{campus}</strong></span>}
+      </div>
+
+      {!formation&&(
+        <div style={{padding:'0.6rem 0.8rem',background:P.amberbg,border:`1px solid ${P.amber}`,borderRadius:8,fontSize:12,color:'#7A4A00',marginBottom:'0.75rem'}}>⚠ Aucun titre disponible sur ce campus. Contactez la Direction des programmes.</div>
+      )}
+
       <div style={{display:'flex',gap:'0.4rem',marginBottom:'1.25rem'}}>
         {[{id:'etudiants',l:'🎓 Étudiants'},{id:'intervenants',l:'👨‍🏫 Intervenants'}].map(t=>(
           <button key={t.id} onClick={()=>setTab(t.id)}
@@ -479,7 +505,7 @@ function ImportCSV({campus,formation,onDone}){
           </button>
         ))}
       </div>
-      {tab==='etudiants'&&<ImportEtudiants campus={campus} onDone={onDone}/>}
+      {tab==='etudiants'&&<ImportEtudiants campus={campus} formationId={formation?._id} onDone={onDone}/>}
       {tab==='intervenants'&&<ImportIntervenants campus={campus} formation={formation} onDone={onDone}/>}
     </div>
   )
@@ -544,7 +570,7 @@ function UserManagement(){
 
       {tab==='excel'&&(
         <div style={card({marginBottom:'1.5rem'})}>
-          <ImportCSV campus="" formation={null} onDone={()=>{api.getUsers().then(d=>setUsers(d.users)).catch(()=>{})}}/>
+          <ImportCSV campus="" formations={[]} formation={null} onDone={()=>{api.getUsers().then(d=>setUsers(d.users)).catch(()=>{})}}/>
         </div>
       )}
 
@@ -827,7 +853,7 @@ function VueRP({user,onLogout}){
               <h2 style={{fontFamily:'Georgia,serif',fontWeight:400,color:P.abysse,marginTop:0,fontSize:22,marginBottom:'0.75rem'}}>Import de comptes</h2>
               <p style={{fontSize:13,color:P.textm,marginBottom:'1.25rem',lineHeight:1.7}}>Importez les intervenants et étudiants de votre campus. Pour les intervenants, Claude apparie automatiquement leurs matières aux modules de la formation sélectionnée.</p>
               <div style={card()}>
-                <ImportCSV campus={user.campus} formation={f} onDone={()=>{}}/>
+                <ImportCSV campus={user.campus} formations={formations} formation={f} onDone={()=>{}}/>
               </div>
             </div>
           )}
