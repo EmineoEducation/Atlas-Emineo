@@ -338,7 +338,13 @@ function apiFetch(path, options) {
     return (ct.includes('application/json') ? res.json() : res.text().then(function(t) {
       return { error: 'Reponse non-JSON (' + res.status + ') : ' + t.slice(0, 200) };
     })).then(function(data) {
-      if (!res.ok) throw new Error(data.error || ('Erreur HTTP ' + res.status));
+      if (!res.ok) {
+        var err = new Error(data.error || ('Erreur HTTP ' + res.status));
+        // Conserve tout champ additionnel renvoye par le serveur (ex: raw_preview)
+        // sans changer la signature attendue par les appelants existants (err.message).
+        Object.keys(data).forEach(function(k) { if (k !== 'error') err[k] = data[k]; });
+        throw err;
+      }
       return data;
     });
   });
@@ -391,6 +397,10 @@ function genererMarkdown(analyse) {
   lines.push('**Référence RNCP :** ' + (meta.rncp_ref || '—'));
   lines.push('**Date d\'analyse :** ' + (meta.date_analyse || '—'));
   lines.push('**Score global :** ' + (meta.score_global || 0) + '/100');
+  if (meta.justification_score_global) {
+    lines.push('');
+    lines.push('_' + meta.justification_score_global + '_');
+  }
   lines.push('');
   lines.push('**Documents analysés :** ' + (meta.documents_analyses || []).join(', '));
   lines.push('');
@@ -413,6 +423,10 @@ function genererMarkdown(analyse) {
     lines.push('## ' + bloc.id + ' — ' + bloc.titre);
     lines.push('');
     lines.push('**Couverture :** ' + (bloc.score_couverture || 0) + '%');
+    if (bloc.justification_score) {
+      lines.push('');
+      lines.push('_' + bloc.justification_score + '_');
+    }
     lines.push('');
 
     (bloc.competences || []).forEach(function(comp) {
@@ -420,6 +434,9 @@ function genererMarkdown(analyse) {
       lines.push('');
       lines.push('**Statut :** ' + (STATUT_LABELS[comp.statut] || comp.statut));
       lines.push('**Couverture :** ' + (comp.score_couverture || 0) + '%');
+      if (comp.justification_score) {
+        lines.push('**Justification :** ' + comp.justification_score);
+      }
       if (comp.modules_couvrants && comp.modules_couvrants.length > 0) {
         lines.push('**Modules couvrants :** ' + comp.modules_couvrants.join(', '));
       }
@@ -571,7 +588,19 @@ function construireDocx(analyse) {
       ligneSynthese('Manquements', meta.nb_manquements || 0, DOCX_COL.rouge),
     ],
   }));
-  children.push(new d.Paragraph({ text: '', spacing: { after: 200 } }));
+  children.push(new d.Paragraph({ text: '', spacing: { after: 120 } }));
+  if (meta.justification_score_global) {
+    children.push(new d.Paragraph({
+      spacing: { after: 200 },
+      children: [new d.TextRun({
+        text: meta.justification_score_global,
+        italics: true,
+        color: DOCX_COL.gris700,
+      })],
+    }));
+  } else {
+    children.push(new d.Paragraph({ text: '', spacing: { after: 200 } }));
+  }
 
   // Blocs > compétences > signaux
   (analyse.blocs || []).forEach(function(bloc) {
@@ -581,7 +610,7 @@ function construireDocx(analyse) {
       children: [new d.TextRun(bloc.id + ' — ' + bloc.titre)],
     }));
     children.push(new d.Paragraph({
-      spacing: { after: 200 },
+      spacing: { after: bloc.justification_score ? 80 : 200 },
       children: [
         new d.TextRun({ text: 'Couverture du bloc : ', bold: true }),
         new d.TextRun({
@@ -591,6 +620,16 @@ function construireDocx(analyse) {
         }),
       ],
     }));
+    if (bloc.justification_score) {
+      children.push(new d.Paragraph({
+        spacing: { after: 200 },
+        children: [new d.TextRun({
+          text: bloc.justification_score,
+          italics: true,
+          color: DOCX_COL.gris700,
+        })],
+      }));
+    }
 
     (bloc.competences || []).forEach(function(comp) {
       children.push(new d.Paragraph({
@@ -609,6 +648,15 @@ function construireDocx(analyse) {
           }),
         ],
       }));
+      if (comp.justification_score) {
+        children.push(new d.Paragraph({
+          spacing: { after: 80 },
+          children: [
+            new d.TextRun({ text: 'Justification : ', bold: true }),
+            new d.TextRun({ text: comp.justification_score, italics: true, color: DOCX_COL.gris700 }),
+          ],
+        }));
+      }
       if (comp.modules_couvrants && comp.modules_couvrants.length > 0) {
         children.push(new d.Paragraph({
           spacing: { after: 160 },
@@ -1332,6 +1380,10 @@ function VueUpload(props) {
   var error = _error[0];
   var setError = _error[1];
 
+  var _errorDetail = useState('');
+  var errorDetail = _errorDetail[0];
+  var setErrorDetail = _errorDetail[1];
+
   var _step = useState('');
   var step = _step[0];
   var setStep = _step[1];
@@ -1359,6 +1411,7 @@ function VueUpload(props) {
     if (!canAnalyse) return;
     setLoading(true);
     setError('');
+    setErrorDetail('');
     setStep('Lecture des documents…');
 
     try {
@@ -1403,6 +1456,7 @@ function VueUpload(props) {
 
     } catch(err) {
       setError(err.message || 'Erreur inconnue.');
+      setErrorDetail(err.raw_preview || '');
     } finally {
       setLoading(false);
       setStep('');
@@ -1480,7 +1534,16 @@ function VueUpload(props) {
           background: '#FDF0F0', border: '1px solid #FCA5A5', borderRadius: 8,
           padding: '.75rem 1rem', fontSize: 13, color: '#C84B4B', marginBottom: '1rem',
         },
-      }, '⚠ ' + error) : null,
+      },
+        '⚠ ' + error,
+        errorDetail ? React.createElement('pre', {
+          style: {
+            marginTop: '.6rem', padding: '.6rem .7rem', background: 'rgba(255,255,255,.6)',
+            borderRadius: 6, fontSize: 11, color: '#8A8982', fontFamily: 'monospace',
+            whiteSpace: 'pre-wrap', wordBreak: 'break-word', maxHeight: 160, overflowY: 'auto',
+          },
+        }, errorDetail) : null
+      ) : null,
 
       React.createElement('button', {
         className: 'btn-analyse',
