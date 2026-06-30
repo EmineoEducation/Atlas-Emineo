@@ -276,6 +276,7 @@ input[type=file]{display:none}
 <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
 <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script src="https://unpkg.com/docx@8.2.4/build/index.umd.js"></script>
 
 <script type="text/babel">
 var useState = React.useState;
@@ -479,6 +480,320 @@ function genererMarkdown(analyse) {
   lines.push('*Généré par Atlas des compétences — Éminéo*');
 
   return lines.join('\n');
+}
+
+/* ══ EXPORT DOCX ════════════════════════════════════════════════ */
+// Couleurs hex (sans #) alignées sur la charte Éminéo de ce fichier (cf. :root au-dessus)
+var DOCX_COL = {
+  abysse: '0B2B2D',
+  petrole: '134547',
+  menthe: '5DE298',
+  saumon: 'E89B77',
+  gris500: '8A8982',
+  gris700: '4A4A46',
+  rouge: 'C84B4B',
+  amber: 'D97706',
+  bleu: '2563EB',
+  vert: '16A34A',
+};
+
+function docxScoreColor(pct) {
+  if (pct >= 75) return DOCX_COL.vert;
+  if (pct >= 50) return DOCX_COL.amber;
+  return DOCX_COL.rouge;
+}
+
+// Construit le Document docx-js à partir de l'objet analyse — miroir structurel de genererMarkdown
+function construireDocx(analyse) {
+  var d = window.docx;
+  var meta = analyse.meta || {};
+  var children = [];
+
+  children.push(new d.Paragraph({
+    heading: d.HeadingLevel.TITLE,
+    children: [new d.TextRun(meta.titre_formation || 'Formation')],
+  }));
+  children.push(new d.Paragraph({
+    spacing: { after: 200 },
+    children: [new d.TextRun({
+      text: (meta.rncp_ref || '—') + '  —  Analysé le ' + (meta.date_analyse || '—'),
+      color: DOCX_COL.gris500,
+      size: 20,
+    })],
+  }));
+  if (meta.documents_analyses && meta.documents_analyses.length) {
+    children.push(new d.Paragraph({
+      spacing: { after: 280 },
+      children: [new d.TextRun({
+        text: 'Documents analysés : ' + meta.documents_analyses.join(', '),
+        color: DOCX_COL.gris500,
+        size: 18,
+        italics: true,
+      })],
+    }));
+  }
+
+  // Tableau de synthèse
+  var tableWidth = 9360;
+  var colW = [4680, 4680];
+  var bord = { style: d.BorderStyle.SINGLE, size: 1, color: 'E8E7E3' };
+  var bordures = { top: bord, bottom: bord, left: bord, right: bord };
+  function ligneSynthese(label, valeur, couleurHex) {
+    return new d.TableRow({
+      children: [
+        new d.TableCell({
+          borders: bordures,
+          width: { size: colW[0], type: d.WidthType.DXA },
+          margins: { top: 90, bottom: 90, left: 140, right: 140 },
+          children: [new d.Paragraph({ children: [new d.TextRun(label)] })],
+        }),
+        new d.TableCell({
+          borders: bordures,
+          width: { size: colW[1], type: d.WidthType.DXA },
+          margins: { top: 90, bottom: 90, left: 140, right: 140 },
+          children: [new d.Paragraph({
+            children: [new d.TextRun({ text: String(valeur), bold: true, color: couleurHex })],
+          })],
+        }),
+      ],
+    });
+  }
+
+  children.push(new d.Table({
+    width: { size: tableWidth, type: d.WidthType.DXA },
+    columnWidths: colW,
+    rows: [
+      ligneSynthese('Score global', (meta.score_global || 0) + ' / 100', docxScoreColor(meta.score_global || 0)),
+      ligneSynthese('Points forts', meta.nb_points_forts || 0, DOCX_COL.vert),
+      ligneSynthese('À peaufiner', meta.nb_a_peaufiner || 0, DOCX_COL.bleu),
+      ligneSynthese('Redondances', meta.nb_redondances || 0, DOCX_COL.amber),
+      ligneSynthese('Lacunes', meta.nb_lacunes || 0, DOCX_COL.amber),
+      ligneSynthese('Manquements', meta.nb_manquements || 0, DOCX_COL.rouge),
+    ],
+  }));
+  children.push(new d.Paragraph({ text: '', spacing: { after: 200 } }));
+
+  // Blocs > compétences > signaux
+  (analyse.blocs || []).forEach(function(bloc) {
+    children.push(new d.Paragraph({
+      heading: d.HeadingLevel.HEADING_1,
+      pageBreakBefore: children.length > 6, // un nouveau bloc démarre une page, sauf le premier
+      children: [new d.TextRun(bloc.id + ' — ' + bloc.titre)],
+    }));
+    children.push(new d.Paragraph({
+      spacing: { after: 200 },
+      children: [
+        new d.TextRun({ text: 'Couverture du bloc : ', bold: true }),
+        new d.TextRun({
+          text: (bloc.score_couverture || 0) + '%',
+          bold: true,
+          color: docxScoreColor(bloc.score_couverture || 0),
+        }),
+      ],
+    }));
+
+    (bloc.competences || []).forEach(function(comp) {
+      children.push(new d.Paragraph({
+        heading: d.HeadingLevel.HEADING_2,
+        children: [new d.TextRun(comp.id + ' — ' + comp.libelle)],
+      }));
+      children.push(new d.Paragraph({
+        spacing: { after: 80 },
+        children: [
+          new d.TextRun({ text: 'Statut : ', bold: true }),
+          new d.TextRun(STATUT_LABELS[comp.statut] || comp.statut || '—'),
+          new d.TextRun({ text: '     Couverture : ', bold: true }),
+          new d.TextRun({
+            text: (comp.score_couverture || 0) + '%',
+            color: docxScoreColor(comp.score_couverture || 0),
+          }),
+        ],
+      }));
+      if (comp.modules_couvrants && comp.modules_couvrants.length > 0) {
+        children.push(new d.Paragraph({
+          spacing: { after: 160 },
+          children: [
+            new d.TextRun({ text: 'Modules couvrants : ', bold: true }),
+            new d.TextRun(comp.modules_couvrants.join(', ')),
+          ],
+        }));
+      }
+
+      var signauxComp = comp.signaux || [];
+      if (signauxComp.length === 0) {
+        children.push(new d.Paragraph({
+          spacing: { after: 200 },
+          children: [new d.TextRun({
+            text: 'Aucun signal pour cette compétence.',
+            color: DOCX_COL.gris500,
+            italics: true,
+          })],
+        }));
+      } else {
+        signauxComp.forEach(function(signal) {
+          var statutArb = signal.statut_arbitrage || 'actif';
+          var estArchive = statutArb === 'archive' || statutArb === 'resolu';
+          var labelGravite = GRAVITE_LABELS[signal.gravite] || '';
+          var labelStatutArb = statutArb === 'archive' ? 'Archivé' : statutArb === 'resolu' ? 'Résolu' : 'Actif';
+
+          children.push(new d.Paragraph({
+            numbering: { reference: 'signauxBullets', level: 0 },
+            children: [
+              new d.TextRun({
+                text: (STATUT_LABELS[signal.type] || signal.type) + ' · ' + labelGravite + ' · ' + labelStatutArb + ' — ',
+                bold: true,
+                strike: estArchive,
+                color: estArchive ? DOCX_COL.gris500 : DOCX_COL.abysse,
+              }),
+              new d.TextRun({
+                text: signal.message || '',
+                strike: estArchive,
+                color: estArchive ? DOCX_COL.gris500 : undefined,
+              }),
+            ],
+          }));
+          if (signal.amelioration_proposee) {
+            children.push(new d.Paragraph({
+              numbering: { reference: 'signauxBullets', level: 1 },
+              children: [
+                new d.TextRun({ text: 'Amélioration retenue : ', italics: true, color: DOCX_COL.petrole }),
+                new d.TextRun({ text: signal.amelioration_proposee, italics: true, color: DOCX_COL.petrole }),
+              ],
+            }));
+          }
+          if (signal.justification_archive) {
+            children.push(new d.Paragraph({
+              numbering: { reference: 'signauxBullets', level: 1 },
+              children: [
+                new d.TextRun({ text: 'Justification archivage : ', italics: true, color: DOCX_COL.gris500 }),
+                new d.TextRun({ text: signal.justification_archive, italics: true, color: DOCX_COL.gris500 }),
+              ],
+            }));
+          }
+        });
+        children.push(new d.Paragraph({ text: '', spacing: { after: 160 } }));
+      }
+    });
+  });
+
+  // Récapitulatif des signaux actifs
+  children.push(new d.Paragraph({
+    heading: d.HeadingLevel.HEADING_1,
+    pageBreakBefore: true,
+    children: [new d.TextRun('Signaux actifs (à traiter)')],
+  }));
+
+  var actifs = [];
+  (analyse.blocs || []).forEach(function(bloc) {
+    (bloc.competences || []).forEach(function(comp) {
+      (comp.signaux || []).forEach(function(s) {
+        if (s.statut_arbitrage === 'actif' && s.type !== 'point_fort') {
+          actifs.push({ blocId: bloc.id, compId: comp.id, signal: s });
+        }
+      });
+    });
+  });
+
+  if (actifs.length === 0) {
+    children.push(new d.Paragraph({
+      children: [new d.TextRun({
+        text: 'Aucun signal actif restant — tous les axes ont été arbitrés.',
+        italics: true,
+        color: DOCX_COL.gris500,
+      })],
+    }));
+  } else {
+    actifs.sort(function(a, b) { return (b.signal.gravite || 0) - (a.signal.gravite || 0); });
+    actifs.forEach(function(item) {
+      var s = item.signal;
+      children.push(new d.Paragraph({
+        numbering: { reference: 'signauxBullets', level: 0 },
+        children: [
+          new d.TextRun({ text: '[' + item.blocId + ' / ' + item.compId + ']  ', bold: true }),
+          new d.TextRun(s.message || ''),
+        ],
+      }));
+      if (s.amelioration_proposee) {
+        children.push(new d.Paragraph({
+          numbering: { reference: 'signauxBullets', level: 1 },
+          children: [
+            new d.TextRun({ text: 'Amélioration : ', italics: true, color: DOCX_COL.petrole }),
+            new d.TextRun({ text: s.amelioration_proposee, italics: true, color: DOCX_COL.petrole }),
+          ],
+        }));
+      }
+    });
+  }
+
+  children.push(new d.Paragraph({ text: '', spacing: { before: 400 } }));
+  children.push(new d.Paragraph({
+    border: { top: { style: d.BorderStyle.SINGLE, size: 6, color: 'E8E7E3', space: 4 } },
+    children: [],
+  }));
+  children.push(new d.Paragraph({
+    spacing: { before: 160 },
+    alignment: d.AlignmentType.CENTER,
+    children: [new d.TextRun({
+      text: 'Généré par Atlas des compétences — Éminéo',
+      italics: true,
+      size: 18,
+      color: DOCX_COL.gris500,
+    })],
+  }));
+
+  return new d.Document({
+    styles: {
+      default: { document: { run: { font: 'Arial', size: 22, color: DOCX_COL.gris700 } } },
+      paragraphStyles: [
+        { id: 'Title', name: 'Title', basedOn: 'Normal', next: 'Normal', quickFormat: true,
+          run: { size: 36, bold: true, font: 'Arial', color: DOCX_COL.abysse },
+          paragraph: { spacing: { after: 80 }, outlineLevel: 0 } },
+        { id: 'Heading1', name: 'Heading 1', basedOn: 'Normal', next: 'Normal', quickFormat: true,
+          run: { size: 28, bold: true, font: 'Arial', color: DOCX_COL.abysse },
+          paragraph: { spacing: { before: 320, after: 160 }, outlineLevel: 0 } },
+        { id: 'Heading2', name: 'Heading 2', basedOn: 'Normal', next: 'Normal', quickFormat: true,
+          run: { size: 24, bold: true, font: 'Arial', color: DOCX_COL.petrole },
+          paragraph: { spacing: { before: 200, after: 100 }, outlineLevel: 1 } },
+      ],
+    },
+    numbering: {
+      config: [
+        { reference: 'signauxBullets', levels: [
+          { level: 0, format: d.LevelFormat.BULLET, text: '•', alignment: d.AlignmentType.LEFT,
+            style: { paragraph: { indent: { left: 720, hanging: 360 } } } },
+          { level: 1, format: d.LevelFormat.BULLET, text: '◦', alignment: d.AlignmentType.LEFT,
+            style: { paragraph: { indent: { left: 1080, hanging: 360 } } } },
+        ] },
+      ],
+    },
+    sections: [{
+      properties: {
+        page: {
+          size: { width: 12240, height: 15840 },
+          margin: { top: 1440, right: 1440, bottom: 1440, left: 1440 },
+        },
+      },
+      children: children,
+    }],
+  });
+}
+
+// Génère le .docx et déclenche le téléchargement — miroir async de exportMD
+function exporterDocx(analyse, titreFormation, onDone) {
+  var doc = construireDocx(analyse);
+  window.docx.Packer.toBlob(doc).then(function(blob) {
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'analyse-pf-' + (titreFormation || 'formation').toLowerCase().replace(/[^a-z0-9]+/g, '-') + '.docx';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    if (onDone) onDone(null);
+  }).catch(function(err) {
+    if (onDone) onDone(err);
+  });
 }
 
 /* ══ COMPOSANT : Dialogue Claude ════════════════════════════════ */
@@ -853,6 +1168,21 @@ function VueAnalyse(props) {
     URL.revokeObjectURL(url);
   }
 
+  var _exportingDocx = useState(false);
+  var exportingDocx = _exportingDocx[0];
+  var setExportingDocx = _exportingDocx[1];
+
+  function exportDOCX() {
+    setExportingDocx(true);
+    exporterDocx(analyse, meta.titre_formation, function(err) {
+      setExportingDocx(false);
+      if (err) {
+        console.error('Export docx echoue :', err);
+        alert('L\'export Word a échoué. Réessayez ou utilisez l\'export .md en attendant.');
+      }
+    });
+  }
+
   var nbActifs = 0;
   (analyse.blocs || []).forEach(function(b) {
     (b.competences || []).forEach(function(c) {
@@ -959,11 +1289,19 @@ function VueAnalyse(props) {
           nbActifs + ' axe' + (nbActifs > 1 ? 's' : '') + ' d\'amélioration actif' + (nbActifs > 1 ? 's' : '') + ' — arbitrez avant d\'exporter.' :
           '✅ Tous les axes ont été arbitrés — prêt pour l\'export.'
       ),
-      React.createElement('button', {
-        className: 'btn-analyse',
-        onClick: exportMD,
-        style: { padding: '.65rem 1.5rem', fontSize: 13 },
-      }, '↓ Exporter le digest (.md)')
+      React.createElement('div', { style: { display: 'flex', gap: '.5rem' } },
+        React.createElement('button', {
+          className: 'btn-sm',
+          onClick: exportMD,
+          style: { padding: '.65rem 1.25rem', fontSize: 13 },
+        }, '↓ .md'),
+        React.createElement('button', {
+          className: 'btn-analyse',
+          onClick: exportDOCX,
+          disabled: exportingDocx,
+          style: { padding: '.65rem 1.5rem', fontSize: 13, opacity: exportingDocx ? 0.65 : 1 },
+        }, exportingDocx ? 'Génération…' : '↓ Exporter le digest (.docx)')
+      )
     )
   );
 }
