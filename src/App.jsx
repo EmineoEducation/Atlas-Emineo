@@ -8,7 +8,7 @@ const P = {
 }
 const SCOL={nominal:'#5DE298',signal:'#9DF0C4',coordination:'#EF9F27',incoherence:'#E24B4A',vide:'#8EADA8'}
 const SFIL={nominal:'rgba(93,226,152,0.12)',signal:'rgba(157,240,196,0.14)',coordination:'rgba(239,159,39,0.10)',incoherence:'rgba(226,75,74,0.08)',vide:'rgba(19,69,71,0.04)'}
-const CAMPUS_LIST=['Paris','Nantes','Bordeaux','Rennes','Le Mans','Vannes','Poitiers','La Rochelle']
+const CAMPUS_LIST=['Le Mans','Paris','Nantes','Bordeaux','Rennes','Vannes','Poitiers','La Rochelle']
 
 function Tag({label,color='blue',small}){
   const m={blue:{bg:'rgba(93,226,152,0.15)',fg:P.petrole},amber:{bg:P.amberbg,fg:'#7A4A00'},teal:{bg:'rgba(157,240,196,0.25)',fg:P.abysse},red:{bg:P.redbg,fg:'#8B1A1A'},gray:{bg:'rgba(19,69,71,0.07)',fg:P.textm}}
@@ -674,7 +674,7 @@ function VueDir({user,onLogout}){
   const [formations,setFormations]=useState([])
   const [loading,setLoading]=useState(true)
   const [files,setFiles]=useState([])
-  const [campusSel,setCampusSel]=useState([])
+  const [campusSel,setCampusSel]=useState(['Le Mans'])
   const [nomFormation,setNomFormation]=useState('')
   const [ingLoading,setIngLoading]=useState(false)
   const [progress,setProgress]=useState('')
