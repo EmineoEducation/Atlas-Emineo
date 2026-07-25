@@ -352,6 +352,38 @@ module.exports = async function handler(req, res) {
       }
     }
 
+    // ─── Comptes FR (Formateur Référent) — 1 placeholder par titre Le Mans ────
+    // Nom/prénom = "À nommer" tant que la Direction/RP n'a pas désigné le FR
+    // réel de chaque titre. Rôle réactivé via l'écran Comptes existant
+    // (users.js autorise désormais dir + rp à créer un rôle 'fr').
+    let createdFR = 0, inscriptionsFR = 0;
+    const frAccounts = [];
+    for (const f of FORMATIONS_LE_MANS) {
+      const fid = formationIds[f.rncp];
+      if (!fid) continue;
+      const email = `fr.${f.data_key}@emineo-education.fr`;
+      let frId;
+      const ex = await db.execute({ sql: 'SELECT id FROM users WHERE email = ?', args: [email] });
+      if (ex.rows.length) {
+        frId = Number(ex.rows[0].id);
+      } else {
+        const ins = await db.execute({
+          sql: 'INSERT INTO users (role,nom,prenom,email,password_hash,campus) VALUES (?,?,?,?,?,?)',
+          args: ['fr', 'À nommer', f.titre_court, email, hashPassword('atlas2026'), f.campus],
+        });
+        frId = Number(ins.lastInsertRowid);
+        createdFR++;
+      }
+      try {
+        await db.execute({
+          sql: "INSERT OR IGNORE INTO inscription (user_id,formation_id,campus,role,promo,groupe,annee_scolaire) VALUES (?,?,?,'fr','','','2026-27')",
+          args: [frId, fid, f.campus],
+        });
+        inscriptionsFR++;
+      } catch (_) {}
+      frAccounts.push({ email, mdp: 'atlas2026', titre: f.titre_court, statut: 'placeholder — à renommer' });
+    }
+
     return res.status(200).json({
       ok: true,
       message: 'Migration + seed Le Mans complets.',
@@ -361,10 +393,13 @@ module.exports = async function handler(req, res) {
         formations_mises_a_jour: updatedFormations,
         rp_crees: createdRP,
         inscriptions_rp: createdInscriptions,
+        fr_crees: createdFR,
+        inscriptions_fr: inscriptionsFR,
       },
       comptes: {
         dir: dirAccounts.map(a => ({ email: a.email, mdp: a.password })),
         rp: RP_LE_MANS.map(a => ({ email: a.email, mdp: a.password, titres: a.rncp_perimeter.length })),
+        fr: frAccounts,
       },
     });
   } catch (e) {

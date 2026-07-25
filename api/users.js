@@ -15,9 +15,9 @@ module.exports = async function handler(req, res) {
         // Dir voit tous les comptes sauf les sessions
         result = await db.execute('SELECT id, role, nom, prenom, email, campus FROM users ORDER BY role, nom');
       } else {
-        // RP voit uniquement les intervenants et étudiants de son campus
+        // RP voit les FR, intervenants et étudiants de son campus
         result = await db.execute({
-          sql: "SELECT id, role, nom, prenom, email, campus FROM users WHERE role IN ('intervenant','etudiant') AND campus = ? ORDER BY role, nom",
+          sql: "SELECT id, role, nom, prenom, email, campus FROM users WHERE role IN ('fr','intervenant','etudiant') AND campus = ? ORDER BY role, nom",
           args: [user.campus || ''],
         });
       }
@@ -36,9 +36,9 @@ module.exports = async function handler(req, res) {
       // - dir peut créer : rp, intervenant, etudiant, dir
       // - rp peut créer : intervenant, etudiant (uniquement)
       const rolesAllowed = user.role === 'dir'
-        ? ['rp', 'intervenant', 'etudiant', 'dir']
+        ? ['rp', 'fr', 'intervenant', 'etudiant', 'dir']
         : user.role === 'rp'
-          ? ['intervenant', 'etudiant']
+          ? ['fr', 'intervenant', 'etudiant']
           : null;
 
       if (!rolesAllowed) return res.status(403).json({ error: 'Accès refusé.' });

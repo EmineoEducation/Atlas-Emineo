@@ -35,10 +35,11 @@ var ANALYSE_SCHEMA = {
         nb_redondances: { type: 'integer' },
         nb_lacunes: { type: 'integer' },
         nb_manquements: { type: 'integer' },
+        nb_sequencage: { type: 'integer' },
       },
       required: [
         'titre_formation', 'rncp_ref', 'date_analyse', 'score_global', 'justification_score_global',
-        'nb_points_forts', 'nb_a_peaufiner', 'nb_redondances', 'nb_lacunes', 'nb_manquements',
+        'nb_points_forts', 'nb_a_peaufiner', 'nb_redondances', 'nb_lacunes', 'nb_manquements', 'nb_sequencage',
       ],
       additionalProperties: false,
     },
@@ -68,7 +69,7 @@ var ANALYSE_SCHEMA = {
                     type: 'object',
                     properties: {
                       id: { type: 'string' },
-                      type: { type: 'string', enum: ['point_fort', 'a_peaufiner', 'redondance', 'lacune', 'manquement'] },
+                      type: { type: 'string', enum: ['point_fort', 'a_peaufiner', 'redondance', 'lacune', 'manquement', 'sequencage'] },
                       gravite: { type: 'integer', enum: [1, 2, 3] },
                       message: { type: 'string' },
                       statut_arbitrage: { type: 'string', enum: ['actif', 'archive', 'resolu'] },
@@ -221,6 +222,12 @@ function buildPrompt(docs, titreFormation, rncpRef) {
     '  redondance = couverte plusieurs fois sans progression identifiable\n' +
     '  lacune = couverte insuffisamment au regard des exigences\n' +
     '  manquement = absente alors qu exigee par le certificateur\n' +
+    '- Signal supplementaire "sequencage" (dans signaux[], jamais comme statut de competence) : ' +
+    'utilise-le quand deux modules qui se completent apparaissent dans un ordre chronologique ' +
+    'contre-intuitif (ex: un module d application avant le module de methode qu il presuppose), ' +
+    'UNIQUEMENT si les documents fournissent une info de sequencement ou de dates exploitable ' +
+    '(champ sequencage, semestre, numero de semaine). Ne jamais deduire un ordre a partir du seul ' +
+    'ordre d apparition dans le document source — cite l indice temporel concret qui motive le signal.\n' +
     '- gravite : 1 = informatif | 2 = a traiter avant rentree | 3 = bloquant pour certification\n' +
     '- score_couverture : 0-100, estimation du taux de couverture de la competence\n' +
     '- score_global : 0-100, estimation globale de la qualite du plan de formation\n' +
@@ -300,9 +307,13 @@ module.exports = async function handler(req, res) {
 
   // Recalcul compteurs meta depuis les signaux reels
   var nb = { point_fort: 0, a_peaufiner: 0, redondance: 0, lacune: 0, manquement: 0 };
+  var nbSequencage = 0;
   (parsed.blocs || []).forEach(function(b) {
     (b.competences || []).forEach(function(c) {
       if (nb[c.statut] !== undefined) nb[c.statut]++;
+      (c.signaux || []).forEach(function(s) {
+        if (s.type === 'sequencage') nbSequencage++;
+      });
     });
   });
   parsed.meta.nb_points_forts = nb.point_fort;
@@ -310,6 +321,7 @@ module.exports = async function handler(req, res) {
   parsed.meta.nb_redondances = nb.redondance;
   parsed.meta.nb_lacunes = nb.lacune;
   parsed.meta.nb_manquements = nb.manquement;
+  parsed.meta.nb_sequencage = nbSequencage;
   parsed.meta.documents_analyses = docs.map(function(d) {
     return (d.type || 'doc') + ':' + (d.nom || 'sans-nom');
   });

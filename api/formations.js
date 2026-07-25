@@ -66,8 +66,16 @@ module.exports = async function handler(req, res) {
           // Fallback ancien système : filtre par campus string
           formations = formations.filter(f => campusMatch(f._campus, user.campus));
         }
+      } else if (user.role === 'fr') {
+        // FR : uniquement le(s) titre(s) dont il est titulaire (table inscription)
+        const insc = await db.execute({
+          sql: "SELECT formation_id FROM inscription WHERE user_id = ? AND role = 'fr'",
+          args: [user.id],
+        });
+        const ids = new Set((insc.rows || []).map(r => Number(r.formation_id)));
+        formations = formations.filter(f => ids.has(f._id));
       } else {
-        // Intervenant, étudiant, fr : formations de son campus uniquement
+        // Intervenant, étudiant : formations de son campus uniquement
         formations = formations.filter(f => campusMatch(f._campus, user.campus));
       }
 
