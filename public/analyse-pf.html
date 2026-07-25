@@ -27,6 +27,8 @@
   --bleu50:#EFF6FF;
   --vert:#16A34A;
   --vert50:#F0FDF4;
+  --violet:#7C3AED;
+  --violet50:#F5F3FF;
 }
 body{font-family:'Inter',sans-serif;background:var(--gris50);color:var(--abysse);line-height:1.5}
 button{font-family:'Inter',sans-serif;cursor:pointer;border:none;background:none}
@@ -254,6 +256,8 @@ input[type=file]{display:none}
 .st-lacune .signal-card{border-left:3px solid var(--amber)}
 .st-manquement .signal-badge{background:var(--rouge50);color:var(--rouge)}
 .st-manquement .signal-card{border-left:3px solid var(--rouge)}
+.st-sequencage .signal-badge{background:var(--violet50);color:var(--violet)}
+.st-sequencage .signal-card{border-left:3px solid var(--violet)}
 
 .comp-pill-pf{border-radius:20px;font-size:10px;font-weight:600;padding:2px 8px}
 .pill-point_fort{background:var(--vert50);color:var(--vert)}
@@ -261,6 +265,7 @@ input[type=file]{display:none}
 .pill-redondance{background:var(--amber50);color:var(--amber)}
 .pill-lacune{background:var(--amber50);color:var(--amber)}
 .pill-manquement{background:var(--rouge50);color:var(--rouge)}
+.pill-sequencage{background:var(--violet50);color:var(--violet)}
 
 .score-bar{background:var(--gris100);border-radius:99px;height:4px;overflow:hidden;margin-top:.3rem}
 .score-fill{height:100%;border-radius:99px;transition:width .6s ease}
@@ -294,6 +299,7 @@ var STATUT_LABELS = {
   redondance:  'Redondance',
   lacune:      'Lacune',
   manquement:  'Manquement',
+  sequencage:  'Séquençage',
 };
 
 var GRAVITE_LABELS = {
@@ -1282,6 +1288,10 @@ function VueAnalyse(props) {
           React.createElement('div', { className: 'kpi-card' },
             React.createElement('div', { className: 'kpi-num', style: { color: '#D97706' } }, meta.nb_lacunes || 0),
             React.createElement('div', { className: 'kpi-label' }, 'Lacunes')
+          ),
+          React.createElement('div', { className: 'kpi-card' },
+            React.createElement('div', { className: 'kpi-num', style: { color: '#7C3AED' } }, meta.nb_sequencage || 0),
+            React.createElement('div', { className: 'kpi-label' }, 'Séquençage')
           ),
           React.createElement('div', { className: 'kpi-card' },
             React.createElement('div', { className: 'kpi-num', style: { color: '#C84B4B' } }, meta.nb_manquements || 0),
