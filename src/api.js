@@ -131,13 +131,24 @@ export const api = {
   deleteFormation: (id)              => apiFetch('/api/formations',  { method: 'DELETE', body: { id } }),
   updateFormation: (id, patch)       => apiFetch('/api/formations',  { method: 'PATCH',  body: { id, ...patch } }),
 
-  // ─── FR — poste de travail Formateur Référent (lecture seule) ───
-  getFR: (formationId, semaine, annee) => {
+  // ─── FR — poste de travail Formateur Référent ───
+  // `periode` : n'importe quelle date dans le mois voulu (défaut : aujourd'hui).
+  getFR: (formationId, periode, annee) => {
     const q = new URLSearchParams({ formation_id: String(formationId) })
-    if (semaine) q.set('semaine', semaine)
+    if (periode) q.set('periode', periode)
     if (annee)   q.set('annee_scolaire', annee)
     return apiFetch('/api/fr?' + q.toString())
   },
+  generateDigest: (formationId, campus, periode, annee) =>
+    apiFetch('/api/fr?action=generate', {
+      method: 'POST',
+      body: { formation_id: formationId, campus, periode, annee_scolaire: annee },
+    }),
+  validerEnvoyerDigest: (digestId, noteFr) =>
+    apiFetch('/api/fr?action=valider-envoyer', {
+      method: 'POST',
+      body: { digest_id: digestId, note_fr: noteFr },
+    }),
 
   // ─── Prévisionnel intervenant (saisie directe) ───
   getPrevisionnel: (formationId, intervenantId, moduleRef, annee) => {

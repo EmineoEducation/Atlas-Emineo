@@ -962,6 +962,8 @@ function VueFR({user,onLogout}){
   const [data,setData]=useState(null)
   const [loading,setLoading]=useState(true)
   const [error,setError]=useState('')
+  const [generating,setGenerating]=useState(false)
+  const [genError,setGenError]=useState('')
 
   useEffect(()=>{
     api.getFormations()
@@ -974,20 +976,38 @@ function VueFR({user,onLogout}){
       .catch(e=>{setError(e.message);setLoading(false)})
   },[])
 
-  useEffect(()=>{
+  function reload(){
     if(!formationId) return
     setLoading(true);setError('')
-    api.getFR(formationId)
-      .then(d=>{setData(d);setLoading(false)})
+    return api.getFR(formationId)
+      .then(d=>{setData(d);setLoading(false);return d})
       .catch(e=>{setError(e.message);setLoading(false)})
-  },[formationId])
+  }
+  useEffect(()=>{ reload() },[formationId])
 
   const f=formations.find(x=>x._id===formationId)||null
   const titre=f?.formation?.titre||'Atlas des compétences'
+  const campus=f?._campus||''
   const prevues=data?.seances_prevues||[]
   const realisees=data?.seances_realisees||[]
   const ecarts=data?.ecarts||[]
   const digest=data?.digest||null
+  const nbAlertes=ecarts.filter(e=>e.etat==='alerte').length
+
+  async function genererDigest(){
+    setGenerating(true);setGenError('')
+    try{
+      await api.generateDigest(formationId,campus)
+      await reload()
+      setOnglet('digest')
+    }catch(e){setGenError(e.message)}finally{setGenerating(false)}
+  }
+
+  async function validerEnvoyer(noteFr){
+    if(!digest) return
+    await api.validerEnvoyerDigest(digest.id,noteFr)
+    await reload()
+  }
 
   const parIntervenant={}
   prevues.forEach(s=>{
@@ -998,7 +1018,7 @@ function VueFR({user,onLogout}){
   const intervenants=Object.values(parIntervenant)
 
   const onglets=[
-    {id:'alertes',label:`Écarts (${ecarts.length})`},
+    {id:'alertes',label:`Comparateur (${nbAlertes} alerte${nbAlertes>1?'s':''})`},
     {id:'digest',label:'Digest'},
     {id:'previsionnel',label:'Prévisionnels'},
   ]
@@ -1034,37 +1054,44 @@ function VueFR({user,onLogout}){
             {onglet==='alertes'&&(
               <div style={{animation:'fadeIn 0.25s ease'}}>
                 <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'0.75rem',marginBottom:'1.5rem'}}>
-                  <div style={card({padding:'1rem 1.25rem',marginBottom:0})}><div style={{fontSize:28,fontWeight:600,lineHeight:1,color:P.red}}>{ecarts.length}</div><div style={{fontSize:11,color:P.textm,marginTop:4}}>Écarts prévu / réalisé</div></div>
-                  <div style={card({padding:'1rem 1.25rem',marginBottom:0})}><div style={{fontSize:28,fontWeight:600,lineHeight:1,color:P.menthe}}>{prevues.length}</div><div style={{fontSize:11,color:P.textm,marginTop:4}}>Séances prévues</div></div>
-                  <div style={card({padding:'1rem 1.25rem',marginBottom:0})}><div style={{fontSize:28,fontWeight:600,lineHeight:1,color:P.petrole}}>{realisees.length}</div><div style={{fontSize:11,color:P.textm,marginTop:4}}>Séances réalisées (CESAR)</div></div>
+                  <div style={card({padding:'1rem 1.25rem',marginBottom:0})}><div style={{fontSize:28,fontWeight:600,lineHeight:1,color:P.menthe}}>{ecarts.filter(e=>e.etat==='nominal').length}</div><div style={{fontSize:11,color:P.textm,marginTop:4}}>Nominal</div></div>
+                  <div style={card({padding:'1rem 1.25rem',marginBottom:0})}><div style={{fontSize:28,fontWeight:600,lineHeight:1,color:P.amber}}>{ecarts.filter(e=>e.etat==='ecart_plus').length}</div><div style={{fontSize:11,color:P.textm,marginTop:4}}>Écart + (contenu suppl.)</div></div>
+                  <div style={card({padding:'1rem 1.25rem',marginBottom:0})}><div style={{fontSize:28,fontWeight:600,lineHeight:1,color:P.red}}>{nbAlertes}</div><div style={{fontSize:11,color:P.textm,marginTop:4}}>Alerte (non déclaré)</div></div>
                 </div>
 
                 {ecarts.length===0?(
-                  <Empty icon="✓" titre="Aucun écart cette semaine" msg="Toutes les séances prévues correspondent au réalisé déclaré. Rien à arbitrer pour le moment."/>
-                ):ecarts.map(e=>(
-                  <div key={e.previsionnel_id} style={card({borderLeft:`3px solid ${P.red}`})}>
+                  <Empty icon="✓" titre="Aucune séance prévue ce mois-ci" msg="Rien à comparer pour la période en cours."/>
+                ):ecarts.map(e=>{
+                  const col=e.etat==='alerte'?P.red:e.etat==='ecart_plus'?P.amber:P.menthe
+                  const label=e.etat==='alerte'?'Alerte':e.etat==='ecart_plus'?'Écart +':'Nominal'
+                  return(
+                  <div key={e.previsionnel_id} style={card({borderLeft:`3px solid ${col}`})}>
                     <div style={{display:'flex',alignItems:'flex-start',gap:'0.5rem',marginBottom:'0.4rem'}}>
-                      <Tag label="Écart prévu / réalisé" color="red" small/>
+                      <Tag label={label} color={e.etat==='alerte'?'red':e.etat==='ecart_plus'?'amber':'teal'} small/>
                       <div style={{flex:1}}>
                         <div style={{fontSize:14,fontWeight:600,color:P.abysse}}>{e.titre} — {e.intervenant_nom}</div>
-                        <div style={{fontSize:12,color:P.textm,marginTop:2}}>Séance {e.numero} · prévue le {fmtDate(e.date_prevue)} · aucune déclaration reçue</div>
+                        <div style={{fontSize:12,color:P.textm,marginTop:2}}>Séance {e.numero} · prévue le {fmtDate(e.date_prevue)}</div>
                       </div>
                     </div>
-                    <div style={{fontSize:13,color:P.textm,lineHeight:1.6}}>
-                      Cette séance figure au prévisionnel mais n'a pas encore de réalisé déclaré (émargement CESAR ou saisie FR).
-                      Le graphe de compétences ne peut pas être mis à jour tant que le contenu réalisé n'est pas connu.
-                    </div>
+                    <div style={{fontSize:13,color:P.textm,lineHeight:1.6}}>{e.detail}</div>
                   </div>
-                ))}
+                )})}
               </div>
             )}
 
             {onglet==='digest'&&(
               <div style={{animation:'fadeIn 0.25s ease'}}>
+                <div style={{display:'flex',justifyContent:'flex-end',marginBottom:'1rem'}}>
+                  <button onClick={genererDigest} disabled={generating}
+                    style={{background:P.petrole,color:P.givre,border:'none',borderRadius:8,padding:'8px 16px',fontSize:12,fontWeight:500,cursor:'pointer',opacity:generating?0.6:1,display:'flex',alignItems:'center',gap:'0.5rem'}}>
+                    {generating?<Spinner size={14}/>:null}{digest?'↻ Régénérer le digest':'Générer le digest du mois'}
+                  </button>
+                </div>
+                {genError&&<div style={{...card(),border:`1px solid ${P.red}`,color:'#8B1A1A',fontSize:12,marginBottom:'1rem'}}>⚠ {genError}</div>}
                 {!digest?(
-                  <Empty icon="✉" titre="Aucun digest généré" msg="Le digest de la semaine n'a pas encore été produit par Atlas. Il apparaîtra ici dès qu'une séance de la semaine sera réalisée, prêt à être relu puis validé."/>
+                  <Empty icon="✉" titre="Aucun digest généré" msg="Générez le digest du mois pour ce titre — il s'appuie sur les séances déclarées de la période en cours."/>
                 ):(
-                  <DigestPreview digest={digest} titre={titre} campus={f._campus} fr={`${user.prenom} ${user.nom}`}/>
+                  <DigestPreview digest={digest} titre={titre} campus={f._campus} fr={`${user.prenom} ${user.nom}`} onValiderEnvoyer={validerEnvoyer}/>
                 )}
               </div>
             )}
@@ -1110,30 +1137,43 @@ function VueFR({user,onLogout}){
 }
 
 /* ── Aperçu digest — reproduit la maquette validée, alimenté par digest.contenu_genere ── */
-function DigestPreview({digest,titre,campus,fr}){
+function DigestPreview({digest,titre,campus,fr,onValiderEnvoyer}){
   const c=digest.contenu_genere||{}
   const D={abysse:P.abysse,petrole:P.petrole,menthe:P.menthe,saumon:P.saumon}
-  const traverse=c.traverse||[]
+  const avancementBlocs=c.avancement_blocs||[]
+  const quiAEnseigne=c.qui_a_enseigne||[]
   const coordination=c.coordination||[]
-  const vosSeances=c.vos_seances||[]
-  const quiDautre=c.qui_dautre||[]
-  const kpis=c.kpis||{intervenants:traverse.length,seances:0,couverture:'—',coordination:coordination.length}
-  const noteFR=c.note_fr||''
+  const sequencesAVenir=c.sequences_a_venir||[]
+  const kpis=c.kpis||{intervenants:0,seances:0,coordination:coordination.length}
+  const periodeLabel=c.periode?.label||''
   const sectStyle={padding:'1.25rem 1.75rem',borderBottom:'1px solid rgba(255,255,255,0.06)',background:D.abysse}
   const labelStyle={fontSize:10,fontWeight:600,letterSpacing:'0.1em',textTransform:'uppercase',color:'rgba(255,255,255,0.28)',marginBottom:'0.75rem'}
   const pill={display:'inline-block',padding:'1px 8px',borderRadius:20,fontSize:10,fontWeight:600,background:'rgba(93,226,152,0.12)',color:D.menthe,border:'1px solid rgba(93,226,152,0.22)',marginRight:3,marginTop:4}
   const item={display:'flex',alignItems:'flex-start',gap:'0.85rem',padding:'0.55rem 0',borderBottom:'1px solid rgba(255,255,255,0.04)'}
-  const dot=(dim)=>({width:7,height:7,borderRadius:'50%',background:dim?'rgba(93,226,152,0.3)':D.menthe,flexShrink:0,marginTop:4})
   const itTitle={fontSize:13,fontWeight:500,color:'#fff',lineHeight:1.4}
   const itSub={fontSize:11,color:'rgba(255,255,255,0.38)',marginTop:2,lineHeight:1.5}
   const statutLabel={genere:'Prêt à valider',valide:'Validé',envoye:'Envoyé'}[digest.statut]||digest.statut
 
+  const [note,setNote]=useState(c.note_fr||c.note_fr_suggestion||'')
+  const [sending,setSending]=useState(false)
+  const [sendError,setSendError]=useState('')
+  useEffect(()=>{ setNote(c.note_fr||c.note_fr_suggestion||''); setSendError('') },[digest.id])
+
+  const dejaEnvoye=digest.statut==='envoye'
+
+  async function handleValider(){
+    setSending(true);setSendError('')
+    try{ await onValiderEnvoyer(note) }
+    catch(e){ setSendError(e.message) }
+    finally{ setSending(false) }
+  }
+
   return(
     <>
       <div style={{...card({background:'rgba(93,226,152,0.10)',border:`1px solid ${P.borderm}`}),display:'flex',alignItems:'flex-start',gap:'0.6rem'}}>
-        <span style={{fontSize:14}}>✓</span>
+        <span style={{fontSize:14}}>{dejaEnvoye?'✓':'✉'}</span>
         <div style={{fontSize:13,color:P.petrole,lineHeight:1.6}}>
-          Digest {statutLabel.toLowerCase()}. Relisez l'aperçu ci-dessous tel que les intervenants le recevront
+          Digest {statutLabel.toLowerCase()}{periodeLabel?` — ${periodeLabel}`:''}. Relisez l'aperçu ci-dessous tel que les intervenants le recevront
           {(digest.destinataires||[]).length>0&&<> — {digest.destinataires.length} destinataire{digest.destinataires.length>1?'s':''}</>}.
         </div>
       </div>
@@ -1148,66 +1188,67 @@ function DigestPreview({digest,titre,campus,fr}){
 
         <div style={{background:D.abysse,padding:'1.75rem'}}>
           <div style={{fontSize:10,fontWeight:600,letterSpacing:'0.12em',textTransform:'uppercase',color:D.menthe,marginBottom:'0.4rem'}}>Synthèse · Formateur Référent {fr}</div>
-          <div style={{fontFamily:'Georgia,serif',fontSize:22,color:'#fff',fontWeight:400,lineHeight:1.25,marginBottom:'0.35rem'}}>{c.titre||'Ce que le groupe a traversé'}</div>
+          <div style={{fontFamily:'Georgia,serif',fontSize:22,color:'#fff',fontWeight:400,lineHeight:1.25,marginBottom:'0.35rem'}}>{c.titre||'Ce que la promo a traversé'}</div>
           <div style={{fontSize:12,color:'rgba(255,255,255,0.35)'}}>Généré par Atlas · Validé avant envoi · Répondez à ce mail pour contacter {fr}</div>
           <div style={{display:'flex',gap:'1.5rem',marginTop:'1.25rem',paddingTop:'1.25rem',borderTop:'1px solid rgba(255,255,255,0.07)'}}>
             <div><div style={{fontSize:22,fontWeight:700,color:D.menthe}}>{kpis.intervenants}</div><div style={{fontSize:11,color:'rgba(255,255,255,0.35)',marginTop:2}}>Intervenants actifs</div></div>
             <div><div style={{fontSize:22,fontWeight:700,color:D.menthe}}>{kpis.seances}</div><div style={{fontSize:11,color:'rgba(255,255,255,0.35)',marginTop:2}}>Séances réalisées</div></div>
-            <div><div style={{fontSize:22,fontWeight:700,color:D.menthe}}>{kpis.couverture}</div><div style={{fontSize:11,color:'rgba(255,255,255,0.35)',marginTop:2}}>Couverture RNCP</div></div>
             <div><div style={{fontSize:22,fontWeight:700,color:D.saumon}}>{kpis.coordination}</div><div style={{fontSize:11,color:'rgba(255,255,255,0.35)',marginTop:2}}>Points de coordination</div></div>
           </div>
         </div>
 
         <div style={sectStyle}>
-          <div style={labelStyle}>Ce que le groupe a traversé</div>
-          {traverse.length===0?<div style={itSub}>Aucune séance réalisée cette période.</div>:traverse.map((t,i)=>(
-            <div key={i} style={item}>
-              <div style={dot(t.en_cours)}/>
-              <div><div style={{...itTitle,...(t.en_cours?{color:'rgba(255,255,255,0.55)'}:{})}}>{t.module}</div>
-                <div style={itSub}>{t.intervenant}{t.seances?` · ${t.seances}`:''}{t.volume?` · ${t.volume}`:''}{t.modalite?` · ${t.modalite}`:''}</div>
-                <div>{(t.competences||[]).map(cp=><span key={cp} style={t.en_cours?{...pill,opacity:0.5}:pill}>{cp}</span>)}</div>
+          <div style={labelStyle}>Avancement RNCP par bloc</div>
+          {avancementBlocs.length===0?<div style={itSub}>Aucun bloc de compétences sur ce titre.</div>:avancementBlocs.map(b=>(
+            <div key={b.id} style={{marginBottom:'0.55rem'}}>
+              <div style={{display:'flex',justifyContent:'space-between',fontSize:12,color:'rgba(255,255,255,0.75)',marginBottom:3}}>
+                <span>{b.id} — {b.titre}</span><span style={{color:D.menthe,fontWeight:600}}>{b.pct==null?'—':`${b.pct}%`}</span>
+              </div>
+              <div style={{background:'rgba(255,255,255,0.08)',borderRadius:99,height:4,overflow:'hidden'}}>
+                <div style={{width:`${b.pct||0}%`,height:'100%',background:D.menthe,borderRadius:99}}/>
               </div>
             </div>
           ))}
         </div>
 
-        {(noteFR||coordination.length>0)&&(
-          <div style={sectStyle}>
-            <div style={labelStyle}>Point de coordination — {fr}, FR</div>
-            {noteFR&&(
-              <div style={{background:'rgba(232,155,119,0.08)',border:'1px solid rgba(232,155,119,0.2)',borderRadius:8,padding:'0.85rem 1rem',marginBottom:coordination.length?'0.75rem':0}}>
-                <div style={{fontSize:10,fontWeight:600,color:D.saumon,letterSpacing:'0.08em',textTransform:'uppercase',marginBottom:'0.3rem'}}>Note du Formateur Référent</div>
-                <div style={{fontSize:12,color:'rgba(255,255,255,0.62)',lineHeight:1.65}}>{noteFR}</div>
+        <div style={sectStyle}>
+          <div style={labelStyle}>Qui a enseigné quoi ce mois-ci</div>
+          {quiAEnseigne.length===0?<div style={itSub}>Aucune séance réalisée cette période.</div>:quiAEnseigne.map((t,i)=>(
+            <div key={i} style={item}>
+              <div style={{width:7,height:7,borderRadius:'50%',background:D.menthe,flexShrink:0,marginTop:4}}/>
+              <div><div style={itTitle}>{t.module}</div>
+                <div style={itSub}>{t.intervenant}{t.modalite?` · ${t.modalite}`:''}</div>
+                <div>{(t.competences||[]).map(cp=><span key={cp} style={pill}>{cp}</span>)}</div>
               </div>
-            )}
-            {coordination.map((co,i)=>(
-              <div key={i} style={{...item,padding:'0.4rem 0'}}>
-                <div style={{width:7,height:7,borderRadius:'50%',background:D.saumon,flexShrink:0,marginTop:4}}/>
-                <div><div style={{...itTitle,fontSize:12}}>{co.titre}</div><div style={itSub}>{co.detail}</div></div>
-              </div>
-            ))}
-          </div>
-        )}
+            </div>
+          ))}
+        </div>
 
-        {vosSeances.length>0&&(
-          <div style={sectStyle}>
-            <div style={labelStyle}>Vos prochaines séances — ancrage RNCP</div>
-            {vosSeances.map((s,i)=>(
-              <div key={i} style={item}>
-                <div style={dot(true)}/>
-                <div><div style={itTitle}>{s.titre}</div><div style={itSub}>{s.sub}</div><div>{(s.competences||[]).map(cp=><span key={cp} style={pill}>{cp}</span>)}</div></div>
-              </div>
-            ))}
-          </div>
-        )}
+        <div style={sectStyle}>
+          <div style={labelStyle}>Point de coordination — {fr}, FR</div>
+          {!dejaEnvoye?(
+            <textarea value={note} onChange={e=>setNote(e.target.value)} placeholder="Note de coordination (modifiable avant envoi)…"
+              style={{width:'100%',minHeight:70,background:'rgba(255,255,255,0.05)',border:'1px solid rgba(255,255,255,0.12)',borderRadius:8,padding:'0.6rem',fontSize:12,color:'#fff',resize:'vertical',outline:'none',lineHeight:1.6,marginBottom:coordination.length?'0.75rem':0}}/>
+          ):note&&(
+            <div style={{background:'rgba(232,155,119,0.08)',border:'1px solid rgba(232,155,119,0.2)',borderRadius:8,padding:'0.85rem 1rem',marginBottom:coordination.length?'0.75rem':0}}>
+              <div style={{fontSize:12,color:'rgba(255,255,255,0.62)',lineHeight:1.65}}>{note}</div>
+            </div>
+          )}
+          {coordination.map((co,i)=>(
+            <div key={i} style={{...item,padding:'0.4rem 0'}}>
+              <div style={{width:7,height:7,borderRadius:'50%',background:D.saumon,flexShrink:0,marginTop:4}}/>
+              <div><div style={{...itTitle,fontSize:12}}>{co.titre}</div><div style={itSub}>{co.detail}</div></div>
+            </div>
+          ))}
+        </div>
 
-        {quiDautre.length>0&&(
+        {sequencesAVenir.length>0&&(
           <div style={sectStyle}>
-            <div style={labelStyle}>Qui d'autre intervient ce mois-ci</div>
-            {quiDautre.map((q,i)=>(
+            <div style={labelStyle}>Ce qui arrive le mois prochain</div>
+            {sequencesAVenir.map((s,i)=>(
               <div key={i} style={item}>
-                <div style={dot(true)}/>
-                <div><div style={itTitle}>{q.intervenant} — {q.module}</div><div style={itSub}>{q.date} · {q.competence?<span style={pill}>{q.competence}</span>:null} {q.detail}</div></div>
+                <div style={{width:7,height:7,borderRadius:'50%',background:'rgba(93,226,152,0.3)',flexShrink:0,marginTop:4}}/>
+                <div><div style={itTitle}>{s.module}</div><div style={itSub}>{s.date?`${s.date} · `:''}{s.intervenant}</div><div>{(s.competences||[]).map(cp=><span key={cp} style={pill}>{cp}</span>)}</div></div>
               </div>
             ))}
           </div>
@@ -1215,13 +1256,17 @@ function DigestPreview({digest,titre,campus,fr}){
 
         <div style={{background:D.petrole,padding:'1.25rem 1.75rem',display:'flex',alignItems:'center',justifyContent:'space-between',gap:'1rem'}}>
           <div style={{fontSize:11,color:'rgba(255,255,255,0.3)',lineHeight:1.5}}>Répondre à ce mail = contacter {fr} directement.<br/>Atlas des compétences · Éminéo · {titre}</div>
-          <button disabled title="Validation disponible prochainement"
-            style={{background:'rgba(93,226,152,0.35)',color:'rgba(11,43,45,0.5)',border:'none',borderRadius:6,padding:'9px 20px',fontWeight:700,fontSize:13,cursor:'not-allowed',whiteSpace:'nowrap'}}>
-            ✓ Valider et envoyer
-          </button>
+          {dejaEnvoye?(
+            <span style={{color:D.menthe,fontSize:13,fontWeight:700,whiteSpace:'nowrap'}}>✓ Envoyé</span>
+          ):(
+            <button onClick={handleValider} disabled={sending}
+              style={{background:D.menthe,color:P.abysse,border:'none',borderRadius:6,padding:'9px 20px',fontWeight:700,fontSize:13,cursor:sending?'default':'pointer',whiteSpace:'nowrap',opacity:sending?0.7:1,display:'flex',alignItems:'center',gap:'0.5rem'}}>
+              {sending?<Spinner size={14}/>:null}{sending?'Envoi…':'✓ Valider et envoyer'}
+            </button>
+          )}
         </div>
       </div>
-      <p style={{textAlign:'center',fontSize:11,color:P.textl,marginTop:'0.75rem'}}>La validation et l'envoi seront activés dans une prochaine version.</p>
+      {sendError&&<p style={{textAlign:'center',fontSize:12,color:P.red,marginTop:'0.75rem'}}>⚠ {sendError}</p>}
     </>
   )
 }
