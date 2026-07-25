@@ -681,6 +681,10 @@ function VueDir({user,onLogout}){
   const [error,setError]=useState('')
   const [selF,setSelF]=useState(null)
   const [editCampus,setEditCampus]=useState(null)   // _id de la formation en cours d'édition campus
+  const [digestData,setDigestData]=useState(null)
+  const [digestLoading,setDigestLoading]=useState(false)
+  const [generating,setGenerating]=useState(false)
+  const [genError,setGenError]=useState('')
 
   useEffect(()=>{loadFormations()},[])
   async function loadFormations(){
@@ -709,13 +713,44 @@ function VueDir({user,onLogout}){
     try{await api.deleteFormation(id);await loadFormations();if(selF?._id===id)setSelF(null)}catch(e){setError(e.message)}
   }
 
+  function premierCampus(f){
+    if(!f)return ''
+    const c=f._campus
+    if(Array.isArray(c))return c[0]||''
+    try{const p=JSON.parse(c);if(Array.isArray(p))return p[0]||''}catch(_){}
+    return (c||'').split(',')[0].trim()
+  }
+
+  async function loadDigest(fId){
+    if(!fId)return
+    setDigestLoading(true)
+    try{const d=await api.getFR(fId);setDigestData(d)}catch(e){setError(e.message)}finally{setDigestLoading(false)}
+  }
+
+  async function genererDigestDir(){
+    if(!fCarto)return
+    setGenerating(true);setGenError('')
+    try{
+      await api.generateDigest(fCarto._id,premierCampus(fCarto))
+      await loadDigest(fCarto._id)
+    }catch(e){setGenError(e.message)}finally{setGenerating(false)}
+  }
+
+  async function validerEnvoyerDir(noteFr){
+    if(!digestData?.digest)return
+    await api.validerEnvoyerDigest(digestData.digest.id,noteFr)
+    await loadDigest(fCarto._id)
+  }
+
   const totalAlertes=formations.flatMap(f=>f.alertes_detectees||[]).length
   const fCarto=selF||formations[0]||null
+
+  useEffect(()=>{ if(onglet==='digest'&&fCarto) loadDigest(fCarto._id) },[onglet,fCarto?._id])
 
   return(
     <div style={{minHeight:'100vh',background:P.givre}}>
       <Topbar user={user} formationTitre="Direction des programmes" onLogout={onLogout} onglet={onglet} setOnglet={setOnglet}
-        onglets={[{id:'formations',label:'Formations'},{id:'ingestion',label:'+ Ingestion'},{id:'cartographie',label:'Cartographie'},{id:'alertes',label:`Alertes (${totalAlertes})`},{id:'comptes',label:'Comptes'}]}/>
+        onglets={[{id:'formations',label:'Formations'},{id:'ingestion',label:'+ Ingestion'},{id:'cartographie',label:'Cartographie'},{id:'digest',label:'Digest'},{id:'alertes',label:`Alertes (${totalAlertes})`},{id:'comptes',label:'Comptes'}]}/>
       <div style={{maxWidth:960,margin:'0 auto',padding:'2rem 1.5rem'}}>
 
         {onglet==='formations'&&(
@@ -809,6 +844,29 @@ function VueDir({user,onLogout}){
               {formations.length>1&&<div style={{display:'flex',gap:'0.4rem',marginBottom:'1rem',flexWrap:'wrap'}}>{formations.map(f=><button key={f._id} onClick={()=>setSelF(f)} style={{padding:'5px 14px',borderRadius:8,fontSize:12,fontWeight:500,cursor:'pointer',border:`1px solid ${fCarto?._id===f._id?P.borderm:P.border}`,background:fCarto?._id===f._id?'rgba(93,226,152,0.12)':P.surface,color:fCarto?._id===f._id?P.petrole:P.textm}}>{f.formation?.titre||'?'}</button>)}</div>}
               <h2 style={{fontFamily:'Georgia,serif',fontWeight:400,color:P.abysse,marginTop:0,fontSize:22,marginBottom:'1rem'}}>{fCarto?.formation?.titre||'Cartographie'}</h2>
               <GrapheCanvas blocs={fCarto?.blocs||[]} alertes={fCarto?.alertes_detectees||[]} showAlerts/>
+            </>}
+          </div>
+        )}
+
+        {onglet==='digest'&&(
+          <div className="fi">
+            {formations.length===0?<Empty icon="✉" titre="Aucune formation" msg="Chargez une formation d'abord." action="Ingestion →" onClick={()=>setOnglet('ingestion')}/>:<>
+              {formations.length>1&&<div style={{display:'flex',gap:'0.4rem',marginBottom:'1rem',flexWrap:'wrap'}}>{formations.map(f=><button key={f._id} onClick={()=>setSelF(f)} style={{padding:'5px 14px',borderRadius:8,fontSize:12,fontWeight:500,cursor:'pointer',border:`1px solid ${fCarto?._id===f._id?P.borderm:P.border}`,background:fCarto?._id===f._id?'rgba(93,226,152,0.12)':P.surface,color:fCarto?._id===f._id?P.petrole:P.textm}}>{f.formation?.titre||'?'}</button>)}</div>}
+              <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:'1rem'}}>
+                <h2 style={{fontFamily:'Georgia,serif',fontWeight:400,color:P.abysse,margin:0,fontSize:22}}>{fCarto?.formation?.titre||'Digest'}</h2>
+                <button onClick={genererDigestDir} disabled={generating}
+                  style={{background:P.petrole,color:P.givre,border:'none',borderRadius:8,padding:'8px 16px',fontSize:12,fontWeight:500,cursor:'pointer',opacity:generating?0.6:1,display:'flex',alignItems:'center',gap:'0.5rem'}}>
+                  {generating?<Spinner size={14}/>:null}{digestData?.digest?'↻ Régénérer le digest':'Générer le digest du mois'}
+                </button>
+              </div>
+              {genError&&<div style={{...card(),border:`1px solid ${P.red}`,color:'#8B1A1A',fontSize:12,marginBottom:'1rem'}}>⚠ {genError}</div>}
+              {digestLoading?<div style={{textAlign:'center',padding:'2rem'}}><Spinner/></div>:
+                !digestData?.digest?(
+                  <Empty icon="✉" titre="Aucun digest généré" msg="Générez le digest du mois pour ce titre — il s'appuie sur les séances déclarées de la période en cours."/>
+                ):(
+                  <DigestPreview digest={digestData.digest} titre={fCarto?.formation?.titre||''} campus={premierCampus(fCarto)} fr={`${user.prenom} ${user.nom} (Direction)`} onValiderEnvoyer={validerEnvoyerDir}/>
+                )
+              }
             </>}
           </div>
         )}
