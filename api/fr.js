@@ -473,15 +473,20 @@ module.exports = async function handler(req, res) {
       const annee = annee_scolaire || '2026-27';
       const ref = periode || new Date().toISOString();
       const { debut, fin } = bornesMois(ref);
+      const mine = user.role === 'intervenant';
+      // Un intervenant ne voit que ses propres séances (prévu ET réalisé) ;
+      // RP/FR/dir voient tout le titre.
+      const scopeSql = mine ? ' AND (intervenant_id = ? OR intervenant_nom = ?)' : '';
+      const scopeArgs = mine ? [user.id, `${user.prenom || ''} ${user.nom || ''}`.trim()] : [];
 
       const prevu = await db.execute({
         sql: `SELECT id, module_ref, campus, intervenant_id, intervenant_nom,
                      numero, titre, date_prevue, modalite, contenu, concepts, competences
               FROM previsionnel_seance
               WHERE formation_id = ? AND annee_scolaire = ?
-                AND date_prevue >= ? AND date_prevue <= ?
+                AND date_prevue >= ? AND date_prevue <= ?${scopeSql}
               ORDER BY date_prevue ASC`,
-        args: [formation_id, annee, debut, fin],
+        args: [formation_id, annee, debut, fin, ...scopeArgs],
       });
 
       const realise = await db.execute({
@@ -490,9 +495,9 @@ module.exports = async function handler(req, res) {
                      compte_rendu, statut_cr, ecart, signal, declared_at
               FROM declaration
               WHERE formation_id = ? AND annee_scolaire = ?
-                AND date_seance >= ? AND date_seance <= ?
+                AND date_seance >= ? AND date_seance <= ?${scopeSql}
               ORDER BY date_seance ASC`,
-        args: [formation_id, annee, debut, fin],
+        args: [formation_id, annee, debut, fin, ...scopeArgs],
       });
 
       const prevRows = prevu.rows.map(r => ({ ...r, concepts: parseJSON(r.concepts, []), competences: parseJSON(r.competences, []) }));
@@ -500,6 +505,28 @@ module.exports = async function handler(req, res) {
       const declParPrevId = {};
       declRows.forEach(d => { if (d.previsionnel_id != null) declParPrevId[d.previsionnel_id] = d; });
       const ecarts = calculerDelta(prevRows, declParPrevId);
+
+      // Avancement cumulé par bloc (cartographie RP/FR) — depuis le début de
+      // l'année scolaire, pas seulement la période affichée.
+      const [formationRow, declCumul] = await Promise.all([
+        db.execute({ sql: 'SELECT data_json FROM formations WHERE id = ?', args: [formation_id] }),
+        db.execute({
+          sql: `SELECT competences FROM declaration WHERE formation_id = ? AND annee_scolaire = ?${scopeSql}`,
+          args: [formation_id, annee, ...scopeArgs],
+        }),
+      ]);
+      const blocs = parseJSON(formationRow.rows[0]?.data_json, {}).blocs || [];
+      const declarationsCumul = declCumul.rows.map(r => ({ competences: parseJSON(r.competences, []) }));
+      const avancementBlocs = calculerAvancementBlocs(blocs, declarationsCumul);
+
+      // Pour l'arborescence intervenant : quelles compétences (parmi les
+      // siennes) ont déjà été déclarées couvertes, tous mois confondus.
+      let mesCompetencesCouvertes = null;
+      if (mine) {
+        const set = new Set();
+        declarationsCumul.forEach(d => (d.competences || []).forEach(c => set.add(normCode(c))));
+        mesCompetencesCouvertes = Array.from(set);
+      }
 
       const digest = await db.execute({
         sql: `SELECT id, semaine_debut, semaine_fin, contenu_genere, statut,
@@ -517,6 +544,8 @@ module.exports = async function handler(req, res) {
         seances_prevues: prevRows,
         seances_realisees: declRows,
         ecarts,
+        avancement_blocs: avancementBlocs,
+        mes_competences_couvertes: mesCompetencesCouvertes,
         digest: digestRow
           ? { ...digestRow, contenu_genere: parseJSON(digestRow.contenu_genere, {}), destinataires: parseJSON(digestRow.destinataires, []) }
           : null,
