@@ -947,6 +947,20 @@ function moduleToBlocMap(blocs){
   ;(blocs||[]).forEach(b=>(b.modules||[]).forEach(mod=>{m[mod.id]=b.id}))
   return m
 }
+function normCode(c){ return String(c||'').toUpperCase().replace(/[^A-Z0-9]/g,'') }
+function abregeMois(label){
+  if(!label) return ''
+  const [mois,annee]=label.split(' ')
+  if(!mois) return label
+  return mois.slice(0,3).charAt(0).toUpperCase()+mois.slice(1,3)+'. '+(annee||'')
+}
+const STOPWORDS=new Set(['de','du','des','la','le','les','et','en','pour','au','aux','d','l','un','une','à','the','of'])
+function titreCourt(titre){
+  if(!titre) return '—'
+  const mots=titre.split(/\s+/).filter(w=>w && !STOPWORDS.has(w.toLowerCase().replace(/[^a-zà-ÿ]/gi,'')))
+  const sigle=mots.map(w=>w[0]).join('').toUpperCase().slice(0,6)
+  return sigle.length>=2?sigle:titre.slice(0,10)
+}
 function fmtCourt(iso){
   if(!iso) return '—'
   try{return new Date(iso).toLocaleDateString('fr-FR',{day:'2-digit',month:'short'})}catch(_){return iso}
@@ -954,12 +968,12 @@ function fmtCourt(iso){
 
 /* Cartographie hub-et-satellites — généralisée à N blocs (la maquette avait
    4 coordonnées fixes ; ici on répartit les blocs en cercle autour du hub). */
-function Cartographie2({blocs,mode,sel,onSelect}){
+function Cartographie2({blocs,mode,sel,onSelect,titre}){
   const deploy = mode==='deploiement'
   const n = blocs.length||1
-  const cx=430, cy=255, R=175, W=860, H=510
+  const cx=430, cy=235, R=225, W=860, H=510
   const positioned = blocs.map((b,i)=>{
-    const a = -Math.PI/2 + i*(2*Math.PI/n)
+    const a = -Math.PI*0.75 + i*(2*Math.PI/n)
     return {...b, x:+(cx+Math.cos(a)*R).toFixed(1), y:+(cy+Math.sin(a)*R).toFixed(1)}
   })
   const C = 2*Math.PI*52
@@ -981,8 +995,8 @@ function Cartographie2({blocs,mode,sel,onSelect}){
             <line key={'l'+b.id} x1={cx} y1={cy} x2={b.x} y2={b.y} stroke={deploy?'#DCE9E4':'transparent'} strokeWidth={1.5} strokeDasharray={deploy?'none':'4 5'}/>
           ))}
           <circle cx={cx} cy={cy} r={52} fill={P.abysse}/>
-          <text x={cx} y={cy-7} textAnchor="middle" fill={P.menthe} style={{font:"600 12px 'DM Sans'"}}>{blocs.length} blocs</text>
-          <text x={cx} y={cy+11} textAnchor="middle" fill="rgba(227,255,240,.5)" style={{font:"400 10px 'DM Sans'"}}>titre</text>
+          <text x={cx} y={cy-7} textAnchor="middle" fill={P.menthe} style={{font:"600 12px 'DM Sans'"}}>{titreCourt(titre)}</text>
+          <text x={cx} y={cy+11} textAnchor="middle" fill="rgba(227,255,240,.5)" style={{font:"400 10px 'DM Sans'"}}>{blocs.length} bloc{blocs.length>1?'s':''}</text>
           {positioned.map(b=>{
             const col = b.st==='ok'?AT.ok:b.st==='warn'?AT.warn:AT.idle
             const nComp = b.comp||0
@@ -1156,18 +1170,22 @@ function Inspecteur({insp}){
 }
 
 /* Rail gauche partagé — brand, titre, rôle, stepper "3 temps", pied de page. */
-function RailAtelier({titre,campus,roleLabel,formations,formationId,onFormation,tempsDefs,temps,setTemps,footer,user,onLogout}){
+function RailAtelier({titre,campus,rncp,periodeLabel,formations,formationId,onFormation,tempsDefs,temps,setTemps,roleButtons,anomalieFooter,user,onLogout}){
   return (
     <aside style={{background:P.abysse,display:'flex',flexDirection:'column',padding:'26px 22px 20px',gap:26,borderRight:'1px solid rgba(227,255,240,.08)',overflowY:'auto'}}>
-      <div>
-        <div style={{fontFamily:"'DM Serif Display',serif",fontSize:21,color:P.givre,lineHeight:1}}>Atlas</div>
-        <div style={{fontSize:10,letterSpacing:'.18em',textTransform:'uppercase',color:P.menthe,marginTop:7}}>L'Atelier · Éminéo</div>
+      <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start'}}>
+        <div>
+          <div style={{fontFamily:"'DM Serif Display',serif",fontSize:21,color:P.givre,lineHeight:1}}>Atlas</div>
+          <div style={{fontSize:10,letterSpacing:'.18em',textTransform:'uppercase',color:P.menthe,marginTop:7}}>L'Atelier · Éminéo</div>
+        </div>
+        <button onClick={onLogout} title={`Déconnexion — ${user.prenom} ${user.nom}`} style={{color:'rgba(227,255,240,.35)',fontSize:15,cursor:'pointer'}}>⏻</button>
       </div>
       <div style={{borderTop:'1px solid rgba(227,255,240,.09)',paddingTop:18}}>
         <div style={{fontSize:15,color:P.givre,fontWeight:600,lineHeight:1.35}}>{titre}</div>
         <div style={{display:'flex',flexWrap:'wrap',gap:5,marginTop:10}}>
+          {rncp&&<span style={{fontSize:9.5,fontWeight:600,letterSpacing:'.05em',color:P.menthe,background:'rgba(93,226,152,.12)',padding:'3px 8px',borderRadius:20}}>RNCP {rncp}</span>}
           {campus&&<span style={{fontSize:9.5,fontWeight:600,letterSpacing:'.05em',color:'rgba(227,255,240,.6)',background:'rgba(227,255,240,.07)',padding:'3px 8px',borderRadius:20}}>{campus}</span>}
-          <span style={{fontSize:9.5,fontWeight:600,letterSpacing:'.05em',color:P.menthe,background:'rgba(93,226,152,.12)',padding:'3px 8px',borderRadius:20}}>{roleLabel}</span>
+          {periodeLabel&&<span style={{fontSize:9.5,fontWeight:600,letterSpacing:'.05em',color:'rgba(227,255,240,.6)',background:'rgba(227,255,240,.07)',padding:'3px 8px',borderRadius:20}}>{periodeLabel}</span>}
         </div>
         {formations.length>1&&(
           <select value={formationId||''} onChange={e=>onFormation(Number(e.target.value))}
@@ -1176,6 +1194,22 @@ function RailAtelier({titre,campus,roleLabel,formations,formationId,onFormation,
           </select>
         )}
       </div>
+
+      {roleButtons&&(
+        <div>
+          <div style={{fontSize:9.5,letterSpacing:'.16em',textTransform:'uppercase',color:'rgba(227,255,240,.35)',marginBottom:9}}>Poste de travail</div>
+          <div style={{display:'flex',flexDirection:'column',gap:6}}>
+            {roleButtons.map(b=>(
+              <button key={b.id} onClick={b.go} style={{display:'flex',flexDirection:'column',textAlign:'left',padding:'10px 12px',borderRadius:10,cursor:'pointer',border:'none',
+                background:b.active?'rgba(93,226,152,.13)':'transparent', color:b.active?P.givre:'rgba(227,255,240,.55)'}}>
+                <span style={{fontSize:12.5,fontWeight:600}}>{b.label}</span>
+                <span style={{fontSize:10.5,opacity:.62,marginTop:2}}>{b.sub}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
       <div style={{flex:1}}>
         <div style={{fontSize:9.5,letterSpacing:'.16em',textTransform:'uppercase',color:'rgba(227,255,240,.35)',marginBottom:11}}>Le mois en 3 temps</div>
         <div style={{display:'flex',flexDirection:'column',gap:2}}>
@@ -1192,13 +1226,10 @@ function RailAtelier({titre,campus,roleLabel,formations,formationId,onFormation,
           ))}
         </div>
       </div>
-      <div style={{borderTop:'1px solid rgba(227,255,240,.09)',paddingTop:14,display:'flex',flexDirection:'column',gap:10}}>
-        {footer}
-        <div style={{display:'flex',alignItems:'center',gap:9}}>
-          <Avatar name={`${user.prenom} ${user.nom}`} size={22}/>
-          <span style={{fontSize:11,color:'rgba(227,255,240,.7)',flex:1}}>{user.prenom} {user.nom}</span>
-          <button onClick={onLogout} title="Déconnexion" style={{color:'rgba(227,255,240,.4)',fontSize:14,cursor:'pointer'}}>⏻</button>
-        </div>
+
+      <div style={{borderTop:'1px solid rgba(227,255,240,.09)',paddingTop:14,display:'flex',alignItems:'center',gap:9}}>
+        <span style={{width:7,height:7,borderRadius:'50%',background:P.saumon,flexShrink:0}}/>
+        <span style={{fontSize:10.5,color:'rgba(227,255,240,.5)',lineHeight:1.45}}>{anomalieFooter}</span>
       </div>
     </aside>
   )
@@ -1266,7 +1297,7 @@ function VueIntervenant({user,onLogout}){
   const prevues=data?.seances_prevues||[]   // déjà scopées à moi côté serveur (role=intervenant)
   const ecarts=data?.ecarts||[]
   const digest=data?.digest||null
-  const norm = c => String(c||'').toUpperCase().replace(/[^A-Z0-9]/g,'')
+  const norm = normCode
   const couvertes = new Set((data?.mes_competences_couvertes||[]).map(norm))
   const modulesEnseignes = new Set(prevues.map(s=>s.module_ref))
   const deploy = temps==='deploiement'
@@ -1352,11 +1383,11 @@ function VueIntervenant({user,onLogout}){
   const [pageTitle,pageSub]=pageTitles[temps]
 
   return (
-    <div style={{display:'grid',gridTemplateColumns:'252px minmax(0,1fr) 336px',height:'100vh',width:'100%',minWidth:1100,background:P.abysse,overflow:'hidden',fontFamily:"'DM Sans',sans-serif"}}>
-      <RailAtelier titre={titre} campus={campus} roleLabel="Intervenant" formations={formations} formationId={formationId}
+    <div style={{display:'grid',gridTemplateColumns:'252px minmax(0,1fr) 336px',height:'100vh',width:'100%',minWidth:1280,background:P.abysse,overflow:'hidden',fontFamily:"'DM Sans',sans-serif"}}>
+      <RailAtelier titre={titre} campus={campus} rncp={f?.formation?.rncp} periodeLabel={abregeMois(data?.periode?.label)} formations={formations} formationId={formationId}
         onFormation={id=>{setFormationId(id);setSel({kind:null,id:null})}} tempsDefs={TEMPS_DEFS} temps={temps} setTemps={setTemps}
-        user={user} onLogout={onLogout}
-        footer={<div style={{fontSize:10.5,color:'rgba(227,255,240,.4)',lineHeight:1.5}}>Lecture seule — la saisie active est réservée au Formateur Référent.</div>}/>
+        user={user} onLogout={onLogout} roleButtons={null}
+        anomalieFooter={`${nbAlertesInt} anomalie${nbAlertesInt>1?'s':''} détectée${nbAlertesInt>1?'s':''} ce mois-ci`}/>
 
       <main style={{background:'#F4FBF7',overflowY:'auto',display:'flex',flexDirection:'column'}}>
         <HeaderAtelier tempsNum={TEMPS_DEFS.find(t=>t.id===temps).num} roleLabel="Intervenant" pageTitle={pageTitle} pageSub={pageSub} stats={stats}/>
@@ -1375,6 +1406,7 @@ function VueIntervenant({user,onLogout}){
               ):(
                 <DigestPreview digest={digest} titre={titre} campus={campus} fr="votre Formateur Référent" readOnly/>
               )}
+              <p style={{fontSize:11,color:AT.idleText,textAlign:'center',marginTop:14,lineHeight:1.6}}>Écran verrouillé — UI de production reprise telle quelle.</p>
             </div>
           )}
         </div>
@@ -1435,6 +1467,7 @@ function VueFR({user,onLogout}){
   const [generating,setGenerating]=useState(false)
   const [genError,setGenError]=useState('')
   const [temps,setTemps]=useState('plan')
+  const [viewRole,setViewRole]=useState('fr')
   const [sel,setSel]=useState({kind:null,id:null})
   const [toast,setToast]=useState(null)
 
@@ -1494,6 +1527,37 @@ function VueFR({user,onLogout}){
   }))
   const anomalies = seancesJournal.filter(s=>s.st==='warn')
 
+  // Aperçu "vue intervenant" — arborescence tous modules confondus (FR n'a pas
+  // de personne unique à prévisualiser, contrairement à un compte intervenant réel).
+  const [openApercu,setOpenApercu]=useState({})
+  const arbreApercu = blocsRaw.map(b=>{
+    const mods=b.modules||[]
+    if(!mods.length) return null
+    return {
+      id:b.id, titre:b.titre,
+      meta: deploy ? mods.length+' module(s) · '+(b.competences||[]).length+' compétence(s)' : mods.length+' module(s) prévu(s)',
+      modules: mods.map(m=>{
+        const ecartsM = ecarts.filter(e=>e.module_ref===m.id)
+        const seancesM = prevues.filter(s=>s.module_ref===m.id)
+        const anyWarn = ecartsM.some(e=>e.etat!=='nominal')
+        const competences = (b.competences||[]).filter(c=>(m.competences_liees||[]).some(cl=>normCode(cl)===normCode(c.id))).map(c=>{
+          const couverte = ecartsM.some(e=>e.etat!=='alerte')
+          return {code:c.id, label:c.libelle, statut: couverte?'Couverte':'Non couverte', st: couverte?'ok':'idle'}
+        })
+        return {
+          id:m.id, titre:m.titre, meta: seancesM.length+' séance(s) ce mois-ci',
+          etat: anyWarn?'À arbitrer':(seancesM.length?'Conforme':'Planifié'), st: anyWarn?'warn':'ok',
+          competences,
+          seances: ecartsM.map(e=>({date:fmtCourt(e.date_prevue), titre:e.titre,
+            etat: e.etat==='nominal'?'Conforme':e.etat==='ecart_plus'?'Écart +':'Lacune',
+            st: e.etat==='nominal'?'ok':'warn', data:e})),
+        }
+      }),
+    }
+  }).filter(Boolean)
+  function toggleApercu(id){ setOpenApercu(s=>({...s,[id]:s[id]===false?true:false})) }
+  const openApercuState = {}; arbreApercu.forEach(b=>{ openApercuState[b.id] = openApercu[b.id]!==false })
+
   function buildInsp(){
     if(temps==='digest'){
       return {kind:'Diffusion', st:'ok', titre:'Digest du mois',
@@ -1524,6 +1588,18 @@ function VueFR({user,onLogout}){
           {t:'Reporter au digest', go:()=>setToast('Anomalie ajoutée au digest du mois.')},
         ] : [], key:'seance'+sel.id}
     }
+    if(sel.kind==='module'){
+      const m=sel.data
+      return {kind:'Module', st:deploy?m.st:'idle', titre:m.titre, desc:`${m.competences.length} compétence(s) associée(s).`,
+        lignes:[{k:'État',v:deploy?m.etat:'Planifié',warn:m.st==='warn'&&deploy}],
+        chipsLabel:'Compétences associées', chips:m.competences.map(c=>c.code), key:'mod'+sel.id}
+    }
+    if(sel.kind==='comp'){
+      const c=sel.data
+      return {kind:'Compétence', st:deploy?c.st:'idle', titre:c.code+' — '+c.label,
+        desc:`Compétence du référentiel RNCP, rattachée au module « ${sel.mod||''} ».`,
+        lignes:[{k:'Module',v:sel.mod||'—'},{k:'Bloc',v:sel.bloc||'—'},{k:'Statut',v:deploy?c.statut:'Prévue',warn:c.st==='idle'&&deploy}], key:'comp'+sel.id}
+    }
     return {kind:'Titre', st:'ok', titre, desc:'Sélectionnez un élément de la cartographie.', lignes:[], key:'root'}
   }
   const insp = {...buildInsp(), toast}
@@ -1532,35 +1608,58 @@ function VueFR({user,onLogout}){
   if(error) return <div style={{minHeight:'100vh',display:'flex',alignItems:'center',justifyContent:'center'}}><Empty icon="⚠" titre="Erreur de chargement" msg={error}/></div>
   if(!f) return <div style={{minHeight:'100vh',display:'flex',alignItems:'center',justifyContent:'center'}}><Empty icon="📋" titre="Aucun titre" msg="Aucun titre ne vous est rattaché. Contactez la Direction des programmes."/></div>
 
-  const stats = temps==='digest'
-    ? [{k:'destinataires',v:String((digest?.destinataires||[]).length||'—')},{k:'anomalies',v:String(nbAlertes),warn:nbAlertes>0}]
-    : temps==='plan'
-      ? [{k:'blocs',v:String(blocs.length)},{k:'compétences',v:String(blocs.reduce((n,b)=>n+b.comp,0))},{k:'modules',v:String(blocs.reduce((n,b)=>n+b.mods,0))}]
-      : [{k:'séances',v:String(ecarts.length)},{k:'conformes',v:String(ecarts.filter(e=>e.etat==='nominal').length)},{k:'anomalies',v:String(nbAlertes),warn:nbAlertes>0}]
+  const nbModApercu=arbreApercu.reduce((n,b)=>n+b.modules.length,0)
+  const nbCompApercu=arbreApercu.reduce((n,b)=>n+b.modules.reduce((m,mo)=>m+mo.competences.length,0),0)
 
-  const pageTitles = {
+  const stats = viewRole==='intervenant'
+    ? (temps==='digest'
+        ? [{k:'destinataires',v:String((digest?.destinataires||[]).length||'—')}]
+        : temps==='plan'
+          ? [{k:'modules',v:String(nbModApercu)},{k:'compétences',v:String(nbCompApercu)}]
+          : [{k:'séances',v:String(ecarts.length)},{k:'à traiter',v:String(nbAlertes),warn:nbAlertes>0}])
+    : temps==='digest'
+      ? [{k:'destinataires',v:String((digest?.destinataires||[]).length||'—')},{k:'anomalies',v:String(nbAlertes),warn:nbAlertes>0}]
+      : temps==='plan'
+        ? [{k:'blocs',v:String(blocs.length)},{k:'compétences',v:String(blocs.reduce((n,b)=>n+b.comp,0))},{k:'modules',v:String(blocs.reduce((n,b)=>n+b.mods,0))}]
+        : [{k:'séances',v:String(ecarts.length)},{k:'conformes',v:String(ecarts.filter(e=>e.etat==='nominal').length)},{k:'anomalies',v:String(nbAlertes),warn:nbAlertes>0}]
+
+  const pageTitlesFR = {
     plan:['Le titre tel qu\u2019il a été planifié',"Cartographie des blocs de compétences du titre, avant toute séance déclarée ce mois-ci."],
     deploiement:['Ce que la promo a réellement couvert',"La même cartographie, remplie par les déclarations de séances. L\u2019anneau mesure la couverture réelle."],
     digest:['La synthèse envoyée aux intervenants',"Écran verrouillé : UI de production, seule la note de coordination est éditable."],
   }
-  const [pageTitle,pageSub] = pageTitles[temps]
+  const pageTitlesInt = {
+    plan:['Aperçu — modules du titre, tels que prévus',"Vue que vous consultez pour vérifier ce que les intervenants voient — tous modules confondus, arborescence dépliée."],
+    deploiement:['Aperçu — modules, séance après séance',"Même arborescence, augmentée du réel déclaré par les intervenants."],
+    digest:['Aperçu du digest tel que reçu par les intervenants',"Écran verrouillé, lecture seule dans cet aperçu — repassez sur « Responsable pédagogique » pour valider et envoyer."],
+  }
+  const [pageTitle,pageSub] = (viewRole==='intervenant'?pageTitlesInt:pageTitlesFR)[temps]
+  const roleLabelHeader = viewRole==='intervenant' ? 'Aperçu intervenant' : 'Formateur référent'
 
   return (
-    <div style={{display:'grid',gridTemplateColumns:'252px minmax(0,1fr) 336px',height:'100vh',width:'100%',minWidth:1100,background:P.abysse,overflow:'hidden',fontFamily:"'DM Sans',sans-serif"}}>
-      <RailAtelier titre={titre} campus={campus} roleLabel="Formateur référent" formations={formations} formationId={formationId}
+    <div style={{display:'grid',gridTemplateColumns:'252px minmax(0,1fr) 336px',height:'100vh',width:'100%',minWidth:1280,background:P.abysse,overflow:'hidden',fontFamily:"'DM Sans',sans-serif"}}>
+      <RailAtelier titre={titre} campus={campus} rncp={f?.formation?.rncp} periodeLabel={abregeMois(data?.periode?.label)} formations={formations} formationId={formationId}
         onFormation={id=>{setFormationId(id);setSel({kind:null,id:null})}} tempsDefs={TEMPS_DEFS} temps={temps} setTemps={setTemps}
         user={user} onLogout={onLogout}
-        footer={<div style={{display:'flex',alignItems:'center',gap:9}}>
-          <span style={{width:7,height:7,borderRadius:'50%',background:P.saumon,flexShrink:0}}/>
-          <span style={{fontSize:10.5,color:'rgba(227,255,240,.5)',lineHeight:1.45}}>{nbAlertes} anomalie{nbAlertes>1?'s':''} détectée{nbAlertes>1?'s':''} ce mois-ci</span>
-        </div>}/>
+        roleButtons={[
+          {id:'fr',active:viewRole==='fr',label:'Responsable pédagogique',sub:`${user.prenom} ${user.nom} · cartographie du titre`,go:()=>{setViewRole('fr');setSel({kind:null,id:null})}},
+          {id:'intervenant',active:viewRole==='intervenant',label:'Intervenant',sub:'Aperçu · tous modules',go:()=>{setViewRole('intervenant');setSel({kind:null,id:null})}},
+        ]}
+        anomalieFooter={`${nbAlertes} anomalie${nbAlertes>1?'s':''} détectée${nbAlertes>1?'s':''} ce mois-ci`}/>
 
       <main style={{background:'#F4FBF7',overflowY:'auto',display:'flex',flexDirection:'column'}}>
-        <HeaderAtelier tempsNum={TEMPS_DEFS.find(t=>t.id===temps).num} roleLabel="Formateur référent" pageTitle={pageTitle} pageSub={pageSub} stats={stats}/>
+        <HeaderAtelier tempsNum={TEMPS_DEFS.find(t=>t.id===temps).num} roleLabel={roleLabelHeader} pageTitle={pageTitle} pageSub={pageSub} stats={stats}/>
 
-        <div key={temps} style={{padding:'26px 34px 46px',animation:'fadeIn .28s ease'}} className="fi">
-          {temps!=='digest'&&<>
-            <Cartographie2 blocs={blocs} mode={temps} sel={sel} onSelect={setSel}/>
+        <div key={temps+viewRole} style={{padding:'26px 34px 46px',animation:'fadeIn .28s ease'}} className="fi">
+          {viewRole==='intervenant'&&temps!=='digest'&&(
+            arbreApercu.length===0?(
+              <Empty icon="📋" titre="Aucun module ce mois-ci" msg="Aucune séance prévisionnelle sur la période en cours pour ce titre."/>
+            ):(
+              <Arbre2 arbre={arbreApercu} mode={temps} open={openApercuState} toggle={toggleApercu} sel={sel} onSelect={setSel}/>
+            )
+          )}
+          {viewRole==='fr'&&temps!=='digest'&&<>
+            <Cartographie2 blocs={blocs} mode={temps} sel={sel} onSelect={setSel} titre={titre}/>
 
             {deploy&&(
               <div style={{display:'grid',gridTemplateColumns:'minmax(0,1.45fr) minmax(0,1fr)',gap:18,marginTop:20}}>
@@ -1622,18 +1721,19 @@ function VueFR({user,onLogout}){
 
           {temps==='digest'&&(
             <div style={{maxWidth:640,margin:'0 auto'}}>
-              <div style={{display:'flex',justifyContent:'flex-end',marginBottom:16}}>
+              {viewRole==='fr'&&<div style={{display:'flex',justifyContent:'flex-end',marginBottom:16}}>
                 <button onClick={genererDigest} disabled={generating}
                   style={{background:P.petrole,color:P.givre,border:'none',borderRadius:8,padding:'8px 16px',fontSize:12,fontWeight:500,cursor:'pointer',opacity:generating?0.6:1,display:'flex',alignItems:'center',gap:8}}>
                   {generating?<Spinner size={14}/>:null}{digest?'↻ Régénérer le digest':'Générer le digest du mois'}
                 </button>
-              </div>
+              </div>}
               {genError&&<div style={{...card(),border:`1px solid ${P.red}`,color:'#8B1A1A',fontSize:12,marginBottom:16}}>⚠ {genError}</div>}
               {!digest?(
                 <Empty icon="✉" titre="Aucun digest généré" msg="Générez le digest du mois pour ce titre — il s'appuie sur les séances déclarées de la période en cours."/>
               ):(
-                <DigestPreview digest={digest} titre={titre} campus={campus} fr={`${user.prenom} ${user.nom}`} onValiderEnvoyer={validerEnvoyer}/>
+                <DigestPreview digest={digest} titre={titre} campus={campus} fr={`${user.prenom} ${user.nom}`} onValiderEnvoyer={validerEnvoyer} readOnly={viewRole==='intervenant'}/>
               )}
+              <p style={{fontSize:11,color:AT.idleText,textAlign:'center',marginTop:14,lineHeight:1.6}}>Écran verrouillé — UI de production reprise telle quelle.</p>
             </div>
           )}
         </div>
