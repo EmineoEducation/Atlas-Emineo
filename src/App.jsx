@@ -922,56 +922,468 @@ function VueRP({user,onLogout}){
 }
 
 /* ═══ VUE INTERVENANT ══════════════════════════════════════════════════════ */
-function VueIntervenant({user,onLogout}){
-  const [formations,setFormations]=useState([])
-  const [selF,setSelF]=useState(null)
-  const [onglet,setOnglet]=useState('avant')
-  const [selMod,setSelMod]=useState(null)
-  const [loading,setLoading]=useState(true)
-  const [ficheLoading,setFicheLoading]=useState(false)
-  const [fiche,setFiche]=useState(null)
-  const [stream,setStream]=useState('')
-  const [sent,setSent]=useState(false)
+/* ═══ L'ATELIER — design system partagé (FR + Intervenant) ═══════════════════
+   Porté depuis la proposition retenue (Claude Design, session du 26/07/2026).
+   Mapping de rôle : le "Responsable pédagogique" de la maquette correspond au
+   rôle FR en prod (seul rôle habilité à générer/valider/envoyer le digest,
+   cf api/fr.js). Le RP réel (vue campus, tous titres confondus) et Dir restent
+   sur l'ancienne UI pour l'instant — la maquette ne les couvrait pas. */
+const AT = {
+  ok:P.menthe,
+  warn:P.saumon, warnText:'#B5643C', warnBg:'#FDF1EB',
+  idle:'#B9C6C3', idleText:'#8CA8A4', idleText2:'#7FA09C',
+}
+function atTag(st){
+  const fg = st==='ok'?P.petrole : st==='warn'?AT.warnText : AT.idleText2
+  const bg = st==='ok'?P.givre : st==='warn'?AT.warnBg : '#F0F4F3'
+  return {fontSize:10,fontWeight:700,letterSpacing:'.04em',padding:'3px 9px',borderRadius:20,flexShrink:0,color:fg,background:bg}
+}
+function atDot(st){
+  const c = st==='ok'?AT.ok : st==='warn'?AT.warn : AT.idle
+  return {width:7,height:7,borderRadius:'50%',flexShrink:0,background:c}
+}
+function moduleToBlocMap(blocs){
+  const m={}
+  ;(blocs||[]).forEach(b=>(b.modules||[]).forEach(mod=>{m[mod.id]=b.id}))
+  return m
+}
+function fmtCourt(iso){
+  if(!iso) return '—'
+  try{return new Date(iso).toLocaleDateString('fr-FR',{day:'2-digit',month:'short'})}catch(_){return iso}
+}
 
-  useEffect(()=>{api.getFormations().then(d=>{setFormations(d.formations);setLoading(false)}).catch(()=>setLoading(false))},[])
-  useEffect(()=>{if(formations.length&&!selF)setSelF(formations[0])},[formations])
-  const mesModules=selF?(selF.blocs||[]).flatMap(b=>(b.modules||[]).map(m=>({...m,bloc_id:b.id,bloc_titre:b.titre}))):[  ]
-
-  async function chargerFiche(mod){
-    setSelMod(mod);setFiche(null);setStream('');setFicheLoading(true)
-    try{const r=await genererFicheJ1(selF,mod,p=>setStream(p));setFiche(r)}finally{setFicheLoading(false)}
-  }
-
-  return(
-    <div style={{minHeight:'100vh',background:P.givre}}>
-      <Topbar user={user} formationTitre={selF?.formation?.titre||''} onLogout={onLogout} onglet={onglet} setOnglet={setOnglet}
-        onglets={[{id:'avant',label:'Fiche J-1'},{id:'declaration',label:'Déclaration'},{id:'graphe',label:"Vue d'ensemble"}]}/>
-      <div style={{maxWidth:700,margin:'0 auto',padding:'2rem 1.5rem'}}>
-        {loading?<div style={{textAlign:'center',padding:'2rem'}}><Spinner/></div>:!selF?<Empty icon="📋" titre="Aucune formation" msg="Aucune formation disponible."/>:<>
-          {formations.length>1&&<div style={{display:'flex',gap:'0.4rem',marginBottom:'1.25rem',flexWrap:'wrap'}}>{formations.map(f=><button key={f._id} onClick={()=>{setSelF(f);setSelMod(null);setFiche(null)}} style={{padding:'5px 12px',borderRadius:8,fontSize:12,cursor:'pointer',border:`1px solid ${selF?._id===f._id?P.borderm:P.border}`,background:selF?._id===f._id?'rgba(93,226,152,0.12)':P.surface,color:selF?._id===f._id?P.petrole:P.textm}}>{f.formation?.titre||'?'}</button>)}</div>}
-          {onglet==='avant'&&!selMod&&<div className="fi"><h2 style={{fontFamily:'Georgia,serif',fontWeight:400,color:P.abysse,marginTop:0,fontSize:22,marginBottom:'0.5rem'}}>Choisir un module</h2><p style={{fontSize:13,color:P.textm,marginBottom:'1rem'}}>Sélectionnez le module pour générer la fiche J‑1.</p>
-            {(selF.blocs||[]).map(b=>{const bM=mesModules.filter(m=>m.bloc_id===b.id);if(!bM.length)return null;return<div key={b.id} style={{marginBottom:'1rem'}}><div style={{fontSize:11,fontWeight:600,color:P.textm,textTransform:'uppercase',letterSpacing:'0.08em',marginBottom:'0.4rem'}}>{b.id} — {b.titre}</div>{bM.map(m=><button key={m.id} onClick={()=>chargerFiche(m)} style={{width:'100%',textAlign:'left',padding:'0.75rem 1rem',borderRadius:10,border:`1px solid ${P.border}`,background:P.surface,marginBottom:'0.35rem',cursor:'pointer',display:'flex',justifyContent:'space-between',alignItems:'center'}} onMouseEnter={e=>e.currentTarget.style.boxShadow='0 3px 12px rgba(11,43,45,0.08)'} onMouseLeave={e=>e.currentTarget.style.boxShadow='none'}><div><div style={{fontSize:13,fontWeight:500,color:P.abysse}}>{m.titre}</div>{m.intervenant&&<div style={{fontSize:11,color:P.textm,marginTop:2}}>{m.intervenant}</div>}</div><span style={{fontSize:11,color:P.textm}}>Générer →</span></button>)}</div>})}
-          </div>}
-          {onglet==='avant'&&selMod&&<div className="fi">
-            <div style={{display:'flex',alignItems:'center',gap:'0.5rem',marginBottom:'1.5rem'}}>
-              <button onClick={()=>{setSelMod(null);setFiche(null)}} style={{fontSize:12,color:P.petrole,border:`1px solid ${P.border}`,borderRadius:6,padding:'3px 10px',background:P.surface,cursor:'pointer'}}>← Modules</button>
-              <span style={{fontSize:13,fontWeight:600,color:P.abysse}}>{selMod.titre}</span>
-            </div>
-            {ficheLoading?<div style={{padding:'1.25rem',background:P.abysse,borderRadius:12,border:`1px solid ${P.borderm}`}}><div style={{fontSize:10,fontWeight:600,color:'rgba(93,226,152,0.5)',letterSpacing:'0.1em',textTransform:'uppercase',marginBottom:'0.5rem',display:'flex',alignItems:'center',gap:'0.5rem'}}><Spinner size={14}/>Claude génère la fiche…</div><div style={{fontSize:11,color:P.eau,fontFamily:'monospace',lineHeight:1.7,whiteSpace:'pre-wrap',wordBreak:'break-word',minHeight:60}}>{stream}</div></div>:fiche&&<>
-              <div style={card()}><div style={{fontSize:10,fontWeight:600,color:P.textm,textTransform:'uppercase',letterSpacing:'0.08em',marginBottom:'0.5rem'}}>Ancrage</div><div style={{display:'flex',gap:'0.5rem',alignItems:'flex-start',marginBottom:'0.5rem'}}><Tag label={selMod.bloc_id}/><div><div style={{fontSize:13,fontWeight:600,color:P.abysse}}>{selMod.titre}</div><div style={{fontSize:11,color:P.textm,marginTop:2}}>{selMod.bloc_titre}</div></div></div><p style={{fontSize:12,color:P.textm,margin:0,lineHeight:1.6,fontStyle:'italic'}}>{fiche.ancrage}</p></div>
-              {fiche.dejavu?.length>0&&<div style={card()}><div style={{fontSize:10,fontWeight:600,color:P.textm,textTransform:'uppercase',letterSpacing:'0.08em',marginBottom:'0.5rem'}}>Déjà vu par vos étudiants</div>{fiche.dejavu.map((it,i)=><div key={i} style={{background:P.surface2,borderRadius:8,padding:'0.55rem 0.8rem',marginBottom:'0.4rem'}}><div style={{display:'flex',alignItems:'center',gap:'0.35rem',marginBottom:'0.3rem'}}>{it.intervenant&&<Avatar name={it.intervenant} size={20}/>}<span style={{fontSize:12,fontWeight:600,color:P.abysse}}>{it.intervenant||'—'}</span><span style={{fontSize:11,color:P.textm}}>· {it.module}</span></div><div style={{display:'flex',flexWrap:'wrap',gap:'0.25rem',marginBottom:'0.3rem'}}>{(it.concepts||[]).map(c=><Tag key={c} label={c} small/>)}</div><p style={{fontSize:11,color:P.textm,margin:0,fontStyle:'italic'}}>{it.lien}</p></div>)}</div>}
-              {fiche.apres?.length>0&&<div style={card()}><div style={{fontSize:10,fontWeight:600,color:P.textm,textTransform:'uppercase',letterSpacing:'0.08em',marginBottom:'0.5rem'}}>Ce qui arrive après</div>{fiche.apres.map((it,i)=><div key={i} style={{display:'flex',gap:'0.6rem',padding:'0.4rem 0',borderBottom:i<fiche.apres.length-1?`1px solid rgba(19,69,71,0.06)`:'none'}}><div style={{fontSize:11,color:P.textl,flexShrink:0,width:60}}>{it.date}</div><div style={{flex:1}}><span style={{fontSize:12,fontWeight:600,color:P.abysse}}>{it.module}</span>{it.intervenant&&<span style={{fontSize:11,color:P.textm}}> · {it.intervenant}</span>}<div style={{display:'flex',flexWrap:'wrap',gap:'0.25rem',marginTop:'0.25rem'}}>{(it.concepts||[]).map(c=><Tag key={c} label={c} small/>)}</div></div></div>)}</div>}
-            </>}
-          </div>}
-          {onglet==='declaration'&&(sent?<div style={{textAlign:'center',padding:'4rem 2rem'}}><div style={{fontSize:48,color:P.menthe}}>✓</div><h2 style={{fontFamily:'Georgia,serif',fontWeight:400,color:P.abysse,fontSize:21,marginTop:'0.5rem'}}>Déclaration enregistrée</h2><button onClick={()=>setSent(false)} style={{marginTop:'1rem',border:`1px solid ${P.border}`,color:P.textm,borderRadius:6,padding:'6px 16px',fontSize:12,background:P.surface,cursor:'pointer'}}>Nouvelle déclaration</button></div>:!selMod?<div style={{padding:'2rem',textAlign:'center',color:P.textm,fontSize:13}}>Sélectionnez un module dans l'onglet Fiche J-1.</div>:<div className="fi"><h1 style={{fontFamily:'Georgia,serif',fontWeight:400,fontSize:21,color:P.abysse,margin:0,marginBottom:'1.25rem'}}>Déclaration — {selMod.titre}</h1><button onClick={async()=>{await new Promise(r=>setTimeout(r,700));setSent(true)}} style={{width:'100%',background:P.petrole,color:P.givre,border:'none',borderRadius:10,padding:'12px',fontSize:14,fontWeight:500,cursor:'pointer'}}>Envoyer la déclaration</button></div>)}
-          {onglet==='graphe'&&<div className="fi"><h2 style={{fontFamily:'Georgia,serif',fontWeight:400,color:P.abysse,marginTop:0,fontSize:22,marginBottom:'0.5rem'}}>Vue d'ensemble</h2><p style={{fontSize:12,color:P.textm,marginBottom:'1rem'}}>Lecture seule.</p><GrapheCanvas blocs={selF?.blocs||[]} alertes={[]} showAlerts={false}/></div>}
-        </>}
+/* Cartographie hub-et-satellites — généralisée à N blocs (la maquette avait
+   4 coordonnées fixes ; ici on répartit les blocs en cercle autour du hub). */
+function Cartographie2({blocs,mode,sel,onSelect}){
+  const deploy = mode==='deploiement'
+  const n = blocs.length||1
+  const cx=430, cy=255, R=175, W=860, H=510
+  const positioned = blocs.map((b,i)=>{
+    const a = -Math.PI/2 + i*(2*Math.PI/n)
+    return {...b, x:+(cx+Math.cos(a)*R).toFixed(1), y:+(cy+Math.sin(a)*R).toFixed(1)}
+  })
+  const C = 2*Math.PI*52
+  return (
+    <div style={{background:P.surface,border:`1px solid ${P.border}`,borderRadius:16,overflow:'hidden'}}>
+      <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',padding:'13px 18px',borderBottom:`1px solid ${P.border}`,flexWrap:'wrap',gap:8}}>
+        <div style={{fontSize:11,fontWeight:600,letterSpacing:'.1em',textTransform:'uppercase',color:P.petrole}}>Cartographie du titre</div>
+        <div style={{display:'flex',gap:16,alignItems:'center',flexWrap:'wrap'}}>
+          {(deploy?[{c:AT.ok,t:'conforme'},{c:AT.warn,t:'anomalie'},{c:AT.idle,t:'non entamé'}]:[{c:'#FFFFFF',t:'compétence prévue'},{c:'#CBDCD7',t:'lien inter-blocs'}]).map(l=>(
+            <span key={l.t} style={{display:'flex',alignItems:'center',gap:6,fontSize:10.5,color:P.textm}}>
+              <span style={{width:8,height:8,borderRadius:'50%',background:l.c,border:`1px solid ${P.border}`,display:'inline-block'}}/>{l.t}
+            </span>
+          ))}
+        </div>
+      </div>
+      <div style={{position:'relative',background:'#FBFEFC'}}>
+        <svg viewBox={`0 0 ${W} ${H}`} style={{display:'block',width:'100%',height:'auto'}}>
+          {positioned.map(b=>(
+            <line key={'l'+b.id} x1={cx} y1={cy} x2={b.x} y2={b.y} stroke={deploy?'#DCE9E4':'transparent'} strokeWidth={1.5} strokeDasharray={deploy?'none':'4 5'}/>
+          ))}
+          <circle cx={cx} cy={cy} r={52} fill={P.abysse}/>
+          <text x={cx} y={cy-7} textAnchor="middle" fill={P.menthe} style={{font:"600 12px 'DM Sans'"}}>{blocs.length} blocs</text>
+          <text x={cx} y={cy+11} textAnchor="middle" fill="rgba(227,255,240,.5)" style={{font:"400 10px 'DM Sans'"}}>titre</text>
+          {positioned.map(b=>{
+            const col = b.st==='ok'?AT.ok:b.st==='warn'?AT.warn:AT.idle
+            const nComp = b.comp||0
+            const dots = Array.from({length:nComp},(_,i2)=>{
+              const a = -Math.PI*0.78 + (Math.PI*1.56)*(nComp===1?0.5:i2/(nComp-1))
+              const covered = deploy && i2 < Math.round(nComp*(b.pct||0)/100)
+              return {x:+(b.x+Math.cos(a)*68).toFixed(1), y:+(b.y+Math.sin(a)*68).toFixed(1),
+                fill: deploy?(covered?col:'#FFFFFF'):'#FFFFFF', stroke: deploy?col:'#CBDCD7'}
+            })
+            const fill = deploy?(b.st==='ok'?'#F1FCF6':b.st==='warn'?'#FDF6F2':'#F6F8F8'):'#FFFFFF'
+            const stroke = deploy?col:'#C3D5D0'
+            return (
+              <g key={b.id} onClick={()=>onSelect({kind:'bloc',id:b.id})} style={{cursor:'pointer'}}>
+                {dots.map((d,di)=><circle key={di} cx={d.x} cy={d.y} r={4.5} fill={d.fill} stroke={d.stroke} strokeWidth={1}/>)}
+                {deploy&&<>
+                  <circle cx={b.x} cy={b.y} r={52} fill="none" stroke="#EAF3EF" strokeWidth={5}/>
+                  <circle cx={b.x} cy={b.y} r={52} fill="none" stroke={col} strokeWidth={5} strokeLinecap="round"
+                    strokeDasharray={`${(C*(b.pct||0)/100).toFixed(1)} ${C.toFixed(1)}`} transform={`rotate(-90 ${b.x} ${b.y})`}/>
+                </>}
+                <circle cx={b.x} cy={b.y} r={45} fill={fill} stroke={stroke} strokeWidth={deploy?1:1.4} strokeDasharray={deploy?'none':'5 4'}/>
+              </g>
+            )
+          })}
+        </svg>
+        {positioned.map(b=>(
+          <div key={'lbl'+b.id}>
+            <button onClick={()=>onSelect({kind:'bloc',id:b.id})} style={{position:'absolute',left:`${(b.x/W*100).toFixed(2)}%`,top:`${(b.y/H*100).toFixed(2)}%`,transform:'translate(-50%,-50%)',textAlign:'center',lineHeight:1.15,width:80,cursor:'pointer'}}>
+              <span style={{fontSize:15,fontWeight:700,color:P.abysse,display:'block'}}>{b.id}</span>
+              <span style={{display:'block',marginTop:2,fontSize:11,fontWeight:600,color:deploy?(b.st==='idle'?AT.idleText:b.st==='warn'?AT.warnText:P.petrole):AT.idleText}}>{deploy?(b.pct||0)+' %':(b.comp||0)+' comp.'}</span>
+            </button>
+            <div style={{position:'absolute',left:`${(b.x/W*100).toFixed(2)}%`,top:`${((b.y+92)/H*100).toFixed(2)}%`,transform:'translate(-50%,-50%)',width:190,textAlign:'center',pointerEvents:'none',fontSize:12,fontWeight:600,color:P.petrole,lineHeight:1.3}}>{b.titre}</div>
+            {deploy&&b.anom>0&&(
+              <div style={{position:'absolute',left:`${((b.x+38)/W*100).toFixed(2)}%`,top:`${((b.y-36)/H*100).toFixed(2)}%`,transform:'translate(-50%,-50%)',width:24,height:24,borderRadius:'50%',background:AT.warn,color:P.abysse,fontSize:11,fontWeight:700,display:'flex',alignItems:'center',justifyContent:'center',pointerEvents:'none'}}>{b.anom}</div>
+            )}
+          </div>
+        ))}
+      </div>
+      <div style={{padding:'10px 18px',borderTop:`1px solid ${P.border}`,fontSize:10.5,color:AT.idleText}}>
+        {deploy?"Anneau = couverture réelle du bloc · satellites pleins = compétences couvertes · pastille = anomalies":"Contours pointillés = structure planifiée, aucune séance encore déclarée"}
       </div>
     </div>
   )
 }
 
-/* ═══ VUE ÉTUDIANT ══════════════════════════════════════════════════════════ */
+/* Arborescence "tiroir" — Babouchka rendu visible en permanence sur la page,
+   jamais caché derrière un clic. */
+function Arbre2({arbre,mode,open,toggle,sel,onSelect}){
+  const deploy = mode==='deploiement'
+  return (
+    <div style={{display:'flex',flexDirection:'column',gap:26}}>
+      {arbre.map(b=>{
+        const o = open[b.id]!==false
+        return (
+          <section key={b.id}>
+            <div style={{display:'flex',alignItems:'center',gap:12,paddingBottom:12}}>
+              <button onClick={()=>toggle(b.id)} style={{width:26,height:26,borderRadius:8,background:P.abysse,color:P.menthe,fontSize:11,fontWeight:700,display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0,cursor:'pointer'}}>{o?'▾':'▸'}</button>
+              <button onClick={()=>onSelect({kind:'bloc',id:b.id})} style={{display:'flex',alignItems:'baseline',gap:10,textAlign:'left',cursor:'pointer'}}>
+                <span style={{fontFamily:"'DM Serif Display',serif",fontSize:18,color:P.abysse}}>{b.id}</span>
+                <span style={{fontSize:14,fontWeight:600,color:P.petrole}}>{b.titre}</span>
+              </button>
+              <span style={{flex:1,height:1,background:P.border}}/>
+              <span style={{fontSize:11,color:P.textm,flexShrink:0}}>{b.meta}</span>
+            </div>
+            {o&&(
+              <div style={{marginLeft:12,borderLeft:'2px solid #CFEBDD',paddingLeft:22,display:'flex',flexDirection:'column',gap:14}}>
+                {b.modules.map(m=>(
+                  <div key={m.id} style={{background:P.surface,border:`1px solid ${P.border}`,borderRadius:14,overflow:'hidden'}}>
+                    <button onClick={()=>onSelect({kind:'module',id:m.id,data:m})} style={{width:'100%',display:'flex',alignItems:'center',gap:12,padding:'14px 16px',textAlign:'left',cursor:'pointer'}}>
+                      <span style={{flex:1}}>
+                        <span style={{display:'block',fontSize:13.5,fontWeight:600,color:P.abysse}}>{m.titre}</span>
+                        <span style={{display:'block',fontSize:11,color:AT.idleText,marginTop:3}}>{m.meta}</span>
+                      </span>
+                      <span style={atTag(deploy?m.st:'idle')}>{deploy?m.etat:'Planifié'}</span>
+                    </button>
+                    <div style={{padding:'2px 16px 14px'}}>
+                      <div style={{fontSize:9.5,fontWeight:600,letterSpacing:'.13em',textTransform:'uppercase',color:AT.idleText,margin:'6px 0 8px'}}>Compétences associées</div>
+                      <div style={{display:'flex',flexDirection:'column',gap:1}}>
+                        {m.competences.map(c=>(
+                          <button key={c.code} onClick={()=>onSelect({kind:'comp',id:m.id+c.code,data:c,mod:m.titre,bloc:b.id+' — '+b.titre})}
+                            style={{width:'100%',display:'flex',alignItems:'center',gap:10,padding:'7px 8px',borderRadius:8,background:sel?.kind==='comp'&&sel?.id===m.id+c.code?'#F1FCF6':'transparent',cursor:'pointer'}}>
+                            <span style={atDot(deploy?c.st:'idle')}/>
+                            <span style={{fontSize:11,fontWeight:600,color:P.petrole,width:44,flexShrink:0,textAlign:'left'}}>{c.code}</span>
+                            <span style={{flex:1,textAlign:'left',fontSize:12,color:P.abysse}}>{c.label}</span>
+                            <span style={atTag(deploy?c.st:'idle')}>{deploy?c.statut:'Prévue'}</span>
+                          </button>
+                        ))}
+                      </div>
+                      {m.seances.length>0&&<>
+                        <div style={{fontSize:9.5,fontWeight:600,letterSpacing:'.13em',textTransform:'uppercase',color:AT.idleText,margin:'14px 0 8px'}}>{deploy?'Séances déclarées':'Séances prévues'}</div>
+                        <div style={{display:'flex',flexDirection:'column',gap:6}}>
+                          {m.seances.map((s,si)=>(
+                            <button key={si} onClick={()=>onSelect({kind:'seance',id:m.id+s.date,data:s})}
+                              style={{width:'100%',display:'flex',alignItems:'center',gap:10,padding:'8px 10px',borderRadius:8,background:sel?.kind==='seance'&&sel?.id===m.id+s.date?'#F1FCF6':'#F7FBF9',cursor:'pointer'}}>
+                              <span style={{fontSize:11,color:AT.idleText,width:52,flexShrink:0,textAlign:'left'}}>{s.date}</span>
+                              <span style={{flex:1,textAlign:'left',fontSize:12,color:P.abysse}}>{s.titre}</span>
+                              <span style={atTag(deploy?s.st:'idle')}>{deploy?s.etat:'prévue'}</span>
+                            </button>
+                          ))}
+                        </div>
+                      </>}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </section>
+        )
+      })}
+    </div>
+  )
+}
+
+/* Inspecteur — panneau persistant à droite, jamais un modal : la sélection
+   courante (bloc, module, compétence, séance) s'y affiche systématiquement. */
+function Inspecteur({insp}){
+  return (
+    <aside style={{background:P.surface,borderLeft:`1px solid ${P.border}`,overflowY:'auto',display:'flex',flexDirection:'column',width:336,flexShrink:0}}>
+      <div style={{padding:'20px 22px 14px',borderBottom:`1px solid ${P.border}`,position:'sticky',top:0,background:P.surface,zIndex:3}}>
+        <div style={{fontSize:9.5,letterSpacing:'.16em',textTransform:'uppercase',color:AT.idleText}}>Inspecteur</div>
+        <div style={{fontSize:11,color:P.textm,marginTop:5,lineHeight:1.5}}>Sélectionnez un bloc, un module, une compétence ou une séance.</div>
+      </div>
+      <div key={insp.key} style={{padding:'20px 22px 30px',animation:'fadeIn .22s ease'}}>
+        <div style={{display:'inline-flex',alignItems:'center',gap:7,padding:'4px 10px',borderRadius:20,background:P.givre,marginBottom:12}}>
+          <span style={atDot(insp.st)}/>
+          <span style={{fontSize:9.5,fontWeight:700,letterSpacing:'.11em',textTransform:'uppercase',color:P.petrole}}>{insp.kind}</span>
+        </div>
+        <h2 style={{fontFamily:"'DM Serif Display',serif",fontSize:20,lineHeight:1.25,color:P.abysse,margin:0}}>{insp.titre}</h2>
+        <p style={{fontSize:12,color:P.textm,lineHeight:1.6,marginTop:8}}>{insp.desc}</p>
+
+        <div style={{display:'flex',flexDirection:'column',gap:1,marginTop:18,borderTop:`1px solid ${P.border}`}}>
+          {(insp.lignes||[]).map((l,i)=>(
+            <div key={i} style={{display:'flex',justifyContent:'space-between',alignItems:'baseline',gap:12,padding:'9px 0',borderBottom:`1px solid ${P.border}`}}>
+              <span style={{fontSize:11,color:AT.idleText,flexShrink:0}}>{l.k}</span>
+              <span style={{fontSize:12.5,fontWeight:600,textAlign:'right',color:l.warn?AT.warnText:P.abysse}}>{l.v}</span>
+            </div>
+          ))}
+        </div>
+
+        {insp.chips&&insp.chips.length>0&&(
+          <div style={{marginTop:16}}>
+            <div style={{fontSize:9.5,fontWeight:600,letterSpacing:'.13em',textTransform:'uppercase',color:AT.idleText,marginBottom:9}}>{insp.chipsLabel}</div>
+            <div style={{display:'flex',flexWrap:'wrap',gap:6}}>
+              {insp.chips.map((c,i)=><span key={i} style={{fontSize:11,fontWeight:600,padding:'4px 10px',borderRadius:20,background:P.givre,color:P.petrole}}>{c}</span>)}
+            </div>
+          </div>
+        )}
+
+        {insp.alerte&&(
+          <div style={{marginTop:18,background:AT.warnBg,border:'1px solid rgba(232,155,119,.45)',borderRadius:12,padding:14}}>
+            <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:7}}>
+              <span style={{width:6,height:6,borderRadius:'50%',background:P.saumon}}/>
+              <span style={{fontSize:9.5,fontWeight:700,letterSpacing:'.11em',textTransform:'uppercase',color:AT.warnText}}>{insp.alerte.titre}</span>
+            </div>
+            <div style={{fontSize:12,color:P.abysse,lineHeight:1.55}}>{insp.alerte.txt}</div>
+          </div>
+        )}
+
+        {insp.actions&&insp.actions.length>0&&(
+          <div style={{marginTop:18,display:'flex',flexDirection:'column',gap:7}}>
+            {insp.actions.map((a,i)=>(
+              <button key={i} onClick={a.go} style={{width:'100%',fontSize:12,fontWeight:600,padding:11,borderRadius:10,cursor:'pointer',border:'none',
+                background:a.primary?P.abysse:P.givre, color:a.primary?P.menthe:P.petrole}}>{a.t}</button>
+            ))}
+          </div>
+        )}
+
+        {insp.toast&&<div style={{marginTop:14,background:P.abysse,color:P.menthe,fontSize:11.5,padding:'10px 13px',borderRadius:10,lineHeight:1.5}}>{insp.toast}</div>}
+      </div>
+    </aside>
+  )
+}
+
+/* Rail gauche partagé — brand, titre, rôle, stepper "3 temps", pied de page. */
+function RailAtelier({titre,campus,roleLabel,formations,formationId,onFormation,tempsDefs,temps,setTemps,footer,user,onLogout}){
+  return (
+    <aside style={{background:P.abysse,display:'flex',flexDirection:'column',padding:'26px 22px 20px',gap:26,borderRight:'1px solid rgba(227,255,240,.08)',overflowY:'auto'}}>
+      <div>
+        <div style={{fontFamily:"'DM Serif Display',serif",fontSize:21,color:P.givre,lineHeight:1}}>Atlas</div>
+        <div style={{fontSize:10,letterSpacing:'.18em',textTransform:'uppercase',color:P.menthe,marginTop:7}}>L'Atelier · Éminéo</div>
+      </div>
+      <div style={{borderTop:'1px solid rgba(227,255,240,.09)',paddingTop:18}}>
+        <div style={{fontSize:15,color:P.givre,fontWeight:600,lineHeight:1.35}}>{titre}</div>
+        <div style={{display:'flex',flexWrap:'wrap',gap:5,marginTop:10}}>
+          {campus&&<span style={{fontSize:9.5,fontWeight:600,letterSpacing:'.05em',color:'rgba(227,255,240,.6)',background:'rgba(227,255,240,.07)',padding:'3px 8px',borderRadius:20}}>{campus}</span>}
+          <span style={{fontSize:9.5,fontWeight:600,letterSpacing:'.05em',color:P.menthe,background:'rgba(93,226,152,.12)',padding:'3px 8px',borderRadius:20}}>{roleLabel}</span>
+        </div>
+        {formations.length>1&&(
+          <select value={formationId||''} onChange={e=>onFormation(Number(e.target.value))}
+            style={{marginTop:10,width:'100%',fontSize:11,padding:'6px 8px',borderRadius:7,background:'rgba(227,255,240,.07)',color:P.givre,border:'1px solid rgba(227,255,240,.12)'}}>
+            {formations.map(x=><option key={x._id} value={x._id} style={{color:'#000'}}>{x.formation?.titre||`Titre ${x._id}`}</option>)}
+          </select>
+        )}
+      </div>
+      <div style={{flex:1}}>
+        <div style={{fontSize:9.5,letterSpacing:'.16em',textTransform:'uppercase',color:'rgba(227,255,240,.35)',marginBottom:11}}>Le mois en 3 temps</div>
+        <div style={{display:'flex',flexDirection:'column',gap:2}}>
+          {tempsDefs.map(t=>(
+            <button key={t.id} onClick={()=>setTemps(t.id)} style={{display:'flex',alignItems:'flex-start',gap:11,padding:'11px 12px',borderRadius:11,textAlign:'left',cursor:'pointer',border:'none',
+              background:temps===t.id?'rgba(93,226,152,.13)':'transparent', color:temps===t.id?P.givre:'rgba(227,255,240,.5)'}}>
+              <span style={{width:20,height:20,borderRadius:'50%',flexShrink:0,display:'flex',alignItems:'center',justifyContent:'center',fontSize:10.5,fontWeight:700,marginTop:1,
+                background:temps===t.id?P.menthe:'rgba(227,255,240,.10)', color:temps===t.id?P.abysse:'rgba(227,255,240,.55)'}}>{t.num}</span>
+              <span style={{display:'flex',flexDirection:'column',gap:2}}>
+                <span style={{fontSize:12.5,fontWeight:600}}>{t.label}</span>
+                <span style={{fontSize:10.5,opacity:.6,lineHeight:1.4}}>{t.sub}</span>
+              </span>
+            </button>
+          ))}
+        </div>
+      </div>
+      <div style={{borderTop:'1px solid rgba(227,255,240,.09)',paddingTop:14,display:'flex',flexDirection:'column',gap:10}}>
+        {footer}
+        <div style={{display:'flex',alignItems:'center',gap:9}}>
+          <Avatar name={`${user.prenom} ${user.nom}`} size={22}/>
+          <span style={{fontSize:11,color:'rgba(227,255,240,.7)',flex:1}}>{user.prenom} {user.nom}</span>
+          <button onClick={onLogout} title="Déconnexion" style={{color:'rgba(227,255,240,.4)',fontSize:14,cursor:'pointer'}}>⏻</button>
+        </div>
+      </div>
+    </aside>
+  )
+}
+
+/* En-tête central partagé. */
+function HeaderAtelier({tempsNum,roleLabel,pageTitle,pageSub,stats}){
+  return (
+    <header style={{padding:'26px 34px 20px',borderBottom:`1px solid ${P.border}`,background:P.surface,position:'sticky',top:0,zIndex:5}}>
+      <div style={{display:'flex',alignItems:'flex-end',justifyContent:'space-between',gap:24,flexWrap:'wrap'}}>
+        <div>
+          <div style={{fontSize:10,letterSpacing:'.16em',textTransform:'uppercase',color:P.textm,marginBottom:6}}>Temps {tempsNum} — {roleLabel}</div>
+          <h1 style={{fontFamily:"'DM Serif Display',serif",fontSize:26,lineHeight:1.15,color:P.abysse,margin:0}}>{pageTitle}</h1>
+          <p style={{fontSize:12.5,color:P.textm,marginTop:6,maxWidth:'60ch',lineHeight:1.55}}>{pageSub}</p>
+        </div>
+        <div style={{display:'flex',gap:22,flexShrink:0,paddingBottom:3}}>
+          {stats.map((s,i)=>(
+            <div key={i} style={{textAlign:'right'}}>
+              <div style={{fontFamily:"'DM Serif Display',serif",fontSize:23,lineHeight:1,color:s.warn?AT.warnText:P.abysse}}>{s.v}</div>
+              <div style={{fontSize:9.5,letterSpacing:'.08em',textTransform:'uppercase',color:AT.idleText,marginTop:2}}>{s.k}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </header>
+  )
+}
+
+const TEMPS_DEFS = [
+  {id:'plan',num:'1',label:'Plan de cours',sub:'Ce qui est prévu'},
+  {id:'deploiement',num:'2',label:'Déploiement',sub:'Ce qui est réellement couvert'},
+  {id:'digest',num:'3',label:'Digest',sub:'Ce qui part aux intervenants'},
+]
+
+/* ═══ VUE INTERVENANT — mes modules en arborescence (lecture seule) ══════════ */
+function VueIntervenant({user,onLogout}){
+  const [formations,setFormations]=useState([])
+  const [formationId,setFormationId]=useState(null)
+  const [data,setData]=useState(null)
+  const [loading,setLoading]=useState(true)
+  const [error,setError]=useState('')
+  const [temps,setTemps]=useState('plan')
+  const [sel,setSel]=useState({kind:null,id:null})
+  const [open,setOpen]=useState({})
+
+  useEffect(()=>{
+    api.getFormations().then(d=>{
+      setFormations(d.formations||[])
+      const first=(d.formations||[])[0]
+      if(first) setFormationId(first._id); else setLoading(false)
+    }).catch(e=>{setError(e.message);setLoading(false)})
+  },[])
+
+  function reload(){
+    if(!formationId) return
+    setLoading(true);setError('')
+    return api.getFR(formationId).then(d=>{setData(d);setLoading(false)}).catch(e=>{setError(e.message);setLoading(false)})
+  }
+  useEffect(()=>{ reload() },[formationId])
+
+  const f=formations.find(x=>x._id===formationId)||null
+  const titre=f?.formation?.titre||'Atlas des compétences'
+  const campus=f?._campus||''
+  const blocsRaw=f?.blocs||[]
+  const prevues=data?.seances_prevues||[]   // déjà scopées à moi côté serveur (role=intervenant)
+  const ecarts=data?.ecarts||[]
+  const digest=data?.digest||null
+  const norm = c => String(c||'').toUpperCase().replace(/[^A-Z0-9]/g,'')
+  const couvertes = new Set((data?.mes_competences_couvertes||[]).map(norm))
+  const modulesEnseignes = new Set(prevues.map(s=>s.module_ref))
+  const deploy = temps==='deploiement'
+
+  // Arborescence limitée à mes modules — déduits de mes séances prévisionnelles
+  // de la période. Limite connue : un module sans séance ce mois-ci n'apparaît
+  // pas ici (portée volontairement mensuelle, cf doc de session).
+  const arbre = blocsRaw.map(b=>{
+    const mods=(b.modules||[]).filter(m=>modulesEnseignes.has(m.id))
+    if(!mods.length) return null
+    return {
+      id:b.id, titre:b.titre,
+      meta: deploy ? mods.length+' module(s) · '+mods.reduce((n,m)=>n+(m.competences_liees||[]).length,0)+' compétence(s)' : mods.length+' module(s) prévu(s)',
+      modules: mods.map(m=>{
+        const seancesM = prevues.filter(s=>s.module_ref===m.id)
+        const ecartsM = ecarts.filter(e=>modulesEnseignes.has(m.id)&&e.module_ref===m.id)
+        const anyWarn = ecartsM.some(e=>e.etat!=='nominal')
+        const competences = (b.competences||[]).filter(c=>(m.competences_liees||[]).some(cl=>norm(cl)===norm(c.id))).map(c=>{
+          const ok = couvertes.has(norm(c.id))
+          return {code:c.id, label:c.libelle, statut: ok?'Couverte':'Non couverte', st: ok?'ok':'idle'}
+        })
+        return {
+          id:m.id, titre:m.titre, meta: seancesM.length+' séance(s) ce mois-ci',
+          etat: anyWarn?'À arbitrer':(seancesM.length?'Conforme':'Planifié'), st: anyWarn?'warn':'ok',
+          competences,
+          seances: ecartsM.map(e=>({date:fmtCourt(e.date_prevue), titre:e.titre,
+            etat: e.etat==='nominal'?'Conforme':e.etat==='ecart_plus'?'Écart +':'Lacune',
+            st: e.etat==='nominal'?'ok':'warn', data:e})),
+        }
+      }),
+    }
+  }).filter(Boolean)
+
+  function toggle(id){ setOpen(s=>({...s,[id]:s[id]===false?true:false})) }
+  const openState = {}; arbre.forEach(b=>{ openState[b.id] = open[b.id]!==false })
+
+  function buildInsp(){
+    if(temps==='digest'){
+      return {kind:'Diffusion', st:'ok', titre:'Votre digest du mois',
+        desc:"Vous recevrez ce digest par email une fois validé par votre Formateur Référent.",
+        lignes:[{k:'Statut',v:digest?.statut==='envoye'?'Envoyé':'En attente de validation',warn:digest?.statut!=='envoye'}], key:'digest'}
+    }
+    if(sel.kind==='module'){
+      const m=sel.data
+      return {kind:'Module', st:deploy?m.st:'idle', titre:m.titre, desc:`${m.competences.length} compétence(s) associée(s).`,
+        lignes:[{k:'État',v:deploy?m.etat:'Planifié',warn:m.st==='warn'&&deploy}],
+        chipsLabel:'Compétences associées', chips:m.competences.map(c=>c.code), key:'mod'+sel.id}
+    }
+    if(sel.kind==='comp'){
+      const c=sel.data
+      return {kind:'Compétence', st:deploy?c.st:'idle', titre:c.code+' — '+c.label,
+        desc:`Compétence du référentiel RNCP, rattachée au module « ${sel.mod||''} ».`,
+        lignes:[{k:'Module',v:sel.mod||'—'},{k:'Bloc',v:sel.bloc||'—'},{k:'Statut',v:deploy?c.statut:'Prévue',warn:c.st==='idle'&&deploy}], key:'comp'+sel.id}
+    }
+    if(sel.kind==='seance'){
+      const s=sel.data
+      return {kind:'Séance', st:s.st||'ok', titre:(s.date||'')+' — '+(s.titre||''), desc:s.data?.detail||'',
+        lignes:[{k:'État',v:s.etat,warn:s.st==='warn'}],
+        alerte: s.st==='warn'?{titre:'Écart détecté',txt:s.data?.detail||''}:null, key:'seance'+sel.id}
+    }
+    return {kind:'Mes modules', st:'ok', titre, desc:'Sélectionnez un module, une compétence ou une séance.', lignes:[], key:'root'}
+  }
+  const insp = buildInsp()
+
+  if(loading&&!data) return <div style={{minHeight:'100vh',background:P.abysse,display:'flex',alignItems:'center',justifyContent:'center'}}><Spinner/></div>
+  if(error) return <div style={{minHeight:'100vh',display:'flex',alignItems:'center',justifyContent:'center'}}><Empty icon="⚠" titre="Erreur de chargement" msg={error}/></div>
+  if(!f) return <div style={{minHeight:'100vh',display:'flex',alignItems:'center',justifyContent:'center'}}><Empty icon="📋" titre="Aucun titre" msg="Aucun titre ne vous est rattaché."/></div>
+
+  const nbMod=arbre.reduce((n,b)=>n+b.modules.length,0)
+  const nbComp=arbre.reduce((n,b)=>n+b.modules.reduce((m,mo)=>m+mo.competences.length,0),0)
+  const nbAlertesInt=ecarts.filter(e=>modulesEnseignes.has(e.module_ref)&&e.etat!=='nominal').length
+  const stats = temps==='digest'
+    ? [{k:'statut',v:digest?.statut==='envoye'?'Envoyé':'En attente'}]
+    : temps==='plan'
+      ? [{k:'modules',v:String(nbMod)},{k:'compétences',v:String(nbComp)}]
+      : [{k:'séances',v:String(ecarts.length)},{k:'à traiter',v:String(nbAlertesInt),warn:nbAlertesInt>0}]
+
+  const pageTitles={
+    plan:['Mes modules, tels qu\u2019ils sont prévus',"Vos blocs, modules et compétences associées — l\u2019arborescence est dépliée sur la page, rien n\u2019est caché derrière un clic."],
+    deploiement:['Mes modules, séance après séance',"La même arborescence, augmentée du réel : statut de chaque compétence et de chaque séance déclarée."],
+    digest:['Le digest que vous allez recevoir',"Écran verrouillé : UI de production, en lecture seule."],
+  }
+  const [pageTitle,pageSub]=pageTitles[temps]
+
+  return (
+    <div style={{display:'grid',gridTemplateColumns:'252px minmax(0,1fr) 336px',height:'100vh',width:'100%',minWidth:1100,background:P.abysse,overflow:'hidden',fontFamily:"'DM Sans',sans-serif"}}>
+      <RailAtelier titre={titre} campus={campus} roleLabel="Intervenant" formations={formations} formationId={formationId}
+        onFormation={id=>{setFormationId(id);setSel({kind:null,id:null})}} tempsDefs={TEMPS_DEFS} temps={temps} setTemps={setTemps}
+        user={user} onLogout={onLogout}
+        footer={<div style={{fontSize:10.5,color:'rgba(227,255,240,.4)',lineHeight:1.5}}>Lecture seule — la saisie active est réservée au Formateur Référent.</div>}/>
+
+      <main style={{background:'#F4FBF7',overflowY:'auto',display:'flex',flexDirection:'column'}}>
+        <HeaderAtelier tempsNum={TEMPS_DEFS.find(t=>t.id===temps).num} roleLabel="Intervenant" pageTitle={pageTitle} pageSub={pageSub} stats={stats}/>
+        <div key={temps} style={{padding:'26px 34px 46px',animation:'fadeIn .28s ease'}} className="fi">
+          {temps!=='digest'&&(
+            arbre.length===0?(
+              <Empty icon="📋" titre="Aucun module ce mois-ci" msg="Aucune séance prévisionnelle rattachée à votre compte pour ce titre, sur la période en cours."/>
+            ):(
+              <Arbre2 arbre={arbre} mode={temps} open={openState} toggle={toggle} sel={sel} onSelect={setSel}/>
+            )
+          )}
+          {temps==='digest'&&(
+            <div style={{maxWidth:640,margin:'0 auto'}}>
+              {!digest?(
+                <Empty icon="✉" titre="Digest non encore généré" msg="Votre Formateur Référent n'a pas encore généré le digest de ce mois."/>
+              ):(
+                <DigestPreview digest={digest} titre={titre} campus={campus} fr="votre Formateur Référent" readOnly/>
+              )}
+            </div>
+          )}
+        </div>
+      </main>
+
+      <Inspecteur insp={insp}/>
+    </div>
+  )
+}
 function VueEtudiant({user,onLogout}){
   const [formations,setFormations]=useState([])
   const [loading,setLoading]=useState(true)
@@ -1013,189 +1425,227 @@ function VueEtudiant({user,onLogout}){
 }
 
 /* ═══ VUE FORMATEUR RÉFÉRENT — poste de travail (lecture seule V1) ═══════════ */
+/* ═══ VUE FORMATEUR RÉFÉRENT — poste de travail L'Atelier ════════════════════ */
 function VueFR({user,onLogout}){
   const [formations,setFormations]=useState([])
   const [formationId,setFormationId]=useState(null)
-  const [onglet,setOnglet]=useState('alertes')
   const [data,setData]=useState(null)
   const [loading,setLoading]=useState(true)
   const [error,setError]=useState('')
   const [generating,setGenerating]=useState(false)
   const [genError,setGenError]=useState('')
+  const [temps,setTemps]=useState('plan')
+  const [sel,setSel]=useState({kind:null,id:null})
+  const [toast,setToast]=useState(null)
 
   useEffect(()=>{
-    api.getFormations()
-      .then(d=>{
-        setFormations(d.formations||[])
-        const first=(d.formations||[])[0]
-        if(first) setFormationId(first._id)
-        else setLoading(false)
-      })
-      .catch(e=>{setError(e.message);setLoading(false)})
+    api.getFormations().then(d=>{
+      setFormations(d.formations||[])
+      const first=(d.formations||[])[0]
+      if(first) setFormationId(first._id); else setLoading(false)
+    }).catch(e=>{setError(e.message);setLoading(false)})
   },[])
 
   function reload(){
     if(!formationId) return
     setLoading(true);setError('')
-    return api.getFR(formationId)
-      .then(d=>{setData(d);setLoading(false);return d})
-      .catch(e=>{setError(e.message);setLoading(false)})
+    return api.getFR(formationId).then(d=>{setData(d);setLoading(false);return d}).catch(e=>{setError(e.message);setLoading(false)})
   }
   useEffect(()=>{ reload() },[formationId])
 
   const f=formations.find(x=>x._id===formationId)||null
   const titre=f?.formation?.titre||'Atlas des compétences'
   const campus=f?._campus||''
+  const blocsRaw=f?.blocs||[]
   const prevues=data?.seances_prevues||[]
-  const realisees=data?.seances_realisees||[]
   const ecarts=data?.ecarts||[]
   const digest=data?.digest||null
+  const avancementBlocs=data?.avancement_blocs||[]
   const nbAlertes=ecarts.filter(e=>e.etat==='alerte').length
+  const modToBloc=moduleToBlocMap(blocsRaw)
+  const deploy = temps==='deploiement'
 
   async function genererDigest(){
     setGenerating(true);setGenError('')
-    try{
-      await api.generateDigest(formationId,campus)
-      await reload()
-      setOnglet('digest')
-    }catch(e){setGenError(e.message)}finally{setGenerating(false)}
+    try{ await api.generateDigest(formationId,campus); await reload(); setTemps('digest') }
+    catch(e){ setGenError(e.message) } finally{ setGenerating(false) }
   }
-
   async function validerEnvoyer(noteFr){
     if(!digest) return
     await api.validerEnvoyerDigest(digest.id,noteFr)
     await reload()
   }
 
-  const parIntervenant={}
-  prevues.forEach(s=>{
-    const k=s.intervenant_nom||'—'
-    if(!parIntervenant[k]) parIntervenant[k]={nom:k,seances:[]}
-    parIntervenant[k].seances.push(s)
+  const blocs = blocsRaw.map(b=>{
+    const anomsBloc = ecarts.filter(e=>e.etat!=='nominal' && modToBloc[e.module_ref]===b.id)
+    const quiSet = new Set(prevues.filter(s=>modToBloc[s.module_ref]===b.id).map(s=>s.intervenant_nom).filter(Boolean))
+    const pct = avancementBlocs.find(a=>a.id===b.id)?.pct ?? 0
+    const anom = anomsBloc.length
+    const st = anom>0?'warn':(pct>0?'ok':'idle')
+    return {id:b.id, titre:b.titre, comp:(b.competences||[]).length, mods:(b.modules||[]).length, pct, anom, st,
+      qui: quiSet.size?Array.from(quiSet).join(' · '):'Non affecté',
+      desc:`${(b.competences||[]).length} compétence(s) au référentiel de ce bloc.`}
   })
-  const intervenants=Object.values(parIntervenant)
 
-  const onglets=[
-    {id:'alertes',label:`Comparateur (${nbAlertes} alerte${nbAlertes>1?'s':''})`},
-    {id:'digest',label:'Digest'},
-    {id:'previsionnel',label:'Prévisionnels'},
-  ]
+  const seancesJournal = ecarts.map(e=>({
+    ...e, st: e.etat==='nominal'?'ok':'warn',
+    etatLabel: e.etat==='nominal'?'Conforme':e.etat==='ecart_plus'?'Écart +':'Lacune',
+    blocId: modToBloc[e.module_ref]||'—',
+  }))
+  const anomalies = seancesJournal.filter(s=>s.st==='warn')
 
-  function fmtDate(iso){
-    if(!iso) return '—'
-    try{return new Date(iso).toLocaleDateString('fr-FR',{day:'2-digit',month:'short'})}catch(_){return iso}
+  function buildInsp(){
+    if(temps==='digest'){
+      return {kind:'Diffusion', st:'ok', titre:'Digest du mois',
+        desc:"Le digest part aux intervenants du titre une fois validé. La note de coordination est le seul champ libre.",
+        lignes:[
+          {k:'Statut',v:digest?.statut==='envoye'?'Envoyé':digest?'Prêt à valider':'Non généré', warn:digest?.statut!=='envoye'},
+          {k:'Anomalies citées',v:String(nbAlertes),warn:nbAlertes>0},
+        ], key:'digest'}
+    }
+    if(sel.kind==='bloc'){
+      const b=blocs.find(x=>x.id===sel.id)
+      if(!b) return {kind:'Bloc',st:'idle',titre:titre,desc:'Sélectionnez un bloc de la cartographie.',lignes:[],key:'none'}
+      const lignes = deploy
+        ? [{k:'Compétences',v:b.comp+' au référentiel'},{k:'Couverture réelle',v:b.pct+' %',warn:b.st==='warn'},{k:'Anomalies',v:b.anom===0?'aucune':b.anom+' à arbitrer',warn:b.anom>0},{k:'Intervenants',v:b.qui}]
+        : [{k:'Compétences',v:b.comp+' au référentiel'},{k:'Modules prévus',v:String(b.mods)},{k:'Intervenants',v:b.qui}]
+      return {kind:'Bloc de compétences', st:deploy?b.st:'idle', titre:b.id+' — '+b.titre, desc:b.desc, lignes,
+        alerte: (b.anom>0&&deploy) ? {titre:b.anom+' anomalie(s)', txt:'Ouvrez le journal des séances pour arbitrer bloc par bloc.'} : null,
+        actions: (b.anom>0&&deploy) ? [{t:'Notifier les intervenants du bloc', primary:true, go:()=>setToast('Relance envoyée aux intervenants de '+b.id+'.')}] : [],
+        key:'bloc'+b.id+temps}
+    }
+    if(sel.kind==='seance'){
+      const s=sel.data||{}
+      return {kind:'Séance', st:s.st||'ok', titre:(s.date_prevue?fmtCourt(s.date_prevue):'')+' — '+(s.titre||''), desc:s.detail||'',
+        lignes:[{k:'Bloc',v:s.blocId||'—'},{k:'Intervenant',v:s.intervenant_nom||'—'},{k:'État',v:s.etatLabel||'—',warn:s.st==='warn'}],
+        alerte: s.st==='warn' ? {titre:'Écart détecté', txt:s.detail||''} : null,
+        actions: s.st==='warn' ? [
+          {t:'Arbitrer et notifier', primary:true, go:()=>setToast('Arbitrage consigné, intervenants notifiés.')},
+          {t:'Reporter au digest', go:()=>setToast('Anomalie ajoutée au digest du mois.')},
+        ] : [], key:'seance'+sel.id}
+    }
+    return {kind:'Titre', st:'ok', titre, desc:'Sélectionnez un élément de la cartographie.', lignes:[], key:'root'}
   }
+  const insp = {...buildInsp(), toast}
 
-  return(
-    <div style={{minHeight:'100vh',background:P.givre}}>
-      <Topbar user={user} formationTitre={`${titre} — Formateur Référent`} onLogout={onLogout} onglet={onglet} setOnglet={setOnglet} onglets={onglets}/>
-      <div style={{maxWidth:1000,margin:'0 auto',padding:'1.5rem 1.25rem'}}>
+  if(loading&&!data) return <div style={{minHeight:'100vh',background:P.abysse,display:'flex',alignItems:'center',justifyContent:'center'}}><Spinner/></div>
+  if(error) return <div style={{minHeight:'100vh',display:'flex',alignItems:'center',justifyContent:'center'}}><Empty icon="⚠" titre="Erreur de chargement" msg={error}/></div>
+  if(!f) return <div style={{minHeight:'100vh',display:'flex',alignItems:'center',justifyContent:'center'}}><Empty icon="📋" titre="Aucun titre" msg="Aucun titre ne vous est rattaché. Contactez la Direction des programmes."/></div>
 
-        {formations.length>1&&(
-          <div style={{marginBottom:'1rem',display:'flex',alignItems:'center',gap:'0.5rem'}}>
-            <span style={{fontSize:11,fontWeight:600,color:P.textm,textTransform:'uppercase',letterSpacing:'0.07em'}}>Titre</span>
-            <select value={formationId||''} onChange={e=>setFormationId(Number(e.target.value))}
-              style={{border:`1px solid ${P.border}`,borderRadius:7,padding:'6px 10px',fontSize:13,color:P.abysse,background:P.surface,outline:'none'}}>
-              {formations.map(x=><option key={x._id} value={x._id}>{x.formation?.titre||`Formation ${x._id}`}{x._campus?` · ${x._campus}`:''}</option>)}
-            </select>
-          </div>
-        )}
+  const stats = temps==='digest'
+    ? [{k:'destinataires',v:String((digest?.destinataires||[]).length||'—')},{k:'anomalies',v:String(nbAlertes),warn:nbAlertes>0}]
+    : temps==='plan'
+      ? [{k:'blocs',v:String(blocs.length)},{k:'compétences',v:String(blocs.reduce((n,b)=>n+b.comp,0))},{k:'modules',v:String(blocs.reduce((n,b)=>n+b.mods,0))}]
+      : [{k:'séances',v:String(ecarts.length)},{k:'conformes',v:String(ecarts.filter(e=>e.etat==='nominal').length)},{k:'anomalies',v:String(nbAlertes),warn:nbAlertes>0}]
 
-        {loading?(
-          <div style={{textAlign:'center',padding:'3rem'}}><Spinner size={28}/></div>
-        ):error?(
-          <Empty icon="⚠" titre="Erreur de chargement" msg={error}/>
-        ):!f?(
-          <Empty icon="📋" titre="Aucune formation" msg="Aucun titre ne vous est rattaché. Contactez la Direction des programmes."/>
-        ):(
-          <>
-            {onglet==='alertes'&&(
-              <div style={{animation:'fadeIn 0.25s ease'}}>
-                <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'0.75rem',marginBottom:'1.5rem'}}>
-                  <div style={card({padding:'1rem 1.25rem',marginBottom:0})}><div style={{fontSize:28,fontWeight:600,lineHeight:1,color:P.menthe}}>{ecarts.filter(e=>e.etat==='nominal').length}</div><div style={{fontSize:11,color:P.textm,marginTop:4}}>Nominal</div></div>
-                  <div style={card({padding:'1rem 1.25rem',marginBottom:0})}><div style={{fontSize:28,fontWeight:600,lineHeight:1,color:P.amber}}>{ecarts.filter(e=>e.etat==='ecart_plus').length}</div><div style={{fontSize:11,color:P.textm,marginTop:4}}>Écart + (contenu suppl.)</div></div>
-                  <div style={card({padding:'1rem 1.25rem',marginBottom:0})}><div style={{fontSize:28,fontWeight:600,lineHeight:1,color:P.red}}>{nbAlertes}</div><div style={{fontSize:11,color:P.textm,marginTop:4}}>Alerte (non déclaré)</div></div>
+  const pageTitles = {
+    plan:['Le titre tel qu\u2019il a été planifié',"Cartographie des blocs de compétences du titre, avant toute séance déclarée ce mois-ci."],
+    deploiement:['Ce que la promo a réellement couvert',"La même cartographie, remplie par les déclarations de séances. L\u2019anneau mesure la couverture réelle."],
+    digest:['La synthèse envoyée aux intervenants',"Écran verrouillé : UI de production, seule la note de coordination est éditable."],
+  }
+  const [pageTitle,pageSub] = pageTitles[temps]
+
+  return (
+    <div style={{display:'grid',gridTemplateColumns:'252px minmax(0,1fr) 336px',height:'100vh',width:'100%',minWidth:1100,background:P.abysse,overflow:'hidden',fontFamily:"'DM Sans',sans-serif"}}>
+      <RailAtelier titre={titre} campus={campus} roleLabel="Formateur référent" formations={formations} formationId={formationId}
+        onFormation={id=>{setFormationId(id);setSel({kind:null,id:null})}} tempsDefs={TEMPS_DEFS} temps={temps} setTemps={setTemps}
+        user={user} onLogout={onLogout}
+        footer={<div style={{display:'flex',alignItems:'center',gap:9}}>
+          <span style={{width:7,height:7,borderRadius:'50%',background:P.saumon,flexShrink:0}}/>
+          <span style={{fontSize:10.5,color:'rgba(227,255,240,.5)',lineHeight:1.45}}>{nbAlertes} anomalie{nbAlertes>1?'s':''} détectée{nbAlertes>1?'s':''} ce mois-ci</span>
+        </div>}/>
+
+      <main style={{background:'#F4FBF7',overflowY:'auto',display:'flex',flexDirection:'column'}}>
+        <HeaderAtelier tempsNum={TEMPS_DEFS.find(t=>t.id===temps).num} roleLabel="Formateur référent" pageTitle={pageTitle} pageSub={pageSub} stats={stats}/>
+
+        <div key={temps} style={{padding:'26px 34px 46px',animation:'fadeIn .28s ease'}} className="fi">
+          {temps!=='digest'&&<>
+            <Cartographie2 blocs={blocs} mode={temps} sel={sel} onSelect={setSel}/>
+
+            {deploy&&(
+              <div style={{display:'grid',gridTemplateColumns:'minmax(0,1.45fr) minmax(0,1fr)',gap:18,marginTop:20}}>
+                <div style={{background:P.surface,border:`1px solid ${P.border}`,borderRadius:16,overflow:'hidden'}}>
+                  <div style={{padding:'13px 18px',borderBottom:`1px solid ${P.border}`,fontSize:11,fontWeight:600,letterSpacing:'.1em',textTransform:'uppercase',color:P.petrole}}>Journal des séances déclarées</div>
+                  {seancesJournal.length===0?<div style={{padding:'2rem',textAlign:'center',color:P.textm,fontSize:13}}>Aucune séance ce mois-ci.</div>:
+                    seancesJournal.map(s=>(
+                      <button key={s.previsionnel_id} onClick={()=>setSel({kind:'seance',id:s.previsionnel_id,data:s})}
+                        style={{width:'100%',display:'flex',alignItems:'center',gap:12,padding:'11px 18px',borderBottom:`1px solid ${P.border}`,cursor:'pointer',border:'none',
+                          background:sel.kind==='seance'&&sel.id===s.previsionnel_id?'#F1FCF6':'transparent'}}>
+                        <span style={{fontSize:11,color:AT.idleText,width:52,flexShrink:0,textAlign:'left'}}>{fmtCourt(s.date_prevue)}</span>
+                        <span style={{fontSize:10,fontWeight:700,color:P.petrole,background:P.givre,padding:'3px 7px',borderRadius:6,flexShrink:0}}>{s.blocId}</span>
+                        <span style={{flex:1,textAlign:'left',fontSize:12.5,color:P.abysse,lineHeight:1.4}}>{s.titre}</span>
+                        <span style={{fontSize:11,color:P.textm,flexShrink:0}}>{s.intervenant_nom}</span>
+                        <span style={atTag(s.st)}>{s.etatLabel}</span>
+                      </button>
+                    ))}
                 </div>
-
-                {ecarts.length===0?(
-                  <Empty icon="✓" titre="Aucune séance prévue ce mois-ci" msg="Rien à comparer pour la période en cours."/>
-                ):ecarts.map(e=>{
-                  const col=e.etat==='alerte'?P.red:e.etat==='ecart_plus'?P.amber:P.menthe
-                  const label=e.etat==='alerte'?'Alerte':e.etat==='ecart_plus'?'Écart +':'Nominal'
-                  return(
-                  <div key={e.previsionnel_id} style={card({borderLeft:`3px solid ${col}`})}>
-                    <div style={{display:'flex',alignItems:'flex-start',gap:'0.5rem',marginBottom:'0.4rem'}}>
-                      <Tag label={label} color={e.etat==='alerte'?'red':e.etat==='ecart_plus'?'amber':'teal'} small/>
-                      <div style={{flex:1}}>
-                        <div style={{fontSize:14,fontWeight:600,color:P.abysse}}>{e.titre} — {e.intervenant_nom}</div>
-                        <div style={{fontSize:12,color:P.textm,marginTop:2}}>Séance {e.numero} · prévue le {fmtDate(e.date_prevue)}</div>
-                      </div>
-                    </div>
-                    <div style={{fontSize:13,color:P.textm,lineHeight:1.6}}>{e.detail}</div>
-                  </div>
-                )})}
-              </div>
-            )}
-
-            {onglet==='digest'&&(
-              <div style={{animation:'fadeIn 0.25s ease'}}>
-                <div style={{display:'flex',justifyContent:'flex-end',marginBottom:'1rem'}}>
-                  <button onClick={genererDigest} disabled={generating}
-                    style={{background:P.petrole,color:P.givre,border:'none',borderRadius:8,padding:'8px 16px',fontSize:12,fontWeight:500,cursor:'pointer',opacity:generating?0.6:1,display:'flex',alignItems:'center',gap:'0.5rem'}}>
-                    {generating?<Spinner size={14}/>:null}{digest?'↻ Régénérer le digest':'Générer le digest du mois'}
-                  </button>
-                </div>
-                {genError&&<div style={{...card(),border:`1px solid ${P.red}`,color:'#8B1A1A',fontSize:12,marginBottom:'1rem'}}>⚠ {genError}</div>}
-                {!digest?(
-                  <Empty icon="✉" titre="Aucun digest généré" msg="Générez le digest du mois pour ce titre — il s'appuie sur les séances déclarées de la période en cours."/>
-                ):(
-                  <DigestPreview digest={digest} titre={titre} campus={f._campus} fr={`${user.prenom} ${user.nom}`} onValiderEnvoyer={validerEnvoyer}/>
-                )}
-              </div>
-            )}
-
-            {onglet==='previsionnel'&&(
-              <div style={{animation:'fadeIn 0.25s ease'}}>
-                {intervenants.length===0?(
-                  <Empty icon="📝" titre="Aucun prévisionnel saisi" msg="Les intervenants n'ont pas encore renseigné leur prévisionnel annuel pour ce titre."/>
-                ):(
-                  <>
-                    <p style={{fontSize:13,color:P.textm,marginBottom:'1.25rem',lineHeight:1.6}}>Saisies intervenants — séances planifiées cette semaine.</p>
-                    <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'0.6rem'}}>
-                      {intervenants.map(it=>(
-                        <div key={it.nom} style={card({marginBottom:0})}>
-                          <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:6}}>
-                            <div style={{display:'flex',alignItems:'center',gap:'0.5rem'}}>
-                              <Avatar name={it.nom} size={26}/>
-                              <div>
-                                <div style={{fontSize:14,fontWeight:600,color:P.abysse}}>{it.nom}</div>
-                                <div style={{fontSize:12,color:P.textm}}>{it.seances.length} séance{it.seances.length>1?'s':''} cette semaine</div>
-                              </div>
-                            </div>
-                          </div>
-                          {it.seances.map(s=>(
-                            <div key={s.id} style={{padding:'0.4rem 0',borderTop:`1px solid ${P.border}`}}>
-                              <div style={{fontSize:12,fontWeight:500,color:P.abysse}}>Séance {s.numero} · {s.titre}</div>
-                              <div style={{fontSize:11,color:P.textm,marginTop:2}}>{fmtDate(s.date_prevue)} · {s.modalite==='D'?'Distanciel':'Présentiel'}</div>
-                              {(s.competences||[]).length>0&&<div style={{display:'flex',gap:3,flexWrap:'wrap',marginTop:4}}>{s.competences.map(c=><Tag key={c} label={c} small/>)}</div>}
-                            </div>
-                          ))}
-                        </div>
+                <div style={{background:P.abysse,borderRadius:16,padding:'18px 20px 20px'}}>
+                  <div style={{fontSize:11,fontWeight:600,letterSpacing:'.1em',textTransform:'uppercase',color:P.menthe,marginBottom:14}}>Anomalies à arbitrer</div>
+                  {anomalies.length===0?<div style={{fontSize:12,color:'rgba(227,255,240,.4)'}}>Aucune anomalie ce mois-ci.</div>:(
+                    <div style={{display:'flex',flexDirection:'column',gap:10}}>
+                      {anomalies.map(a=>(
+                        <button key={a.previsionnel_id} onClick={()=>setSel({kind:'seance',id:a.previsionnel_id,data:a})}
+                          style={{display:'block',width:'100%',textAlign:'left',padding:'13px 14px',borderRadius:12,cursor:'pointer',border:'1px solid',
+                            background:sel.id===a.previsionnel_id?'rgba(93,226,152,.10)':'rgba(227,255,240,.05)',
+                            borderColor:sel.id===a.previsionnel_id?'rgba(93,226,152,.35)':'rgba(227,255,240,.08)'}}>
+                          <span style={{display:'flex',alignItems:'center',gap:8,marginBottom:6}}>
+                            <span style={{width:6,height:6,borderRadius:'50%',background:P.saumon}}/>
+                            <span style={{fontSize:9.5,fontWeight:700,letterSpacing:'.11em',textTransform:'uppercase',color:P.saumon}}>{a.etatLabel}</span>
+                          </span>
+                          <span style={{display:'block',fontSize:12.5,color:P.givre,lineHeight:1.45}}>{a.titre}</span>
+                          <span style={{display:'block',fontSize:11,color:'rgba(227,255,240,.45)',marginTop:5}}>{fmtCourt(a.date_prevue)} · {a.intervenant_nom} · {a.blocId}</span>
+                        </button>
                       ))}
                     </div>
-                  </>
-                )}
+                  )}
+                </div>
               </div>
             )}
-          </>
-        )}
-      </div>
+
+            {!deploy&&(
+              <div style={{background:P.surface,border:`1px solid ${P.border}`,borderRadius:16,marginTop:20,overflow:'hidden'}}>
+                <div style={{padding:'13px 18px',borderBottom:`1px solid ${P.border}`,fontSize:11,fontWeight:600,letterSpacing:'.1em',textTransform:'uppercase',color:P.petrole}}>Ce qui est prévu — répartition des intervenants</div>
+                {blocs.map(b=>(
+                  <button key={b.id} onClick={()=>setSel({kind:'bloc',id:b.id})}
+                    style={{width:'100%',display:'flex',alignItems:'center',gap:14,padding:'12px 18px',borderBottom:`1px solid ${P.border}`,cursor:'pointer',border:'none',
+                      background:sel.kind==='bloc'&&sel.id===b.id?'#F1FCF6':'transparent'}}>
+                    <span style={{fontSize:11,fontWeight:700,color:P.petrole,background:P.givre,padding:'4px 9px',borderRadius:7,flexShrink:0}}>{b.id}</span>
+                    <span style={{flex:1,textAlign:'left',fontSize:12.5,color:P.abysse}}>{b.titre}</span>
+                    <span style={{fontSize:11,color:P.textm,width:104,textAlign:'left'}}>{b.comp} compétences</span>
+                    <span style={{fontSize:11,color:P.textm,width:96,textAlign:'left'}}>{b.mods} modules</span>
+                    <span style={{fontSize:11,color:P.petrole,flexShrink:0}}>{b.qui}</span>
+                  </button>
+                ))}
+              </div>
+            )}
+          </>}
+
+          {temps==='digest'&&(
+            <div style={{maxWidth:640,margin:'0 auto'}}>
+              <div style={{display:'flex',justifyContent:'flex-end',marginBottom:16}}>
+                <button onClick={genererDigest} disabled={generating}
+                  style={{background:P.petrole,color:P.givre,border:'none',borderRadius:8,padding:'8px 16px',fontSize:12,fontWeight:500,cursor:'pointer',opacity:generating?0.6:1,display:'flex',alignItems:'center',gap:8}}>
+                  {generating?<Spinner size={14}/>:null}{digest?'↻ Régénérer le digest':'Générer le digest du mois'}
+                </button>
+              </div>
+              {genError&&<div style={{...card(),border:`1px solid ${P.red}`,color:'#8B1A1A',fontSize:12,marginBottom:16}}>⚠ {genError}</div>}
+              {!digest?(
+                <Empty icon="✉" titre="Aucun digest généré" msg="Générez le digest du mois pour ce titre — il s'appuie sur les séances déclarées de la période en cours."/>
+              ):(
+                <DigestPreview digest={digest} titre={titre} campus={campus} fr={`${user.prenom} ${user.nom}`} onValiderEnvoyer={validerEnvoyer}/>
+              )}
+            </div>
+          )}
+        </div>
+      </main>
+
+      <Inspecteur insp={insp}/>
     </div>
   )
 }
 
 /* ── Aperçu digest — reproduit la maquette validée, alimenté par digest.contenu_genere ── */
-function DigestPreview({digest,titre,campus,fr,onValiderEnvoyer}){
+function DigestPreview({digest,titre,campus,fr,onValiderEnvoyer,readOnly=false}){
   const c=digest.contenu_genere||{}
   const D={abysse:P.abysse,petrole:P.petrole,menthe:P.menthe,saumon:P.saumon}
   const avancementBlocs=c.avancement_blocs||[]
@@ -1284,7 +1734,7 @@ function DigestPreview({digest,titre,campus,fr,onValiderEnvoyer}){
 
         <div style={sectStyle}>
           <div style={labelStyle}>Point de coordination — {fr}, FR</div>
-          {!dejaEnvoye?(
+          {!dejaEnvoye&&!readOnly?(
             <textarea value={note} onChange={e=>setNote(e.target.value)} placeholder="Note de coordination (modifiable avant envoi)…"
               style={{width:'100%',minHeight:70,background:'rgba(255,255,255,0.05)',border:'1px solid rgba(255,255,255,0.12)',borderRadius:8,padding:'0.6rem',fontSize:12,color:'#fff',resize:'vertical',outline:'none',lineHeight:1.6,marginBottom:coordination.length?'0.75rem':0}}/>
           ):note&&(
@@ -1316,6 +1766,8 @@ function DigestPreview({digest,titre,campus,fr,onValiderEnvoyer}){
           <div style={{fontSize:11,color:'rgba(255,255,255,0.3)',lineHeight:1.5}}>Répondre à ce mail = contacter {fr} directement.<br/>Atlas des compétences · Éminéo · {titre}</div>
           {dejaEnvoye?(
             <span style={{color:D.menthe,fontSize:13,fontWeight:700,whiteSpace:'nowrap'}}>✓ Envoyé</span>
+          ):readOnly?(
+            <span style={{color:'rgba(255,255,255,0.35)',fontSize:12}}>En attente de validation</span>
           ):(
             <button onClick={handleValider} disabled={sending}
               style={{background:D.menthe,color:P.abysse,border:'none',borderRadius:6,padding:'9px 20px',fontWeight:700,fontSize:13,cursor:sending?'default':'pointer',whiteSpace:'nowrap',opacity:sending?0.7:1,display:'flex',alignItems:'center',gap:'0.5rem'}}>
