@@ -670,6 +670,7 @@ function AlertesList({formations,showFormationTitle=true}){
 
 /* ═══ VUE DIRECTION DES PROGRAMMES ════════════════════════════════════════ */
 function VueDir({user,onLogout}){
+  const [atelierOpen,setAtelierOpen]=useState(false)
   const [onglet,setOnglet]=useState('formations')
   const [formations,setFormations]=useState([])
   const [loading,setLoading]=useState(true)
@@ -747,11 +748,25 @@ function VueDir({user,onLogout}){
 
   useEffect(()=>{ if(onglet==='digest'&&fCarto) loadDigest(fCarto._id) },[onglet,fCarto?._id])
 
+  // La Direction peut ouvrir le poste de travail L'Atelier (même écran que le
+  // Formateur Référent — l'API autorise déjà 'dir' sur toutes les actions FR).
+  if(atelierOpen) return <VueFR user={user} onLogout={onLogout} onRetour={()=>setAtelierOpen(false)}/>
+
   return(
     <div style={{minHeight:'100vh',background:P.givre}}>
       <Topbar user={user} formationTitre="Direction des programmes" onLogout={onLogout} onglet={onglet} setOnglet={setOnglet}
         onglets={[{id:'formations',label:'Formations'},{id:'ingestion',label:'+ Ingestion'},{id:'cartographie',label:'Cartographie'},{id:'digest',label:'Digest'},{id:'alertes',label:`Alertes (${totalAlertes})`},{id:'comptes',label:'Comptes'}]}/>
       <div style={{maxWidth:960,margin:'0 auto',padding:'2rem 1.5rem'}}>
+
+        <button onClick={()=>setAtelierOpen(true)}
+          style={{width:'100%',display:'flex',alignItems:'center',gap:14,background:P.abysse,color:P.givre,border:'none',borderRadius:14,padding:'16px 20px',marginBottom:'1.5rem',cursor:'pointer',textAlign:'left'}}>
+          <span style={{fontFamily:"'DM Serif Display',serif",fontSize:19,color:P.menthe,flexShrink:0}}>L'Atelier</span>
+          <span style={{flex:1}}>
+            <span style={{display:'block',fontSize:13,fontWeight:600}}>Ouvrir le poste de travail</span>
+            <span style={{display:'block',fontSize:11.5,color:'rgba(227,255,240,.5)',marginTop:2}}>Cartographie · comparateur · digest — le mois en 3 temps</span>
+          </span>
+          <span style={{fontSize:16,color:P.menthe,flexShrink:0}}>→</span>
+        </button>
 
         {onglet==='formations'&&(
           <div className="fi">
@@ -887,6 +902,7 @@ function VueDir({user,onLogout}){
 
 /* ═══ VUE RP ════════════════════════════════════════════════════════════════ */
 function VueRP({user,onLogout}){
+  const [atelierOpen,setAtelierOpen]=useState(false)
   const [onglet,setOnglet]=useState('formations')
   const [formations,setFormations]=useState([])
   const [loading,setLoading]=useState(true)
@@ -896,11 +912,22 @@ function VueRP({user,onLogout}){
   const f=selF||formations[0]||null
   const alertes=f?.alertes_detectees||[]
 
+  if(atelierOpen) return <VueFR user={user} onLogout={onLogout} onRetour={()=>setAtelierOpen(false)}/>
+
   return(
     <div style={{minHeight:'100vh',background:P.givre}}>
       <Topbar user={user} formationTitre={f?.formation?.titre||''} onLogout={onLogout} onglet={onglet} setOnglet={setOnglet}
         onglets={[{id:'formations',label:'Mes formations'},{id:'cartographie',label:'Cartographie'},{id:'blocs',label:'Blocs'},{id:'alertes',label:`Alertes (${alertes.length})`},{id:'comptes',label:'Comptes'}]}/>
       <div style={{maxWidth:960,margin:'0 auto',padding:'1.5rem'}}>
+        <button onClick={()=>setAtelierOpen(true)}
+          style={{width:'100%',display:'flex',alignItems:'center',gap:14,background:P.abysse,color:P.givre,border:'none',borderRadius:14,padding:'16px 20px',marginBottom:'1.5rem',cursor:'pointer',textAlign:'left'}}>
+          <span style={{fontFamily:"'DM Serif Display',serif",fontSize:19,color:P.menthe,flexShrink:0}}>L'Atelier</span>
+          <span style={{flex:1}}>
+            <span style={{display:'block',fontSize:13,fontWeight:600}}>Ouvrir le poste de travail</span>
+            <span style={{display:'block',fontSize:11.5,color:'rgba(227,255,240,.5)',marginTop:2}}>Cartographie · comparateur · digest — le mois en 3 temps</span>
+          </span>
+          <span style={{fontSize:16,color:P.menthe,flexShrink:0}}>→</span>
+        </button>
         {loading?<div style={{textAlign:'center',padding:'2rem'}}><Spinner/></div>:!f?<Empty icon="🎓" titre="Aucune formation" msg="Aucune formation sur votre campus. Contacter la Direction des programmes."/>:<>
           {onglet==='formations'&&<div className="fi"><h2 style={{fontFamily:'Georgia,serif',fontWeight:400,color:P.abysse,marginTop:0,fontSize:22,marginBottom:'1rem'}}>Mes formations — {user.campus}</h2>{formations.map(fo=>{const isSel=selF?._id===fo._id;return<div key={fo._id} onClick={()=>setSelF(fo)} style={{...card({cursor:'pointer'}),background:isSel?P.petrole:P.surface,border:`1px solid ${isSel?P.petrole:P.border}`,boxShadow:isSel?'0 4px 18px rgba(19,69,71,0.25)':'0 1px 6px rgba(11,43,45,0.06)',transition:'all 0.18s'}}><div style={{fontSize:14,fontWeight:600,color:isSel?P.menthe:P.abysse}}>{fo.formation?.titre}</div><div style={{fontSize:11,color:isSel?'rgba(227,255,240,0.55)':P.textm,marginTop:3}}>{(fo.blocs||[]).length}B · {(fo.blocs||[]).flatMap(b=>b.modules||[]).length}M</div></div>})}</div>}
           {onglet==='cartographie'&&<div className="fi"><h2 style={{fontFamily:'Georgia,serif',fontWeight:400,color:P.abysse,marginTop:0,fontSize:22,marginBottom:'1rem'}}>{f.formation?.titre}</h2><GrapheCanvas blocs={f.blocs||[]} alertes={alertes} showAlerts/></div>}
@@ -1170,9 +1197,12 @@ function Inspecteur({insp}){
 }
 
 /* Rail gauche partagé — brand, titre, rôle, stepper "3 temps", pied de page. */
-function RailAtelier({titre,campus,rncp,periodeLabel,formations,formationId,onFormation,tempsDefs,temps,setTemps,roleButtons,anomalieFooter,user,onLogout}){
+function RailAtelier({titre,campus,rncp,periodeLabel,formations,formationId,onFormation,tempsDefs,temps,setTemps,roleButtons,anomalieFooter,user,onLogout,onRetour}){
   return (
     <aside style={{background:P.abysse,display:'flex',flexDirection:'column',padding:'26px 22px 20px',gap:26,borderRight:'1px solid rgba(227,255,240,.08)',overflowY:'auto'}}>
+      {onRetour&&(
+        <button onClick={onRetour} style={{alignSelf:'flex-start',fontSize:11,fontWeight:600,color:P.menthe,background:'rgba(93,226,152,.10)',padding:'5px 11px',borderRadius:8,cursor:'pointer',marginBottom:-14}}>← Direction</button>
+      )}
       <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start'}}>
         <div>
           <div style={{fontFamily:"'DM Serif Display',serif",fontSize:21,color:P.givre,lineHeight:1}}>Atlas</div>
@@ -1458,7 +1488,7 @@ function VueEtudiant({user,onLogout}){
 
 /* ═══ VUE FORMATEUR RÉFÉRENT — poste de travail (lecture seule V1) ═══════════ */
 /* ═══ VUE FORMATEUR RÉFÉRENT — poste de travail L'Atelier ════════════════════ */
-function VueFR({user,onLogout}){
+function VueFR({user,onLogout,onRetour}){
   const [formations,setFormations]=useState([])
   const [formationId,setFormationId]=useState(null)
   const [data,setData]=useState(null)
@@ -1640,7 +1670,7 @@ function VueFR({user,onLogout}){
     <div style={{display:'grid',gridTemplateColumns:'252px minmax(0,1fr) 336px',height:'100vh',width:'100%',minWidth:1280,background:P.abysse,overflow:'hidden',fontFamily:"'DM Sans',sans-serif"}}>
       <RailAtelier titre={titre} campus={campus} rncp={f?.formation?.rncp} periodeLabel={abregeMois(data?.periode?.label)} formations={formations} formationId={formationId}
         onFormation={id=>{setFormationId(id);setSel({kind:null,id:null})}} tempsDefs={TEMPS_DEFS} temps={temps} setTemps={setTemps}
-        user={user} onLogout={onLogout}
+        user={user} onLogout={onLogout} onRetour={onRetour}
         roleButtons={[
           {id:'fr',active:viewRole==='fr',label:'Responsable pédagogique',sub:`${user.prenom} ${user.nom} · cartographie du titre`,go:()=>{setViewRole('fr');setSel({kind:null,id:null})}},
           {id:'intervenant',active:viewRole==='intervenant',label:'Intervenant',sub:'Aperçu · tous modules',go:()=>{setViewRole('intervenant');setSel({kind:null,id:null})}},
