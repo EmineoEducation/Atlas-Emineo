@@ -975,6 +975,16 @@ function moduleToBlocMap(blocs){
   return m
 }
 function normCode(c){ return String(c||'').toUpperCase().replace(/[^A-Z0-9]/g,'') }
+
+/* Libellés des 4 états du comparateur prévu/réalisé (cf api/fr.js
+   calculerDelta). 'ecart_moins' a été ajouté le 25/08/2026 : une séance dont
+   le contenu annoncé n'a pas été couvert s'affichait auparavant « Conforme ». */
+function etatLabel(etat){
+  if(etat==='nominal')    return 'Conforme'
+  if(etat==='ecart_plus') return 'Écart +'
+  if(etat==='ecart_moins')return 'Écart −'
+  return 'Non déclarée'
+}
 function abregeMois(label){
   if(!label) return ''
   const [mois,annee]=label.split(' ')
@@ -1197,7 +1207,7 @@ function Inspecteur({insp}){
 }
 
 /* Rail gauche partagé — brand, titre, rôle, stepper "3 temps", pied de page. */
-function RailAtelier({titre,campus,rncp,periodeLabel,formations,formationId,onFormation,tempsDefs,temps,setTemps,roleButtons,anomalieFooter,user,onLogout,onRetour}){
+function RailAtelier({titre,campus,rncp,periodeLabel,onMois,formations,formationId,onFormation,tempsDefs,temps,setTemps,roleButtons,anomalieFooter,user,onLogout,onRetour}){
   return (
     <aside style={{background:P.abysse,display:'flex',flexDirection:'column',padding:'26px 22px 20px',gap:26,borderRight:'1px solid rgba(227,255,240,.08)',overflowY:'auto'}}>
       {onRetour&&(
@@ -1215,7 +1225,15 @@ function RailAtelier({titre,campus,rncp,periodeLabel,formations,formationId,onFo
         <div style={{display:'flex',flexWrap:'wrap',gap:5,marginTop:10}}>
           {rncp&&<span style={{fontSize:9.5,fontWeight:600,letterSpacing:'.05em',color:P.menthe,background:'rgba(93,226,152,.12)',padding:'3px 8px',borderRadius:20}}>RNCP {rncp}</span>}
           {campus&&<span style={{fontSize:9.5,fontWeight:600,letterSpacing:'.05em',color:'rgba(227,255,240,.6)',background:'rgba(227,255,240,.07)',padding:'3px 8px',borderRadius:20}}>{campus}</span>}
-          {periodeLabel&&<span style={{fontSize:9.5,fontWeight:600,letterSpacing:'.05em',color:'rgba(227,255,240,.6)',background:'rgba(227,255,240,.07)',padding:'3px 8px',borderRadius:20}}>{periodeLabel}</span>}
+          {periodeLabel&&(onMois?(
+            <span style={{display:'inline-flex',alignItems:'center',gap:2,background:'rgba(227,255,240,.07)',borderRadius:20,padding:'1px 3px'}}>
+              <button onClick={()=>onMois(-1)} title="Mois précédent" style={{color:'rgba(227,255,240,.55)',fontSize:12,padding:'2px 6px',cursor:'pointer',lineHeight:1}}>‹</button>
+              <span style={{fontSize:9.5,fontWeight:600,letterSpacing:'.05em',color:'rgba(227,255,240,.78)',minWidth:54,textAlign:'center'}}>{periodeLabel}</span>
+              <button onClick={()=>onMois(1)} title="Mois suivant" style={{color:'rgba(227,255,240,.55)',fontSize:12,padding:'2px 6px',cursor:'pointer',lineHeight:1}}>›</button>
+            </span>
+          ):(
+            <span style={{fontSize:9.5,fontWeight:600,letterSpacing:'.05em',color:'rgba(227,255,240,.6)',background:'rgba(227,255,240,.07)',padding:'3px 8px',borderRadius:20}}>{periodeLabel}</span>
+          ))}
         </div>
         {formations.length>1&&(
           <select value={formationId||''} onChange={e=>onFormation(Number(e.target.value))}
@@ -1354,7 +1372,7 @@ function VueIntervenant({user,onLogout}){
           etat: anyWarn?'À arbitrer':(seancesM.length?'Conforme':'Planifié'), st: anyWarn?'warn':'ok',
           competences,
           seances: ecartsM.map(e=>({date:fmtCourt(e.date_prevue), titre:e.titre,
-            etat: e.etat==='nominal'?'Conforme':e.etat==='ecart_plus'?'Écart +':'Lacune',
+            etat: etatLabel(e.etat),
             st: e.etat==='nominal'?'ok':'warn', data:e})),
         }
       }),
@@ -1500,6 +1518,14 @@ function VueFR({user,onLogout,onRetour}){
   const [viewRole,setViewRole]=useState('fr')
   const [sel,setSel]=useState({kind:null,id:null})
   const [toast,setToast]=useState(null)
+  /* Mois consulté. Défaut : le mois en cours. Le FR doit pouvoir revenir sur le
+     mois précédent (digest déjà parti, écarts arbitrés) sans attendre. */
+  const [periode,setPeriode]=useState(()=>new Date().toISOString())
+  function decalerMois(n){
+    const d=new Date(periode)
+    setPeriode(new Date(Date.UTC(d.getUTCFullYear(),d.getUTCMonth()+n,15)).toISOString())
+    setSel({kind:null,id:null})
+  }
 
   useEffect(()=>{
     api.getFormations().then(d=>{
@@ -1512,9 +1538,9 @@ function VueFR({user,onLogout,onRetour}){
   function reload(){
     if(!formationId) return
     setLoading(true);setError('')
-    return api.getFR(formationId).then(d=>{setData(d);setLoading(false);return d}).catch(e=>{setError(e.message);setLoading(false)})
+    return api.getFR(formationId,periode).then(d=>{setData(d);setLoading(false);return d}).catch(e=>{setError(e.message);setLoading(false)})
   }
-  useEffect(()=>{ reload() },[formationId])
+  useEffect(()=>{ reload() },[formationId,periode])
 
   const f=formations.find(x=>x._id===formationId)||null
   const titre=f?.formation?.titre||'Atlas des compétences'
@@ -1530,7 +1556,7 @@ function VueFR({user,onLogout,onRetour}){
 
   async function genererDigest(){
     setGenerating(true);setGenError('')
-    try{ await api.generateDigest(formationId,campus); await reload(); setTemps('digest') }
+    try{ await api.generateDigest(formationId,campus,periode); await reload(); setTemps('digest') }
     catch(e){ setGenError(e.message) } finally{ setGenerating(false) }
   }
   async function validerEnvoyer(noteFr){
@@ -1552,7 +1578,7 @@ function VueFR({user,onLogout,onRetour}){
 
   const seancesJournal = ecarts.map(e=>({
     ...e, st: e.etat==='nominal'?'ok':'warn',
-    etatLabel: e.etat==='nominal'?'Conforme':e.etat==='ecart_plus'?'Écart +':'Lacune',
+    etatLabel: etatLabel(e.etat),
     blocId: modToBloc[e.module_ref]||'—',
   }))
   const anomalies = seancesJournal.filter(s=>s.st==='warn')
@@ -1579,7 +1605,7 @@ function VueFR({user,onLogout,onRetour}){
           etat: anyWarn?'À arbitrer':(seancesM.length?'Conforme':'Planifié'), st: anyWarn?'warn':'ok',
           competences,
           seances: ecartsM.map(e=>({date:fmtCourt(e.date_prevue), titre:e.titre,
-            etat: e.etat==='nominal'?'Conforme':e.etat==='ecart_plus'?'Écart +':'Lacune',
+            etat: etatLabel(e.etat),
             st: e.etat==='nominal'?'ok':'warn', data:e})),
         }
       }),
@@ -1668,7 +1694,8 @@ function VueFR({user,onLogout,onRetour}){
 
   return (
     <div style={{display:'grid',gridTemplateColumns:'252px minmax(0,1fr) 336px',height:'100vh',width:'100%',minWidth:1280,background:P.abysse,overflow:'hidden',fontFamily:"'DM Sans',sans-serif"}}>
-      <RailAtelier titre={titre} campus={campus} rncp={f?.formation?.rncp} periodeLabel={abregeMois(data?.periode?.label)} formations={formations} formationId={formationId}
+      <RailAtelier titre={titre} campus={campus} rncp={f?.formation?.rncp} periodeLabel={abregeMois(data?.periode?.label)}
+        onMois={decalerMois} formations={formations} formationId={formationId}
         onFormation={id=>{setFormationId(id);setSel({kind:null,id:null})}} tempsDefs={TEMPS_DEFS} temps={temps} setTemps={setTemps}
         user={user} onLogout={onLogout} onRetour={onRetour}
         roleButtons={[
