@@ -337,41 +337,148 @@ async function upsertDigest(db, { formationId, campus, anneeScolaire, debut, fin
 }
 
 // ── Envoi Resend ───────────────────────────────────────────────────────────
-function renderDigestHTML(c, titreFormation, campus, frNom) {
-  const pill = (t) => `<span style="background:#E1F5EE;color:#085041;font-size:11px;font-weight:600;padding:2px 8px;border-radius:20px;margin-right:4px;display:inline-block">${t}</span>`;
-  const blocsRows = (c.avancement_blocs || []).map(b =>
-    `<tr><td style="padding:4px 8px;font-size:12px;color:#fff">${b.id} — ${b.titre}</td><td style="padding:4px 8px;font-size:12px;color:#5DE298;text-align:right">${b.pct == null ? '—' : b.pct + '%'}</td></tr>`
-  ).join('');
-  const quiRows = (c.qui_a_enseigne || []).map(q =>
-    `<tr><td style="padding:6px 8px;font-size:12px;color:#0B2B2D">${q.module}</td><td style="padding:6px 8px;font-size:12px;color:#0B2B2D">${q.intervenant}</td><td style="padding:6px 8px;font-size:12px">${(q.competences||[]).map(pill).join('')}</td></tr>`
-  ).join('');
-  const sequences = (c.sequences_a_venir || []).map(s =>
-    `<li style="font-size:12px;color:#134547;margin-bottom:4px">${s.date || ''} — ${s.module} (${s.intervenant})</li>`
-  ).join('');
+// ── Rendu HTML du digest ───────────────────────────────────────────────────
+// Reecrit le 25/08/2026. Trois defauts corriges :
+//  1. La section "Avancement RNCP par bloc" ecrivait en color:#fff sur un
+//     conteneur sans fond — blanc sur blanc, illisible. Invisible depuis
+//     l'apercu in-app, qui a son propre fond sombre.
+//  2. Le bandeau de KPI (intervenants / seances / coordination) et les barres
+//     de progression, presents dans l'apercu, etaient absents du mail : les
+//     deux ne montraient pas la meme chose, alors que l'ecran promet
+//     "tel que les intervenants le recevront".
+//  3. Aucun echappement HTML sur les noms, libelles et note du FR.
+//
+// Structure en tables avec bgcolor explicite sur chaque cellule : c'est la
+// seule mise en forme fiable dans Outlook, qui rend le HTML avec le moteur de
+// Word et ignore les fonds poses sur des <div>. Aucune couleur en rgba() pour
+// la meme raison — uniquement des hex opaques.
+function esc(v) {
+  return String(v == null ? '' : v)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
 
-  return `
-  <div style="font-family:Arial,Helvetica,sans-serif;max-width:640px;margin:0 auto">
-    <div style="background:#134547;padding:14px 24px;color:#5DE298;font-size:16px;font-weight:700">Atlas · Éminéo</div>
-    <div style="background:#0B2B2D;padding:28px 24px">
-      <div style="color:#5DE298;font-size:11px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">Synthèse · Formateur Référent ${frNom || ''}</div>
-      <div style="color:#fff;font-size:22px;font-weight:700;margin-bottom:8px">${c.titre || ''}</div>
-      <div style="color:rgba(255,255,255,.55);font-size:12px">${titreFormation}${campus ? ' · ' + campus : ''} · ${c.periode ? c.periode.label : ''}</div>
-    </div>
-    <div style="padding:20px 24px;border-bottom:1px solid #E3FFF0">
-      <div style="font-size:11px;color:#888;text-transform:uppercase;margin-bottom:8px">Avancement RNCP par bloc</div>
-      <table style="width:100%;border-collapse:collapse"><tbody>${blocsRows}</tbody></table>
-    </div>
-    <div style="padding:20px 24px;border-bottom:1px solid #E3FFF0">
-      <div style="font-size:11px;color:#888;text-transform:uppercase;margin-bottom:8px">Qui a enseigné quoi ce mois-ci</div>
-      <table style="width:100%;border-collapse:collapse"><tbody>${quiRows}</tbody></table>
-    </div>
-    ${c.note_fr ? `<div style="padding:16px 24px;background:#FAEEDA;margin:16px 24px;border-radius:8px">
-      <div style="font-size:10px;color:#633806;text-transform:uppercase;margin-bottom:4px">Note de coordination — ${frNom || 'FR'}</div>
-      <div style="font-size:12px;color:#633806">${c.note_fr}</div>
-    </div>` : ''}
-    ${sequences ? `<div style="padding:20px 24px"><div style="font-size:11px;color:#888;text-transform:uppercase;margin-bottom:8px">Ce qui arrive le mois prochain</div><ul style="margin:0;padding-left:18px">${sequences}</ul></div>` : ''}
-    <div style="padding:16px 24px;background:#134547;color:rgba(255,255,255,.5);font-size:11px">Répondre à cet email = contacter ${frNom || 'le Formateur Référent'} directement.</div>
-  </div>`;
+// Palette Eminéo, en hex opaques (pas de rgba : Outlook ne la supporte pas).
+const C = {
+  abysse: '#0B2B2D', petrole: '#134547', menthe: '#5DE298', givre: '#E3FFF0',
+  saumon: '#E89B77', rail: '#17383A', ligne: '#1C4143',
+  texte: '#FFFFFF', texteAtt: '#9FB8B5', label: '#7FA09C',
+};
+
+function renderDigestHTML(c, titreFormation, campus, frNom) {
+  const kpis = c.kpis || { intervenants: 0, seances: 0, coordination: 0 };
+
+  const pill = (t) =>
+    `<span style="background:${C.ligne};color:${C.menthe};font-size:10px;font-weight:600;padding:2px 8px;border-radius:20px;margin:2px 4px 0 0;display:inline-block;font-family:Arial,Helvetica,sans-serif">${esc(t)}</span>`;
+
+  const kpi = (val, lib, couleur) =>
+    `<td width="33%" valign="top" style="padding:0 8px 0 0;font-family:Arial,Helvetica,sans-serif">
+       <div style="font-size:26px;font-weight:700;color:${couleur};line-height:1">${esc(val)}</div>
+       <div style="font-size:11px;color:${C.texteAtt};padding-top:4px">${esc(lib)}</div>
+     </td>`;
+
+  // Barre de progression en table : une cellule remplie a X %, une cellule
+  // vide pour le reste. Fonctionne partout, y compris Outlook.
+  const barre = (pct) => {
+    const p = Math.max(0, Math.min(100, Number(pct) || 0));
+    const rempli = p > 0
+      ? `<td width="${p}%" bgcolor="${C.menthe}" style="height:4px;line-height:4px;font-size:1px">&nbsp;</td>`
+      : '';
+    const vide = p < 100
+      ? `<td width="${100 - p}%" bgcolor="${C.rail}" style="height:4px;line-height:4px;font-size:1px">&nbsp;</td>`
+      : '';
+    return `<table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse"><tr>${rempli}${vide}</tr></table>`;
+  };
+
+  const blocs = (c.avancement_blocs || []).map(b => `
+    <tr><td style="padding:0 0 12px 0;font-family:Arial,Helvetica,sans-serif">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
+        <td style="font-size:12px;color:${C.texte};padding-bottom:5px">${esc(b.id)} — ${esc(b.titre)}</td>
+        <td align="right" style="font-size:12px;font-weight:700;color:${C.menthe};padding-bottom:5px">${b.pct == null ? '—' : b.pct + '%'}</td>
+      </tr></table>
+      ${barre(b.pct)}
+    </td></tr>`).join('');
+
+  const qui = (c.qui_a_enseigne || []).map(q => `
+    <tr><td style="padding:0 0 14px 0;font-family:Arial,Helvetica,sans-serif;border-bottom:1px solid ${C.ligne}">
+      <div style="font-size:13px;color:${C.texte};line-height:1.4;padding-bottom:3px">${esc(q.module)}</div>
+      <div style="font-size:11px;color:${C.texteAtt};padding-bottom:4px">${esc(q.intervenant)}${q.modalite ? ' · ' + esc(q.modalite) : ''}</div>
+      <div>${(q.competences || []).map(pill).join('')}</div>
+    </td></tr>`).join('');
+
+  const coord = (c.coordination || []).map(co => `
+    <tr><td style="padding:0 0 10px 0;font-family:Arial,Helvetica,sans-serif">
+      <div style="font-size:12px;color:${C.saumon};font-weight:600">${esc(co.titre)}</div>
+      <div style="font-size:11px;color:${C.texteAtt};line-height:1.5">${esc(co.detail)}</div>
+    </td></tr>`).join('');
+
+  const suite = (c.sequences_a_venir || []).map(s => `
+    <tr><td style="padding:0 0 10px 0;font-family:Arial,Helvetica,sans-serif">
+      <div style="font-size:12.5px;color:${C.texte};line-height:1.4">${esc(s.module)}</div>
+      <div style="font-size:11px;color:${C.texteAtt}">${s.date ? esc(String(s.date).slice(0, 10)) + ' · ' : ''}${esc(s.intervenant)}</div>
+    </td></tr>`).join('');
+
+  const section = (label, contenu) => `
+    <tr><td bgcolor="${C.abysse}" style="padding:20px 26px;border-bottom:1px solid ${C.ligne}">
+      <div style="font-family:Arial,Helvetica,sans-serif;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:${C.label};padding-bottom:14px">${esc(label)}</div>
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">${contenu}</table>
+    </td></tr>`;
+
+  const vide = (msg) => `<tr><td style="font-family:Arial,Helvetica,sans-serif;font-size:12px;color:${C.texteAtt}">${esc(msg)}</td></tr>`;
+
+  return `<!DOCTYPE html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark"><meta name="supported-color-schemes" content="dark">
+<title>${esc(c.titre || 'Atlas — Éminéo')}</title></head>
+<body style="margin:0;padding:0;background:${C.abysse}">
+<table width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="${C.abysse}" style="background:${C.abysse}">
+<tr><td align="center" style="padding:24px 12px">
+
+<table width="640" cellpadding="0" cellspacing="0" border="0" style="max-width:640px;width:100%;border-collapse:collapse;border-radius:14px;overflow:hidden">
+
+  <tr><td bgcolor="${C.petrole}" style="padding:14px 26px;font-family:Arial,Helvetica,sans-serif">
+    <table width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
+      <td style="font-size:15px;font-weight:700;color:${C.menthe}">Atlas · Éminéo</td>
+      <td align="right" style="font-size:11px;color:${C.texteAtt}">${esc(titreFormation)}${campus ? ' · ' + esc(campus) : ''}</td>
+    </tr></table>
+  </td></tr>
+
+  <tr><td bgcolor="${C.abysse}" style="padding:28px 26px;font-family:Arial,Helvetica,sans-serif">
+    <div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:${C.menthe};padding-bottom:8px">Synthèse · Formateur Référent ${esc(frNom)}</div>
+    <div style="font-size:23px;font-weight:700;color:${C.texte};line-height:1.25;padding-bottom:8px">${esc(c.titre)}</div>
+    <div style="font-size:12px;color:${C.texteAtt};line-height:1.5">Généré par Atlas · Validé avant envoi · Répondez à ce mail pour contacter ${esc(frNom || 'le Formateur Référent')}</div>
+    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:20px;border-top:1px solid ${C.ligne}">
+      <tr><td style="padding-top:18px">
+        <table width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
+          ${kpi(kpis.intervenants, 'Intervenants actifs', C.menthe)}
+          ${kpi(kpis.seances, 'Séances réalisées', C.menthe)}
+          ${kpi(kpis.coordination, 'Points de coordination', C.saumon)}
+        </tr></table>
+      </td></tr>
+    </table>
+  </td></tr>
+
+  ${section('Avancement RNCP par bloc', blocs || vide('Aucun bloc de compétences sur ce titre.'))}
+  ${section('Qui a enseigné quoi ce mois-ci', qui || vide('Aucune séance déclarée sur la période.'))}
+
+  <tr><td bgcolor="${C.abysse}" style="padding:20px 26px;border-bottom:1px solid ${C.ligne}">
+    <div style="font-family:Arial,Helvetica,sans-serif;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:${C.label};padding-bottom:14px">Point de coordination — ${esc(frNom || 'FR')}</div>
+    ${c.note_fr ? `<table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:${coord ? '14px' : '0'}">
+      <tr><td bgcolor="#2A2320" style="padding:14px 16px;border-left:3px solid ${C.saumon};font-family:Arial,Helvetica,sans-serif;font-size:12.5px;color:${C.givre};line-height:1.65">${esc(c.note_fr)}</td></tr>
+    </table>` : ''}
+    ${coord ? `<table width="100%" cellpadding="0" cellspacing="0" border="0">${coord}</table>` : (c.note_fr ? '' : vide('Aucun point de coordination ce mois-ci.'))}
+  </td></tr>
+
+  ${suite ? section('Ce qui arrive le mois prochain', suite) : ''}
+
+  <tr><td bgcolor="${C.petrole}" style="padding:18px 26px;font-family:Arial,Helvetica,sans-serif;font-size:11px;color:${C.texteAtt};line-height:1.6">
+    Répondre à ce mail = contacter ${esc(frNom || 'le Formateur Référent')} directement.<br>
+    Atlas des compétences · Éminéo · ${esc(titreFormation)}
+  </td></tr>
+
+</table>
+</td></tr></table>
+</body></html>`;
 }
 
 // Expediteur. Par defaut l'adresse de marque — mais elle exige que le domaine
@@ -508,13 +615,20 @@ module.exports = async function handler(req, res) {
       const resendKey = process.env.RESEND_API_KEY;
       let resendId = null;
       if (resendKey) {
-        const html = renderDigestHTML(contenu, titreFormation, digest.campus, frNom)
-          + (modeTest
-            ? `<div style="font-family:Arial,sans-serif;max-width:640px;margin:12px auto;padding:12px 16px;background:#FDF1EB;border:1px solid #E89B77;border-radius:8px;font-size:12px;color:#B5643C">
-                 <strong>Mode test.</strong> Ce message aurait été envoyé à ${emails.length} destinataire(s) :
-                 ${emails.join(', ')}
-               </div>`
-            : '');
+        let html = renderDigestHTML(contenu, titreFormation, digest.campus, frNom);
+        if (modeTest) {
+          // Le rendu est desormais un document HTML complet : le bandeau doit
+          // etre insere AVANT </body>, pas concatene apres.
+          const bandeau =
+            `<table width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="${C.abysse}"><tr><td align="center" style="padding:0 12px 24px">
+               <table width="640" cellpadding="0" cellspacing="0" border="0" style="max-width:640px;width:100%">
+                 <tr><td bgcolor="#3A2A22" style="padding:14px 18px;border:1px solid ${C.saumon};border-radius:10px;font-family:Arial,Helvetica,sans-serif;font-size:12px;color:${C.saumon};line-height:1.6">
+                   <strong>Mode test.</strong> Ce message aurait été envoyé à ${emails.length} destinataire(s) :<br>${esc(emails.join(', '))}
+                 </td></tr>
+               </table>
+             </td></tr></table>`;
+          html = html.replace('</body>', bandeau + '</body>');
+        }
         const sent = await envoyerResend(resendKey, {
           to: modeTest ? [redirect] : emails,
           subject: modeTest ? `[TEST] ${sujet}` : sujet,
