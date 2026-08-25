@@ -447,6 +447,12 @@ module.exports = async function handler(req, res) {
     }
 
     // ─── Seed formations Le Mans (idempotent par rncp+campus) ───────────────
+    // Par defaut, une formation deja en base n'est mise a jour que si ses blocs
+    // sont vides — pour ne jamais ecraser un referentiel enrichi a la main.
+    // ?force=1 leve cette protection : indispensable quand DATA_LE_MANS evolue
+    // (ex. reconstruction du MSMC 38504 sur le referentiel officiel de juillet
+    // 2023, le 25/08/2026). A n'utiliser que volontairement.
+    const forceRefs = req.query && (req.query.force === '1' || req.query.force === 'true');
     let createdFormations = 0, updatedFormations = 0;
     const formationIds = {};
 
@@ -459,10 +465,10 @@ module.exports = async function handler(req, res) {
       if (ex.rows.length) {
         const row = ex.rows[0];
         formationIds[f.rncp] = Number(row.id);
-        // Mettre à jour si les blocs sont vides
+        // Mettre à jour si les blocs sont vides, ou si ?force=1
         let existing = {};
         try { existing = JSON.parse(row.data_json || '{}'); } catch(_) {}
-        if (!existing.blocs || existing.blocs.length === 0) {
+        if (forceRefs || !existing.blocs || existing.blocs.length === 0) {
           await db.execute({ sql: 'UPDATE formations SET titre=?,rncp=?,niveau=?,titre_court=?,certificateur=?,data_json=? WHERE id=?', args: [f.titre,f.rncp,f.niveau,f.titre_court,f.certificateur,dataStr,row.id] });
           updatedFormations++;
         }
@@ -567,6 +573,7 @@ module.exports = async function handler(req, res) {
         comptes_dir_crees: createdDir,
         formations_creees: createdFormations,
         formations_mises_a_jour: updatedFormations,
+        referentiels_forces: !!forceRefs,
         rp_crees: createdRP,
         inscriptions_rp: createdInscriptions,
         inscriptions_rp_purgees: purgedInscriptions,
