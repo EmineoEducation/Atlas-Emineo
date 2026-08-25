@@ -26,6 +26,27 @@ const { requireAuth, requireRole } = require('./_lib/auth');
 const MODEL = 'claude-haiku-4-5-20251001';
 const MAX_TOKENS = 2000;
 
+// ── Roles habilites sur le digest ──────────────────────────────────────────
+// Corrige le 25/08/2026 (audit Le Mans, bug B01). Le rôle 'rp' etait absent :
+// Johnny Nicolas et Etienne Azerad, les deux Responsables Pedagogiques du
+// pilote, obtenaient un 403 sur "Generer le digest" et "Valider et envoyer",
+// alors que src/App.jsx leur ouvre bien L'Atelier depuis VueRP.
+// Le bug etait invisible depuis un compte 'dir', qui lui etait autorise.
+const ROLES_DIGEST = ['dir', 'fr', 'rp'];
+
+// Un 'dir' voit tous les titres. Un 'fr' ou un 'rp' doit etre inscrit sur le
+// titre — quel que soit le libelle de son inscription ('fr' pour un Formateur
+// Referent, 'rp' pour un Responsable Pedagogique, cf api/setup.js).
+async function verifierPerimetre(db, user, formationId) {
+  if (user.role === 'dir') return { ok: true };
+  const insc = await db.execute({
+    sql: "SELECT 1 FROM inscription WHERE user_id=? AND formation_id=? AND role IN ('fr','rp')",
+    args: [user.id, formationId],
+  });
+  if (!insc.rows.length) return { ok: false, error: "Ce titre n'est pas dans votre périmètre." };
+  return { ok: true };
+}
+
 // ── Dates ──────────────────────────────────────────────────────────────────
 // Bornes du mois (UTC) contenant `ref`. Remplace bornesSemaine() : la cadence
 // est passee d'hebdomadaire a mensuelle (1er lundi du mois, cf PPT v2.0).
@@ -89,7 +110,10 @@ function calculerQuiAEnseigne(declarationsPeriode, previsionnelParId) {
   return declarationsPeriode.map(d => {
     const prev = previsionnelParId[d.previsionnel_id] || null;
     return {
-      module: d.module_ref || (prev && prev.titre) || 'Module',
+      // Le titre de seance est plus lisible que le code module (M12) dans le
+      // mail recu par les intervenants — le code ne sert qu'au rattachement
+      // au bloc cote cartographie.
+      module: (prev && prev.titre) || d.module_ref || 'Module',
       intervenant: d.intervenant_nom || (prev && prev.intervenant_nom) || '—',
       modalite: prev ? prev.modalite : '',
       competences: d.competences || [],
@@ -117,11 +141,18 @@ function detecterCoordination(declarationsPeriode) {
     }));
 }
 
-// Delta 3 etats entre previsionnel et declaration (cf slide "comparateur").
+// Delta 4 etats entre previsionnel et declaration (cf slide "comparateur").
 // Heuristique volontairement simple en V1, documentee comme telle :
-//  - pas de declaration correspondante -> ALERTE
-//  - concepts couverts > concepts annonces -> ECART+ (contenu supplementaire)
-//  - sinon -> NOMINAL
+//  - pas de declaration correspondante        -> ALERTE      (rien n'est remonte)
+//  - concepts couverts > concepts annonces    -> ECART+      (contenu supplementaire)
+//  - concepts couverts < concepts annonces    -> ECART-      (contenu non traite)
+//  - egalite                                  -> NOMINAL
+//
+// L'etat ECART- a ete ajoute le 25/08/2026 (audit Le Mans, bug B04) : avant
+// cette correction, une seance ou RIEN n'avait ete couvert (couvert = 0,
+// attendu = 6) tombait dans le "sinon" et s'affichait "Conforme au
+// previsionnel". C'etait le faux negatif le plus grave de l'outil : l'Atlas
+// rassurait le Formateur Referent precisement la ou il devait l'alerter.
 function calculerDelta(prevRows, declParPrevId) {
   return prevRows.map(p => {
     const d = declParPrevId[p.id];
@@ -132,12 +163,23 @@ function calculerDelta(prevRows, declParPrevId) {
     }
     const attendu = (p.concepts || []).length;
     const couvert = (d.couvert || []).length;
-    const etat = couvert > attendu ? 'ecart_plus' : 'nominal';
+
+    let etat = 'nominal';
+    let detail = 'Conforme au previsionnel.';
+
+    if (couvert > attendu) {
+      etat = 'ecart_plus';
+      detail = `${couvert} concept(s) couvert(s) pour ${attendu} annonce(s) — contenu supplementaire.`;
+    } else if (couvert < attendu) {
+      etat = 'ecart_moins';
+      detail = couvert === 0
+        ? `Aucun concept declare couvert alors que ${attendu} etai(en)t annonce(s).`
+        : `${couvert} concept(s) couvert(s) pour ${attendu} annonce(s) — contenu non traite.`;
+    }
+
     return { previsionnel_id: p.id, module_ref: p.module_ref, intervenant_nom: p.intervenant_nom,
-      numero: p.numero, titre: p.titre, date_prevue: p.date_prevue, etat,
-      detail: etat === 'ecart_plus'
-        ? `${couvert} concept(s) couvert(s) pour ${attendu} annonce(s) — contenu supplementaire detecte.`
-        : 'Conforme au previsionnel.' };
+      numero: p.numero, titre: p.titre, date_prevue: p.date_prevue, etat, detail,
+      concepts_attendus: attendu, concepts_couverts: couvert };
   });
 }
 
@@ -387,18 +429,13 @@ module.exports = async function handler(req, res) {
 
     // ── POST ?action=generate — (re)génère le digest du mois en cours ──────
     if (req.method === 'POST' && action === 'generate') {
-      const user = await requireRole(req, ['dir', 'fr']);
+      const user = await requireRole(req, ROLES_DIGEST);
       if (!user) return res.status(403).json({ error: 'Accès réservé.' });
       const { formation_id, campus, annee_scolaire, periode } = req.body || {};
       if (!formation_id || !campus) return res.status(400).json({ error: 'formation_id et campus requis.' });
 
-      if (user.role === 'fr') {
-        const insc = await db.execute({
-          sql: "SELECT 1 FROM inscription WHERE user_id=? AND formation_id=? AND role='fr'",
-          args: [user.id, formation_id],
-        });
-        if (!insc.rows.length) return res.status(403).json({ error: "Ce titre n'est pas dans votre périmètre FR." });
-      }
+      const perim = await verifierPerimetre(db, user, formation_id);
+      if (!perim.ok) return res.status(403).json({ error: perim.error });
 
       const apiKey = process.env.ANTHROPIC_API_KEY;
       const annee = annee_scolaire || '2026-27';
@@ -410,7 +447,7 @@ module.exports = async function handler(req, res) {
 
     // ── POST ?action=valider-envoyer — 1 clic : note FR + envoi Resend ─────
     if (req.method === 'POST' && action === 'valider-envoyer') {
-      const user = await requireRole(req, ['dir', 'fr']);
+      const user = await requireRole(req, ROLES_DIGEST);
       if (!user) return res.status(403).json({ error: 'Accès réservé.' });
       const { digest_id, note_fr } = req.body || {};
       if (!digest_id) return res.status(400).json({ error: 'digest_id requis.' });
@@ -424,13 +461,8 @@ module.exports = async function handler(req, res) {
       const digest = row.rows[0];
       if (digest.statut === 'envoye') return res.status(409).json({ error: 'Ce digest a déjà été envoyé.' });
 
-      if (user.role === 'fr') {
-        const insc = await db.execute({
-          sql: "SELECT 1 FROM inscription WHERE user_id=? AND formation_id=? AND role='fr'",
-          args: [user.id, digest.formation_id],
-        });
-        if (!insc.rows.length) return res.status(403).json({ error: "Ce titre n'est pas dans votre périmètre FR." });
-      }
+      const perim = await verifierPerimetre(db, user, digest.formation_id);
+      if (!perim.ok) return res.status(403).json({ error: perim.error });
 
       const contenu = parseJSON(digest.contenu_genere, {});
       if (typeof note_fr === 'string') contenu.note_fr = note_fr;
@@ -441,13 +473,29 @@ module.exports = async function handler(req, res) {
       const titreFormation = (formationRow.rows[0] && formationRow.rows[0].titre) || '';
       const frNom = `${user.prenom || ''} ${user.nom || ''}`.trim();
 
+      // ── Garde-fou d'envoi (audit Le Mans, bug B03) ────────────────────────
+      // Tant que ATLAS_MAIL_REDIRECT est renseignee dans Vercel, AUCUN mail ne
+      // part vers les intervenants : tout est redirige vers cette adresse et le
+      // sujet est prefixe [TEST]. Retirer la variable = passage en envoi reel.
+      // A conserver renseignee pendant toute la phase de demonstration.
+      const redirect = (process.env.ATLAS_MAIL_REDIRECT || '').trim();
+      const modeTest = !!redirect;
+      const emails = destinataires.map(d => d.email);
+      const sujet = contenu.titre || `Atlas — ${titreFormation}`;
+
       const resendKey = process.env.RESEND_API_KEY;
       let resendId = null;
       if (resendKey) {
-        const html = renderDigestHTML(contenu, titreFormation, digest.campus, frNom);
+        const html = renderDigestHTML(contenu, titreFormation, digest.campus, frNom)
+          + (modeTest
+            ? `<div style="font-family:Arial,sans-serif;max-width:640px;margin:12px auto;padding:12px 16px;background:#FDF1EB;border:1px solid #E89B77;border-radius:8px;font-size:12px;color:#B5643C">
+                 <strong>Mode test.</strong> Ce message aurait été envoyé à ${emails.length} destinataire(s) :
+                 ${emails.join(', ')}
+               </div>`
+            : '');
         const sent = await envoyerResend(resendKey, {
-          to: destinataires.map(d => d.email),
-          subject: contenu.titre || `Atlas — ${titreFormation}`,
+          to: modeTest ? [redirect] : emails,
+          subject: modeTest ? `[TEST] ${sujet}` : sujet,
           html,
         });
         resendId = sent && sent.id;
@@ -459,7 +507,7 @@ module.exports = async function handler(req, res) {
       });
 
       return res.status(200).json({ ok: true, statut: 'envoye', resend_id: resendId, destinataires: destinataires.length,
-        resend_configure: !!resendKey });
+        resend_configure: !!resendKey, mode_test: modeTest, redirige_vers: modeTest ? redirect : null });
     }
 
     // ── GET — lecture (prévu / réalisé / écarts 3 états / digest) ──────────

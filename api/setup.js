@@ -127,8 +127,10 @@ const RP_LE_MANS = [
     "email": "etienne.azerad@cesacom.fr",
     "password": "atlas2026",
     "campus": "Le Mans",
+    // CESACOM : 2 titres. Le BTS COM (37198) releve d'ISME, pas de CESACOM —
+    // corrige le 25/08/2026 (audit Le Mans, point A2). Repartition validee :
+    // 2 titres CESACOM / 9 titres ISME.
     "rncp_perimeter": [
-      "37198",
       "39741",
       "38504"
     ]
@@ -140,6 +142,7 @@ const RP_LE_MANS = [
     "password": "atlas2026",
     "campus": "Le Mans",
     "rncp_perimeter": [
+      "37198",
       "38363",
       "38362",
       "38368",
@@ -151,6 +154,146 @@ const RP_LE_MANS = [
     ]
   }
 ];
+
+// ─── Jeu de démonstration — MDEC (RNCP 39354, périmètre Johnny) ──────────────
+// Activé uniquement par POST /api/setup?demo=1[&mois=2026-09].
+// Objectif : donner à L'Atelier de quoi raconter quelque chose. Sans ces
+// lignes, la cartographie est à 0 %, le journal est vide et le digest sort
+// à 0/0/0 (audit Le Mans, point A3).
+//
+// MDEC est le seul titre du pilote dont les 44 modules sont tous rattachés à
+// une compétence — c'est ce qui en fait le titre de démonstration.
+//
+// Les 4 intervenants sont fictifs et portent un domaine non routable
+// (@demo.emineo-education.fr) : même en cas de clic sur "Valider et envoyer",
+// aucun mail ne peut atteindre une vraie personne. Le garde-fou
+// ATLAS_MAIL_REDIRECT d'api/fr.js constitue la seconde barrière.
+const DEMO_RNCP = '39354';
+const DEMO_INTERVENANTS = [
+  { nom: 'Faure',    prenom: 'Camille', email: 'camille.faure@demo.emineo-education.fr' },
+  { nom: 'Renard',   prenom: 'Thomas',  email: 'thomas.renard@demo.emineo-education.fr' },
+  { nom: 'Belkacem', prenom: 'Nadia',   email: 'nadia.belkacem@demo.emineo-education.fr' },
+  { nom: 'Ménard',   prenom: 'Olivier', email: 'olivier.menard@demo.emineo-education.fr' },
+];
+
+// 8 séances prévues, 6 déclarées. Répartition voulue des 4 états du
+// comparateur : 4 NOMINAL · 1 ÉCART+ · 1 ÉCART− · 2 ALERTE.
+// Aucune séance le 1er du mois : la comparaison de bornes d'api/fr.js les
+// exclurait (bug B06, traité au bloc B).
+const DEMO_SEANCES = [
+  { jour: 7,  module: 'M1',  intervenant: 0, titre: 'Cycle de la veille et cartographie des sources',
+    concepts: ['Business Intelligence', 'Cycle de la veille', 'Sources', 'Outils'],
+    competences: ['C.1'],
+    decl: { couvert: ['Business Intelligence', 'Cycle de la veille', 'Sources', 'Outils'], competences: ['C.1'] } },
+
+  { jour: 8,  module: 'M1',  intervenant: 0, titre: 'De la veille à la décision stratégique',
+    concepts: ['Analyse PESTEL', 'Signaux faibles', 'Note de synthèse'],
+    competences: ['C.1'],
+    decl: { couvert: ['Analyse PESTEL', 'Signaux faibles', 'Note de synthèse', 'Veille concurrentielle', 'Scénarios'],
+            competences: ['C.1', 'C.15'] } },
+
+  { jour: 14, module: 'M2',  intervenant: 1, titre: 'Diagnostic interne — chaîne de valeur et ressources',
+    concepts: ['Chaîne de valeur', 'Ressources clés', 'VRIO', 'Diagnostic interne'],
+    competences: ['C.2'],
+    decl: { couvert: ['Chaîne de valeur', 'Ressources clés'], competences: ['C.2'] } },
+
+  { jour: 15, module: 'M2',  intervenant: 1, titre: 'Diagnostic externe et synthèse SWOT',
+    concepts: ['Diagnostic externe', 'SWOT', 'Facteurs clés de succès'],
+    competences: ['C.2'],
+    decl: { couvert: ['Diagnostic externe', 'SWOT', 'Facteurs clés de succès'], competences: ['C.2'] } },
+
+  { jour: 21, module: 'M26', intervenant: 2, titre: 'Veille commerciale augmentée — IA et Big Data',
+    concepts: ['Veille commerciale', 'IA appliquée', 'Big Data', 'CRM'],
+    competences: ['C.15'],
+    decl: { couvert: ['Veille commerciale', 'IA appliquée', 'Big Data', 'CRM'], competences: ['C.15'] } },
+
+  { jour: 22, module: 'M26', intervenant: 2, titre: 'Détecter les opportunités d\u2019innovation',
+    concepts: ['Innovation', 'Opportunités marché', 'Prospective', 'Benchmark'],
+    competences: ['C.15'],
+    decl: null },
+
+  { jour: 28, module: 'M12', intervenant: 3, titre: 'Feuille de route et répartition de la charge',
+    concepts: ['Planification', 'Feuille de route', 'Répartition de charge'],
+    competences: ['C.29'],
+    decl: { couvert: ['Planification', 'Feuille de route', 'Répartition de charge'], competences: ['C.29'] } },
+
+  { jour: 29, module: 'M12', intervenant: 3, titre: 'Supervision et points d\u2019étape',
+    concepts: ['Supervision', 'Points d\u2019étape', 'Reporting équipe'],
+    competences: ['C.29'],
+    decl: null },
+];
+
+function jourISO(mois, jour, heure) {
+  return `${mois}-${String(jour).padStart(2, '0')}T${heure}:00.000Z`;
+}
+
+async function seedDemo(db, formationId, campus, mois, annee) {
+  // Idempotence : on repart d'une base propre pour ce titre.
+  await db.execute({ sql: 'DELETE FROM declaration WHERE formation_id=? AND annee_scolaire=?', args: [formationId, annee] });
+  await db.execute({ sql: 'DELETE FROM previsionnel_seance WHERE formation_id=? AND annee_scolaire=?', args: [formationId, annee] });
+  await db.execute({ sql: 'DELETE FROM digest_fr WHERE formation_id=? AND annee_scolaire=?', args: [formationId, annee] });
+
+  // Comptes intervenants fictifs + rattachement au titre (ce sont eux qui
+  // alimentent la liste des destinataires du digest).
+  const ids = [];
+  for (const p of DEMO_INTERVENANTS) {
+    let uid;
+    const ex = await db.execute({ sql: 'SELECT id FROM users WHERE email = ?', args: [p.email] });
+    if (ex.rows.length) {
+      uid = Number(ex.rows[0].id);
+    } else {
+      const ins = await db.execute({
+        sql: 'INSERT INTO users (role,nom,prenom,email,password_hash,campus) VALUES (?,?,?,?,?,?)',
+        args: ['intervenant', p.nom, p.prenom, p.email, hashPassword('atlas2026'), campus],
+      });
+      uid = Number(ins.lastInsertRowid);
+    }
+    await db.execute({
+      sql: "INSERT OR IGNORE INTO inscription (user_id,formation_id,campus,role,promo,groupe,annee_scolaire) VALUES (?,?,?,'intervenant','','',?)",
+      args: [uid, formationId, campus, annee],
+    });
+    ids.push(uid);
+  }
+
+  let nbPrev = 0, nbDecl = 0;
+  for (const s of DEMO_SEANCES) {
+    const p = DEMO_INTERVENANTS[s.intervenant];
+    const nom = `${p.prenom} ${p.nom}`;
+    const uid = ids[s.intervenant];
+    const date = jourISO(mois, s.jour, '09');
+
+    const ins = await db.execute({
+      sql: `INSERT INTO previsionnel_seance
+              (formation_id, module_ref, campus, intervenant_id, intervenant_nom,
+               numero, titre, date_prevue, modalite, contenu, concepts, competences, annee_scolaire)
+            VALUES (?,?,?,?,?,?,?,?,'P','',?,?,?)`,
+      args: [formationId, s.module, campus, uid, nom, nbPrev + 1, s.titre, date,
+        JSON.stringify(s.concepts), JSON.stringify(s.competences), annee],
+    });
+    const prevId = Number(ins.lastInsertRowid);
+    nbPrev++;
+
+    if (s.decl) {
+      await db.execute({
+        sql: `INSERT INTO declaration
+                (formation_id, module_ref, previsionnel_id, campus, intervenant_id, intervenant_nom,
+                 seance_numero, date_seance, source, couvert, competences, compte_rendu, annee_scolaire)
+              VALUES (?,?,?,?,?,?,?,?,'demo',?,?,'',?)`,
+        args: [formationId, s.module, prevId, campus, uid, nom, nbPrev, date,
+          JSON.stringify(s.decl.couvert), JSON.stringify(s.decl.competences), annee],
+      });
+      nbDecl++;
+    }
+  }
+
+  return {
+    mois,
+    intervenants: DEMO_INTERVENANTS.length,
+    seances_prevues: nbPrev,
+    seances_declarees: nbDecl,
+    attendu: '4 conformes · 1 écart + · 1 écart − · 2 alertes',
+  };
+}
 
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'POST only' });
@@ -331,7 +474,7 @@ module.exports = async function handler(req, res) {
     }
 
     // ─── Comptes RP Le Mans + inscriptions ───────────────────────────────────
-    let createdRP = 0, createdInscriptions = 0;
+    let createdRP = 0, createdInscriptions = 0, purgedInscriptions = 0;
     for (const rp of RP_LE_MANS) {
       let rpId;
       const ex = await db.execute({ sql: 'SELECT id FROM users WHERE email = ?', args: [rp.email] });
@@ -342,9 +485,24 @@ module.exports = async function handler(req, res) {
         rpId = Number(ins.lastInsertRowid);
         createdRP++;
       }
-      for (const rncp of rp.rncp_perimeter) {
-        const fid = formationIds[rncp];
-        if (!fid) continue;
+      // Périmètre attendu pour ce RP.
+      const fidsAttendus = rp.rncp_perimeter.map(r => formationIds[r]).filter(Boolean);
+
+      // Purge des inscriptions RP hors périmètre. Indispensable au rejeu :
+      // INSERT OR IGNORE ajoute, mais ne retire jamais. Sans cette purge, le
+      // BTS COM resterait rattaché à Etienne après la correction A2.
+      const inscExistantes = await db.execute({
+        sql: "SELECT id, formation_id FROM inscription WHERE user_id=? AND role='rp'",
+        args: [rpId],
+      });
+      for (const row of inscExistantes.rows) {
+        if (!fidsAttendus.includes(Number(row.formation_id))) {
+          await db.execute({ sql: 'DELETE FROM inscription WHERE id = ?', args: [row.id] });
+          purgedInscriptions++;
+        }
+      }
+
+      for (const fid of fidsAttendus) {
         try {
           await db.execute({ sql: "INSERT OR IGNORE INTO inscription (user_id,formation_id,campus,role,promo,groupe,annee_scolaire) VALUES (?,?,?,'rp','','','2026-27')", args: [rpId,fid,rp.campus] });
           createdInscriptions++;
@@ -384,6 +542,24 @@ module.exports = async function handler(req, res) {
       frAccounts.push({ email, mdp: 'atlas2026', titre: f.titre_court, statut: 'placeholder — à renommer' });
     }
 
+    // ─── Jeu de démonstration (optionnel) ────────────────────────────────────
+    // POST /api/setup?demo=1        → seed MDEC sur septembre 2026
+    // POST /api/setup?demo=1&mois=2026-10 → autre mois
+    // Sans ?demo=1, rien n'est seedé : le comportement historique est inchangé.
+    let demo = null;
+    const veutDemo = req.query && (req.query.demo === '1' || req.query.demo === 'true');
+    if (veutDemo) {
+      const mois = (req.query.mois && /^\d{4}-\d{2}$/.test(req.query.mois)) ? req.query.mois : '2026-09';
+      const fid = formationIds[DEMO_RNCP];
+      if (!fid) {
+        demo = { error: `Formation RNCP ${DEMO_RNCP} introuvable — seed démo ignoré.` };
+      } else {
+        demo = await seedDemo(db, fid, 'Le Mans', mois, '2026-27');
+        demo.formation_id = fid;
+        demo.rncp = DEMO_RNCP;
+      }
+    }
+
     return res.status(200).json({
       ok: true,
       message: 'Migration + seed Le Mans complets.',
@@ -393,9 +569,11 @@ module.exports = async function handler(req, res) {
         formations_mises_a_jour: updatedFormations,
         rp_crees: createdRP,
         inscriptions_rp: createdInscriptions,
+        inscriptions_rp_purgees: purgedInscriptions,
         fr_crees: createdFR,
         inscriptions_fr: inscriptionsFR,
       },
+      demo,
       comptes: {
         dir: dirAccounts.map(a => ({ email: a.email, mdp: a.password })),
         rp: RP_LE_MANS.map(a => ({ email: a.email, mdp: a.password, titres: a.rncp_perimeter.length })),
