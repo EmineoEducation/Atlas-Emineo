@@ -1550,7 +1550,12 @@ function VueFR({user,onLogout,onRetour}){
   const ecarts=data?.ecarts||[]
   const digest=data?.digest||null
   const avancementBlocs=data?.avancement_blocs||[]
-  const nbAlertes=ecarts.filter(e=>e.etat==='alerte').length
+  /* Toute séance non conforme est une anomalie à arbitrer : non déclarée,
+     écart + ou écart −. Avant le 25/08/2026 seul l'état 'alerte' était compté,
+     si bien que le rail annonçait « 2 anomalies » pendant que le panneau
+     « Anomalies à arbitrer » en listait 4. */
+  const nbAlertes=ecarts.filter(e=>e.etat!=='nominal').length
+  const nbNonDeclarees=ecarts.filter(e=>e.etat==='alerte').length
   const modToBloc=moduleToBlocMap(blocsRaw)
   const deploy = temps==='deploiement'
 
@@ -1621,6 +1626,7 @@ function VueFR({user,onLogout,onRetour}){
         lignes:[
           {k:'Statut',v:digest?.statut==='envoye'?'Envoyé':digest?'Prêt à valider':'Non généré', warn:digest?.statut!=='envoye'},
           {k:'Anomalies citées',v:String(nbAlertes),warn:nbAlertes>0},
+          {k:'Séances non déclarées',v:String(nbNonDeclarees),warn:nbNonDeclarees>0},
         ], key:'digest'}
     }
     if(sel.kind==='bloc'){
@@ -1702,7 +1708,7 @@ function VueFR({user,onLogout,onRetour}){
           {id:'fr',active:viewRole==='fr',label:'Responsable pédagogique',sub:`${user.prenom} ${user.nom} · cartographie du titre`,go:()=>{setViewRole('fr');setSel({kind:null,id:null})}},
           {id:'intervenant',active:viewRole==='intervenant',label:'Intervenant',sub:'Aperçu · tous modules',go:()=>{setViewRole('intervenant');setSel({kind:null,id:null})}},
         ]}
-        anomalieFooter={`${nbAlertes} anomalie${nbAlertes>1?'s':''} détectée${nbAlertes>1?'s':''} ce mois-ci`}/>
+        anomalieFooter={`${nbAlertes} anomalie${nbAlertes>1?'s':''} à arbitrer${nbNonDeclarees?` · ${nbNonDeclarees} non déclarée${nbNonDeclarees>1?'s':''}`:''}`}/>
 
       <main style={{background:'#F4FBF7',overflowY:'auto',display:'flex',flexDirection:'column'}}>
         <HeaderAtelier tempsNum={TEMPS_DEFS.find(t=>t.id===temps).num} roleLabel={roleLabelHeader} pageTitle={pageTitle} pageSub={pageSub} stats={stats}/>
