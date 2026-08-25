@@ -137,7 +137,7 @@ function detecterCoordination(declarationsPeriode) {
     .filter(v => v.intervenants.size > 1)
     .map(v => ({
       titre: `${v.competence} — coordination`,
-      detail: `Couverte par ${Array.from(v.intervenants).join(', ')} sur la periode.`,
+      detail: `Couverte par ${Array.from(v.intervenants).join(', ')} sur la période.`,
     }));
 }
 
