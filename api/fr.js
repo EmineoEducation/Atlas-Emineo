@@ -374,14 +374,36 @@ function renderDigestHTML(c, titreFormation, campus, frNom) {
   </div>`;
 }
 
+// Expediteur. Par defaut l'adresse de marque — mais elle exige que le domaine
+// emineo-education.fr soit verifie dans Resend (enregistrements SPF/DKIM a
+// poser dans la zone DNS, demande DSI). Tant que ce n'est pas fait, Resend
+// renvoie 403 "domain is not verified".
+// Contournement : ATLAS_MAIL_FROM = "Atlas <onboarding@resend.dev>", le
+// bac a sable Resend, qui n'exige aucune verification mais ne delivre QUE
+// vers l'adresse du compte Resend — d'ou l'obligation d'avoir en meme temps
+// ATLAS_MAIL_REDIRECT pointant sur cette meme adresse.
+const MAIL_FROM_DEFAUT = 'Atlas <atlas@emineo-education.fr>';
+
 async function envoyerResend(apiKey, { to, subject, html }) {
+  const from = (process.env.ATLAS_MAIL_FROM || '').trim() || MAIL_FROM_DEFAUT;
   const r = await fetch('https://api.resend.com/emails', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${apiKey}` },
-    body: JSON.stringify({ from: 'Atlas <atlas@emineo-education.fr>', to, subject, html }),
+    body: JSON.stringify({ from, to, subject, html }),
   });
   const data = await r.json();
-  if (!r.ok) throw new Error((data && data.message) || ('Resend HTTP ' + r.status));
+  if (!r.ok) {
+    const msg = (data && (data.message || data.error)) || ('Resend HTTP ' + r.status);
+    // Message explicite : l'erreur brute de Resend ne dit pas quoi faire.
+    if (String(msg).includes('not verified')) {
+      throw new Error(
+        `${msg} — Renseigner ATLAS_MAIL_FROM = "Atlas <onboarding@resend.dev>" dans Vercel ` +
+        `(mode bac a sable, envoi possible uniquement vers l'adresse du compte Resend), ` +
+        `ou faire verifier le domaine emineo-education.fr sur resend.com/domains.`
+      );
+    }
+    throw new Error(msg);
+  }
   return data;
 }
 
