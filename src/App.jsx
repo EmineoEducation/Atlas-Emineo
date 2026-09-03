@@ -919,6 +919,7 @@ function VueDir({user,onLogout}){
               <div style={{fontSize:28,marginBottom:'0.6rem',opacity:0.45}}>📄</div>
               <div style={{fontSize:14,fontWeight:500,color:P.petrole}}>4 · Glisser-déposer ou cliquer</div>
               <div style={{fontSize:12,color:P.textm}}>.md .txt .pdf .docx .xlsx</div>
+              <div style={{fontSize:11,color:P.textm,marginTop:'0.5rem',opacity:0.85}}>Tous les fichiers d'un même dépôt doivent être de la nature choisie ci-dessus. Un RACE déposé avec un plan de formation serait lu comme un plan de formation.</div>
             </div>
 
             {files.length>0&&<div style={{marginBottom:'1rem'}}>{files.map((f,i)=><div key={i} style={{display:'flex',alignItems:'center',justifyContent:'space-between',padding:'0.5rem 0.75rem',background:P.surface,borderRadius:8,border:`1px solid ${P.border}`,marginBottom:'0.35rem'}}><div style={{fontSize:13,fontWeight:500,color:P.abysse}}>{f.name} <span style={{fontSize:11,color:P.textm}}>({(f.size/1024).toFixed(1)} Ko)</span></div><button onClick={()=>setFiles(prev=>prev.filter((_,j)=>j!==i))} style={{color:P.red,fontSize:16,cursor:'pointer'}}>×</button></div>)}</div>}

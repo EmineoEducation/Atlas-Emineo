@@ -24,13 +24,29 @@ async function chargerMammoth() {
   return _mammoth
 }
 
-// pdf.js a besoin de son worker. L'import '?url' laisse Vite l'émettre comme
-// asset et en donner l'URL finale — sans quoi le worker est introuvable en
-// production.
+// pdf.js appelle Promise.withResolvers, que Safari n'expose qu'à partir de la
+// version 17.4 — sur une version antérieure, l'appel échoue avec un laconique
+// « undefined is not a function ». Ni le build standard ni le build legacy ne
+// polyfillent cette méthode. Six lignes suffisent, et elles ne s'activent que
+// si le navigateur en a besoin.
+function polyfillWithResolvers() {
+  if (typeof Promise.withResolvers === 'function') return
+  Promise.withResolvers = function () {
+    let resolve, reject
+    const promise = new Promise((res, rej) => { resolve = res; reject = rej })
+    return { promise, resolve, reject }
+  }
+}
+
+// On utilise le build « legacy », transpilé pour les navigateurs plus anciens.
+// Le build standard vise des moteurs très récents et casse silencieusement
+// ailleurs. L'import '?url' laisse Vite émettre le worker comme asset et en
+// donner l'URL finale — sans quoi le worker est introuvable en production.
 async function chargerPdfjs() {
   if (!_pdfjs) {
-    const lib = await import('pdfjs-dist')
-    const workerUrl = (await import('pdfjs-dist/build/pdf.worker.min.mjs?url')).default
+    polyfillWithResolvers()
+    const lib = await import('pdfjs-dist/legacy/build/pdf.mjs')
+    const workerUrl = (await import('pdfjs-dist/legacy/build/pdf.worker.min.mjs?url')).default
     lib.GlobalWorkerOptions.workerSrc = workerUrl
     _pdfjs = lib
   }
@@ -139,7 +155,16 @@ export async function extraireTextes(files, onProgress) {
   const out = []
   for (let i = 0; i < files.length; i++) {
     if (onProgress) onProgress('Lecture ' + (i + 1) + '/' + files.length + ' — ' + files[i].name)
-    out.push(await extraireTexte(files[i]))
+    try {
+      out.push(await extraireTexte(files[i]))
+    } catch (e) {
+      // Une panne interne de parseur remonte un message technique sans nom de
+      // fichier — inexploitable quand on dépose plusieurs documents. On dit
+      // toujours lequel a échoué.
+      const msg = (e && e.message) ? e.message : String(e)
+      if (msg.startsWith(files[i].name)) throw e
+      throw new Error(files[i].name + ' : lecture impossible (' + msg + ')')
+    }
   }
   return out
 }
