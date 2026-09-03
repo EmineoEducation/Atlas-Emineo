@@ -155,6 +155,38 @@ module.exports = async function handler(req, res) {
     'Une valeur vide se corrige ; une valeur inventee fausse silencieusement la\n' +
     'couverture d\'une promotion entiere. Ne devine pas.\n\n';
 
+  // Perimetre certifiant et options — regle partagee PF / syllabi.
+  // Deux constats du premier depot reel (Bachelor CDC, 03/09/2026) :
+  //   1. le document Prog B3 2026-27 contenait les trois annees du cursus.
+  //      Claude a tout ingere — comportement correct pour un plan de formation,
+  //      mais 58 modules de prepa sont venus diluer la couverture du titre, avec
+  //      deux gros blocs a zero competence en permanence sur la cartographie.
+  //   2. les trois options intensives etaient extraites comme des blocs
+  //      ordinaires. Or un etudiant en suit UNE : les compter toutes revient a
+  //      exiger une couverture que personne n atteindra jamais.
+  const REGLE_PERIMETRE =
+    'PERIMETRE CERTIFIANT — REGLE CRITIQUE :\n' +
+    'Ne retiens que ce qui concourt a la certification du titre lui-meme.\n\n' +
+    'A EXCLURE TOTALEMENT, sans en creer ni bloc ni module :\n' +
+    '- les annees preparatoires en amont du titre : sections intitulees\n' +
+    '  Prepa, Preparatoire, Annee 1, Annee 2, 1re annee, 2e annee, lorsque le\n' +
+    '  titre porte sur la troisieme annee (Bachelor 3, B3) ;\n' +
+    '- les annees de cycle anterieures au titre de facon generale ;\n' +
+    '- les mises a niveau, remises a niveau et modules d\'integration.\n\n' +
+    'Un plan de formation de Bachelor decrit souvent les trois annees du cursus\n' +
+    'alors que seule la derniere est certifiante. Ne conserve que celle-ci.\n\n' +
+    'ATTENTION — ne confonds pas avec un Mastere : M1 et M2 sont TOUS DEUX\n' +
+    'certifiants et doivent etre conserves. La regle ci-dessus vise les annees\n' +
+    'preparatoires qui precedent le titre, pas les annees qui le composent.\n\n' +
+    'OPTIONS ET PARCOURS AU CHOIX :\n' +
+    'Chaque bloc porte un champ nature valant obligatoire ou option.\n' +
+    'Une option est un parcours entre lesquels l\'etudiant choisit : options de\n' +
+    'specialisation, semaines intensives au choix, parcours alternatifs.\n' +
+    'Chaque option reste un bloc DISTINCT — ne les fusionne jamais entre elles.\n' +
+    'Les options mutuellement exclusives partagent un meme option_groupe\n' +
+    '(par exemple Semaines intensives), ce qui permet de savoir qu\'un etudiant\n' +
+    'n\'en suit qu\'une seule. Un bloc obligatoire laisse option_groupe vide.\n\n';
+
   const REGLES_COMMUNES =
     'REGLES IMPERATIVES :\n' +
     '- Retourne UNIQUEMENT du JSON brut, aucun texte avant ou apres, aucun backtick\n' +
@@ -173,7 +205,7 @@ module.exports = async function handler(req, res) {
       'viendra plus tard, par les syllabi et le RACE — ne le force pas ici.\n\n' +
       'Campus concerne(s) : ' + campusLabel + '\n\n' +
       corpus + '\n\n' +
-      REGLES_COMMUNES + REGLE_ANNEE +
+      REGLES_COMMUNES + REGLE_PERIMETRE + REGLE_ANNEE +
       'ORGANISATION EN BLOCS :\n' +
       'Si le plan de formation enonce explicitement des blocs de competences,\n' +
       'reprends-les. Sinon, place TOUS les modules dans un bloc unique d\'identifiant\n' +
@@ -187,6 +219,8 @@ module.exports = async function handler(req, res) {
       '    {\n' +
       '      "id": "B0",\n' +
       '      "titre": "Modules non rattaches",\n' +
+      '      \"nature\": \"obligatoire\",\n' +
+      '      \"option_groupe\": \"\",\n' +
       '      "competences": [],\n' +
       '      "modules": [ { "id": "M1", "titre": "Titre du module", "annee_cycle": "M1", "intervenant": "Nom ou vide", "volume": "12h", "semestre": "S1 ou vide", "competences_liees": [], "notions_cles": [] } ]\n' +
       '    }\n' +
@@ -215,6 +249,8 @@ module.exports = async function handler(req, res) {
       '    {\n' +
       '      "id": "B1",\n' +
       '      "titre": "Titre du bloc",\n' +
+      '      \"nature\": \"obligatoire\",\n' +
+      '      \"option_groupe\": \"\",\n' +
       '      "competences": [ { "id": "C.1", "libelle": "Libelle court", "criteres": ["critere 1"] } ],\n' +
       '      "modules": []\n' +
       '    }\n' +
@@ -233,7 +269,7 @@ module.exports = async function handler(req, res) {
       'de formation. Un titre reformule casse ce rapprochement.\n\n' +
       'Campus concerne(s) : ' + campusLabel + '\n\n' +
       corpus + '\n\n' +
-      REGLES_COMMUNES + REGLE_ANNEE +
+      REGLES_COMMUNES + REGLE_PERIMETRE + REGLE_ANNEE +
       'Les competences sont souvent enoncees en prose libre. Rattache-les aux\n' +
       'codes du referentiel (C.1, C.14...) quand le document les cite ou les\n' +
       'paraphrase sans ambiguite. Dans le doute, laisse competences_liees vide :\n' +
@@ -248,6 +284,8 @@ module.exports = async function handler(req, res) {
       '    {\n' +
       '      "id": "B1",\n' +
       '      "titre": "Titre du bloc",\n' +
+      '      \"nature\": \"obligatoire\",\n' +
+      '      \"option_groupe\": \"\",\n' +
       '      "competences": [ { "id": "C.1", "libelle": "Libelle court" } ],\n' +
       '      "modules": [ { "id": "M1", "titre": "Titre exact du module", "annee_cycle": "M1", "intervenant": "Nom ou vide", "volume": "12h", "competences_liees": ["C.1"], "notions_cles": ["notion 1"], "seances": [ { "numero": 1, "titre": "Titre de seance", "notions": ["notion"] } ] } ]\n' +
       '    }\n' +
@@ -282,6 +320,41 @@ module.exports = async function handler(req, res) {
   if (!parsed.alertes_detectees) parsed.alertes_detectees = [];
   if (!parsed.intervenants) parsed.intervenants = [];
   if (!parsed.notions_transversales) parsed.notions_transversales = [];
+
+  // ─── Normalisation nature de bloc + filet anti-prepa ──────────────────────
+  // Le prompt demande d'exclure les annees preparatoires, mais un prompt n'est
+  // pas une garantie. Second filet cote serveur : tout bloc dont l'intitule
+  // designe une annee amont est retire, et sa mise a l'ecart est remontee a
+  // l'appelant plutot que silencieuse.
+  const PREPA = /\b(pr[eé]pa|pr[eé]paratoire|remise\s+[aà]\s+niveau|mise\s+[aà]\s+niveau)\b/i;
+  const ANNEE_AMONT = /\b(ann[eé]e\s*[12]\b|1(re|ère)\s*ann[eé]e|2(e|ème)\s*ann[eé]e|b1\b|b2\b)/i;
+  const blocsEcartes = [];
+  parsed.blocs = (Array.isArray(parsed.blocs) ? parsed.blocs : []).filter(b => {
+    const lib = String(b.titre || '') + ' ' + String(b.id || '');
+    // Un bloc n'est ecarte que s'il designe une annee amont ET ne porte aucune
+    // competence : un bloc certifiant mal intitule ne doit pas disparaitre.
+    const amont = PREPA.test(lib) || ANNEE_AMONT.test(lib);
+    if (amont && !(b.competences || []).length) {
+      blocsEcartes.push({
+        id: String(b.id || ''),
+        titre: String(b.titre || ''),
+        modules: (b.modules || []).length,
+      });
+      return false;
+    }
+    return true;
+  });
+  if (blocsEcartes.length) parsed._blocs_ecartes = blocsEcartes;
+
+  // nature : vocabulaire ferme, obligatoire par defaut.
+  for (const b of parsed.blocs) {
+    const nat = String(b.nature || '').trim().toLowerCase();
+    b.nature = nat === 'option' ? 'option' : 'obligatoire';
+    b.option_groupe = b.nature === 'option'
+      ? String(b.option_groupe || '').trim() || 'Options'
+      : '';
+  }
+  parsed._options = parsed.blocs.filter(b => b.nature === 'option').length;
 
   // ─── Normalisation de l'annee de cycle ────────────────────────────────────
   // Le champ conditionne le rattachement d'un module a une promotion (M1/M2).

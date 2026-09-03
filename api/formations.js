@@ -181,6 +181,11 @@ module.exports = async function handler(req, res) {
                   id: k,
                   titre: m._bloc_titre || 'Modules non rattachés',
                   competences: (blocsEntrants.find(b => b.id === k) || {}).competences || [],
+                  // Un bloc d'option est un parcours au choix : l'etudiant en
+                  // suit un seul. Conserver la distinction ici evite d'exiger
+                  // plus tard une couverture que personne n'atteindra.
+                  nature: (blocsEntrants.find(b => b.id === k) || {}).nature === 'option' ? 'option' : 'obligatoire',
+                  option_groupe: (blocsEntrants.find(b => b.id === k) || {}).option_groupe || '',
                   modules: [],
                 });
               }
@@ -239,7 +244,12 @@ module.exports = async function handler(req, res) {
                 dejaLa.competences = (b.competences || []).length ? b.competences : dejaLa.competences;
                 if (!dejaLa.titre || dejaLa.titre === 'Modules non rattachés') dejaLa.titre = b.titre || dejaLa.titre;
               } else {
-                blocsExistants.push({ id: b.id, titre: b.titre, competences: b.competences || [], modules: [] });
+                blocsExistants.push({
+                  id: b.id, titre: b.titre, competences: b.competences || [],
+                  nature: b.nature === 'option' ? 'option' : 'obligatoire',
+                  option_groupe: b.option_groupe || '',
+                  modules: [],
+                });
               }
             }
 
@@ -288,6 +298,7 @@ module.exports = async function handler(req, res) {
               id: Number(row.id),
               modules: mods.length,
               blocs: (sortie.blocs || []).length,
+              blocs_option: (sortie.blocs || []).filter(b => b.nature === 'option').length,
             });
           }
         }

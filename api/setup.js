@@ -307,7 +307,7 @@ module.exports = async function handler(req, res) {
         'johnny.nicolas@isme.fr',
       ];
       const compte = {};
-      for (const t of ['digest_fr', 'declaration', 'previsionnel_seance', 'inscription', 'formations', 'sessions']) {
+      for (const t of ['digest_fr', 'declaration', 'previsionnel_seance', 'groupe', 'inscription', 'formations', 'sessions']) {
         try {
           const r = await db.execute(`DELETE FROM ${t}`);
           compte[t] = Number(r.rowsAffected || 0);
@@ -472,6 +472,30 @@ module.exports = async function handler(req, res) {
         createdDir++;
       }
     }
+
+    // ─── Groupes (options intensives) ────────────────────────────────────────
+    // Les etudiants choisissent individuellement leur option intensive. Une
+    // fois les choix connus, chaque option donne lieu a un ou plusieurs
+    // groupes, que le RP alimente. Un groupe est rattache a un bloc d'option :
+    // c'est ce lien qui permettra de ne compter, pour un etudiant, que
+    // l'option qu'il suit reellement — et non les trois.
+    await db.execute(`CREATE TABLE IF NOT EXISTS groupe (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      formation_id INTEGER NOT NULL,
+      bloc_id TEXT NOT NULL DEFAULT '',
+      option_groupe TEXT NOT NULL DEFAULT '',
+      nom TEXT NOT NULL,
+      campus TEXT NOT NULL DEFAULT '',
+      annee_scolaire TEXT NOT NULL DEFAULT '2026-27',
+      created_at TEXT
+    )`);
+    await db.execute(`CREATE UNIQUE INDEX IF NOT EXISTS idx_groupe_unique ON groupe(formation_id, annee_scolaire, nom)`);
+    await db.execute(`CREATE INDEX IF NOT EXISTS idx_groupe_formation ON groupe(formation_id)`);
+
+    // Rattachement d'un etudiant a un groupe. La colonne texte `groupe` existe
+    // depuis l'origine mais n'a jamais ete structuree : une reference par
+    // identifiant survit au renommage d'un groupe, pas un libelle recopie.
+    try { await db.execute(`ALTER TABLE inscription ADD COLUMN groupe_id INTEGER`); } catch (_) {}
 
     // ─── Seed formations Le Mans (idempotent par titre_court+campus) ────────
     // Cle = titre_court + campus : M1 et M2 d'un meme Mastere partagent le code
