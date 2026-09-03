@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { api, apiFetch, setToken, clearToken, getToken, ingererDocuments, genererFicheJ1 } from './api.js'
+import { extraireTextes } from './lire-documents.js'
 
 const P = {
   abysse:'#0B2B2D',petrole:'#134547',menthe:'#5DE298',givre:'#E3FFF0',eau:'#9DF0C4',saumon:'#E89B77',
@@ -713,7 +714,6 @@ function VueDir({user,onLogout}){
   async function loadFormations(){
     try{const d=await api.getFormations();setFormations(d.formations);setLoading(false)}catch(e){setError(e.message);setLoading(false)}
   }
-  async function lireTexte(file){return new Promise((res,rej)=>{const r=new FileReader();r.onload=e=>res(e.target.result);r.onerror=rej;r.readAsText(file,'utf-8')})}
 
   // Ingestion vers des promotions pre-creees.
   // Le PF pose la structure et se ventile sur les deux annees d'un Mastere ;
@@ -722,14 +722,29 @@ function VueDir({user,onLogout}){
     if(!files.length||!ciblesSel.length)return
     setIngLoading(true);setError('');setRapport(null);setProgress('Lecture des fichiers…')
     try{
-      const textes=await Promise.all(files.map(f=>lireTexte(f)))
+      const textes=await extraireTextes(files,setProgress)
       setProgress(typeDoc==='pf'?'Analyse du plan de formation…':typeDoc==='race'?'Analyse du référentiel…':'Analyse des syllabi…')
       const data=await ingererDocuments(textes,'Le Mans',setProgress,typeDoc)
+      // Garde-fou : une extraction vide ne doit pas passer pour un succès.
+      // C'est ce qui masquait la lecture binaire des .docx — rapport à zéro
+      // module, aucune erreur, aucun changement visible.
+      const nbMod=(data.blocs||[]).reduce((n,b)=>n+((b.modules||[]).length),0)
+      const nbComp=(data.blocs||[]).reduce((n,b)=>n+((b.competences||[]).length),0)
+      if(typeDoc==='race'?nbComp===0:nbMod===0){
+        throw new Error(typeDoc==='race'
+          ?"Aucune compétence n'a pu être extraite de ce document. Vérifier qu'il s'agit bien d'un RACE et que le texte est lisible."
+          :"Aucun module n'a pu être extraits de ce document. Vérifier la nature sélectionnée et que le fichier contient bien du texte.")
+      }
+      if(data._documents_tronques)setError('Attention : document(s) '+data._documents_tronques.join(', ')+' tronqué(s) — la fin n\'a pas été analysée.')
       if(nomFormation.trim()&&data.formation)data.formation.titre=nomFormation.trim()
+      // Année de cycle : _cycle vient du seed et fait foi. L'intitulé n'est
+      // qu'un repli — « Bach CDC » y donnerait « BACH », qui n'est pas un cycle.
       const cibles=ciblesSel.map(id=>{
         const f=formations.find(x=>x._id===id)
-        const tc=f?.titre_court||f?._titre_court||''
-        return {id,cycle:(tc.split(' ')[0]||'').toUpperCase()}
+        const tc=String(f?._titre_court||'')
+        const tok=(tc.split(' ')[0]||'').toUpperCase()
+        const cycle=String(f?._cycle||'').toUpperCase()||(['M1','M2','B3'].includes(tok)?tok:'B3')
+        return {id,cycle}
       })
       setProgress(cibles.length>1?'Ventilation sur les promotions…':'Enregistrement…')
       const r=await api.alimenterPromotions(cibles,data,typeDoc)
