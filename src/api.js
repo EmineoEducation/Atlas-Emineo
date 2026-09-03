@@ -138,6 +138,16 @@ export const api = {
   // Alimente une ou plusieurs promotions depuis une même ingestion.
   // cibles : [{ id, cycle }] — un PF de Mastère se ventile sur M1 et M2.
   // couche : 'pf' remplace la structure, 'syllabus'/'race' l'enrichissent.
+  // ─── Groupes d'options intensives ─────────────────────────────────────────
+  // Les étudiants choisissent individuellement leur option ; le RP les répartit
+  // ensuite dans les groupes correspondants.
+  getGroupes:    fid            => apiFetch('/api/inscription?action=groupes&formation_id='+fid),
+  syncGroupes:   fid            => apiFetch('/api/inscription?action=sync-groupes', { method:'POST', body:{ formation_id: fid } }),
+  creerGroupe:   (fid,nom,blocId,optGroupe) => apiFetch('/api/inscription?action=groupe', { method:'POST', body:{ formation_id: fid, nom, bloc_id: blocId||'', option_groupe: optGroupe||'' } }),
+  renommerGroupe:(id,nom)       => apiFetch('/api/inscription?action=groupe', { method:'PATCH', body:{ id, nom } }),
+  supprimerGroupe:id            => apiFetch('/api/inscription?action=groupe&id='+id, { method:'DELETE' }),
+  affecterEtudiant:(inscriptionId,groupeId) => apiFetch('/api/inscription?action=affecter', { method:'POST', body:{ inscription_id: inscriptionId, groupe_id: groupeId||null } }),
+
   alimenterPromotions: (cibles, data, couche) =>
     apiFetch('/api/formations', { method: 'POST', body: { cibles, data, couche } }),
   deleteFormation: (id)              => apiFetch('/api/formations',  { method: 'DELETE', body: { id } }),

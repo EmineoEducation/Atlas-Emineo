@@ -700,6 +700,7 @@ function VueDir({user,onLogout}){
   const [typeDoc,setTypeDoc]=useState('pf')        // 'pf' | 'syllabus' | 'race'
   const [ciblesSel,setCiblesSel]=useState([])      // ids de promotions visées
   const [rapport,setRapport]=useState(null)
+  const [info,setInfo]=useState('')
   const [ingLoading,setIngLoading]=useState(false)
   const [progress,setProgress]=useState('')
   const [error,setError]=useState('')
@@ -720,7 +721,7 @@ function VueDir({user,onLogout}){
   // les syllabi et le RACE viennent ensuite l'enrichir sans jamais l'ecraser.
   async function handleIngestion(){
     if(!files.length||!ciblesSel.length)return
-    setIngLoading(true);setError('');setRapport(null);setProgress('Lecture des fichiers…')
+    setIngLoading(true);setError('');setInfo('');setRapport(null);setProgress('Lecture des fichiers…')
     try{
       const textes=await extraireTextes(files,setProgress)
       setProgress(typeDoc==='pf'?'Analyse du plan de formation…':typeDoc==='race'?'Analyse du référentiel…':'Analyse des syllabi…')
@@ -735,6 +736,7 @@ function VueDir({user,onLogout}){
           ?"Aucune compétence n'a pu être extraite de ce document. Vérifier qu'il s'agit bien d'un RACE et que le texte est lisible."
           :"Aucun module n'a pu être extraits de ce document. Vérifier la nature sélectionnée et que le fichier contient bien du texte.")
       }
+      if(data._blocs_ecartes)setInfo('Écarté(s) car hors périmètre certifiant : '+data._blocs_ecartes.map(b=>(b.titre||b.id)+' — '+b.modules+' modules').join(' · ')+'.')
       if(data._documents_tronques)setError('Attention : document(s) '+data._documents_tronques.join(', ')+' tronqué(s) — la fin n\'a pas été analysée.')
       if(nomFormation.trim()&&data.formation)data.formation.titre=nomFormation.trim()
       // Année de cycle : _cycle vient du seed et fait foi. L'intitulé n'est
@@ -800,7 +802,7 @@ function VueDir({user,onLogout}){
   return(
     <div style={{minHeight:'100vh',background:P.givre}}>
       <Topbar user={user} formationTitre="Direction des programmes" onLogout={onLogout} onglet={onglet} setOnglet={setOnglet}
-        onglets={[{id:'formations',label:'Formations'},{id:'ingestion',label:'+ Ingestion'},{id:'cartographie',label:'Cartographie'},{id:'digest',label:'Digest'},{id:'alertes',label:`Alertes (${totalAlertes})`},{id:'comptes',label:'Comptes'}]}/>
+        onglets={[{id:'formations',label:'Formations'},{id:'ingestion',label:'+ Ingestion'},{id:'cartographie',label:'Cartographie'},{id:'digest',label:'Digest'},{id:'alertes',label:`Alertes (${totalAlertes})`},{id:'groupes',label:'Groupes'},{id:'comptes',label:'Comptes'}]}/>
       <div style={{maxWidth:960,margin:'0 auto',padding:'2rem 1.5rem'}}>
 
         <button onClick={()=>setAtelierOpen(true)}
@@ -931,6 +933,7 @@ function VueDir({user,onLogout}){
             </button>
 
             {error&&<div style={{marginTop:'1rem',padding:'0.75rem 1rem',background:P.redbg,border:`1px solid ${P.red}`,borderRadius:8,fontSize:12,color:'#8B1A1A'}}>{error}</div>}
+            {info&&<div style={{marginTop:'1rem',padding:'0.75rem 1rem',background:'#FDF1EB',border:'1px solid #E89B77',borderRadius:8,fontSize:12,color:'#B5643C',lineHeight:1.6}}>{info}</div>}
 
             {/* Rapport d'ingestion — ce qui est passé, et surtout ce qui ne l'est pas */}
             {rapport&&(
@@ -939,7 +942,7 @@ function VueDir({user,onLogout}){
                 {(rapport.cibles||[]).map((c,i)=>(
                   <div key={i} style={{fontSize:13,color:P.abysse,padding:'0.35rem 0',borderBottom:`1px solid ${P.border}`}}>
                     <strong>{c.promotion}</strong>
-                    {c.modules!==undefined&&<span style={{color:P.textm}}> — {c.modules} module(s), {c.blocs} bloc(s)</span>}
+                    {c.modules!==undefined&&<span style={{color:P.textm}}> — {c.modules} module(s), {c.blocs} bloc(s){c.blocs_option?', dont '+c.blocs_option+' au choix':''}</span>}
                     {c.modules_rapproches!==undefined&&<span style={{color:P.textm}}> — {c.modules_rapproches} module(s) enrichi(s), {c.modules_non_rapproches} sans correspondance</span>}
                   </div>
                 ))}
@@ -1001,6 +1004,7 @@ function VueDir({user,onLogout}){
           </div>
         )}
 
+        {onglet==='groupes'&&<GroupesOptions formations={formations}/>}
         {onglet==='comptes'&&<UserManagement/>}
       </div>
     </div>
@@ -1024,7 +1028,7 @@ function VueRP({user,onLogout}){
   return(
     <div style={{minHeight:'100vh',background:P.givre}}>
       <Topbar user={user} formationTitre={f?.formation?.titre||''} onLogout={onLogout} onglet={onglet} setOnglet={setOnglet}
-        onglets={[{id:'formations',label:'Mes formations'},{id:'cartographie',label:'Cartographie'},{id:'blocs',label:'Blocs'},{id:'alertes',label:`Alertes (${alertes.length})`},{id:'comptes',label:'Comptes'}]}/>
+        onglets={[{id:'formations',label:'Mes formations'},{id:'cartographie',label:'Cartographie'},{id:'blocs',label:'Blocs'},{id:'alertes',label:`Alertes (${alertes.length})`},{id:'groupes',label:'Groupes'},{id:'comptes',label:'Comptes'}]}/>
       <div style={{maxWidth:960,margin:'0 auto',padding:'1.5rem'}}>
         <button onClick={()=>setAtelierOpen(true)}
           style={{width:'100%',display:'flex',alignItems:'center',gap:14,background:P.abysse,color:P.givre,border:'none',borderRadius:14,padding:'16px 20px',marginBottom:'1.5rem',cursor:'pointer',textAlign:'left'}}>
@@ -1040,6 +1044,7 @@ function VueRP({user,onLogout}){
           {onglet==='cartographie'&&<div className="fi"><h2 style={{fontFamily:'Georgia,serif',fontWeight:400,color:P.abysse,marginTop:0,fontSize:22,marginBottom:'1rem'}}>{f.formation?.titre}</h2><GrapheCanvas blocs={f.blocs||[]} alertes={alertes} showAlerts/></div>}
           {onglet==='blocs'&&<div className="fi"><h2 style={{fontFamily:'Georgia,serif',fontWeight:400,color:P.abysse,marginTop:0,fontSize:22,marginBottom:'1rem'}}>Blocs</h2>{(f.blocs||[]).map(b=><details key={b.id} style={{...card(),marginBottom:'0.6rem'}}><summary style={{listStyle:'none',display:'flex',justifyContent:'space-between',cursor:'pointer'}}><div><Tag label={b.id} small/><span style={{marginLeft:'0.5rem',fontSize:14,fontWeight:600,color:P.abysse}}>{b.titre}</span><div style={{fontSize:11,color:P.textm,marginTop:3}}>{(b.competences||[]).length}C · {(b.modules||[]).length}M</div></div><span style={{fontSize:18,color:P.textm}}>▾</span></summary><div style={{marginTop:'0.75rem',paddingTop:'0.75rem',borderTop:`1px solid ${P.border}`}}>{(b.modules||[]).map(m=><div key={m.id} style={{background:P.surface2,borderRadius:8,padding:'0.5rem 0.75rem',marginBottom:'0.35rem',border:`1px solid ${P.border}`}}><div style={{fontSize:13,fontWeight:500,color:P.abysse}}>{m.titre}</div>{m.intervenant&&<div style={{fontSize:11,color:P.textm}}>{m.intervenant}</div>}{m.notions_cles?.length>0&&<div style={{display:'flex',flexWrap:'wrap',gap:'0.25rem',marginTop:'0.3rem'}}>{m.notions_cles.map(n=><Tag key={n} label={n} small/>)}</div>}</div>)}</div></details>)}</div>}
           {onglet==='alertes'&&<div className="fi"><h2 style={{fontFamily:'Georgia,serif',fontWeight:400,color:P.abysse,marginTop:0,fontSize:22,marginBottom:'0.5rem'}}>Alertes</h2><p style={{fontSize:12,color:P.textm,marginBottom:'1.25rem'}}>Ignorez les alertes non pertinentes — elles restent réactivables.</p><AlertesList formations={[f]} showFormationTitle={false}/></div>}
+          {onglet==='groupes'&&<GroupesOptions formations={formations}/>}
           {onglet==='comptes'&&(
             <div className="fi">
               <h2 style={{fontFamily:'Georgia,serif',fontWeight:400,color:P.abysse,marginTop:0,fontSize:22,marginBottom:'0.75rem'}}>Import de comptes</h2>
@@ -1112,15 +1117,167 @@ function fmtCourt(iso){
 
 /* Cartographie hub-et-satellites — généralisée à N blocs (la maquette avait
    4 coordonnées fixes ; ici on répartit les blocs en cercle autour du hub). */
+/* ── Groupes d'options intensives ────────────────────────────────────────────
+   Les étudiants choisissent individuellement leur option ; une fois les choix
+   connus, chaque option donne lieu à un ou plusieurs groupes que le RP
+   alimente. Le rattachement se fait par identifiant de groupe, ce qui permet
+   de renommer un groupe sans perdre ses membres. */
+function GroupesOptions({formations}){
+  const [fid,setFid]=useState(formations[0]?._id||null)
+  const [data,setData]=useState(null)
+  const [busy,setBusy]=useState(false)
+  const [err,setErr]=useState('')
+  const [nouveau,setNouveau]=useState('')
+
+  async function charger(id){
+    if(!id)return
+    setErr('')
+    try{ setData(await api.getGroupes(id)) }
+    catch(e){ setErr(e.message); setData(null) }
+  }
+  useEffect(()=>{charger(fid)},[fid])
+
+  async function agir(fn){
+    setBusy(true);setErr('')
+    try{ await fn(); await charger(fid) }
+    catch(e){ setErr(e.message) }
+    finally{ setBusy(false) }
+  }
+
+  const groupes=data?.groupes||[]
+  const etudiants=data?.etudiants||[]
+  const sansGroupe=data?.options_sans_groupe||[]
+  const nonAffectes=etudiants.filter(e=>!e.groupe_id)
+
+  return (
+    <div className="fi">
+      <h2 style={{fontFamily:'Georgia,serif',fontWeight:400,color:P.abysse,marginTop:0,fontSize:24,marginBottom:'0.4rem'}}>Groupes d'options</h2>
+      <p style={{fontSize:13,color:P.textm,marginBottom:'1.5rem',lineHeight:1.7}}>
+        Chaque étudiant suit une seule option intensive. Le rattacher à son groupe permet de ne compter, dans sa couverture, que l'option qu'il suit réellement.
+      </p>
+
+      <div style={card({marginBottom:'1rem'})}>
+        <div style={{fontSize:12,fontWeight:600,color:P.abysse,marginBottom:'0.6rem'}}>Titre</div>
+        <select value={fid||''} onChange={e=>setFid(Number(e.target.value))}
+          style={{width:'100%',border:`1px solid ${P.border}`,borderRadius:8,padding:'0.6rem 0.8rem',fontSize:13,color:P.abysse,background:P.surface,outline:'none'}}>
+          {formations.map(f=><option key={f._id} value={f._id}>{f._titre_court||f.formation?.titre||'Sans titre'}</option>)}
+        </select>
+      </div>
+
+      {err&&<div style={{marginBottom:'1rem',padding:'0.75rem 1rem',background:P.redbg,border:`1px solid ${P.red}`,borderRadius:8,fontSize:12,color:'#8B1A1A'}}>{err}</div>}
+
+      {sansGroupe.length>0&&(
+        <div style={{marginBottom:'1rem',padding:'0.85rem 1rem',background:'#FDF1EB',border:'1px solid #E89B77',borderRadius:8,fontSize:12,color:'#B5643C',lineHeight:1.6}}>
+          {sansGroupe.length} option(s) du référentiel sans groupe : {sansGroupe.map(o=>o.titre).join(' · ')}.
+          <button disabled={busy} onClick={()=>agir(()=>api.syncGroupes(fid))}
+            style={{marginLeft:8,padding:'3px 12px',borderRadius:20,border:'1px solid #E89B77',background:P.surface,color:'#B5643C',fontSize:11,fontWeight:600,cursor:busy?'wait':'pointer'}}>Créer les groupes</button>
+        </div>
+      )}
+
+      {data&&groupes.length===0&&sansGroupe.length===0&&(
+        <div style={card()}><div style={{fontSize:13,color:P.textm}}>Ce titre ne comporte aucune option au référentiel. Rien à répartir.</div></div>
+      )}
+
+      {groupes.map(g=>{
+        const membres=etudiants.filter(e=>e.groupe_id===g.id)
+        return (
+          <div key={g.id} style={card({marginBottom:'0.75rem'})}>
+            <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',gap:12,flexWrap:'wrap',marginBottom:'0.6rem'}}>
+              <div>
+                <div style={{fontSize:14,fontWeight:600,color:P.abysse}}>{g.nom}</div>
+                <div style={{fontSize:11,color:P.textm,marginTop:2}}>{g.bloc_id||'—'}{g.option_groupe?' · '+g.option_groupe:''} · {g.effectif} étudiant(s)</div>
+              </div>
+              <div style={{display:'flex',gap:6}}>
+                <button disabled={busy} onClick={()=>{const n=window.prompt('Nouveau nom du groupe',g.nom);if(n&&n.trim())agir(()=>api.renommerGroupe(g.id,n.trim()))}}
+                  style={{padding:'4px 12px',borderRadius:20,border:`1px solid ${P.border}`,background:P.surface,color:P.textm,fontSize:11,cursor:'pointer'}}>Renommer</button>
+                <button disabled={busy} onClick={()=>{if(window.confirm('Supprimer « '+g.nom+' » ? Les étudiants seront détachés, pas supprimés.'))agir(()=>api.supprimerGroupe(g.id))}}
+                  style={{padding:'4px 12px',borderRadius:20,border:`1px solid ${P.red}`,background:P.surface,color:P.red,fontSize:11,cursor:'pointer'}}>Supprimer</button>
+              </div>
+            </div>
+            {membres.length===0
+              ? <div style={{fontSize:12,color:P.textm,fontStyle:'italic'}}>Aucun étudiant rattaché.</div>
+              : <div style={{display:'flex',flexWrap:'wrap',gap:'0.35rem'}}>
+                  {membres.map(m=>(
+                    <span key={m.inscription_id} style={{display:'inline-flex',alignItems:'center',gap:6,padding:'3px 6px 3px 12px',borderRadius:20,background:'rgba(93,226,152,0.12)',border:`1px solid ${P.borderm}`,fontSize:12,color:P.petrole}}>
+                      {m.prenom} {m.nom}
+                      <button disabled={busy} title="Retirer du groupe" onClick={()=>agir(()=>api.affecterEtudiant(m.inscription_id,null))}
+                        style={{color:P.textm,fontSize:14,lineHeight:1,padding:'0 4px',cursor:'pointer'}}>×</button>
+                    </span>
+                  ))}
+                </div>}
+          </div>
+        )
+      })}
+
+      {groupes.length>0&&(
+        <div style={card({marginBottom:'0.75rem'})}>
+          <div style={{fontSize:12,fontWeight:600,color:P.abysse,marginBottom:'0.6rem'}}>Étudiants sans groupe <span style={{fontWeight:400,color:P.textm}}>({nonAffectes.length})</span></div>
+          {etudiants.length===0
+            ? <div style={{fontSize:12,color:P.textm,fontStyle:'italic'}}>Aucun étudiant inscrit à ce titre. Les importer depuis l'écran Comptes.</div>
+            : nonAffectes.length===0
+              ? <div style={{fontSize:12,color:P.petrole}}>Tous les étudiants sont répartis.</div>
+              : nonAffectes.map(e=>(
+                  <div key={e.inscription_id} style={{display:'flex',alignItems:'center',justifyContent:'space-between',gap:12,padding:'0.4rem 0',borderBottom:`1px solid ${P.border}`}}>
+                    <span style={{fontSize:13,color:P.abysse}}>{e.prenom} {e.nom} <span style={{fontSize:11,color:P.textm}}>{e.email}</span></span>
+                    <select disabled={busy} defaultValue="" onChange={ev=>{const v=ev.target.value;if(v)agir(()=>api.affecterEtudiant(e.inscription_id,Number(v)))}}
+                      style={{border:`1px solid ${P.border}`,borderRadius:8,padding:'4px 8px',fontSize:12,color:P.abysse,background:P.surface,outline:'none'}}>
+                      <option value="">Affecter à…</option>
+                      {groupes.map(g=><option key={g.id} value={g.id}>{g.nom}</option>)}
+                    </select>
+                  </div>
+                ))}
+        </div>
+      )}
+
+      <div style={card()}>
+        <div style={{fontSize:12,fontWeight:600,color:P.abysse,marginBottom:'0.5rem'}}>Groupe supplémentaire <span style={{fontWeight:400,color:P.textm}}>(dédoubler une option à fort effectif)</span></div>
+        <div style={{display:'flex',gap:8,flexWrap:'wrap'}}>
+          <input value={nouveau} onChange={e=>setNouveau(e.target.value)} placeholder="Ex : Option Création — groupe B"
+            style={{flex:1,minWidth:220,border:`1px solid ${P.border}`,borderRadius:8,padding:'0.55rem 0.8rem',fontSize:13,color:P.abysse,outline:'none'}}/>
+          <button disabled={busy||!nouveau.trim()||!fid} onClick={()=>agir(async()=>{await api.creerGroupe(fid,nouveau.trim(),'','');setNouveau('')})}
+            style={{padding:'0.55rem 1.2rem',borderRadius:8,border:'none',fontSize:13,fontWeight:600,cursor:(nouveau.trim()&&fid)?'pointer':'not-allowed',
+              background:(nouveau.trim()&&fid)?`linear-gradient(135deg,${P.petrole},${P.menthe})`:'rgba(19,69,71,0.08)',color:(nouveau.trim()&&fid)?P.abysse:P.textm}}>Créer</button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 function Cartographie2({blocs,mode,sel,onSelect,titre}){
   const deploy = mode==='deploiement'
   const n = blocs.length||1
-  const cx=430, cy=235, R=225, W=860, H=510
+
+  // Géométrie adaptative.
+  // L'ancienne version figeait rayon et dimensions sur des valeurs calibrées
+  // pour cinq blocs. À onze, l'espacement angulaire tombait sous la taille des
+  // nœuds : cercles, satellites et libellés se recouvraient au point de rendre
+  // la cartographie illisible. Tout est désormais dérivé du nombre de blocs.
+  const rNode   = n<=6 ? 45 : n<=9 ? 38 : 32   // rayon d'un nœud
+  const rSat    = rNode + 20                    // orbite des satellites de compétences
+  const labelW  = 158                           // largeur allouée à un libellé
+  const gapLbl  = 26                            // écart nœud → libellé
+  // Le rayon de l'anneau de libellés découle de la place qu'ils réclament :
+  // il faut au moins `labelW` de corde entre deux libellés voisins.
+  // Deux contraintes, chacune exprimée en corde entre voisins :
+  //   nœuds    → la corde doit valoir au moins deux orbites de satellites
+  //   libellés → la corde doit valoir au moins la largeur d'un libellé
+  // On dimensionne sur la plus exigeante des deux, jamais sur une constante.
+  const sin     = Math.sin(Math.PI/Math.max(n,2))
+  const Rnoeuds = Math.max(168, Math.ceil(rSat/sin) + 4)
+  const Rlabel  = Math.max(248, Math.ceil((labelW/2+6)/sin), Rnoeuds + rNode + gapLbl + 24)
+  const R       = Math.max(Rnoeuds, Rlabel - rNode - gapLbl - 24)
+  const W       = Math.round(2*(Rlabel + labelW/2 + 12))
+  const H       = Math.round(2*(Rlabel + 34))
+  const cx = W/2, cy = H/2
+  const rCentre = n<=6 ? 52 : 44
+
   const positioned = blocs.map((b,i)=>{
-    const a = -Math.PI*0.75 + i*(2*Math.PI/n)
-    return {...b, x:+(cx+Math.cos(a)*R).toFixed(1), y:+(cy+Math.sin(a)*R).toFixed(1)}
+    const a = -Math.PI/2 + i*(2*Math.PI/n)
+    return {...b,
+      x:+(cx+Math.cos(a)*R).toFixed(1), y:+(cy+Math.sin(a)*R).toFixed(1),
+      lx:+(cx+Math.cos(a)*Rlabel).toFixed(1), ly:+(cy+Math.sin(a)*Rlabel).toFixed(1)}
   })
-  const C = 2*Math.PI*52
+  const C = 2*Math.PI*rNode
   return (
     <div style={{background:P.surface,border:`1px solid ${P.border}`,borderRadius:16,overflow:'hidden'}}>
       <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',padding:'13px 18px',borderBottom:`1px solid ${P.border}`,flexWrap:'wrap',gap:8}}>
@@ -1138,8 +1295,8 @@ function Cartographie2({blocs,mode,sel,onSelect,titre}){
           {positioned.map(b=>(
             <line key={'l'+b.id} x1={cx} y1={cy} x2={b.x} y2={b.y} stroke={deploy?'#DCE9E4':'transparent'} strokeWidth={1.5} strokeDasharray={deploy?'none':'4 5'}/>
           ))}
-          <circle cx={cx} cy={cy} r={52} fill={P.abysse}/>
-          <text x={cx} y={cy-7} textAnchor="middle" fill={P.menthe} style={{font:"600 12px 'DM Sans'"}}>{titreCourt(titre)}</text>
+          <circle cx={cx} cy={cy} r={rCentre} fill={P.abysse}/>
+          <text x={cx} y={cy-6} textAnchor="middle" fill={P.menthe} style={{font:"600 12px 'DM Sans'"}}>{titreCourt(titre)}</text>
           <text x={cx} y={cy+11} textAnchor="middle" fill="rgba(227,255,240,.5)" style={{font:"400 10px 'DM Sans'"}}>{blocs.length} bloc{blocs.length>1?'s':''}</text>
           {positioned.map(b=>{
             const col = b.st==='ok'?AT.ok:b.st==='warn'?AT.warn:AT.idle
@@ -1147,7 +1304,7 @@ function Cartographie2({blocs,mode,sel,onSelect,titre}){
             const dots = Array.from({length:nComp},(_,i2)=>{
               const a = -Math.PI*0.78 + (Math.PI*1.56)*(nComp===1?0.5:i2/(nComp-1))
               const covered = deploy && i2 < Math.round(nComp*(b.pct||0)/100)
-              return {x:+(b.x+Math.cos(a)*68).toFixed(1), y:+(b.y+Math.sin(a)*68).toFixed(1),
+              return {x:+(b.x+Math.cos(a)*rSat).toFixed(1), y:+(b.y+Math.sin(a)*rSat).toFixed(1),
                 fill: deploy?(covered?col:'#FFFFFF'):'#FFFFFF', stroke: deploy?col:'#CBDCD7'}
             })
             const fill = deploy?(b.st==='ok'?'#F1FCF6':b.st==='warn'?'#FDF6F2':'#F6F8F8'):'#FFFFFF'
@@ -1156,30 +1313,50 @@ function Cartographie2({blocs,mode,sel,onSelect,titre}){
               <g key={b.id} onClick={()=>onSelect({kind:'bloc',id:b.id})} style={{cursor:'pointer'}}>
                 {dots.map((d,di)=><circle key={di} cx={d.x} cy={d.y} r={4.5} fill={d.fill} stroke={d.stroke} strokeWidth={1}/>)}
                 {deploy&&<>
-                  <circle cx={b.x} cy={b.y} r={52} fill="none" stroke="#EAF3EF" strokeWidth={5}/>
-                  <circle cx={b.x} cy={b.y} r={52} fill="none" stroke={col} strokeWidth={5} strokeLinecap="round"
-                    strokeDasharray={`${(C*(b.pct||0)/100).toFixed(1)} ${C.toFixed(1)}`} transform={`rotate(-90 ${b.x} ${b.y})`}/>
+                  <circle cx={b.x} cy={b.y} r={rNode+7} fill="none" stroke="#EAF3EF" strokeWidth={5}/>
+                  <circle cx={b.x} cy={b.y} r={rNode+7} fill="none" stroke={col} strokeWidth={5} strokeLinecap="round"
+                    strokeDasharray={`${(2*Math.PI*(rNode+7)*(b.pct||0)/100).toFixed(1)} ${(2*Math.PI*(rNode+7)).toFixed(1)}`} transform={`rotate(-90 ${b.x} ${b.y})`}/>
                 </>}
-                <circle cx={b.x} cy={b.y} r={45} fill={fill} stroke={stroke} strokeWidth={deploy?1:1.4} strokeDasharray={deploy?'none':'5 4'}/>
+                <circle cx={b.x} cy={b.y} r={rNode}
+                  fill={b.nature==='option'?'#FDF6F2':fill}
+                  stroke={b.nature==='option'?'#E89B77':stroke}
+                  strokeWidth={deploy?1:1.4}
+                  strokeDasharray={b.nature==='option'?'2 4':(deploy?'none':'5 4')}/>
               </g>
             )
           })}
         </svg>
+        {/* Le nœud ne porte plus que le chiffre : un identifiant comme
+            B3_OPTION_EVENEMENTIEL débordait largement du cercle et venait
+            recouvrir ses voisins. L'identité du bloc est reportée dans le
+            libellé extérieur, où elle dispose de la place nécessaire. */}
         {positioned.map(b=>(
           <div key={'lbl'+b.id}>
-            <button onClick={()=>onSelect({kind:'bloc',id:b.id})} style={{position:'absolute',left:`${(b.x/W*100).toFixed(2)}%`,top:`${(b.y/H*100).toFixed(2)}%`,transform:'translate(-50%,-50%)',textAlign:'center',lineHeight:1.15,width:80,cursor:'pointer'}}>
-              <span style={{fontSize:15,fontWeight:700,color:P.abysse,display:'block'}}>{b.id}</span>
-              <span style={{display:'block',marginTop:2,fontSize:11,fontWeight:600,color:deploy?(b.st==='idle'?AT.idleText:b.st==='warn'?AT.warnText:P.petrole):AT.idleText}}>{deploy?(b.pct||0)+' %':(b.comp||0)+' comp.'}</span>
+            <button onClick={()=>onSelect({kind:'bloc',id:b.id})} title={b.id+' — '+(b.titre||'')}
+              style={{position:'absolute',left:`${(b.x/W*100).toFixed(2)}%`,top:`${(b.y/H*100).toFixed(2)}%`,transform:'translate(-50%,-50%)',textAlign:'center',lineHeight:1.05,width:2*rNode-8,cursor:'pointer'}}>
+              <span style={{fontSize:n<=6?20:17,fontWeight:700,color:P.abysse,display:'block'}}>{deploy?(b.pct||0):(b.comp||0)}</span>
+              <span style={{display:'block',marginTop:1,fontSize:9.5,fontWeight:600,letterSpacing:'.02em',color:deploy?(b.st==='idle'?AT.idleText:b.st==='warn'?AT.warnText:P.petrole):AT.idleText}}>{deploy?'%':'comp.'}</span>
             </button>
-            <div style={{position:'absolute',left:`${(b.x/W*100).toFixed(2)}%`,top:`${((b.y+92)/H*100).toFixed(2)}%`,transform:'translate(-50%,-50%)',width:190,textAlign:'center',pointerEvents:'none',fontSize:12,fontWeight:600,color:P.petrole,lineHeight:1.3}}>{b.titre}</div>
+            {/* Libellé sur un anneau extérieur : le rayon a été dimensionné
+                pour qu'il reste `labelW` de corde entre deux voisins. Titre
+                borné à deux lignes, texte complet au survol. */}
+            <div title={b.titre||''}
+              style={{position:'absolute',left:`${(b.lx/W*100).toFixed(2)}%`,top:`${(b.ly/H*100).toFixed(2)}%`,transform:'translate(-50%,-50%)',width:labelW,textAlign:'center',pointerEvents:'none'}}>
+              <div style={{fontSize:9.5,fontWeight:700,letterSpacing:'.06em',color:AT.idleText,textTransform:'uppercase',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>{b.id}</div>
+              {b.nature==='option'&&(
+                <div title={b.optGroupe?b.optGroupe+' — parcours au choix':'Parcours au choix'}
+                  style={{display:'inline-block',marginTop:2,padding:'0 6px',borderRadius:20,background:'rgba(232,155,119,.16)',color:'#B5643C',fontSize:9,fontWeight:700,letterSpacing:'.05em',textTransform:'uppercase'}}>au choix</div>
+              )}
+              <div style={{marginTop:1,fontSize:11.5,fontWeight:600,color:P.petrole,lineHeight:1.25,display:'-webkit-box',WebkitLineClamp:2,WebkitBoxOrient:'vertical',overflow:'hidden'}}>{b.titre}</div>
+            </div>
             {deploy&&b.anom>0&&(
-              <div style={{position:'absolute',left:`${((b.x+38)/W*100).toFixed(2)}%`,top:`${((b.y-36)/H*100).toFixed(2)}%`,transform:'translate(-50%,-50%)',width:24,height:24,borderRadius:'50%',background:AT.warn,color:P.abysse,fontSize:11,fontWeight:700,display:'flex',alignItems:'center',justifyContent:'center',pointerEvents:'none'}}>{b.anom}</div>
+              <div style={{position:'absolute',left:`${((b.x+rNode*0.8)/W*100).toFixed(2)}%`,top:`${((b.y-rNode*0.8)/H*100).toFixed(2)}%`,transform:'translate(-50%,-50%)',width:22,height:22,borderRadius:'50%',background:AT.warn,color:P.abysse,fontSize:11,fontWeight:700,display:'flex',alignItems:'center',justifyContent:'center',pointerEvents:'none'}}>{b.anom}</div>
             )}
           </div>
         ))}
       </div>
       <div style={{padding:'10px 18px',borderTop:`1px solid ${P.border}`,fontSize:10.5,color:AT.idleText}}>
-        {deploy?"Anneau = couverture réelle du bloc · satellites pleins = compétences couvertes · pastille = anomalies":"Contours pointillés = structure planifiée, aucune séance encore déclarée"}
+        {(deploy?"Anneau = couverture réelle du bloc · satellites pleins = compétences couvertes · pastille = anomalies":"Contours pointillés = structure planifiée, aucune séance encore déclarée")+(blocs.some(b=>b.nature==='option')?" · contour saumon = parcours au choix, un seul suivi par étudiant":"")}
       </div>
     </div>
   )
@@ -1677,6 +1854,26 @@ function VueFR({user,onLogout,onRetour}){
     await reload()
   }
 
+  // Dénominateur de couverture — les options ne s'additionnent pas.
+  // Un étudiant suit une seule option intensive : compter les trois reviendrait
+  // à exiger une couverture que personne n'atteindra. On retient donc, par
+  // groupe d'options mutuellement exclusives, la moyenne des modules plutôt
+  // que leur somme. Le compte est indicatif au niveau de la promotion ; la
+  // couverture exacte par étudiant se lira via son groupe.
+  const blocsOblig = blocsRaw.filter(b=>b.nature!=='option')
+  const blocsOpt   = blocsRaw.filter(b=>b.nature==='option')
+  const modsDe = arr => arr.reduce((n,b)=>n+((b.modules||[]).length),0)
+  const parGroupeOpt = {}
+  for(const b of blocsOpt){ const k=b.option_groupe||'Options'; (parGroupeOpt[k]=parGroupeOpt[k]||[]).push(b) }
+  const modulesOptRetenus = Object.values(parGroupeOpt)
+    .reduce((n,arr)=>n+Math.round(modsDe(arr)/Math.max(arr.length,1)),0)
+  const totauxTitre = {
+    blocsOblig: blocsOblig.length,
+    blocsOption: blocsOpt.length,
+    modulesAttendus: modsDe(blocsOblig)+modulesOptRetenus,
+    modulesTotal: modsDe(blocsRaw),
+  }
+
   const blocs = blocsRaw.map(b=>{
     const anomsBloc = ecarts.filter(e=>e.etat!=='nominal' && modToBloc[e.module_ref]===b.id)
     const quiSet = new Set(prevues.filter(s=>modToBloc[s.module_ref]===b.id).map(s=>s.intervenant_nom).filter(Boolean))
@@ -1684,6 +1881,7 @@ function VueFR({user,onLogout,onRetour}){
     const anom = anomsBloc.length
     const st = anom>0?'warn':(pct>0?'ok':'idle')
     return {id:b.id, titre:b.titre, comp:(b.competences||[]).length, mods:(b.modules||[]).length, pct, anom, st,
+      nature:b.nature==='option'?'option':'obligatoire', optGroupe:b.option_groupe||'',
       qui: quiSet.size?Array.from(quiSet).join(' · '):'Non affecté',
       desc:`${(b.competences||[]).length} compétence(s) au référentiel de ce bloc.`}
   })
@@ -1789,7 +1987,7 @@ function VueFR({user,onLogout,onRetour}){
     : temps==='digest'
       ? [{k:'destinataires',v:String((digest?.destinataires||[]).length||'—')},{k:'anomalies',v:String(nbAlertes),warn:nbAlertes>0}]
       : temps==='plan'
-        ? [{k:'blocs',v:String(blocs.length)},{k:'compétences',v:String(blocs.reduce((n,b)=>n+b.comp,0))},{k:'modules',v:String(blocs.reduce((n,b)=>n+b.mods,0))}]
+        ? [{k:'blocs',v:totauxTitre.blocsOption?`${totauxTitre.blocsOblig} + ${totauxTitre.blocsOption} au choix`:String(totauxTitre.blocsOblig)},{k:'compétences',v:String(blocs.reduce((n,b)=>n+b.comp,0))},{k:'modules par étudiant',v:totauxTitre.modulesAttendus!==totauxTitre.modulesTotal?`${totauxTitre.modulesAttendus} sur ${totauxTitre.modulesTotal}`:String(totauxTitre.modulesTotal)}]
         : [{k:'séances',v:String(ecarts.length)},{k:'conformes',v:String(ecarts.filter(e=>e.etat==='nominal').length)},{k:'anomalies',v:String(nbAlertes),warn:nbAlertes>0}]
 
   const pageTitlesFR = {
