@@ -27,6 +27,28 @@ const FORMATIONS_LE_MANS = [
     "data_key": "cdc"
   },
   {
+    "titre_court": "M1 MDEC",
+    "cycle": "M1",
+    "data_rncp": "39354",
+    "rncp": "39354",
+    "niveau": "7",
+    "titre": "Master Manager du développement d'entreprise et commercial — M1",
+    "certificateur": "ISME / Aforem",
+    "campus": "Le Mans",
+    "data_key": "mdec-m1"
+  },
+  {
+    "titre_court": "M2 MDEC",
+    "cycle": "M2",
+    "data_rncp": "39354",
+    "rncp": "39354",
+    "niveau": "7",
+    "titre": "Master Manager du développement d'entreprise et commercial — M2",
+    "certificateur": "ISME / Aforem",
+    "campus": "Le Mans",
+    "data_key": "mdec-m2"
+  },
+  {
     "titre_court": "M1 MSMC",
     "cycle": "M1",
     "data_rncp": "38504",
@@ -69,28 +91,6 @@ const FORMATIONS_LE_MANS = [
     "certificateur": "ISME",
     "campus": "Le Mans",
     "data_key": "mrh-m2"
-  },
-  {
-    "titre_court": "M1 MDEC",
-    "cycle": "M1",
-    "data_rncp": "39354",
-    "rncp": "39354",
-    "niveau": "7",
-    "titre": "Master Manager du développement d'entreprise et commercial — M1",
-    "certificateur": "ISME / Aforem",
-    "campus": "Le Mans",
-    "data_key": "mdec-m1"
-  },
-  {
-    "titre_court": "M2 MDEC",
-    "cycle": "M2",
-    "data_rncp": "39354",
-    "rncp": "39354",
-    "niveau": "7",
-    "titre": "Master Manager du développement d'entreprise et commercial — M2",
-    "certificateur": "ISME / Aforem",
-    "campus": "Le Mans",
-    "data_key": "mdec-m2"
   }
 ];
 
@@ -273,6 +273,57 @@ module.exports = async function handler(req, res) {
   try {
     const db = getDB();
 
+    // ─── Réinitialisation complète (?reset=1) ────────────────────────────────
+    // Vide le contenu pédagogique et opérationnel avant de rejouer le seed.
+    // Demandee le 03/09/2026 : l'Atlas repart d'une base nue, le contenu ne
+    // pouvant provenir que de l'ingestion des PF, syllabi et RACE.
+    //
+    // Detruit : formations, previsionnels, declarations, digests, inscriptions,
+    // sessions, et tous les comptes hors direction et RP du perimetre pilote.
+    // Conserve : les 6 comptes acteurs, qui sont recrees juste apres.
+    //
+    // Irreversible — aucune sauvegarde n'est prise. Exige ?reset=1 ET la
+    // confirmation explicite confirm=je-confirme dans la query, pour qu'un
+    // rejeu distrait de /api/setup ne puisse jamais vider la base.
+    const veutReset = req.query && (req.query.reset === '1' || req.query.reset === 'true');
+    const resetConfirme = req.query && req.query.confirm === 'je-confirme';
+    let reset = null;
+
+    if (veutReset && !resetConfirme) {
+      return res.status(400).json({
+        error: 'Réinitialisation non confirmée.',
+        attendu: 'POST /api/setup?reset=1&confirm=je-confirme',
+        effet: 'Vide formations, prévisionnels, déclarations, digests, inscriptions, sessions et comptes non-acteurs. Irréversible.',
+      });
+    }
+
+    if (veutReset && resetConfirme) {
+      const emailsConserves = [
+        'arnaud.robert@emineo-education.fr',
+        'ludovic.herve@emineo-education.fr',
+        'sylvain.kornowski@emineo-education.fr',
+        'sylvain.duclos@emineo-education.fr',
+        'etienne.azerad@cesacom.fr',
+        'johnny.nicolas@isme.fr',
+      ];
+      const compte = {};
+      for (const t of ['digest_fr', 'declaration', 'previsionnel_seance', 'inscription', 'formations', 'sessions']) {
+        try {
+          const r = await db.execute(`DELETE FROM ${t}`);
+          compte[t] = Number(r.rowsAffected || 0);
+        } catch (_) { compte[t] = 'table absente'; }
+      }
+      try {
+        const ph = emailsConserves.map(() => '?').join(',');
+        const r = await db.execute({
+          sql: `DELETE FROM users WHERE email NOT IN (${ph})`,
+          args: emailsConserves,
+        });
+        compte.users = Number(r.rowsAffected || 0);
+      } catch (_) { compte.users = 'table absente'; }
+      reset = { effectue: true, lignes_supprimees: compte };
+    }
+
     // ─── Tables de base ──────────────────────────────────────────────────────
     await db.execute(`CREATE TABLE IF NOT EXISTS users (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -438,7 +489,22 @@ module.exports = async function handler(req, res) {
     for (const f of FORMATIONS_LE_MANS) {
       // Copie defensive : plusieurs annees de cycle partagent le meme objet
       // source dans DATA_LE_MANS, une mutation directe fuirait de M1 vers M2.
-      const data = JSON.parse(JSON.stringify(DATA_LE_MANS[f.data_rncp] || {}));
+      // Le referentiel n'est plus injecte par defaut (03/09/2026) : le contenu
+      // pedagogique doit provenir de l'ingestion des PF, syllabi et RACE, seule
+      // source faisant foi. DATA_LE_MANS reste dans le fichier — notamment la
+      // reconstruction MSMC du referentiel officiel de juillet 2023 — et se
+      // reinjecte a la demande avec ?refs=1, sans rien avoir a reecrire.
+      const avecRefs = req.query && (req.query.refs === '1' || req.query.refs === 'true');
+      const source = avecRefs ? (DATA_LE_MANS[f.data_rncp] || {}) : {};
+      const data = JSON.parse(JSON.stringify(source));
+      if (!avecRefs) {
+        data.formation = { titre: f.titre, rncp: f.rncp, etablissement: f.certificateur, annee: '2026-27' };
+        data.blocs = [];
+        data.intervenants = [];
+        data.notions_transversales = [];
+        data.alertes_detectees = [];
+        data._vide = true;
+      }
       data._campus = f.campus;
       data._cycle = f.cycle;
       // Les modules ne portent pas encore de marqueur d'annee : M1 et M2
@@ -457,7 +523,10 @@ module.exports = async function handler(req, res) {
         formationIds[f.titre_court] = Number(row.id);
         let existing = {};
         try { existing = JSON.parse(row.data_json || '{}'); } catch(_) {}
-        if (forceRefs || !existing.blocs || existing.blocs.length === 0) {
+        // Une promotion deja alimentee par ingestion n'est jamais ecrasee par un
+        // rejeu du seed : seules les coquilles vides sont mises a jour.
+        const dejaAlimentee = existing.blocs && existing.blocs.length > 0;
+        if (forceRefs || !dejaAlimentee) {
           await db.execute({
             sql: 'UPDATE formations SET titre=?,rncp=?,niveau=?,titre_court=?,certificateur=?,data_json=? WHERE id=?',
             args: [f.titre, f.rncp, f.niveau, f.titre_court, f.certificateur, dataStr, row.id],
@@ -627,6 +696,7 @@ module.exports = async function handler(req, res) {
         fr_seedes: 0,
         fr_placeholders_supprimes: frPlaceholdersSupprimes,
       },
+      reset,
       purge,
       demo,
       comptes: {

@@ -76,7 +76,7 @@ module.exports = async function handler(req, res) {
     return res.status(500).json({ error: 'ANTHROPIC_API_KEY non configuree sur le serveur.' });
   }
 
-  const { textes, campus, prompt } = req.body || {};
+  const { textes, campus, prompt, type_doc } = req.body || {};
 
   // ─── MODE 1 : prompt direct (fiche J-1 intervenant) ───────────────────────
   // Renvoie { text } — le front parse lui-meme.
@@ -91,70 +91,157 @@ module.exports = async function handler(req, res) {
     }
   }
 
-  // ─── MODE 2 : ingestion de documents (textes + campus) ────────────────────
-  // Renvoie { data } — structure pedagogique parsee.
+  // ─── MODE 2 : ingestion de documents ──────────────────────────────────────
+  // Trois natures de document, trois lectures differentes (03/09/2026) :
+  //   'pf'       Plan de formation — donne la STRUCTURE : quels modules, dans
+  //              quelle annee de cycle, quel volume, quel intervenant. C'est le
+  //              point de depart : il cree les modules et les repartit M1 / M2.
+  //   'syllabus' Syllabus — donne le DETAIL d'un module deja structure :
+  //              seances, notions travaillees, rattachement aux competences.
+  //   'race'     Referentiel d'activites et de competences — donne la GRILLE :
+  //              blocs, competences, criteres. C'est la cible du mapping.
+  // Melanger ces trois lectures dans un prompt unique produisait une extraction
+  // moyenne pour les trois : un PF etait lu comme un syllabus pauvre, un RACE
+  // comme un PF sans volumes.
   if (!textes || !Array.isArray(textes) || textes.length === 0) {
     return res.status(400).json({ error: 'Body invalide : fournir { prompt } ou { textes[], campus }.' });
   }
+
+  const TYPES = ['pf', 'syllabus', 'race'];
+  const typeDoc = TYPES.includes(String(type_doc || '').toLowerCase())
+    ? String(type_doc).toLowerCase()
+    : 'pf';
 
   const corpus = textes
     .map((t, i) => '--- DOCUMENT ' + (i + 1) + ' ---\n' + (t || '').slice(0, 12000))
     .join('\n\n');
 
-  const campusLabel = Array.isArray(campus)
-    ? campus.join(', ')
-    : (campus || 'non precise');
+  const campusLabel = Array.isArray(campus) ? campus.join(', ') : (campus || 'non precise');
 
-  const ingestPrompt =
-    'Tu es expert en ingenierie pedagogique. Analyse ces documents de formation et extrais leur structure pedagogique.\n\n' +
-    'Campus concerne(s) : ' + campusLabel + '\n\n' +
-    corpus + '\n\n' +
+  // Regle d'annee de cycle — partagee par les trois lectures.
+  const REGLE_ANNEE =
+    'ANNEE DE CYCLE — REGLE CRITIQUE :\n' +
+    'Les Masteres se deroulent sur deux ans. Un document peut couvrir le M1, le\n' +
+    'M2, ou les deux. Chaque module porte un champ "annee_cycle" valant\n' +
+    'exactement "M1", "M2", "B3" ou "".\n\n' +
+    'Indices RECEVABLES, par ordre de fiabilite :\n' +
+    '1. Mention explicite rattachee au module : "M1", "M2", "Master 1",\n' +
+    '   "Master 2", "1re annee", "2e annee", "annee 1", "annee 2", "B3".\n' +
+    '2. Titre de section, d\'onglet, d\'en-tete de tableau ou de colonne sous\n' +
+    '   lequel le module est liste : herite de cette section, et de rien d\'autre.\n' +
+    '3. Titre du document lui-meme s\'il ne couvre qu\'une annee.\n\n' +
+    'PIEGE DES SEMESTRES : "S1" et "S2" designent le plus souvent les deux\n' +
+    'semestres D\'UNE MEME annee, pas M1 et M2. Ne deduis JAMAIS l\'annee d\'un\n' +
+    'S1/S2 seul. Une numerotation allant de S1 a S4 sur tout le document autorise\n' +
+    'en revanche S1-S2 = M1 et S3-S4 = M2.\n\n' +
+    'Autres interdits : ne deduis pas l\'annee du niveau de difficulte apparent,\n' +
+    'de la position dans la liste, du volume horaire, ni du caractere\n' +
+    '"fondamental" ou "avance" de l\'intitule. Sans indice recevable, renvoie "".\n' +
+    'Une valeur vide se corrige ; une valeur inventee fausse silencieusement la\n' +
+    'couverture d\'une promotion entiere. Ne devine pas.\n\n';
+
+  const REGLES_COMMUNES =
     'REGLES IMPERATIVES :\n' +
     '- Retourne UNIQUEMENT du JSON brut, aucun texte avant ou apres, aucun backtick\n' +
     '- Maximum 5 notions_cles par module (les plus importantes)\n' +
     '- Libelles de competences : max 12 mots\n' +
-    '- Message d\'alerte : 1 phrase max, formule positivement (opportunite de coordination)\n' +
-    '- Si un champ est inconnu, utilise une chaine vide "" ou un tableau vide []\n\n' +
-    'ANNEE DE CYCLE — REGLE CRITIQUE :\n' +
-    'Les Masteres se deroulent sur deux ans. Un plan de formation ou un syllabus peut\n' +
-    'couvrir le M1, le M2, ou les deux. Chaque module doit porter le champ\n' +
-    '"annee_cycle" avec exactement l\'une de ces valeurs : "M1", "M2", "B3" ou "".\n\n' +
-    'Indices RECEVABLES pour trancher, par ordre de fiabilite :\n' +
-    '1. Mention explicite rattachee au module ou a sa section : "M1", "M2",\n' +
-    '   "Master 1", "Master 2", "1re annee", "2e annee", "annee 1", "annee 2",\n' +
-    '   "B3", "Bachelor 3".\n' +
-    '2. Titre de section, d\'onglet, d\'en-tete de tableau ou de colonne sous lequel\n' +
-    '   le module est liste : herite alors de cette section, et de rien d\'autre.\n' +
-    '3. Titre ou en-tete du document lui-meme, s\'il ne couvre qu\'une seule annee\n' +
-    '   (ex. "Plan de formation MRH M1 2026-27") : applique-le a tous ses modules.\n\n' +
-    'PIEGE A EVITER — semestres : "S1" et "S2" designent le plus souvent les deux\n' +
-    'semestres D\'UNE MEME annee, pas M1 et M2. Ne deduis JAMAIS l\'annee de cycle\n' +
-    'd\'un S1/S2 seul. Une numerotation S1 a S4 sur l\'ensemble du document autorise\n' +
-    'en revanche la correspondance S1-S2 = M1 et S3-S4 = M2.\n\n' +
-    'Autres interdits : ne deduis pas l\'annee du niveau de difficulte apparent, de\n' +
-    'la position du module dans la liste, du volume horaire, ni du caractere\n' +
-    '"fondamental" ou "avance" de l\'intitule. En l\'absence d\'indice recevable,\n' +
-    'renvoie "" — une valeur vide est exploitable, une valeur inventee corrompt le\n' +
-    'calcul de couverture par promotion. Ne devine pas.\n\n' +
-    'Renseigne aussi "annees_couvertes" au niveau formation : la liste des annees\n' +
-    'de cycle effectivement presentes dans les documents (ex. ["M1"], ["M1","M2"]),\n' +
-    'et "modules_sans_annee" : le nombre de modules laisses a "". Ce compteur sert\n' +
-    'a la Direction des programmes pour mesurer ce qui reste a qualifier.\n\n' +
-    'Structure JSON exacte a retourner :\n' +
-    '{\n' +
-    '  "formation": { "titre": "Titre de la formation", "etablissement": "Nom", "rncp": "Numero RNCP si trouve sinon vide", "annee": "2025-26", "annees_couvertes": ["M1"], "modules_sans_annee": 0 },\n' +
-    '  "blocs": [\n' +
-    '    {\n' +
-    '      "id": "B1",\n' +
-    '      "titre": "Titre du bloc",\n' +
-    '      "competences": [ { "id": "C1", "libelle": "Libelle court" } ],\n' +
-    '      "modules": [ { "id": "M1", "titre": "Titre du module", "annee_cycle": "M1", "intervenant": "Nom ou vide", "competences_liees": ["C1"], "notions_cles": ["notion 1"], "volume": "12h" } ]\n' +
-    '    }\n' +
-    '  ],\n' +
-    '  "intervenants": ["noms trouves"],\n' +
-    '  "notions_transversales": ["notions presentes dans plusieurs blocs"],\n' +
-    '  "alertes_detectees": [ { "niveau": 2, "notion": "Notion", "modules": ["M1","M3"], "message": "Phrase positive sur la coordination." } ]\n' +
-    '}';
+    '- Si un champ est inconnu, utilise une chaine vide "" ou un tableau vide []\n' +
+    '- N\'invente aucun module, aucune competence, aucun intervenant absent des documents\n\n';
+
+  let ingestPrompt;
+
+  if (typeDoc === 'pf') {
+    ingestPrompt =
+      'Tu es expert en ingenierie pedagogique. Ces documents sont des PLANS DE\n' +
+      'FORMATION. Ta tache est d\'en extraire la STRUCTURE : la liste des modules\n' +
+      'et leur repartition par annee de cycle. Le rattachement aux competences\n' +
+      'viendra plus tard, par les syllabi et le RACE — ne le force pas ici.\n\n' +
+      'Campus concerne(s) : ' + campusLabel + '\n\n' +
+      corpus + '\n\n' +
+      REGLES_COMMUNES + REGLE_ANNEE +
+      'ORGANISATION EN BLOCS :\n' +
+      'Si le plan de formation enonce explicitement des blocs de competences,\n' +
+      'reprends-les. Sinon, place TOUS les modules dans un bloc unique d\'identifiant\n' +
+      '"B0" et de titre "Modules non rattaches" — c\'est un etat d\'attente\n' +
+      'parfaitement normal a ce stade, pas un echec. N\'invente jamais de blocs\n' +
+      'plausibles pour faire joli : un B0 honnete vaut mieux qu\'un decoupage faux.\n\n' +
+      'Structure JSON exacte a retourner :\n' +
+      '{\n' +
+      '  "formation": { "titre": "Titre", "etablissement": "Nom", "rncp": "Numero si trouve sinon vide", "annee": "2026-27", "annees_couvertes": ["M1","M2"], "modules_sans_annee": 0 },\n' +
+      '  "blocs": [\n' +
+      '    {\n' +
+      '      "id": "B0",\n' +
+      '      "titre": "Modules non rattaches",\n' +
+      '      "competences": [],\n' +
+      '      "modules": [ { "id": "M1", "titre": "Titre du module", "annee_cycle": "M1", "intervenant": "Nom ou vide", "volume": "12h", "semestre": "S1 ou vide", "competences_liees": [], "notions_cles": [] } ]\n' +
+      '    }\n' +
+      '  ],\n' +
+      '  "intervenants": ["noms trouves"],\n' +
+      '  "notions_transversales": [],\n' +
+      '  "alertes_detectees": []\n' +
+      '}';
+  } else if (typeDoc === 'race') {
+    ingestPrompt =
+      'Tu es expert en ingenierie pedagogique. Ces documents sont un REFERENTIEL\n' +
+      'D\'ACTIVITES ET DE COMPETENCES (RACE). Ta tache est d\'en extraire la GRILLE\n' +
+      'DE CERTIFICATION : blocs, competences, criteres d\'evaluation. Un RACE ne\n' +
+      'contient pas de modules d\'enseignement — laisse les tableaux de modules\n' +
+      'vides plutot que d\'y recopier des competences.\n\n' +
+      'Campus concerne(s) : ' + campusLabel + '\n\n' +
+      corpus + '\n\n' +
+      REGLES_COMMUNES +
+      'Conserve les codes officiels tels qu\'ils apparaissent (C.1, C.20-II...).\n' +
+      'Si deux specialisations portent le meme code, suffixe-les pour les\n' +
+      'distinguer plutot que de les fusionner.\n\n' +
+      'Structure JSON exacte a retourner :\n' +
+      '{\n' +
+      '  "formation": { "titre": "Titre", "etablissement": "Nom", "rncp": "Numero", "annee": "", "annees_couvertes": [], "modules_sans_annee": 0 },\n' +
+      '  "blocs": [\n' +
+      '    {\n' +
+      '      "id": "B1",\n' +
+      '      "titre": "Titre du bloc",\n' +
+      '      "competences": [ { "id": "C.1", "libelle": "Libelle court", "criteres": ["critere 1"] } ],\n' +
+      '      "modules": []\n' +
+      '    }\n' +
+      '  ],\n' +
+      '  "intervenants": [],\n' +
+      '  "notions_transversales": ["notions presentes dans plusieurs blocs"],\n' +
+      '  "alertes_detectees": []\n' +
+      '}';
+  } else {
+    ingestPrompt =
+      'Tu es expert en ingenierie pedagogique. Ces documents sont des SYLLABI. Ta\n' +
+      'tache est d\'extraire, pour chaque module, son DETAIL : seances, notions\n' +
+      'travaillees, et rattachement aux competences du referentiel.\n\n' +
+      'Le titre du module doit etre repris MOT POUR MOT tel qu\'il figure dans le\n' +
+      'syllabus : il sert a rapprocher ce detail du module deja cree par le plan\n' +
+      'de formation. Un titre reformule casse ce rapprochement.\n\n' +
+      'Campus concerne(s) : ' + campusLabel + '\n\n' +
+      corpus + '\n\n' +
+      REGLES_COMMUNES + REGLE_ANNEE +
+      'Les competences sont souvent enoncees en prose libre. Rattache-les aux\n' +
+      'codes du referentiel (C.1, C.14...) quand le document les cite ou les\n' +
+      'paraphrase sans ambiguite. Dans le doute, laisse competences_liees vide :\n' +
+      'un rattachement errone est plus couteux qu\'une case vide, car il fait\n' +
+      'apparaitre comme couverte une competence qui ne l\'est pas.\n\n' +
+      'Message d\'alerte : 1 phrase max, formulee positivement (opportunite de\n' +
+      'coordination), jamais comme un reproche.\n\n' +
+      'Structure JSON exacte a retourner :\n' +
+      '{\n' +
+      '  "formation": { "titre": "Titre", "etablissement": "Nom", "rncp": "Numero si trouve", "annee": "2026-27", "annees_couvertes": ["M1"], "modules_sans_annee": 0 },\n' +
+      '  "blocs": [\n' +
+      '    {\n' +
+      '      "id": "B1",\n' +
+      '      "titre": "Titre du bloc",\n' +
+      '      "competences": [ { "id": "C.1", "libelle": "Libelle court" } ],\n' +
+      '      "modules": [ { "id": "M1", "titre": "Titre exact du module", "annee_cycle": "M1", "intervenant": "Nom ou vide", "volume": "12h", "competences_liees": ["C.1"], "notions_cles": ["notion 1"], "seances": [ { "numero": 1, "titre": "Titre de seance", "notions": ["notion"] } ] } ]\n' +
+      '    }\n' +
+      '  ],\n' +
+      '  "intervenants": ["noms trouves"],\n' +
+      '  "notions_transversales": ["notions presentes dans plusieurs blocs"],\n' +
+      '  "alertes_detectees": [ { "niveau": 2, "notion": "Notion", "modules": ["M1","M3"], "message": "Phrase positive sur la coordination." } ]\n' +
+      '}';
+  }
 
   let text;
   try {
@@ -201,6 +288,7 @@ module.exports = async function handler(req, res) {
 
 
   parsed._campus = Array.isArray(campus) ? JSON.stringify(campus) : (campus || '');
+  parsed._type_doc = typeDoc;
 
   return res.status(200).json({ data: parsed });
 };
