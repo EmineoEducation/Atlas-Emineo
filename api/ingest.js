@@ -115,15 +115,40 @@ module.exports = async function handler(req, res) {
     '- Libelles de competences : max 12 mots\n' +
     '- Message d\'alerte : 1 phrase max, formule positivement (opportunite de coordination)\n' +
     '- Si un champ est inconnu, utilise une chaine vide "" ou un tableau vide []\n\n' +
+    'ANNEE DE CYCLE — REGLE CRITIQUE :\n' +
+    'Les Masteres se deroulent sur deux ans. Un plan de formation ou un syllabus peut\n' +
+    'couvrir le M1, le M2, ou les deux. Chaque module doit porter le champ\n' +
+    '"annee_cycle" avec exactement l\'une de ces valeurs : "M1", "M2", "B3" ou "".\n\n' +
+    'Indices RECEVABLES pour trancher, par ordre de fiabilite :\n' +
+    '1. Mention explicite rattachee au module ou a sa section : "M1", "M2",\n' +
+    '   "Master 1", "Master 2", "1re annee", "2e annee", "annee 1", "annee 2",\n' +
+    '   "B3", "Bachelor 3".\n' +
+    '2. Titre de section, d\'onglet, d\'en-tete de tableau ou de colonne sous lequel\n' +
+    '   le module est liste : herite alors de cette section, et de rien d\'autre.\n' +
+    '3. Titre ou en-tete du document lui-meme, s\'il ne couvre qu\'une seule annee\n' +
+    '   (ex. "Plan de formation MRH M1 2026-27") : applique-le a tous ses modules.\n\n' +
+    'PIEGE A EVITER — semestres : "S1" et "S2" designent le plus souvent les deux\n' +
+    'semestres D\'UNE MEME annee, pas M1 et M2. Ne deduis JAMAIS l\'annee de cycle\n' +
+    'd\'un S1/S2 seul. Une numerotation S1 a S4 sur l\'ensemble du document autorise\n' +
+    'en revanche la correspondance S1-S2 = M1 et S3-S4 = M2.\n\n' +
+    'Autres interdits : ne deduis pas l\'annee du niveau de difficulte apparent, de\n' +
+    'la position du module dans la liste, du volume horaire, ni du caractere\n' +
+    '"fondamental" ou "avance" de l\'intitule. En l\'absence d\'indice recevable,\n' +
+    'renvoie "" — une valeur vide est exploitable, une valeur inventee corrompt le\n' +
+    'calcul de couverture par promotion. Ne devine pas.\n\n' +
+    'Renseigne aussi "annees_couvertes" au niveau formation : la liste des annees\n' +
+    'de cycle effectivement presentes dans les documents (ex. ["M1"], ["M1","M2"]),\n' +
+    'et "modules_sans_annee" : le nombre de modules laisses a "". Ce compteur sert\n' +
+    'a la Direction des programmes pour mesurer ce qui reste a qualifier.\n\n' +
     'Structure JSON exacte a retourner :\n' +
     '{\n' +
-    '  "formation": { "titre": "Titre de la formation", "etablissement": "Nom", "rncp": "Numero RNCP si trouve sinon vide", "annee": "2025-26" },\n' +
+    '  "formation": { "titre": "Titre de la formation", "etablissement": "Nom", "rncp": "Numero RNCP si trouve sinon vide", "annee": "2025-26", "annees_couvertes": ["M1"], "modules_sans_annee": 0 },\n' +
     '  "blocs": [\n' +
     '    {\n' +
     '      "id": "B1",\n' +
     '      "titre": "Titre du bloc",\n' +
     '      "competences": [ { "id": "C1", "libelle": "Libelle court" } ],\n' +
-    '      "modules": [ { "id": "M1", "titre": "Titre du module", "intervenant": "Nom ou vide", "competences_liees": ["C1"], "notions_cles": ["notion 1"], "volume": "12h" } ]\n' +
+    '      "modules": [ { "id": "M1", "titre": "Titre du module", "annee_cycle": "M1", "intervenant": "Nom ou vide", "competences_liees": ["C1"], "notions_cles": ["notion 1"], "volume": "12h" } ]\n' +
     '    }\n' +
     '  ],\n' +
     '  "intervenants": ["noms trouves"],\n' +
@@ -155,6 +180,25 @@ module.exports = async function handler(req, res) {
   if (!parsed.alertes_detectees) parsed.alertes_detectees = [];
   if (!parsed.intervenants) parsed.intervenants = [];
   if (!parsed.notions_transversales) parsed.notions_transversales = [];
+
+  // ─── Normalisation de l'annee de cycle ────────────────────────────────────
+  // Le champ conditionne le rattachement d'un module a une promotion (M1/M2).
+  // On n'accepte que le vocabulaire ferme et on recompte cote serveur : le
+  // total annonce par le modele n'est pas une source de verite.
+  const CYCLES_VALIDES = ['M1', 'M2', 'B3'];
+  let sansAnnee = 0;
+  const cyclesVus = new Set();
+  for (const bloc of parsed.blocs) {
+    if (!Array.isArray(bloc.modules)) { bloc.modules = []; continue; }
+    for (const mod of bloc.modules) {
+      const brut = String(mod.annee_cycle || '').trim().toUpperCase();
+      mod.annee_cycle = CYCLES_VALIDES.includes(brut) ? brut : '';
+      if (mod.annee_cycle) cyclesVus.add(mod.annee_cycle); else sansAnnee++;
+    }
+  }
+  parsed.formation.annees_couvertes = CYCLES_VALIDES.filter(c => cyclesVus.has(c));
+  parsed.formation.modules_sans_annee = sansAnnee;
+
 
   parsed._campus = Array.isArray(campus) ? JSON.stringify(campus) : (campus || '');
 

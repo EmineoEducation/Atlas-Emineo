@@ -10,42 +10,87 @@ const DATA_LE_MANS = {
 };
 
 // ─── Métadonnées des formations Le Mans ──────────────────────────────────────
+// Un titre RNCP peut se decliner en plusieurs annees de cycle : le M1 et le M2
+// d'un meme Mastere partagent le referentiel (data_rncp) mais constituent deux
+// promotions distinctes, avec leurs propres seances, previsionnels et digests.
+// La cle d'idempotence du seed est donc titre_court + campus, pas rncp + campus.
 const FORMATIONS_LE_MANS = [
   {
+    "titre_court": "Bach CDC",
+    "cycle": "B3",
+    "data_rncp": "39741",
     "rncp": "39741",
     "niveau": "6",
-    "titre_court": "B3 CDC",
     "titre": "Bachelor Chargé de communication",
     "certificateur": "Cesacom / Sup de Vinci",
     "campus": "Le Mans",
     "data_key": "cdc"
   },
   {
+    "titre_court": "M1 MSMC",
+    "cycle": "M1",
+    "data_rncp": "38504",
     "rncp": "38504",
     "niveau": "7",
-    "titre_court": "MSMC",
-    "titre": "Manager des stratégies marketing et communication",
+    "titre": "Manager des stratégies marketing et communication — M1",
     "certificateur": "Cesacom / MediaSchool",
     "campus": "Le Mans",
-    "data_key": "msmc"
+    "data_key": "msmc-m1"
   },
   {
+    "titre_court": "M2 MSMC",
+    "cycle": "M2",
+    "data_rncp": "38504",
+    "rncp": "38504",
+    "niveau": "7",
+    "titre": "Manager des stratégies marketing et communication — M2",
+    "certificateur": "Cesacom / MediaSchool",
+    "campus": "Le Mans",
+    "data_key": "msmc-m2"
+  },
+  {
+    "titre_court": "M1 MRH",
+    "cycle": "M1",
+    "data_rncp": "41295",
     "rncp": "41295",
     "niveau": "7",
-    "titre_court": "MRH",
-    "titre": "Master Manager des ressources humaines",
+    "titre": "Master Manager des ressources humaines — M1",
     "certificateur": "ISME",
     "campus": "Le Mans",
-    "data_key": "mrh"
+    "data_key": "mrh-m1"
   },
   {
+    "titre_court": "M2 MRH",
+    "cycle": "M2",
+    "data_rncp": "41295",
+    "rncp": "41295",
+    "niveau": "7",
+    "titre": "Master Manager des ressources humaines — M2",
+    "certificateur": "ISME",
+    "campus": "Le Mans",
+    "data_key": "mrh-m2"
+  },
+  {
+    "titre_court": "M1 MDEC",
+    "cycle": "M1",
+    "data_rncp": "39354",
     "rncp": "39354",
     "niveau": "7",
-    "titre_court": "MDEC",
-    "titre": "Master Manager du développement d'entreprise et commercial",
+    "titre": "Master Manager du développement d'entreprise et commercial — M1",
     "certificateur": "ISME / Aforem",
     "campus": "Le Mans",
-    "data_key": "mdec"
+    "data_key": "mdec-m1"
+  },
+  {
+    "titre_court": "M2 MDEC",
+    "cycle": "M2",
+    "data_rncp": "39354",
+    "rncp": "39354",
+    "niveau": "7",
+    "titre": "Master Manager du développement d'entreprise et commercial — M2",
+    "certificateur": "ISME / Aforem",
+    "campus": "Le Mans",
+    "data_key": "mdec-m2"
   }
 ];
 
@@ -57,11 +102,13 @@ const RP_LE_MANS = [
     "email": "etienne.azerad@cesacom.fr",
     "password": "atlas2026",
     "campus": "Le Mans",
-    // Perimetre CESACOM (cadrage du 03/09/2026) : le Bachelor CDC et le
-    // Mastere MSMC (M1 + M2). Les BTS sortent du perimetre Atlas.
-    "rncp_perimeter": [
-      "39741",
-      "38504"
+    // Perimetre CESACOM (cadrage du 03/09/2026) : Bachelor CDC + les deux
+    // annees du Mastere MSMC. Perimetre exprime en titre_court, car M1 et M2
+    // partagent le meme code RNCP.
+    "perimetre": [
+      "Bach CDC",
+      "M1 MSMC",
+      "M2 MSMC"
     ]
   },
   {
@@ -70,10 +117,12 @@ const RP_LE_MANS = [
     "email": "johnny.nicolas@isme.fr",
     "password": "atlas2026",
     "campus": "Le Mans",
-    // Perimetre ISME : les deux Masteres MRH et MDEC (M1 + M2).
-    "rncp_perimeter": [
-      "41295",
-      "39354"
+    // Perimetre ISME : les deux annees du MRH et du MDEC.
+    "perimetre": [
+      "M1 MRH",
+      "M2 MRH",
+      "M1 MDEC",
+      "M2 MDEC"
     ]
   }
 ];
@@ -91,7 +140,7 @@ const RP_LE_MANS = [
 // (@demo.emineo-education.fr) : même en cas de clic sur "Valider et envoyer",
 // aucun mail ne peut atteindre une vraie personne. Le garde-fou
 // ATLAS_MAIL_REDIRECT d'api/fr.js constitue la seconde barrière.
-const DEMO_RNCP = '39354';
+const DEMO_TITRE = 'M1 MDEC';   // libelle du jeu de demonstration (titre_court)
 const DEMO_INTERVENANTS = [
   { nom: 'Faure',    prenom: 'Camille', email: 'camille.faure@demo.emineo-education.fr' },
   { nom: 'Renard',   prenom: 'Thomas',  email: 'thomas.renard@demo.emineo-education.fr' },
@@ -269,6 +318,8 @@ module.exports = async function handler(req, res) {
     await db.execute(`CREATE INDEX IF NOT EXISTS idx_sessions_token ON sessions(token)`);
     await db.execute(`CREATE INDEX IF NOT EXISTS idx_users_email ON users(email)`);
     await db.execute(`CREATE INDEX IF NOT EXISTS idx_formations_rncp ON formations(rncp, campus)`);
+    // Cle d'idempotence du seed depuis le decoupage par annee de cycle.
+    await db.execute(`CREATE INDEX IF NOT EXISTS idx_formations_titre ON formations(titre_court, campus)`);
 
     // ─── Tables v2 ───────────────────────────────────────────────────────────
     await db.execute(`CREATE TABLE IF NOT EXISTS previsionnel_seance (
@@ -359,6 +410,8 @@ module.exports = async function handler(req, res) {
       { nom: 'Robert',    prenom: 'Arnaud',  email: 'arnaud.robert@emineo-education.fr',    password: 'atlas2026' },
       { nom: 'Hervé',     prenom: 'Ludovic', email: 'ludovic.herve@emineo-education.fr',    password: 'atlas2026' },
       { nom: 'Kornowski', prenom: 'Sylvain', email: 'sylvain.kornowski@emineo-education.fr', password: 'atlas2026' },
+      // Directeur du campus du Mans — acces a l'ensemble du perimetre pilote.
+      { nom: 'Duclos',    prenom: 'Sylvain', email: 'sylvain.duclos@emineo-education.fr',    password: 'atlas2026' },
     ];
     let createdDir = 0;
     for (const a of dirAccounts) {
@@ -369,7 +422,10 @@ module.exports = async function handler(req, res) {
       }
     }
 
-    // ─── Seed formations Le Mans (idempotent par rncp+campus) ───────────────
+    // ─── Seed formations Le Mans (idempotent par titre_court+campus) ────────
+    // Cle = titre_court + campus : M1 et M2 d'un meme Mastere partagent le code
+    // RNCP, rncp+campus ne discriminerait plus depuis le decoupage par annee de
+    // cycle (03/09/2026).
     // Par defaut, une formation deja en base n'est mise a jour que si ses blocs
     // sont vides — pour ne jamais ecraser un referentiel enrichi a la main.
     // ?force=1 leve cette protection : indispensable quand DATA_LE_MANS evolue
@@ -380,58 +436,81 @@ module.exports = async function handler(req, res) {
     const formationIds = {};
 
     for (const f of FORMATIONS_LE_MANS) {
-      const data = DATA_LE_MANS[f.rncp] || {};
+      // Copie defensive : plusieurs annees de cycle partagent le meme objet
+      // source dans DATA_LE_MANS, une mutation directe fuirait de M1 vers M2.
+      const data = JSON.parse(JSON.stringify(DATA_LE_MANS[f.data_rncp] || {}));
       data._campus = f.campus;
+      data._cycle = f.cycle;
+      // Les modules ne portent pas encore de marqueur d'annee : M1 et M2
+      // heritent du referentiel complet du titre. Le taux de couverture par
+      // annee restera donc sous-evalue tant que le decoupage des modules par
+      // annee de cycle n'aura pas ete instruit avec la Direction des programmes.
+      data._note_cycle = 'Référentiel complet du titre. Modules non encore ventilés par année de cycle.';
       const dataStr = JSON.stringify(data);
 
-      const ex = await db.execute({ sql: 'SELECT id, data_json FROM formations WHERE rncp = ? AND campus = ?', args: [f.rncp, f.campus] });
+      const ex = await db.execute({
+        sql: 'SELECT id, data_json FROM formations WHERE titre_court = ? AND campus = ?',
+        args: [f.titre_court, f.campus],
+      });
       if (ex.rows.length) {
         const row = ex.rows[0];
-        formationIds[f.rncp] = Number(row.id);
-        // Mettre à jour si les blocs sont vides, ou si ?force=1
+        formationIds[f.titre_court] = Number(row.id);
         let existing = {};
         try { existing = JSON.parse(row.data_json || '{}'); } catch(_) {}
         if (forceRefs || !existing.blocs || existing.blocs.length === 0) {
-          await db.execute({ sql: 'UPDATE formations SET titre=?,rncp=?,niveau=?,titre_court=?,certificateur=?,data_json=? WHERE id=?', args: [f.titre,f.rncp,f.niveau,f.titre_court,f.certificateur,dataStr,row.id] });
+          await db.execute({
+            sql: 'UPDATE formations SET titre=?,rncp=?,niveau=?,titre_court=?,certificateur=?,data_json=? WHERE id=?',
+            args: [f.titre, f.rncp, f.niveau, f.titre_court, f.certificateur, dataStr, row.id],
+          });
           updatedFormations++;
         }
       } else {
-        const ins = await db.execute({ sql: 'INSERT INTO formations (campus,titre,rncp,niveau,titre_court,certificateur,data_json,created_at) VALUES (?,?,?,?,?,?,?,datetime(\'now\'))', args: [f.campus,f.titre,f.rncp,f.niveau,f.titre_court,f.certificateur,dataStr] });
-        formationIds[f.rncp] = Number(ins.lastInsertRowid);
+        const ins = await db.execute({
+          sql: 'INSERT INTO formations (campus,titre,rncp,niveau,titre_court,certificateur,data_json,created_at) VALUES (?,?,?,?,?,?,?,datetime(\'now\'))',
+          args: [f.campus, f.titre, f.rncp, f.niveau, f.titre_court, f.certificateur, dataStr],
+        });
+        formationIds[f.titre_court] = Number(ins.lastInsertRowid);
         createdFormations++;
       }
     }
 
-    // ─── Purge des titres hors périmètre ─────────────────────────────────────
-    // Le seed ci-dessus ajoute et met a jour, mais ne retire jamais. Sans cette
-    // purge, les titres sortis de FORMATIONS_LE_MANS (BTS + Bachelors, decision
-    // du 02/09/2026) resteraient en base et resteraient visibles depuis un
-    // compte 'dir' — qui ne filtre pas par perimetre RP.
+    // ─── Purge hors périmètre (titres + campus) ─────────────────────────────
+    // Le seed ci-dessus ajoute et met a jour, mais ne retire jamais. Deux
+    // categories sont donc a nettoyer explicitement :
+    //   1. les titres du Mans sortis de FORMATIONS_LE_MANS (BTS, Bachelors
+    //      hors CDC) — decision du 02/09/2026 ;
+    //   2. toutes les formations d'un autre campus que Le Mans — Le Mans est
+    //      le seul site pilote, decision du 03/09/2026.
+    // Sans cette purge elles resteraient visibles depuis un compte 'dir', qui
+    // ne filtre pas par perimetre RP.
     // Protegee par ?purge=1 : jamais declenchee par un rejeu de routine.
     const veutPurge = req.query && (req.query.purge === '1' || req.query.purge === 'true');
-    const rncpAutorises = FORMATIONS_LE_MANS.map(f => f.rncp);
+    const titresAutorises = FORMATIONS_LE_MANS.map(f => f.titre_court);
     let purge = null;
 
     {
-      const placeholders = rncpAutorises.map(() => '?').join(',');
+      const ph = titresAutorises.map(() => '?').join(',');
       const horsPerimetre = await db.execute({
-        sql: `SELECT id, rncp, titre_court FROM formations WHERE campus = ? AND rncp NOT IN (${placeholders})`,
-        args: ['Le Mans', ...rncpAutorises],
+        sql: `SELECT id, rncp, campus, titre_court FROM formations
+              WHERE campus <> ? OR titre_court NOT IN (${ph})`,
+        args: ['Le Mans', ...titresAutorises],
       });
       const cibles = horsPerimetre.rows.map(r => ({
-        id: Number(r.id), rncp: String(r.rncp), titre_court: String(r.titre_court || ''),
+        id: Number(r.id),
+        campus: String(r.campus || ''),
+        libelle: `${String(r.campus || '—')} · ${String(r.titre_court || r.rncp || 'sans libellé')}`,
       }));
 
       if (!cibles.length) {
-        purge = { effectuee: false, motif: 'Aucun titre hors périmètre en base.', titres: [] };
+        purge = { effectuee: false, motif: 'Aucune formation hors périmètre en base.', cibles: [] };
       } else if (!veutPurge) {
         purge = {
           effectuee: false,
-          motif: 'Titres hors périmètre détectés. Relancer avec ?purge=1 pour les supprimer.',
-          titres: cibles.map(c => `${c.rncp} ${c.titre_court}`),
+          motif: 'Formations hors périmètre détectées. Relancer avec ?purge=1 pour les supprimer.',
+          cibles: cibles.map(c => c.libelle),
         };
       } else {
-        let supprLignes = 0, supprFR = 0;
+        let supprLignes = 0;
         for (const c of cibles) {
           for (const t of ['previsionnel_seance', 'declaration', 'digest_fr', 'inscription']) {
             try {
@@ -442,26 +521,33 @@ module.exports = async function handler(req, res) {
           await db.execute({ sql: 'DELETE FROM formations WHERE id = ?', args: [c.id] });
         }
 
-        // Comptes FR orphelins : uniquement les placeholders jamais renommes.
-        // Un FR reellement nomme est conserve — a arbitrer manuellement.
-        const frOrphelins = await db.execute({
-          sql: "SELECT u.id, u.email FROM users u WHERE u.role='fr' AND u.nom='À nommer' AND u.email LIKE 'fr.%@emineo-education.fr' AND NOT EXISTS (SELECT 1 FROM inscription i WHERE i.user_id = u.id)",
-          args: [],
-        });
-        for (const row of frOrphelins.rows) {
-          await db.execute({ sql: 'DELETE FROM sessions WHERE user_id = ?', args: [Number(row.id)] });
-          await db.execute({ sql: 'DELETE FROM users WHERE id = ?', args: [Number(row.id)] });
-          supprFR++;
-        }
-
         purge = {
           effectuee: true,
-          titres: cibles.map(c => `${c.rncp} ${c.titre_court}`),
+          cibles: cibles.map(c => c.libelle),
           formations_supprimees: cibles.length,
+          autres_campus_supprimes: cibles.filter(c => c.campus !== 'Le Mans').length,
           lignes_dependantes_supprimees: supprLignes,
-          comptes_fr_placeholder_supprimes: supprFR,
         };
       }
+    }
+
+    // ─── Nettoyage des comptes FR placeholder ────────────────────────────────
+    // Les seeds anterieurs creaient un compte FR "À nommer" par titre. Ils ne
+    // sont plus generes : on retire ceux qui restent, a condition qu'ils
+    // n'aient jamais ete renommes ni rattaches a une formation. Un FR
+    // reellement nomme est conserve — a arbitrer manuellement.
+    let frPlaceholdersSupprimes = 0;
+    if (veutPurge) {
+      const frOrphelins = await db.execute({
+        sql: "SELECT u.id FROM users u WHERE u.role='fr' AND u.nom='À nommer' AND u.email LIKE 'fr.%@emineo-education.fr' AND NOT EXISTS (SELECT 1 FROM inscription i WHERE i.user_id = u.id)",
+        args: [],
+      });
+      for (const row of frOrphelins.rows) {
+        await db.execute({ sql: 'DELETE FROM sessions WHERE user_id = ?', args: [Number(row.id)] });
+        await db.execute({ sql: 'DELETE FROM users WHERE id = ?', args: [Number(row.id)] });
+        frPlaceholdersSupprimes++;
+      }
+      if (purge) purge.comptes_fr_placeholder_supprimes = frPlaceholdersSupprimes;
     }
 
     // ─── Comptes RP Le Mans + inscriptions ───────────────────────────────────
@@ -477,7 +563,7 @@ module.exports = async function handler(req, res) {
         createdRP++;
       }
       // Périmètre attendu pour ce RP.
-      const fidsAttendus = rp.rncp_perimeter.map(r => formationIds[r]).filter(Boolean);
+      const fidsAttendus = rp.perimetre.map(t => formationIds[t]).filter(Boolean);
 
       // Purge des inscriptions RP hors périmètre. Indispensable au rejeu :
       // INSERT OR IGNORE ajoute, mais ne retire jamais. Sans cette purge, le
@@ -501,37 +587,13 @@ module.exports = async function handler(req, res) {
       }
     }
 
-    // ─── Comptes FR (Formateur Référent) — 1 placeholder par titre Le Mans ────
-    // Nom/prénom = "À nommer" tant que la Direction/RP n'a pas désigné le FR
-    // réel de chaque titre. Rôle réactivé via l'écran Comptes existant
-    // (users.js autorise désormais dir + rp à créer un rôle 'fr').
-    let createdFR = 0, inscriptionsFR = 0;
-    const frAccounts = [];
-    for (const f of FORMATIONS_LE_MANS) {
-      const fid = formationIds[f.rncp];
-      if (!fid) continue;
-      const email = `fr.${f.data_key}@emineo-education.fr`;
-      let frId;
-      const ex = await db.execute({ sql: 'SELECT id FROM users WHERE email = ?', args: [email] });
-      if (ex.rows.length) {
-        frId = Number(ex.rows[0].id);
-      } else {
-        const ins = await db.execute({
-          sql: 'INSERT INTO users (role,nom,prenom,email,password_hash,campus) VALUES (?,?,?,?,?,?)',
-          args: ['fr', 'À nommer', f.titre_court, email, hashPassword('atlas2026'), f.campus],
-        });
-        frId = Number(ins.lastInsertRowid);
-        createdFR++;
-      }
-      try {
-        await db.execute({
-          sql: "INSERT OR IGNORE INTO inscription (user_id,formation_id,campus,role,promo,groupe,annee_scolaire) VALUES (?,?,?,'fr','','','2026-27')",
-          args: [frId, fid, f.campus],
-        });
-        inscriptionsFR++;
-      } catch (_) {}
-      frAccounts.push({ email, mdp: 'atlas2026', titre: f.titre_court, statut: 'placeholder — à renommer' });
-    }
+    // ─── Comptes FR (Formateur Référent) — non seedes ────────────────────────
+    // Le role 'fr' reste actif dans le schema et dans les garde-fous d'acces
+    // (api/fr.js autorise dir + fr + rp), mais aucun compte FR n'est cree :
+    // le perimetre pilote arrete au 03/09/2026 ne compte que 6 acteurs, les
+    // deux RP couvrant eux-memes le poste de travail de leur pole. La creation
+    // de comptes FR reels se fera via l'ecran Comptes, apres validation du
+    // role et de sa compensation par la Direction generale.
 
     // ─── Jeu de démonstration (optionnel) ────────────────────────────────────
     // POST /api/setup?demo=1        → seed MDEC sur septembre 2026
@@ -541,13 +603,13 @@ module.exports = async function handler(req, res) {
     const veutDemo = req.query && (req.query.demo === '1' || req.query.demo === 'true');
     if (veutDemo) {
       const mois = (req.query.mois && /^\d{4}-\d{2}$/.test(req.query.mois)) ? req.query.mois : '2026-09';
-      const fid = formationIds[DEMO_RNCP];
+      const fid = formationIds[DEMO_TITRE];
       if (!fid) {
-        demo = { error: `Formation RNCP ${DEMO_RNCP} introuvable — seed démo ignoré.` };
+        demo = { error: `Formation ${DEMO_TITRE} introuvable — seed démo ignoré.` };
       } else {
         demo = await seedDemo(db, fid, 'Le Mans', mois, '2026-27');
         demo.formation_id = fid;
-        demo.rncp = DEMO_RNCP;
+        demo.titre = DEMO_TITRE;
       }
     }
 
@@ -562,15 +624,15 @@ module.exports = async function handler(req, res) {
         rp_crees: createdRP,
         inscriptions_rp: createdInscriptions,
         inscriptions_rp_purgees: purgedInscriptions,
-        fr_crees: createdFR,
-        inscriptions_fr: inscriptionsFR,
+        fr_seedes: 0,
+        fr_placeholders_supprimes: frPlaceholdersSupprimes,
       },
       purge,
       demo,
       comptes: {
         dir: dirAccounts.map(a => ({ email: a.email, mdp: a.password })),
-        rp: RP_LE_MANS.map(a => ({ email: a.email, mdp: a.password, titres: a.rncp_perimeter.length })),
-        fr: frAccounts,
+        rp: RP_LE_MANS.map(a => ({ email: a.email, mdp: a.password, titres: a.perimetre.length })),
+        fr: 'Aucun compte FR seedé — à créer via l\'écran Comptes après validation du rôle.',
       },
     });
   } catch (e) {
