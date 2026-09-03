@@ -112,8 +112,23 @@ module.exports = async function handler(req, res) {
     ? String(type_doc).toLowerCase()
     : 'pf';
 
+  // Un plan de formation complet depasse largement 12 000 caracteres — l'ancien
+  // plafond coupait la fin du document, donc les derniers modules, sans que
+  // rien ne le signale. Plafond par document releve, et plafond global pour ne
+  // pas exploser la fenetre de contexte sur un depot de plusieurs syllabi.
+  const MAX_PAR_DOC = 60000;
+  const MAX_TOTAL = 180000;
+  let cumul = 0;
+  const tronques = [];
   const corpus = textes
-    .map((t, i) => '--- DOCUMENT ' + (i + 1) + ' ---\n' + (t || '').slice(0, 12000))
+    .map((t, i) => {
+      const brut = String(t || '');
+      let morceau = brut.slice(0, MAX_PAR_DOC);
+      if (cumul + morceau.length > MAX_TOTAL) morceau = morceau.slice(0, Math.max(0, MAX_TOTAL - cumul));
+      cumul += morceau.length;
+      if (morceau.length < brut.length) tronques.push(i + 1);
+      return '--- DOCUMENT ' + (i + 1) + ' ---\n' + morceau;
+    })
     .join('\n\n');
 
   const campusLabel = Array.isArray(campus) ? campus.join(', ') : (campus || 'non precise');
@@ -289,6 +304,10 @@ module.exports = async function handler(req, res) {
 
   parsed._campus = Array.isArray(campus) ? JSON.stringify(campus) : (campus || '');
   parsed._type_doc = typeDoc;
+  // Signale a l'appelant qu'une partie du corpus n'a pas ete transmise : sans
+  // cela, un document coupe produit une extraction partielle indiscernable
+  // d'une extraction complete.
+  if (tronques.length) parsed._documents_tronques = tronques;
 
   return res.status(200).json({ data: parsed });
 };
