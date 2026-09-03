@@ -78,12 +78,16 @@ function repairJSON(raw) {
 }
 
 // ─── Ingestion de documents (envoie textes + campus) ──────────────────────────
-// Signature : ingererDocuments(textes, campus, onProgress)
-export async function ingererDocuments(textes, campus, onProgress) {
+// Signature : ingererDocuments(textes, campus, onProgress, typeDoc)
+// typeDoc : 'pf' (défaut) | 'syllabus' | 'race' — conditionne la lecture côté
+// serveur. Un plan de formation, un syllabus et un RACE ne se lisent pas de la
+// même façon : le premier donne la structure, le second le détail, le troisième
+// la grille de certification.
+export async function ingererDocuments(textes, campus, onProgress, typeDoc = 'pf') {
   if (onProgress) onProgress('Envoi au serveur…')
   const result = await apiFetch('/api/ingest', {
     method: 'POST',
-    body: { textes, campus },
+    body: { textes, campus, type_doc: typeDoc },
   })
   if (result.error) throw new Error(result.error)
   if (!result.data) throw new Error('Réponse inattendue du serveur (pas de champ data).')
@@ -128,6 +132,14 @@ export const api = {
   deleteUser:      (id)              => apiFetch('/api/users',       { method: 'DELETE', body: { id } }),
   getFormations:   ()                => apiFetch('/api/formations'),
   createFormation: (campus, data)    => apiFetch('/api/formations',  { method: 'POST',   body: { campus, data } }),
+  // Alimente une promotion existante depuis une ingestion PF / syllabi / RACE.
+  // Preserve l'identite de la promotion, ne remplace que le contenu pedagogique.
+  alimenterFormation: (cibleId, data) => apiFetch('/api/formations',  { method: 'POST',   body: { cible_id: cibleId, data } }),
+  // Alimente une ou plusieurs promotions depuis une même ingestion.
+  // cibles : [{ id, cycle }] — un PF de Mastère se ventile sur M1 et M2.
+  // couche : 'pf' remplace la structure, 'syllabus'/'race' l'enrichissent.
+  alimenterPromotions: (cibles, data, couche) =>
+    apiFetch('/api/formations', { method: 'POST', body: { cibles, data, couche } }),
   deleteFormation: (id)              => apiFetch('/api/formations',  { method: 'DELETE', body: { id } }),
   updateFormation: (id, patch)       => apiFetch('/api/formations',  { method: 'PATCH',  body: { id, ...patch } }),
 
