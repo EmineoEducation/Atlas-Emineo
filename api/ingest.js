@@ -35,7 +35,7 @@ function repairJSON(raw) {
 }
 
 // Appel Claude (non-streame) — renvoie le texte concatene
-async function callClaude(apiKey, prompt) {
+async function callClaude(apiKey, prompt, maxTokens) {
   const r = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
     headers: {
@@ -45,7 +45,7 @@ async function callClaude(apiKey, prompt) {
     },
     body: JSON.stringify({
       model: MODEL,
-      max_tokens: MAX_TOKENS,
+      max_tokens: maxTokens || MAX_TOKENS,
       messages: [{ role: 'user', content: prompt }],
     }),
   });
@@ -78,11 +78,24 @@ module.exports = async function handler(req, res) {
 
   const { textes, campus, prompt, type_doc } = req.body || {};
 
-  // ─── MODE 1 : prompt direct (fiche J-1 intervenant) ───────────────────────
+  // ─── MODE 1 : prompt direct (fiche J-1, appariement CSV) ──────────────────
   // Renvoie { text } — le front parse lui-meme.
+  //
+  // Ce mode relaie un prompt construit par le navigateur. Tel quel, c'est un
+  // acces libre au modele pour tout compte authentifie : rien n'empeche
+  // d'envoyer autre chose qu'une fiche, aux frais d'Eminéo. Deux garde-fous en
+  // attendant que la construction du prompt passe cote serveur (voir note
+  // d'audit) : une longueur plafonnee, et un budget de sortie reduit — une
+  // fiche J-1 ou un appariement tiennent tres largement dans 4 000 tokens.
+  const PROMPT_MAX = 30000;
   if (prompt && typeof prompt === 'string') {
+    if (prompt.length > PROMPT_MAX) {
+      return res.status(413).json({
+        error: 'Prompt trop long (' + prompt.length + ' caracteres, maximum ' + PROMPT_MAX + ').',
+      });
+    }
     try {
-      const text = await callClaude(apiKey, prompt);
+      const text = await callClaude(apiKey, prompt, 4000);
       return res.status(200).json({ text });
     } catch (e) {
       return res.status(e.status || 502).json({

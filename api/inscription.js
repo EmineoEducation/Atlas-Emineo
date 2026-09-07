@@ -74,9 +74,17 @@ module.exports = async function handler(req, res) {
 
       const f = await chargerFormation(db, formation_id);
       if (!f) return res.status(404).json({ error: 'Formation introuvable.' });
-      if (!campusAutorise(user, f.campus)) {
-        return res.status(403).json({ error: 'Formation hors de votre campus.' });
+      // Le FR consulte les groupes des titres dont il est titulaire : il en a
+      // besoin pour lire la couverture, sans pouvoir les modifier.
+      let autorise = campusAutorise(user, f.campus);
+      if (!autorise && user.role === 'fr') {
+        const perim = await db.execute({
+          sql: "SELECT 1 FROM inscription WHERE user_id = ? AND role = 'fr' AND formation_id = ? LIMIT 1",
+          args: [user.id, formation_id],
+        });
+        autorise = perim.rows.length > 0;
       }
+      if (!autorise) return res.status(403).json({ error: 'Formation hors de votre périmètre.' });
 
       const g = await db.execute({
         sql: `SELECT g.id, g.nom, g.bloc_id, g.option_groupe,
@@ -229,10 +237,22 @@ module.exports = async function handler(req, res) {
       return res.status(400).json({ error: 'Action non reconnue.' });
     }
 
-    // ─── Lectures historiques ───────────────────────────────────────────────
+    // ─── Lectures ───────────────────────────────────────────────────────────
     const { formation_id, user_id, role } = req.query;
 
+    // Les listes nominatives (noms, adresses) ne sont pas des donnees ouvertes.
+    // Avant correction, tout compte authentifie — y compris un etudiant ou un
+    // intervenant — pouvait lister l'integralite des inscrits d'un titre avec
+    // leurs adresses, et lire les rattachements de n'importe qui en devinant un
+    // identifiant. La lecture est desormais bornee au besoin d'en connaitre.
+    const ROLES_LECTURE = ['dir', 'rp', 'fr'];
+
     if (user_id) {
+      // Chacun voit ses propres rattachements ; les autres relevent d'un role
+      // d'encadrement.
+      if (Number(user_id) !== Number(user.id) && !ROLES_LECTURE.includes(user.role)) {
+        return res.status(403).json({ error: 'Accès réservé.' });
+      }
       const r = await db.execute({
         sql: `SELECT id, formation_id, campus, role, promo, groupe, groupe_id, annee_scolaire, created_at
               FROM inscription WHERE user_id = ? ORDER BY created_at DESC`,
@@ -242,9 +262,20 @@ module.exports = async function handler(req, res) {
     }
 
     if (formation_id) {
+      if (!ROLES_LECTURE.includes(user.role)) {
+        return res.status(403).json({ error: 'Accès réservé à la direction, aux RP et aux FR.' });
+      }
       const conditions = ['i.formation_id = ?', 'i.annee_scolaire = ?'];
       const args = [formation_id, annee];
       if (user.role === 'rp') { conditions.push('i.campus = ?'); args.push(user.campus || ''); }
+      // Un FR ne voit que les titres dont il est titulaire.
+      if (user.role === 'fr') {
+        const perim = await db.execute({
+          sql: "SELECT 1 FROM inscription WHERE user_id = ? AND role = 'fr' AND formation_id = ? LIMIT 1",
+          args: [user.id, formation_id],
+        });
+        if (!perim.rows.length) return res.status(403).json({ error: 'Titre hors de votre périmètre.' });
+      }
       if (role) { conditions.push('i.role = ?'); args.push(role); }
 
       const r = await db.execute({
