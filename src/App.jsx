@@ -196,8 +196,24 @@ function genPassword(){
 
 // Parser CSV séparateur ";" — gère les champs entre guillemets et le BOM UTF-8
 function parseCSV(text){
-  const lines=text.replace(/^\uFEFF/,'').split('\n').map(l=>l.trim()).filter(Boolean)
+  const lines=text.replace(/^\uFEFF/,'').split(/\r?\n/).map(l=>l.trim()).filter(Boolean)
   if(!lines.length)return[]
+  // Le separateur etait fige sur le point-virgule. Un export a virgules — le
+  // cas le plus repandu, et celui que produit une conversion de tableur — se
+  // retrouvait alors en une seule colonne : aucune ligne valide, sans que rien
+  // n'indique pourquoi. On le deduit desormais de la ligne d'en-tete, hors
+  // guillemets, en retenant le caractere le plus frequent.
+  function compter(line,sep){
+    let n=0,inQ=false
+    for(let i=0;i<line.length;i++){
+      const c=line[i]
+      if(c==='"'){ if(inQ&&line[i+1]==='"'){i++} else inQ=!inQ }
+      else if(c===sep&&!inQ)n++
+    }
+    return n
+  }
+  const SEP=[';',',','\t'].reduce((meilleur,sep)=>
+    compter(lines[0],sep)>compter(lines[0],meilleur)?sep:meilleur,';')
   function splitLine(line){
     const cols=[];let cur='',inQ=false
     for(let i=0;i<line.length;i++){
@@ -205,7 +221,7 @@ function parseCSV(text){
       if(c==='"'&&!inQ){inQ=true}
       else if(c==='"'&&inQ&&line[i+1]==='"'){cur+='"';i++}
       else if(c==='"'&&inQ){inQ=false}
-      else if(c===';'&&!inQ){cols.push(cur.trim());cur=''}
+      else if(c===SEP&&!inQ){cols.push(cur.trim());cur=''}
       else cur+=c
     }
     cols.push(cur.trim())
@@ -262,7 +278,7 @@ function ImportEtudiants({campus,formationId,onDone}){
     r.onload=e=>{
       try{
         const parsed=parseCSV(e.target.result)
-        if(!parsed.length){setErr('Fichier vide.');return}
+        if(!parsed.length){setErr('Aucune ligne exploitable dans ce fichier.');return}
         // Colonnes CRM : nom / prenom / email_ecole (ou email)
         const rows=parsed.map(p=>({
           nom:(p.nom||'').toUpperCase(),
@@ -274,7 +290,7 @@ function ImportEtudiants({campus,formationId,onDone}){
         setRows(rows)
       }catch(e){setErr('Erreur : '+e.message)}
     }
-    r.readAsText(file,'utf-8')
+    fichierVersTexte(file).then(t=>r.onload({target:{result:t}})).catch(e=>setErr(e.message))
   }
 
   async function handleImport(){
@@ -299,7 +315,7 @@ function ImportEtudiants({campus,formationId,onDone}){
       </p>
       <div onClick={()=>document.getElementById('csv-etu').click()}
         style={{border:`2px dashed ${P.borderm}`,borderRadius:12,padding:'1.75rem',textAlign:'center',cursor:'pointer',background:'rgba(93,226,152,0.03)',marginBottom:'0.75rem'}}>
-        <input id="csv-etu" type="file" accept=".csv,.xlsx,.xls" style={{display:'none'}} onChange={e=>e.target.files[0]&&parseFile(e.target.files[0])}/>
+        <input id="csv-etu" type="file" accept=".csv,.txt,.xlsx,.xlsm" style={{display:'none'}} onChange={e=>e.target.files[0]&&parseFile(e.target.files[0])}/>
         <div style={{fontSize:22,opacity:0.4,marginBottom:'0.35rem'}}>🎓</div>
         <div style={{fontSize:13,fontWeight:500,color:P.petrole}}>Fichier étudiants (.csv)</div>
       </div>
@@ -339,7 +355,7 @@ function ImportIntervenants({campus,formation,onDone}){
     r.onload=e=>{
       try{
         const parsed=parseCSV(e.target.result)
-        if(!parsed.length){setErr('Fichier vide.');return}
+        if(!parsed.length){setErr('Aucune ligne exploitable dans ce fichier.');return}
         // Colonnes CRM intervenants : Nom;Prénom;Matières;Email école
         // Après parsing CSV, clés normalisées : nom / prenom / mati_res / email__cole
         const rows=parsed.map(p=>{
@@ -361,7 +377,7 @@ function ImportIntervenants({campus,formation,onDone}){
         setRows(rows)
       }catch(e){setErr('Erreur : '+e.message)}
     }
-    r.readAsText(file,'utf-8')
+    fichierVersTexte(file).then(t=>r.onload({target:{result:t}})).catch(e=>setErr(e.message))
   }
 
   // Appariement sémantique via Claude (passe par /api/ingest mode prompt)
@@ -436,7 +452,7 @@ function ImportIntervenants({campus,formation,onDone}){
       {!formation&&<div style={{padding:'0.6rem 0.8rem',background:P.amberbg,border:`1px solid ${P.amber}`,borderRadius:8,fontSize:12,color:'#7A4A00',marginBottom:'0.75rem'}}>⚠ Sélectionnez d'abord une formation dans l'onglet "Mes formations" pour activer l'appariement.</div>}
       <div onClick={()=>document.getElementById('csv-int').click()}
         style={{border:`2px dashed ${P.borderm}`,borderRadius:12,padding:'1.75rem',textAlign:'center',cursor:'pointer',background:'rgba(93,226,152,0.03)',marginBottom:'0.75rem'}}>
-        <input id="csv-int" type="file" accept=".csv,.xlsx,.xls" style={{display:'none'}} onChange={e=>e.target.files[0]&&parseFile(e.target.files[0])}/>
+        <input id="csv-int" type="file" accept=".csv,.txt,.xlsx,.xlsm" style={{display:'none'}} onChange={e=>e.target.files[0]&&parseFile(e.target.files[0])}/>
         <div style={{fontSize:22,opacity:0.4,marginBottom:'0.35rem'}}>👨‍🏫</div>
         <div style={{fontSize:13,fontWeight:500,color:P.petrole}}>Fichier intervenants (.csv)</div>
       </div>
@@ -917,7 +933,7 @@ function VueDir({user,onLogout}){
             {/* Zone de dépôt */}
             <div onDragOver={e=>e.preventDefault()} onDrop={e=>{e.preventDefault();setFiles(prev=>[...prev,...Array.from(e.dataTransfer.files)])}} onClick={()=>document.getElementById('fi2').click()}
               style={{border:`2px dashed ${P.borderm}`,borderRadius:16,padding:'2.5rem 2rem',textAlign:'center',background:'rgba(93,226,152,0.04)',marginBottom:'1rem',cursor:'pointer'}}>
-              <input id="fi2" type="file" multiple accept=".txt,.md,.csv,.pdf,.docx,.xlsx" style={{display:'none'}} onChange={e=>setFiles(prev=>[...prev,...Array.from(e.target.files)])}/>
+              <input id="fi2" type="file" multiple accept=".txt,.md,.csv,.json,.pdf,.docx,.xlsx,.xlsm" style={{display:'none'}} onChange={e=>setFiles(prev=>[...prev,...Array.from(e.target.files)])}/>
               <div style={{fontSize:28,marginBottom:'0.6rem',opacity:0.45}}>📄</div>
               <div style={{fontSize:14,fontWeight:500,color:P.petrole}}>4 · Glisser-déposer ou cliquer</div>
               <div style={{fontSize:12,color:P.textm}}>.md .txt .pdf .docx .xlsx</div>
@@ -1122,8 +1138,33 @@ function fmtCourt(iso){
    connus, chaque option donne lieu à un ou plusieurs groupes que le RP
    alimente. Le rattachement se fait par identifiant de groupe, ce qui permet
    de renommer un groupe sans perdre ses membres. */
+// Les imports de comptes annoncent .csv, .xlsx et .xls, mais ne lisaient le
+// fichier qu'en texte brut : un classeur Excel y arrivait sous forme d'archive
+// binaire, et l'analyse echouait sur « Fichier vide » sans dire pourquoi. Ce
+// pont convertit un tableur en CSV avant analyse, et refuse explicitement les
+// formats qu'on ne sait pas ouvrir.
+async function fichierVersTexte(file){
+  const ext=String(file.name||'').split('.').pop().toLowerCase()
+  if(ext==='xlsx'||ext==='xlsm'){
+    const {lireClasseur}=await import('./lire-xlsx.js')
+    const buf=await file.arrayBuffer()
+    const brut=await lireClasseur(buf)
+    // lireClasseur separe les colonnes par « | » et prefixe chaque feuille ;
+    // parseCSV attend des virgules et pas d'en-tete de feuille.
+    return brut.split('\n').filter(l=>!l.startsWith('### FEUILLE'))
+      .map(l=>l.split(' | ').map(c=>'"'+String(c).replace(/"/g,'""')+'"').join(',')).join('\n')
+  }
+  if(ext==='xls')throw new Error('Le format .xls (ancien binaire) n\'est pas lisible. Réenregistrer en .xlsx ou .csv.')
+  return await file.text()
+}
+
 function GroupesOptions({formations}){
-  const [fid,setFid]=useState(formations[0]?._id||null)
+  // Les formations arrivent de facon asynchrone : a la premiere image la liste
+  // est vide, donc initialiser fid depuis formations[0] le laissait a null pour
+  // toujours. Le titre affiche dans le menu n'etait alors pas celui charge, et
+  // le premier de la liste restait inatteignable — aucun changement de valeur
+  // ne declenchant onChange.
+  const [fid,setFid]=useState(null)
   const [data,setData]=useState(null)
   const [busy,setBusy]=useState(false)
   const [err,setErr]=useState('')
@@ -1135,6 +1176,7 @@ function GroupesOptions({formations}){
     try{ setData(await api.getGroupes(id)) }
     catch(e){ setErr(e.message); setData(null) }
   }
+  useEffect(()=>{ if(fid==null&&formations.length) setFid(formations[0]._id) },[formations,fid])
   useEffect(()=>{charger(fid)},[fid])
 
   async function agir(fn){
