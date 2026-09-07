@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
-import { api, apiFetch, setToken, clearToken, getToken, ingererDocuments, genererFicheJ1 } from './api.js'
+import { api, apiFetch, setToken, clearToken, getToken, ingererDocuments, genererFicheJ1, apparierIntervenants, rapprocherModules } from './api.js'
 import { extraireTextes } from './lire-documents.js'
 
 const P = {
@@ -195,6 +195,14 @@ function genPassword(){
 }
 
 // Parser CSV séparateur ";" — gère les champs entre guillemets et le BOM UTF-8
+// Même normalisation que la fusion côté serveur (api/formations.js) : accents,
+// casse, ponctuation et espaces multiples neutralisés. Les deux doivent rester
+// identiques, sinon un intitulé réécrit ici ne serait pas reconnu là-bas.
+function normaliserTitre(t){
+  return String(t||'').toLowerCase().normalize('NFD')
+    .replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,' ').trim()
+}
+
 function parseCSV(text){
   const lines=text.replace(/^\uFEFF/,'').split(/\r?\n/).map(l=>l.trim()).filter(Boolean)
   if(!lines.length)return[]
@@ -385,26 +393,10 @@ function ImportIntervenants({campus,formation,onDone}){
     if(!allModules.length){setErr('Aucune formation sélectionnée — impossible d\'apparier les modules.');return}
     setAppLoading(true);setErr('')
     try{
-      const modulesStr=allModules.map(m=>`${m.id}|${m.titre} (${m.bloc})`).join('\n')
-      const intervenantsStr=rows.map((r,i)=>`[${i}] ${r.prenom} ${r.nom} — matières CRM : ${r.matieres.join(' / ')}`).join('\n')
-      const prompt=
-        'Tu es expert en ingénierie pédagogique. Apparie chaque intervenant à ses modules dans la formation.\n\n'+
-        'MODULES DE LA FORMATION (id|titre):\n'+modulesStr+'\n\n'+
-        'INTERVENANTS ET LEURS MATIÈRES (issues du CRM, libellés approximatifs):\n'+intervenantsStr+'\n\n'+
-        'RÈGLES:\n'+
-        '- Fais une correspondance sémantique entre les libellés CRM et les titres de modules\n'+
-        '- Un intervenant peut être affecté à plusieurs modules\n'+
-        '- Si aucun module ne correspond, retourne un tableau vide\n'+
-        '- Retourne UNIQUEMENT ce JSON, sans texte ni backtick:\n'+
-        '{"affectations":[{"index":0,"modules":["M1","M3"]},{"index":1,"modules":["M2"]}]}'
-      const result=await apiFetch('/api/ingest',{method:'POST',body:{prompt}})
-      const text=result.text||''
-      let parsed
-      try{
-        const clean=text.replace(/^```(?:json)?\s*/i,'').replace(/```\s*$/,'').trim()
-        const first=clean.indexOf('{'),last=clean.lastIndexOf('}')
-        parsed=JSON.parse(first>=0?clean.slice(first,last+1):clean)
-      }catch{setErr('Claude n\'a pas retourné un JSON valide. Réessayez.');setAppLoading(false);return}
+      const parsed=await apparierIntervenants(
+        allModules.map(m=>({id:m.id,titre:m.titre,bloc:m.bloc})),
+        rows.map(r=>({prenom:r.prenom,nom:r.nom,matieres:r.matieres}))
+      )
       const updated=rows.map((r,i)=>{
         const aff=(parsed.affectations||[]).find(a=>a.index===i)
         return{...r,modules_appareis:aff?aff.modules:[]}
@@ -739,6 +731,7 @@ function VueDir({user,onLogout}){
     if(!files.length||!ciblesSel.length)return
     setIngLoading(true);setError('');setInfo('');setRapport(null);setProgress('Lecture des fichiers…')
     try{
+      let avisRapprochement='',renommages=[],aArbitrer=[]
       const textes=await extraireTextes(files,setProgress)
       setProgress(typeDoc==='pf'?'Analyse du plan de formation…':typeDoc==='race'?'Analyse du référentiel…':'Analyse des syllabi…')
       const data=await ingererDocuments(textes,'Le Mans',setProgress,typeDoc)
@@ -752,8 +745,50 @@ function VueDir({user,onLogout}){
           ?"Aucune compétence n'a pu être extraite de ce document. Vérifier qu'il s'agit bien d'un RACE et que le texte est lisible."
           :"Aucun module n'a pu être extraits de ce document. Vérifier la nature sélectionnée et que le fichier contient bien du texte.")
       }
-      if(data._blocs_ecartes)setInfo('Écarté(s) car hors périmètre certifiant : '+data._blocs_ecartes.map(b=>(b.titre||b.id)+' — '+b.modules+' modules').join(' · ')+'.')
-      if(data._documents_tronques)setError('Attention : document(s) '+data._documents_tronques.join(', ')+' tronqué(s) — la fin n\'a pas été analysée.')
+      // ── Rapprochement sémantique syllabus → plan de formation ──────────────
+      // La fusion en base se fait sur l'intitulé exact. « Relations Presse »
+      // face à « Relations presse et influence » échouait donc, alors qu'il
+      // s'agit du même enseignement. Les intitulés sont alignés ici, AVANT
+      // l'envoi : correspondances sûres appliquées, douteuses laissées à
+      // l'arbitrage. Une fusion erronée passerait inaperçue ; une case vide se
+      // corrige.
+      if(typeDoc==='syllabus'&&ciblesSel.length===1){
+        const cible=formations.find(x=>x._id===ciblesSel[0])
+        const modulesPF=(cible?.blocs||[]).flatMap(b=>(b.modules||[]).map(m=>({titre:m.titre,bloc:b.id})))
+        const exact=new Set(modulesPF.map(m=>normaliserTitre(m.titre)))
+        const restants=(data.blocs||[]).flatMap(b=>(b.modules||[]).map(m=>m.titre))
+          .filter(t=>t&&!exact.has(normaliserTitre(t)))
+        if(modulesPF.length&&restants.length){
+          setProgress('Rapprochement des intitulés…')
+          try{
+            const r=await rapprocherModules(modulesPF,restants)
+            const SEUIL=85,prisPF=new Set(),prisSy=new Set()
+            for(const c of (r?.correspondances||[])){
+              if(!c||!c.syllabus||!c.pf)continue
+              if(prisPF.has(c.pf)||prisSy.has(c.syllabus))continue
+              if((c.confiance||0)>=SEUIL){prisPF.add(c.pf);prisSy.add(c.syllabus);renommages.push(c)}
+              else if((c.confiance||0)>=50)aArbitrer.push(c)
+            }
+            const table=new Map(renommages.map(c=>[normaliserTitre(c.syllabus),c.pf]))
+            for(const b of (data.blocs||[]))for(const m of (b.modules||[])){
+              const cible2=table.get(normaliserTitre(m.titre))
+              if(cible2){m._titre_syllabus=m.titre;m.titre=cible2}
+            }
+          }catch(e){avisRapprochement='Rapprochement sémantique indisponible ('+(e.message||e)+') — repli sur l\'intitulé exact.'}
+        }
+      }
+
+      // Signalements non bloquants : ils décrivent ce qui a été mis de côté,
+      // pas un échec. En rouge, ils laissaient croire à une interruption.
+      const avis=[]
+      if(data._lots>1)avis.push(data._lots+' lots analysés puis fusionnés (corpus volumineux).')
+      if(data._documents_tronques)avis.push('Document(s) '+data._documents_tronques.join(', ')+' au-delà de 120 000 caractères : la fin n\'a pas été analysée.')
+      if(data._lots_en_echec)avis.push(data._lots_en_echec.length+' lot(s) en échec — contenu partiel.')
+      if(data._blocs_ecartes)avis.push('Écarté(s) car hors périmètre certifiant : '+data._blocs_ecartes.map(b=>(b.titre||b.id)+' — '+b.modules+' modules').join(' · ')+'.')
+      if(avisRapprochement)avis.push(avisRapprochement)
+      if(renommages.length)avis.push(renommages.length+' intitulé(s) rapproché(s) automatiquement : '+renommages.map(c=>'« '+c.syllabus+' » → « '+c.pf+' » ('+c.confiance+' %)').join(' · ')+'.')
+      if(aArbitrer.length)avis.push(aArbitrer.length+' rapprochement(s) trop incertain(s), laissé(s) de côté : '+aArbitrer.map(c=>'« '+c.syllabus+' » ≈ « '+c.pf+' » ('+c.confiance+' %'+(c.motif?', '+c.motif:'')+')').join(' · ')+'. À trancher à la main.')
+      if(avis.length)setInfo(avis.join(' '))
       if(nomFormation.trim()&&data.formation)data.formation.titre=nomFormation.trim()
       // Année de cycle : _cycle vient du seed et fait foi. L'intitulé n'est
       // qu'un repli — « Bach CDC » y donnerait « BACH », qui n'est pas un cycle.

@@ -96,30 +96,42 @@ export async function ingererDocuments(textes, campus, onProgress, typeDoc = 'pf
 }
 
 // ─── Fiche J-1 intervenant (envoie un prompt direct) ──────────────────────────
-// Signature : genererFicheJ1(formation, module_, onToken)
-export async function genererFicheJ1(formation, module_, onToken) {
+// Signature : genererFicheJ1(formation, module_)
+// ─── Appels structurés au modèle ──────────────────────────────────────────────
+// Le navigateur n'envoie plus de prompt : il nomme une action et fournit ses
+// paramètres. Le prompt est écrit côté serveur, dans api/ingest.js.
+async function actionClaude(action, params) {
+  const r = await apiFetch('/api/ingest', { method: 'POST', body: { action, params } })
+  if (r.error) throw new Error(r.error)
+  return r.data
+}
+
+// Fiche contexte J-1 pour un intervenant.
+export async function genererFicheJ1(formation, module_) {
   const autres = (formation.blocs || [])
     .flatMap(b => (b.modules || []).map(m => ({ titre: m.titre, notions: m.notions_cles })))
     .filter(m => m.titre !== module_.titre)
     .slice(0, 10)
-
-  const prompt =
-    'Assistant pédagogique. Fiche contexte J-1.\n' +
-    'Formation : ' + ((formation.formation && formation.formation.titre) || '') + '\n' +
-    'Module : ' + module_.titre + '\n' +
-    'Notions : ' + ((module_.notions_cles || []).join(', ')) + '\n' +
-    'Autres modules : ' + JSON.stringify(autres) + '\n' +
-    'Retourne UNIQUEMENT ce JSON : {"ancrage":"2 lignes max","dejavu":[{"intervenant":"...","module":"...","concepts":["..."],"lien":"conseil"}],"apres":[{"date":"à venir","intervenant":"...","module":"...","concepts":["..."]}]}'
-
   try {
-    const result = await apiFetch('/api/ingest', { method: 'POST', body: { prompt } })
-    const text = result.text || ''
-    if (onToken) onToken(text)
-    try { return repairJSON(text) }
-    catch (_) { return { ancrage: text.slice(0, 120), dejavu: [], apres: [] } }
+    return await actionClaude('fiche', {
+      formation: (formation.formation && formation.formation.titre) || '',
+      module: module_.titre,
+      notions: module_.notions_cles || [],
+      autres_modules: autres,
+    })
   } catch (_) {
     return { ancrage: 'Cette séance prépare les étudiants aux compétences visées.', dejavu: [], apres: [] }
   }
+}
+
+// Appariement intervenants du CRM ↔ modules de la formation.
+export function apparierIntervenants(modules, intervenants) {
+  return actionClaude('appariement', { modules, intervenants })
+}
+
+// Rapprochement sémantique des intitulés syllabus ↔ plan de formation.
+export function rapprocherModules(modulesPF, modulesSyllabus) {
+  return actionClaude('rapprochement', { modules_pf: modulesPF, modules_syllabus: modulesSyllabus })
 }
 
 // ─── Objet api — toutes les méthodes consommées par App.jsx ───────────────────
