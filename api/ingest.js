@@ -234,24 +234,55 @@ module.exports = async function handler(req, res) {
   // corpus, ce qui revenait a perdre silencieusement la fin des documents.
   // Desormais les documents sont repartis en lots analyses successivement, et
   // les resultats fusionnes.
-  const LOT_MAX = 45000;    // caracteres par appel Claude
-  const DOC_MAX = 120000;   // plafond d'un document isole (~40 pages)
+  // Decoupage : groupement ET fractionnement.
+  // La version precedente regroupait plusieurs documents mais n'en decoupait
+  // jamais un seul. Un plan de formation de 113 modules partait donc en un
+  // appel unique — et c'est la SORTIE qui sature, pas l'entree : demander les
+  // seances et notions de 113 modules depasse tres largement les 16 000 tokens
+  // autorises, le JSON etait tronque donc invalide, et l'unique lot echouait.
+  // Les documents sont desormais fractionnes, et un lot qui echoue est
+  // automatiquement redecoupe puis retente.
+  //
+  // La taille de lot depend de la nature : un syllabus produit beaucoup plus de
+  // sortie par caractere d'entree qu'un plan de formation, puisqu'on lui
+  // demande le detail seance par seance.
+  const LOT_MAX = typeDoc === 'syllabus' ? 22000 : 40000;
+  const LOT_MIN = 5000;     // en deca, inutile de redecouper davantage
+  const DOC_MAX = 400000;   // plafond d'un document (~130 pages)
+  const APPELS_MAX = 14;    // garde-fou de cout
   const tronques = [];
 
-  const prepares = textes.map((t, i) => {
+  // Fractionnement d'un texte sur des frontieres de paragraphe, pour ne pas
+  // couper un module en deux au milieu de sa description.
+  function fractionner(texte, taille) {
+    if (texte.length <= taille) return [texte];
+    const morceaux = [];
+    let reste = texte;
+    while (reste.length > taille) {
+      let coupe = reste.lastIndexOf('\n\n', taille);
+      if (coupe < taille * 0.5) coupe = reste.lastIndexOf('\n', taille);
+      if (coupe < taille * 0.5) coupe = taille;
+      morceaux.push(reste.slice(0, coupe));
+      reste = reste.slice(coupe);
+    }
+    if (reste.trim()) morceaux.push(reste);
+    return morceaux;
+  }
+
+  // File de travail : chaque entree est un corpus pret a analyser.
+  const file = [];
+  textes.forEach((t, idx) => {
     const brut = String(t || '');
     const coupe = brut.slice(0, DOC_MAX);
-    if (coupe.length < brut.length) tronques.push(i + 1);
-    return '--- DOCUMENT ' + (i + 1) + ' ---\n' + coupe;
+    if (coupe.length < brut.length) tronques.push(idx + 1);
+    const parts = fractionner(coupe, LOT_MAX);
+    parts.forEach((part, k) => {
+      const etiquette = parts.length > 1
+        ? '--- DOCUMENT ' + (idx + 1) + ' (partie ' + (k + 1) + '/' + parts.length + ') ---'
+        : '--- DOCUMENT ' + (idx + 1) + ' ---';
+      file.push(etiquette + '\n' + part);
+    });
   });
-
-  const lots = [];
-  let courant = [], taille = 0;
-  for (const doc of prepares) {
-    if (courant.length && taille + doc.length > LOT_MAX) { lots.push(courant); courant = []; taille = 0; }
-    courant.push(doc); taille += doc.length;
-  }
-  if (courant.length) lots.push(courant);
 
   const campusLabel = Array.isArray(campus) ? campus.join(', ') : (campus || 'non precise');
 
@@ -422,25 +453,24 @@ module.exports = async function handler(req, res) {
   return ingestPrompt;
   }
 
-  // ─── Analyse lot par lot, puis fusion ──────────────────────────────────────
+  // ─── Analyse, avec redecoupage adaptatif ───────────────────────────────────
+  // Un lot dont la reponse est illisible est presume trop volumineux en sortie :
+  // on le coupe en deux et on retente, jusqu'a LOT_MIN. C'est la seule facon de
+  // traiter un document dont on ne peut pas prevoir la densite a l'avance.
   const normTitre = t => String(t || '').toLowerCase().normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, ' ').trim();
 
   let parsed = null;
   const echecsLots = [];
+  let appels = 0;
+  let lotsReussis = 0;
 
-  for (let k = 0; k < lots.length; k++) {
-    const corpus = lots[k].join('\n\n');
-    let text;
-    try { text = await callClaude(apiKey, construirePrompt(corpus)); }
-    catch (e) { echecsLots.push({ lot: k + 1, raison: (e && e.message) ? e.message : String(e) }); continue; }
-
-    let bloc;
-    try { bloc = repairJSON(text); }
-    catch (e) { echecsLots.push({ lot: k + 1, raison: 'JSON invalide' }); continue; }
-
-    if (!parsed) { parsed = bloc; if (!Array.isArray(parsed.blocs)) parsed.blocs = []; continue; }
-
+  function fusionner(bloc) {
+    if (!parsed) {
+      parsed = bloc;
+      if (!Array.isArray(parsed.blocs)) parsed.blocs = [];
+      return;
+    }
     for (const b of (bloc.blocs || [])) {
       const cible = parsed.blocs.find(x => String(x.id) === String(b.id));
       if (!cible) { parsed.blocs.push(b); continue; }
@@ -457,14 +487,58 @@ module.exports = async function handler(req, res) {
       if (!cible.titre && b.titre) cible.titre = b.titre;
       if (b.nature === 'option') cible.nature = 'option';
     }
-    const fus = (a, b) => Array.from(new Set([...(a || []), ...(b || [])].filter(Boolean)));
-    parsed.intervenants = fus(parsed.intervenants, bloc.intervenants);
-    parsed.notions_transversales = fus(parsed.notions_transversales, bloc.notions_transversales);
+    const u = (a, b) => Array.from(new Set([...(a || []), ...(b || [])].filter(Boolean)));
+    parsed.intervenants = u(parsed.intervenants, bloc.intervenants);
+    parsed.notions_transversales = u(parsed.notions_transversales, bloc.notions_transversales);
     parsed.alertes_detectees = [...(parsed.alertes_detectees || []), ...(bloc.alertes_detectees || [])];
   }
 
+  while (file.length) {
+    if (appels >= APPELS_MAX) {
+      echecsLots.push({ raison: 'Plafond de ' + APPELS_MAX + ' appels atteint, ' + file.length + ' fragment(s) non analyse(s).' });
+      break;
+    }
+    const corpus = file.shift();
+    appels++;
+
+    let text;
+    try {
+      text = await callClaude(apiKey, construirePrompt(corpus));
+    } catch (e) {
+      const msg = (e && e.message) ? e.message : String(e);
+      // Une erreur reseau ou d'API ne se resout pas en coupant : on la signale.
+      echecsLots.push({ taille: corpus.length, raison: msg });
+      continue;
+    }
+
+    try {
+      fusionner(repairJSON(text));
+      lotsReussis++;
+    } catch (_) {
+      if (corpus.length > LOT_MIN * 2) {
+        const moitie = fractionner(corpus, Math.ceil(corpus.length / 2));
+        file.unshift(...moitie);
+      } else {
+        echecsLots.push({
+          taille: corpus.length,
+          raison: 'Reponse illisible meme apres redecoupage',
+          apercu: String(text).slice(0, 200),
+        });
+      }
+    }
+  }
+
   if (!parsed) {
-    return res.status(502).json({ error: 'Aucun lot n\'a pu etre analyse.', lots: lots.length, echecs: echecsLots });
+    // Le message doit porter la cause : « aucun lot analyse » sans plus de
+    // detail ne permettait rien de diagnostiquer.
+    const cause = echecsLots.length
+      ? echecsLots.map(e => e.raison).filter(Boolean).join(' | ')
+      : 'cause inconnue';
+    return res.status(502).json({
+      error: 'Analyse impossible : ' + cause,
+      appels,
+      echecs: echecsLots,
+    });
   }
 
   if (!parsed.formation) parsed.formation = { titre: 'Formation importee', annee: '' };
@@ -533,7 +607,8 @@ module.exports = async function handler(req, res) {
   // cela, un document coupe produit une extraction partielle indiscernable
   // d'une extraction complete.
   if (tronques.length) parsed._documents_tronques = tronques;
-  if (lots.length > 1) parsed._lots = lots.length;
+  if (appels > 1) parsed._lots = appels;
+  if (lotsReussis) parsed._lots_reussis = lotsReussis;
   if (echecsLots.length) parsed._lots_en_echec = echecsLots;
 
   return res.status(200).json({ data: parsed });
