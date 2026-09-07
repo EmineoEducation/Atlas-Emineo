@@ -1,0 +1,247 @@
+{
+  "rncp": "39741",
+  "intitule": "Chargé de communication",
+  "certificateur": "Association Sup de Vinci",
+  "dossier": "36290",
+  "source": "39741_ASDV_CDC_Referentiels.pdf",
+  "activites": [
+    {
+      "id": "C1",
+      "numero": 1,
+      "libelle": "Organisation du processus de veille permanente et/ou ponctuelle",
+      "competences": [
+        {
+          "id": "C1.1",
+          "libelle": "Définir un process de veille permanente et ponctuelle, via une méthodologie, des outils (dont l'intelligence artificielle) et sources spécifiques, afin d'optimiser la recherche et la sélection d'informations"
+        }
+      ]
+    },
+    {
+      "id": "C2",
+      "numero": 2,
+      "libelle": "Identification des tendances et innovations en communication",
+      "competences": [
+        {
+          "id": "C2.1",
+          "libelle": "Analyser les tendances actuelles et à venir de la société en général, et en termes d'information, communication et consommation en particulier, afin d'orienter les réflexions stratégiques et solutions préconisées"
+        },
+        {
+          "id": "C2.2",
+          "libelle": "Présenter une synthèse de la veille effectuée, par le biais d'un document synthétique et visuel, dans l'optique d'aider à la prise de décisions pour tous les acteurs concernés"
+        }
+      ]
+    },
+    {
+      "id": "C3",
+      "numero": 3,
+      "libelle": "Analyse de la demande du client interne ou externe",
+      "competences": [
+        {
+          "id": "C3.1",
+          "libelle": "Dresser le diagnostic de la situation en prenant appui sur le brief annonceur pour identifier les enjeux de la future communication"
+        },
+        {
+          "id": "C3.2",
+          "libelle": "Problématiser la demande du client, en identifiant les opportunités, obstacles et cibles, afin de déterminer une stratégie et un plan de communication en cohérence avec le contexte interne et externe"
+        }
+      ]
+    },
+    {
+      "id": "C4",
+      "numero": 4,
+      "libelle": "Élaboration de la recommandation stratégique de communication",
+      "competences": [
+        {
+          "id": "C4.1",
+          "libelle": "Proposer une solution à mettre en œuvre, basée sur l'identité et les objectifs de l'annonceur, le contexte socio-économique, culturel et le cadre règlementaire, en l'inscrivant dans une perspective de durabilité et de vécu expérientiel, afin de garantir originalité et faisabilité"
+        },
+        {
+          "id": "C4.2",
+          "libelle": "Planifier les actions recommandées et affecter les ressources nécessaires, dans le but d'optimiser la réussite du projet"
+        }
+      ]
+    },
+    {
+      "id": "C5",
+      "numero": 5,
+      "libelle": "Présentation de la recommandation au client / à l'annonceur",
+      "competences": [
+        {
+          "id": "C5.1",
+          "libelle": "Présenter la recommandation, en utilisant des techniques de communication et de négociation, afin de convaincre le client que le dispositif choisi lui permettra d'atteindre ses objectifs"
+        }
+      ]
+    },
+    {
+      "id": "C6",
+      "numero": 6,
+      "libelle": "Encadrement de la production de messages et contenus",
+      "competences": [
+        {
+          "id": "C6.1",
+          "libelle": "Traduire le plan de communication en brief des équipes créatives et de production, à partir des enjeux stratégiques de la commande, en orientant la production autour de l'éco-conception et en garantissant la conformité légale des messages et contenus"
+        }
+      ]
+    },
+    {
+      "id": "C7",
+      "numero": 7,
+      "libelle": "Coordination de l'équipe projet",
+      "competences": [
+        {
+          "id": "C7.1",
+          "libelle": "Piloter les collaborations professionnelles, en ayant recours à des techniques de communication adaptées, dans une visée de dynamique inclusive d'équipe"
+        },
+        {
+          "id": "C7.2",
+          "libelle": "Mobiliser l'ensemble des parties prenantes, en prenant en compte leurs besoins spécifiques, dans une logique de génération de valeur aux niveaux micro, méso et macro"
+        }
+      ]
+    },
+    {
+      "id": "C8",
+      "numero": 8,
+      "libelle": "Pilotage d'un réseau de partenaires",
+      "competences": [
+        {
+          "id": "C8.1",
+          "libelle": "Sélectionner les prestataires (fournisseurs, influenceurs, etc.) dans une logique d'achat responsable, afin de garantir la conformité au cahier des charges ainsi que la durabilité des actions de communication"
+        },
+        {
+          "id": "C8.2",
+          "libelle": "Développer un réseau responsable de partenaires, en intégrant les dimensions de viabilité, équitabilité et durabilité dans la collaboration, afin de pérenniser l'activité de manière durable"
+        }
+      ]
+    },
+    {
+      "id": "C9",
+      "numero": 9,
+      "libelle": "Conception universelle de supports de communication",
+      "competences": [
+        {
+          "id": "C9.1",
+          "libelle": "Concevoir des supports de communication, à partir de l'analyse de la cible visée, de son potentiel handicap et du contexte de prise de connaissance du support, via le design inclusif et dans le respect du cadre règlementaire"
+        }
+      ]
+    },
+    {
+      "id": "C10",
+      "numero": 10,
+      "libelle": "Production de contenus en tenant compte des impératifs d'accessibilité",
+      "competences": [
+        {
+          "id": "C10.1",
+          "libelle": "Produire des contenus rédactionnels imprimés accessibles, à partir du brief créatif, à l'aide de l'intelligence artificielle, dans le respect du cadre règlementaire"
+        },
+        {
+          "id": "C10.2",
+          "libelle": "Produire des contenus rédactionnels pour le web accessibles et responsive, en appliquant les méthodes de responsive design et responsive content"
+        },
+        {
+          "id": "C10.3",
+          "libelle": "Produire des messages visuels et audiovisuels accessibles, via des logiciels de PAO ou de montage vidéo, en ayant recours à l'intelligence artificielle"
+        }
+      ]
+    },
+    {
+      "id": "C11",
+      "numero": 11,
+      "libelle": "Gestion budgétaire du projet de communication",
+      "competences": [
+        {
+          "id": "C11.1",
+          "libelle": "Estimer et suivre les coûts tout au long du cycle de vie du projet de communication, en employant des techniques de gestion budgétaire, afin de garantir sa faisabilité et sa viabilité économique"
+        }
+      ]
+    },
+    {
+      "id": "C12",
+      "numero": 12,
+      "libelle": "Mesure des actions de communication",
+      "competences": [
+        {
+          "id": "C12.1",
+          "libelle": "Collecter la data marketing, via des indicateurs de performance, dans le respect de la règlementation en vigueur, en vue de générer de la donnée exploitable quantitativement et qualitativement"
+        },
+        {
+          "id": "C12.2",
+          "libelle": "Exploiter la donnée, au travers de tableaux de bord, en vue d'identifier les leviers de performance et d'analyser le retour sur investissement"
+        }
+      ]
+    },
+    {
+      "id": "C13",
+      "numero": 13,
+      "libelle": "Amélioration continue des actions de communication",
+      "competences": [
+        {
+          "id": "C13.1",
+          "libelle": "Corriger les anomalies, dans l'optique de maintenir la correspondance avec le plan d'action de communication défini"
+        },
+        {
+          "id": "C13.2",
+          "libelle": "Consolider les bonnes pratiques, en formalisant des savoir-faire et méthodes, afin d'industrialiser les pratiques et process"
+        }
+      ]
+    }
+  ],
+  "evaluation": [
+    {
+      "intitule": "Mise en situation professionnelle reconstituée — veille",
+      "activites": [
+        1,
+        2
+      ],
+      "modalite": "Individuel, à l'écrit"
+    },
+    {
+      "intitule": "Mise en situation professionnelle reconstituée — stratégie",
+      "activites": [
+        3,
+        4
+      ],
+      "modalite": "Individuel, à l'écrit"
+    },
+    {
+      "intitule": "Mise en situation professionnelle réelle — recommandation",
+      "activites": [
+        3,
+        4,
+        5
+      ],
+      "modalite": "En groupe, à l'oral"
+    },
+    {
+      "intitule": "Mise en situation professionnelle reconstituée — brief créatif",
+      "activites": [
+        6
+      ],
+      "modalite": "Individuel, à l'oral"
+    },
+    {
+      "intitule": "Rapport d'étonnement — coordination et partenaires",
+      "activites": [
+        7,
+        8
+      ],
+      "modalite": "Individuel, à l'écrit"
+    },
+    {
+      "intitule": "Compilation de supports de communication",
+      "activites": [
+        9,
+        10
+      ],
+      "modalite": "Individuel, via un dossier"
+    },
+    {
+      "intitule": "Rapport d'étonnement — budget, mesure et amélioration",
+      "activites": [
+        11,
+        12,
+        13
+      ],
+      "modalite": "Individuel, à l'écrit"
+    }
+  ]
+}
