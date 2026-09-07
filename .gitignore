@@ -1,0 +1,23 @@
+# macOS
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+
+# Dépendances et build — régénérés par Vercel, jamais versionnés
+node_modules/
+dist/
+.vite/
+.vercel/
+
+# Variables d'environnement — les clés vivent dans Vercel, jamais dans le dépôt
+.env
+.env.local
+.env.*.local
+
+# Journaux et éditeurs
+*.log
+npm-debug.log*
+.idea/
+.vscode/
+*.swp
