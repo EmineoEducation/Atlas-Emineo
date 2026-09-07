@@ -102,8 +102,12 @@ module.exports = async function handler(req, res) {
     //
     // Sans cible, on retombe sur la creation d'une formation autonome (heritage).
     if (req.method === 'POST') {
-      const user = await requireRole(req, ['dir', 'rp']);
-      if (!user) return res.status(403).json({ error: 'Accès réservé.' });
+      // Direction uniquement (03/09/2026). Une alimentation remplace le
+      // référentiel d'une promotion sans conserver la version précédente : tant
+      // qu'il n'existe pas d'historique, un seul acteur en porte la
+      // responsabilité. Les RP et les FR restent lecteurs.
+      const user = await requireRole(req, ['dir']);
+      if (!user) return res.status(403).json({ error: 'Écriture des référentiels réservée à la direction.' });
 
       const { campus, data, rncp, niveau, titre_court, certificateur, cible_id, cibles, couche } = req.body || {};
       if (!data) return res.status(400).json({ error: 'data requis.' });

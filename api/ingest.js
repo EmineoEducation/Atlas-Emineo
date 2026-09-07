@@ -63,46 +63,148 @@ async function callClaude(apiKey, prompt, maxTokens) {
     .join('');
 }
 
+// Les prompts sont construits ici, jamais recus du navigateur. Chaque usage est
+// une action nommee avec ses parametres et sa propre garde de role.
+function extraireJSON(text) {
+  const clean = String(text || '').replace(/^```(?:json)?\s*/i, '').replace(/```\s*$/, '').trim();
+  const a = clean.indexOf('{'), b = clean.lastIndexOf('}');
+  return JSON.parse(a >= 0 ? clean.slice(a, b + 1) : clean);
+}
+
+// ── Fiche contexte J-1 ───────────────────────────────────────────────────────
+function promptFiche(p) {
+  const autres = (p.autres_modules || []).slice(0, 10)
+    .map(m => '- ' + String(m.titre || '') + ' : ' + (m.notions || []).join(', '))
+    .join('\n');
+  return 'Assistant pedagogique. Fiche contexte J-1 pour un intervenant.\n\n' +
+    'Formation : ' + String(p.formation || '') + '\n' +
+    'Module : ' + String(p.module || '') + '\n' +
+    'Notions du module : ' + (p.notions || []).join(', ') + '\n\n' +
+    'Autres modules de la formation :\n' + (autres || '(aucun)') + '\n\n' +
+    'Ne mentionne que des modules figurant dans la liste ci-dessus. N invente ni\n' +
+    'intervenant ni date. Ton factuel, jamais culpabilisant.\n\n' +
+    'Retourne UNIQUEMENT ce JSON, sans texte ni backtick :\n' +
+    '{"ancrage":"2 lignes max","dejavu":[{"intervenant":"","module":"","concepts":[""],"lien":"conseil"}],' +
+    '"apres":[{"date":"a venir","intervenant":"","module":"","concepts":[""]}]}';
+}
+
+// ── Appariement intervenants CRM ↔ modules ───────────────────────────────────
+function promptAppariement(p) {
+  const mods = (p.modules || []).map(m => String(m.id) + '|' + String(m.titre) + ' (' + String(m.bloc || '') + ')').join('\n');
+  const gens = (p.intervenants || []).map((r, i) => '[' + i + '] ' + String(r.prenom || '') + ' ' + String(r.nom || '') +
+    ' — matieres CRM : ' + (r.matieres || []).join(' / ')).join('\n');
+  return 'Tu es expert en ingenierie pedagogique. Apparie chaque intervenant a ses modules.\n\n' +
+    'MODULES (id|titre (bloc)) :\n' + mods + '\n\n' +
+    'INTERVENANTS ET MATIERES CRM (libelles approximatifs) :\n' + gens + '\n\n' +
+    'REGLES :\n' +
+    '- Correspondance semantique entre libelles CRM et titres de modules\n' +
+    '- Un intervenant peut couvrir plusieurs modules\n' +
+    '- N utilise que des identifiants figurant dans la liste des modules\n' +
+    '- Si aucun module ne correspond, renvoie un tableau vide pour cet intervenant\n\n' +
+    'Retourne UNIQUEMENT ce JSON : {"affectations":[{"index":0,"modules":["M1","M3"]}]}';
+}
+
+// ── Rapprochement semantique syllabus ↔ plan de formation ────────────────────
+// Le rapprochement par intitule exact echoue des qu un syllabus nomme un module
+// autrement que le plan de formation : « Relations Presse » face a « Relations
+// presse et influence ». Claude propose les correspondances, avec un indice de
+// confiance ; l application n applique que les plus surs et soumet le reste a
+// arbitrage humain. Une correspondance erronee fusionnerait deux modules
+// distincts — plus couteux qu une case laissee vide.
+function promptRapprochement(p) {
+  const pf = (p.modules_pf || []).map((m, i) => '[' + i + '] ' + String(m.titre) + (m.bloc ? '  (bloc ' + m.bloc + ')' : '')).join('\n');
+  const sy = (p.modules_syllabus || []).map((t, i) => '[' + i + '] ' + String(t)).join('\n');
+  return 'Tu es expert en ingenierie pedagogique. Rapproche des intitules de modules\n' +
+    'issus de syllabi des intitules du plan de formation d une meme promotion.\n\n' +
+    'PLAN DE FORMATION :\n' + pf + '\n\n' +
+    'MODULES DES SYLLABI :\n' + sy + '\n\n' +
+    'CE QUI CONSTITUE UNE CORRESPONDANCE :\n' +
+    '- meme enseignement designe autrement : ordre des mots, singulier/pluriel,\n' +
+    '  accents, ponctuation, casse\n' +
+    '- abreviation ou sigle face a sa forme developpee (SMA/SMO et Social Media\n' +
+    '  Advertising, RP et Relations presse, PAO et Publication assistee)\n' +
+    '- qualificatif ajoute ou retire sans changer l objet enseigne\n' +
+    '  (« Relations presse » et « Relations presse et influence »)\n' +
+    '- traduction ou variante linguistique du meme intitule\n\n' +
+    'CE QUI N EN EST PAS UNE :\n' +
+    '- deux matieres voisines mais distinctes (« Droit social » et « Droit des\n' +
+    '  contrats », « Anglais » et « Anglais des affaires » quand les deux\n' +
+    '  figurent au plan)\n' +
+    '- un module generique rapproche d un module specialise faute de mieux\n' +
+    '- un rapprochement fonde sur un seul mot commun tres frequent\n' +
+    '  (communication, projet, strategie, management, culture)\n\n' +
+    'Chaque module du plan ne peut recevoir qu un seul module de syllabus, et\n' +
+    'reciproquement. Si deux candidats se valent, ne tranche pas : baisse la\n' +
+    'confiance des deux et laisse arbitrer.\n\n' +
+    'Attribue une confiance de 0 a 100 : 90+ pour une reformulation evidente,\n' +
+    '70-89 pour une correspondance probable mais discutable, sous 70 pour un\n' +
+    'doute reel. Mieux vaut une confiance basse qu un faux rapprochement :\n' +
+    'une case vide se corrige, une fusion erronee passe inapercue.\n' +
+    'N inclus aucune paire dont la confiance serait inferieure a 50.\n' +
+    'Le motif tient en moins de 12 mots.\n\n' +
+    'Retourne UNIQUEMENT ce JSON :\n' +
+    '{"correspondances":[{"syllabus":"intitule exact du syllabus",' +
+    '"pf":"intitule exact du plan de formation","confiance":92,"motif":"sigle developpe"}]}';
+}
+
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Methode non supportee.' });
   }
-
-  const user = await requireRole(req, ['dir', 'rp', 'intervenant']);
-  if (!user) return res.status(403).json({ error: 'Acces reserve.' });
 
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) {
     return res.status(500).json({ error: 'ANTHROPIC_API_KEY non configuree sur le serveur.' });
   }
 
-  const { textes, campus, prompt, type_doc } = req.body || {};
+  const { textes, campus, type_doc, action, params } = req.body || {};
 
-  // ─── MODE 1 : prompt direct (fiche J-1, appariement CSV) ──────────────────
-  // Renvoie { text } — le front parse lui-meme.
-  //
-  // Ce mode relaie un prompt construit par le navigateur. Tel quel, c'est un
-  // acces libre au modele pour tout compte authentifie : rien n'empeche
-  // d'envoyer autre chose qu'une fiche, aux frais d'Eminéo. Deux garde-fous en
-  // attendant que la construction du prompt passe cote serveur (voir note
-  // d'audit) : une longueur plafonnee, et un budget de sortie reduit — une
-  // fiche J-1 ou un appariement tiennent tres largement dans 4 000 tokens.
-  const PROMPT_MAX = 30000;
-  if (prompt && typeof prompt === 'string') {
-    if (prompt.length > PROMPT_MAX) {
-      return res.status(413).json({
-        error: 'Prompt trop long (' + prompt.length + ' caracteres, maximum ' + PROMPT_MAX + ').',
-      });
+  // ── Actions structurees ────────────────────────────────────────────────────
+  // Le mode « prompt libre » a ete retire : il ouvrait le modele a tout compte
+  // authentifie, aux frais d Eminéo, sans qu aucun controle ne porte sur le
+  // contenu envoye. Les trois usages reels sont desormais nommes, leurs
+  // parametres valides, et leur prompt ecrit ici.
+  const ACTIONS = {
+    fiche:          { roles: ['dir', 'rp', 'fr', 'intervenant'], build: promptFiche,        max: 2000 },
+    appariement:    { roles: ['dir', 'rp'],                      build: promptAppariement,  max: 4000 },
+    rapprochement:  { roles: ['dir'],                            build: promptRapprochement, max: 4000 },
+  };
+
+  if (action) {
+    const def = ACTIONS[String(action)];
+    if (!def) return res.status(400).json({ error: 'Action inconnue : ' + action });
+
+    const user = await requireRole(req, def.roles);
+    if (!user) return res.status(403).json({ error: 'Acces reserve.' });
+
+    const p = params || {};
+    let prompt;
+    try { prompt = def.build(p); }
+    catch (e) { return res.status(400).json({ error: 'Parametres invalides : ' + e.message }); }
+
+    // Un prompt construit ici reste borne, mais des parametres volumineux
+    // peuvent le faire deriver : on verifie le resultat, pas l intention.
+    if (prompt.length > 40000) {
+      return res.status(413).json({ error: 'Trop de donnees pour un seul appel (' + prompt.length + ' caracteres).' });
     }
+
     try {
-      const text = await callClaude(apiKey, prompt, 4000);
-      return res.status(200).json({ text });
+      const text = await callClaude(apiKey, prompt, def.max);
+      let data = null;
+      try { data = extraireJSON(text); } catch (_) { data = null; }
+      if (!data) return res.status(422).json({ error: 'Reponse illisible du modele.', apercu: String(text).slice(0, 300) });
+      return res.status(200).json({ data });
     } catch (e) {
-      return res.status(e.status || 502).json({
-        error: 'Appel Claude echoue : ' + (e && e.message ? e.message : String(e)),
-      });
+      return res.status(e.status || 502).json({ error: 'Appel Claude echoue : ' + (e && e.message ? e.message : String(e)) });
     }
   }
+
+  // ── Ingestion de documents : direction uniquement ──────────────────────────
+  // Decision du 03/09/2026 : les referentiels sont ecrases sans historique par
+  // une ingestion. Tant qu il n existe pas de versionnement, un seul acteur en
+  // porte la responsabilite.
+  const user = await requireRole(req, ['dir']);
+  if (!user) return res.status(403).json({ error: 'Ingestion de documents reservee a la direction.' });
 
   // ─── MODE 2 : ingestion de documents ──────────────────────────────────────
   // Trois natures de document, trois lectures differentes (03/09/2026) :
@@ -125,24 +227,31 @@ module.exports = async function handler(req, res) {
     ? String(type_doc).toLowerCase()
     : 'pf';
 
-  // Un plan de formation complet depasse largement 12 000 caracteres — l'ancien
-  // plafond coupait la fin du document, donc les derniers modules, sans que
-  // rien ne le signale. Plafond par document releve, et plafond global pour ne
-  // pas exploser la fenetre de contexte sur un depot de plusieurs syllabi.
-  const MAX_PAR_DOC = 60000;
-  const MAX_TOTAL = 180000;
-  let cumul = 0;
+  // Decoupage en lots plutot que troncature.
+  // Un appel unique imposait deux plafonds : la fenetre de contexte en entree,
+  // et surtout les 16 000 tokens de sortie — un corpus volumineux produisait un
+  // JSON coupe en plein milieu, donc invalide. La parade etait de tronquer le
+  // corpus, ce qui revenait a perdre silencieusement la fin des documents.
+  // Desormais les documents sont repartis en lots analyses successivement, et
+  // les resultats fusionnes.
+  const LOT_MAX = 45000;    // caracteres par appel Claude
+  const DOC_MAX = 120000;   // plafond d'un document isole (~40 pages)
   const tronques = [];
-  const corpus = textes
-    .map((t, i) => {
-      const brut = String(t || '');
-      let morceau = brut.slice(0, MAX_PAR_DOC);
-      if (cumul + morceau.length > MAX_TOTAL) morceau = morceau.slice(0, Math.max(0, MAX_TOTAL - cumul));
-      cumul += morceau.length;
-      if (morceau.length < brut.length) tronques.push(i + 1);
-      return '--- DOCUMENT ' + (i + 1) + ' ---\n' + morceau;
-    })
-    .join('\n\n');
+
+  const prepares = textes.map((t, i) => {
+    const brut = String(t || '');
+    const coupe = brut.slice(0, DOC_MAX);
+    if (coupe.length < brut.length) tronques.push(i + 1);
+    return '--- DOCUMENT ' + (i + 1) + ' ---\n' + coupe;
+  });
+
+  const lots = [];
+  let courant = [], taille = 0;
+  for (const doc of prepares) {
+    if (courant.length && taille + doc.length > LOT_MAX) { lots.push(courant); courant = []; taille = 0; }
+    courant.push(doc); taille += doc.length;
+  }
+  if (courant.length) lots.push(courant);
 
   const campusLabel = Array.isArray(campus) ? campus.join(', ') : (campus || 'non precise');
 
@@ -208,6 +317,7 @@ module.exports = async function handler(req, res) {
     '- Si un champ est inconnu, utilise une chaine vide "" ou un tableau vide []\n' +
     '- N\'invente aucun module, aucune competence, aucun intervenant absent des documents\n\n';
 
+  function construirePrompt(corpus) {
   let ingestPrompt;
 
   if (typeDoc === 'pf') {
@@ -309,23 +419,52 @@ module.exports = async function handler(req, res) {
       '}';
   }
 
-  let text;
-  try {
-    text = await callClaude(apiKey, ingestPrompt);
-  } catch (e) {
-    return res.status(e.status || 502).json({
-      error: 'Appel Claude echoue : ' + (e && e.message ? e.message : String(e)),
-    });
+  return ingestPrompt;
   }
 
-  let parsed;
-  try {
-    parsed = repairJSON(text);
-  } catch (e) {
-    return res.status(422).json({
-      error: 'JSON invalide retourne par Claude',
-      raw_preview: text.slice(0, 500),
-    });
+  // ─── Analyse lot par lot, puis fusion ──────────────────────────────────────
+  const normTitre = t => String(t || '').toLowerCase().normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, ' ').trim();
+
+  let parsed = null;
+  const echecsLots = [];
+
+  for (let k = 0; k < lots.length; k++) {
+    const corpus = lots[k].join('\n\n');
+    let text;
+    try { text = await callClaude(apiKey, construirePrompt(corpus)); }
+    catch (e) { echecsLots.push({ lot: k + 1, raison: (e && e.message) ? e.message : String(e) }); continue; }
+
+    let bloc;
+    try { bloc = repairJSON(text); }
+    catch (e) { echecsLots.push({ lot: k + 1, raison: 'JSON invalide' }); continue; }
+
+    if (!parsed) { parsed = bloc; if (!Array.isArray(parsed.blocs)) parsed.blocs = []; continue; }
+
+    for (const b of (bloc.blocs || [])) {
+      const cible = parsed.blocs.find(x => String(x.id) === String(b.id));
+      if (!cible) { parsed.blocs.push(b); continue; }
+      const vus = new Set((cible.modules || []).map(m => normTitre(m.titre)));
+      for (const m of (b.modules || [])) {
+        if (vus.has(normTitre(m.titre))) continue;
+        (cible.modules = cible.modules || []).push(m); vus.add(normTitre(m.titre));
+      }
+      const codes = new Set((cible.competences || []).map(c => String(c.id || c)));
+      for (const c of (b.competences || [])) {
+        if (codes.has(String(c.id || c))) continue;
+        (cible.competences = cible.competences || []).push(c); codes.add(String(c.id || c));
+      }
+      if (!cible.titre && b.titre) cible.titre = b.titre;
+      if (b.nature === 'option') cible.nature = 'option';
+    }
+    const fus = (a, b) => Array.from(new Set([...(a || []), ...(b || [])].filter(Boolean)));
+    parsed.intervenants = fus(parsed.intervenants, bloc.intervenants);
+    parsed.notions_transversales = fus(parsed.notions_transversales, bloc.notions_transversales);
+    parsed.alertes_detectees = [...(parsed.alertes_detectees || []), ...(bloc.alertes_detectees || [])];
+  }
+
+  if (!parsed) {
+    return res.status(502).json({ error: 'Aucun lot n\'a pu etre analyse.', lots: lots.length, echecs: echecsLots });
   }
 
   if (!parsed.formation) parsed.formation = { titre: 'Formation importee', annee: '' };
@@ -394,6 +533,8 @@ module.exports = async function handler(req, res) {
   // cela, un document coupe produit une extraction partielle indiscernable
   // d'une extraction complete.
   if (tronques.length) parsed._documents_tronques = tronques;
+  if (lots.length > 1) parsed._lots = lots.length;
+  if (echecsLots.length) parsed._lots_en_echec = echecsLots;
 
   return res.status(200).json({ data: parsed });
 };
