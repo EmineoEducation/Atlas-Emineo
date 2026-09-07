@@ -89,6 +89,14 @@ export async function ingererDocuments(textes, campus, onProgress, typeDoc = 'pf
     method: 'POST',
     body: { textes, campus, type_doc: typeDoc },
   })
+  // Le serveur détaille les échecs fragment par fragment. Ne remonter que
+  // `error` privait de tout diagnostic : « Analyse impossible » sans la cause.
+  if (result.error && Array.isArray(result.echecs) && result.echecs.length) {
+    const detail = result.echecs
+      .map(e => (e.taille ? Math.round(e.taille / 1000) + ' k car. : ' : '') + (e.raison || ''))
+      .filter(Boolean).join(' — ')
+    throw new Error(result.error + (detail ? ' [' + detail + ']' : ''))
+  }
   if (result.error) throw new Error(result.error)
   if (!result.data) throw new Error('Réponse inattendue du serveur (pas de champ data).')
   if (onProgress) onProgress('Structuration…')
