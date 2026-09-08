@@ -1468,6 +1468,20 @@ function Cartographie2({blocs,mode,sel,onSelect,titre}){
                 {deploy&&actif.anom>0?` · ${actif.anom} anomalie${actif.anom>1?'s':''}`:''}
                 {actif.qui?` · ${actif.qui}`:''}
               </div>
+              {/* Un bloc se définit par son épreuve : c'est l'information la
+                  plus structurante, elle passe avant les compteurs. */}
+              {(actif.epreuves||[]).length>0&&(
+                <div style={{marginTop:5,paddingTop:5,borderTop:`1px solid ${P.border}`,fontSize:11.5,color:P.petrole,lineHeight:1.5}}>
+                  {actif.epreuves.map((e,i)=>(
+                    <div key={i}>
+                      <strong>{e.intitule}</strong>
+                      {e.modalite?' · '+e.modalite:''}
+                      {e.duree?' · '+e.duree+' h':''}
+                      {e.date?' · le '+e.date:''}
+                    </div>
+                  ))}
+                </div>
+              )}
             </>
           ) : (
             <div style={{fontSize:12,color:AT.idleText,paddingTop:6}}>Survoler un bloc pour en voir le détail · cliquer pour l'ouvrir dans l'Inspecteur.</div>
@@ -2002,6 +2016,7 @@ function VueFR({user,onLogout,onRetour}){
     const st = anom>0?'warn':(pct>0?'ok':'idle')
     return {id:b.id, titre:b.titre, comp:(b.competences||[]).length, mods:(b.modules||[]).length, pct, anom, st,
       nature:b.nature==='option'?'option':'obligatoire', optGroupe:b.option_groupe||'',
+      epreuves:b.epreuves||[],
       qui: quiSet.size?Array.from(quiSet).join(' · '):'Non affecté',
       desc:`${(b.competences||[]).length} compétence(s) au référentiel de ce bloc.`}
   })
@@ -2148,6 +2163,25 @@ function VueFR({user,onLogout,onRetour}){
           )}
           {viewRole==='fr'&&temps!=='digest'&&<>
             <Cartographie2 blocs={blocs} mode={temps} sel={sel} onSelect={setSel} titre={titre}/>
+            {/* Enseignements rattachés à aucun bloc : hors de la rosace, parce
+                qu'aucune épreuve ne les sanctionne — mais bien dans la
+                formation, donc listés juste en dessous. */}
+            {(f?.modules_hors_bloc||[]).length>0&&(
+              <div style={{marginTop:'0.75rem',background:P.surface,border:`1px solid ${P.border}`,borderRadius:14,padding:'12px 18px'}}>
+                <div style={{fontSize:11,fontWeight:600,letterSpacing:'.08em',textTransform:'uppercase',color:AT.idleText,marginBottom:6}}>
+                  Modules hors bloc · {(f.modules_hors_bloc).reduce((n,m)=>n+(m.volume||0),0)} h
+                </div>
+                <div style={{fontSize:12,color:P.textm,marginBottom:8,lineHeight:1.55}}>Enseignements sans épreuve de certification rattachée. Ils ne constituent pas un bloc.</div>
+                <div style={{display:'flex',flexWrap:'wrap',gap:'0.35rem'}}>
+                  {f.modules_hors_bloc.map((m,i)=>(
+                    <span key={i} title={(m.competences_liees||[]).join(', ')}
+                      style={{padding:'4px 12px',borderRadius:20,border:`1px solid ${P.border}`,background:P.surface,fontSize:12,color:P.abysse}}>
+                      {m.titre}<span style={{color:AT.idleText,marginLeft:6}}>{m.volume} h</span>
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
 
             {deploy&&(
               <div style={{display:'grid',gridTemplateColumns:'minmax(0,1.45fr) minmax(0,1fr)',gap:18,marginTop:20}}>
