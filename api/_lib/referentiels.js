@@ -10,15 +10,57 @@
 //
 // `_lib/` n'est pas décompté du plafond de 12 fonctions du plan Hobby.
 
-const REFERENTIELS = {
-  'bach-cdc': require('../../referentiels/bach-cdc.json'),
-};
+const fs = require('node:fs');
+const path = require('node:path');
 
-// Le RACE est chargé à part : plusieurs titres peuvent partager un référentiel
-// de certification, et il n'a pas à être dupliqué dans chaque fichier de titre.
-const RACES = {
-  '39741': require('../../referentiels/race-39741.json'),
-};
+// Découverte automatique du contenu de referentiels/.
+//
+// Auparavant chaque titre devait être déclaré ici par un `require` : ajouter le
+// MRH ou le MDEC imposait de modifier ce fichier, donc un aller-retour de plus
+// à chaque session. Le dossier est désormais lu au démarrage de la fonction, et
+// le type de chaque fichier déduit de son contenu — un RACE porte des
+// `activites`, un titre porte des `blocs`. Aucune convention de nommage à
+// respecter, aucune ligne à ajouter : déposer le JSON suffit.
+//
+// Les fichiers sont embarqués dans la fonction par `includeFiles` dans
+// vercel.json. Sans cette directive, le dossier serait absent à l'exécution.
+const CHEMINS_CANDIDATS = [
+  path.join(process.cwd(), 'referentiels'),
+  path.join(__dirname, '..', '..', 'referentiels'),
+  path.join(__dirname, '..', 'referentiels'),
+];
+
+const REFERENTIELS = {};
+const RACES = {};
+const DIAGNOSTIC = { dossier: null, essais: CHEMINS_CANDIDATS, lus: [], erreurs: [] };
+
+for (const dossier of CHEMINS_CANDIDATS) {
+  let fichiers;
+  try { fichiers = fs.readdirSync(dossier).filter(f => f.endsWith('.json')); }
+  catch (_) { continue; }
+
+  DIAGNOSTIC.dossier = dossier;
+  for (const f of fichiers) {
+    try {
+      const contenu = JSON.parse(fs.readFileSync(path.join(dossier, f), 'utf-8'));
+      const cle = f.replace(/\.json$/, '');
+      if (Array.isArray(contenu.activites) && contenu.rncp) {
+        RACES[String(contenu.rncp)] = contenu;
+        DIAGNOSTIC.lus.push({ fichier: f, type: 'race', rncp: contenu.rncp });
+      } else if (contenu.formation && Array.isArray(contenu.blocs)) {
+        REFERENTIELS[cle] = contenu;
+        DIAGNOSTIC.lus.push({ fichier: f, type: 'titre', promotion: contenu.formation.titre_court });
+      } else {
+        DIAGNOSTIC.erreurs.push({ fichier: f, raison: 'ni RACE ni référentiel de titre' });
+      }
+    } catch (e) {
+      // Un JSON mal formé ne doit pas empêcher les autres de se charger : il est
+      // signalé dans le rapport de synchronisation, pas fatal.
+      DIAGNOSTIC.erreurs.push({ fichier: f, raison: e.message });
+    }
+  }
+  break;
+}
 
 // Traduit un référentiel du dépôt vers la forme attendue par l'application.
 //
@@ -107,4 +149,4 @@ function versFormatApplication(ref) {
   };
 }
 
-module.exports = { REFERENTIELS, RACES, versFormatApplication };
+module.exports = { REFERENTIELS, RACES, versFormatApplication, DIAGNOSTIC };
