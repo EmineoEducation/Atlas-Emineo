@@ -1,5 +1,6 @@
 const { getDB } = require('./_lib/db');
 const { requireAuth, requireRole } = require('./_lib/auth');
+const { REFERENTIELS, versFormatApplication } = require('./_lib/referentiels');
 
 // Normaliser campus : string ou JSON array -> string normalisée pour filtre
 function normCampus(c) { return (c || '').toLowerCase().trim(); }
