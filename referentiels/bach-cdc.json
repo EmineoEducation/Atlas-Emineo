@@ -1,5 +1,5 @@
 {
-  "genere_le": "2026-09-07",
+  "genere_le": "2026-09-08",
   "outil": "outils/construire-referentiel.mjs",
   "formation": {
     "rncp": "39741",
@@ -33,8 +33,8 @@
             "C1"
           ],
           "competences_plage": false,
-          "epreuve": "EC MSPR VST : individuel, ecrit + oral (Veille stratégique, créative et tendancielle)",
-          "commentaire": "110",
+          "epreuve": "EC MSPR VST : individuel, ecrit + oral\n(Veille stratégique, créative et tendancielle)",
+          "commentaire": "",
           "sous_modules": []
         },
         {
@@ -55,11 +55,23 @@
             "C2"
           ],
           "competences_plage": false,
-          "epreuve": "65",
-          "commentaire": "",
+          "epreuve": "",
+          "commentaire": "prévoir 1 séance en autonomie ou partiel de fin de module",
           "sous_modules": []
         }
       ],
+      "epreuves": [
+        {
+          "intitule": "EC MSPR VST",
+          "modalite": "individuel, ecrit + oral",
+          "objet": "Veille stratégique, créative et tendancielle",
+          "duree": 3.5,
+          "date": "15/12/2025",
+          "note": "Programmé le 15/12/2025",
+          "calendrier": "Oral VST"
+        }
+      ],
+      "competences_mentionnees": [],
       "activites": [
         {
           "id": "C1",
@@ -84,8 +96,7 @@
       "nature": "obligatoire",
       "competences": [
         "C3",
-        "C4",
-        "C5"
+        "C4"
       ],
       "modules": [
         {
@@ -95,8 +106,8 @@
             "C3"
           ],
           "competences_plage": false,
-          "epreuve": "EC MSPR Groka : individuel, écrit EC MSPR Compet' nat' : Sous-groupe, oral (définition stratégie de communication + plan de communication)",
-          "commentaire": "119",
+          "epreuve": "EC MSPR Groka : individuel, écrit\nEC MSPR Compet' nat' : Sous-groupe, oral\n(définition stratégie de communication + plan de communication)",
+          "commentaire": "",
           "sous_modules": []
         },
         {
@@ -139,7 +150,7 @@
             "C4.2"
           ],
           "competences_plage": false,
-          "epreuve": "126",
+          "epreuve": "",
           "commentaire": "",
           "sous_modules": []
         },
@@ -152,10 +163,33 @@
             "C5"
           ],
           "competences_plage": true,
-          "epreuve": "129",
-          "commentaire": "",
+          "epreuve": "",
+          "commentaire": "7h comptabilisées en FFP pour la finale",
           "sous_modules": []
         }
+      ],
+      "epreuves": [
+        {
+          "intitule": "EC MSPR Groka",
+          "modalite": "individuel, écrit",
+          "objet": "définition stratégie de communication + plan de communication",
+          "duree": 7,
+          "date": "26/05/2026",
+          "note": "Programmé le 26/05/2026",
+          "calendrier": "GroKa"
+        },
+        {
+          "intitule": "EC MSPR Compet' nat'",
+          "modalite": "Sous-groupe, oral",
+          "objet": "définition stratégie de communication + plan de communication",
+          "duree": 10.5,
+          "date": "",
+          "note": "Transverse tous blocs",
+          "calendrier": "Grand final"
+        }
+      ],
+      "competences_mentionnees": [
+        "C5"
       ],
       "activites": [
         {
@@ -172,13 +206,6 @@
           "competences": [
             "C4.1",
             "C4.2"
-          ]
-        },
-        {
-          "id": "C5",
-          "libelle": "Présentation de la recommandation au client / à l'annonceur",
-          "competences": [
-            "C5.1"
           ]
         }
       ]
@@ -200,7 +227,7 @@
           ],
           "competences_plage": false,
           "epreuve": "EC MSPR Brief Créatif : individuel, écrit",
-          "commentaire": "134",
+          "commentaire": "",
           "sous_modules": []
         },
         {
@@ -232,8 +259,8 @@
             "C7"
           ],
           "competences_plage": false,
-          "epreuve": "65",
-          "commentaire": "",
+          "epreuve": "",
+          "commentaire": "prévoir 1 séance en autonomie ou partiel de fin de module",
           "sous_modules": [
             {
               "titre": "Elevator Pitch",
@@ -262,6 +289,17 @@
           ]
         }
       ],
+      "epreuves": [
+        {
+          "intitule": "EC MSPR Brief Créatif",
+          "modalite": "individuel, écrit",
+          "duree": 4,
+          "date": "",
+          "note": "7h Inclues dans le module Compet' Nat",
+          "calendrier": "Brief Créa"
+        }
+      ],
+      "competences_mentionnees": [],
       "activites": [
         {
           "id": "C6",
@@ -285,7 +323,6 @@
       "titre": "Réaliser des contenus de communication",
       "nature": "obligatoire",
       "competences": [
-        "C8",
         "C9",
         "C10"
       ],
@@ -297,7 +334,7 @@
             "C10"
           ],
           "competences_plage": false,
-          "epreuve": "EC Book Séminaire d'option : individuel, écrit (compilation de supports de communication)",
+          "epreuve": "EC Book Séminaire d'option : individuel, écrit\n(compilation de supports de communication)",
           "commentaire": "+21h intégrées aux intensives, RAN et IDA",
           "sous_modules": []
         },
@@ -308,8 +345,8 @@
             "C10"
           ],
           "competences_plage": false,
-          "epreuve": "153",
-          "commentaire": "",
+          "epreuve": "",
+          "commentaire": "+14h intégrées aux intensives, RAN et IDA",
           "sous_modules": []
         },
         {
@@ -341,7 +378,7 @@
             "C9"
           ],
           "competences_plage": false,
-          "epreuve": "158",
+          "epreuve": "",
           "commentaire": "",
           "sous_modules": []
         },
@@ -352,8 +389,8 @@
             "C9"
           ],
           "competences_plage": false,
-          "epreuve": "65",
-          "commentaire": "",
+          "epreuve": "",
+          "commentaire": "prévoir 1 séance en autonomie ou partiel de fin de module",
           "sous_modules": []
         },
         {
@@ -365,7 +402,7 @@
             "C10"
           ],
           "competences_plage": true,
-          "epreuve": "162",
+          "epreuve": "",
           "commentaire": "",
           "sous_modules": [],
           "nature": "option",
@@ -375,14 +412,14 @@
               "titre": "Option Communication Digitale",
               "semaines": [
                 {
-                  "intitule": "Semaine 1 Stratégie digitale - Analyse de l'écosystème digital - Définition des objectifs et KPIs - Élaboration d'une stratégie de contenu multiplateforme Création de contenu digital - Techniques de storytelling adaptées aux réseaux sociaux - Atelier de création de visuels avec Photoshop - Production de vidéos courtes pour TikTok et Instagram Reels Marketing d'influence - Identification et approche des micro-influenceurs locaux - Création d'une campagne d'influence",
-                  "libelle": "Semaine 1 Stratégie digitale - Analyse de l'écosystème digital - Définition des objectifs et KPIs - Élaboration d'une stratégie de contenu multiplateforme Création de contenu digital - Techniques de storytelling adaptées aux réseaux sociaux - Atelier de création de visuels avec Photoshop - Production de vidéos courtes pour TikTok et Instagram Reels Marketing d'influence - Identification et approche des micro-influenceurs locaux - Création d'une campagne d'influence",
-                  "detail": ""
+                  "intitule": "Stratégie digitale",
+                  "libelle": "Semaine 1",
+                  "detail": "- Analyse de l'écosystème digital - Définition des objectifs et KPIs - Élaboration d'une stratégie de contenu multiplateforme Création de contenu digital - Techniques de storytelling adaptées aux réseaux sociaux - Atelier de création de visuels avec Photoshop - Production de vidéos courtes pour TikTok et Instagram Reels Marketing d'influence - Identification et approche des micro-influenceurs locaux - Création d'une campagne d'influence"
                 },
                 {
-                  "intitule": "Semaine 2 Community Management - Mise en place d'un calendrier éditorial - Techniques d'engagement et de modération - Création d'un chatbot Campagne digitale - Configuration de campagnes Facebook Ads et Google Ads - Optimisation du référencement local (SEO) - Analyse des performances et ajustements en temps réel Projet final - Présentation d'une stratégie digitale complète pour le festival",
-                  "libelle": "Semaine 2 Community Management - Mise en place d'un calendrier éditorial - Techniques d'engagement et de modération - Création d'un chatbot Campagne digitale - Configuration de campagnes Facebook Ads et Google Ads - Optimisation du référencement local (SEO) - Analyse des performances et ajustements en temps réel Projet final - Présentation d'une stratégie digitale complète pour le festival",
-                  "detail": ""
+                  "intitule": "Community Management",
+                  "libelle": "Semaine 2",
+                  "detail": "- Mise en place d'un calendrier éditorial - Techniques d'engagement et de modération - Création d'un chatbot Campagne digitale - Configuration de campagnes Facebook Ads et Google Ads - Optimisation du référencement local (SEO) - Analyse des performances et ajustements en temps réel Projet final - Présentation d'une stratégie digitale complète pour le festival"
                 }
               ]
             },
@@ -390,14 +427,14 @@
               "titre": "Option Création",
               "semaines": [
                 {
-                  "intitule": "Semaine 1 Identité visuelle - Analyse des tendances graphiques dans l'événementiel - Création d'un moodboard et d'une charte graphique - Conception du logo et des éléments visuels clés Direction artistique - Définition du concept créatif global - Storyboarding pour les supports visuels Création de supports print - Principes de composition et de typographie - Atelier de création d'affiches avec Adobe Illustrator - Conception de flyers et de programmes",
-                  "libelle": "Semaine 1 Identité visuelle - Analyse des tendances graphiques dans l'événementiel - Création d'un moodboard et d'une charte graphique - Conception du logo et des éléments visuels clés Direction artistique - Définition du concept créatif global - Storyboarding pour les supports visuels Création de supports print - Principes de composition et de typographie - Atelier de création d'affiches avec Adobe Illustrator - Conception de flyers et de programmes",
-                  "detail": ""
+                  "intitule": "Identité visuelle",
+                  "libelle": "Semaine 1",
+                  "detail": "- Analyse des tendances graphiques dans l'événementiel - Création d'un moodboard et d'une charte graphique - Conception du logo et des éléments visuels clés Direction artistique - Définition du concept créatif global - Storyboarding pour les supports visuels Création de supports print - Principes de composition et de typographie - Atelier de création d'affiches avec Adobe Illustrator - Conception de flyers et de programmes"
                 },
                 {
-                  "intitule": "Semaine 2 Scénographie et expérience visuelle - Conception d'installations artistiques - Design d'éléments de signalétique - Création d'une expérience immersive pour les cibles Création de contenu audiovisuel - Scénarisation d'un teaser - Techniques de montage vidéo avec Adobe Premiere - Création d'animations pour les réseaux sociaux Projet final - Présentation d'un concept créatif complet pour le festival",
-                  "libelle": "Semaine 2 Scénographie et expérience visuelle - Conception d'installations artistiques - Design d'éléments de signalétique - Création d'une expérience immersive pour les cibles Création de contenu audiovisuel - Scénarisation d'un teaser - Techniques de montage vidéo avec Adobe Premiere - Création d'animations pour les réseaux sociaux Projet final - Présentation d'un concept créatif complet pour le festival",
-                  "detail": ""
+                  "intitule": "Scénographie et expérience visuelle",
+                  "libelle": "Semaine 2",
+                  "detail": "- Conception d'installations artistiques - Design d'éléments de signalétique - Création d'une expérience immersive pour les cibles Création de contenu audiovisuel - Scénarisation d'un teaser - Techniques de montage vidéo avec Adobe Premiere - Création d'animations pour les réseaux sociaux Projet final - Présentation d'un concept créatif complet pour le festival"
                 }
               ]
             },
@@ -405,29 +442,31 @@
               "titre": "Option Communication Événementielle",
               "semaines": [
                 {
-                  "intitule": "Semaine 1 Planification stratégique - Analyse SWOT et benchmarking - Définition du concept et de la programmation - Élaboration d'un rétroplanning et d'un budget prévisionnel Sponsoring et partenariats - Identification des sponsors potentiels - Création de packages de sponsoring - Techniques de négociation et de pitch Logistique événementielle - Gestion des prestataires et fournisseurs - Planification des espaces et des flux de visiteurs - Aspects réglementaires et sécuritaires",
-                  "libelle": "Semaine 1 Planification stratégique - Analyse SWOT et benchmarking - Définition du concept et de la programmation - Élaboration d'un rétroplanning et d'un budget prévisionnel Sponsoring et partenariats - Identification des sponsors potentiels - Création de packages de sponsoring - Techniques de négociation et de pitch Logistique événementielle - Gestion des prestataires et fournisseurs - Planification des espaces et des flux de visiteurs - Aspects réglementaires et sécuritaires",
-                  "detail": ""
+                  "intitule": "Planification stratégique",
+                  "libelle": "Semaine 1",
+                  "detail": "- Analyse SWOT et benchmarking - Définition du concept et de la programmation - Élaboration d'un rétroplanning et d'un budget prévisionnel Sponsoring et partenariats - Identification des sponsors potentiels - Création de packages de sponsoring - Techniques de négociation et de pitch Logistique événementielle - Gestion des prestataires et fournisseurs - Planification des espaces et des flux de visiteurs - Aspects réglementaires et sécuritaires"
                 },
                 {
-                  "intitule": "Semaine 2 Expérience visiteur - Conception d'activités interactives pour les cibles - Mise en place d'un système de billetterie et d'accréditation - Création d'une application mobile dédiée Relations presse et publiques - Rédaction d'un dossier et d'un communiqué de presse - Organisation d'une conférence de presse - Gestion des relations avec les médias locaux Projet final - Présentation d'un plan d'organisation complet",
-                  "libelle": "Semaine 2 Expérience visiteur - Conception d'activités interactives pour les cibles - Mise en place d'un système de billetterie et d'accréditation - Création d'une application mobile dédiée Relations presse et publiques - Rédaction d'un dossier et d'un communiqué de presse - Organisation d'une conférence de presse - Gestion des relations avec les médias locaux Projet final - Présentation d'un plan d'organisation complet",
-                  "detail": ""
+                  "intitule": "Expérience visiteur",
+                  "libelle": "Semaine 2",
+                  "detail": "- Conception d'activités interactives pour les cibles - Mise en place d'un système de billetterie et d'accréditation - Création d'une application mobile dédiée Relations presse et publiques - Rédaction d'un dossier et d'un communiqué de presse - Organisation d'une conférence de presse - Gestion des relations avec les médias locaux Projet final - Présentation d'un plan d'organisation complet"
                 }
               ]
             }
           ]
         }
       ],
-      "activites": [
+      "epreuves": [
         {
-          "id": "C8",
-          "libelle": "Pilotage d'un réseau de partenaires",
-          "competences": [
-            "C8.1",
-            "C8.2"
-          ]
-        },
+          "intitule": "EC Book Séminaire d'option",
+          "modalite": "individuel, écrit",
+          "objet": "compilation de supports de communication"
+        }
+      ],
+      "competences_mentionnees": [
+        "C8"
+      ],
+      "activites": [
         {
           "id": "C9",
           "libelle": "Conception universelle de supports de communication",
@@ -463,7 +502,7 @@
           ],
           "competences_plage": false,
           "epreuve": "EC Doss' de Perf' : individuel, écrit",
-          "commentaire": "167",
+          "commentaire": "",
           "sous_modules": []
         },
         {
@@ -478,6 +517,13 @@
           "sous_modules": []
         }
       ],
+      "epreuves": [
+        {
+          "intitule": "EC Doss' de Perf'",
+          "modalite": "individuel, écrit"
+        }
+      ],
+      "competences_mentionnees": [],
       "activites": [
         {
           "id": "C11",
@@ -495,13 +541,49 @@
           ]
         }
       ]
+    }
+  ],
+  "modules_hors_bloc": [
+    {
+      "titre": "Anglais",
+      "volume": 21,
+      "competences_liees": [
+        "C13"
+      ],
+      "competences_plage": false,
+      "epreuve": "",
+      "commentaire": "",
+      "sous_modules": [],
+      "section": "Compétences transversales"
     },
     {
-      "id": "B06",
-      "titre": "Compétences transversales",
-      "nature": "obligatoire",
-      "_volume_section": 84,
-      "competences": [
+      "titre": "Expression Ecrite et Orale",
+      "volume": 14,
+      "competences_liees": [
+        "C13"
+      ],
+      "competences_plage": false,
+      "epreuve": "",
+      "commentaire": "",
+      "sous_modules": [],
+      "section": "Compétences transversales"
+    },
+    {
+      "titre": "Personal Branding",
+      "volume": 7,
+      "competences_liees": [
+        "C13"
+      ],
+      "competences_plage": false,
+      "epreuve": "",
+      "commentaire": "",
+      "sous_modules": [],
+      "section": "Compétences transversales"
+    },
+    {
+      "titre": "Méthodologie compétition",
+      "volume": 7,
+      "competences_liees": [
         "C1",
         "C2",
         "C3",
@@ -516,172 +598,49 @@
         "C12",
         "C13"
       ],
-      "modules": [
-        {
-          "titre": "Anglais",
-          "volume": 21,
-          "competences_liees": [
-            "C13"
-          ],
-          "competences_plage": false,
-          "epreuve": "177",
-          "commentaire": "",
-          "sous_modules": []
-        },
-        {
-          "titre": "Expression Ecrite et Orale",
-          "volume": 14,
-          "competences_liees": [
-            "C13"
-          ],
-          "competences_plage": false,
-          "epreuve": "",
-          "commentaire": "",
-          "sous_modules": []
-        },
-        {
-          "titre": "Personal Branding",
-          "volume": 7,
-          "competences_liees": [
-            "C13"
-          ],
-          "competences_plage": false,
-          "epreuve": "",
-          "commentaire": "",
-          "sous_modules": []
-        },
-        {
-          "titre": "Méthodologie compétition",
-          "volume": 7,
-          "competences_liees": [
-            "C1",
-            "C2",
-            "C3",
-            "C4",
-            "C5",
-            "C6",
-            "C7",
-            "C8",
-            "C9",
-            "C10",
-            "C11",
-            "C12",
-            "C13"
-          ],
-          "competences_plage": true,
-          "epreuve": "",
-          "commentaire": "",
-          "sous_modules": []
-        }
-      ],
-      "ecartes": [
-        {
-          "titre": "Compet' Régionale",
-          "volume": 35
-        }
-      ],
-      "activites": [
-        {
-          "id": "C1",
-          "libelle": "Organisation du processus de veille permanente et/ou ponctuelle",
-          "competences": [
-            "C1.1"
-          ]
-        },
-        {
-          "id": "C2",
-          "libelle": "Identification des tendances et innovations en communication",
-          "competences": [
-            "C2.1",
-            "C2.2"
-          ]
-        },
-        {
-          "id": "C3",
-          "libelle": "Analyse de la demande du client interne ou externe",
-          "competences": [
-            "C3.1",
-            "C3.2"
-          ]
-        },
-        {
-          "id": "C4",
-          "libelle": "Élaboration de la recommandation stratégique de communication",
-          "competences": [
-            "C4.1",
-            "C4.2"
-          ]
-        },
-        {
-          "id": "C5",
-          "libelle": "Présentation de la recommandation au client / à l'annonceur",
-          "competences": [
-            "C5.1"
-          ]
-        },
-        {
-          "id": "C6",
-          "libelle": "Encadrement de la production de messages et contenus",
-          "competences": [
-            "C6.1"
-          ]
-        },
-        {
-          "id": "C7",
-          "libelle": "Coordination de l'équipe projet",
-          "competences": [
-            "C7.1",
-            "C7.2"
-          ]
-        },
-        {
-          "id": "C8",
-          "libelle": "Pilotage d'un réseau de partenaires",
-          "competences": [
-            "C8.1",
-            "C8.2"
-          ]
-        },
-        {
-          "id": "C9",
-          "libelle": "Conception universelle de supports de communication",
-          "competences": [
-            "C9.1"
-          ]
-        },
-        {
-          "id": "C10",
-          "libelle": "Production de contenus en tenant compte des impératifs d'accessibilité",
-          "competences": [
-            "C10.1",
-            "C10.2",
-            "C10.3"
-          ]
-        },
-        {
-          "id": "C11",
-          "libelle": "Gestion budgétaire du projet de communication",
-          "competences": [
-            "C11.1"
-          ]
-        },
-        {
-          "id": "C12",
-          "libelle": "Mesure des actions de communication",
-          "competences": [
-            "C12.1",
-            "C12.2"
-          ]
-        },
-        {
-          "id": "C13",
-          "libelle": "Amélioration continue des actions de communication",
-          "competences": [
-            "C13.1",
-            "C13.2"
-          ]
-        }
-      ]
+      "competences_plage": true,
+      "epreuve": "",
+      "commentaire": "",
+      "sous_modules": [],
+      "section": "Compétences transversales"
+    }
+  ],
+  "hors_bloc_ecartes": [
+    {
+      "titre": "Compet' Régionale",
+      "volume": 35
+    }
+  ],
+  "epreuves_planifiees": [
+    {
+      "intitule": "Oral VST",
+      "volume": 3.5,
+      "date": "15/12/2025",
+      "note": "Programmé le 15/12/2025"
+    },
+    {
+      "intitule": "GroKa",
+      "volume": 7,
+      "date": "26/05/2026",
+      "note": "Programmé le 26/05/2026"
+    },
+    {
+      "intitule": "Brief Créa",
+      "volume": 4,
+      "date": "",
+      "note": "7h Inclues dans le module Compet' Nat"
+    },
+    {
+      "intitule": "Grand final",
+      "volume": 10.5,
+      "date": "",
+      "note": "Transverse tous blocs"
+    },
+    {
+      "intitule": "Bilan et épreuves compensatoires",
+      "volume": 14,
+      "date": "",
+      "note": "En sus de la volumétrie cible"
     }
   ],
   "hors_perimetre": [
