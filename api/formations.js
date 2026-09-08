@@ -101,6 +101,55 @@ module.exports = async function handler(req, res) {
     //      un syllabus apres un PF effacait le PF.
     //
     // Sans cible, on retombe sur la creation d'une formation autonome (heritage).
+    // ─── Synchronisation depuis le dépôt ───────────────────────────────────
+    // Remplace intégralement le référentiel d'une promotion par le fichier
+    // versionné dans referentiels/. C'est désormais la seule voie légitime :
+    // les ingestions navigateur successives empilaient leurs résultats dans le
+    // même data_json sans jamais rien retirer, d'où les blocs en double
+    // observés le 07/09 — B01…B06 issus d'un dépôt, B1…B4 d'un autre.
+    // Un remplacement complet, tracé et reproductible, évite ce cumul.
+    if (req.method === 'POST' && String(req.query.action || '') === 'sync-referentiels') {
+      const user = await requireRole(req, ['dir']);
+      if (!user) return res.status(403).json({ error: 'Synchronisation réservée à la direction.' });
+
+      const demande = req.body && req.body.cles;
+      const cles = Array.isArray(demande) && demande.length ? demande : Object.keys(REFERENTIELS);
+      const rapport = [];
+
+      for (const cle of cles) {
+        const ref = REFERENTIELS[cle];
+        if (!ref) { rapport.push({ cle, etat: 'inconnu' }); continue; }
+
+        const tc = ref.formation.titre_court;
+        const campus = ref.formation.campus;
+        const cible = await db.execute({
+          sql: 'SELECT id FROM formations WHERE titre_court = ? AND campus = ?',
+          args: [tc, campus],
+        });
+        if (!cible.rows.length) {
+          rapport.push({ cle, promotion: tc, etat: 'promotion absente — lancer /api/setup' });
+          continue;
+        }
+
+        const data = versFormatApplication(ref);
+        await db.execute({
+          sql: 'UPDATE formations SET data_json = ?, rncp = ?, titre = ? WHERE id = ?',
+          args: [JSON.stringify(data), ref.formation.rncp, ref.formation.titre, cible.rows[0].id],
+        });
+
+        rapport.push({
+          cle, promotion: tc, etat: 'synchronisé',
+          blocs: data.blocs.length,
+          modules: data.blocs.reduce((n, b) => n + b.modules.length, 0),
+          competences: data.blocs.reduce((n, b) => n + b.competences.length, 0),
+          controles_ok: data._controles_ok,
+          genere_le: data._genere_le,
+        });
+      }
+
+      return res.status(200).json({ ok: true, rapport });
+    }
+
     if (req.method === 'POST') {
       // Direction uniquement (03/09/2026). Une alimentation remplace le
       // référentiel d'une promotion sans conserver la version précédente : tant
