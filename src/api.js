@@ -168,6 +168,12 @@ export const api = {
   supprimerGroupe:id            => apiFetch('/api/inscription?action=groupe&id='+id, { method:'DELETE' }),
   affecterEtudiant:(inscriptionId,groupeId) => apiFetch('/api/inscription?action=affecter', { method:'POST', body:{ inscription_id: inscriptionId, groupe_id: groupeId||null } }),
 
+  // Remplace le référentiel des promotions par les fichiers versionnés du
+  // dépôt. Voie unique depuis le 07/09/2026 : un remplacement complet, là où
+  // les ingestions successives empilaient sans jamais retirer.
+  synchroniserReferentiels: (cles) =>
+    apiFetch('/api/formations?action=sync-referentiels', { method: 'POST', body: { cles: cles || null } }),
+
   alimenterPromotions: (cibles, data, couche) =>
     apiFetch('/api/formations', { method: 'POST', body: { cibles, data, couche } }),
   deleteFormation: (id)              => apiFetch('/api/formations',  { method: 'DELETE', body: { id } }),

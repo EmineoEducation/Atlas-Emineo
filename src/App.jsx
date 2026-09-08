@@ -709,6 +709,8 @@ function VueDir({user,onLogout}){
   const [ciblesSel,setCiblesSel]=useState([])      // ids de promotions visées
   const [rapport,setRapport]=useState(null)
   const [info,setInfo]=useState('')
+  const [syncEnCours,setSyncEnCours]=useState(false)
+  const [syncRapport,setSyncRapport]=useState(null)
   const [ingLoading,setIngLoading]=useState(false)
   const [progress,setProgress]=useState('')
   const [error,setError]=useState('')
@@ -909,6 +911,37 @@ function VueDir({user,onLogout}){
         {onglet==='ingestion'&&(
           <div className="fi">
             <h2 style={{fontFamily:'Georgia,serif',fontWeight:400,color:P.abysse,marginTop:0,fontSize:24,marginBottom:'0.4rem'}}>Alimenter une promotion</h2>
+
+            {/* Synchronisation depuis le dépôt — voie de référence.
+                Le dépôt de fichiers ci-dessous reste disponible pour les
+                syllabi, mais la structure d'un titre vient désormais des
+                référentiels versionnés : reproductible, relisible en diff, et
+                surtout remplacée en bloc plutôt que cumulée. */}
+            <div style={card({marginBottom:'1.25rem',background:'rgba(93,226,152,0.06)',border:`1px solid ${P.borderm}`})}>
+              <div style={{fontSize:12,fontWeight:600,color:P.abysse,marginBottom:'0.35rem'}}>Référentiels du dépôt</div>
+              <p style={{fontSize:12,color:P.textm,margin:'0 0 0.7rem',lineHeight:1.6}}>
+                Remplace intégralement la structure des promotions par les fichiers de <code style={{fontSize:11}}>referentiels/</code>, produits par l'extracteur et validés en commit. Efface tout résidu d'ingestion antérieure.
+              </p>
+              <button disabled={syncEnCours} onClick={async()=>{
+                setSyncEnCours(true);setError('');setInfo('');setSyncRapport(null)
+                try{ const r=await api.synchroniserReferentiels(); setSyncRapport(r.rapport||[]); await loadFormations() }
+                catch(e){ setError('Synchronisation : '+(e&&e.message?e.message:String(e))) }
+                finally{ setSyncEnCours(false) }
+              }} style={{padding:'0.6rem 1.4rem',borderRadius:8,border:'none',fontSize:13,fontWeight:600,cursor:syncEnCours?'wait':'pointer',
+                background:`linear-gradient(135deg,${P.petrole},${P.menthe})`,color:P.abysse}}>
+                {syncEnCours?'Synchronisation…':'Synchroniser depuis le dépôt'}
+              </button>
+              {syncRapport&&(
+                <div style={{marginTop:'0.75rem',fontSize:12,color:P.abysse,lineHeight:1.7}}>
+                  {syncRapport.map((r,i)=>(
+                    <div key={i} style={{paddingTop:4,borderTop:i?`1px solid ${P.border}`:'none'}}>
+                      <strong>{r.promotion||r.cle}</strong> — {r.etat}
+                      {r.blocs!==undefined&&<span style={{color:P.textm}}> · {r.blocs} blocs, {r.modules} modules, {r.competences} compétences{r.controles_ok?'':' · contrôles en écart'}</span>}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
             <p style={{fontSize:13,color:P.textm,marginBottom:'1.5rem',lineHeight:1.7}}>
               Les sept promotions du Mans sont déjà créées. Le plan de formation pose la structure et se répartit sur les deux années ; les syllabi et le RACE viennent ensuite l'enrichir.
             </p>
@@ -1323,117 +1356,127 @@ function GroupesOptions({formations}){
 function Cartographie2({blocs,mode,sel,onSelect,titre}){
   const deploy = mode==='deploiement'
   const n = blocs.length||1
+  const [survol,setSurvol] = useState(null)
 
-  // Géométrie adaptative.
-  // L'ancienne version figeait rayon et dimensions sur des valeurs calibrées
-  // pour cinq blocs. À onze, l'espacement angulaire tombait sous la taille des
-  // nœuds : cercles, satellites et libellés se recouvraient au point de rendre
-  // la cartographie illisible. Tout est désormais dérivé du nombre de blocs.
-  const rNode   = n<=6 ? 45 : n<=9 ? 38 : 32   // rayon d'un nœud
-  const rSat    = rNode + 20                    // orbite des satellites de compétences
-  const labelW  = 158                           // largeur allouée à un libellé
-  const gapLbl  = 26                            // écart nœud → libellé
-  // Le rayon de l'anneau de libellés découle de la place qu'ils réclament :
-  // il faut au moins `labelW` de corde entre deux libellés voisins.
-  // Deux contraintes, chacune exprimée en corde entre voisins :
-  //   nœuds    → la corde doit valoir au moins deux orbites de satellites
-  //   libellés → la corde doit valoir au moins la largeur d'un libellé
-  // On dimensionne sur la plus exigeante des deux, jamais sur une constante.
-  const sin     = Math.sin(Math.PI/Math.max(n,2))
-  const Rnoeuds = Math.max(168, Math.ceil(rSat/sin) + 4)
-  const Rlabel  = Math.max(248, Math.ceil((labelW/2+6)/sin), Rnoeuds + rNode + gapLbl + 24)
-  const R       = Math.max(Rnoeuds, Rlabel - rNode - gapLbl - 24)
-  const W       = Math.round(2*(Rlabel + labelW/2 + 12))
-  const H       = Math.round(2*(Rlabel + 34))
+  // Rosace : un cercle par bloc de compétences, rien d'autre.
+  //
+  // La version précédente empilait sur la même image les nœuds, une couronne de
+  // satellites par compétence, un libellé complet et un badge « au choix ». À
+  // vingt-et-un blocs, ces quatre couches se recouvraient au point que la carte
+  // ne se lisait plus. Seuls les blocs constituent la cartographie : le détail
+  // se révèle au survol, où il dispose de toute la place voulue.
+  const rNode = n<=8 ? 40 : n<=14 ? 33 : 27
+  const ecart = 16                              // respiration entre deux cercles
+  const sin   = Math.sin(Math.PI/Math.max(n,2))
+  const R     = Math.max(150, Math.ceil((rNode+ecart/2)/sin))
+  const marge = rNode + 26
+  const W     = Math.round(2*(R+marge))
+  const H     = Math.round(2*(R+marge))
   const cx = W/2, cy = H/2
-  const rCentre = n<=6 ? 52 : 44
+  const rCentre = Math.min(54, Math.max(34, R*0.22))
+
+  // Identifiants longs (B04_OPT_EVENEMENTIELLE) abrégés pour tenir dans le
+  // cercle. L'intitulé complet reste accessible au survol.
+  function codeCourt(id){
+    const s=String(id||'').replace(/^B\d+[_-]/,'').replace(/^BLC/,'')||String(id||'')
+    return s.length>8 ? s.slice(0,7)+'…' : s
+  }
 
   const positioned = blocs.map((b,i)=>{
     const a = -Math.PI/2 + i*(2*Math.PI/n)
-    return {...b,
-      x:+(cx+Math.cos(a)*R).toFixed(1), y:+(cy+Math.sin(a)*R).toFixed(1),
-      lx:+(cx+Math.cos(a)*Rlabel).toFixed(1), ly:+(cy+Math.sin(a)*Rlabel).toFixed(1)}
+    return {...b, x:+(cx+Math.cos(a)*R).toFixed(1), y:+(cy+Math.sin(a)*R).toFixed(1), ang:a}
   })
-  const C = 2*Math.PI*rNode
+  const actif = positioned.find(b=>b.id===survol)
+
   return (
     <div style={{background:P.surface,border:`1px solid ${P.border}`,borderRadius:16,overflow:'hidden'}}>
       <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',padding:'13px 18px',borderBottom:`1px solid ${P.border}`,flexWrap:'wrap',gap:8}}>
         <div style={{fontSize:11,fontWeight:600,letterSpacing:'.1em',textTransform:'uppercase',color:P.petrole}}>Cartographie du titre</div>
-        <div style={{display:'flex',gap:16,alignItems:'center',flexWrap:'wrap'}}>
-          {(deploy?[{c:AT.ok,t:'conforme'},{c:AT.warn,t:'anomalie'},{c:AT.idle,t:'non entamé'}]:[{c:'#FFFFFF',t:'compétence prévue'},{c:'#CBDCD7',t:'lien inter-blocs'}]).map(l=>(
-            <span key={l.t} style={{display:'flex',alignItems:'center',gap:6,fontSize:10.5,color:P.textm}}>
-              <span style={{width:8,height:8,borderRadius:'50%',background:l.c,border:`1px solid ${P.border}`,display:'inline-block'}}/>{l.t}
-            </span>
-          ))}
-        </div>
+        <div style={{fontSize:11,color:AT.idleText}}>{n} bloc{n>1?'s':''} · survoler pour le détail</div>
       </div>
-      <div style={{position:'relative',background:'#FBFEFC'}}>
-        <svg viewBox={`0 0 ${W} ${H}`} style={{display:'block',width:'100%',height:'auto'}}>
+
+      <div style={{position:'relative',padding:'8px 12px 4px'}}>
+        <svg viewBox={`0 0 ${W} ${H}`} style={{width:'100%',height:'auto',display:'block'}}>
+          {/* Rayons discrets vers le centre : ils donnent la forme de rosace
+              sans prétendre représenter une relation entre blocs. */}
           {positioned.map(b=>(
-            <line key={'l'+b.id} x1={cx} y1={cy} x2={b.x} y2={b.y} stroke={deploy?'#DCE9E4':'transparent'} strokeWidth={1.5} strokeDasharray={deploy?'none':'4 5'}/>
+            <line key={'r'+b.id} x1={cx} y1={cy} x2={b.x} y2={b.y} stroke="#E2ECE8" strokeWidth={1}/>
           ))}
-          <circle cx={cx} cy={cy} r={rCentre} fill={P.abysse}/>
-          <text x={cx} y={cy-6} textAnchor="middle" fill={P.menthe} style={{font:"600 12px 'DM Sans'"}}>{titreCourt(titre)}</text>
-          <text x={cx} y={cy+11} textAnchor="middle" fill="rgba(227,255,240,.5)" style={{font:"400 10px 'DM Sans'"}}>{blocs.length} bloc{blocs.length>1?'s':''}</text>
+
           {positioned.map(b=>{
-            const col = b.st==='ok'?AT.ok:b.st==='warn'?AT.warn:AT.idle
-            const nComp = b.comp||0
-            const dots = Array.from({length:nComp},(_,i2)=>{
-              const a = -Math.PI*0.78 + (Math.PI*1.56)*(nComp===1?0.5:i2/(nComp-1))
-              const covered = deploy && i2 < Math.round(nComp*(b.pct||0)/100)
-              return {x:+(b.x+Math.cos(a)*rSat).toFixed(1), y:+(b.y+Math.sin(a)*rSat).toFixed(1),
-                fill: deploy?(covered?col:'#FFFFFF'):'#FFFFFF', stroke: deploy?col:'#CBDCD7'}
-            })
-            const fill = deploy?(b.st==='ok'?'#F1FCF6':b.st==='warn'?'#FDF6F2':'#F6F8F8'):'#FFFFFF'
-            const stroke = deploy?col:'#C3D5D0'
+            const option = b.nature==='option'
+            const vise   = survol===b.id || (sel&&sel.kind==='bloc'&&sel.id===b.id)
+            const col    = deploy ? (b.st==='warn'?AT.warn:b.st==='idle'?AT.idle:AT.ok) : (option?'#E89B77':'#CBDCD7')
             return (
-              <g key={b.id} onClick={()=>onSelect({kind:'bloc',id:b.id})} style={{cursor:'pointer'}}>
-                {dots.map((d,di)=><circle key={di} cx={d.x} cy={d.y} r={4.5} fill={d.fill} stroke={d.stroke} strokeWidth={1}/>)}
-                {deploy&&<>
-                  <circle cx={b.x} cy={b.y} r={rNode+7} fill="none" stroke="#EAF3EF" strokeWidth={5}/>
-                  <circle cx={b.x} cy={b.y} r={rNode+7} fill="none" stroke={col} strokeWidth={5} strokeLinecap="round"
-                    strokeDasharray={`${(2*Math.PI*(rNode+7)*(b.pct||0)/100).toFixed(1)} ${(2*Math.PI*(rNode+7)).toFixed(1)}`} transform={`rotate(-90 ${b.x} ${b.y})`}/>
-                </>}
+              <g key={b.id} style={{cursor:'pointer'}}
+                onMouseEnter={()=>setSurvol(b.id)} onMouseLeave={()=>setSurvol(null)}
+                onClick={()=>onSelect({kind:'bloc',id:b.id})}>
+                {vise&&<circle cx={b.x} cy={b.y} r={rNode+8} fill="none" stroke={col} strokeWidth={1} opacity={0.45}/>}
+                {deploy&&(
+                  <circle cx={b.x} cy={b.y} r={rNode+6} fill="none" stroke="#EAF3EF" strokeWidth={4}/>
+                )}
+                {deploy&&(
+                  <circle cx={b.x} cy={b.y} r={rNode+6} fill="none" stroke={col} strokeWidth={4} strokeLinecap="round"
+                    strokeDasharray={`${(2*Math.PI*(rNode+6)*(b.pct||0)/100).toFixed(1)} ${(2*Math.PI*(rNode+6)).toFixed(1)}`}
+                    transform={`rotate(-90 ${b.x} ${b.y})`}/>
+                )}
                 <circle cx={b.x} cy={b.y} r={rNode}
-                  fill={b.nature==='option'?'#FDF6F2':fill}
-                  stroke={b.nature==='option'?'#E89B77':stroke}
-                  strokeWidth={deploy?1:1.4}
-                  strokeDasharray={b.nature==='option'?'2 4':(deploy?'none':'5 4')}/>
+                  fill={option?'#FDF6F2':(vise?'#F2FAF6':P.surface)}
+                  stroke={option?'#E89B77':(deploy?col:'#CBDCD7')}
+                  strokeWidth={vise?2:1.3}
+                  strokeDasharray={deploy?'none':(option?'2 4':'5 4')}/>
+                <text x={b.x} y={b.y-3} textAnchor="middle"
+                  style={{font:`700 ${n<=8?13:11.5}px 'DM Sans',system-ui`,fill:P.abysse,pointerEvents:'none'}}>
+                  {codeCourt(b.id)}
+                </text>
+                <text x={b.x} y={b.y+12} textAnchor="middle"
+                  style={{font:`600 ${n<=8?11:10}px 'DM Sans',system-ui`,fill:option?'#B5643C':AT.idleText,pointerEvents:'none'}}>
+                  {deploy?(b.pct||0)+' %':(b.comp||0)+' comp.'}
+                </text>
+                {deploy&&b.anom>0&&(
+                  <g pointerEvents="none">
+                    <circle cx={b.x+rNode*0.72} cy={b.y-rNode*0.72} r={9} fill={AT.warn}/>
+                    <text x={b.x+rNode*0.72} y={b.y-rNode*0.72+3.5} textAnchor="middle"
+                      style={{font:"700 10px 'DM Sans'",fill:P.abysse}}>{b.anom}</text>
+                  </g>
+                )}
               </g>
             )
           })}
+
+          <circle cx={cx} cy={cy} r={rCentre} fill={P.abysse}/>
+          <text x={cx} y={cy-4} textAnchor="middle" style={{font:"600 12px 'DM Sans'",fill:P.menthe}}>{titreCourt(titre)}</text>
+          <text x={cx} y={cy+12} textAnchor="middle" style={{font:"400 10px 'DM Sans'",fill:'rgba(227,255,240,.5)'}}>{n} bloc{n>1?'s':''}</text>
         </svg>
-        {/* Le nœud ne porte plus que le chiffre : un identifiant comme
-            B3_OPTION_EVENEMENTIEL débordait largement du cercle et venait
-            recouvrir ses voisins. L'identité du bloc est reportée dans le
-            libellé extérieur, où elle dispose de la place nécessaire. */}
-        {positioned.map(b=>(
-          <div key={'lbl'+b.id}>
-            <button onClick={()=>onSelect({kind:'bloc',id:b.id})} title={b.id+' — '+(b.titre||'')}
-              style={{position:'absolute',left:`${(b.x/W*100).toFixed(2)}%`,top:`${(b.y/H*100).toFixed(2)}%`,transform:'translate(-50%,-50%)',textAlign:'center',lineHeight:1.05,width:2*rNode-8,cursor:'pointer'}}>
-              <span style={{fontSize:n<=6?20:17,fontWeight:700,color:P.abysse,display:'block'}}>{deploy?(b.pct||0):(b.comp||0)}</span>
-              <span style={{display:'block',marginTop:1,fontSize:9.5,fontWeight:600,letterSpacing:'.02em',color:deploy?(b.st==='idle'?AT.idleText:b.st==='warn'?AT.warnText:P.petrole):AT.idleText}}>{deploy?'%':'comp.'}</span>
-            </button>
-            {/* Libellé sur un anneau extérieur : le rayon a été dimensionné
-                pour qu'il reste `labelW` de corde entre deux voisins. Titre
-                borné à deux lignes, texte complet au survol. */}
-            <div title={b.titre||''}
-              style={{position:'absolute',left:`${(b.lx/W*100).toFixed(2)}%`,top:`${(b.ly/H*100).toFixed(2)}%`,transform:'translate(-50%,-50%)',width:labelW,textAlign:'center',pointerEvents:'none'}}>
-              <div style={{fontSize:9.5,fontWeight:700,letterSpacing:'.06em',color:AT.idleText,textTransform:'uppercase',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>{b.id}</div>
-              {b.nature==='option'&&(
-                <div title={b.optGroupe?b.optGroupe+' — parcours au choix':'Parcours au choix'}
-                  style={{display:'inline-block',marginTop:2,padding:'0 6px',borderRadius:20,background:'rgba(232,155,119,.16)',color:'#B5643C',fontSize:9,fontWeight:700,letterSpacing:'.05em',textTransform:'uppercase'}}>au choix</div>
-              )}
-              <div style={{marginTop:1,fontSize:11.5,fontWeight:600,color:P.petrole,lineHeight:1.25,display:'-webkit-box',WebkitLineClamp:2,WebkitBoxOrient:'vertical',overflow:'hidden'}}>{b.titre}</div>
-            </div>
-            {deploy&&b.anom>0&&(
-              <div style={{position:'absolute',left:`${((b.x+rNode*0.8)/W*100).toFixed(2)}%`,top:`${((b.y-rNode*0.8)/H*100).toFixed(2)}%`,transform:'translate(-50%,-50%)',width:22,height:22,borderRadius:'50%',background:AT.warn,color:P.abysse,fontSize:11,fontWeight:700,display:'flex',alignItems:'center',justifyContent:'center',pointerEvents:'none'}}>{b.anom}</div>
-            )}
-          </div>
-        ))}
+
+        {/* Détail au survol, ancré sous le centre : position fixe, donc jamais
+            hors cadre et jamais superposé à un autre libellé. */}
+        <div style={{minHeight:64,margin:'2px 4px 6px',padding:'10px 14px',borderRadius:10,
+          background:actif?(actif.nature==='option'?'#FDF6F2':'#F2FAF6'):'transparent',
+          border:`1px solid ${actif?(actif.nature==='option'?'#E89B77':P.borderm):'transparent'}`,
+          transition:'background .12s'}}>
+          {actif ? (
+            <>
+              <div style={{display:'flex',alignItems:'baseline',gap:8,flexWrap:'wrap'}}>
+                <span style={{fontSize:10,fontWeight:700,letterSpacing:'.06em',textTransform:'uppercase',color:AT.idleText}}>{actif.id}</span>
+                {actif.nature==='option'&&<span style={{fontSize:9.5,fontWeight:700,letterSpacing:'.05em',textTransform:'uppercase',color:'#B5643C'}}>parcours au choix{actif.optGroupe?' · '+actif.optGroupe:''}</span>}
+              </div>
+              <div style={{fontSize:13.5,fontWeight:600,color:P.abysse,lineHeight:1.35,marginTop:2}}>{actif.titre}</div>
+              <div style={{fontSize:11.5,color:P.textm,marginTop:3}}>
+                {actif.comp||0} compétence{(actif.comp||0)>1?'s':''} · {actif.mods||0} module{(actif.mods||0)>1?'s':''}
+                {deploy?` · couverture ${actif.pct||0} %`:''}
+                {deploy&&actif.anom>0?` · ${actif.anom} anomalie${actif.anom>1?'s':''}`:''}
+                {actif.qui?` · ${actif.qui}`:''}
+              </div>
+            </>
+          ) : (
+            <div style={{fontSize:12,color:AT.idleText,paddingTop:6}}>Survoler un bloc pour en voir le détail · cliquer pour l'ouvrir dans l'Inspecteur.</div>
+          )}
+        </div>
       </div>
+
       <div style={{padding:'10px 18px',borderTop:`1px solid ${P.border}`,fontSize:10.5,color:AT.idleText}}>
-        {(deploy?"Anneau = couverture réelle du bloc · satellites pleins = compétences couvertes · pastille = anomalies":"Contours pointillés = structure planifiée, aucune séance encore déclarée")+(blocs.some(b=>b.nature==='option')?" · contour saumon = parcours au choix, un seul suivi par étudiant":"")}
+        {(deploy?"Anneau = couverture réelle du bloc · pastille = anomalies":"Contours pointillés = structure planifiée, aucune séance encore déclarée")+(blocs.some(b=>b.nature==='option')?" · contour saumon = parcours au choix, un seul suivi par étudiant":"")}
       </div>
     </div>
   )
