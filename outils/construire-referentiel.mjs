@@ -31,12 +31,16 @@ const race = JSON.parse(readFileSync(cfg.race, 'utf-8'));
 const parActivite = new Map(race.activites.map(a => [a.id, a]));
 const couverture = new Map(race.activites.map(a => [a.id, []]));
 
-for (const b of pf.blocs) {
-  for (const m of b.modules) {
-    for (const code of m.competences_liees) {
-      const act = 'C' + code.slice(1).split('.')[0];
-      if (couverture.has(act)) couverture.get(act).push({ bloc: b.id, module: m.titre, code, plage: !!m.competences_plage });
-    }
+// Les modules hors bloc enseignent eux aussi : les omettre faisait apparaître
+// C13 comme non couverte alors que trois modules la portent.
+const tousModules = [
+  ...pf.blocs.flatMap(b => b.modules.map(m => ({ ...m, bloc: b.id }))),
+  ...(pf.modules_hors_bloc || []).map(m => ({ ...m, bloc: 'hors bloc' })),
+];
+for (const m of tousModules) {
+  for (const code of (m.competences_liees || [])) {
+    const act = 'C' + code.slice(1).split('.')[0];
+    if (couverture.has(act)) couverture.get(act).push({ bloc: m.bloc, module: m.titre, code, plage: !!m.competences_plage });
   }
 }
 
@@ -66,6 +70,9 @@ const sortie = {
   formation: pf.formation,
   race: { rncp: race.rncp, intitule: race.intitule, certificateur: race.certificateur, source: race.source },
   blocs: pf.blocs,
+  modules_hors_bloc: pf.modules_hors_bloc || [],
+  hors_bloc_ecartes: pf.hors_bloc_ecartes || [],
+  epreuves_planifiees: pf.epreuves_planifiees || [],
   hors_perimetre: pf.hors_perimetre,
   controles: pf.controles,
   anomalies: pf.anomalies,
@@ -84,9 +91,18 @@ console.log(`\n${pf.formation.titre_court} — RNCP ${pf.formation.rncp} · ${pf
 for (const b of pf.blocs) {
   console.log(`${b.id}  ${String(b.modules.length).padStart(2)} modules  ${String(vol(b)).padStart(6)} h  ${b.competences.join(' ')}`);
   console.log(`     ${b.titre}`);
-  for (const e of (b.ecartes || [])) console.log(`     écarté sur décision : ${e.titre} (${e.volume} h)`);
+  for (const e of (b.epreuves || [])) {
+    const cal = e.date ? ` — ${e.duree} h, le ${e.date}` : (e.duree ? ` — ${e.duree} h` : '');
+    console.log(`     épreuve : ${e.intitule} (${e.modalite})${cal}`);
+  }
 }
-console.log(`\nTotal certifiant : ${pf.blocs.reduce((n, b) => n + vol(b), 0)} h`);
+const hb = pf.modules_hors_bloc || [];
+if (hb.length) {
+  console.log(`\nModules hors bloc — aucune épreuve rattachée  ${hb.reduce((n, m) => n + (m.volume || 0), 0)} h`);
+  for (const m of hb) console.log(`     ${m.titre} (${m.volume} h) ${m.competences_liees.join(',')}`);
+  for (const e of (pf.hors_bloc_ecartes || [])) console.log(`     écarté sur décision : ${e.titre} (${e.volume} h)`);
+}
+console.log(`\nVolume blocs : ${pf.blocs.reduce((n, b) => n + vol(b), 0)} h · hors bloc : ${hb.reduce((n, m) => n + (m.volume || 0), 0)} h`);
 console.log(`Contrôles        : ${pf.controles.filter(c => c.ok).length}/${pf.controles.length} conformes`);
 console.log(`Anomalies        : ${pf.anomalies.length || 'aucune'}`);
 if (nonCouvertes.length) console.log(`Activités sans aucun module : ${nonCouvertes.join(', ')}`);

@@ -26,11 +26,11 @@ export const TITRES = {
 
     // Les onglets Pro 1 et Pro2 décrivent les deux années de prépa, non
     // certifiantes : elles ne sont pas lues.
+    // Enseignements conservés mais rattachés à aucun bloc : ils ne sont
+    // sanctionnés par aucune épreuve de certification, donc n'en constituent
+    // pas un. Ils portent néanmoins C13, qu'aucun bloc numéroté ne couvre.
     sections_conservees: {
-      // Porte C13, qu'aucun bloc numéroté ne couvre. L'exclure reviendrait à
-      // laisser une compétence certifiante sans aucun enseignement.
       'Compétences transversales': {
-        id: 'B06',
         titre: 'Compétences transversales',
         modules: [
           'Anglais',
@@ -43,7 +43,16 @@ export const TITRES = {
     sections_exclues: [
       'Remise à niveau',
       'Organisation pédagogique',
-      'Epreuves de certification',
     ],
+
+    // Rapprochement entre l'épreuve déclarée sur un bloc et sa ligne au
+    // calendrier, qui porte durée et date de programmation. Les deux libellés
+    // ne se ressemblent pas toujours : le lien se déclare.
+    calendrier_epreuves: {
+      'EC MSPR VST': 'Oral VST',
+      'EC MSPR Groka': 'GroKa',
+      'EC MSPR Brief Créatif': 'Brief Créa',
+      "EC MSPR Compet' nat'": 'Grand final',
+    },
   },
 };
