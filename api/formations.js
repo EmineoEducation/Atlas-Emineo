@@ -1,6 +1,6 @@
 const { getDB } = require('./_lib/db');
 const { requireAuth, requireRole } = require('./_lib/auth');
-const { REFERENTIELS, versFormatApplication } = require('./_lib/referentiels');
+const { REFERENTIELS, versFormatApplication, DIAGNOSTIC } = require('./_lib/referentiels');
 
 // Normaliser campus : string ou JSON array -> string normalisée pour filtre
 function normCampus(c) { return (c || '').toLowerCase().trim(); }
@@ -113,6 +113,16 @@ module.exports = async function handler(req, res) {
       const user = await requireRole(req, ['dir']);
       if (!user) return res.status(403).json({ error: 'Synchronisation réservée à la direction.' });
 
+      // Aucun référentiel trouvé : c'est un défaut d'embarquement du dossier,
+      // pas une base vide. Le dire explicitement évite une chasse à l'aveugle.
+      if (!Object.keys(REFERENTIELS).length) {
+        return res.status(500).json({
+          error: 'Aucun référentiel embarqué dans la fonction.',
+          diagnostic: DIAGNOSTIC,
+          piste: "Vérifier includeFiles dans vercel.json et la présence de referentiels/*.json",
+        });
+      }
+
       const demande = req.body && req.body.cles;
       const cles = Array.isArray(demande) && demande.length ? demande : Object.keys(REFERENTIELS);
       const rapport = [];
@@ -132,7 +142,15 @@ module.exports = async function handler(req, res) {
           continue;
         }
 
+        // Comparaison de la date de génération : savoir si l'on remplace par du
+        // neuf ou si l'on rejoue l'identique évite les doutes après un push.
+        let ancien = {};
+        try {
+          const a = await db.execute({ sql: 'SELECT data_json FROM formations WHERE id = ?', args: [cible.rows[0].id] });
+          ancien = JSON.parse((a.rows[0] || {}).data_json || '{}');
+        } catch (_) {}
         const data = versFormatApplication(ref);
+        const dejaAJour = ancien._genere_le === data._genere_le && (ancien.blocs || []).length === data.blocs.length;
         await db.execute({
           sql: 'UPDATE formations SET data_json = ?, rncp = ?, titre = ? WHERE id = ?',
           args: [JSON.stringify(data), ref.formation.rncp, ref.formation.titre, cible.rows[0].id],
@@ -140,6 +158,7 @@ module.exports = async function handler(req, res) {
 
         rapport.push({
           cle, promotion: tc, etat: 'synchronisé',
+          deja_a_jour: dejaAJour,
           blocs: data.blocs.length,
           modules: data.blocs.reduce((n, b) => n + b.modules.length, 0),
           competences: data.blocs.reduce((n, b) => n + b.competences.length, 0),
@@ -150,7 +169,7 @@ module.exports = async function handler(req, res) {
         });
       }
 
-      return res.status(200).json({ ok: true, rapport });
+      return res.status(200).json({ ok: true, source: DIAGNOSTIC.dossier, lus: DIAGNOSTIC.lus.length, erreurs: DIAGNOSTIC.erreurs, rapport });
     }
 
     if (req.method === 'POST') {
