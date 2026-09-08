@@ -64,11 +64,29 @@ function versFormatApplication(ref) {
       option_groupe: b.option_groupe || '',
       competences,
       competences_mentionnees: b.competences_mentionnees || [],
+      // Un bloc se définit par la ou les épreuves qui le sanctionnent.
+      epreuves: b.epreuves || [],
       modules,
     };
   });
 
+  // Modules sans épreuve rattachée : conservés à part, jamais promus en bloc.
+  // Les afficher comme un sixième bloc laissait croire à une certification qui
+  // n'existe pas, et gonflait la cartographie.
+  const horsBloc = (ref.modules_hors_bloc || []).map((m, i) => ({
+    id: 'HB-M' + (i + 1),
+    titre: m.titre,
+    volume: m.volume,
+    section: m.section || '',
+    competences_liees: m.competences_liees || [],
+    competences_plage: !!m.competences_plage,
+    notions_cles: [],
+    intervenant: '',
+  }));
+
   return {
+    modules_hors_bloc: horsBloc,
+    epreuves_planifiees: ref.epreuves_planifiees || [],
     formation: {
       titre: ref.formation.titre,
       rncp: ref.formation.rncp,
