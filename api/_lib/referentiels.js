@@ -76,12 +76,20 @@ function versFormatApplication(ref) {
   const parActivite = new Map((race ? race.activites : []).map(a => [a.id, a]));
 
   const blocs = (ref.blocs || []).map(b => {
-    const competences = [];
-    for (const code of (b.competences || [])) {
-      const act = parActivite.get(code);
-      if (!act) { competences.push({ id: code, libelle: '' }); continue; }
-      for (const c of act.competences) {
-        competences.push({ id: c.id, libelle: c.libelle, activite: act.id, activite_libelle: act.libelle });
+    // Les compétences officielles sont déjà résolues par l'outil d'extraction,
+    // qui seul connaît le mode de numérotation du titre — activités pour le
+    // Bachelor, compétences pour le Mastère. Les recalculer ici les gonflait :
+    // « C1 » lu comme une activité rendait deux compétences au lieu d'une.
+    let competences = (b.competences_race || []).map(c => ({
+      id: c.id, libelle: c.libelle, activite: c.activite || '',
+    }));
+    if (!competences.length) {
+      for (const code of (b.competences || [])) {
+        const act = parActivite.get(code);
+        if (!act) { competences.push({ id: code, libelle: '' }); continue; }
+        for (const c of act.competences) {
+          competences.push({ id: c.id, libelle: c.libelle, activite: act.id, activite_libelle: act.libelle });
+        }
       }
     }
 
