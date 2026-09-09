@@ -1,0 +1,285 @@
+{
+  "rncp": "38504",
+  "intitule": "Manager des stratégies marketing et communication",
+  "certificateur": "MediaSchool",
+  "version": "Juillet 2023",
+  "source": "38504-RACE.pdf",
+  "regle_certification": "Validation cumulative des blocs 1, 2 et 3, plus un des blocs optionnels 4-I, 4-II ou 4-III.",
+  "blocs": [
+    {
+      "id": "B01",
+      "libelle": "Diagnostiquer le positionnement et la proposition de valeur distinctive de la marque",
+      "nature": "obligatoire",
+      "option_groupe": ""
+    },
+    {
+      "id": "B02",
+      "libelle": "Elaborer une stratégie marketing communication alignée avec les valeurs de la marque",
+      "nature": "obligatoire",
+      "option_groupe": ""
+    },
+    {
+      "id": "B03",
+      "libelle": "Piloter le déploiement d'une stratégie marketing communication responsable",
+      "nature": "obligatoire",
+      "option_groupe": ""
+    },
+    {
+      "id": "B04-I",
+      "libelle": "Entretenir la notoriété de la marque par une stratégie d'influence et de réputation",
+      "nature": "option",
+      "option_groupe": "Spécialisation"
+    },
+    {
+      "id": "B04-II",
+      "libelle": "Engager l'innovation et la transformation digitale de la communication",
+      "nature": "option",
+      "option_groupe": "Spécialisation"
+    },
+    {
+      "id": "B04-III",
+      "libelle": "Développer la stratégie créative de la marque dans des supports originaux",
+      "nature": "option",
+      "option_groupe": "Spécialisation"
+    }
+  ],
+  "activites": [
+    {
+      "id": "C1",
+      "code": "A.1",
+      "libelle": "Pilotage d'une veille stratégique sur l'environnement de la marque",
+      "bloc": "B01",
+      "competences": [
+        {
+          "id": "C.1",
+          "libelle": "Organiser un système de veille stratégique sur l'environnement de la marque, afin de disposer des informations concernant les évolutions touchant aux technologies, à la règlementation, aux tendances socio-comportementales et aux pratiques de communication."
+        },
+        {
+          "id": "C.2",
+          "libelle": "Evaluer l'impact des tendances repérées dans l'environnement de la marque, afin de qualifier leur potentiel d'opportunité ou de risque et de déterminer leurs modalités de prise en compte."
+        }
+      ]
+    },
+    {
+      "id": "C2",
+      "code": "A.2",
+      "libelle": "Conduite d'études marketing sur le marché et le public cible de la marque centrées sur la Data",
+      "bloc": "B01",
+      "competences": [
+        {
+          "id": "C.3",
+          "libelle": "Piloter la réalisation d'études qualitatives et quantitatives associant l'exploitation de données massives internes ou externes, afin de disposer des éléments d'analyse fiables nécessaires à la prise de décision stratégique."
+        },
+        {
+          "id": "C.4",
+          "libelle": "Interpréter les résultats des études produites, en mobilisant les méthodes, matrices et modèles d'analyse adéquats, afin de préconiser les orientations de la stratégie marketing."
+        }
+      ]
+    },
+    {
+      "id": "C3",
+      "code": "A.3",
+      "libelle": "Réalisation du diagnostic marketing de la marque",
+      "bloc": "B01",
+      "competences": [
+        {
+          "id": "C.5",
+          "libelle": "Analyser le positionnement et l'identité de la marque, en s'appuyant sur une méthode d'investigation engageant une démarche collaborative, afin d'identifier ses caractères distinctifs."
+        },
+        {
+          "id": "C.6",
+          "libelle": "Clarifier le positionnement et la proposition de valeur de la marque incluant ses engagements éthiques, sociétaux et environnementaux, afin d'élaborer la plateforme de marque."
+        }
+      ]
+    },
+    {
+      "id": "C4",
+      "code": "A.4",
+      "libelle": "Définition des orientations stratégiques marketing communication de la marque",
+      "bloc": "B02",
+      "competences": [
+        {
+          "id": "C.7",
+          "libelle": "Fixer les objectifs assignés à la stratégie marketing communication sur les plans qualitatifs et quantitatifs, afin de disposer de repères spécifiques, mesurables, réalistes, pertinents et limités dans le temps."
+        },
+        {
+          "id": "C.8",
+          "libelle": "Déterminer le cœur de cible et les cibles secondaires de la marque, en établissant la segmentation de son marché, afin de définir une approche adaptée à chacune."
+        },
+        {
+          "id": "C.9",
+          "libelle": "Définir le ou les axes de communication à privilégier exprimant la proposition de valeur de la marque et déclinant ses engagements RSE."
+        }
+      ]
+    },
+    {
+      "id": "C5",
+      "code": "A.5",
+      "libelle": "Evaluation et définition des conditions de déploiement des orientations stratégiques",
+      "bloc": "B02",
+      "competences": [
+        {
+          "id": "C.10",
+          "libelle": "Choisir les canaux, modalités de communication et outils associés selon une approche omnicanal, afin de toucher de façon efficiente le public cible."
+        },
+        {
+          "id": "C.11",
+          "libelle": "Evaluer l'opportunité et l'intérêt des actions déclinant la stratégie, en produisant l'estimation de leur ROI, afin de déterminer lesquelles choisir."
+        },
+        {
+          "id": "C.12",
+          "libelle": "Etablir la projection financière de la stratégie à conduire, afin de négocier l'allocation de moyens suffisants pour sa mise en œuvre."
+        }
+      ]
+    },
+    {
+      "id": "C6",
+      "code": "A.6",
+      "libelle": "Cadrage de la réalisation des actions déclinant la stratégie marketing communication responsable",
+      "bloc": "B03",
+      "competences": [
+        {
+          "id": "C.13",
+          "libelle": "Elaborer ou valider les documents de référence — cahier des charges, brief — cadrant la réalisation des actions, en veillant à la présence de critères sociaux et environnementaux."
+        },
+        {
+          "id": "C.14",
+          "libelle": "Organiser globalement la mise en œuvre des actions, en déterminant les méthodes de conduite de projet, afin d'en maîtriser le déploiement et de minorer les risques de coût, qualité, délai et RSE."
+        }
+      ]
+    },
+    {
+      "id": "C7",
+      "code": "A.7",
+      "libelle": "Management des parties prenantes internes et externes",
+      "bloc": "B03",
+      "competences": [
+        {
+          "id": "C.15",
+          "libelle": "Constituer les équipes internes impliquées dans la réalisation des actions, en veillant aux conditions d'inclusion des salariés en situation de handicap."
+        },
+        {
+          "id": "C.16",
+          "libelle": "Animer l'écosystème des parties prenantes, en mettant en œuvre un management collaboratif propice à l'innovation et à l'intelligence collective."
+        },
+        {
+          "id": "C.17",
+          "libelle": "Gérer le portefeuille de prestataires et fournisseurs, en vérifiant l'alignement de leurs pratiques avec les engagements RSE de la marque."
+        }
+      ]
+    },
+    {
+      "id": "C8",
+      "code": "A.8",
+      "libelle": "Evaluation continue des résultats du déploiement et prise de décision d'ajustement",
+      "bloc": "B03",
+      "competences": [
+        {
+          "id": "C.18",
+          "libelle": "Organiser la mesure de l'impact de la stratégie entreprise, en déterminant les données, critères et indicateurs de performance clés, afin d'évaluer son efficacité en continu."
+        },
+        {
+          "id": "C.19",
+          "libelle": "Interpréter les métriques restituant les résultats, en utilisant des outils d'analyse et de visualisation digitalisés, afin de vérifier l'atteinte des objectifs et de décider des mesures correctives."
+        }
+      ]
+    },
+    {
+      "id": "A.9-I",
+      "code": "A.9-I",
+      "libelle": "Entretien de la notoriété de la marque par une stratégie d'influence et de gestion de sa réputation",
+      "bloc": "B04-I",
+      "competences": [
+        {
+          "id": "C.20-I",
+          "libelle": "Gérer les relations avec la presse, les médias et les partenaires institutionnels, afin de favoriser la prise de parole de la marque."
+        },
+        {
+          "id": "C.21-I",
+          "libelle": "Activer les leviers d'influence de la marque, en lui associant des relais d'opinion, dans le respect des règles éthiques de transparence."
+        },
+        {
+          "id": "C.22-I",
+          "libelle": "Assurer une gestion anticipée de l'image et de la notoriété de la marque, en repérant tout signal faible d'irritation ou de risque."
+        }
+      ]
+    },
+    {
+      "id": "A.9-II",
+      "code": "A.9-II",
+      "libelle": "Engagement de l'innovation et de la transformation digitale de la communication de la marque",
+      "bloc": "B04-II",
+      "competences": [
+        {
+          "id": "C.20-II",
+          "libelle": "Identifier les facteurs de rupture et d'innovation liés aux technologies digitales, afin de définir une stratégie d'innovation porteuse de développement."
+        },
+        {
+          "id": "C.21-II",
+          "libelle": "Déterminer les innovations à implémenter, en établissant leur processus de développement et en identifiant les facteurs de risque à anticiper."
+        },
+        {
+          "id": "C.22-II",
+          "libelle": "Définir les stratégies d'accompagnement des acteurs internes, afin d'optimiser la mise en œuvre de l'innovation et de conduire le changement."
+        }
+      ]
+    },
+    {
+      "id": "A.9-III",
+      "code": "A.9-III",
+      "libelle": "Développement de la stratégie créative de la marque dans des supports et contenus originaux",
+      "bloc": "B04-III",
+      "competences": [
+        {
+          "id": "C.20-III",
+          "libelle": "Définir les axes générateurs des contenus de la marque, en traduisant sa proposition de valeur en concepts créatifs, afin de canaliser le travail des équipes créatives."
+        },
+        {
+          "id": "C.21-III",
+          "libelle": "Générer des idées originales et innovantes de contenus et de nouveaux formats, afin de capter l'attention et d'engager l'audience visée."
+        },
+        {
+          "id": "C.22-III",
+          "libelle": "Concrétiser les idées dans les différents canaux et supports, en déployant des techniques narratives et de design privilégiant l'interactivité."
+        }
+      ]
+    }
+  ],
+  "evaluation": [
+    {
+      "intitule": "Note de synthèse sur les évolutions et tendances de l'environnement d'une marque",
+      "competences": "C.1 & C.2",
+      "modalite": "Étude de cas · travail individuel · production écrite et présentation devant jury"
+    },
+    {
+      "intitule": "Plateforme de marque réalisée à partir d'études sur son marché",
+      "competences": "C.3 à C.6",
+      "modalite": "Étude de cas · travail individuel · production écrite et présentation devant jury"
+    },
+    {
+      "intitule": "Proposition de stratégie marketing communication",
+      "competences": "C.7 à C.12",
+      "modalite": "Étude de cas · travail individuel · production écrite et présentation devant jury"
+    },
+    {
+      "intitule": "Réalisation d'un projet marketing communication",
+      "competences": "C.13 à C.19",
+      "modalite": "Mise en situation professionnelle · travail individuel en cadre collectif"
+    },
+    {
+      "intitule": "Conception d'une stratégie de gestion de la réputation intégrant une situation de crise",
+      "competences": "C.20-I à C.22-I",
+      "modalite": "Mise en situation professionnelle · travail individuel en cadre collectif"
+    },
+    {
+      "intitule": "Proposition de transformation d'outils ou canaux induite par une innovation de rupture",
+      "competences": "C.20-II à C.22-II",
+      "modalite": "Mise en situation professionnelle · travail individuel en cadre collectif"
+    },
+    {
+      "intitule": "Proposition d'une stratégie créative de marque répondant à un brief client",
+      "competences": "C.20-III à C.22-III",
+      "modalite": "Mise en situation professionnelle · travail individuel en cadre collectif"
+    }
+  ]
+}

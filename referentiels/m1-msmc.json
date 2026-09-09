@@ -1,0 +1,1063 @@
+{
+  "genere_le": "2026-09-08",
+  "outil": "outils/construire-referentiel.mjs",
+  "formation": {
+    "rncp": "38504",
+    "titre": "Manager des stratégies marketing et communication — M1",
+    "titre_court": "M1 MSMC",
+    "campus": "Le Mans",
+    "annee_cycle": "M1",
+    "source": "PF_MSMC__2026-28_Mediaschool.xlsx",
+    "feuille": "Mst MSMC1 "
+  },
+  "race": {
+    "rncp": "38504",
+    "intitule": "Manager des stratégies marketing et communication",
+    "certificateur": "MediaSchool",
+    "source": "38504-RACE.pdf"
+  },
+  "blocs": [
+    {
+      "id": "B01",
+      "titre": "Diagnostiquer le positionnement et la proposition de valeur distinctive de la marque",
+      "nature": "obligatoire",
+      "competences": [
+        "C1",
+        "C2",
+        "C3",
+        "C4",
+        "C5",
+        "C6"
+      ],
+      "modules": [
+        {
+          "titre": "Veille dynamique (panel, méthodes d'interview) et Imaginaires de la conso",
+          "volume": 21,
+          "competences_liees": [
+            "C1"
+          ],
+          "competences_plage": false,
+          "activite": "A.1",
+          "sequencage": "S1-S2",
+          "seances": 6,
+          "epreuve": "",
+          "commentaire": "",
+          "sous_modules": []
+        },
+        {
+          "titre": "Stratégie d'impact positif",
+          "volume": 14,
+          "competences_liees": [
+            "C2"
+          ],
+          "competences_plage": false,
+          "activite": "A.1",
+          "sequencage": "S1-S2",
+          "seances": 4,
+          "epreuve": "",
+          "commentaire": "",
+          "sous_modules": []
+        },
+        {
+          "titre": "TD : Méthodologie Dossier de veille",
+          "volume": 14,
+          "competences_liees": [
+            "C1",
+            "C2"
+          ],
+          "competences_plage": false,
+          "activite": "A.1",
+          "sequencage": "S1-S2",
+          "seances": 4,
+          "epreuve": "",
+          "commentaire": "",
+          "sous_modules": []
+        },
+        {
+          "titre": "Méthodologie Pack Marque",
+          "volume": 21,
+          "competences_liees": [
+            "C3",
+            "C4",
+            "C5",
+            "C6"
+          ],
+          "competences_plage": true,
+          "activite": "A.2",
+          "sequencage": "S1-S2",
+          "seances": 6,
+          "epreuve": "",
+          "commentaire": "",
+          "sous_modules": []
+        },
+        {
+          "titre": "Etudes marketing stratégique et communication omnicanale",
+          "volume": 21,
+          "competences_liees": [
+            "C3"
+          ],
+          "competences_plage": false,
+          "activite": "A.2",
+          "sequencage": "S1-S2",
+          "seances": 6,
+          "epreuve": "",
+          "commentaire": "",
+          "sous_modules": []
+        },
+        {
+          "titre": "Insights et Analyse consommateurs",
+          "volume": 14,
+          "competences_liees": [
+            "C4"
+          ],
+          "competences_plage": false,
+          "activite": "A.2",
+          "sequencage": "S1-S2",
+          "seances": 4,
+          "epreuve": "",
+          "commentaire": "",
+          "sous_modules": []
+        },
+        {
+          "titre": "Analyse de la stratégie de positionnement de la marque",
+          "volume": 17.5,
+          "competences_liees": [
+            "C5",
+            "C6"
+          ],
+          "competences_plage": false,
+          "activite": "A.3",
+          "sequencage": "S1-S2",
+          "seances": 5,
+          "epreuve": "",
+          "commentaire": "",
+          "sous_modules": []
+        },
+        {
+          "titre": "Eloquence et préparation à l'épreuve de certification orale",
+          "volume": 10.5,
+          "competences_liees": [
+            "C3",
+            "C4",
+            "C5",
+            "C6"
+          ],
+          "competences_plage": true,
+          "activite": "A.3",
+          "sequencage": "S2",
+          "seances": 3,
+          "epreuve": "",
+          "commentaire": "",
+          "sous_modules": []
+        }
+      ],
+      "epreuves": [
+        {
+          "intitule": "BC01 - A.1 EC",
+          "detail": "BC01 - A.1 EC\nNOTE DE SYNTHÈSE\nIndividuel\nEcrit - Fin mai/début juin\nOral - début juillet",
+          "ecrit": "E1 Note de synthèse\nsur les évolutions et tendances de l’environnement\nd’une marque ciblée, réalisée à partir d’une veille\nstratégique\n1 ECRIT Hors centre 3 à 6 mois\nINDIVIDUEL",
+          "oral": "1 ORAL 30 minutes :\n• 15 minutes de présentation\n• 15 minutes de questions/réponses\n\n• A programmer 1 semaine minimum après le rendu du\nlivrable\n\n• Présentation de la note de synthèse et de la plateforme\nde marque,\nJustification des méthodologies mobilisées, ainsi que le\nrésultat des analyses conduites à partir des investigations\net études opérées.",
+          "activite": "A.1"
+        },
+        {
+          "intitule": "BC01 - A.2-A.3 EC",
+          "detail": "BC01 - A.2-A.3 EC\nPACK MARQUE\nIndividuel\nEcrit - Fin mai/début juin\nOral - début juillet",
+          "ecrit": "E2 La réalisation d'une plateforme de marque\nconçue à partir d’études sur son marché et d’une\ndémarche d’investigation sur son environnement interne\n1 ECRIT Hors centre 4 mois\nINDIVIDUEL",
+          "oral": "",
+          "activite": "A.2"
+        }
+      ],
+      "competences_mentionnees": [],
+      "competences_race": [
+        {
+          "id": "C.1",
+          "libelle": "Organiser un système de veille stratégique sur l'environnement de la marque, afin de disposer des informations concernant les évolutions touchant aux technologies, à la règlementation, aux tendances socio-comportementales et aux pratiques de communication.",
+          "activite": "A.1"
+        },
+        {
+          "id": "C.2",
+          "libelle": "Evaluer l'impact des tendances repérées dans l'environnement de la marque, afin de qualifier leur potentiel d'opportunité ou de risque et de déterminer leurs modalités de prise en compte.",
+          "activite": "A.1"
+        },
+        {
+          "id": "C.3",
+          "libelle": "Piloter la réalisation d'études qualitatives et quantitatives associant l'exploitation de données massives internes ou externes, afin de disposer des éléments d'analyse fiables nécessaires à la prise de décision stratégique.",
+          "activite": "A.2"
+        },
+        {
+          "id": "C.4",
+          "libelle": "Interpréter les résultats des études produites, en mobilisant les méthodes, matrices et modèles d'analyse adéquats, afin de préconiser les orientations de la stratégie marketing.",
+          "activite": "A.2"
+        },
+        {
+          "id": "C.5",
+          "libelle": "Analyser le positionnement et l'identité de la marque, en s'appuyant sur une méthode d'investigation engageant une démarche collaborative, afin d'identifier ses caractères distinctifs.",
+          "activite": "A.3"
+        },
+        {
+          "id": "C.6",
+          "libelle": "Clarifier le positionnement et la proposition de valeur de la marque incluant ses engagements éthiques, sociétaux et environnementaux, afin d'élaborer la plateforme de marque.",
+          "activite": "A.3"
+        }
+      ],
+      "bloc_race": "B01"
+    },
+    {
+      "id": "B02",
+      "titre": "Elaborer une stratégie marketing communication alignée avec les valeurs de la marque et favorisant l’engagement de son public cible",
+      "nature": "obligatoire",
+      "competences": [
+        "C8",
+        "C9",
+        "C10",
+        "C11",
+        "C12"
+      ],
+      "modules": [
+        {
+          "titre": "Elaboration de la stratégie de marque (plateforme de marque)",
+          "volume": 14,
+          "competences_liees": [
+            "C7",
+            "C8",
+            "C9"
+          ],
+          "competences_plage": true,
+          "activite": "A.4",
+          "sequencage": "S1-S2",
+          "seances": 4,
+          "epreuve": "",
+          "commentaire": "",
+          "sous_modules": []
+        },
+        {
+          "titre": "Brand content : Editorialisation et narration de marque",
+          "volume": 14,
+          "competences_liees": [
+            "C8"
+          ],
+          "competences_plage": false,
+          "activite": "A.4",
+          "sequencage": "S1-S2",
+          "seances": 4,
+          "epreuve": "",
+          "commentaire": "",
+          "sous_modules": []
+        },
+        {
+          "titre": "Fondamentaux de la RSE/ ESS",
+          "volume": 10.5,
+          "competences_liees": [
+            "C9"
+          ],
+          "competences_plage": false,
+          "activite": "A.4",
+          "sequencage": "S2",
+          "seances": 3,
+          "epreuve": "",
+          "commentaire": "",
+          "sous_modules": []
+        },
+        {
+          "titre": "Plan Marketing et de communication, et Mediaplanning",
+          "volume": 17.5,
+          "competences_liees": [
+            "C10"
+          ],
+          "competences_plage": false,
+          "activite": "A.5",
+          "sequencage": "S1-S2",
+          "seances": 5,
+          "epreuve": "",
+          "commentaire": "",
+          "sous_modules": []
+        },
+        {
+          "titre": "Référencements (SEO, SEA, SMO, SMA)",
+          "volume": 14,
+          "competences_liees": [
+            "C10"
+          ],
+          "competences_plage": false,
+          "activite": "A.5",
+          "sequencage": "S2",
+          "seances": 4,
+          "epreuve": "",
+          "commentaire": "",
+          "sous_modules": []
+        },
+        {
+          "titre": "Adobe - outils créatifs numériques au service de la strat",
+          "volume": 17.5,
+          "competences_liees": [
+            "C10"
+          ],
+          "competences_plage": false,
+          "activite": "A.5",
+          "sequencage": "S1-S2",
+          "seances": 5,
+          "epreuve": "",
+          "commentaire": "",
+          "sous_modules": []
+        },
+        {
+          "titre": "Photographie : techniques de prise de vue",
+          "volume": 10.5,
+          "competences_liees": [
+            "C10"
+          ],
+          "competences_plage": false,
+          "activite": "A.5",
+          "sequencage": "S1-S2",
+          "seances": 3,
+          "epreuve": "",
+          "commentaire": "",
+          "sous_modules": []
+        },
+        {
+          "titre": "Fabrication : de l'idée à la réalisation",
+          "volume": 10.5,
+          "competences_liees": [
+            "C10"
+          ],
+          "competences_plage": false,
+          "activite": "A.5",
+          "sequencage": "S2",
+          "seances": 3,
+          "epreuve": "",
+          "commentaire": "",
+          "sous_modules": []
+        },
+        {
+          "titre": "Wordpress",
+          "volume": 14,
+          "competences_liees": [
+            "C10"
+          ],
+          "competences_plage": false,
+          "activite": "A.5",
+          "sequencage": "S1-S2",
+          "seances": 4,
+          "epreuve": "",
+          "commentaire": "",
+          "sous_modules": []
+        },
+        {
+          "titre": "Budget Pilotage financier & négociation",
+          "volume": 14,
+          "competences_liees": [
+            "C11",
+            "C12"
+          ],
+          "competences_plage": false,
+          "activite": "A.5",
+          "sequencage": "S2",
+          "seances": 4,
+          "epreuve": "",
+          "commentaire": "",
+          "sous_modules": []
+        },
+        {
+          "titre": "TD : Accompagnement Mégaka",
+          "volume": 7,
+          "competences_liees": [],
+          "competences_plage": false,
+          "activite": "A.5",
+          "sequencage": "S2",
+          "seances": 2,
+          "epreuve": "",
+          "commentaire": "",
+          "sous_modules": []
+        }
+      ],
+      "epreuves": [
+        {
+          "intitule": "BC02 - A.4-A.5 EC",
+          "detail": "BC02 - A.4-A.5 EC\nMEGAKA\nIndividuel\nEcrit - Fin mai/début juin\nOral - début juillet",
+          "ecrit": "E3 Rédaction d'une proposition de stratégie marketing\ncommunication intégrant :\n• Les recommandations d’axes stratégiques, leur\ndéclinaison en actions marketing et communication et\nleur traduction financière.\n• Les recommandations stratégiques prennent en\ncompte et présente l’entreprise, son environnement et\nsa plateforme de marque.\n• La politique RSE de l’entreprise doit nécessairement\nêtre traduite dans les orientations proposées.\n• Les actions concrétisant les orientations stratégiques\ndoivent être justifiées au regard de leur intérêt démontré\npar l’étude de leur ROI potentiel.\n1 ECRIT Hors centre 2 mois\nINDIVIDUEL",
+          "oral": "1 ORAL 30 minutes :\n• 15 minutes de présentation\n• 15 minutes de questions/réponses\n\n• A programmer 1 semaine minimum après le rendu du\nlivrable\n\n• Présentation de la note d'orientation stratégique.\nJustification des orientations, , en les mettant en relation\navec la problématique de la marque et le diagnostic de\nson environnement interne/externe",
+          "activite": "A.4"
+        }
+      ],
+      "competences_mentionnees": [
+        "C7"
+      ],
+      "competences_race": [
+        {
+          "id": "C.8",
+          "libelle": "Déterminer le cœur de cible et les cibles secondaires de la marque, en établissant la segmentation de son marché, afin de définir une approche adaptée à chacune.",
+          "activite": "A.4"
+        },
+        {
+          "id": "C.9",
+          "libelle": "Définir le ou les axes de communication à privilégier exprimant la proposition de valeur de la marque et déclinant ses engagements RSE.",
+          "activite": "A.4"
+        },
+        {
+          "id": "C.10",
+          "libelle": "Choisir les canaux, modalités de communication et outils associés selon une approche omnicanal, afin de toucher de façon efficiente le public cible.",
+          "activite": "A.5"
+        },
+        {
+          "id": "C.11",
+          "libelle": "Evaluer l'opportunité et l'intérêt des actions déclinant la stratégie, en produisant l'estimation de leur ROI, afin de déterminer lesquelles choisir.",
+          "activite": "A.5"
+        },
+        {
+          "id": "C.12",
+          "libelle": "Etablir la projection financière de la stratégie à conduire, afin de négocier l'allocation de moyens suffisants pour sa mise en œuvre.",
+          "activite": "A.5"
+        }
+      ],
+      "bloc_race": "B02"
+    },
+    {
+      "id": "B05",
+      "titre": "Engager l’innovation et la transformation digitale de la communication de la marque (Strat de Marque et transformation digitale)",
+      "nature": "option",
+      "competences": [
+        "C20",
+        "C21",
+        "C22"
+      ],
+      "modules": [
+        {
+          "titre": "Spé Marque & transfo : Benchmarking (analyse des strat concurrentielles)",
+          "volume": 10.5,
+          "competences_liees": [
+            "C20"
+          ],
+          "competences_plage": false,
+          "activite": "A.9-II",
+          "sequencage": "S2",
+          "seances": 3,
+          "epreuve": "",
+          "commentaire": "",
+          "sous_modules": []
+        },
+        {
+          "titre": "Spé Marque & transfo : Supports de communication innovants",
+          "volume": 14,
+          "competences_liees": [
+            "C21"
+          ],
+          "competences_plage": false,
+          "activite": "A.9-II",
+          "sequencage": "S2",
+          "seances": 4,
+          "epreuve": "",
+          "commentaire": "",
+          "sous_modules": []
+        },
+        {
+          "titre": "Spé Marque & transfo : Référencement : Google Analytics (approfondissement)",
+          "volume": 14,
+          "competences_liees": [
+            "C22"
+          ],
+          "competences_plage": false,
+          "activite": "A.9-II",
+          "sequencage": "S2",
+          "seances": 4,
+          "epreuve": "",
+          "commentaire": "",
+          "sous_modules": []
+        },
+        {
+          "titre": "Spé Marque & transfo : Design thinking",
+          "volume": 14,
+          "competences_liees": [
+            "C21"
+          ],
+          "competences_plage": false,
+          "activite": "A.9-II",
+          "sequencage": "S1-S2",
+          "seances": 4,
+          "epreuve": "",
+          "commentaire": "",
+          "sous_modules": []
+        },
+        {
+          "titre": "Spé Marque & transfo : Webdesign et Design responsive",
+          "volume": 10.5,
+          "competences_liees": [
+            "C21"
+          ],
+          "competences_plage": false,
+          "activite": "A.9-II",
+          "sequencage": "S2",
+          "seances": 3,
+          "epreuve": "",
+          "commentaire": "",
+          "sous_modules": []
+        },
+        {
+          "titre": "Spé Marque & transfo : UX/UI",
+          "volume": 14,
+          "competences_liees": [
+            "C22"
+          ],
+          "competences_plage": false,
+          "activite": "A.9-II",
+          "sequencage": "S2",
+          "seances": 4,
+          "epreuve": "",
+          "commentaire": "",
+          "sous_modules": []
+        },
+        {
+          "titre": "Spé Marque & transfo : Wordpress perfectionnement & NoCode",
+          "volume": 17.5,
+          "competences_liees": [
+            "C22"
+          ],
+          "competences_plage": false,
+          "activite": "A.9-II",
+          "sequencage": "S2",
+          "seances": 5,
+          "epreuve": "",
+          "commentaire": "",
+          "sous_modules": []
+        }
+      ],
+      "epreuves": [
+        {
+          "intitule": "BC05 - A9 II EC",
+          "detail": "BC05 - A9 II EC\nPPI\nIndividuel écrit/oral\n(Année 2)",
+          "ecrit": "",
+          "oral": "",
+          "activite": "A.9-II"
+        }
+      ],
+      "option_groupe": "Spécialisation",
+      "competences_mentionnees": [],
+      "competences_race": [
+        {
+          "id": "C.20-II",
+          "libelle": "Identifier les facteurs de rupture et d'innovation liés aux technologies digitales, afin de définir une stratégie d'innovation porteuse de développement.",
+          "activite": "A.9-II"
+        },
+        {
+          "id": "C.21-II",
+          "libelle": "Déterminer les innovations à implémenter, en établissant leur processus de développement et en identifiant les facteurs de risque à anticiper.",
+          "activite": "A.9-II"
+        },
+        {
+          "id": "C.22-II",
+          "libelle": "Définir les stratégies d'accompagnement des acteurs internes, afin d'optimiser la mise en œuvre de l'innovation et de conduire le changement.",
+          "activite": "A.9-II"
+        }
+      ],
+      "bloc_race": "B04-II"
+    },
+    {
+      "id": "B06",
+      "titre": "Développer la stratégie créative de la marque dans des supports et contenus originaux et innovants (Créa)",
+      "nature": "option",
+      "competences": [
+        "C20",
+        "C21",
+        "C22"
+      ],
+      "modules": [
+        {
+          "titre": "Spé Srat Créa : Histoire de l'art et tendances contemporaines",
+          "volume": 10.5,
+          "competences_liees": [
+            "C20"
+          ],
+          "competences_plage": false,
+          "activite": "A.9-III",
+          "sequencage": "S1-S2",
+          "seances": 3,
+          "epreuve": "",
+          "commentaire": "",
+          "sous_modules": []
+        },
+        {
+          "titre": "Spé Strat Créa : Direction artistique",
+          "volume": 14,
+          "competences_liees": [
+            "C21"
+          ],
+          "competences_plage": false,
+          "activite": "A.9-III",
+          "sequencage": "S1-S2",
+          "seances": 4,
+          "epreuve": "",
+          "commentaire": "",
+          "sous_modules": []
+        },
+        {
+          "titre": "Spé Strat Créa : Créativité et pensée innovante",
+          "volume": 14,
+          "competences_liees": [
+            "C21"
+          ],
+          "competences_plage": false,
+          "activite": "A.9-III",
+          "sequencage": "S1-S2",
+          "seances": 4,
+          "epreuve": "",
+          "commentaire": "",
+          "sous_modules": []
+        },
+        {
+          "titre": "Spé Strat Créa : Éthique professionnelle (propriété artistique, intellectuelle,…)",
+          "volume": 7,
+          "competences_liees": [
+            "C21"
+          ],
+          "competences_plage": false,
+          "activite": "A.9-III",
+          "sequencage": "S2",
+          "seances": 2,
+          "epreuve": "",
+          "commentaire": "",
+          "sous_modules": []
+        },
+        {
+          "titre": "Spé Strat Créa : Fabrication : RSE et communication visuelle responsable",
+          "volume": 7,
+          "competences_liees": [
+            "C21"
+          ],
+          "competences_plage": false,
+          "activite": "A.9-III",
+          "sequencage": "S2",
+          "seances": 2,
+          "epreuve": "",
+          "commentaire": "",
+          "sous_modules": []
+        },
+        {
+          "titre": "Spé Strat Créa : Outils créatifs et worflow collaboratif (Figma, Notion...)",
+          "volume": 10.5,
+          "competences_liees": [
+            "C22"
+          ],
+          "competences_plage": false,
+          "activite": "A.9-III",
+          "sequencage": "S2",
+          "seances": 3,
+          "epreuve": "",
+          "commentaire": "",
+          "sous_modules": []
+        },
+        {
+          "titre": "Spé Strat Créa : PAO/Adobe : Logotype & typo",
+          "volume": 10.5,
+          "competences_liees": [
+            "C22"
+          ],
+          "competences_plage": false,
+          "activite": "A.9-III",
+          "sequencage": "S2",
+          "seances": 3,
+          "epreuve": "",
+          "commentaire": "",
+          "sous_modules": []
+        },
+        {
+          "titre": "Spé Strat Créa : Adobe Première",
+          "volume": 10.5,
+          "competences_liees": [
+            "C22"
+          ],
+          "competences_plage": false,
+          "activite": "A.9-III",
+          "sequencage": "S2",
+          "seances": 3,
+          "epreuve": "",
+          "commentaire": "",
+          "sous_modules": []
+        },
+        {
+          "titre": "Spé Strat Créa : Adobe : Montage Photo",
+          "volume": 10.5,
+          "competences_liees": [
+            "C22"
+          ],
+          "competences_plage": false,
+          "activite": "A.9-III",
+          "sequencage": "S2",
+          "seances": 3,
+          "epreuve": "",
+          "commentaire": "",
+          "sous_modules": []
+        }
+      ],
+      "epreuves": [
+        {
+          "intitule": "BC06 - A9 III EC",
+          "detail": "BC06 - A9 III EC\nPPC\nIndividuel écrit/oral\n(Année 2)",
+          "ecrit": "",
+          "oral": "",
+          "activite": "A.9-III"
+        }
+      ],
+      "option_groupe": "Spécialisation",
+      "competences_mentionnees": [],
+      "competences_race": [
+        {
+          "id": "C.20-III",
+          "libelle": "Définir les axes générateurs des contenus de la marque, en traduisant sa proposition de valeur en concepts créatifs, afin de canaliser le travail des équipes créatives.",
+          "activite": "A.9-III"
+        },
+        {
+          "id": "C.21-III",
+          "libelle": "Générer des idées originales et innovantes de contenus et de nouveaux formats, afin de capter l'attention et d'engager l'audience visée.",
+          "activite": "A.9-III"
+        },
+        {
+          "id": "C.22-III",
+          "libelle": "Concrétiser les idées dans les différents canaux et supports, en déployant des techniques narratives et de design privilégiant l'interactivité.",
+          "activite": "A.9-III"
+        }
+      ],
+      "bloc_race": "B04-III"
+    }
+  ],
+  "modules_hors_bloc": [
+    {
+      "titre": "Accueil en formation / intégration",
+      "volume": 10.5,
+      "competences_liees": [],
+      "competences_plage": false,
+      "activite": "",
+      "sequencage": "S1",
+      "seances": 3,
+      "epreuve": "",
+      "commentaire": "",
+      "sous_modules": [],
+      "section": "Bloc transversal"
+    },
+    {
+      "titre": "Anglais professionnel de la communication",
+      "volume": 21,
+      "competences_liees": [
+        "C1",
+        "C2",
+        "C3",
+        "C4",
+        "C5",
+        "C6",
+        "C7",
+        "C8",
+        "C9",
+        "C10",
+        "C11",
+        "C12",
+        "C13",
+        "C14",
+        "C15",
+        "C16",
+        "C17",
+        "C18",
+        "C19",
+        "C20",
+        "C21",
+        "C22"
+      ],
+      "competences_plage": true,
+      "activite": "",
+      "sequencage": "S1-S2",
+      "seances": 6,
+      "epreuve": "",
+      "commentaire": "",
+      "sous_modules": [],
+      "section": "Bloc transversal"
+    },
+    {
+      "titre": "Séminaire d'intégration et de remise à niveau PAO",
+      "volume": 7,
+      "competences_liees": [
+        "C1"
+      ],
+      "competences_plage": false,
+      "activite": "",
+      "sequencage": "S1",
+      "seances": 2,
+      "epreuve": "",
+      "commentaire": "",
+      "sous_modules": [],
+      "section": "Bloc transversal"
+    },
+    {
+      "titre": "Séminaire d'intégration et de remise à niveau Vidéo",
+      "volume": 7,
+      "competences_liees": [
+        "C1"
+      ],
+      "competences_plage": false,
+      "activite": "",
+      "sequencage": "S1",
+      "seances": 2,
+      "epreuve": "",
+      "commentaire": "",
+      "sous_modules": [],
+      "section": "Bloc transversal"
+    },
+    {
+      "titre": "Séminaire d'intégration et de remise à niveau Photo",
+      "volume": 7,
+      "competences_liees": [
+        "C1"
+      ],
+      "competences_plage": false,
+      "activite": "",
+      "sequencage": "S1",
+      "seances": 2,
+      "epreuve": "",
+      "commentaire": "",
+      "sous_modules": [],
+      "section": "Bloc transversal"
+    },
+    {
+      "titre": "BT : Ateliers / Worshop/ séminaire",
+      "volume": 35,
+      "competences_liees": [
+        "C1"
+      ],
+      "competences_plage": false,
+      "activite": "",
+      "sequencage": "S1-S2",
+      "seances": 10,
+      "epreuve": "",
+      "commentaire": "",
+      "sous_modules": [],
+      "section": "Bloc transversal"
+    },
+    {
+      "titre": "Méthodologie Compétition",
+      "volume": 10.5,
+      "competences_liees": [
+        "C1",
+        "C2",
+        "C3",
+        "C4",
+        "C5",
+        "C6",
+        "C7",
+        "C8",
+        "C9",
+        "C10",
+        "C11",
+        "C12",
+        "C13",
+        "C14",
+        "C15",
+        "C16",
+        "C17",
+        "C18",
+        "C19",
+        "C20",
+        "C21",
+        "C22"
+      ],
+      "competences_plage": true,
+      "activite": "",
+      "sequencage": "S1",
+      "seances": 3,
+      "epreuve": "",
+      "commentaire": "",
+      "sous_modules": [],
+      "section": "Bloc transversal : Compétitions"
+    },
+    {
+      "titre": "Compétition M1 (7 au 11 JUIN)",
+      "volume": 35,
+      "competences_liees": [
+        "C1",
+        "C2",
+        "C3",
+        "C4",
+        "C5",
+        "C6",
+        "C7",
+        "C8",
+        "C9",
+        "C10",
+        "C11",
+        "C12",
+        "C13",
+        "C14",
+        "C15",
+        "C16",
+        "C17",
+        "C18",
+        "C19",
+        "C20",
+        "C21",
+        "C22"
+      ],
+      "competences_plage": true,
+      "activite": "",
+      "sequencage": "S2",
+      "seances": 10,
+      "epreuve": "",
+      "commentaire": "",
+      "sous_modules": [],
+      "section": "Bloc transversal : Compétitions"
+    }
+  ],
+  "hors_bloc_ecartes": [],
+  "epreuves_planifiees": [
+    {
+      "intitule": "Ecrit Pack Marque (BC01) Rendu de dossier début juin",
+      "volume": 0,
+      "bloc_vise": "BC1",
+      "date": "",
+      "note": "Ecrit individuel · S2"
+    },
+    {
+      "intitule": "Oral Pack Marque (BC01) Soutenance juillet",
+      "volume": 10.5,
+      "bloc_vise": "BC1",
+      "date": "01/07/2027",
+      "note": "Oral Individuel · 01/07/2027"
+    },
+    {
+      "intitule": "Ecrit Mégaka (BC02) Rendu de dossier début juin",
+      "volume": 0,
+      "bloc_vise": "BC2",
+      "date": "",
+      "note": "Ecrit individuel · S2"
+    },
+    {
+      "intitule": "Oral Mégaka (BC02) Soutenance juillet",
+      "volume": 10.5,
+      "bloc_vise": "BC2",
+      "date": "01/07/2027",
+      "note": "Oral Individuel · 01/07/2027"
+    }
+  ],
+  "hors_perimetre": [],
+  "controles": [
+    {
+      "titre": "Diagnostiquer le positionnement et la proposition de valeur ",
+      "annonce": 133,
+      "calcule": 133,
+      "ok": true
+    },
+    {
+      "titre": "Elaborer une stratégie marketing communication alignée avec ",
+      "annonce": 143.5,
+      "calcule": 143.5,
+      "ok": true
+    },
+    {
+      "titre": "Engager l’innovation et la transformation digitale de la com",
+      "annonce": 94.5,
+      "calcule": 94.5,
+      "ok": true
+    },
+    {
+      "titre": "Développer la stratégie créative de la marque dans des suppo",
+      "annonce": 94.5,
+      "calcule": 94.5,
+      "ok": true
+    },
+    {
+      "titre": "Bloc transversal",
+      "annonce": 87.5,
+      "calcule": 87.5,
+      "ok": true
+    },
+    {
+      "titre": "Bloc transversal : Compétitions",
+      "annonce": 45.5,
+      "calcule": 45.5,
+      "ok": true
+    },
+    {
+      "titre": "Epreuves de certification",
+      "annonce": 21,
+      "calcule": 21,
+      "ok": true
+    }
+  ],
+  "anomalies": [],
+  "couverture": {
+    "competences_sans_module": [
+      "C.20-I",
+      "C.21-I",
+      "C.22-I"
+    ],
+    "competences_couvertes_par_transverse": [
+      {
+        "competence": "C.7",
+        "libelle": "Fixer les objectifs assignés à la stratégie marketing communication sur les plans qualitatifs et quantitatifs, afin de disposer de repères spécifiques, mesurables, réalistes, pertinents et limités dans le temps.",
+        "via": [
+          "Elaboration de la stratégie de marque (plateforme de marque)",
+          "Anglais professionnel de la communication",
+          "Méthodologie Compétition",
+          "Compétition M1 (7 au 11 JUIN)"
+        ]
+      },
+      {
+        "competence": "C.13",
+        "libelle": "Elaborer ou valider les documents de référence — cahier des charges, brief — cadrant la réalisation des actions, en veillant à la présence de critères sociaux et environnementaux.",
+        "via": [
+          "Anglais professionnel de la communication",
+          "Méthodologie Compétition",
+          "Compétition M1 (7 au 11 JUIN)"
+        ]
+      },
+      {
+        "competence": "C.14",
+        "libelle": "Organiser globalement la mise en œuvre des actions, en déterminant les méthodes de conduite de projet, afin d'en maîtriser le déploiement et de minorer les risques de coût, qualité, délai et RSE.",
+        "via": [
+          "Anglais professionnel de la communication",
+          "Méthodologie Compétition",
+          "Compétition M1 (7 au 11 JUIN)"
+        ]
+      },
+      {
+        "competence": "C.15",
+        "libelle": "Constituer les équipes internes impliquées dans la réalisation des actions, en veillant aux conditions d'inclusion des salariés en situation de handicap.",
+        "via": [
+          "Anglais professionnel de la communication",
+          "Méthodologie Compétition",
+          "Compétition M1 (7 au 11 JUIN)"
+        ]
+      },
+      {
+        "competence": "C.16",
+        "libelle": "Animer l'écosystème des parties prenantes, en mettant en œuvre un management collaboratif propice à l'innovation et à l'intelligence collective.",
+        "via": [
+          "Anglais professionnel de la communication",
+          "Méthodologie Compétition",
+          "Compétition M1 (7 au 11 JUIN)"
+        ]
+      },
+      {
+        "competence": "C.17",
+        "libelle": "Gérer le portefeuille de prestataires et fournisseurs, en vérifiant l'alignement de leurs pratiques avec les engagements RSE de la marque.",
+        "via": [
+          "Anglais professionnel de la communication",
+          "Méthodologie Compétition",
+          "Compétition M1 (7 au 11 JUIN)"
+        ]
+      },
+      {
+        "competence": "C.18",
+        "libelle": "Organiser la mesure de l'impact de la stratégie entreprise, en déterminant les données, critères et indicateurs de performance clés, afin d'évaluer son efficacité en continu.",
+        "via": [
+          "Anglais professionnel de la communication",
+          "Méthodologie Compétition",
+          "Compétition M1 (7 au 11 JUIN)"
+        ]
+      },
+      {
+        "competence": "C.19",
+        "libelle": "Interpréter les métriques restituant les résultats, en utilisant des outils d'analyse et de visualisation digitalisés, afin de vérifier l'atteinte des objectifs et de décider des mesures correctives.",
+        "via": [
+          "Anglais professionnel de la communication",
+          "Méthodologie Compétition",
+          "Compétition M1 (7 au 11 JUIN)"
+        ]
+      }
+    ]
+  }
+}

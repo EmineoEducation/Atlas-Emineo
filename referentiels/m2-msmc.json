@@ -1,0 +1,1102 @@
+{
+  "genere_le": "2026-09-08",
+  "outil": "outils/construire-referentiel.mjs",
+  "formation": {
+    "rncp": "38504",
+    "titre": "Manager des stratégies marketing et communication — M2",
+    "titre_court": "M2 MSMC",
+    "campus": "Le Mans",
+    "annee_cycle": "M2",
+    "source": "PF_MSMC__2026-28_Mediaschool.xlsx",
+    "feuille": "Mst MSMC2"
+  },
+  "race": {
+    "rncp": "38504",
+    "intitule": "Manager des stratégies marketing et communication",
+    "certificateur": "MediaSchool",
+    "source": "38504-RACE.pdf"
+  },
+  "blocs": [
+    {
+      "id": "B03",
+      "titre": "Piloter le déploiement d’une stratégie marketing communication responsable",
+      "nature": "obligatoire",
+      "competences": [
+        "C13",
+        "C14",
+        "C15",
+        "C16",
+        "C17",
+        "C18",
+        "C19"
+      ],
+      "modules": [
+        {
+          "titre": "Conception de projet",
+          "volume": 14,
+          "competences_liees": [
+            "C13"
+          ],
+          "competences_plage": false,
+          "activite": "A.6",
+          "sequencage": "",
+          "seances": 4,
+          "epreuve": "",
+          "commentaire": "",
+          "sous_modules": []
+        },
+        {
+          "titre": "Rédaction de Brief / Elevator Pitch / Rhétorique",
+          "volume": 10.5,
+          "competences_liees": [
+            "C13"
+          ],
+          "competences_plage": false,
+          "activite": "A.6",
+          "sequencage": "",
+          "seances": 3,
+          "epreuve": "",
+          "commentaire": "",
+          "sous_modules": []
+        },
+        {
+          "titre": "Droit appliqué aux stratégies de communication",
+          "volume": 7,
+          "competences_liees": [
+            "C13"
+          ],
+          "competences_plage": false,
+          "activite": "A.6",
+          "sequencage": "",
+          "seances": 2,
+          "epreuve": "",
+          "commentaire": "",
+          "sous_modules": []
+        },
+        {
+          "titre": "Planification Stratégique",
+          "volume": 14,
+          "competences_liees": [
+            "C13",
+            "C14"
+          ],
+          "competences_plage": false,
+          "activite": "A.6",
+          "sequencage": "",
+          "seances": 4,
+          "epreuve": "",
+          "commentaire": "",
+          "sous_modules": []
+        },
+        {
+          "titre": "Communication responsable & durable",
+          "volume": 10.5,
+          "competences_liees": [
+            "C13"
+          ],
+          "competences_plage": false,
+          "activite": "A.6",
+          "sequencage": "",
+          "seances": 3,
+          "epreuve": "",
+          "commentaire": "",
+          "sous_modules": []
+        },
+        {
+          "titre": "Communication de crise",
+          "volume": 10.5,
+          "competences_liees": [
+            "C13"
+          ],
+          "competences_plage": false,
+          "activite": "A.6",
+          "sequencage": "",
+          "seances": 3,
+          "epreuve": "",
+          "commentaire": "",
+          "sous_modules": []
+        },
+        {
+          "titre": "Audio-Vidéo : De la Pré-prod à la Post-prod",
+          "volume": 17.5,
+          "competences_liees": [
+            "C13",
+            "C14"
+          ],
+          "competences_plage": false,
+          "activite": "A.6",
+          "sequencage": "",
+          "seances": 5,
+          "epreuve": "",
+          "commentaire": "",
+          "sous_modules": []
+        },
+        {
+          "titre": "Audio-Vidéo : Motion vidéo",
+          "volume": 17.5,
+          "competences_liees": [
+            "C13",
+            "C14"
+          ],
+          "competences_plage": false,
+          "activite": "A.6",
+          "sequencage": "",
+          "seances": 5,
+          "epreuve": "",
+          "commentaire": "",
+          "sous_modules": []
+        },
+        {
+          "titre": "Management d'équipe & conduite du changement",
+          "volume": 14,
+          "competences_liees": [
+            "C15"
+          ],
+          "competences_plage": false,
+          "activite": "A.7",
+          "sequencage": "",
+          "seances": 4,
+          "epreuve": "",
+          "commentaire": "",
+          "sous_modules": []
+        },
+        {
+          "titre": "Management de projet",
+          "volume": 14,
+          "competences_liees": [
+            "C16"
+          ],
+          "competences_plage": false,
+          "activite": "A.7",
+          "sequencage": "",
+          "seances": 4,
+          "epreuve": "",
+          "commentaire": "",
+          "sous_modules": []
+        },
+        {
+          "titre": "Management interculturel",
+          "volume": 10.5,
+          "competences_liees": [
+            "C15",
+            "C16",
+            "C17"
+          ],
+          "competences_plage": false,
+          "activite": "A.7",
+          "sequencage": "",
+          "seances": 3,
+          "epreuve": "",
+          "commentaire": "",
+          "sous_modules": []
+        },
+        {
+          "titre": "Management intergénérationnel et gestion des situations difficiles",
+          "volume": 10.5,
+          "competences_liees": [
+            "C15",
+            "C16",
+            "C17"
+          ],
+          "competences_plage": true,
+          "activite": "A.7",
+          "sequencage": "",
+          "seances": 3,
+          "epreuve": "",
+          "commentaire": "",
+          "sous_modules": []
+        },
+        {
+          "titre": "Négociation Commerciales & Relations fournisseurs",
+          "volume": 10.5,
+          "competences_liees": [
+            "C17"
+          ],
+          "competences_plage": false,
+          "activite": "A.7",
+          "sequencage": "",
+          "seances": 3,
+          "epreuve": "",
+          "commentaire": "",
+          "sous_modules": []
+        },
+        {
+          "titre": "Indicateurs-clés de performance : définition et organisation de la collecte",
+          "volume": 10.5,
+          "competences_liees": [
+            "C18"
+          ],
+          "competences_plage": false,
+          "activite": "A.8",
+          "sequencage": "",
+          "seances": 3,
+          "epreuve": "",
+          "commentaire": "",
+          "sous_modules": []
+        },
+        {
+          "titre": "Indicateurs-clés de performance : analytics & Data visualisation (+Référencement SMA /SMO)",
+          "volume": 24.5,
+          "competences_liees": [
+            "C18",
+            "C19"
+          ],
+          "competences_plage": false,
+          "activite": "A.8",
+          "sequencage": "",
+          "seances": 7,
+          "epreuve": "",
+          "commentaire": "",
+          "sous_modules": []
+        },
+        {
+          "titre": "Méthodologie Bloc 3 et Ateliers de production PiloPlan (séances à étaler dans le semestre 2)",
+          "volume": 35,
+          "competences_liees": [],
+          "competences_plage": false,
+          "activite": "A.8",
+          "sequencage": "",
+          "seances": 10,
+          "epreuve": "",
+          "commentaire": "",
+          "sous_modules": []
+        }
+      ],
+      "epreuves": [
+        {
+          "intitule": "BC03 - A6/A7/A8 EC",
+          "detail": "BC03 - A6/A7/A8 EC\nPILO PLAN\nCollectif et écrit/oral\n(Année 2)",
+          "ecrit": "E4 Réalisation d’un projet marketing communication\nintégrant :\n\n• Les cahiers des charges à destination des équipes\ninternes et fournisseurs,\n• Le retroplanning de réalisation,\n• L’organigramme de l’écosystème et de l’équipe projet\navec précision des rôles, missions et attributions\nrespectifs.\n• Les outils de pilotage du projet.\n• Les outils de sélection et d’évaluation fournisseurs.\n• Le rapport d’expérience et d’étonnement sur la\ndimension managériale – à la fois méthodologique et\nrelationnelle – de la conduite du projet.\n• Le système d’évaluation de la performance de l’action\nréalisée et l’interprétation des résultats obtenus\nECRIT COLLECTIF (Groupe de 2 à 3 )\n\n\n+\nE5 Une note réflexive / retour d'expérience :\nanalyse de sa participation à l'élaboration\nd'une stratégie en équipe en indiquant la\nmanière dont il a contribué au projet, les\ndifficultés rencontrées\net en proposant des actions permettant\nde surpasser les difficultés.\nECRIT INDIVIDUEL HORS MURS",
+          "oral": "1 ORAL 30 minutes par candidat :\n\n• 15 minutes de présentation\n• 15 minutes de questions/réponses\n• A programmer 1 semaine minimum après le rendu du livrable\n\n• Présentation de l'ensemble des livrables produits.\nMise en exergue des écarts entre les productions\ncollectives et les productions individuelles, proposant ainsi\nun regard réflexif sur son action et sa production.",
+          "activite": "A.6"
+        }
+      ],
+      "competences_mentionnees": [],
+      "competences_race": [
+        {
+          "id": "C.13",
+          "libelle": "Elaborer ou valider les documents de référence — cahier des charges, brief — cadrant la réalisation des actions, en veillant à la présence de critères sociaux et environnementaux.",
+          "activite": "A.6"
+        },
+        {
+          "id": "C.14",
+          "libelle": "Organiser globalement la mise en œuvre des actions, en déterminant les méthodes de conduite de projet, afin d'en maîtriser le déploiement et de minorer les risques de coût, qualité, délai et RSE.",
+          "activite": "A.6"
+        },
+        {
+          "id": "C.15",
+          "libelle": "Constituer les équipes internes impliquées dans la réalisation des actions, en veillant aux conditions d'inclusion des salariés en situation de handicap.",
+          "activite": "A.7"
+        },
+        {
+          "id": "C.16",
+          "libelle": "Animer l'écosystème des parties prenantes, en mettant en œuvre un management collaboratif propice à l'innovation et à l'intelligence collective.",
+          "activite": "A.7"
+        },
+        {
+          "id": "C.17",
+          "libelle": "Gérer le portefeuille de prestataires et fournisseurs, en vérifiant l'alignement de leurs pratiques avec les engagements RSE de la marque.",
+          "activite": "A.7"
+        },
+        {
+          "id": "C.18",
+          "libelle": "Organiser la mesure de l'impact de la stratégie entreprise, en déterminant les données, critères et indicateurs de performance clés, afin d'évaluer son efficacité en continu.",
+          "activite": "A.8"
+        },
+        {
+          "id": "C.19",
+          "libelle": "Interpréter les métriques restituant les résultats, en utilisant des outils d'analyse et de visualisation digitalisés, afin de vérifier l'atteinte des objectifs et de décider des mesures correctives.",
+          "activite": "A.8"
+        }
+      ],
+      "bloc_race": "B03"
+    },
+    {
+      "id": "B05",
+      "titre": "Engager l’innovation et la transformation digitale de la communication de la marque (Strat des marques et innovation)",
+      "nature": "option",
+      "competences": [
+        "C20",
+        "C21",
+        "C22"
+      ],
+      "modules": [
+        {
+          "titre": "Spé Marque & Transfo : Gestion de campagne Digitale",
+          "volume": 10.5,
+          "competences_liees": [
+            "C20",
+            "C21",
+            "C22"
+          ],
+          "competences_plage": true,
+          "activite": "A.9-II",
+          "sequencage": "",
+          "seances": 3,
+          "epreuve": "",
+          "commentaire": "",
+          "sous_modules": []
+        },
+        {
+          "titre": "Spé Marque & Tranfo : Méthodes agiles de gestion de projet (SCRUM, etc.)",
+          "volume": 10.5,
+          "competences_liees": [
+            "C20",
+            "C21",
+            "C22"
+          ],
+          "competences_plage": true,
+          "activite": "A.9-II",
+          "sequencage": "",
+          "seances": 3,
+          "epreuve": "",
+          "commentaire": "",
+          "sous_modules": []
+        },
+        {
+          "titre": "Spé Marque & Transfo : Méthodologie IAGen LLM & Automatisation marketing",
+          "volume": 14,
+          "competences_liees": [
+            "C21"
+          ],
+          "competences_plage": false,
+          "activite": "A.9-II",
+          "sequencage": "",
+          "seances": 4,
+          "epreuve": "",
+          "commentaire": "",
+          "sous_modules": []
+        },
+        {
+          "titre": "Spé Marque & Transfo : Droit des marques et de la communication digitale",
+          "volume": 7,
+          "competences_liees": [
+            "C21"
+          ],
+          "competences_plage": false,
+          "activite": "A.9-II",
+          "sequencage": "",
+          "seances": 2,
+          "epreuve": "",
+          "commentaire": "",
+          "sous_modules": []
+        },
+        {
+          "titre": "Spé Marque & Transfo : Accompagnement PPI",
+          "volume": 21,
+          "competences_liees": [
+            "C20",
+            "C21",
+            "C22"
+          ],
+          "competences_plage": true,
+          "activite": "A.9-II",
+          "sequencage": "",
+          "seances": 6,
+          "epreuve": "",
+          "commentaire": "",
+          "sous_modules": []
+        },
+        {
+          "titre": "Hackathon Websérie",
+          "volume": 35,
+          "competences_liees": [],
+          "competences_plage": false,
+          "activite": "A.9-II",
+          "sequencage": "",
+          "seances": null,
+          "epreuve": "",
+          "commentaire": "",
+          "sous_modules": [
+            {
+              "titre": "Spé Marque & Transfo (hackathon websérie) : Brand storytelling (storytelling de marque appliqué)",
+              "volume": 3.5,
+              "competences_liees": [
+                "C21"
+              ]
+            },
+            {
+              "titre": "Spé Marque & Transfo (hackathon websérie) : Méthodologie IA Gen : Scénarisation et storyboard",
+              "volume": 3.5,
+              "competences_liees": [
+                "C21"
+              ]
+            },
+            {
+              "titre": "Spé Marque & Transo (hackathon websérie) : Markting digital et distribution (canaux / multicast) - Gestion de campagne",
+              "volume": 3.5,
+              "competences_liees": [
+                "C22"
+              ]
+            },
+            {
+              "titre": "Spé Marque & Transfo (hackathon websérie) : Prod vidéo : captation multiformat (webdesign)",
+              "volume": 7,
+              "competences_liees": [
+                "C22"
+              ]
+            },
+            {
+              "titre": "Spé Marque & Transfo (hackathon websérie) : TP - Production de la websérie en équipe",
+              "volume": 17.5,
+              "competences_liees": [
+                "C20",
+                "C21",
+                "C22"
+              ]
+            }
+          ]
+        },
+        {
+          "titre": "Hackathon Podcast",
+          "volume": 35,
+          "competences_liees": [],
+          "competences_plage": false,
+          "activite": "A.9-II",
+          "sequencage": "",
+          "seances": null,
+          "epreuve": "",
+          "commentaire": "",
+          "sous_modules": [
+            {
+              "titre": "Spé Marque & Transfo (hackathon Podcast) : Conception du contenu audio",
+              "volume": 7,
+              "competences_liees": [
+                "C21"
+              ]
+            },
+            {
+              "titre": "Spé Marque & Transfo (hackathon Podcast) : techniques d'enregistrement et de montage",
+              "volume": 3.5,
+              "competences_liees": [
+                "C21"
+              ]
+            },
+            {
+              "titre": "Spé Marque & Transfo (hackathon Podcast) : distribution et promotion (gestion de campagne)",
+              "volume": 3.5,
+              "competences_liees": [
+                "C22"
+              ]
+            },
+            {
+              "titre": "Spé Marque & Transfo (hackathon Podcast) : Mesures d'audience et Roi (référencements et analytics)",
+              "volume": 3.5,
+              "competences_liees": [
+                "C22"
+              ]
+            },
+            {
+              "titre": "Spé Marque & Transfo (hackathon Podcast) : TP - Production du Podcast en équipe",
+              "volume": 17.5,
+              "competences_liees": [
+                "C20",
+                "C21",
+                "C22"
+              ]
+            }
+          ]
+        },
+        {
+          "titre": "Hackathon Media Tactique",
+          "volume": 35,
+          "competences_liees": [],
+          "competences_plage": false,
+          "activite": "A.9-II",
+          "sequencage": "",
+          "seances": null,
+          "epreuve": "",
+          "commentaire": "",
+          "sous_modules": [
+            {
+              "titre": "Spé Marque & Transfo (hackathon Media) : Conception stratégique du jeu (media tactique) - Hist des ID et des médias",
+              "volume": 7,
+              "competences_liees": [
+                "C21"
+              ]
+            },
+            {
+              "titre": "Spé Marque & Transfo (hackathon Media) : Expérience utilisateur hybride (NoCode, IA…)",
+              "volume": 7,
+              "competences_liees": [
+                "C21"
+              ]
+            },
+            {
+              "titre": "Spé Marque & Transfo (hackathon Media) : Lancement et promotion (Design responsive…)",
+              "volume": 3.5,
+              "competences_liees": [
+                "C22"
+              ]
+            },
+            {
+              "titre": "Spé Marque & Transfo (hackathon Media) : TP - Production du jeu en équipe",
+              "volume": 17.5,
+              "competences_liees": [
+                "C20",
+                "C21",
+                "C22"
+              ]
+            }
+          ]
+        }
+      ],
+      "epreuves": [
+        {
+          "intitule": "BC05 - A9 II EC",
+          "detail": "BC05 - A9 II EC\nPPI\nIndividuel écrit/oral\n(Année 2)",
+          "ecrit": "E6 Proposition de mise en place d’une transformation\nd’outils ou canaux marketing communication induite par\nune innovation de rupture intégrant :\n• La présentation du facteur de rupture d’ordre\néconomique, technologique ou stratégique.\n• Le plan de mise en place de la transformation sur une\néchéance de 2 à 5 ans.\n• Le plan d’accompagnement au changement associé à\nla transformation\nECRIT COLLECTIF (Groupe de 2 à 3 )\nSemaine intensive\n\n+\nE7 Une note réflexive / retour d'expérience :\nanalyse de sa participation à l'élaboration\nd'une stratégie en équipe en indiquant la\nmanière dont il a contribué au projet, les\ndifficultés rencontrées\net en proposant des actions permettant\nde surpasser les difficultés.\nECRIT INDIVIDUEL",
+          "oral": "1 ORAL 30 minutes par candidat :\n• 15 minutes de présentation\n• 15 minutes de questions/réponses\n\n• A programmer 1 semaine minimum après le rendu du livrable\n\n• Présentation de l’ensemble des livrables produits, à la\nfois collectivement et individuellement.\nMise en exergue les écarts entre les productions\ncollectives et les productions individuelles, proposant ainsi\nun regard réflexif sur son action et sa production.",
+          "activite": "A.9-II"
+        }
+      ],
+      "option_groupe": "Spécialisation",
+      "competences_mentionnees": [],
+      "competences_race": [
+        {
+          "id": "C.21-II",
+          "libelle": "Déterminer les innovations à implémenter, en établissant leur processus de développement et en identifiant les facteurs de risque à anticiper.",
+          "activite": "A.9-II"
+        },
+        {
+          "id": "C.22-II",
+          "libelle": "Définir les stratégies d'accompagnement des acteurs internes, afin d'optimiser la mise en œuvre de l'innovation et de conduire le changement.",
+          "activite": "A.9-II"
+        },
+        {
+          "id": "C.20-II",
+          "libelle": "Identifier les facteurs de rupture et d'innovation liés aux technologies digitales, afin de définir une stratégie d'innovation porteuse de développement.",
+          "activite": "A.9-II"
+        }
+      ],
+      "bloc_race": "B04-II"
+    },
+    {
+      "id": "B06",
+      "titre": "Développer la stratégie créative de la marque dans des supports et contenus originaux et innovants (Créa)",
+      "nature": "option",
+      "competences": [
+        "C20",
+        "C21",
+        "C22"
+      ],
+      "modules": [
+        {
+          "titre": "Spé Créa : Approfondissement Adobe After Effect",
+          "volume": 14,
+          "competences_liees": [
+            "C22"
+          ],
+          "competences_plage": false,
+          "activite": "A.9-III",
+          "sequencage": "",
+          "seances": 4,
+          "epreuve": "",
+          "commentaire": "",
+          "sous_modules": []
+        },
+        {
+          "titre": "Spé Créa : Méthodologies IAGen créative",
+          "volume": 14,
+          "competences_liees": [
+            "C21"
+          ],
+          "competences_plage": false,
+          "activite": "A.9-III",
+          "sequencage": "",
+          "seances": 4,
+          "epreuve": "",
+          "commentaire": "",
+          "sous_modules": []
+        },
+        {
+          "titre": "Spé Créa : Psychologie des couleurs",
+          "volume": 14,
+          "competences_liees": [
+            "C20"
+          ],
+          "competences_plage": false,
+          "activite": "A.9-III",
+          "sequencage": "",
+          "seances": 4,
+          "epreuve": "",
+          "commentaire": "",
+          "sous_modules": []
+        },
+        {
+          "titre": "Spé Créa : Accompagnement PPC",
+          "volume": 21,
+          "competences_liees": [
+            "C20",
+            "C21",
+            "C22"
+          ],
+          "competences_plage": true,
+          "activite": "A.9-III",
+          "sequencage": "",
+          "seances": 6,
+          "epreuve": "",
+          "commentaire": "",
+          "sous_modules": []
+        },
+        {
+          "titre": "Hackathon Websérie",
+          "volume": 35,
+          "competences_liees": [],
+          "competences_plage": false,
+          "activite": "A.9-III",
+          "sequencage": "",
+          "seances": null,
+          "epreuve": "",
+          "commentaire": "",
+          "sous_modules": [
+            {
+              "titre": "Spé créa (hackathon webserie) : Direction artistique : websérie",
+              "volume": 3.5,
+              "competences_liees": [
+                "C21"
+              ]
+            },
+            {
+              "titre": "Spé créa (hackathon webserie) : Adobe Premiere : Techniques de réalisation avancées",
+              "volume": 3.5,
+              "competences_liees": [
+                "C22"
+              ]
+            },
+            {
+              "titre": "Spé créa (hackathon webserie) : Psychologie des couleurs : Expérimentation visuelle",
+              "volume": 3.5,
+              "competences_liees": [
+                "C22"
+              ]
+            },
+            {
+              "titre": "Spé créa (hackathon webserie) : Post-Prod vidéo : montage et motion design multicast",
+              "volume": 7,
+              "competences_liees": [
+                "C21"
+              ]
+            },
+            {
+              "titre": "Spé créa (hackathon webserie) : TP - Production de la websérie en équipe",
+              "volume": 17.5,
+              "competences_liees": [
+                "C20",
+                "C21",
+                "C22"
+              ]
+            }
+          ]
+        },
+        {
+          "titre": "Hackathon Podcast",
+          "volume": 35,
+          "competences_liees": [],
+          "competences_plage": false,
+          "activite": "A.9-III",
+          "sequencage": "",
+          "seances": null,
+          "epreuve": "",
+          "commentaire": "",
+          "sous_modules": [
+            {
+              "titre": "Spé créa (hackathon podcast) : Direction artistique : Identité sonore",
+              "volume": 7,
+              "competences_liees": [
+                "C21"
+              ]
+            },
+            {
+              "titre": "Spé créa (hackathon podcast) : Créativité et pensée innovante : Narration innovante",
+              "volume": 7,
+              "competences_liees": [
+                "C21"
+              ]
+            },
+            {
+              "titre": "Spé créa (hackathon podcast) : Créativité audio : sons, voix",
+              "volume": 3.5,
+              "competences_liees": [
+                "C22"
+              ]
+            },
+            {
+              "titre": "Spé créa (hackathon podcast) : TP - Production du Podcast en équipe",
+              "volume": 17.5,
+              "competences_liees": [
+                "C20",
+                "C21",
+                "C22"
+              ]
+            }
+          ]
+        },
+        {
+          "titre": "Hackathon Media Tactique",
+          "volume": 35,
+          "competences_liees": [],
+          "competences_plage": false,
+          "activite": "A.9-III",
+          "sequencage": "",
+          "seances": null,
+          "epreuve": "",
+          "commentaire": "",
+          "sous_modules": [
+            {
+              "titre": "Spé créa (hackathon Media) : Conception créative du jeu",
+              "volume": 7,
+              "competences_liees": [
+                "C21"
+              ]
+            },
+            {
+              "titre": "Spé créa (hackathon Media) : Histoire de l'art et tendances visuelles : Design graphique et visuel",
+              "volume": 7,
+              "competences_liees": [
+                "C20"
+              ]
+            },
+            {
+              "titre": "Spé créa (hackathon Media) : IAGen Créative : Mécaniques de jeu innovantes",
+              "volume": 3.5,
+              "competences_liees": [
+                "C21"
+              ]
+            },
+            {
+              "titre": "Spé créa (hackathon Media) : TP - Production du jeu en équipe",
+              "volume": 17.5,
+              "competences_liees": [
+                "C20",
+                "C21",
+                "C22"
+              ]
+            }
+          ]
+        }
+      ],
+      "epreuves": [
+        {
+          "intitule": "BC06 - A9 III EC",
+          "detail": "BC06 - A9 III EC\nPPC\nIndividuel écrit/oral\n(Année 2)",
+          "ecrit": "E6 La proposition d’une stratégie créative de marque\nrépondant à un brief client intégrant :\n• Le pitch de la problématique de la marque et des axes\ngénérateurs de contenu.\n• Plusieurs supports de communication, de différents\nformats et destinés à différents canaux, mobilisant\nnécessairement des techniques de narration\noriginales\nECRIT COLLECTIF (Groupe de 2 à 3 )\nSemaine intensive\n\n+\nE7 Une note réflexive / retour d'expérience :\nanalyse de sa participation à l'élaboration\nd'une stratégie en équipe en indiquant la\nmanière dont il a contribué au projet, les\ndifficultés rencontrées\net en proposant des actions permettant\nde surpasser les difficultés.\nECRIT INDIVIDUEL (hors mur, prévoir date de rendu la semaine suivante l'écrit collectif en intensive)",
+          "oral": "1 ORAL 30 minutes par candidat :\n• 15 minutes de présentation\n• 15 minutes de questions/réponses\n\n• A programmer 1 semaine minimum après le rendu du livrable\n\n• Présentation de l’ensemble des livrables produits, à la\nfois collectivement et individuellement.\nMise en exergue les écarts entre les productions\ncollectives et les productions individuelles, proposant ainsi\nun regard réflexif sur son action et sa production.",
+          "activite": "A.9-III"
+        }
+      ],
+      "option_groupe": "Spécialisation",
+      "competences_mentionnees": [],
+      "competences_race": [
+        {
+          "id": "C.22-III",
+          "libelle": "Concrétiser les idées dans les différents canaux et supports, en déployant des techniques narratives et de design privilégiant l'interactivité.",
+          "activite": "A.9-III"
+        },
+        {
+          "id": "C.21-III",
+          "libelle": "Générer des idées originales et innovantes de contenus et de nouveaux formats, afin de capter l'attention et d'engager l'audience visée.",
+          "activite": "A.9-III"
+        },
+        {
+          "id": "C.20-III",
+          "libelle": "Définir les axes générateurs des contenus de la marque, en traduisant sa proposition de valeur en concepts créatifs, afin de canaliser le travail des équipes créatives.",
+          "activite": "A.9-III"
+        }
+      ],
+      "bloc_race": "B04-III"
+    }
+  ],
+  "modules_hors_bloc": [
+    {
+      "titre": "Ateliers / Worshop / Séminaires campus A2",
+      "volume": 3.5,
+      "competences_liees": [
+        "C3"
+      ],
+      "competences_plage": false,
+      "activite": "",
+      "sequencage": "",
+      "seances": 1,
+      "epreuve": "",
+      "commentaire": "",
+      "sous_modules": [],
+      "section": "Bloc transversal"
+    },
+    {
+      "titre": "Personal Branding publication de contenu : expertise métier",
+      "volume": 10.5,
+      "competences_liees": [
+        "C1",
+        "C2",
+        "C3",
+        "C4",
+        "C5",
+        "C6",
+        "C7",
+        "C8",
+        "C9",
+        "C10",
+        "C11",
+        "C12",
+        "C13",
+        "C14",
+        "C15",
+        "C16",
+        "C17",
+        "C18",
+        "C19"
+      ],
+      "competences_plage": true,
+      "activite": "",
+      "sequencage": "S1-S2",
+      "seances": 3,
+      "epreuve": "",
+      "commentaire": "",
+      "sous_modules": [],
+      "section": "Bloc transversal"
+    },
+    {
+      "titre": "Business Game création d'entreprise",
+      "volume": 21,
+      "competences_liees": [],
+      "competences_plage": false,
+      "activite": "",
+      "sequencage": "",
+      "seances": 6,
+      "epreuve": "",
+      "commentaire": "",
+      "sous_modules": [],
+      "section": "Bloc transversal"
+    },
+    {
+      "titre": "Compétition M2 (Training EC BLOC 5/6 PPI ou PPC) Décembre",
+      "volume": 35,
+      "competences_liees": [
+        "C1",
+        "C2",
+        "C3",
+        "C4",
+        "C5",
+        "C6",
+        "C7",
+        "C8",
+        "C9",
+        "C10",
+        "C11",
+        "C12",
+        "C13",
+        "C14",
+        "C15",
+        "C16",
+        "C17",
+        "C18",
+        "C19",
+        "C20",
+        "C21",
+        "C22"
+      ],
+      "competences_plage": true,
+      "activite": "",
+      "sequencage": "",
+      "seances": 10,
+      "epreuve": "",
+      "commentaire": "",
+      "sous_modules": [],
+      "section": "Bloc transversal : Compétitions"
+    }
+  ],
+  "hors_bloc_ecartes": [],
+  "epreuves_planifiees": [
+    {
+      "intitule": "EC Bloc 3",
+      "volume": 0,
+      "bloc_vise": "BC3",
+      "date": "",
+      "note": ""
+    },
+    {
+      "intitule": "EC BC3 ORAL Pilo Plan (BC03)",
+      "volume": 10.5,
+      "bloc_vise": "BC3",
+      "date": "",
+      "note": "Oral individuel"
+    },
+    {
+      "intitule": "EC PPI ou PPC (BC5/6) : semaine intensive (12 AU 16 JUIN 2028)",
+      "volume": 35,
+      "bloc_vise": "BC5 ou BC6",
+      "date": "",
+      "note": "Ecrit collectif"
+    },
+    {
+      "intitule": "EC BC5/6 ORAL",
+      "volume": 10.5,
+      "bloc_vise": "",
+      "date": "",
+      "note": "Oral individuel"
+    },
+    {
+      "intitule": "Bilan compétences",
+      "volume": 14,
+      "bloc_vise": "",
+      "date": "",
+      "note": ""
+    }
+  ],
+  "hors_perimetre": [],
+  "controles": [
+    {
+      "titre": "Piloter le déploiement d’une stratégie marketing communicati",
+      "annonce": 231,
+      "calcule": 231,
+      "ok": true
+    },
+    {
+      "titre": "Engager l’innovation et la transformation digitale de la com",
+      "annonce": 168,
+      "calcule": 168,
+      "ok": true
+    },
+    {
+      "titre": "Développer la stratégie créative de la marque dans des suppo",
+      "annonce": 168,
+      "calcule": 168,
+      "ok": true
+    },
+    {
+      "titre": "Bloc transversal",
+      "annonce": 35,
+      "calcule": 35,
+      "ok": true
+    },
+    {
+      "titre": "Bloc transversal : Compétitions",
+      "annonce": 35,
+      "calcule": 35,
+      "ok": true
+    },
+    {
+      "titre": "Epreuves de certification",
+      "annonce": 70,
+      "calcule": 70,
+      "ok": true
+    }
+  ],
+  "anomalies": [],
+  "couverture": {
+    "competences_sans_module": [
+      "C.20-I",
+      "C.21-I",
+      "C.22-I"
+    ],
+    "competences_couvertes_par_transverse": [
+      {
+        "competence": "C.1",
+        "libelle": "Organiser un système de veille stratégique sur l'environnement de la marque, afin de disposer des informations concernant les évolutions touchant aux technologies, à la règlementation, aux tendances socio-comportementales et aux pratiques de communication.",
+        "via": [
+          "Personal Branding publication de contenu : expertise métier",
+          "Compétition M2 (Training EC BLOC 5/6 PPI ou PPC) Décembre"
+        ]
+      },
+      {
+        "competence": "C.2",
+        "libelle": "Evaluer l'impact des tendances repérées dans l'environnement de la marque, afin de qualifier leur potentiel d'opportunité ou de risque et de déterminer leurs modalités de prise en compte.",
+        "via": [
+          "Personal Branding publication de contenu : expertise métier",
+          "Compétition M2 (Training EC BLOC 5/6 PPI ou PPC) Décembre"
+        ]
+      },
+      {
+        "competence": "C.4",
+        "libelle": "Interpréter les résultats des études produites, en mobilisant les méthodes, matrices et modèles d'analyse adéquats, afin de préconiser les orientations de la stratégie marketing.",
+        "via": [
+          "Personal Branding publication de contenu : expertise métier",
+          "Compétition M2 (Training EC BLOC 5/6 PPI ou PPC) Décembre"
+        ]
+      },
+      {
+        "competence": "C.5",
+        "libelle": "Analyser le positionnement et l'identité de la marque, en s'appuyant sur une méthode d'investigation engageant une démarche collaborative, afin d'identifier ses caractères distinctifs.",
+        "via": [
+          "Personal Branding publication de contenu : expertise métier",
+          "Compétition M2 (Training EC BLOC 5/6 PPI ou PPC) Décembre"
+        ]
+      },
+      {
+        "competence": "C.6",
+        "libelle": "Clarifier le positionnement et la proposition de valeur de la marque incluant ses engagements éthiques, sociétaux et environnementaux, afin d'élaborer la plateforme de marque.",
+        "via": [
+          "Personal Branding publication de contenu : expertise métier",
+          "Compétition M2 (Training EC BLOC 5/6 PPI ou PPC) Décembre"
+        ]
+      },
+      {
+        "competence": "C.7",
+        "libelle": "Fixer les objectifs assignés à la stratégie marketing communication sur les plans qualitatifs et quantitatifs, afin de disposer de repères spécifiques, mesurables, réalistes, pertinents et limités dans le temps.",
+        "via": [
+          "Personal Branding publication de contenu : expertise métier",
+          "Compétition M2 (Training EC BLOC 5/6 PPI ou PPC) Décembre"
+        ]
+      },
+      {
+        "competence": "C.8",
+        "libelle": "Déterminer le cœur de cible et les cibles secondaires de la marque, en établissant la segmentation de son marché, afin de définir une approche adaptée à chacune.",
+        "via": [
+          "Personal Branding publication de contenu : expertise métier",
+          "Compétition M2 (Training EC BLOC 5/6 PPI ou PPC) Décembre"
+        ]
+      },
+      {
+        "competence": "C.9",
+        "libelle": "Définir le ou les axes de communication à privilégier exprimant la proposition de valeur de la marque et déclinant ses engagements RSE.",
+        "via": [
+          "Personal Branding publication de contenu : expertise métier",
+          "Compétition M2 (Training EC BLOC 5/6 PPI ou PPC) Décembre"
+        ]
+      },
+      {
+        "competence": "C.10",
+        "libelle": "Choisir les canaux, modalités de communication et outils associés selon une approche omnicanal, afin de toucher de façon efficiente le public cible.",
+        "via": [
+          "Personal Branding publication de contenu : expertise métier",
+          "Compétition M2 (Training EC BLOC 5/6 PPI ou PPC) Décembre"
+        ]
+      },
+      {
+        "competence": "C.11",
+        "libelle": "Evaluer l'opportunité et l'intérêt des actions déclinant la stratégie, en produisant l'estimation de leur ROI, afin de déterminer lesquelles choisir.",
+        "via": [
+          "Personal Branding publication de contenu : expertise métier",
+          "Compétition M2 (Training EC BLOC 5/6 PPI ou PPC) Décembre"
+        ]
+      },
+      {
+        "competence": "C.12",
+        "libelle": "Etablir la projection financière de la stratégie à conduire, afin de négocier l'allocation de moyens suffisants pour sa mise en œuvre.",
+        "via": [
+          "Personal Branding publication de contenu : expertise métier",
+          "Compétition M2 (Training EC BLOC 5/6 PPI ou PPC) Décembre"
+        ]
+      },
+      {
+        "competence": "C.20-II",
+        "libelle": "Identifier les facteurs de rupture et d'innovation liés aux technologies digitales, afin de définir une stratégie d'innovation porteuse de développement.",
+        "via": [
+          "Spé Marque & Transfo : Gestion de campagne Digitale",
+          "Spé Marque & Tranfo : Méthodes agiles de gestion de projet (SCRUM, etc.)",
+          "Spé Marque & Transfo : Accompagnement PPI"
+        ]
+      },
+      {
+        "competence": "C.22-II",
+        "libelle": "Définir les stratégies d'accompagnement des acteurs internes, afin d'optimiser la mise en œuvre de l'innovation et de conduire le changement.",
+        "via": [
+          "Spé Marque & Transfo : Gestion de campagne Digitale",
+          "Spé Marque & Tranfo : Méthodes agiles de gestion de projet (SCRUM, etc.)",
+          "Spé Marque & Transfo : Accompagnement PPI"
+        ]
+      }
+    ]
+  }
+}
