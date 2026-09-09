@@ -24,44 +24,75 @@ const pf = extraire(cfg.source, cfg);
 const race = JSON.parse(readFileSync(cfg.race, 'utf-8'));
 
 // ── Croisement plan de formation × RACE ──────────────────────────────────────
-// Le plan désigne les compétences par leur code d'activité (C1…C13) et parfois
-// par le code précis d'une compétence (C4.2). On rattache les deux au RACE, et
-// surtout on relève ce qu'aucun module ne couvre : c'est le premier signal utile
-// que la cartographie doit porter.
-const parActivite = new Map(race.activites.map(a => [a.id, a]));
-const couverture = new Map(race.activites.map(a => [a.id, []]));
+// Les deux référentiels ne numérotent pas au même niveau. Le RACE 39741 découpe
+// en treize activités (C1…C13) que le plan cite directement. Le RACE 38504
+// numérote ses vingt-huit compétences (C.1…C.22-III), et le plan les cite sans
+// leur suffixe de spécialisation — « C20 » dans le bloc SPE 5 désigne C.20-II.
+// Le mode de correspondance est donc déclaré par titre, jamais deviné.
+const mode = cfg.codes_pf || 'activites';
+const corrBlocs = cfg.correspondance_blocs || {};
 
-// Les modules hors bloc enseignent eux aussi : les omettre faisait apparaître
-// C13 comme non couverte alors que trois modules la portent.
+// Index des compétences du RACE, par code nu et par code complet.
+const parCode = new Map();
+for (const a of race.activites) {
+  for (const c of a.competences) {
+    parCode.set(c.id, { ...c, activite: a.code || a.id, activite_libelle: a.libelle, bloc: a.bloc || '' });
+  }
+}
+
+// Résout un code du plan vers une ou plusieurs compétences du RACE.
+function resoudre(code, blocLocal) {
+  const nu = String(code).replace(/^C\.?/i, '');
+  if (mode === 'competences') {
+    const blocRace = corrBlocs[blocLocal] || '';
+    // Une spécialisation suffixe ses compétences : C20 dans le bloc 4-II est
+    // C.20-II. Le suffixe se lit sur le bloc, pas sur le code.
+    const suffixe = (blocRace.match(/-(I{1,3})$/) || [, ''])[1];
+    const cible = 'C.' + nu + (suffixe ? '-' + suffixe : '');
+    return parCode.has(cible) ? [parCode.get(cible)] : (parCode.has('C.' + nu) ? [parCode.get('C.' + nu)] : []);
+  }
+  // Mode activités : le code désigne une activité, on prend ses compétences.
+  const act = race.activites.find(a => a.id === 'C' + nu || a.code === 'C' + nu);
+  return act ? act.competences.map(c => parCode.get(c.id)).filter(Boolean) : [];
+}
+
 const tousModules = [
   ...pf.blocs.flatMap(b => b.modules.map(m => ({ ...m, bloc: b.id }))),
   ...(pf.modules_hors_bloc || []).map(m => ({ ...m, bloc: 'hors bloc' })),
 ];
+
+const couverture = new Map([...parCode.keys()].map(k => [k, []]));
 for (const m of tousModules) {
   for (const code of (m.competences_liees || [])) {
-    const act = 'C' + code.slice(1).split('.')[0];
-    if (couverture.has(act)) couverture.get(act).push({ bloc: m.bloc, module: m.titre, code, plage: !!m.competences_plage });
+    for (const c of resoudre(code, m.bloc)) {
+      if (couverture.has(c.id)) couverture.get(c.id).push({ bloc: m.bloc, module: m.titre, plage: !!m.competences_plage });
+    }
   }
 }
 
-// Une activité n'est réputée couverte de façon propre que si un module la vise
-// nommément. Une plage « C3 à C5 » vaut mention, pas enseignement dédié.
 const nonCouvertes = [];
 const couverturesLarges = [];
 for (const [id, refs] of couverture) {
   if (!refs.length) { nonCouvertes.push(id); continue; }
-  // Un enseignement dédié vise l'activité nommément, pas via une plage
-  // englobante : « C4.2 » compte, « C3 à C5 » non.
-  const dedie = refs.some(r => !r.plage && (r.code === id || r.code.startsWith(id + '.')));
-  if (!dedie) couverturesLarges.push({ activite: id, libelle: (parActivite.get(id)||{}).libelle||'', via: [...new Set(refs.map(r => r.module))] });
+  if (!refs.some(r => !r.plage)) {
+    couverturesLarges.push({ competence: id, libelle: (parCode.get(id) || {}).libelle || '', via: [...new Set(refs.map(r => r.module))] });
+  }
 }
 
-// Les blocs héritent du libellé officiel des activités qu'ils portent.
+// Chaque bloc reçoit les compétences officielles qu'il porte.
 for (const b of pf.blocs) {
-  b.activites = b.competences.map(c => {
-    const a = parActivite.get(c);
-    return a ? { id: a.id, libelle: a.libelle, competences: a.competences.map(x => x.id) } : { id: c, libelle: '', competences: [] };
-  });
+  const vues = new Map();
+  for (const m of b.modules) {
+    for (const code of (m.competences_liees || [])) {
+      if (m.competences_plage) continue;
+      for (const c of resoudre(code, b.id)) vues.set(c.id, c);
+    }
+    for (const sm of (m.sous_modules || [])) {
+      for (const code of (sm.competences_liees || [])) for (const c of resoudre(code, b.id)) vues.set(c.id, c);
+    }
+  }
+  b.competences_race = [...vues.values()].map(c => ({ id: c.id, libelle: c.libelle, activite: c.activite }));
+  b.bloc_race = corrBlocs[b.id] || '';
 }
 
 const sortie = {
@@ -77,8 +108,8 @@ const sortie = {
   controles: pf.controles,
   anomalies: pf.anomalies,
   couverture: {
-    activites_sans_module_dedie: nonCouvertes,
-    activites_couvertes_par_transverse: couverturesLarges,
+    competences_sans_module: nonCouvertes,
+    competences_couvertes_par_transverse: couverturesLarges,
   },
 };
 
@@ -105,9 +136,9 @@ if (hb.length) {
 console.log(`\nVolume blocs : ${pf.blocs.reduce((n, b) => n + vol(b), 0)} h · hors bloc : ${hb.reduce((n, m) => n + (m.volume || 0), 0)} h`);
 console.log(`Contrôles        : ${pf.controles.filter(c => c.ok).length}/${pf.controles.length} conformes`);
 console.log(`Anomalies        : ${pf.anomalies.length || 'aucune'}`);
-if (nonCouvertes.length) console.log(`Activités sans aucun module : ${nonCouvertes.join(', ')}`);
+if (nonCouvertes.length) console.log(`Compétences sans aucun module : ${nonCouvertes.join(', ')}`);
 if (couverturesLarges.length) {
-  console.log(`Activités sans module dédié (couvertes seulement par un transverse) :`);
-  for (const c of couverturesLarges) console.log(`  ${c.activite} ← ${c.via.join(', ')}`);
+  console.log(`Compétences sans module dédié (couvertes seulement par un transverse) :`);
+  for (const c of couverturesLarges) console.log(`  ${c.competence} ← ${c.via.slice(0,3).join(', ')}`);
 }
 console.log(`\nÉcrit : ${dest}`);
