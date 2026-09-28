@@ -1,0 +1,379 @@
+{
+ "rncp": "41295",
+ "intitule": "Manager des ressources humaines",
+ "certificateur": "ISME",
+ "version": "Référentiel 2026 — v0126",
+ "source": "41295 - ISME MRH Referentiel.pdf",
+ "regle_certification": "Validation cumulative des cinq blocs BC01 à BC05. Année 1 : BC01, BC03, BC04. Année 2 : BC02, BC05. Épreuve complémentaire : dossier P2O et soutenance orale.",
+ "blocs": [
+  {
+   "id": "B01",
+   "libelle": "Élaborer la stratégie RH de son périmètre en responsabilité",
+   "nature": "obligatoire",
+   "option_groupe": "",
+   "annee_cycle": "M1"
+  },
+  {
+   "id": "B02",
+   "libelle": "Manager les data, projets et équipes RH",
+   "nature": "obligatoire",
+   "option_groupe": "",
+   "annee_cycle": "M2"
+  },
+  {
+   "id": "B03",
+   "libelle": "Superviser l’administration du personnel",
+   "nature": "obligatoire",
+   "option_groupe": "",
+   "annee_cycle": "M1"
+  },
+  {
+   "id": "B04",
+   "libelle": "Piloter le dialogue social et la communication RH",
+   "nature": "obligatoire",
+   "option_groupe": "",
+   "annee_cycle": "M1"
+  },
+  {
+   "id": "B05",
+   "libelle": "Manager les talents et l’expérience collaborateur",
+   "nature": "obligatoire",
+   "option_groupe": "",
+   "annee_cycle": "M2"
+  }
+ ],
+ "activites": [
+  {
+   "id": "A1",
+   "code": "A.1",
+   "libelle": "Pilotage de la veille",
+   "bloc": "B01",
+   "competences": [
+    {
+     "id": "C.1.1",
+     "libelle": "Piloter un dispositif de veille, basé sur un process structuré incluant les domaines règlementaire, concurrentielle, technologique et socio- économique, via des outils digitaux et à l’aide de l’IA1, dans une double visée de performance et conformité"
+    }
+   ]
+  },
+  {
+   "id": "A2",
+   "code": "A.2",
+   "libelle": "Management de l’innovation",
+   "bloc": "B01",
+   "competences": [
+    {
+     "id": "C.2.1",
+     "libelle": "Favoriser le développement d’innovations sociale, organisationnelle et/ou technologique, par la mise en œuvre de méthodes collaboratives en gestion de l’innovation, en considération des évolutions et disruptions prévues pour le monde du travail de demain (‘futur of work’), dans une optique de développement de la capacité de transformation de l’entreprise"
+    }
+   ]
+  },
+  {
+   "id": "A3",
+   "code": "A.3",
+   "libelle": "Conduite d’audit RH",
+   "bloc": "B01",
+   "competences": [
+    {
+     "id": "C.3.1",
+     "libelle": "Elaborer un audit RH, en tenant compte de l’écosystème de l’entreprise, en identifiant les besoins en ressources clés de l’entreprise, à court, moyen et long termes, en analysant les process, pratiques et outils RH, au travers d’outils de diagnostic stratégique, dans le but de concevoir une stratégie RH adaptée aux spécificités de l’entreprise"
+    }
+   ]
+  },
+  {
+   "id": "A4",
+   "code": "A.4",
+   "libelle": "Définition et évaluation d’une stratégie RH RSE",
+   "bloc": "B01",
+   "competences": [
+    {
+     "id": "C.4.1",
+     "libelle": "Définir et évaluer l’impact d’une stratégie RH durable et inclusive (sur son périmètre en responsabilité), en l’élaborant à partir de la vision d’entreprise élaborée par la direction générale, et sur la base des éléments de veille et d’innovation, notamment en ce qui concerne les évolutions des organisations de travail, en lui adossant des ICP6, ceci dans l’optique de permettre à l’entreprise d'assurer la cohérence entre sa vision, l’organisation de ses ressources et les évolutions du monde du travail"
+    },
+    {
+     "id": "C.4.2",
+     "libelle": "Contribuer au verdissement de l’entreprise, en hiérarchisant les priorités RSE, au travers d’une analyse de matérialité, afin d’inscrire la stratégie RH au service d’une transition écologique et numérique résiliente"
+    },
+    {
+     "id": "C.4.3",
+     "libelle": "Sécuriser la stratégie RH, en évaluant les risques associés, via une méthode d’analyse des risques ainsi que l’IA prédictive, et au travers d’une approche effectuale, dans le but de réduire les incidences stratégiques et opérationnelles"
+    }
+   ]
+  },
+  {
+   "id": "A5",
+   "code": "A.5",
+   "libelle": "Management de la donnée RH",
+   "bloc": "B02",
+   "competences": [
+    {
+     "id": "C.5.1",
+     "libelle": "Participer à la gouvernance des données RH, au travers de normes internes (politiques de données) concernant la façon dont les données sont collectées, stockées, traitées, archivées et supprimées, en respectant la règlementation en vigueur pour les aspects de sécurité/protection et confidentialité des données, ainsi que d’éthique liée à leur usage, dans l’optique de mettre en place une stratégie RH ‘data driven’"
+    },
+    {
+     "id": "C.5.2",
+     "libelle": "Participer à l’exploitation de la donnée collaborateur, via un SIRH11, au travers de techniques d’analyse et d’interprétation des données, ainsi que de pratiques conformes à la règlementation en vigueur, dans le but d’optimiser le traitement de l’information liées aux ressources humaines"
+    },
+    {
+     "id": "C.5.3",
+     "libelle": "Valoriser la donnée RH, au travers de reporting social, via des méthodes d’analyse de données12 et outils de visualisation, dans le but d’ajuster la stratégie RH en temps réel pour répondre aux besoins changeants de l'écosystème de l'entreprise et également prédire les besoins RH"
+    }
+   ]
+  },
+  {
+   "id": "A6",
+   "code": "A.6",
+   "libelle": "Conduite de projets de transformation de l’organisation de travail durables",
+   "bloc": "B02",
+   "competences": [
+    {
+     "id": "C.6.1",
+     "libelle": "Elaborer un projet de transformation de l’organisation de travail, sur la base des transitions actuelles et à venir du monde du travail, dans l’optique de pérenniser l’activité de l’entreprise, de façon durable et inclusive"
+    },
+    {
+     "id": "C.6.2",
+     "libelle": "Piloter un projet de transformation de l’organisation de travail, au travers de méthodologie et outils de conduite de projet ainsi que de conduite du changement, afin d’évaluer sa performance"
+    },
+    {
+     "id": "C.6.3",
+     "libelle": "Concevoir, assurer le suivi et contrôler le budget, en collaboration avec la direction administrative et financière, dans une perspective de rentabilité et retour sur investissement"
+    }
+   ]
+  },
+  {
+   "id": "A7",
+   "code": "A.7",
+   "libelle": "Management de personnes en modes projet et hiérarchique",
+   "bloc": "B02",
+   "competences": [
+    {
+     "id": "C.7.1",
+     "libelle": "Mobiliser l’ensemble des parties prenantes, en valorisant le sens des actions RH menées, au travers de modalités de diffusion de l’information inclusives, de capitalisation des bonnes pratiques et de situations de travail favorisant l’intelligence collective, dans une logique de génération de valeur tant au niveau individuel que collectif"
+    },
+    {
+     "id": "C.7.2",
+     "libelle": "Développer un réseau responsable de partenaires, en intégrant les dimensions de viabilité, équitabilité et durabilité dans la collaboration, afin de pérenniser l’activité"
+    },
+    {
+     "id": "C.7.3",
+     "libelle": "Conduire et superviser des collaborations professionnelles, en le mode hybride, en adoptant des méthodes et techniques de management et d’entretien collaboratives et inclusives, dans une visée de cadrage institutionnelle et de reconnaissance individuelle / collective."
+    }
+   ]
+  },
+  {
+   "id": "A8",
+   "code": "A.8",
+   "libelle": "Définition et pilotage de la politique de rémunération globale",
+   "bloc": "B03",
+   "competences": [
+    {
+     "id": "C.8.1",
+     "libelle": "Participer à l’élaboration et au contrôle des process relatifs au système de rémunération globale, en fonction de la vision d’entreprise, en intégrant un mix salarial adapté, en conformité avec la règlementation en vigueur et en adéquation avec les motivations des candidats et collaborateurs, via des outils bureautiques et digitaux RH et SIRH, dans une visée de management des talents"
+    }
+   ]
+  },
+  {
+   "id": "A9",
+   "code": "A.9",
+   "libelle": "Supervision de la production des bulletins de paie",
+   "bloc": "B03",
+   "competences": [
+    {
+     "id": "C.9.1",
+     "libelle": "Superviser la production sécurisée de bulletins de paie, au travers de process liés à la collecte, la validation des variables de paie et la production de la paie, ainsi que des déclarations fiscales afférentes, en fonction de la législation, de la règlementation sociale ainsi que de la convention collective en vigueur, via des outils bureautiques et digitaux RH et SIRH, dans une optique de valorisation du capital humain de l’entreprise, de cadrage de la relation de travail, ainsi que de performance globale"
+    }
+   ]
+  },
+  {
+   "id": "A10",
+   "code": "A.10",
+   "libelle": "Définition et évaluation des process de gestion administrative du personnel (autre que la paie)",
+   "bloc": "B03",
+   "competences": [
+    {
+     "id": "C.10.1",
+     "libelle": "Elaborer ou améliorer les processus de gestion administrative du personnel relatifs à l’ensemble de la vie du contrat de travail, en fonction de la législation, de la règlementation sociale ainsi que de la convention collective en vigueur, selon les procédures de rédaction administrative et directives fournies par les organismes extérieurs (URSSAF, Médecine du travail, Mutuelle, …), en digitalisant les process via des outils bureautiques et digitaux RH et SIRH, dans une triple visée de service rendu aux collaborateurs, optimisation du circuit RH et sécurité juridique de l’entreprise"
+    }
+   ]
+  },
+  {
+   "id": "A11",
+   "code": "A.11",
+   "libelle": "Conduite du dialogue social",
+   "bloc": "B04",
+   "competences": [
+    {
+     "id": "C.11.1",
+     "libelle": "Garantir le bon fonctionnement des IRP18, dans le respect de la règlementation en vigueur, afin d’œuvrer pour le développement économique et social de l’entreprise"
+    },
+    {
+     "id": "C.11.2",
+     "libelle": "Favoriser les conditions d’un dialogue social orienté vers la valorisation de la responsabilité sociétale de l’entreprise, afin d’inscrire son fonctionnement dans une perspective viable, vivable et équitable"
+    }
+   ]
+  },
+  {
+   "id": "A12",
+   "code": "A.12",
+   "libelle": "Participation à la définition et au déploiement de la politique de communication RH externe",
+   "bloc": "B04",
+   "competences": [
+    {
+     "id": "C.12.1",
+     "libelle": "Participer à la définition et l’encadrement de la marque employeur, en lien avec la direction communication, dans une dimension RSE, au travers de la stratégie digitale et d’e-réputation / du marketing RH digital, afin de développer l’attractivité de l’entreprise, aussi bien auprès des futures recrues que des collaborateurs"
+    }
+   ]
+  },
+  {
+   "id": "A13",
+   "code": "A.13",
+   "libelle": "Participation à la définition et au déploiement de la politique de communication RH interne",
+   "bloc": "B04",
+   "competences": [
+    {
+     "id": "C.13.1",
+     "libelle": "Structurer le circuit de communication RH interne, par le biais de canaux phygitaux (réseau social, intranet, évènements, …), outils collaboratifs et autre SIRH, dans le respect de la règlementation sociale en vigueur, dans une visée de mutualisation et génération de valeur"
+    }
+   ]
+  },
+  {
+   "id": "A14",
+   "code": "A.14",
+   "libelle": "Accompagnement des managers de terrain et déploiement de la relation de proximité",
+   "bloc": "B04",
+   "competences": [
+    {
+     "id": "C.14.1",
+     "libelle": "Instaurer un dispositif de recueil et traitement des problématiques RH rencontrées par les opérationnels, par le biais d’une méthodologie adaptée à la taille et au fonctionnement de l’entreprise, au travers d’une posture de proximité et service auprès de ses clients internes, ainsi que de promoteur et facilitateur, dans une visée de résilience organisationnelle"
+    }
+   ]
+  },
+  {
+   "id": "A15",
+   "code": "A.15",
+   "libelle": "Définition et pilotage de la politique d’acquisition de talents",
+   "bloc": "B05",
+   "competences": [
+    {
+     "id": "C.15.1",
+     "libelle": "Définir et contrôler l’application de process de recrutement omnicanal, en conformité avec la règlementation en vigueur, à l’aide de l’IA, notamment pour la phase de sélection (sourcing), et le recrutement guidé par les données (data driven recruiting) ainsi que des neurosciences, dans une optique d’optimisation de la performance ainsi que de l’expérience candidat"
+    },
+    {
+     "id": "C.15.2",
+     "libelle": "Superviser la rédaction de fiches de poste et annonces, avec des arguments et un champ lexical adaptés à la cible visée, au travers du marketing RH, dans le respect de la règlementation en vigueur et en s’assurant de sa dimension inclusive, afin d’attirer les talents"
+    }
+   ]
+  },
+  {
+   "id": "A16",
+   "code": "A.16",
+   "libelle": "Management des compétences",
+   "bloc": "B05",
+   "competences": [
+    {
+     "id": "C.16.1",
+     "libelle": "Identifier et anticiper les besoins de compétences nécessaires à la croissance et l’évolution de l’entreprise, au travers d’analyses sur les évolutions du marché du travail ainsi que les perspectives d’évolution de l’entreprise, notamment en termes d’obsolescence des compétences, à l’aide d’outils d’analyses prédictives ainsi que de méthodologies agiles, dans une optique d’optimisation des parcours professionnels au sein de l’entreprise"
+    },
+    {
+     "id": "C.16.2",
+     "libelle": "Mettre en place une démarche proactive de gestion/ évolution des carrières et mobilités internes, au travers de l’analytics RH, via des solutions de talentmarketplace et plan de succession, intégrant pleinement la dimension RSE, développant les compétences en DEI20 tout au long de la chaîne de valeur des talents, dans une visée de sécurisation des parcours, adaptation des compétences et égalité auprès des collaborateurs, en termes d’offres d’opportunités d’évolution et d’épanouissement"
+    },
+    {
+     "id": "C.16.3",
+     "libelle": "Piloter le plan de développement des compétences et de la politique de formation, dans le respect du cadre légal de la formation professionnelle, à l’aide de dispositifs mobilisables à l’initiative de l’employeur, du salarié ou d’un commun accord, au travers de la notion d’organisation apprenante, et via des modalités hybrides, dans le but d’optimiser la performance et la compétitivité de l’entreprise"
+    }
+   ]
+  },
+  {
+   "id": "A17",
+   "code": "A.17",
+   "libelle": "Management de l’expérience collaborateur",
+   "bloc": "B05",
+   "competences": [
+    {
+     "id": "C.17.1",
+     "libelle": "Mettre en œuvre une démarche d’onboarding22, au travers d’une méthodologie incluant des modalités inclusives et hybrides ainsi que des supports accessibles, dans une optique d’acculturation et de fidélisation des talents"
+    },
+    {
+     "id": "C.17.2",
+     "libelle": "Mettre en œuvre une démarche d’offboarding23, en planifiant les successions via l’analytics RH, et au travers d’outils digitaux et de l’IA, dans une logique d’anticipation aux niveaux du collaborateur ainsi que de l’entreprise"
+    },
+    {
+     "id": "C.17.3",
+     "libelle": "Déployer une démarche QVCT24 dans un environnement hybride, au travers de réflexions et actions menées dans une approche RSE, à l’aide de la data RH, d’outils digitaux collaboratifs et de l’IA, dans le respect de la règlementation QVCT en vigueur, afin d’offrir un cadre de travail propice à l'épanouissement professionnel ainsi qu’à la cohésion de groupe"
+    },
+    {
+     "id": "C.17.4",
+     "libelle": "Evaluer et prévenir les risques physiques et psychosociaux, dans le respect des obligations en matière de santé et sécurité au travail, afin de construire une organisation de travail conciliant santé des collaborateurs et performance globale de l’entreprise"
+    }
+   ]
+  }
+ ],
+ "evaluation": [
+  {
+   "intitule": "Mise en situation professionnelle reconstituée",
+   "competences": "C.1.1",
+   "modalite": "Mise en situation professionnelle reconstituée Relative aux activités 1 à 4 Epreuve individuelle, à l’écrit Sur la base d’éléments socio- économiques relatifs à une entreprise fictive, il est demandé au candidat de: - Concevoir un dispositif de veille et",
+   "bloc": "B01"
+  },
+  {
+   "intitule": "conduire son déploiement, - Elaborer un diagnostic RH, - Définir une stratégie RH RSE en fonction de l’audit établi, sur la base d’éléments de veille et d’innov",
+   "competences": "C.2.1",
+   "modalite": "conduire son déploiement, - Elaborer un diagnostic RH, - Définir une stratégie RH RSE en fonction de l’audit établi, sur la base d’éléments de veille et d’innovation RH et en lui associant des indicateurs clés de performance et de risque.",
+   "bloc": "B01"
+  },
+  {
+   "intitule": "Mise en situation professionnelle reconstituée",
+   "competences": "C.5.1",
+   "modalite": "Mise en situation professionnelle reconstituée Relative aux activités 5, 6 et 7 (à l’exception de la compétence 7.3.) Epreuve en sous-groupe, en mode projet, à l’écrit Sur la base d’éléments socio- économiques d’une entreprise fictive, il est demandé au candidat de conduire un projet de transformation digitale. Il doit précisément:",
+   "bloc": "B02"
+  },
+  {
+   "intitule": "- Contrôler la conformité de la politique de données RH, - Définir le périmètre et les étapes du projet, - Elaborer le budget, - Paramétrer le SIRH en fonction,",
+   "competences": "C.5.2",
+   "modalite": "- Contrôler la conformité de la politique de données RH, - Définir le périmètre et les étapes du projet, - Elaborer le budget, - Paramétrer le SIRH en fonction, - Exploiter et interpréter des données RH, - Préciser les modalités choisies pour mobiliser les parties prenantes, - Préciser les critères de sélection pour créer un réseau de partenaires.",
+   "bloc": "B02"
+  },
+  {
+   "intitule": "Mise en situation professionnelle reconstituée",
+   "competences": "C.7.3",
+   "modalite": "Mise en situation professionnelle reconstituée Relative à la compétence 7.3. uniquement Epreuve individuelle, à l’écrit Sur la base de 2 entretiens professionnels fictifs entre un manager RH et un membre de son équipe, le candidat analyse les points suivants: - Façon dont le cadre de l’entretien est posé et tenu, - Façon dont le manager des RH favorise la communication, - Dynamique de l’entretien.",
+   "bloc": "B02"
+  },
+  {
+   "intitule": "Mise en situation professionnelle reconstituée",
+   "competences": "C.8.1",
+   "modalite": "Mise en situation professionnelle reconstituée Relative aux activités 8, 9, 10. Epreuve individuelle, à l’écrit Sur la base d’éléments socio- économiques relatifs à une entreprise fictive, il est demandé au candidat de: - Contrôler la conformité de bulletins de paie au regard des informations communiquées sur les personnes concernées ainsi que de la convention et de la règlementation en vigueur, - Analyser des changements de situation professionnelle (ex: changement de statut, passage en pré-retraite, etc.) au regard de la politique de rémunération globale ainsi que de la règlementation en vigueur et préparer les documents afférents",
+   "bloc": "B03"
+  },
+  {
+   "intitule": "Mise en situation professionnelle reconstituée",
+   "competences": "C.11.1",
+   "modalite": "Mise en situation professionnelle reconstituée Relative aux activités 11, 12, 13. Epreuve individuelle, à l’écrit Sur la base d’éléments socio- économiques relatifs à une entreprise fictive, et particulièrement d’une situation de tension en termes de climat social, il est demandé au candidat de: - Evaluer la conformité du process de dialogue social, - Analyser la dynamique sociale et sociétale à l’œuvre,",
+   "bloc": "B04"
+  },
+  {
+   "intitule": "- Elaborer des axes d’action en termes de politique de relations sociales, actions de communication interne / externe et RSE, en lien avec une matrice de matéri",
+   "competences": "C.11.2",
+   "modalite": "- Elaborer des axes d’action en termes de politique de relations sociales, actions de communication interne / externe et RSE, en lien avec une matrice de matérialité.",
+   "bloc": "B04"
+  },
+  {
+   "intitule": "Mise en situation professionnelle reconstituée",
+   "competences": "C.14.1",
+   "modalite": "Mise en situation professionnelle reconstituée Relative aux activités 12, 13, 14. Epreuve individuelle, à l’écrit Sur la base d’éléments socio- économiques relatifs à une entreprise fictive, et particulièrement d’une situation d’évolution/ restructuration organisationnelle, il est demandé au candidat de: - Définir une stratégie de communication RH interne et externe via marketing RH, - Identifier les freins et problématiques qui pourraient survenir en lien avec les évolutions et hiérarchiser leurs impacts sur l’organisation, - Proposer un plan d’accompagnement des opérationnels.",
+   "bloc": "B04"
+  },
+  {
+   "intitule": "Mise en situation professionnelle reconstituée",
+   "competences": "C.15.1",
+   "modalite": "Mise en situation professionnelle reconstituée Relative aux activités 15 et 16. Epreuve individuelle, à l’écrit Sur la base d’éléments socio- économiques relatifs à une entreprise fictive qui va connaître une transformation structurelle à court terme et qui nécessite l’acquisition de nouveau talents, il est demandé au candidat de: - Définir la politique de recrutement, - Définir la politique de formation, pour répondre au contexte et aux enjeux.",
+   "bloc": "B05"
+  },
+  {
+   "intitule": "Mise en situation professionnelle reconstituée",
+   "competences": "C.17.1",
+   "modalite": "Mise en situation professionnelle reconstituée Relative à l’activité 17. Epreuve individuelle, à l’écrit Sur la base d’éléments socio- économiques relatifs à une entreprise fictive, il est demandé au candidat de: - Proposer une évolution / révision d’une stratégie d’on/offboarding en tenant compte des enjeux de la QVCT à l’échelle de l’entreprise et de ses moyens, - Cartographier les risques et associer des niveaux de prévention pour les risques majeurs.",
+   "bloc": "B05"
+  }
+ ]
+}
