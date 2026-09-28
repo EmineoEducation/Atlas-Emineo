@@ -1,0 +1,340 @@
+{
+ "rncp": "39354",
+ "intitule": "Manager du développement d'entreprise et commercial",
+ "certificateur": "AFOREM",
+ "version": "Règlement de certification V.9 — juillet 2025",
+ "source": "Mastere_MDEC_RPC_ISME.pdf",
+ "regle_certification": "Validation cumulative des cinq blocs BC 1 à BC 5. Les blocs 2, 3 et 4 se valident sur moyenne. BC 1, BC 3 et la première partie des blocs 2 et 5 sont situés en M1 ; BC 4 et les secondes parties des blocs 2 et 5 en M2.",
+ "blocs": [
+  {
+   "id": "B01",
+   "libelle": "Élaborer la stratégie générale de développement de l'entreprise",
+   "nature": "obligatoire",
+   "option_groupe": "",
+   "annee_cycle": "M1"
+  },
+  {
+   "id": "B02",
+   "libelle": "Piloter un centre de profit",
+   "nature": "obligatoire",
+   "option_groupe": "",
+   "annee_cycle": "M1 et M2"
+  },
+  {
+   "id": "B03",
+   "libelle": "Concevoir la stratégie de développement commercial",
+   "nature": "obligatoire",
+   "option_groupe": "",
+   "annee_cycle": "M1"
+  },
+  {
+   "id": "B04",
+   "libelle": "Superviser la mise en œuvre de la performance commerciale",
+   "nature": "obligatoire",
+   "option_groupe": "",
+   "annee_cycle": "M2"
+  },
+  {
+   "id": "B05",
+   "libelle": "Manager une équipe",
+   "nature": "obligatoire",
+   "option_groupe": "",
+   "annee_cycle": "M1 et M2"
+  }
+ ],
+ "activites": [
+  {
+   "id": "A1",
+   "code": "A.1",
+   "libelle": "Analyse de l’environnement interne et externe de l’entreprise",
+   "bloc": "B01",
+   "competences": [
+    {
+     "id": "C.1",
+     "libelle": "Analyser les opportunités et les menaces potentielles en repérant et interprétant les tendances de l’environnement pour guider la prise de décision stratégique."
+    },
+    {
+     "id": "C.2",
+     "libelle": "Diagnostiquer les forces et faiblesses de l’organisation par des outils d’analyse stratégique pour déterminer les leviers d’action stratégiques."
+    },
+    {
+     "id": "C.3",
+     "libelle": "Synthétiser les informations recueillies pour nourrir la réflexion collective quant à la stratégie de développement à élaborer."
+    }
+   ]
+  },
+  {
+   "id": "A2",
+   "code": "A.2",
+   "libelle": "Définition de la stratégie générale de développement de l’entreprise",
+   "bloc": "B01",
+   "competences": [
+    {
+     "id": "C.4",
+     "libelle": "Déterminer la vision et le projet stratégique de l’entreprise en collaboration avec les parties prenantes en tenant compte des enjeux scientifiques, sociétaux et éthiques dans une logique RSE, pour garantir la pérennité et le développement."
+    },
+    {
+     "id": "C.5",
+     "libelle": "Définir et prioriser les objectifs stratégiques alignés avec la stratégie générale de l’entreprise en utilisant des outils d’analyse de la valeur pour maximiser l’impact stratégique."
+    },
+    {
+     "id": "C.6",
+     "libelle": "Communiquer les objectifs stratégiques de manière claire et convaincante à tous les niveaux de l’organisation pour garantir leur compréhension et l’adhésion des équipes."
+    }
+   ]
+  },
+  {
+   "id": "A3",
+   "code": "A.3",
+   "libelle": "Planification et évaluation de la stratégie générale de développement de l’entreprise",
+   "bloc": "B01",
+   "competences": [
+    {
+     "id": "C.7",
+     "libelle": "Elaborer des plans stratégiques détaillés en identifiant les ressources et les étapes clés pour atteindre les objectifs stratégiques fixés"
+    },
+    {
+     "id": "C.8",
+     "libelle": "Accompagner les directions opérationnelles dans la déclinaison des objectifs stratégiques sur leur périmètre en responsabilité pour assurer l’alignement et la cohérence de leurs plans d’action."
+    },
+    {
+     "id": "C.9",
+     "libelle": "Construire un dispositif d’évaluation de la performance des plans stratégiques définis en utilisant des indicateurs clés de performance pour identifier les ajustements nécessaires et améliorer la pertinence des plans."
+    }
+   ]
+  },
+  {
+   "id": "A4",
+   "code": "A.4",
+   "libelle": "Pilotage des activités opérationnelles d’un centre de profit (PARTIE M1)",
+   "bloc": "B02",
+   "competences": [
+    {
+     "id": "C.10",
+     "libelle": "Gérer les ressources financières en réalisant des prévisions budgétaires et des analyses de rentabilité afin de garantir une saine gestion financière et d’atteindre les objectifs économiques."
+    },
+    {
+     "id": "C.11",
+     "libelle": "Assurer la conformité juridique des activités en réalisant une veille réglementaire et en garantissant l’application de procédures conformes aux normes légales en vigueur, afin de limiter les risques liés aux activités du centre de profit."
+    },
+    {
+     "id": "C.12",
+     "libelle": "Piloter la gestion des ressources humaines, en matière de recrutement, de rémunération, de formation et d’organisation du travail, en mettant en place des politiques adaptées aux enjeux et au contexte des activités du centre de profit."
+    },
+    {
+     "id": "C.13",
+     "libelle": "Garantir la gestion des services généraux (achats, gestion des bâtiments, gestion des matériels) réalisés en interne ou externalisés, pour assurer le bon fonctionnement du centre de profit."
+    }
+   ]
+  },
+  {
+   "id": "A5",
+   "code": "A.5",
+   "libelle": "Optimisation de l’organisation d’un centre de profit",
+   "bloc": "B02",
+   "competences": [
+    {
+     "id": "C.14",
+     "libelle": "Diriger les opérations d’ajustement/ transformation dans une logique RSE et d’amélioration continue de la qualité, pour assurer la pérennité et l’agilité de l’organisation."
+    }
+   ]
+  },
+  {
+   "id": "A6",
+   "code": "A.6",
+   "libelle": "Analyse du marché et des perspectives d’évolution commerciale",
+   "bloc": "B03",
+   "competences": [
+    {
+     "id": "C.15",
+     "libelle": "Elaborer une stratégie de veille à l’aide de technologies intelligentes (IA, Big Data, CRM…) pour saisir les opportunités d’innovation remarquables et profitables"
+    },
+    {
+     "id": "C.16",
+     "libelle": "Identifier les segments de marché les plus lucratifs en analysant les comportements et les attentes des clients pour allouer efficacement les efforts de marketing et de vente."
+    },
+    {
+     "id": "C.17",
+     "libelle": "Diagnostiquer les avantages concurrentiels et les lacunes à combler de l’entreprise en évaluant comparativement la concurrence pour définir les axes de la stratégie de développement commerciale."
+    }
+   ]
+  },
+  {
+   "id": "A7",
+   "code": "A.7",
+   "libelle": "Elaboration de la stratégie commerciale",
+   "bloc": "B03",
+   "competences": [
+    {
+     "id": "C.18",
+     "libelle": "Elaborer la stratégie commerciale en alignement avec les orientations définies par la direction générale, en vue de garantir la pérennité et le développement des activités commerciales."
+    },
+    {
+     "id": "C.19",
+     "libelle": "Assurer la traduction de la stratégie commerciale à un niveau intermédiaire en supervisant l’élaboration des Plan d’Action Commercial (PAC) établis par les responsables de périmètre, secteur ou produit, en vue de garantir leur cohérence avec la stratégie commerciale."
+    },
+    {
+     "id": "C.20",
+     "libelle": "Sécuriser la stratégie commerciale en identifiant, analysant et évaluant les aléas internes et externes, dans le but de réajuster les objectifs commerciaux et les moyens déployés."
+    }
+   ]
+  },
+  {
+   "id": "A8",
+   "code": "A.8",
+   "libelle": "Allocation des ressources et moyens nécessaires à la mise en œuvre de la stratégie commerciale",
+   "bloc": "B03",
+   "competences": [
+    {
+     "id": "C.21",
+     "libelle": "Inventorier les moyens et ressources disponibles (humains, techniques, budgétaires, matériels…) nécessaires, en interne et en externe, à la mise en œuvre de la stratégie commerciale."
+    },
+    {
+     "id": "C.22",
+     "libelle": "Négocier avec la direction générale l’attribution des moyens et ressources complémentaires pour permettre la mise en œuvre de la stratégie commerciale, et C.23 Gérer efficacement et équitablement l’utilisation des moyens et des ressources disponibles en accord avec les objectifs fixés, afin de garantir le respect du budget défini."
+    },
+    {
+     "id": "C.23",
+     "libelle": "Gérer les ressources nécessaires à la mise en œuvre de la stratégie commerciale",
+     "libelle_source": "RPC — formulation abrégée, compétence non citée dans le plan de formation"
+    }
+   ]
+  },
+  {
+   "id": "A9",
+   "code": "A.9",
+   "libelle": "Déploiement des politiques de développement commercial et de satisfaction client",
+   "bloc": "B04",
+   "competences": [
+    {
+     "id": "C.24",
+     "libelle": "Développer une politique commerciale innovante, alignée sur les objectifs de la stratégie commerciale, en collaboration avec les directions internes, et en privilégiant la création d’alliances stratégiques dans le but de créer des opportunités nouvelles."
+    },
+    {
+     "id": "C.25",
+     "libelle": "Concevoir et déployer une stratégie de satisfaction client omnicanal centrée sur l’excellence du service, la personnalisation des offres et la réactivité aux besoins des clients afin de favoriser la fidélisation de la clientèle."
+    },
+    {
+     "id": "C.26",
+     "libelle": "Elaborer des stratégies et des initiatives visant à intégrer la RSE dans les pratiques commerciales, en collaboration avec les différentes parties prenantes de l’entreprise, pour renforcer la contribution positive de l’entreprise à la société et à l’environnement."
+    }
+   ]
+  },
+  {
+   "id": "A10",
+   "code": "A.10",
+   "libelle": "Management d’un système d’amélioration de la performance commerciale",
+   "bloc": "B04",
+   "competences": [
+    {
+     "id": "C.27",
+     "libelle": "Evaluer la performance des équipes commerciales en analysant les indicateurs de performance (KPI) issus des process mis en place, pour mesurer l’atteinte des objectifs commerciaux fixés et repérer les leviers de développement."
+    },
+    {
+     "id": "C.28",
+     "libelle": "Piloter le dispositif d’amélioration de la performance commerciale en développant des plans d’action intégrant des pratiques responsables afin de renforcer la qualité et la performance du processus commercial."
+    }
+   ]
+  },
+  {
+   "id": "A11",
+   "code": "A.11",
+   "libelle": "Organisation et supervision des activités de l’équipe managée",
+   "bloc": "B05",
+   "competences": [
+    {
+     "id": "C.29",
+     "libelle": "Planifier les activités en établissant une feuille de route de chacun afin de répartir la charge de travail de manière équitable."
+    },
+    {
+     "id": "C.30",
+     "libelle": "Elaborer des procédures opérationnelles, en modélisant et optimisant les pratiques existantes des acteurs concernés, en vue de consolider l’organisation du travail et la rendre plus efficiente."
+    },
+    {
+     "id": "C.31",
+     "libelle": "Mesurer les performances individuelles et collectives via des tableaux de bord et des remontés d’information pour évaluer les écarts et décider des ajustements"
+    }
+   ]
+  },
+  {
+   "id": "A12",
+   "code": "A.12",
+   "libelle": "Mobilisation de l’équipe managée",
+   "bloc": "B05",
+   "competences": [
+    {
+     "id": "C.32",
+     "libelle": "Développer la cohésion et l’esprit d’équipe, en valorisant le sens des actions menées, la complémentarité entre les acteurs et la plus-value apportée par chacun, en vue d’instaurer un environnement de travail inclusif et collaboratif, où chacun se sent motivé et engagé."
+    },
+    {
+     "id": "C.33",
+     "libelle": "Assurer la conduite du changement en déployant des méthodes et outils adaptés, pour assurer la pérennité et l’agilité de l’organisation et l’adhésion de l’équipe."
+    },
+    {
+     "id": "C.34",
+     "libelle": "Définir des objectifs individuels et collectifs mobilisateurs en tenant compte des compétences et aspirations de chaque membre et des objectifs de l’unité dirigée, afin de fixer un cap clair pour son équipe."
+    },
+    {
+     "id": "C.35",
+     "libelle": "Identifier les besoins en compétences de chaque membre de l’équipe en fonction des exigences du poste au travers de l’entretien annuel pour répondre aux besoins du service et C.36 Soutenir les collaborateurs dans la réalisation de leur mission en mettant à disposition son expertise, par la formation-action ou le tutorat, afin de renforcer les compétences de son équipe et C.37 Organiser la capitalisation des bonnes pratiques en exploitant l’intelligence collective à travers l’analyse de situation, afin d‘inscrire le fonctionnement de l’équipe dans une visée d’amélioration continue et de co-développement."
+    }
+   ]
+  },
+  {
+   "id": "A13",
+   "code": "A.13",
+   "libelle": "Développement des compétences des membres de l'équipe managée",
+   "bloc": "B05",
+   "competences": [
+    {
+     "id": "C.36",
+     "libelle": "Soutenir les collaborateurs dans le développement de leurs compétences",
+     "libelle_source": "RPC — formulation abrégée, compétence non citée dans le plan de formation"
+    },
+    {
+     "id": "C.37",
+     "libelle": "Capitaliser les bonnes pratiques au sein de l'équipe managée",
+     "libelle_source": "RPC — formulation abrégée, compétence non citée dans le plan de formation"
+    }
+   ]
+  }
+ ],
+ "evaluation": [
+  {
+   "intitule": "Étude de cas — élaboration de la stratégie de développement général de l'entreprise",
+   "competences": "C.1 à C.9",
+   "modalite": "Étude de cas · individuelle · écrite",
+   "bloc": "B01"
+  },
+  {
+   "intitule": "Épreuve 2.1 — pilotage financier d'un centre de profit",
+   "competences": "C.10",
+   "modalite": "Étude de cas · individuelle · écrite",
+   "bloc": "B02"
+  },
+  {
+   "intitule": "Épreuve 2.2 — rapport d'analyse",
+   "competences": "C.11 à C.14",
+   "modalite": "Rapport écrit individuel fondé sur l'expérience en entreprise d'accueil",
+   "bloc": "B02"
+  },
+  {
+   "intitule": "Conception et déploiement de la stratégie commerciale",
+   "competences": "C.15 à C.23",
+   "modalite": "Évaluation individuelle écrite · oral collectif",
+   "bloc": "B03"
+  },
+  {
+   "intitule": "Projet d'optimisation opérationnel (P2O)",
+   "competences": "C.24 à C.28",
+   "modalite": "Mémoire professionnel individuel · soutenance orale devant jury",
+   "bloc": "B04"
+  },
+  {
+   "intitule": "Étude de cas — management d'équipe",
+   "competences": "C.29 à C.37",
+   "modalite": "Étude de cas · individuelle · écrite",
+   "bloc": "B05"
+  }
+ ]
+}
