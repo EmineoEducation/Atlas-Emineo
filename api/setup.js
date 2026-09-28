@@ -1,5 +1,5 @@
 const { getDB } = require('./_lib/db');
-const { hashPassword } = require('./_lib/auth');
+const { hashPassword, requireRole } = require('./_lib/auth');
 
 // ─── Données pédagogiques Le Mans (générées le 24/07/2026) ───────────────────
 const DATA_LE_MANS = {
@@ -272,6 +272,32 @@ module.exports = async function handler(req, res) {
 
   try {
     const db = getDB();
+
+    // ─── Garde d'acces ───────────────────────────────────────────────────────
+    // /api/setup cree les tables, peut tout reinitialiser (?reset=1) et rejoue
+    // le seed des comptes : il ne doit jamais etre appelable sans
+    // authentification. Deux voies, et deux seulement :
+    //   1. Bootstrap — tant qu'aucun compte direction n'existe (base nue,
+    //      premiere installation), l'appel passe.
+    //   2. Ensuite — seul un compte `dir` authentifie peut le declencher.
+    //
+    // Depuis la console du navigateur, une fois connecte en direction :
+    //   fetch('/api/setup', { method: 'POST', headers: {
+    //     Authorization: 'Bearer ' + localStorage.getItem('atlas_token') } })
+    //     .then(r => r.json()).then(console.log)
+    let bootstrap = false;
+    try {
+      const dirs = await db.execute("SELECT COUNT(*) AS n FROM users WHERE role = 'dir'");
+      bootstrap = Number(dirs.rows[0].n) === 0;
+    } catch (_) {
+      bootstrap = true; // table `users` absente : toute premiere installation
+    }
+    if (!bootstrap) {
+      const acteur = await requireRole(req, ['dir']);
+      if (!acteur) {
+        return res.status(401).json({ error: 'Authentification direction requise.' });
+      }
+    }
 
     // ─── Réinitialisation complète (?reset=1) ────────────────────────────────
     // Vide le contenu pédagogique et opérationnel avant de rejouer le seed.
