@@ -333,7 +333,7 @@ module.exports = async function handler(req, res) {
         'johnny.nicolas@isme.fr',
       ];
       const compte = {};
-      for (const t of ['digest_fr', 'declaration', 'previsionnel_seance', 'groupe', 'inscription', 'formations', 'sessions']) {
+      for (const t of ['digest_fr', 'declaration', 'previsionnel_seance', 'matiere_cesar', 'groupe_planning', 'groupe', 'inscription', 'formations', 'sessions']) {
         try {
           const r = await db.execute(`DELETE FROM ${t}`);
           compte[t] = Number(r.rowsAffected || 0);
@@ -523,6 +523,99 @@ module.exports = async function handler(req, res) {
     // identifiant survit au renommage d'un groupe, pas un libelle recopie.
     try { await db.execute(`ALTER TABLE inscription ADD COLUMN groupe_id INTEGER`); } catch (_) {}
 
+    // ─── Groupes planning CESAR (02/10/2026) ─────────────────────────────────
+    // Reunion Helene Abellard du 01/10/2026. Dans CESAR la hierarchie est :
+    //   plan de formation -> groupe de formation -> GROUPE PLANNING -> seances
+    // Les seances se rattachent au groupe planning, pas au groupe de formation.
+    // Deux groupes planning d'un meme groupe de formation peuvent suivre des
+    // progressions differentes ("je vais avoir des progressions pedagogiques
+    // differentes parce que j'ai des sous-groupes"). Agreger la couverture au
+    // niveau du titre produirait donc une moyenne qui ne decrit aucun groupe
+    // reel.
+    //
+    // Cette table n'a rien a voir avec la table `groupe` ci-dessus, qui porte
+    // les options intensives choisies par les etudiants. Les deux coexistent.
+    //
+    // formation_id NULL = groupe connu de CESAR mais pas encore rattache a un
+    // titre Atlas. L'import ne devine jamais : il signale.
+    await db.execute(`CREATE TABLE IF NOT EXISTS groupe_planning (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      code_cesar TEXT NOT NULL,
+      libelle TEXT NOT NULL DEFAULT '',
+      groupe_formation TEXT DEFAULT '',
+      formation_id INTEGER,
+      campus TEXT NOT NULL DEFAULT 'Le Mans',
+      effectif INTEGER,
+      statut TEXT NOT NULL DEFAULT 'a_rattacher',
+      annee_scolaire TEXT NOT NULL DEFAULT '2026-27',
+      created_at TEXT DEFAULT (datetime('now')),
+      updated_at TEXT DEFAULT (datetime('now'))
+    )`);
+    await db.execute(`CREATE UNIQUE INDEX IF NOT EXISTS idx_gp_code ON groupe_planning(code_cesar, annee_scolaire)`);
+    await db.execute(`CREATE INDEX IF NOT EXISTS idx_gp_formation ON groupe_planning(formation_id, annee_scolaire)`);
+
+    // ─── Resolution des intitules de matiere CESAR ───────────────────────────
+    // Second point de la reunion du 01/10/2026 : le sequencage. Quand un
+    // etablissement sequence une matiere, CESAR planifie les sous-matieres et
+    // la matiere mere n'apparait nulle part dans la planification — alors que
+    // c'est elle que le certificateur attend. Une seance emargee peut donc
+    // porter un libelle absent du plan de formation.
+    //
+    // Cette table est la couche de resolution : libelle planifie dans CESAR ->
+    // module du plan de formation Atlas. Elle absorbe aussi les simples ecarts
+    // de nommage ("Relations Presse" / "Relations presse et influence").
+    //
+    // module_ref vide = intitule rencontre a l'import mais pas encore arbitre.
+    // C'est la file d'attente de validation du FR : aucune correspondance ne
+    // s'applique sans decision humaine, meme proposee par Claude.
+    //   origine : 'import' (rencontre, non arbitre) | 'sequencage' (fourni par
+    //             le reporting CESAR) | 'manuel' (arbitre dans Atlas)
+    await db.execute(`CREATE TABLE IF NOT EXISTS matiere_cesar (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      formation_id INTEGER NOT NULL,
+      libelle_cesar TEXT NOT NULL,
+      cle TEXT NOT NULL,
+      module_ref TEXT DEFAULT '',
+      origine TEXT NOT NULL DEFAULT 'import',
+      confiance INTEGER DEFAULT 0,
+      occurrences INTEGER NOT NULL DEFAULT 0,
+      valide_par INTEGER,
+      valide_at TEXT,
+      annee_scolaire TEXT NOT NULL DEFAULT '2026-27',
+      created_at TEXT DEFAULT (datetime('now'))
+    )`);
+    await db.execute(`CREATE UNIQUE INDEX IF NOT EXISTS idx_mat_cle ON matiere_cesar(formation_id, cle, annee_scolaire)`);
+    await db.execute(`CREATE INDEX IF NOT EXISTS idx_mat_module ON matiere_cesar(formation_id, module_ref)`);
+
+    // ─── Colonnes CESAR sur le previsionnel et le realise ────────────────────
+    // ref_cesar  : identifiant de la seance dans CESAR. Cle d'idempotence de
+    //              l'import — reimporter le meme export ne doit jamais creer
+    //              de doublon. A defaut d'identifiant fourni, api/cesar-sync.js
+    //              en fabrique un deterministe (groupe + date + heure + matiere).
+    // code_groupe_cesar : rattachement au groupe planning.
+    // duree_minutes     : volume horaire reel de la seance. C'est ce que le
+    //              reporting demande par Arnaud compare au plan de formation
+    //              ("ce qu'il recherchait, c'etait la ou il y en avait moins").
+    for (const col of [
+      "ALTER TABLE previsionnel_seance ADD COLUMN ref_cesar TEXT DEFAULT ''",
+      "ALTER TABLE previsionnel_seance ADD COLUMN code_groupe_cesar TEXT DEFAULT ''",
+      "ALTER TABLE previsionnel_seance ADD COLUMN duree_minutes INTEGER",
+      "ALTER TABLE previsionnel_seance ADD COLUMN libelle_cesar TEXT DEFAULT ''",
+      "ALTER TABLE declaration ADD COLUMN ref_cesar TEXT DEFAULT ''",
+      "ALTER TABLE declaration ADD COLUMN code_groupe_cesar TEXT DEFAULT ''",
+      "ALTER TABLE declaration ADD COLUMN duree_minutes INTEGER",
+      "ALTER TABLE declaration ADD COLUMN libelle_cesar TEXT DEFAULT ''",
+    ]) {
+      try { await db.execute(col); } catch (_) {}
+    }
+    // Index partiels : l'unicite ne porte que sur les lignes effectivement
+    // issues de CESAR. Les lignes saisies dans Atlas (ref_cesar vide) ne sont
+    // pas contraintes, sans quoi la deuxieme saisie manuelle echouerait.
+    await db.execute(`CREATE UNIQUE INDEX IF NOT EXISTS idx_prev_ref_cesar ON previsionnel_seance(ref_cesar) WHERE ref_cesar <> ''`);
+    await db.execute(`CREATE UNIQUE INDEX IF NOT EXISTS idx_decl_ref_cesar ON declaration(ref_cesar) WHERE ref_cesar <> ''`);
+    await db.execute(`CREATE INDEX IF NOT EXISTS idx_prev_groupe ON previsionnel_seance(code_groupe_cesar, annee_scolaire)`);
+    await db.execute(`CREATE INDEX IF NOT EXISTS idx_decl_groupe ON declaration(code_groupe_cesar, annee_scolaire)`);
+
     // ─── Seed formations Le Mans (idempotent par titre_court+campus) ────────
     // Cle = titre_court + campus : M1 et M2 d'un meme Mastere partagent le code
     // RNCP, rncp+campus ne discriminerait plus depuis le decoupage par annee de
@@ -631,12 +724,21 @@ module.exports = async function handler(req, res) {
       } else {
         let supprLignes = 0;
         for (const c of cibles) {
-          for (const t of ['previsionnel_seance', 'declaration', 'digest_fr', 'inscription']) {
+          for (const t of ['previsionnel_seance', 'declaration', 'digest_fr', 'inscription', 'matiere_cesar']) {
             try {
               const r = await db.execute({ sql: `DELETE FROM ${t} WHERE formation_id = ?`, args: [c.id] });
               supprLignes += Number(r.rowsAffected || 0);
             } catch (_) {}
           }
+          // Un groupe planning n'est pas supprime avec la formation : il garde
+          // son identite CESAR et redevient simplement non rattache. Le
+          // recharger couterait un nouvel import pour rien.
+          try {
+            await db.execute({
+              sql: "UPDATE groupe_planning SET formation_id = NULL, statut = 'a_rattacher', updated_at = datetime('now') WHERE formation_id = ?",
+              args: [c.id],
+            });
+          } catch (_) {}
           await db.execute({ sql: 'DELETE FROM formations WHERE id = ?', args: [c.id] });
         }
 
@@ -732,9 +834,25 @@ module.exports = async function handler(req, res) {
       }
     }
 
+    // ─── Etat du volet CESAR ─────────────────────────────────────────────────
+    // Remonte dans la reponse pour que la migration soit verifiable depuis la
+    // console sans ouvrir la base.
+    let cesar = null;
+    try {
+      const gp = await db.execute("SELECT COUNT(*) AS n, SUM(CASE WHEN formation_id IS NULL THEN 1 ELSE 0 END) AS orphelins FROM groupe_planning");
+      const mc = await db.execute("SELECT COUNT(*) AS n, SUM(CASE WHEN module_ref = '' THEN 1 ELSE 0 END) AS a_arbitrer FROM matiere_cesar");
+      cesar = {
+        groupes_planning: Number(gp.rows[0].n || 0),
+        groupes_non_rattaches: Number(gp.rows[0].orphelins || 0),
+        intitules_matiere: Number(mc.rows[0].n || 0),
+        intitules_a_arbitrer: Number(mc.rows[0].a_arbitrer || 0),
+      };
+    } catch (e) { cesar = { error: e.message }; }
+
     return res.status(200).json({
       ok: true,
       message: 'Migration + seed Le Mans complets.',
+      cesar,
       details: {
         comptes_dir_crees: createdDir,
         formations_creees: createdFormations,
