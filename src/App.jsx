@@ -182,11 +182,14 @@ function LoginPage({onLogin}){
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   IMPORT CSV — deux modes : étudiants / intervenants
+   IMPORT CSV — intervenants
    Format CRM Éminéo : CSV séparateur ";" UTF-8 BOM
-   Étudiants  : Nom;Prénom;Email école
-   Intervenants : Nom;Prénom;Matières;Email école
-     → pour les intervenants : Claude apparie les matières CRM aux modules Atlas
+   Colonnes : Nom;Prénom;Matières;Email école
+     → Claude apparie les matières CRM aux modules du titre choisi.
+
+   L'import des étudiants a été retiré le 05/10/2026 : le dispositif ne
+   fonctionne qu'en digest intervenants + RP, aucun compte étudiant n'est créé
+   au pilote. Proposer l'import revenait à annoncer une voie sans destination.
 ═══════════════════════════════════════════════════════════════════════════ */
 
 function genPassword(){
@@ -269,78 +272,6 @@ function ResultTable({rows,onReset}){
         </table>
       </div>
       <button onClick={onReset} style={{border:`1px solid ${P.border}`,color:P.textm,borderRadius:6,padding:'5px 14px',fontSize:12,background:P.surface,cursor:'pointer'}}>Nouvel import</button>
-    </div>
-  )
-}
-
-/* ── Import étudiants ─────────────────────────────────────────────────────── */
-function ImportEtudiants({campus,formationId,onDone}){
-  const [rows,setRows]=useState([])
-  const [importing,setImporting]=useState(false)
-  const [done,setDone]=useState(false)
-  const [err,setErr]=useState('')
-
-  function parseFile(file){
-    setErr('');setRows([]);setDone(false)
-    const r=new FileReader()
-    r.onload=e=>{
-      try{
-        const parsed=parseCSV(e.target.result)
-        if(!parsed.length){setErr('Aucune ligne exploitable dans ce fichier.');return}
-        // Colonnes CRM : nom / prenom / email_ecole (ou email)
-        const rows=parsed.map(p=>({
-          nom:(p.nom||'').toUpperCase(),
-          prenom:p.prenom||p['pr_nom']||'',
-          email:p.email_ecole||p.email||p.mail||'',
-          mdp:genPassword(),status:'pending',msg:''
-        })).filter(r=>r.nom&&r.email)
-        if(!rows.length){setErr('Aucune ligne valide (nom + email requis).');return}
-        setRows(rows)
-      }catch(e){setErr('Erreur : '+e.message)}
-    }
-    fichierVersTexte(file).then(t=>r.onload({target:{result:t}})).catch(e=>setErr(e.message))
-  }
-
-  async function handleImport(){
-    setImporting(true)
-    const updated=[...rows]
-    for(let i=0;i<updated.length;i++){
-      try{
-        await api.createUser({nom:updated[i].nom,prenom:updated[i].prenom,email:updated[i].email,role:'etudiant',campus:campus||'',password:updated[i].mdp,formation_id:formationId||undefined})
-        updated[i]={...updated[i],status:'ok'}
-      }catch(e){updated[i]={...updated[i],status:'err',msg:e.message}}
-      setRows([...updated])
-    }
-    setImporting(false);setDone(true)
-    if(onDone)onDone()
-  }
-
-  if(done)return <ResultTable rows={rows} onReset={()=>{setRows([]);setDone(false)}}/>
-  return(
-    <div>
-      <p style={{fontSize:12,color:P.textm,marginBottom:'0.75rem',lineHeight:1.7}}>
-        Export CRM → fichier <strong>.csv</strong> avec colonnes : <strong>Nom · Prénom · Email école</strong>
-      </p>
-      <div onClick={()=>document.getElementById('csv-etu').click()}
-        style={{border:`2px dashed ${P.borderm}`,borderRadius:12,padding:'1.75rem',textAlign:'center',cursor:'pointer',background:'rgba(93,226,152,0.03)',marginBottom:'0.75rem'}}>
-        <input id="csv-etu" type="file" accept=".csv,.txt,.xlsx,.xlsm" style={{display:'none'}} onChange={e=>e.target.files[0]&&parseFile(e.target.files[0])}/>
-        <div style={{fontSize:22,opacity:0.4,marginBottom:'0.35rem'}}>🎓</div>
-        <div style={{fontSize:13,fontWeight:500,color:P.petrole}}>Fichier étudiants (.csv)</div>
-      </div>
-      {err&&<div style={{padding:'0.6rem 0.8rem',background:P.redbg,border:`1px solid ${P.red}`,borderRadius:8,fontSize:12,color:'#8B1A1A',marginBottom:'0.75rem'}}>{err}</div>}
-      {rows.length>0&&<>
-        <div style={{fontSize:12,color:P.textm,marginBottom:'0.5rem'}}>{rows.length} étudiant{rows.length>1?'s':''} détecté{rows.length>1?'s':''}</div>
-        <div style={{maxHeight:160,overflowY:'auto',marginBottom:'0.75rem',border:`1px solid ${P.border}`,borderRadius:8}}>
-          <table style={{width:'100%',borderCollapse:'collapse',fontSize:12}}>
-            <thead><tr style={{background:P.surface2}}>{['Prénom','Nom','Email'].map(h=><th key={h} style={{padding:'5px 8px',textAlign:'left',fontWeight:600,color:P.textm,borderBottom:`1px solid ${P.border}`}}>{h}</th>)}</tr></thead>
-            <tbody>{rows.map((r,i)=><tr key={i}><td style={{padding:'4px 8px',color:P.abysse}}>{r.prenom}</td><td style={{padding:'4px 8px',color:P.abysse}}>{r.nom}</td><td style={{padding:'4px 8px',color:P.abysse,fontSize:11}}>{r.email}</td></tr>)}</tbody>
-          </table>
-        </div>
-        <button onClick={handleImport} disabled={importing}
-          style={{width:'100%',padding:'0.75rem',borderRadius:10,fontSize:13,fontWeight:600,border:'none',cursor:importing?'not-allowed':'pointer',background:importing?'rgba(19,69,71,0.08)':`linear-gradient(135deg,${P.petrole},${P.menthe})`,color:importing?P.textm:P.abysse}}>
-          {importing?<span style={{display:'flex',alignItems:'center',justifyContent:'center',gap:'0.5rem'}}><Spinner size={14}/>Création…</span>:`Créer ${rows.length} compte${rows.length>1?'s':''} étudiant${rows.length>1?'s':''} →`}
-        </button>
-      </>}
     </div>
   )
 }
@@ -437,16 +368,17 @@ function ImportIntervenants({campus,formation,onDone}){
   if(done)return <ResultTable rows={rows} onReset={()=>{setRows([]);setDone(false);setAppDone(false)}}/>
   return(
     <div>
-      <p style={{fontSize:12,color:P.textm,marginBottom:'0.75rem',lineHeight:1.7}}>
-        Export CRM → fichier <strong>.csv</strong> avec colonnes : <strong>Nom · Prénom · Matières · Email école</strong><br/>
-        Claude apparie automatiquement les matières aux modules de la formation.
-      </p>
-      {!formation&&<div style={{padding:'0.6rem 0.8rem',background:P.amberbg,border:`1px solid ${P.amber}`,borderRadius:8,fontSize:12,color:'#7A4A00',marginBottom:'0.75rem'}}>⚠ Sélectionnez d'abord une formation dans l'onglet "Mes formations" pour activer l'appariement.</div>}
-      <div onClick={()=>document.getElementById('csv-int').click()}
-        style={{border:`2px dashed ${P.borderm}`,borderRadius:12,padding:'1.75rem',textAlign:'center',cursor:'pointer',background:'rgba(93,226,152,0.03)',marginBottom:'0.75rem'}}>
+      {/* Le bandeau « sélectionnez d'abord une formation dans l'onglet Mes
+          formations » a été supprimé le 05/10/2026 : il désignait un ailleurs
+          sans y mener. Le titre se choisit désormais au-dessus, dans cet
+          écran. Il reste donc toujours un titre sélectionné ici — sauf si le
+          périmètre est vide, cas traité par le conteneur. */}
+      <div onClick={()=>formation&&document.getElementById('csv-int').click()}
+        style={{border:`2px dashed ${formation?P.borderm:P.border}`,borderRadius:12,padding:'1.75rem',textAlign:'center',cursor:formation?'pointer':'not-allowed',background:formation?'rgba(93,226,152,0.03)':'rgba(19,69,71,0.02)',marginBottom:'0.75rem',opacity:formation?1:0.55}}>
         <input id="csv-int" type="file" accept=".csv,.txt,.xlsx,.xlsm" style={{display:'none'}} onChange={e=>e.target.files[0]&&parseFile(e.target.files[0])}/>
         <div style={{fontSize:22,opacity:0.4,marginBottom:'0.35rem'}}>👨‍🏫</div>
-        <div style={{fontSize:13,fontWeight:500,color:P.petrole}}>Fichier intervenants (.csv)</div>
+        <div style={{fontSize:13,fontWeight:500,color:P.petrole}}>Fichier intervenants (.csv ou .xlsx)</div>
+        <div style={{fontSize:11,color:P.textm,marginTop:4}}>Nom · Prénom · Matières · Email école</div>
       </div>
       {err&&<div style={{padding:'0.6rem 0.8rem',background:P.redbg,border:`1px solid ${P.red}`,borderRadius:8,fontSize:12,color:'#8B1A1A',marginBottom:'0.75rem'}}>{err}</div>}
 
@@ -492,50 +424,102 @@ function ImportIntervenants({campus,formation,onDone}){
   )
 }
 
-/* ── ImportCSV : conteneur avec sélecteur de titre + onglets Étudiants / Intervenants ─ */
+/* ── Campus d'une formation (le champ est tantôt une chaîne, tantôt un JSON) ── */
+function premierCampusDe(f){
+  if(!f)return ''
+  const c=f._campus
+  if(Array.isArray(c))return c[0]||''
+  try{const p=JSON.parse(c);if(Array.isArray(p))return p[0]||''}catch(_){}
+  return String(c||'').split(',')[0].trim()
+}
+
+/* ── ImportCSV : import des intervenants, titre choisi sur place ─────────────
+   Trois corrections du 05/10/2026, toutes au même endroit :
+
+   1. L'onglet « Étudiants » disparaît. Aucun compte étudiant n'est créé au
+      pilote ; la voie était ouverte sans destination.
+   2. Le choix du titre se fait ici, par simple clic sur une vignette. Il
+      passait auparavant par un menu déroulant, et seulement quand plusieurs
+      titres étaient disponibles — sinon rien n'était cliquable et l'écran
+      affichait « — aucun titre — » sans recours.
+   3. L'écran charge lui-même la liste des titres si l'appelant ne la fournit
+      pas. La Direction y arrivait avec un tableau vide (formations={[]}) :
+      l'appariement ne pouvait aboutir, quel que soit le fichier déposé.
+
+   Le campus retenu pour les comptes créés est celui de l'appelant si connu
+   (cas du RP), sinon celui du titre choisi. Un intervenant sans campus ne
+   verrait aucune formation : api/formations.js filtre dessus. */
 function ImportCSV({campus,formations,formation:formationProp,onDone}){
-  const [tab,setTab]=useState('etudiants')
-  // Liste des titres disponibles (déjà filtrée au campus du RP par l'appelant)
-  const titres=formations||(formationProp?[formationProp]:[])
-  const [selId,setSelId]=useState(()=>{
-    if(formationProp&&formationProp._id) return formationProp._id
-    return titres[0]?._id||null
-  })
-  const formation=titres.find(t=>t._id===selId)||formationProp||null
+  const fournies=(formations&&formations.length)?formations:(formationProp?[formationProp]:[])
+  const [chargees,setChargees]=useState(null)
+  const [selId,setSelId]=useState(formationProp?._id||null)
+
+  useEffect(()=>{
+    if(fournies.length)return
+    let vivant=true
+    api.getFormations().then(d=>{if(vivant)setChargees(d.formations||[])}).catch(()=>{if(vivant)setChargees([])})
+    return()=>{vivant=false}
+  },[fournies.length])
+
+  const titres=fournies.length?fournies:(chargees||[])
+  useEffect(()=>{
+    if(!titres.length)return
+    if(!titres.some(t=>t._id===selId))setSelId(titres[0]._id)
+  },[titres.length])
+
+  const formation=titres.find(t=>t._id===selId)||null
+  const campusCible=campus||premierCampusDe(formation)
+  const enChargement=!fournies.length&&chargees===null
+
+  if(enChargement)return <div style={{textAlign:'center',padding:'2rem'}}><Spinner/></div>
+
+  if(!titres.length)return(
+    <Empty icon="🎓" titre="Aucun titre accessible"
+      msg="Aucun titre n'est rattaché à votre périmètre. Contactez la Direction des programmes pour en faire rattacher un — l'import sera alors disponible ici."/>
+  )
 
   return(
     <div>
-      {/* Bandeau de contexte — lève toute ambiguïté : où vont les comptes importés */}
-      <div style={{display:'flex',alignItems:'center',gap:'0.75rem',flexWrap:'wrap',padding:'0.7rem 0.9rem',background:'rgba(93,226,152,0.08)',border:`1px solid ${P.borderm}`,borderRadius:10,marginBottom:'1.25rem'}}>
-        <span style={{fontSize:12,fontWeight:600,color:P.petrole}}>Vous importez vers</span>
-        {titres.length>1?(
-          <select value={selId||''} onChange={e=>setSelId(Number(e.target.value))}
-            style={{border:`1px solid ${P.border}`,borderRadius:7,padding:'5px 10px',fontSize:13,fontWeight:600,color:P.abysse,background:P.surface,outline:'none'}}>
-            {titres.map(t=><option key={t._id} value={t._id}>{t.formation?.titre||`Formation ${t._id}`}</option>)}
-          </select>
-        ):(
-          <span style={{fontSize:13,fontWeight:600,color:P.abysse}}>{formation?.formation?.titre||'— aucun titre —'}</span>
-        )}
-        {campus&&<span style={{fontSize:12,color:P.textm}}>· campus <strong style={{color:P.abysse}}>{campus}</strong></span>}
+      {/* 1 · Titre de destination — toujours visible, toujours cliquable */}
+      <div style={{marginBottom:'1.25rem'}}>
+        <div style={{fontSize:11,fontWeight:700,letterSpacing:'.08em',textTransform:'uppercase',color:P.textm,marginBottom:'0.5rem'}}>
+          1 · Titre de destination
+        </div>
+        <div style={{display:'flex',flexWrap:'wrap',gap:'0.4rem'}}>
+          {titres.map(t=>{
+            const on=t._id===selId
+            const nbMod=(t.blocs||[]).flatMap(b=>b.modules||[]).length
+            return(
+              <button key={t._id} onClick={()=>setSelId(t._id)}
+                style={{textAlign:'left',padding:'8px 14px',borderRadius:10,cursor:'pointer',
+                  border:`1px solid ${on?P.petrole:P.border}`,
+                  background:on?P.petrole:P.surface,
+                  boxShadow:on?'0 3px 14px rgba(19,69,71,0.22)':'none',transition:'all .16s'}}>
+                <span style={{display:'block',fontSize:13,fontWeight:600,color:on?P.menthe:P.abysse}}>
+                  {t.formation?.titre||t._titre_court||`Titre ${t._id}`}
+                </span>
+                <span style={{display:'block',fontSize:11,marginTop:2,color:on?'rgba(227,255,240,.55)':P.textm}}>
+                  {nbMod} module{nbMod>1?'s':''}{premierCampusDe(t)?' · '+premierCampusDe(t):''}
+                </span>
+              </button>
+            )
+          })}
+        </div>
       </div>
 
-      {!formation&&(
-        <div style={{padding:'0.6rem 0.8rem',background:P.amberbg,border:`1px solid ${P.amber}`,borderRadius:8,fontSize:12,color:'#7A4A00',marginBottom:'0.75rem'}}>⚠ Aucun titre disponible sur ce campus. Contactez la Direction des programmes.</div>
-      )}
-
-      <div style={{display:'flex',gap:'0.4rem',marginBottom:'1.25rem'}}>
-        {[{id:'etudiants',l:'🎓 Étudiants'},{id:'intervenants',l:'👨‍🏫 Intervenants'}].map(t=>(
-          <button key={t.id} onClick={()=>setTab(t.id)}
-            style={{padding:'6px 16px',borderRadius:8,fontSize:13,fontWeight:500,cursor:'pointer',
-              border:`1px solid ${tab===t.id?P.borderm:P.border}`,
-              background:tab===t.id?P.petrole:P.surface,
-              color:tab===t.id?P.menthe:P.textm}}>
-            {t.l}
-          </button>
-        ))}
+      {/* Rappel de destination — une seule ligne, sans avertissement orange */}
+      <div style={{display:'flex',alignItems:'center',gap:8,flexWrap:'wrap',padding:'0.65rem 0.9rem',
+        background:'rgba(93,226,152,0.08)',border:`1px solid ${P.borderm}`,borderRadius:10,marginBottom:'1.25rem'}}>
+        <span style={{fontSize:12,color:P.textm}}>Les comptes créés seront rattachés à</span>
+        <strong style={{fontSize:13,color:P.abysse}}>{formation?.formation?.titre||'—'}</strong>
+        {campusCible&&<span style={{fontSize:12,color:P.textm}}>· campus <strong style={{color:P.abysse}}>{campusCible}</strong></span>}
       </div>
-      {tab==='etudiants'&&<ImportEtudiants campus={campus} formationId={formation?._id} onDone={onDone}/>}
-      {tab==='intervenants'&&<ImportIntervenants campus={campus} formation={formation} onDone={onDone}/>}
+
+      {/* 2 · Fichier */}
+      <div style={{fontSize:11,fontWeight:700,letterSpacing:'.08em',textTransform:'uppercase',color:P.textm,marginBottom:'0.5rem'}}>
+        2 · Fichier intervenants
+      </div>
+      <ImportIntervenants campus={campusCible} formation={formation} onDone={onDone}/>
     </div>
   )
 }
@@ -571,7 +555,7 @@ function UserManagement(){
     <div className="fi">
       <h2 style={{fontFamily:'Georgia,serif',fontWeight:400,color:P.abysse,marginTop:0,fontSize:22,marginBottom:'1rem'}}>Gestion des comptes RP</h2>
       <div style={{display:'flex',gap:'0.4rem',marginBottom:'1.25rem'}}>
-        {[{id:'manuel',l:'Création manuelle'},{id:'excel',l:'Import Excel'}].map(t=><button key={t.id} onClick={()=>setTab(t.id)} style={{padding:'5px 14px',borderRadius:8,fontSize:12,fontWeight:500,cursor:'pointer',border:`1px solid ${tab===t.id?P.borderm:P.border}`,background:tab===t.id?'rgba(93,226,152,0.12)':P.surface,color:tab===t.id?P.petrole:P.textm}}>{t.l}</button>)}
+        {[{id:'manuel',l:'Création manuelle'},{id:'excel',l:'Import intervenants'}].map(t=><button key={t.id} onClick={()=>setTab(t.id)} style={{padding:'5px 14px',borderRadius:8,fontSize:12,fontWeight:500,cursor:'pointer',border:`1px solid ${tab===t.id?P.borderm:P.border}`,background:tab===t.id?'rgba(93,226,152,0.12)':P.surface,color:tab===t.id?P.petrole:P.textm}}>{t.l}</button>)}
       </div>
 
       {tab==='manuel'&&(
@@ -599,7 +583,10 @@ function UserManagement(){
 
       {tab==='excel'&&(
         <div style={card({marginBottom:'1.5rem'})}>
-          <ImportCSV campus="" formations={[]} formation={null} onDone={()=>{api.getUsers().then(d=>setUsers(d.users)).catch(()=>{})}}/>
+          {/* Aucune liste n'est passée : ImportCSV charge lui-même les titres.
+              En lui transmettant un tableau vide, la Direction se retrouvait
+              devant « — aucun titre — », sans appariement possible. */}
+          <ImportCSV onDone={()=>{api.getUsers().then(d=>setUsers(d.users)).catch(()=>{})}}/>
         </div>
       )}
 
@@ -1131,8 +1118,8 @@ function VueRP({user,onLogout}){
           {onglet==='groupes'&&<GroupesOptions formations={formations}/>}
           {onglet==='comptes'&&(
             <div className="fi">
-              <h2 style={{fontFamily:'Georgia,serif',fontWeight:400,color:P.abysse,marginTop:0,fontSize:22,marginBottom:'0.75rem'}}>Import de comptes</h2>
-              <p style={{fontSize:13,color:P.textm,marginBottom:'1.25rem',lineHeight:1.7}}>Importez les intervenants et étudiants de votre campus. Pour les intervenants, Claude apparie automatiquement leurs matières aux modules de la formation sélectionnée.</p>
+              <h2 style={{fontFamily:'Georgia,serif',fontWeight:400,color:P.abysse,marginTop:0,fontSize:22,marginBottom:'0.75rem'}}>Comptes intervenants</h2>
+              <p style={{fontSize:13,color:P.textm,marginBottom:'1.25rem',lineHeight:1.7}}>Choisissez le titre, déposez l'export du CRM : Claude apparie les matières aux modules, vous créez les comptes. Les mots de passe ne s'affichent qu'une fois.</p>
               <div style={card()}>
                 <ImportCSV campus={user.campus} formations={formations} formation={f} onDone={()=>{}}/>
               </div>
