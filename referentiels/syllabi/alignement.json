@@ -749,7 +749,8 @@
    ]
   },
   {
-   "cle": "mdec-39354",
+   "cle": "m1-mdec",
+   "source": "mdec-39354",
    "liens": [
     {
      "syllabus": "C1 Veille, analyse et stratégie",
@@ -836,42 +837,6 @@
      "origine": "code"
     },
     {
-     "syllabus": "C11 Environnement réglementaire et juridique",
-     "bloc": "B02",
-     "module_pf": "C11 Environnement règlementaire et juridique",
-     "origine": "code"
-    },
-    {
-     "syllabus": "C121 Gestion RH",
-     "bloc": "B02",
-     "module_pf": "C121 Gestion RH",
-     "origine": "code"
-    },
-    {
-     "syllabus": "C122 Talent Acquisition",
-     "bloc": "B02",
-     "module_pf": "C122 Talent acquisition",
-     "origine": "code"
-    },
-    {
-     "syllabus": "C13 Gestion des Services Généraux",
-     "bloc": "B02",
-     "module_pf": "C13 Gestion des Services généraux",
-     "origine": "code"
-    },
-    {
-     "syllabus": "C141 Organisation agile",
-     "bloc": "B02",
-     "module_pf": "C141 Organisation agile",
-     "origine": "code"
-    },
-    {
-     "syllabus": "C142 RSE et Qualité continue",
-     "bloc": "B02",
-     "module_pf": "C142 RSE et Qualité continue",
-     "origine": "code"
-    },
-    {
      "syllabus": "C15 Veille et Innovation",
      "bloc": "B03",
      "module_pf": "C15 Veille et Innovation",
@@ -932,6 +897,85 @@
      "origine": "code"
     },
     {
+     "syllabus": "C29 Structure et Organisation",
+     "bloc": "B05",
+     "module_pf": "C29 Structure et Organisation",
+     "origine": "code"
+    },
+    {
+     "syllabus": "C30 Optimisation des processus RH",
+     "bloc": "B05",
+     "module_pf": "C30 Optimisation des processus RH",
+     "origine": "code"
+    },
+    {
+     "syllabus": "C31 Performance RH",
+     "bloc": "B05",
+     "module_pf": "C31 Performance RH",
+     "origine": "code"
+    }
+   ],
+   "ecartes": [],
+   "fusions": [],
+   "resume": {
+    "liens": 27,
+    "modules_alimentes": 27,
+    "modules_sans_syllabus": 2
+   },
+   "modules_sans_syllabus": [
+    {
+     "bloc": "HB",
+     "titre": "Intégration - Coaching",
+     "section": "Transversal"
+    },
+    {
+     "bloc": "HB",
+     "titre": "BT Masterclass Séminaire Workshop",
+     "section": "Transversal"
+    }
+   ]
+  },
+  {
+   "cle": "m2-mdec",
+   "source": "mdec-39354",
+   "liens": [
+    {
+     "syllabus": "C11 Environnement réglementaire et juridique",
+     "bloc": "B02",
+     "module_pf": "C11 Environnement règlementaire et juridique",
+     "origine": "code"
+    },
+    {
+     "syllabus": "C121 Gestion RH",
+     "bloc": "B02",
+     "module_pf": "C121 Gestion RH",
+     "origine": "code"
+    },
+    {
+     "syllabus": "C122 Talent Acquisition",
+     "bloc": "B02",
+     "module_pf": "C122 Talent acquisition",
+     "origine": "code"
+    },
+    {
+     "syllabus": "C13 Gestion des Services Généraux",
+     "bloc": "B02",
+     "module_pf": "C13 Gestion des Services généraux",
+     "origine": "code"
+    },
+    {
+     "syllabus": "C141 Organisation agile",
+     "bloc": "B02",
+     "module_pf": "C141 Organisation agile",
+     "origine": "code"
+    },
+    {
+     "syllabus": "C142 RSE et Qualité continue",
+     "bloc": "B02",
+     "module_pf": "C142 RSE et Qualité continue",
+     "origine": "code"
+    },
+    {
      "syllabus": "C24 Politique commerciale",
      "bloc": "B02",
      "module_pf": "C24 Politique commerciale",
@@ -953,24 +997,6 @@
      "syllabus": "C28 Performance et pratiques responsables",
      "bloc": "B02",
      "module_pf": "C28 Performance et pratiques responsables",
-     "origine": "code"
-    },
-    {
-     "syllabus": "C29 Structure et Organisation",
-     "bloc": "B05",
-     "module_pf": "C29 Structure et Organisation",
-     "origine": "code"
-    },
-    {
-     "syllabus": "C30 Optimisation des processus RH",
-     "bloc": "B05",
-     "module_pf": "C30 Optimisation des processus RH",
-     "origine": "code"
-    },
-    {
-     "syllabus": "C31 Performance RH",
-     "bloc": "B05",
-     "module_pf": "C31 Performance RH",
      "origine": "code"
     },
     {
@@ -1019,22 +1045,11 @@
    "ecartes": [],
    "fusions": [],
    "resume": {
-    "liens": 44,
-    "modules_alimentes": 44,
-    "syllabi_ecartes": 0,
-    "modules_sans_syllabus": 4
+    "liens": 17,
+    "modules_alimentes": 17,
+    "modules_sans_syllabus": 2
    },
    "modules_sans_syllabus": [
-    {
-     "bloc": "HB",
-     "titre": "Intégration - Coaching",
-     "section": "Transversal"
-    },
-    {
-     "bloc": "HB",
-     "titre": "BT Masterclass Séminaire Workshop",
-     "section": "Transversal"
-    },
     {
      "bloc": "HB",
      "titre": "BT Masterclass Workshop",
@@ -1048,7 +1063,8 @@
    ]
   },
   {
-   "cle": "mrh-41295",
+   "cle": "m1-mrh",
+   "source": "mrh-41295",
    "liens": [
     {
      "syllabus": "Module 1 : Veille stratégique RH digitale et réglementaire",
@@ -1157,7 +1173,21 @@
      "bloc": "B04",
      "module_pf": "Module 29 : Méthodes de recueil terrain et posture managériale",
      "origine": "code"
-    },
+    }
+   ],
+   "ecartes": [],
+   "fusions": [],
+   "resume": {
+    "liens": 18,
+    "modules_alimentes": 18,
+    "modules_sans_syllabus": 0
+   },
+   "modules_sans_syllabus": []
+  },
+  {
+   "cle": "m2-mrh",
+   "source": "mrh-41295",
+   "liens": [
     {
      "syllabus": "Module 11 : Gouvernance et sécurité des données RH (RGPD et éthique)",
      "bloc": "B02",
@@ -1288,17 +1318,11 @@
    "ecartes": [],
    "fusions": [],
    "resume": {
-    "liens": 39,
-    "modules_alimentes": 39,
-    "syllabi_ecartes": 0,
-    "modules_sans_syllabus": 1
+    "liens": 21,
+    "modules_alimentes": 21,
+    "modules_sans_syllabus": 0
    },
-   "modules_sans_syllabus": [
-    {
-     "bloc": "B05",
-     "titre": "CT TUTORAT EPREUVE COMPLEMENTAIRE - Dossier P2O"
-    }
-   ]
+   "modules_sans_syllabus": []
   }
  ]
 }
