@@ -84,9 +84,19 @@ const familles = (definition.familles || []).map((f, i) => {
            blocs, modules, competences, notions: membres }
 })
 
-const ecartees = (definition.ecartees || []).map(({ motif, notions: intitules }) => ({
-  motif, notions: intitules.flatMap(t => resoudre(t).map(o => ({ notion: t, bloc: o.bloc, module: o.module }))),
-}))
+// Une règle d'écart peut être nommée intitulé par intitulé, ou décrite par un
+// motif. Les syllabi MDEC terminent chaque module par « Études de cas pratiques
+// en <sujet> » : dix-neuf variantes du même rien. Les énumérer serait une
+// recopie fastidieuse et fragile ; le motif dit l'intention.
+const ecartees = (definition.ecartees || []).map(({ motif, notions, pattern }) => {
+  const liste = [...(notions || [])]
+  if (pattern) {
+    const re = new RegExp(pattern, 'iu')
+    for (const [k, e] of occurrences)
+      if (!vues.has(k) && re.test(e.libelle) && !liste.includes(e.libelle)) liste.push(e.libelle)
+  }
+  return { motif, notions: liste.flatMap(t => resoudre(t).map(o => ({ notion: t, bloc: o.bloc, module: o.module }))) }
+})
 
 const oubliees = [...occurrences.entries()].filter(([k]) => !vues.has(k)).map(([, e]) => e.libelle)
 
