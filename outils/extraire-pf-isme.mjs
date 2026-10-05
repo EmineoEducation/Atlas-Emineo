@@ -298,9 +298,12 @@ function anneesEtVolumesMRH(grille) {
 
 /* ── Assemblage ───────────────────────────────────────────────────────────── */
 const PROFILS = {
-  mdec: { lire: lireMDEC, rncp: '39354', titre: 'Mastère Manager du développement commercial',
+  // L'intitulé reprend celui déjà en base, suffixé de l'année : la
+  // synchronisation réécrit le titre de la promotion, et deux promotions d'un
+  // même titre portant le même nom sont indistinguables dans la liste.
+  mdec: { lire: lireMDEC, rncp: '39354', titre: "Master Manager du développement d'entreprise et commercial",
           court: 'MDEC', feuille: 1 },
-  mrh: { lire: lireMRH, rncp: '41295', titre: 'Mastère Management des ressources humaines',
+  mrh: { lire: lireMRH, rncp: '41295', titre: 'Master Manager des ressources humaines',
          court: 'MRH', feuille: 0 },
 }
 
@@ -367,7 +370,8 @@ if (fichier && nomProfil) await (async () => {
     const contenu = {
       genere_le: new Date().toISOString().slice(0, 10),
       outil: 'extraire-pf-isme',
-      formation: { rncp: profil.rncp, titre: profil.titre, titre_court: 'M' + annee + ' ' + profil.court,
+      formation: { rncp: profil.rncp, titre: profil.titre + ' — M' + annee,
+                   titre_court: 'M' + annee + ' ' + profil.court,
                    campus: 'Le Mans', annee_cycle: 'M' + annee,
                    source: basename(fichier), feuille: feuille.nom },
       race: {}, blocs: blocsAnnee, modules_hors_bloc: horsBlocAnnee, hors_bloc_ecartes: [],
