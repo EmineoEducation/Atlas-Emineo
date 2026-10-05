@@ -381,11 +381,6 @@
      "observations": "Epreuve relative à la compétence C.10 de l’activité 4 (Gérer les ressources financières en réalisant des prévisions budgétaires et des analyses de rentabilité afin de garantir une saine gestion financière et d’atteindre les objectifs économiques.) A partir d’une étude de cas, il est demandé au candidat de réaliser des prévisions budgétaires et d’analyser la rentabilité du centre de profit."
     },
     {
-     "intitule": "Mémoire P2O \"PROJET D'OPTIMISATION OPERATIONNEL\" 1 ECRIT + 1 EPREUVE ORALE Individuel",
-     "activite": "A.9",
-     "observations": "A partir d’une commande de l’entreprise, et en lien avec la mission réalisée en entreprise, il est demandé au candidat de résoudre une problématique de performance commerciale, qu’il présente dans un mémoire professionnel, soutenu devant un jury Durée de l’oral : 20 minutes de présentation + 20 minutes de questions/réponses"
-    },
-    {
      "intitule": "EC BC4 Soutenance",
      "activite": "",
      "observations": ""
@@ -404,7 +399,7 @@
    ],
    "competences_race": [],
    "bloc_race": "",
-   "volume_annonce": 231
+   "volume_annonce": 59.5
   },
   {
    "id": "B03",
@@ -788,7 +783,7 @@
    ],
    "competences_race": [],
    "bloc_race": "",
-   "volume_annonce": 143.5
+   "volume_annonce": 28
   }
  ],
  "modules_hors_bloc": [
@@ -843,9 +838,9 @@
   },
   {
    "titre": "Piloter un centre de profit",
-   "annonce": 231,
+   "annonce": 59.5,
    "calcule": 59.5,
-   "ok": false
+   "ok": true
   },
   {
    "titre": "Concevoir la stratégie de développement commercial",
@@ -855,9 +850,9 @@
   },
   {
    "titre": "Manager une équipe",
-   "annonce": 143.5,
+   "annonce": 28,
    "calcule": 28,
-   "ok": false
+   "ok": true
   }
  ],
  "anomalies": [],

@@ -273,7 +273,8 @@
     }
    ],
    "competences_race": [],
-   "bloc_race": ""
+   "bloc_race": "",
+   "volume_annonce": null
   },
   {
    "id": "B05",
@@ -563,7 +564,8 @@
     }
    ],
    "competences_race": [],
-   "bloc_race": ""
+   "bloc_race": "",
+   "volume_annonce": null
   }
  ],
  "modules_hors_bloc": [],

@@ -20,12 +20,7 @@
     "C11",
     "C12",
     "C13",
-    "C14",
-    "C24",
-    "C25",
-    "C26",
-    "C27",
-    "C28"
+    "C14"
    ],
    "modules": [
     {
@@ -151,112 +146,7 @@
      "sous_modules": [],
      "themes": [
       "Stratégie d’amélioration continue de la qualité",
-      "Qualité de service interne",
-      "BC – 4 Superviser la mise en œuvre de la performance commerciale"
-     ]
-    },
-    {
-     "titre": "C24 Politique commerciale",
-     "code": "C24",
-     "libelle": "Politique commerciale",
-     "volume": 24.5,
-     "competences_liees": [
-      "C24"
-     ],
-     "competences_plage": false,
-     "activite": "A.9",
-     "annee": "2",
-     "sequencage": "",
-     "seances": null,
-     "epreuve": "",
-     "commentaire": "",
-     "sous_modules": [],
-     "themes": [
-      "Développement de réseau",
-      "Résolution de problèmes"
-     ]
-    },
-    {
-     "titre": "C25 Stratégie client",
-     "code": "C25",
-     "libelle": "Stratégie client",
-     "volume": 21,
-     "competences_liees": [
-      "C25"
-     ],
-     "competences_plage": false,
-     "activite": "A.9",
-     "annee": "2",
-     "sequencage": "",
-     "seances": null,
-     "epreuve": "",
-     "commentaire": "",
-     "sous_modules": [],
-     "themes": [
-      "Démarche de recueil de la satisfaction client"
-     ]
-    },
-    {
-     "titre": "C26 RSE et pratiques commerciales",
-     "code": "C26",
-     "libelle": "RSE et pratiques commerciales",
-     "volume": 14,
-     "competences_liees": [
-      "C26"
-     ],
-     "competences_plage": false,
-     "activite": "A.9",
-     "annee": "2",
-     "sequencage": "",
-     "seances": null,
-     "epreuve": "",
-     "commentaire": "",
-     "sous_modules": [],
-     "themes": [
-      "La démarche RSE appliquée aux pratiques commerciales : principes et plan d’actions",
-      "Les impacts et risques de la démarche commerciale"
-     ]
-    },
-    {
-     "titre": "C27Performance commerciale et KPI",
-     "code": "C27",
-     "libelle": "Performance commerciale et KPI",
-     "volume": 35,
-     "competences_liees": [
-      "C27"
-     ],
-     "competences_plage": false,
-     "activite": "A.10",
-     "annee": "2",
-     "sequencage": "",
-     "seances": null,
-     "epreuve": "",
-     "commentaire": "",
-     "sous_modules": [],
-     "themes": [
-      "Stratégie de rémunération de l’équipe commerciale",
-      "Indicateurs et tableaux de bord commerciaux",
-      "Analyse de la performance individuelle et collective"
-     ]
-    },
-    {
-     "titre": "C28 Performance et pratiques responsables",
-     "code": "C28",
-     "libelle": "Performance et pratiques responsables",
-     "volume": 21,
-     "competences_liees": [
-      "C28"
-     ],
-     "competences_plage": false,
-     "activite": "A.10",
-     "annee": "2",
-     "sequencage": "",
-     "seances": null,
-     "epreuve": "",
-     "commentaire": "",
-     "sous_modules": [],
-     "themes": [
-      "Démarche d’amélioration continue de la qualité de la démarche commerciale"
+      "Qualité de service interne"
      ]
     }
    ],
@@ -265,11 +155,6 @@
      "intitule": "BC 2.4 - C10 à programmer avant fin MARS",
      "activite": "A.4",
      "observations": "Epreuve relative à la compétence C.10 de l’activité 4 (Gérer les ressources financières en réalisant des prévisions budgétaires et des analyses de rentabilité afin de garantir une saine gestion financière et d’atteindre les objectifs économiques.) A partir d’une étude de cas, il est demandé au candidat de réaliser des prévisions budgétaires et d’analyser la rentabilité du centre de profit."
-    },
-    {
-     "intitule": "Mémoire P2O \"PROJET D'OPTIMISATION OPERATIONNEL\" 1 ECRIT + 1 EPREUVE ORALE Individuel",
-     "activite": "A.9",
-     "observations": "A partir d’une commande de l’entreprise, et en lien avec la mission réalisée en entreprise, il est demandé au candidat de résoudre une problématique de performance commerciale, qu’il présente dans un mémoire professionnel, soutenu devant un jury Durée de l’oral : 20 minutes de présentation + 20 minutes de questions/réponses"
     },
     {
      "intitule": "EC BC4 Soutenance",
@@ -298,31 +183,11 @@
     {
      "id": "C14",
      "libelle": "Diriger les opérations d’ajustement/ transformation dans une logique RSE et d’amélioration continue de la qualité, pour assurer la pérennité et l’agilité de l’organisation."
-    },
-    {
-     "id": "C24",
-     "libelle": "Développer une politique commerciale innovante, alignée sur les objectifs de la stratégie commerciale, en collaboration avec les directions internes, et en privilégiant la création d’alliances stratégiques dans le but de créer des opportunités nouvelles."
-    },
-    {
-     "id": "C25",
-     "libelle": "Concevoir et déployer une stratégie de satisfaction client omnicanal centrée sur l’excellence du service, la personnalisation des offres et la réactivité aux besoins des clients afin de favoriser la fidélisation de la clientèle."
-    },
-    {
-     "id": "C26",
-     "libelle": "Elaborer des stratégies et des initiatives visant à intégrer la RSE dans les pratiques commerciales, en collaboration avec les différentes parties prenantes de l’entreprise, pour renforcer la contribution positive de l’entreprise à la société et à l’environnement."
-    },
-    {
-     "id": "C27",
-     "libelle": "Evaluer la performance des équipes commerciales en analysant les indicateurs de performance (KPI) issus des process mis en place, pour mesurer l’atteinte des objectifs commerciaux fixés et repérer les leviers de développement."
-    },
-    {
-     "id": "C28",
-     "libelle": "Piloter le dispositif d’amélioration de la performance commerciale en développant des plans d’action intégrant des pratiques responsables afin de renforcer la qualité et la performance du processus commercial."
     }
    ],
    "competences_race": [],
    "bloc_race": "",
-   "volume_annonce": 231
+   "volume_annonce": 171.5
   },
   {
    "id": "B05",
@@ -507,7 +372,157 @@
    ],
    "competences_race": [],
    "bloc_race": "",
-   "volume_annonce": 143.5
+   "volume_annonce": 115.5
+  },
+  {
+   "id": "B04",
+   "titre": "Superviser la mise en œuvre de la performance commerciale",
+   "nature": "obligatoire",
+   "competences": [
+    "C24",
+    "C25",
+    "C26",
+    "C27",
+    "C28"
+   ],
+   "modules": [
+    {
+     "titre": "C24 Politique commerciale",
+     "code": "C24",
+     "libelle": "Politique commerciale",
+     "volume": 24.5,
+     "competences_liees": [
+      "C24"
+     ],
+     "competences_plage": false,
+     "activite": "A.9",
+     "annee": "2",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "",
+     "commentaire": "",
+     "sous_modules": [],
+     "themes": [
+      "Développement de réseau",
+      "Résolution de problèmes"
+     ]
+    },
+    {
+     "titre": "C25 Stratégie client",
+     "code": "C25",
+     "libelle": "Stratégie client",
+     "volume": 21,
+     "competences_liees": [
+      "C25"
+     ],
+     "competences_plage": false,
+     "activite": "A.9",
+     "annee": "2",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "",
+     "commentaire": "",
+     "sous_modules": [],
+     "themes": [
+      "Démarche de recueil de la satisfaction client"
+     ]
+    },
+    {
+     "titre": "C26 RSE et pratiques commerciales",
+     "code": "C26",
+     "libelle": "RSE et pratiques commerciales",
+     "volume": 14,
+     "competences_liees": [
+      "C26"
+     ],
+     "competences_plage": false,
+     "activite": "A.9",
+     "annee": "2",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "",
+     "commentaire": "",
+     "sous_modules": [],
+     "themes": [
+      "La démarche RSE appliquée aux pratiques commerciales : principes et plan d’actions",
+      "Les impacts et risques de la démarche commerciale"
+     ]
+    },
+    {
+     "titre": "C27Performance commerciale et KPI",
+     "code": "C27",
+     "libelle": "Performance commerciale et KPI",
+     "volume": 35,
+     "competences_liees": [
+      "C27"
+     ],
+     "competences_plage": false,
+     "activite": "A.10",
+     "annee": "2",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "",
+     "commentaire": "",
+     "sous_modules": [],
+     "themes": [
+      "Stratégie de rémunération de l’équipe commerciale",
+      "Indicateurs et tableaux de bord commerciaux",
+      "Analyse de la performance individuelle et collective"
+     ]
+    },
+    {
+     "titre": "C28 Performance et pratiques responsables",
+     "code": "C28",
+     "libelle": "Performance et pratiques responsables",
+     "volume": 21,
+     "competences_liees": [
+      "C28"
+     ],
+     "competences_plage": false,
+     "activite": "A.10",
+     "annee": "2",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "",
+     "commentaire": "",
+     "sous_modules": [],
+     "themes": [
+      "Démarche d’amélioration continue de la qualité de la démarche commerciale"
+     ]
+    }
+   ],
+   "epreuves": [
+    {
+     "intitule": "Mémoire P2O \"PROJET D'OPTIMISATION OPERATIONNEL\" 1 ECRIT + 1 EPREUVE ORALE Individuel",
+     "activite": "A.9",
+     "observations": "A partir d’une commande de l’entreprise, et en lien avec la mission réalisée en entreprise, il est demandé au candidat de résoudre une problématique de performance commerciale, qu’il présente dans un mémoire professionnel, soutenu devant un jury Durée de l’oral : 20 minutes de présentation + 20 minutes de questions/réponses"
+    }
+   ],
+   "competences_mentionnees": [
+    {
+     "id": "C24",
+     "libelle": "Développer une politique commerciale innovante, alignée sur les objectifs de la stratégie commerciale, en collaboration avec les directions internes, et en privilégiant la création d’alliances stratégiques dans le but de créer des opportunités nouvelles."
+    },
+    {
+     "id": "C25",
+     "libelle": "Concevoir et déployer une stratégie de satisfaction client omnicanal centrée sur l’excellence du service, la personnalisation des offres et la réactivité aux besoins des clients afin de favoriser la fidélisation de la clientèle."
+    },
+    {
+     "id": "C26",
+     "libelle": "Elaborer des stratégies et des initiatives visant à intégrer la RSE dans les pratiques commerciales, en collaboration avec les différentes parties prenantes de l’entreprise, pour renforcer la contribution positive de l’entreprise à la société et à l’environnement."
+    },
+    {
+     "id": "C27",
+     "libelle": "Evaluer la performance des équipes commerciales en analysant les indicateurs de performance (KPI) issus des process mis en place, pour mesurer l’atteinte des objectifs commerciaux fixés et repérer les leviers de développement."
+    },
+    {
+     "id": "C28",
+     "libelle": "Piloter le dispositif d’amélioration de la performance commerciale en développant des plans d’action intégrant des pratiques responsables afin de renforcer la qualité et la performance du processus commercial."
+    }
+   ],
+   "competences_race": [],
+   "bloc_race": "",
+   "volume_annonce": 136.5
   }
  ],
  "modules_hors_bloc": [
@@ -556,13 +571,19 @@
  "controles": [
   {
    "titre": "Piloter un centre de profit",
-   "annonce": 231,
-   "calcule": 266,
+   "annonce": 171.5,
+   "calcule": 150.5,
    "ok": false
   },
   {
    "titre": "Manager une équipe",
-   "annonce": 143.5,
+   "annonce": 115.5,
+   "calcule": 115.5,
+   "ok": true
+  },
+  {
+   "titre": "Superviser la mise en œuvre de la performance commerciale",
+   "annonce": 136.5,
    "calcule": 115.5,
    "ok": false
   }
