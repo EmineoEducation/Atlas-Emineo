@@ -1,0 +1,273 @@
+{
+ "cle": "bach-cdc",
+ "revu_le": "2026-10-05",
+ "familles": [
+  {
+   "libelle": "Veille stratégique et détection des tendances",
+   "type": "concept",
+   "notions": [
+    "Rappels fondamentaux et enjeux de la veille",
+    "Structuration du process de veille",
+    "Collecte, qualification et analyse avancée",
+    "Identification et hiérarchisation des tendances",
+    "Restitution créative et opérationnelle de la veille",
+    "Exploitation stratégique et évaluation"
+   ]
+  },
+  {
+   "libelle": "RSE, communication durable et inclusive",
+   "type": "concept",
+   "notions": [
+    "Enjeux et cadre de la communication durable",
+    "Éco-conception et sobriété dans la communication",
+    "Communication inclusive, diversité et accessibilité",
+    "Pilotage et valorisation d’une stratégie responsable"
+   ]
+  },
+  {
+   "libelle": "Comportement du consommateur et insights",
+   "type": "concept",
+   "notions": [
+    "Introduction et enjeux de la connaissance consommateur",
+    "Facteurs individuels et processus décisionnels",
+    "Facteurs environnementaux, sociaux et culturels",
+    "Facteurs situationnels et contextuels",
+    "Outils d’analyse et formulation d’insights",
+    "Applications stratégiques et atelier pratique"
+   ]
+  },
+  {
+   "libelle": "Diagnostic et positionnement de marque",
+   "type": "concept",
+   "notions": [
+    "Introduction : enjeux et fondamentaux du positionnement de marque",
+    "Diagnostic stratégique et analyse de l’environnement",
+    "Définition et choix du positionnement stratégique",
+    "Diagnostic et analyse de marché"
+   ]
+  },
+  {
+   "libelle": "Plateforme de marque et proposition de valeur",
+   "type": "concept",
+   "notions": [
+    "Construction de la plateforme de marque",
+    "Déclinaison opérationnelle et plan d’action"
+   ]
+  },
+  {
+   "libelle": "Plan marketing et plan de communication",
+   "type": "concept",
+   "notions": [
+    "Introduction et rappels méthodologiques",
+    "Définition de la stratégie marketing et des axes de communication",
+    "Construction du plan marketing et du plan de communication",
+    "Budget, indicateurs de performance et pilotage"
+   ]
+  },
+  {
+   "libelle": "Identité visuelle et direction artistique",
+   "type": "concept",
+   "notions": [
+    "Fondamentaux de l’identité visuelle de marque",
+    "Déploiement de l’identité et du récit sur les supports",
+    "Création vectorielle et identité visuelle sur Illustrator",
+    "Direction artistique, storytelling et scénarisation"
+   ]
+  },
+  {
+   "libelle": "Storytelling et brand content",
+   "type": "concept",
+   "notions": [
+    "Storytelling de marque et narration stratégique",
+    "Fondamentaux du storytelling et de l’écriture créative",
+    "Construction de concepts narratifs et univers de marque",
+    "Techniques avancées et formats innovants"
+   ]
+  },
+  {
+   "libelle": "Réputation et stratégie d’influence",
+   "type": "concept",
+   "notions": [
+    "Gestion de la réputation et stratégie d’influence",
+    "Évaluation, pilotage et innovation"
+   ]
+  },
+  {
+   "libelle": "Référencement et visibilité",
+   "type": "concept",
+   "notions": [
+    "SEO avancé : stratégie, IA et multimodalité",
+    "SEA : campagnes intelligentes et optimisation dynamique",
+    "Synergie SEO/SEA et pilotage de la visibilité",
+    "Stratégie SMA : campagnes sponsorisées sur les réseaux sociaux",
+    "Stratégie SMO : optimisation de la présence organique",
+    "Plugins, contenus dynamiques et optimisation SEO"
+   ]
+  },
+  {
+   "libelle": "Mesure de la performance et data",
+   "type": "concept",
+   "notions": [
+    "Suivi, analyse et optimisation des campagnes",
+    "Définition des KPI et choix des indicateurs",
+    "Collecte, organisation et visualisation des données",
+    "Analyse, interprétation et exploitation des KPI"
+   ]
+  },
+  {
+   "libelle": "Gestion de projet : risques, budget et pilotage",
+   "type": "concept",
+   "notions": [
+    "Fondamentaux de la gestion de projet",
+    "Gestion des ressources, des risques et des conflits",
+    "Pilotage du projet et reporting",
+    "Gestion des parties prenantes et des prestataires",
+    "Gestion de projet audiovisuel et photographique"
+   ]
+  },
+  {
+   "libelle": "Management d’équipe et conduite du changement",
+   "type": "concept",
+   "notions": [
+    "Management d’équipe projet",
+    "Gestion du changement et accompagnement des équipes"
+   ]
+  },
+  {
+   "libelle": "Méthodes agiles",
+   "type": "concept",
+   "notions": [
+    "Méthodes agiles et innovation managériale"
+   ]
+  },
+  {
+   "libelle": "Prise de parole, éloquence et soutenance",
+   "type": "posture",
+   "notions": [
+    "Fondamentaux de l’éloquence et de l’art oratoire",
+    "Structuration et adaptation du discours",
+    "Techniques avancées de persuasion et de rhétorique",
+    "Mise en situation professionnelle et feedback",
+    "Expression orale professionnelle et prise de parole",
+    "Adaptation de l’expression au public et au contexte",
+    "Présentation, argumentation et restitution"
+   ]
+  },
+  {
+   "libelle": "Écrit professionnel",
+   "type": "posture",
+   "notions": [
+    "Structuration et argumentation de l’écrit professionnel"
+   ]
+  },
+  {
+   "libelle": "Création graphique et PAO",
+   "type": "outil",
+   "notions": [
+    "Cahier des charges, workflow professionnel et innovation",
+    "Création graphique avancée sur Photoshop",
+    "Mise en page professionnelle et édition sur InDesign"
+   ]
+  },
+  {
+   "libelle": "Audiovisuel, photo et post-production",
+   "type": "outil",
+   "notions": [
+    "Production et maîtrise technique avancée",
+    "Post-production, diffusion et restitution professionnelle"
+   ]
+  },
+  {
+   "libelle": "Web, CMS et outils no-code",
+   "type": "outil",
+   "notions": [
+    "Installation avancée, configuration et sécurité",
+    "Choix, personnalisation et accessibilité des thèmes"
+   ]
+  },
+  {
+   "libelle": "IA générative et prompting",
+   "type": "concept",
+   "notions": [
+    "Introduction à l’IA générative et au prompting",
+    "Techniques fondamentales et avancées de prompting",
+    "Applications professionnelles et intégration dans les workflows",
+    "Limites, impacts et éthique du prompting"
+   ]
+  },
+  {
+   "libelle": "Sémiologie et psychologie des couleurs",
+   "type": "concept",
+   "notions": [
+    "Fondamentaux de la sémiologie appliquée à la communication",
+    "Sémiologie et psychologie de la couleur",
+    "Analyse sémiotique et chromatique de projets concrets"
+   ]
+  },
+  {
+   "libelle": "Budget, pilotage financier et négociation",
+   "type": "concept",
+   "notions": [
+    "Fondamentaux de la gestion budgétaire en communication",
+    "Analyse financière et optimisation des coûts",
+    "Techniques et stratégies de négociation",
+    "Gestion de la relation client, prestataire et partenaire"
+   ]
+  },
+  {
+   "libelle": "Stratégie digitale et community management",
+   "type": "concept",
+   "notions": [
+    "Jour 1-2 :Stratégie Digitale",
+    "Jour 3-4 :Community Management & Ligne éditoriale"
+   ]
+  },
+  {
+   "libelle": "Anglais professionnel et interculturalité",
+   "type": "concept",
+   "notions": [
+    "Anglais professionnel et vocabulaire métier",
+    "Techniques de présentation et de prise de parole",
+    "Rédaction professionnelle en anglais",
+    "Réunions, négociation et gestion de projet en anglais",
+    "Communication interculturelle et adaptation",
+    "Soutenance, argumentation et feedback"
+   ]
+  },
+  {
+   "libelle": "Personal branding et présence éditoriale",
+   "type": "concept",
+   "notions": [
+    "Définir son identité professionnelle et son positionnement",
+    "Storytelling et prise de parole de soi",
+    "Création et optimisation des supports de personal branding",
+    "Développer sa présence numérique et son réseau"
+   ]
+  }
+ ],
+ "ecartees": [
+  {
+   "motif": "trame pédagogique",
+   "notions": [
+    "Atelier de synthèse et étude de cas",
+    "Atelier pratique et restitution professionnelle",
+    "Projet fil rouge et restitution professionnelle",
+    "Projet fil rouge, publication et restitution professionnelle",
+    "Restitution, critique et valorisation professionnelle",
+    "Valorisation de la singularité et restitution professionnelle",
+    "Synthèse, restitution et feedback"
+   ]
+  },
+  {
+   "motif": "déroulé d’épreuve, pas un programme",
+   "notions": [
+    "Phase 1 – Cadrage (3h30)",
+    "Phase 2 – Semaine de Compétition (5 jours)",
+    "Phase 3 – Finale & Jury (1 jour)",
+    "Phase 4 – Débrief pédagogique",
+    "Phase 5 : TP d’évaluation",
+    "Jour 5 : TP d’évaluation"
+   ]
+  }
+ ]
+}
