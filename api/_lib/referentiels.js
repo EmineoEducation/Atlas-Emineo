@@ -48,6 +48,8 @@ for (const dossier of CHEMINS_CANDIDATS) {
         RACES[String(contenu.rncp)] = contenu;
         DIAGNOSTIC.lus.push({ fichier: f, type: 'race', rncp: contenu.rncp });
       } else if (contenu.formation && Array.isArray(contenu.blocs)) {
+        // La clé de fichier sert ensuite à retrouver l'alignement des syllabi.
+        Object.defineProperty(contenu, '_cle', { value: cle, enumerable: false });
         REFERENTIELS[cle] = contenu;
         DIAGNOSTIC.lus.push({ fichier: f, type: 'titre', promotion: contenu.formation.titre_court });
       } else {
@@ -62,6 +64,106 @@ for (const dossier of CHEMINS_CANDIDATS) {
   break;
 }
 
+// ── Contenu des syllabi ─────────────────────────────────────────────────────
+//
+// Le plan de formation donne la structure — blocs, modules, volumes. Il ne dit
+// rien de ce qui est enseigné. Ce contenu vit dans les programmes Word, extrait
+// par outils/extraire-syllabus.mjs vers referentiels/syllabi/<clé>.json, et
+// rattaché aux modules du plan par referentiels/syllabi/alignement.json, table
+// relue et validée à la main.
+//
+// Jusqu'au 05/10/2026 le champ notions_cles était posé vide en dur ici. La
+// cartographie ne pouvait donc tracer aucun lien entre blocs, et les alertes de
+// coordination n'avaient rien à comparer : elles se calculent sur les notions
+// partagées. C'est ce raccord qui manquait.
+//
+// Le rattachement n'est pas de un à un. Un module du plan peut recevoir
+// plusieurs syllabi — le plan tient en une ligne ce que le programme découpe en
+// trois TD. Et un syllabus peut alimenter plusieurs modules — une option
+// dédoublée entre deux parcours au choix suit le même enseignement.
+const SYLLABI = {};      // clé de titre -> Map('bloc§intitulé module' -> contenu)
+DIAGNOSTIC.syllabi = { dossier: null, titres: [], erreurs: [] };
+
+(function chargerSyllabi() {
+  if (!DIAGNOSTIC.dossier) return;
+  const dossier = path.join(DIAGNOSTIC.dossier, 'syllabi');
+  let alignement;
+  try {
+    alignement = JSON.parse(fs.readFileSync(path.join(dossier, 'alignement.json'), 'utf-8'));
+  } catch (e) {
+    // Absence d'alignement : les syllabi restent inertes, le reste fonctionne.
+    DIAGNOSTIC.syllabi.erreurs.push({ fichier: 'alignement.json', raison: e.message });
+    return;
+  }
+  DIAGNOSTIC.syllabi.dossier = dossier;
+
+  for (const titre of alignement.titres || []) {
+    let modules;
+    try {
+      const brut = JSON.parse(fs.readFileSync(path.join(dossier, titre.cle + '.json'), 'utf-8'));
+      // Plusieurs fiches peuvent porter le même intitulé — trois « Semaines
+      // intensives », deux « Éloquence & art oratoire » — avec des contenus
+      // différents. Les regrouper par intitulé plutôt que retenir la première
+      // évite d'en perdre deux sur trois.
+      modules = new Map();
+      for (const src of brut.sources || [])
+        for (const m of src.modules || []) {
+          if (!m.titre) continue;
+          const lot = modules.get(m.titre) || [];
+          lot.push(m);
+          modules.set(m.titre, lot);
+        }
+    } catch (e) {
+      DIAGNOSTIC.syllabi.erreurs.push({ fichier: titre.cle + '.json', raison: e.message });
+      continue;
+    }
+
+    const parModule = new Map();
+    let rattaches = 0, introuvables = [];
+    for (const lien of titre.liens || []) {
+      const lot = modules.get(lien.syllabus);
+      if (!lot || !lot.length) { introuvables.push(lien.syllabus); continue; }
+      const k = lien.bloc + '§' + lien.module_pf;
+      const cumul = parModule.get(k) || { notions_cles: [], seances: [], objectif: '', programme: [], syllabi: [] };
+      for (const syl of lot) {
+        // Trois liens vers le même module, chacun tirant le même lot de fiches :
+        // sans garde, séances et programme seraient comptés trois fois.
+        if (cumul.syllabi.includes(syl.titre)) continue;
+        for (const n of syl.notions_cles || [])
+          if (n && !cumul.notions_cles.includes(n)) cumul.notions_cles.push(n);
+        for (const sc of syl.seances || []) cumul.seances.push(sc);
+        for (const pr of syl.programme || []) cumul.programme.push(pr);
+        if (!cumul.objectif && syl.objectif) cumul.objectif = syl.objectif;
+        cumul.syllabi.push(syl.titre);
+      }
+      parModule.set(k, cumul);
+      rattaches++;
+    }
+    SYLLABI[titre.cle] = parModule;
+    DIAGNOSTIC.syllabi.titres.push({
+      cle: titre.cle, modules_syllabus: Array.from(modules.values()).reduce((n, l) => n + l.length, 0), liens: rattaches,
+      modules_alimentes: parModule.size,
+      notions: Array.from(parModule.values()).reduce((n, c) => n + c.notions_cles.length, 0),
+      introuvables,
+    });
+  }
+})();
+
+// Applique le contenu d'un syllabus à un module du plan. Sans rattachement, le
+// module repart avec des champs vides : absence de contenu, non absence de
+// module.
+function contenuModule(cleTitre, blocId, titreModule) {
+  const table = SYLLABI[cleTitre];
+  const c = table && table.get(blocId + '§' + titreModule);
+  return {
+    notions_cles: c ? c.notions_cles : [],
+    seances: c ? c.seances : [],
+    objectif: c ? c.objectif : '',
+    programme: c ? c.programme : [],
+    _syllabi: c ? c.syllabi : [],
+  };
+}
+
 // Traduit un référentiel du dépôt vers la forme attendue par l'application.
 //
 // Deux conversions importantes :
@@ -73,6 +175,7 @@ for (const dossier of CHEMINS_CANDIDATS) {
 //      l'écart : les compter reviendrait à déclarer enseigné ce qui ne l'est pas.
 function versFormatApplication(ref) {
   const race = RACES[ref.formation.rncp];
+  const cleTitre = ref._cle || '';
   const parActivite = new Map((race ? race.activites : []).map(a => [a.id, a]));
 
   const blocs = (ref.blocs || []).map(b => {
@@ -100,7 +203,7 @@ function versFormatApplication(ref) {
       intervenant: '',
       competences_liees: m.competences_liees || [],
       competences_plage: !!m.competences_plage,
-      notions_cles: [],
+      ...contenuModule(cleTitre, b.id, m.titre),
       epreuve: m.epreuve || '',
       commentaire: m.commentaire || '',
       sous_modules: m.sous_modules || [],
@@ -130,7 +233,7 @@ function versFormatApplication(ref) {
     section: m.section || '',
     competences_liees: m.competences_liees || [],
     competences_plage: !!m.competences_plage,
-    notions_cles: [],
+    ...contenuModule(cleTitre, 'HB', m.titre),
     intervenant: '',
   }));
 
@@ -153,8 +256,10 @@ function versFormatApplication(ref) {
     _source: 'referentiels/' + ref.formation.titre_court,
     _genere_le: ref.genere_le || '',
     _couverture: ref.couverture || {},
+    _notions: blocs.reduce((n, b) => n + b.modules.reduce((k, m) => k + (m.notions_cles || []).length, 0), 0)
+            + horsBloc.reduce((n, m) => n + (m.notions_cles || []).length, 0),
     _controles_ok: (ref.controles || []).every(c => c.ok),
   };
 }
 
-module.exports = { REFERENTIELS, RACES, versFormatApplication, DIAGNOSTIC };
+module.exports = { REFERENTIELS, RACES, SYLLABI, versFormatApplication, DIAGNOSTIC };
