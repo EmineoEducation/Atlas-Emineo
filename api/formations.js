@@ -164,6 +164,8 @@ module.exports = async function handler(req, res) {
           competences: data.blocs.reduce((n, b) => n + b.competences.length, 0),
           hors_bloc: (data.modules_hors_bloc || []).length,
           notions: data._notions || 0,
+          familles: data._familles || 0,
+          signaux: (data.alertes_detectees || []).length,
           epreuves: data.blocs.reduce((n, b) => n + (b.epreuves || []).length, 0),
           controles_ok: data._controles_ok,
           genere_le: data._genere_le,
