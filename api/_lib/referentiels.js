@@ -167,6 +167,95 @@ function contenuModule(cleTitre, blocId, titreModule) {
   };
 }
 
+// ── Familles de notions ─────────────────────────────────────────────────────
+//
+// Les notions des syllabi ne se répètent jamais mot pour mot : « Structuration
+// d'une veille dynamique » et « Rappels fondamentaux et enjeux de la veille »
+// parlent de la même chose sans partager un seul terme signifiant. Aucun
+// rapprochement automatique ne peut donc relier deux modules — et le relier
+// par mots communs produirait un graphe faux, où le bloc créatif rejoindrait
+// le bloc diagnostic parce que tous deux comportent une « restitution ».
+//
+// Le regroupement est donc fait hors ligne, relu à la main, et versionné dans
+// referentiels/notions/familles-<promotion>.json. Ici on ne fait que le lire et
+// en tirer trois choses : les familles portées par chaque module, les liens
+// entre blocs, et les signaux de résonance. Aucun appel à un modèle en
+// production, aucune clé, rien qui tombe.
+const FAMILLES = {};     // clé de promotion -> { parModule, liste }
+DIAGNOSTIC.familles = { titres: [], erreurs: [] };
+
+(function chargerFamilles() {
+  if (!DIAGNOSTIC.dossier) return;
+  const dossier = path.join(DIAGNOSTIC.dossier, 'notions');
+  let fichiers = [];
+  try { fichiers = fs.readdirSync(dossier).filter(f => /^familles-.+\.json$/.test(f)); }
+  catch (e) { return; }                       // dossier absent : rien à relier
+
+  for (const f of fichiers) {
+    const cle = f.replace(/^familles-/, '').replace(/\.json$/, '');
+    try {
+      const brut = JSON.parse(fs.readFileSync(path.join(dossier, f), 'utf-8'));
+      const parModule = new Map();            // intitulé de module -> [familles]
+      const liste = [];
+      for (const fam of brut.familles || []) {
+        if (!fam.modules || !fam.modules.length) continue;
+        liste.push({ libelle: fam.libelle, type: fam.type, blocs: fam.blocs || [],
+                     modules: fam.modules, competences: fam.competences || [],
+                     notions: (fam.notions || []).length });
+        for (const m of fam.modules) {
+          if (!parModule.has(m)) parModule.set(m, []);
+          parModule.get(m).push(fam.libelle);
+        }
+      }
+      FAMILLES[cle] = { parModule, liste };
+      DIAGNOSTIC.familles.titres.push({ cle, familles: liste.length,
+        transversales: liste.filter(x => x.blocs.length > 1).length });
+    } catch (e) {
+      DIAGNOSTIC.familles.erreurs.push({ fichier: f, raison: e.message });
+    }
+  }
+})();
+
+// Liens entre blocs : deux blocs sont reliés quand une même famille est
+// enseignée dans l'un et dans l'autre. Le poids est le nombre de familles
+// partagées — c'est lui qui donnera l'épaisseur du trait.
+function liensEntreBlocs(liste) {
+  const paires = new Map();
+  for (const fam of liste) {
+    const blocs = [...new Set(fam.blocs)].sort();
+    for (let i = 0; i < blocs.length; i++)
+      for (let j = i + 1; j < blocs.length; j++) {
+        const k = blocs[i] + '§' + blocs[j];
+        if (!paires.has(k)) paires.set(k, { a: blocs[i], b: blocs[j], familles: [] });
+        paires.get(k).familles.push(fam.libelle);
+      }
+  }
+  return [...paires.values()].map(p => ({ ...p, poids: p.familles.length }))
+    .sort((x, y) => y.poids - x.poids);
+}
+
+// Signaux de résonance. Seul le niveau 3 est calculable aujourd'hui : il ne
+// demande que le contenu annoncé. Les niveaux 1 et 2 — approfondissement voulu
+// d'une année sur l'autre, recoupement entre deux intervenants qui ne se sont
+// pas parlé — exigent de savoir QUI enseigne quoi. Aucun référentiel ne le
+// porte : cette information viendra de l'émargement CESAR.
+function signauxResonance(liste) {
+  return liste
+    .filter(f => f.modules.length > 1 && f.type !== 'posture')
+    .map(f => {
+      const plusieursBlocs = [...new Set(f.blocs)].length > 1
+      const message = plusieursBlocs
+        ? f.libelle + ' est enseigné dans ' + f.modules.length + ' modules répartis sur les blocs '
+          + [...new Set(f.blocs)].sort().join(', ') + '. Articulation à expliciter : '
+          + f.modules.slice(0, 4).join(' · ') + (f.modules.length > 4 ? ' · …' : '')
+        : f.libelle + ' revient dans ' + f.modules.length + ' modules du même bloc ('
+          + f.blocs[0] + ') : ' + f.modules.slice(0, 4).join(' · ') + (f.modules.length > 4 ? ' · …' : '')
+      return { niveau: 3, notion: f.libelle, modules: f.modules, blocs: [...new Set(f.blocs)].sort(),
+               competences: f.competences, transversale: plusieursBlocs, message }
+    })
+    .sort((a, b) => (b.transversale - a.transversale) || (b.modules.length - a.modules.length))
+}
+
 // Traduit un référentiel du dépôt vers la forme attendue par l'application.
 //
 // Deux conversions importantes :
@@ -179,6 +268,7 @@ function contenuModule(cleTitre, blocId, titreModule) {
 function versFormatApplication(ref) {
   const race = RACES[ref.formation.rncp];
   const cleTitre = ref._cle || '';
+  const fam = FAMILLES[cleTitre] || { parModule: new Map(), liste: [] };
   const parActivite = new Map((race ? race.activites : []).map(a => [a.id, a]));
 
   const blocs = (ref.blocs || []).map(b => {
@@ -207,6 +297,7 @@ function versFormatApplication(ref) {
       competences_liees: m.competences_liees || [],
       competences_plage: !!m.competences_plage,
       ...contenuModule(cleTitre, b.id, m.titre),
+      familles: fam.parModule.get(m.titre) || [],
       epreuve: m.epreuve || '',
       commentaire: m.commentaire || '',
       sous_modules: m.sous_modules || [],
@@ -237,6 +328,7 @@ function versFormatApplication(ref) {
     competences_liees: m.competences_liees || [],
     competences_plage: !!m.competences_plage,
     ...contenuModule(cleTitre, 'HB', m.titre),
+    familles: fam.parModule.get(m.titre) || [],
     intervenant: '',
   }));
 
@@ -252,8 +344,12 @@ function versFormatApplication(ref) {
     },
     blocs,
     intervenants: [],
-    notions_transversales: [],
-    alertes_detectees: [],
+    // Les familles portées par plus d'un module : ce sont elles qui font la
+    // trame transversale du diplôme, et le graphe de la cartographie.
+    notions_transversales: fam.liste.filter(f => f.modules.length > 1)
+      .sort((a, b) => b.modules.length - a.modules.length),
+    liens_blocs: liensEntreBlocs(fam.liste),
+    alertes_detectees: signauxResonance(fam.liste),
     _campus: ref.formation.campus,
     _cycle: ref.formation.annee_cycle,
     _source: 'referentiels/' + ref.formation.titre_court,
@@ -262,7 +358,8 @@ function versFormatApplication(ref) {
     _notions: blocs.reduce((n, b) => n + b.modules.reduce((k, m) => k + (m.notions_cles || []).length, 0), 0)
             + horsBloc.reduce((n, m) => n + (m.notions_cles || []).length, 0),
     _controles_ok: (ref.controles || []).every(c => c.ok),
+    _familles: fam.liste.length,
   };
 }
 
-module.exports = { REFERENTIELS, RACES, SYLLABI, versFormatApplication, DIAGNOSTIC };
+module.exports = { REFERENTIELS, RACES, SYLLABI, FAMILLES, versFormatApplication, DIAGNOSTIC };
