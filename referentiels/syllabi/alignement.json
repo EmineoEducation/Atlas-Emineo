@@ -977,25 +977,25 @@
     },
     {
      "syllabus": "C24 Politique commerciale",
-     "bloc": "B02",
+     "bloc": "B04",
      "module_pf": "C24 Politique commerciale",
      "origine": "code"
     },
     {
      "syllabus": "C25 Stratégie client",
-     "bloc": "B02",
+     "bloc": "B04",
      "module_pf": "C25 Stratégie client",
      "origine": "code"
     },
     {
      "syllabus": "C26 RSE et pratiques commerciales",
-     "bloc": "B02",
+     "bloc": "B04",
      "module_pf": "C26 RSE et pratiques commerciales",
      "origine": "code"
     },
     {
      "syllabus": "C28 Performance et pratiques responsables",
-     "bloc": "B02",
+     "bloc": "B04",
      "module_pf": "C28 Performance et pratiques responsables",
      "origine": "code"
     },
@@ -1037,7 +1037,7 @@
     },
     {
      "syllabus": "C27 Performance commerciale et KPI",
-     "bloc": "B02",
+     "bloc": "B04",
      "module_pf": "C27Performance commerciale et KPI",
      "origine": "corrige"
     }
