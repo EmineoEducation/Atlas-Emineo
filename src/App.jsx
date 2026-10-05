@@ -638,6 +638,38 @@ function CartographieTitre({formation}){
       <Cartographie2 blocs={blocs} mode="plan" sel={sel} titre={titre}
         onSelect={x=>setSel(p=>p.kind==='bloc'&&p.id===x.id?{kind:null,id:null}:x)}/>
 
+      {/* Trame transversale — ce que plusieurs modules enseignent en commun.
+          La rosace montre les blocs ; elle ne peut pas montrer ce qui les
+          traverse. C'est pourtant là que se joue la coordination : une famille
+          portée par quatre modules de trois blocs différents est soit un
+          approfondissement voulu, soit quatre fois le même cours. */}
+      {(formation?.notions_transversales || []).length > 0 && (
+        <div style={{...card({marginTop:'0.9rem'})}}>
+          <div style={{fontSize:10,fontWeight:700,letterSpacing:'.08em',textTransform:'uppercase',color:P.textm,marginBottom:'0.1rem'}}>
+            Notions transversales
+          </div>
+          <p style={{fontSize:12,color:P.textm,margin:'0 0 0.75rem',lineHeight:1.6}}>
+            {formation.notions_transversales.length} familles de notions sont portées par plusieurs modules.
+            {(formation.liens_blocs || []).length > 0 && ' ' + formation.liens_blocs.length + ' relient des blocs distincts.'}
+          </p>
+          {formation.notions_transversales.map(n => {
+            const traverse = (n.blocs || []).length > 1
+            return (
+              <div key={n.libelle} style={{display:'flex',alignItems:'flex-start',gap:10,padding:'7px 0',borderBottom:`1px solid ${P.border}`}}>
+                <span style={{flexShrink:0,display:'flex',gap:3,flexWrap:'wrap',width:96}}>
+                  {(n.blocs || []).map(b => <Tag key={b} label={b} small/>)}
+                </span>
+                <span style={{flex:1,minWidth:0}}>
+                  <span style={{fontSize:13,fontWeight:traverse?600:400,color:P.abysse}}>{n.libelle}</span>
+                  <span style={{fontSize:11,color:P.textm}}> · {n.modules.length} modules</span>
+                  <div style={{fontSize:11,color:P.textm,marginTop:2,lineHeight:1.5}}>{n.modules.join(' · ')}</div>
+                </span>
+              </div>
+            )
+          })}
+        </div>
+      )}
+
       {/* Détail du bloc retenu — dépliage sous la carte plutôt qu'en panneau
           flottant : la lecture reste dans le flux de la page. */}
       {blocSel&&(
@@ -808,7 +840,7 @@ function VueDir({user,onLogout}){
                   {syncRapport.map((r,i)=>(
                     <div key={i} style={{paddingTop:4,borderTop:i?`1px solid ${P.border}`:'none'}}>
                       <strong>{r.promotion||r.cle}</strong> — {r.etat}
-                      {r.blocs!==undefined&&<span style={{color:P.textm}}> · {r.blocs} blocs, {r.modules} modules, {r.competences} compétences{r.notions?', ':''}{r.notions?<strong style={{color:P.petrole}}>{r.notions} notions</strong>:null}{r.controles_ok?'':' · contrôles en écart'}</span>}
+                      {r.blocs!==undefined&&<span style={{color:P.textm}}> · {r.blocs} blocs, {r.modules} modules, {r.competences} compétences{r.notions?', ':''}{r.notions?<strong style={{color:P.petrole}}>{r.notions} notions</strong>:null}{r.signaux?<span style={{color:P.textm}}>, {r.signaux} signaux</span>:null}{r.controles_ok?'':' · contrôles en écart'}</span>}
                     </div>
                   ))}
                 </div>
