@@ -267,16 +267,62 @@ function lireMRH(grille) {
   return { blocs, horsBloc }
 }
 
+/* ── Année d'un module MRH ─────────────────────────────────────────────────
+   La feuille « MRH GLOBAL » donne la structure et les compétences, mais pas
+   l'année. La feuille « MRH 1 & 2 » donne l'année et le volume, sous un autre
+   intitulé : « C11 Veille stratégique RH digitale… » là où GLOBAL écrit
+   « Module 1 : Veille stratégique RH digitale… ». Le libellé qui suit le
+   préfixe est le même : c'est lui qui relie les deux feuilles. */
+const RE_ANNEE_MRH = /^ANN[ÉE]E\s*(\d)/i
+const sansPrefixe = t => String(t || '')
+  .replace(/^\s*Module\s*\d+\s*[:.\-–—]\s*/i, '')
+  .replace(/^\s*C\s*\d{1,3}(?:\.\d)?\s*[:.\-–—]?\s*/i, '')
+  .toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+  .replace(/[^a-z0-9]+/g, ' ').trim()
+
+function anneesEtVolumesMRH(grille) {
+  const table = new Map()
+  let annee = ''
+  for (const ligne of grille) {
+    if (!ligne) continue
+    const a = txt(ligne[0]), vol = nombre(ligne[1])
+    let m
+    if ((m = a.match(RE_ANNEE_MRH))) { annee = m[1]; continue }
+    if (/^BC\s*\d/i.test(a) || RE_ACTIVITE_MRH.test(a)) continue
+    const code = codeEtLibelle(a)
+    if (!code.code || !code.libelle) continue
+    table.set(sansPrefixe(a), { annee, volume: vol, code: code.code })
+  }
+  return table
+}
+
 /* ── Assemblage ───────────────────────────────────────────────────────────── */
 const PROFILS = {
   mdec: { lire: lireMDEC, rncp: '39354', titre: 'Mastère Manager du développement commercial',
-          titre_court: 'M1 MDEC', feuille: 1 },
+          court: 'MDEC', feuille: 1 },
   mrh: { lire: lireMRH, rncp: '41295', titre: 'Mastère Management des ressources humaines',
-         titre_court: 'M1 MRH', feuille: 0 },
+         court: 'MRH', feuille: 0 },
+}
+
+/* Un plan ISME couvre les deux années du cycle. Atlas raisonne par promotion :
+   un étudiant de M2 ne doit pas voir la couverture du M1 dans son parcours, et
+   le réalisé de CESAR arrive par groupe planning, donc par promotion. On scinde
+   donc le plan en deux référentiels, en ne gardant dans chacun que les modules
+   de son année et les blocs qui en contiennent. */
+function parAnnee(blocs, annee) {
+  return blocs
+    .map(b => ({ ...b, modules: b.modules.filter(m => String(m.annee || '') === annee) }))
+    .filter(b => b.modules.length)
+    .map(b => {
+      const codes = []
+      for (const m of b.modules) for (const c of m.competences_liees) if (!codes.includes(c)) codes.push(c)
+      return { ...b, competences: codes,
+               competences_mentionnees: b.competences_mentionnees.filter(c => codes.includes(c.id)) }
+    })
 }
 
 const [fichier, nomProfil] = process.argv.slice(2)
-if (fichier && nomProfil) {
+if (fichier && nomProfil) await (async () => {
   const profil = PROFILS[nomProfil]
   if (!profil) { console.error('Profil inconnu : ' + nomProfil); process.exit(1) }
 
@@ -284,29 +330,54 @@ if (fichier && nomProfil) {
   const feuille = cl.feuilles[profil.feuille]
   const { blocs, horsBloc } = profil.lire(feuille.cellules)
 
-  const anomalies = []
-  for (const b of blocs) {
-    if (!b.modules.length) anomalies.push({ bloc: b.id, raison: 'aucun module' })
-    if (!b.competences.length) anomalies.push({ bloc: b.id, raison: 'aucune compétence' })
+  // MRH : l'année et le volume se lisent sur la seconde feuille.
+  if (nomProfil === 'mrh' && cl.feuilles[1]) {
+    const table = anneesEtVolumesMRH(cl.feuilles[1].cellules)
+    for (const b of blocs) for (const m of b.modules) {
+      const t = table.get(sansPrefixe(m.titre))
+      if (!t) continue
+      m.annee = t.annee
+      if (m.volume == null) m.volume = t.volume
+      if (!m.code) m.code = t.code
+    }
   }
-  const sansCode = blocs.flatMap(b => b.modules).filter(m => !m.code).map(m => m.titre)
-  if (sansCode.length) anomalies.push({ raison: 'modules sans code', titres: sansCode })
 
-  const controles = blocs
-    .filter(b => b.volume_annonce != null)
-    .map(b => {
-      const calcule = b.modules.reduce((n, m) => n + (m.volume || 0), 0)
-      return { titre: b.titre, annonce: b.volume_annonce, calcule: Math.round(calcule * 10) / 10,
-               ok: Math.abs(b.volume_annonce - calcule) < 0.5 }
-    })
+  const { writeFileSync } = await import('node:fs')
+  for (const annee of ['1', '2']) {
+    const blocsAnnee = parAnnee(blocs, annee)
+    if (!blocsAnnee.length) continue
+    const horsBlocAnnee = horsBloc.filter(m => String(m.annee || '') === annee || !m.annee)
 
-  process.stdout.write(JSON.stringify({
-    genere_le: new Date().toISOString().slice(0, 10),
-    outil: 'extraire-pf-isme',
-    formation: { rncp: profil.rncp, titre: profil.titre, titre_court: profil.titre_court,
-                 campus: 'Le Mans', annee_cycle: '', source: basename(fichier), feuille: feuille.nom },
-    race: {}, blocs, modules_hors_bloc: horsBloc, hors_bloc_ecartes: [], epreuves_planifiees: [],
-    hors_perimetre: [], controles, anomalies,
-    couverture: { competences_sans_module: [], competences_couvertes_par_transverse: [] },
-  }, null, 1))
-}
+    const anomalies = []
+    for (const b of blocsAnnee) {
+      if (!b.competences.length) anomalies.push({ bloc: b.id, raison: 'aucune compétence' })
+    }
+    const sansCode = blocsAnnee.flatMap(b => b.modules).filter(m => !m.code).map(m => m.titre)
+    if (sansCode.length) anomalies.push({ raison: 'modules sans code', titres: sansCode })
+
+    const controles = blocsAnnee
+      .filter(b => b.volume_annonce != null)
+      .map(b => {
+        const calcule = b.modules.reduce((n, m) => n + (m.volume || 0), 0)
+        return { titre: b.titre, annonce: b.volume_annonce, calcule: Math.round(calcule * 10) / 10,
+                 ok: Math.abs(b.volume_annonce - calcule) < 0.5 }
+      })
+
+    const cle = 'm' + annee + '-' + profil.court.toLowerCase()
+    const contenu = {
+      genere_le: new Date().toISOString().slice(0, 10),
+      outil: 'extraire-pf-isme',
+      formation: { rncp: profil.rncp, titre: profil.titre, titre_court: 'M' + annee + ' ' + profil.court,
+                   campus: 'Le Mans', annee_cycle: 'M' + annee,
+                   source: basename(fichier), feuille: feuille.nom },
+      race: {}, blocs: blocsAnnee, modules_hors_bloc: horsBlocAnnee, hors_bloc_ecartes: [],
+      epreuves_planifiees: [], hors_perimetre: [], controles, anomalies,
+      couverture: { competences_sans_module: [], competences_couvertes_par_transverse: [] },
+    }
+    writeFileSync(cle + '.json', JSON.stringify(contenu, null, 1))
+    console.error(cle.padEnd(9), blocsAnnee.length, 'blocs ·',
+      blocsAnnee.reduce((n, b) => n + b.modules.length, 0), 'modules ·',
+      blocsAnnee.reduce((n, b) => n + b.competences.length, 0), 'compétences ·',
+      horsBlocAnnee.length, 'hors bloc')
+  }
+})()
