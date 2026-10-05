@@ -100,7 +100,10 @@ DIAGNOSTIC.syllabi = { dossier: null, titres: [], erreurs: [] };
   for (const titre of alignement.titres || []) {
     let modules;
     try {
-      const brut = JSON.parse(fs.readFileSync(path.join(dossier, titre.cle + '.json'), 'utf-8'));
+      // Deux promotions d'un même titre partagent un seul fichier de syllabi :
+      // le programme ISME décrit les deux années d'un coup. L'alignement dit
+      // lequel lire ; à défaut, c'est le fichier du nom de la promotion.
+      const brut = JSON.parse(fs.readFileSync(path.join(dossier, (titre.source || titre.cle) + '.json'), 'utf-8'));
       // Plusieurs fiches peuvent porter le même intitulé — trois « Semaines
       // intensives », deux « Éloquence & art oratoire » — avec des contenus
       // différents. Les regrouper par intitulé plutôt que retenir la première
@@ -114,7 +117,7 @@ DIAGNOSTIC.syllabi = { dossier: null, titres: [], erreurs: [] };
           modules.set(m.titre, lot);
         }
     } catch (e) {
-      DIAGNOSTIC.syllabi.erreurs.push({ fichier: titre.cle + '.json', raison: e.message });
+      DIAGNOSTIC.syllabi.erreurs.push({ fichier: (titre.source || titre.cle) + '.json', raison: e.message });
       continue;
     }
 
