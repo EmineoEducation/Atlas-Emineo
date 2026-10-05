@@ -1,0 +1,1167 @@
+{
+ "cle": "",
+ "genere_le": "2026-10-05",
+ "outil": "familles-notions",
+ "methode": "regroupement hors ligne, à relire et corriger à la main",
+ "controle": {
+  "notions_distinctes": 110,
+  "occurrences": 110,
+  "classees": 110,
+  "ecartees": 19,
+  "intitules_oublies": [],
+  "intitules_inconnus": []
+ },
+ "familles": [
+  {
+   "id": "F01",
+   "libelle": "Veille et intelligence économique",
+   "type": "concept",
+   "blocs": [
+    "B01",
+    "B03"
+   ],
+   "modules": [
+    "C1 Veille, analyse et stratégie",
+    "C15 Veille et Innovation"
+   ],
+   "competences": [
+    "C1",
+    "C15"
+   ],
+   "notions": [
+    {
+     "notion": "Fondamentaux de la Business Intelligence et de la veille stratégique",
+     "bloc": "B01",
+     "module": "C1 Veille, analyse et stratégie",
+     "competences": [
+      "C1"
+     ]
+    },
+    {
+     "notion": "Outils et techniques de veille",
+     "bloc": "B01",
+     "module": "C1 Veille, analyse et stratégie",
+     "competences": [
+      "C1"
+     ]
+    },
+    {
+     "notion": "Environnement international et intelligence économique",
+     "bloc": "B01",
+     "module": "C1 Veille, analyse et stratégie",
+     "competences": [
+      "C1"
+     ]
+    },
+    {
+     "notion": "De la veille à la décision stratégique",
+     "bloc": "B01",
+     "module": "C1 Veille, analyse et stratégie",
+     "competences": [
+      "C1"
+     ]
+    },
+    {
+     "notion": "Introduction à la veille stratégique et à l’innovation",
+     "bloc": "B03",
+     "module": "C15 Veille et Innovation",
+     "competences": [
+      "C15"
+     ]
+    },
+    {
+     "notion": "Technologies au service de la veille commerciale",
+     "bloc": "B03",
+     "module": "C15 Veille et Innovation",
+     "competences": [
+      "C15"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F02",
+   "libelle": "Analyse concurrentielle et benchmark",
+   "type": "concept",
+   "blocs": [
+    "B01",
+    "B03"
+   ],
+   "modules": [
+    "C1 Veille, analyse et stratégie",
+    "C17 Benchmarking et diagnostic"
+   ],
+   "competences": [
+    "C1",
+    "C17"
+   ],
+   "notions": [
+    {
+     "notion": "Analyse de l'environnement concurrentiel",
+     "bloc": "B01",
+     "module": "C1 Veille, analyse et stratégie",
+     "competences": [
+      "C1"
+     ]
+    },
+    {
+     "notion": "Introduction au benchmarking stratégique",
+     "bloc": "B03",
+     "module": "C17 Benchmarking et diagnostic",
+     "competences": [
+      "C17"
+     ]
+    },
+    {
+     "notion": "Évaluation des avantages concurrentiels",
+     "bloc": "B03",
+     "module": "C17 Benchmarking et diagnostic",
+     "competences": [
+      "C17"
+     ]
+    },
+    {
+     "notion": "Diagnostic des lacunes à combler",
+     "bloc": "B03",
+     "module": "C17 Benchmarking et diagnostic",
+     "competences": [
+      "C17"
+     ]
+    },
+    {
+     "notion": "Développement stratégique basé sur le benchmarking",
+     "bloc": "B03",
+     "module": "C17 Benchmarking et diagnostic",
+     "competences": [
+      "C17"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F03",
+   "libelle": "Diagnostic stratégique",
+   "type": "concept",
+   "blocs": [
+    "B01"
+   ],
+   "modules": [
+    "C2 Diagnostic stratégique"
+   ],
+   "competences": [
+    "C2"
+   ],
+   "notions": [
+    {
+     "notion": "Fondamentaux du diagnostic stratégique",
+     "bloc": "B01",
+     "module": "C2 Diagnostic stratégique",
+     "competences": [
+      "C2"
+     ]
+    },
+    {
+     "notion": "Diagnostic interne de l'organisation",
+     "bloc": "B01",
+     "module": "C2 Diagnostic stratégique",
+     "competences": [
+      "C2"
+     ]
+    },
+    {
+     "notion": "Outils et méthodes d'analyse stratégique",
+     "bloc": "B01",
+     "module": "C2 Diagnostic stratégique",
+     "competences": [
+      "C2"
+     ]
+    },
+    {
+     "notion": "Du diagnostic aux leviers d'action",
+     "bloc": "B01",
+     "module": "C2 Diagnostic stratégique",
+     "competences": [
+      "C2"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F04",
+   "libelle": "Intelligence collective et animation de réunion",
+   "type": "concept",
+   "blocs": [
+    "B01"
+   ],
+   "modules": [
+    "C3 La Reflexion collaborative"
+   ],
+   "competences": [
+    "C3"
+   ],
+   "notions": [
+    {
+     "notion": "Fondamentaux de l'intelligence collective",
+     "bloc": "B01",
+     "module": "C3 La Reflexion collaborative",
+     "competences": [
+      "C3"
+     ]
+    },
+    {
+     "notion": "Techniques d'animation de réunion",
+     "bloc": "B01",
+     "module": "C3 La Reflexion collaborative",
+     "competences": [
+      "C3"
+     ]
+    },
+    {
+     "notion": "Méthodes de brainstorming avancées",
+     "bloc": "B01",
+     "module": "C3 La Reflexion collaborative",
+     "competences": [
+      "C3"
+     ]
+    },
+    {
+     "notion": "Synthèse et capitalisation des informations stratégiques",
+     "bloc": "B01",
+     "module": "C3 La Reflexion collaborative",
+     "competences": [
+      "C3"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F05",
+   "libelle": "Gouvernance et culture d’entreprise",
+   "type": "concept",
+   "blocs": [
+    "B01"
+   ],
+   "modules": [
+    "C41 Culture et Gouvernance"
+   ],
+   "competences": [
+    "C4"
+   ],
+   "notions": [
+    {
+     "notion": "Fondamentaux de la gouvernance d'entreprise",
+     "bloc": "B01",
+     "module": "C41 Culture et Gouvernance",
+     "competences": [
+      "C4"
+     ]
+    },
+    {
+     "notion": "Vision et projet stratégique",
+     "bloc": "B01",
+     "module": "C41 Culture et Gouvernance",
+     "competences": [
+      "C4"
+     ]
+    },
+    {
+     "notion": "Culture d'entreprise comme levier stratégique",
+     "bloc": "B01",
+     "module": "C41 Culture et Gouvernance",
+     "competences": [
+      "C4"
+     ]
+    },
+    {
+     "notion": "Gouvernance collaborative et parties prenantes",
+     "bloc": "B01",
+     "module": "C41 Culture et Gouvernance",
+     "competences": [
+      "C4"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F06",
+   "libelle": "RSE et pratiques responsables",
+   "type": "concept",
+   "blocs": [
+    "B01"
+   ],
+   "modules": [
+    "C42 RSE"
+   ],
+   "competences": [],
+   "notions": [
+    {
+     "notion": "Introduction à la RSE",
+     "bloc": "B01",
+     "module": "C42 RSE",
+     "competences": []
+    },
+    {
+     "notion": "Enjeux sociétaux et environnementaux",
+     "bloc": "B01",
+     "module": "C42 RSE",
+     "competences": []
+    },
+    {
+     "notion": "Mise en œuvre d'une stratégie RSE",
+     "bloc": "B01",
+     "module": "C42 RSE",
+     "competences": []
+    }
+   ]
+  },
+  {
+   "id": "F07",
+   "libelle": "Plan d’action et priorisation stratégique",
+   "type": "concept",
+   "blocs": [
+    "B01"
+   ],
+   "modules": [
+    "C5 Plan d'action stratégique"
+   ],
+   "competences": [
+    "C5"
+   ],
+   "notions": [
+    {
+     "notion": "Fondamentaux du plan d'action stratégique",
+     "bloc": "B01",
+     "module": "C5 Plan d'action stratégique",
+     "competences": [
+      "C5"
+     ]
+    },
+    {
+     "notion": "Outils d'analyse et priorisation stratégique",
+     "bloc": "B01",
+     "module": "C5 Plan d'action stratégique",
+     "competences": [
+      "C5"
+     ]
+    },
+    {
+     "notion": "Planification et mise en œuvre des actions stratégiques",
+     "bloc": "B01",
+     "module": "C5 Plan d'action stratégique",
+     "competences": [
+      "C5"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F08",
+   "libelle": "Communication, leadership et prise de parole",
+   "type": "posture",
+   "blocs": [
+    "B01",
+    "B03"
+   ],
+   "modules": [
+    "C6 Communication et Leadership",
+    "C222 Pitch"
+   ],
+   "competences": [
+    "C6"
+   ],
+   "notions": [
+    {
+     "notion": "Principes fondamentaux de la communication stratégique",
+     "bloc": "B01",
+     "module": "C6 Communication et Leadership",
+     "competences": [
+      "C6"
+     ]
+    },
+    {
+     "notion": "Leadership et force de conviction",
+     "bloc": "B01",
+     "module": "C6 Communication et Leadership",
+     "competences": [
+      "C6"
+     ]
+    },
+    {
+     "notion": "Prise de parole en public et communication interpersonnelle",
+     "bloc": "B01",
+     "module": "C6 Communication et Leadership",
+     "competences": [
+      "C6"
+     ]
+    },
+    {
+     "notion": "Communication en situation complexe",
+     "bloc": "B01",
+     "module": "C6 Communication et Leadership",
+     "competences": [
+      "C6"
+     ]
+    },
+    {
+     "notion": "Introduction au pitch stratégique",
+     "bloc": "B03",
+     "module": "C222 Pitch",
+     "competences": []
+    },
+    {
+     "notion": "Techniques avancées de présentation orale",
+     "bloc": "B03",
+     "module": "C222 Pitch",
+     "competences": []
+    },
+    {
+     "notion": "Simulation de pitch stratégique",
+     "bloc": "B03",
+     "module": "C222 Pitch",
+     "competences": []
+    }
+   ]
+  },
+  {
+   "id": "F09",
+   "libelle": "Management de projet",
+   "type": "concept",
+   "blocs": [
+    "B01"
+   ],
+   "modules": [
+    "C7 Management de projet"
+   ],
+   "competences": [
+    "C7"
+   ],
+   "notions": [
+    {
+     "notion": "Introduction au management de projet stratégique",
+     "bloc": "B01",
+     "module": "C7 Management de projet",
+     "competences": [
+      "C7"
+     ]
+    },
+    {
+     "notion": "Méthodologies et outils de planification stratégique",
+     "bloc": "B01",
+     "module": "C7 Management de projet",
+     "competences": [
+      "C7"
+     ]
+    },
+    {
+     "notion": "Suivi et évaluation des projets stratégiques",
+     "bloc": "B01",
+     "module": "C7 Management de projet",
+     "competences": [
+      "C7"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F10",
+   "libelle": "Négociation",
+   "type": "concept",
+   "blocs": [
+    "B01",
+    "B03"
+   ],
+   "modules": [
+    "C81 Négociation",
+    "C221 Budget et Négociation approfondie"
+   ],
+   "competences": [
+    "C22",
+    "C8"
+   ],
+   "notions": [
+    {
+     "notion": "Fondamentaux de la négociation stratégique",
+     "bloc": "B01",
+     "module": "C81 Négociation",
+     "competences": [
+      "C8"
+     ]
+    },
+    {
+     "notion": "Techniques et outils de négociation",
+     "bloc": "B01",
+     "module": "C81 Négociation",
+     "competences": [
+      "C8"
+     ]
+    },
+    {
+     "notion": "Alignement stratégique et cohérence des actions",
+     "bloc": "B01",
+     "module": "C81 Négociation",
+     "competences": [
+      "C8"
+     ]
+    },
+    {
+     "notion": "Techniques avancées de négociation budgétaire",
+     "bloc": "B03",
+     "module": "C221 Budget et Négociation approfondie",
+     "competences": [
+      "C22"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F11",
+   "libelle": "Accompagnement des équipes opérationnelles",
+   "type": "posture",
+   "blocs": [
+    "B01"
+   ],
+   "modules": [
+    "C82 L'accompagnement stratégique"
+   ],
+   "competences": [],
+   "notions": [
+    {
+     "notion": "Fondamentaux de l'accompagnement stratégique",
+     "bloc": "B01",
+     "module": "C82 L'accompagnement stratégique",
+     "competences": []
+    },
+    {
+     "notion": "Techniques d'accompagnement des équipes opérationnelles",
+     "bloc": "B01",
+     "module": "C82 L'accompagnement stratégique",
+     "competences": []
+    },
+    {
+     "notion": "Outils pour garantir la cohérence stratégique",
+     "bloc": "B01",
+     "module": "C82 L'accompagnement stratégique",
+     "competences": []
+    }
+   ]
+  },
+  {
+   "id": "F12",
+   "libelle": "Performance, KPI et tableaux de bord",
+   "type": "concept",
+   "blocs": [
+    "B01",
+    "B02",
+    "B05"
+   ],
+   "modules": [
+    "C9 Stratégie de la Performance",
+    "C31 Performance RH",
+    "C101 Maîtriser Excel"
+   ],
+   "competences": [
+    "C10",
+    "C31",
+    "C9"
+   ],
+   "notions": [
+    {
+     "notion": "Introduction à l’évaluation stratégique",
+     "bloc": "B01",
+     "module": "C9 Stratégie de la Performance",
+     "competences": [
+      "C9"
+     ]
+    },
+    {
+     "notion": "Indicateurs clés de performance (KPI)",
+     "bloc": "B01",
+     "module": "C9 Stratégie de la Performance",
+     "competences": [
+      "C9"
+     ]
+    },
+    {
+     "notion": "Outils et tableaux de bord pour le suivi stratégique",
+     "bloc": "B01",
+     "module": "C9 Stratégie de la Performance",
+     "competences": [
+      "C9"
+     ]
+    },
+    {
+     "notion": "Analyse et ajustement des plans stratégiques",
+     "bloc": "B01",
+     "module": "C9 Stratégie de la Performance",
+     "competences": [
+      "C9"
+     ]
+    },
+    {
+     "notion": "Introduction à la mesure de la performance RH",
+     "bloc": "B05",
+     "module": "C31 Performance RH",
+     "competences": [
+      "C31"
+     ]
+    },
+    {
+     "notion": "Outils pour mesurer la performance RH",
+     "bloc": "B05",
+     "module": "C31 Performance RH",
+     "competences": [
+      "C31"
+     ]
+    },
+    {
+     "notion": "Évaluation et ajustement des performances",
+     "bloc": "B05",
+     "module": "C31 Performance RH",
+     "competences": [
+      "C31"
+     ]
+    },
+    {
+     "notion": "Conception de tableaux de bord financiers",
+     "bloc": "B02",
+     "module": "C101 Maîtriser Excel",
+     "competences": [
+      "C10"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F13",
+   "libelle": "Excel et outils bureautiques",
+   "type": "outil",
+   "blocs": [
+    "B02"
+   ],
+   "modules": [
+    "C101 Maîtriser Excel"
+   ],
+   "competences": [
+    "C10"
+   ],
+   "notions": [
+    {
+     "notion": "Introduction à Excel pour la gestion financière",
+     "bloc": "B02",
+     "module": "C101 Maîtriser Excel",
+     "competences": [
+      "C10"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F14",
+   "libelle": "Gestion budgétaire et analyse financière",
+   "type": "concept",
+   "blocs": [
+    "B02",
+    "B03"
+   ],
+   "modules": [
+    "C101 Maîtriser Excel",
+    "C102 Gestion budget",
+    "C103 Analyse financière et financement",
+    "C221 Budget et Négociation approfondie"
+   ],
+   "competences": [
+    "C10",
+    "C22"
+   ],
+   "notions": [
+    {
+     "notion": "Prévisions budgétaires avec Excel",
+     "bloc": "B02",
+     "module": "C101 Maîtriser Excel",
+     "competences": [
+      "C10"
+     ]
+    },
+    {
+     "notion": "Analyse de rentabilité et indicateurs financiers",
+     "bloc": "B02",
+     "module": "C101 Maîtriser Excel",
+     "competences": [
+      "C10"
+     ]
+    },
+    {
+     "notion": "Fondamentaux de la gestion budgétaire",
+     "bloc": "B02",
+     "module": "C102 Gestion budget",
+     "competences": []
+    },
+    {
+     "notion": "Techniques d’optimisation budgétaire",
+     "bloc": "B02",
+     "module": "C102 Gestion budget",
+     "competences": []
+    },
+    {
+     "notion": "Outils pour la gestion budgétaire",
+     "bloc": "B02",
+     "module": "C102 Gestion budget",
+     "competences": []
+    },
+    {
+     "notion": "Principes fondamentaux de l’analyse financière",
+     "bloc": "B02",
+     "module": "C103 Analyse financière et financement",
+     "competences": []
+    },
+    {
+     "notion": "Évaluation des besoins en financement",
+     "bloc": "B02",
+     "module": "C103 Analyse financière et financement",
+     "competences": []
+    },
+    {
+     "notion": "Techniques de financement des entreprises",
+     "bloc": "B02",
+     "module": "C103 Analyse financière et financement",
+     "competences": []
+    },
+    {
+     "notion": "Introduction à la gestion budgétaire stratégique",
+     "bloc": "B03",
+     "module": "C221 Budget et Négociation approfondie",
+     "competences": [
+      "C22"
+     ]
+    },
+    {
+     "notion": "Gestion efficace du budget alloué",
+     "bloc": "B03",
+     "module": "C221 Budget et Négociation approfondie",
+     "competences": [
+      "C22"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F15",
+   "libelle": "Innovation commerciale",
+   "type": "concept",
+   "blocs": [
+    "B03"
+   ],
+   "modules": [
+    "C15 Veille et Innovation"
+   ],
+   "competences": [
+    "C15"
+   ],
+   "notions": [
+    {
+     "notion": "Stratégie d’innovation commerciale",
+     "bloc": "B03",
+     "module": "C15 Veille et Innovation",
+     "competences": [
+      "C15"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F16",
+   "libelle": "Analyse de marché, segmentation et ciblage",
+   "type": "concept",
+   "blocs": [
+    "B03"
+   ],
+   "modules": [
+    "C16 Analyse du marché et ciblage"
+   ],
+   "competences": [
+    "C16"
+   ],
+   "notions": [
+    {
+     "notion": "Introduction à l’analyse de marché",
+     "bloc": "B03",
+     "module": "C16 Analyse du marché et ciblage",
+     "competences": [
+      "C16"
+     ]
+    },
+    {
+     "notion": "Étude des comportements clients",
+     "bloc": "B03",
+     "module": "C16 Analyse du marché et ciblage",
+     "competences": [
+      "C16"
+     ]
+    },
+    {
+     "notion": "Segmentation et ciblage des marchés",
+     "bloc": "B03",
+     "module": "C16 Analyse du marché et ciblage",
+     "competences": [
+      "C16"
+     ]
+    },
+    {
+     "notion": "Développement stratégique basé sur l’analyse de marché",
+     "bloc": "B03",
+     "module": "C16 Analyse du marché et ciblage",
+     "competences": [
+      "C16"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F17",
+   "libelle": "Stratégie commerciale et plan d’action commercial",
+   "type": "concept",
+   "blocs": [
+    "B03"
+   ],
+   "modules": [
+    "C18 Stratégie commerciale",
+    "C19 PAC et développement réseau"
+   ],
+   "competences": [
+    "C18",
+    "C19"
+   ],
+   "notions": [
+    {
+     "notion": "Introduction à la stratégie commerciale",
+     "bloc": "B03",
+     "module": "C18 Stratégie commerciale",
+     "competences": [
+      "C18"
+     ]
+    },
+    {
+     "notion": "Développement de la stratégie commerciale",
+     "bloc": "B03",
+     "module": "C18 Stratégie commerciale",
+     "competences": [
+      "C18"
+     ]
+    },
+    {
+     "notion": "Communication et mise en œuvre de la stratégie commerciale",
+     "bloc": "B03",
+     "module": "C18 Stratégie commerciale",
+     "competences": [
+      "C18"
+     ]
+    },
+    {
+     "notion": "Introduction aux Plans d’Action Commercial (PAC)",
+     "bloc": "B03",
+     "module": "C19 PAC et développement réseau",
+     "competences": [
+      "C19"
+     ]
+    },
+    {
+     "notion": "Supervision des PAC par secteur ou produit",
+     "bloc": "B03",
+     "module": "C19 PAC et développement réseau",
+     "competences": [
+      "C19"
+     ]
+    },
+    {
+     "notion": "Développement du réseau commercial",
+     "bloc": "B03",
+     "module": "C19 PAC et développement réseau",
+     "competences": [
+      "C19"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F18",
+   "libelle": "Gestion des risques",
+   "type": "concept",
+   "blocs": [
+    "B03"
+   ],
+   "modules": [
+    "C201 Gestion des risques",
+    "C202 Analyse et sécurisation de stratégie"
+   ],
+   "competences": [
+    "C20"
+   ],
+   "notions": [
+    {
+     "notion": "Introduction à la gestion des risques commerciaux",
+     "bloc": "B03",
+     "module": "C201 Gestion des risques",
+     "competences": [
+      "C20"
+     ]
+    },
+    {
+     "notion": "Méthodes d’identification et d’analyse des risques",
+     "bloc": "B03",
+     "module": "C201 Gestion des risques",
+     "competences": [
+      "C20"
+     ]
+    },
+    {
+     "notion": "Évaluation et gestion proactive des risques",
+     "bloc": "B03",
+     "module": "C201 Gestion des risques",
+     "competences": [
+      "C20"
+     ]
+    },
+    {
+     "notion": "Introduction à l’analyse stratégique et sécurisation",
+     "bloc": "B03",
+     "module": "C202 Analyse et sécurisation de stratégie",
+     "competences": []
+    },
+    {
+     "notion": "Évaluation des indicateurs commerciaux",
+     "bloc": "B03",
+     "module": "C202 Analyse et sécurisation de stratégie",
+     "competences": []
+    },
+    {
+     "notion": "Gestion proactive des risques commerciaux",
+     "bloc": "B03",
+     "module": "C202 Analyse et sécurisation de stratégie",
+     "competences": []
+    }
+   ]
+  },
+  {
+   "id": "F19",
+   "libelle": "Business plan",
+   "type": "concept",
+   "blocs": [
+    "B03"
+   ],
+   "modules": [
+    "C21 Business plan"
+   ],
+   "competences": [
+    "C21"
+   ],
+   "notions": [
+    {
+     "notion": "Introduction au business plan",
+     "bloc": "B03",
+     "module": "C21 Business plan",
+     "competences": [
+      "C21"
+     ]
+    },
+    {
+     "notion": "Inventaire des moyens et ressources disponibles",
+     "bloc": "B03",
+     "module": "C21 Business plan",
+     "competences": [
+      "C21"
+     ]
+    },
+    {
+     "notion": "Élaboration du business plan",
+     "bloc": "B03",
+     "module": "C21 Business plan",
+     "competences": [
+      "C21"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F20",
+   "libelle": "Organisation du travail et planification des activités",
+   "type": "concept",
+   "blocs": [
+    "B05"
+   ],
+   "modules": [
+    "C29 Structure et Organisation"
+   ],
+   "competences": [
+    "C29"
+   ],
+   "notions": [
+    {
+     "notion": "Introduction à la structuration organisationnelle",
+     "bloc": "B05",
+     "module": "C29 Structure et Organisation",
+     "competences": [
+      "C29"
+     ]
+    },
+    {
+     "notion": "Techniques de planification des activités",
+     "bloc": "B05",
+     "module": "C29 Structure et Organisation",
+     "competences": [
+      "C29"
+     ]
+    },
+    {
+     "notion": "Répartition équitable des charges de travail",
+     "bloc": "B05",
+     "module": "C29 Structure et Organisation",
+     "competences": [
+      "C29"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F21",
+   "libelle": "Processus RH et optimisation",
+   "type": "concept",
+   "blocs": [
+    "B05"
+   ],
+   "modules": [
+    "C30 Optimisation des processus RH"
+   ],
+   "competences": [
+    "C30"
+   ],
+   "notions": [
+    {
+     "notion": "Introduction à l’optimisation des processus RH",
+     "bloc": "B05",
+     "module": "C30 Optimisation des processus RH",
+     "competences": [
+      "C30"
+     ]
+    },
+    {
+     "notion": "Techniques de modélisation des processus RH",
+     "bloc": "B05",
+     "module": "C30 Optimisation des processus RH",
+     "competences": [
+      "C30"
+     ]
+    },
+    {
+     "notion": "Optimisation des pratiques RH opérationnelles",
+     "bloc": "B05",
+     "module": "C30 Optimisation des processus RH",
+     "competences": [
+      "C30"
+     ]
+    }
+   ]
+  }
+ ],
+ "ecartees": [
+  {
+   "motif": "trame pédagogique",
+   "notions": [
+    {
+     "notion": "Études de cas pratiques en RSE",
+     "bloc": "B01",
+     "module": "C42 RSE"
+    },
+    {
+     "notion": "Études de cas pratiques",
+     "bloc": "B01",
+     "module": "C5 Plan d'action stratégique"
+    },
+    {
+     "notion": "Études de cas pratiques en gestion de projet stratégique",
+     "bloc": "B01",
+     "module": "C7 Management de projet"
+    },
+    {
+     "notion": "Études de cas pratiques en négociation stratégique",
+     "bloc": "B01",
+     "module": "C81 Négociation"
+    },
+    {
+     "notion": "Études de cas pratiques en accompagnement stratégique",
+     "bloc": "B01",
+     "module": "C82 L'accompagnement stratégique"
+    },
+    {
+     "notion": "Études de cas pratiques en évaluation stratégique",
+     "bloc": "B01",
+     "module": "C9 Stratégie de la Performance"
+    },
+    {
+     "notion": "Études de cas pratiques en gestion budgétaire",
+     "bloc": "B02",
+     "module": "C102 Gestion budget"
+    },
+    {
+     "notion": "Études de cas pratiques en analyse financière",
+     "bloc": "B02",
+     "module": "C103 Analyse financière et financement"
+    },
+    {
+     "notion": "Études de cas pratiques en veille et innovation",
+     "bloc": "B03",
+     "module": "C15 Veille et Innovation"
+    },
+    {
+     "notion": "Études de cas pratiques en stratégie commerciale",
+     "bloc": "B03",
+     "module": "C18 Stratégie commerciale"
+    },
+    {
+     "notion": "Études de cas pratiques en PAC et développement réseau",
+     "bloc": "B03",
+     "module": "C19 PAC et développement réseau"
+    },
+    {
+     "notion": "Études de cas pratiques en gestion des risques commerciaux",
+     "bloc": "B03",
+     "module": "C201 Gestion des risques"
+    },
+    {
+     "notion": "Études de cas pratiques en analyse et sécurisation stratégique",
+     "bloc": "B03",
+     "module": "C202 Analyse et sécurisation de stratégie"
+    },
+    {
+     "notion": "Études de cas pratiques en business plan",
+     "bloc": "B03",
+     "module": "C21 Business plan"
+    },
+    {
+     "notion": "Études de cas pratiques en négociation et gestion budgétaire",
+     "bloc": "B03",
+     "module": "C221 Budget et Négociation approfondie"
+    },
+    {
+     "notion": "Études de cas pratiques en pitching stratégique",
+     "bloc": "B03",
+     "module": "C222 Pitch"
+    },
+    {
+     "notion": "Études de cas pratiques en structuration organisationnelle",
+     "bloc": "B05",
+     "module": "C29 Structure et Organisation"
+    },
+    {
+     "notion": "Études de cas pratiques en optimisation RH",
+     "bloc": "B05",
+     "module": "C30 Optimisation des processus RH"
+    },
+    {
+     "notion": "Études de cas pratiques en performance RH",
+     "bloc": "B05",
+     "module": "C31 Performance RH"
+    }
+   ]
+  }
+ ]
+}

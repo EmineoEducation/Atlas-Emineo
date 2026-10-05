@@ -1,0 +1,230 @@
+{
+ "cle": "m1-mdec",
+ "revu_le": "2026-10-05",
+ "familles": [
+  {
+   "libelle": "Veille et intelligence économique",
+   "type": "concept",
+   "notions": [
+    "Fondamentaux de la Business Intelligence et de la veille stratégique",
+    "Outils et techniques de veille",
+    "Environnement international et intelligence économique",
+    "De la veille à la décision stratégique",
+    "Introduction à la veille stratégique et à l’innovation",
+    "Technologies au service de la veille commerciale"
+   ]
+  },
+  {
+   "libelle": "Analyse concurrentielle et benchmark",
+   "type": "concept",
+   "notions": [
+    "Analyse de l'environnement concurrentiel",
+    "Introduction au benchmarking stratégique",
+    "Évaluation des avantages concurrentiels",
+    "Diagnostic des lacunes à combler",
+    "Développement stratégique basé sur le benchmarking"
+   ]
+  },
+  {
+   "libelle": "Diagnostic stratégique",
+   "type": "concept",
+   "notions": [
+    "Fondamentaux du diagnostic stratégique",
+    "Diagnostic interne de l'organisation",
+    "Outils et méthodes d'analyse stratégique",
+    "Du diagnostic aux leviers d'action"
+   ]
+  },
+  {
+   "libelle": "Intelligence collective et animation de réunion",
+   "type": "concept",
+   "notions": [
+    "Fondamentaux de l'intelligence collective",
+    "Techniques d'animation de réunion",
+    "Méthodes de brainstorming avancées",
+    "Synthèse et capitalisation des informations stratégiques"
+   ]
+  },
+  {
+   "libelle": "Gouvernance et culture d’entreprise",
+   "type": "concept",
+   "notions": [
+    "Fondamentaux de la gouvernance d'entreprise",
+    "Vision et projet stratégique",
+    "Culture d'entreprise comme levier stratégique",
+    "Gouvernance collaborative et parties prenantes"
+   ]
+  },
+  {
+   "libelle": "RSE et pratiques responsables",
+   "type": "concept",
+   "notions": [
+    "Introduction à la RSE",
+    "Enjeux sociétaux et environnementaux",
+    "Mise en œuvre d'une stratégie RSE"
+   ]
+  },
+  {
+   "libelle": "Plan d’action et priorisation stratégique",
+   "type": "concept",
+   "notions": [
+    "Fondamentaux du plan d'action stratégique",
+    "Outils d'analyse et priorisation stratégique",
+    "Planification et mise en œuvre des actions stratégiques"
+   ]
+  },
+  {
+   "libelle": "Communication, leadership et prise de parole",
+   "type": "posture",
+   "notions": [
+    "Principes fondamentaux de la communication stratégique",
+    "Leadership et force de conviction",
+    "Prise de parole en public et communication interpersonnelle",
+    "Communication en situation complexe",
+    "Introduction au pitch stratégique",
+    "Techniques avancées de présentation orale",
+    "Simulation de pitch stratégique"
+   ]
+  },
+  {
+   "libelle": "Management de projet",
+   "type": "concept",
+   "notions": [
+    "Introduction au management de projet stratégique",
+    "Méthodologies et outils de planification stratégique",
+    "Suivi et évaluation des projets stratégiques"
+   ]
+  },
+  {
+   "libelle": "Négociation",
+   "type": "concept",
+   "notions": [
+    "Fondamentaux de la négociation stratégique",
+    "Techniques et outils de négociation",
+    "Alignement stratégique et cohérence des actions",
+    "Techniques avancées de négociation budgétaire"
+   ]
+  },
+  {
+   "libelle": "Accompagnement des équipes opérationnelles",
+   "type": "posture",
+   "notions": [
+    "Fondamentaux de l'accompagnement stratégique",
+    "Techniques d'accompagnement des équipes opérationnelles",
+    "Outils pour garantir la cohérence stratégique"
+   ]
+  },
+  {
+   "libelle": "Performance, KPI et tableaux de bord",
+   "type": "concept",
+   "notions": [
+    "Introduction à l’évaluation stratégique",
+    "Indicateurs clés de performance (KPI)",
+    "Outils et tableaux de bord pour le suivi stratégique",
+    "Analyse et ajustement des plans stratégiques",
+    "Introduction à la mesure de la performance RH",
+    "Outils pour mesurer la performance RH",
+    "Évaluation et ajustement des performances",
+    "Conception de tableaux de bord financiers"
+   ]
+  },
+  {
+   "libelle": "Excel et outils bureautiques",
+   "type": "outil",
+   "notions": [
+    "Introduction à Excel pour la gestion financière"
+   ]
+  },
+  {
+   "libelle": "Gestion budgétaire et analyse financière",
+   "type": "concept",
+   "notions": [
+    "Prévisions budgétaires avec Excel",
+    "Analyse de rentabilité et indicateurs financiers",
+    "Fondamentaux de la gestion budgétaire",
+    "Techniques d’optimisation budgétaire",
+    "Outils pour la gestion budgétaire",
+    "Principes fondamentaux de l’analyse financière",
+    "Évaluation des besoins en financement",
+    "Techniques de financement des entreprises",
+    "Introduction à la gestion budgétaire stratégique",
+    "Gestion efficace du budget alloué"
+   ]
+  },
+  {
+   "libelle": "Innovation commerciale",
+   "type": "concept",
+   "notions": [
+    "Stratégie d’innovation commerciale"
+   ]
+  },
+  {
+   "libelle": "Analyse de marché, segmentation et ciblage",
+   "type": "concept",
+   "notions": [
+    "Introduction à l’analyse de marché",
+    "Étude des comportements clients",
+    "Segmentation et ciblage des marchés",
+    "Développement stratégique basé sur l’analyse de marché"
+   ]
+  },
+  {
+   "libelle": "Stratégie commerciale et plan d’action commercial",
+   "type": "concept",
+   "notions": [
+    "Introduction à la stratégie commerciale",
+    "Développement de la stratégie commerciale",
+    "Communication et mise en œuvre de la stratégie commerciale",
+    "Introduction aux Plans d’Action Commercial (PAC)",
+    "Supervision des PAC par secteur ou produit",
+    "Développement du réseau commercial"
+   ]
+  },
+  {
+   "libelle": "Gestion des risques",
+   "type": "concept",
+   "notions": [
+    "Introduction à la gestion des risques commerciaux",
+    "Méthodes d’identification et d’analyse des risques",
+    "Évaluation et gestion proactive des risques",
+    "Introduction à l’analyse stratégique et sécurisation",
+    "Évaluation des indicateurs commerciaux",
+    "Gestion proactive des risques commerciaux"
+   ]
+  },
+  {
+   "libelle": "Business plan",
+   "type": "concept",
+   "notions": [
+    "Introduction au business plan",
+    "Inventaire des moyens et ressources disponibles",
+    "Élaboration du business plan"
+   ]
+  },
+  {
+   "libelle": "Organisation du travail et planification des activités",
+   "type": "concept",
+   "notions": [
+    "Introduction à la structuration organisationnelle",
+    "Techniques de planification des activités",
+    "Répartition équitable des charges de travail"
+   ]
+  },
+  {
+   "libelle": "Processus RH et optimisation",
+   "type": "concept",
+   "notions": [
+    "Introduction à l’optimisation des processus RH",
+    "Techniques de modélisation des processus RH",
+    "Optimisation des pratiques RH opérationnelles"
+   ]
+  }
+ ],
+ "ecartees": [
+  {
+   "motif": "trame pédagogique",
+   "pattern": "^Études? de cas pratiques",
+   "notions": []
+  }
+ ]
+}

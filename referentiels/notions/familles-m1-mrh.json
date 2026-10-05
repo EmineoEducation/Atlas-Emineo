@@ -1,0 +1,899 @@
+{
+ "cle": "",
+ "genere_le": "2026-10-05",
+ "outil": "familles-notions",
+ "methode": "regroupement hors ligne, à relire et corriger à la main",
+ "controle": {
+  "notions_distinctes": 80,
+  "occurrences": 81,
+  "classees": 80,
+  "ecartees": 4,
+  "intitules_oublies": [],
+  "intitules_inconnus": []
+ },
+ "familles": [
+  {
+   "id": "F01",
+   "libelle": "Veille stratégique RH et prospective",
+   "type": "concept",
+   "blocs": [
+    "B01"
+   ],
+   "modules": [
+    "Module 1 : Veille stratégique RH digitale et réglementaire",
+    "Module 2 : Veille économique, sociale et technologique avec outils IA"
+   ],
+   "competences": [
+    "C1"
+   ],
+   "notions": [
+    {
+     "notion": "Fondamentaux de la veille stratégique appliquée aux RH",
+     "bloc": "B01",
+     "module": "Module 1 : Veille stratégique RH digitale et réglementaire",
+     "competences": [
+      "C1"
+     ]
+    },
+    {
+     "notion": "Panorama réglementaire RH et veille juridique",
+     "bloc": "B01",
+     "module": "Module 1 : Veille stratégique RH digitale et réglementaire",
+     "competences": [
+      "C1"
+     ]
+    },
+    {
+     "notion": "Outils digitaux et IA pour la veille réglementaire",
+     "bloc": "B01",
+     "module": "Module 1 : Veille stratégique RH digitale et réglementaire",
+     "competences": [
+      "C1"
+     ]
+    },
+    {
+     "notion": "Méthodes d’analyse et de partage de la veille",
+     "bloc": "B01",
+     "module": "Module 1 : Veille stratégique RH digitale et réglementaire",
+     "competences": [
+      "C1"
+     ]
+    },
+    {
+     "notion": "Enjeux et périmètre de la veille économique, sociale et technologique RH",
+     "bloc": "B01",
+     "module": "Module 2 : Veille économique, sociale et technologique avec outils IA",
+     "competences": [
+      "C1"
+     ]
+    },
+    {
+     "notion": "Sources et indicateurs pour la veille économique et sociale RH",
+     "bloc": "B01",
+     "module": "Module 2 : Veille économique, sociale et technologique avec outils IA",
+     "competences": [
+      "C1"
+     ]
+    },
+    {
+     "notion": "Veille technologique et innovations RH",
+     "bloc": "B01",
+     "module": "Module 2 : Veille économique, sociale et technologique avec outils IA",
+     "competences": [
+      "C1"
+     ]
+    },
+    {
+     "notion": "Outils digitaux et IA pour structurer la veille économique, sociale et technologique",
+     "bloc": "B01",
+     "module": "Module 2 : Veille économique, sociale et technologique avec outils IA",
+     "competences": [
+      "C1"
+     ]
+    },
+    {
+     "notion": "De la veille à la décision : scénarios et recommandations RH",
+     "bloc": "B01",
+     "module": "Module 2 : Veille économique, sociale et technologique avec outils IA",
+     "competences": [
+      "C1"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F02",
+   "libelle": "Innovation sociale et transformation organisationnelle",
+   "type": "concept",
+   "blocs": [
+    "B01"
+   ],
+   "modules": [
+    "Module 3 : Management de l’innovation sociale et organisationnelle",
+    "Module 4 : Méthodes collaboratives et transformation digitale RH"
+   ],
+   "competences": [
+    "C2.1"
+   ],
+   "notions": [
+    {
+     "notion": "Introduction à l’innovation sociale et organisationnelle RH",
+     "bloc": "B01",
+     "module": "Module 3 : Management de l’innovation sociale et organisationnelle",
+     "competences": [
+      "C2.1"
+     ]
+    },
+    {
+     "notion": "Gestion des disruptions et intégration des transitions",
+     "bloc": "B01",
+     "module": "Module 3 : Management de l’innovation sociale et organisationnelle",
+     "competences": [
+      "C2.1"
+     ]
+    },
+    {
+     "notion": "Développement de la capacité de transformation",
+     "bloc": "B01",
+     "module": "Module 3 : Management de l’innovation sociale et organisationnelle",
+     "competences": [
+      "C2.1"
+     ]
+    },
+    {
+     "notion": "Accompagnement des changements organisationnels",
+     "bloc": "B01",
+     "module": "Module 4 : Méthodes collaboratives et transformation digitale RH",
+     "competences": [
+      "C2.1"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F03",
+   "libelle": "Méthodes collaboratives et participatives",
+   "type": "concept",
+   "blocs": [
+    "B01"
+   ],
+   "modules": [
+    "Module 3 : Management de l’innovation sociale et organisationnelle",
+    "Module 4 : Méthodes collaboratives et transformation digitale RH"
+   ],
+   "competences": [
+    "C2.1"
+   ],
+   "notions": [
+    {
+     "notion": "Méthodes collaboratives pour l’innovation",
+     "bloc": "B01",
+     "module": "Module 3 : Management de l’innovation sociale et organisationnelle",
+     "competences": [
+      "C2.1"
+     ]
+    },
+    {
+     "notion": "Fondements des méthodes collaboratives en management RH",
+     "bloc": "B01",
+     "module": "Module 4 : Méthodes collaboratives et transformation digitale RH",
+     "competences": [
+      "C2.1"
+     ]
+    },
+    {
+     "notion": "Démarches participatives pour la transformation digitale RH",
+     "bloc": "B01",
+     "module": "Module 4 : Méthodes collaboratives et transformation digitale RH",
+     "competences": [
+      "C2.1"
+     ]
+    },
+    {
+     "notion": "Outils numériques facilitant les méthodes collaboratives",
+     "bloc": "B01",
+     "module": "Module 4 : Méthodes collaboratives et transformation digitale RH",
+     "competences": [
+      "C2.1"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F04",
+   "libelle": "Diagnostic et audit RH",
+   "type": "concept",
+   "blocs": [
+    "B01"
+   ],
+   "modules": [
+    "Module 5 : Diagnostic stratégique RH et analyse des processus",
+    "Module 6 : Outils d’audit RH et utilisation de data analytics"
+   ],
+   "competences": [
+    "C3.1"
+   ],
+   "notions": [
+    {
+     "notion": "Principes du diagnostic stratégique en ressources humaines",
+     "bloc": "B01",
+     "module": "Module 5 : Diagnostic stratégique RH et analyse des processus",
+     "competences": [
+      "C3.1"
+     ]
+    },
+    {
+     "notion": "Identification et analyse des ressources clés",
+     "bloc": "B01",
+     "module": "Module 5 : Diagnostic stratégique RH et analyse des processus",
+     "competences": [
+      "C3.1"
+     ]
+    },
+    {
+     "notion": "Analyse des processus RH",
+     "bloc": "B01",
+     "module": "Module 5 : Diagnostic stratégique RH et analyse des processus",
+     "competences": [
+      "C3.1"
+     ]
+    },
+    {
+     "notion": "Synthèse et formulation d’un diagnostic stratégique RH",
+     "bloc": "B01",
+     "module": "Module 5 : Diagnostic stratégique RH et analyse des processus",
+     "competences": [
+      "C3.1"
+     ]
+    },
+    {
+     "notion": "Introduction aux outils d’audit RH",
+     "bloc": "B01",
+     "module": "Module 6 : Outils d’audit RH et utilisation de data analytics",
+     "competences": [
+      "C3.1"
+     ]
+    },
+    {
+     "notion": "Mise en œuvre d’un audit RH complet",
+     "bloc": "B01",
+     "module": "Module 6 : Outils d’audit RH et utilisation de data analytics",
+     "competences": [
+      "C3.1"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F05",
+   "libelle": "Data RH et analytics",
+   "type": "concept",
+   "blocs": [
+    "B01"
+   ],
+   "modules": [
+    "Module 6 : Outils d’audit RH et utilisation de data analytics"
+   ],
+   "competences": [
+    "C3.1"
+   ],
+   "notions": [
+    {
+     "notion": "Collecte et préparation des données RH",
+     "bloc": "B01",
+     "module": "Module 6 : Outils d’audit RH et utilisation de data analytics",
+     "competences": [
+      "C3.1"
+     ]
+    },
+    {
+     "notion": "Techniques de data analytics appliquées à l’audit RH",
+     "bloc": "B01",
+     "module": "Module 6 : Outils d’audit RH et utilisation de data analytics",
+     "competences": [
+      "C3.1"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F06",
+   "libelle": "RSE, matérialité et transition écologique",
+   "type": "concept",
+   "blocs": [
+    "B01"
+   ],
+   "modules": [
+    "Module 6 : Outils d’audit RH et utilisation de data analytics",
+    "Module 7 : Stratégie RH responsable et indicateurs clés (KPI",
+    "Module 8 : RSE et transition écologique en RH",
+    "Module 9 : Priorisation RSE et analyse de matérialité RH"
+   ],
+   "competences": [
+    "C3.1",
+    "C4.1",
+    "C4.2"
+   ],
+   "notions": [
+    {
+     "notion": "Intégration des critères de RSE dans l’audit RH",
+     "bloc": "B01",
+     "module": "Module 6 : Outils d’audit RH et utilisation de data analytics",
+     "competences": [
+      "C3.1"
+     ]
+    },
+    {
+     "notion": "Enjeux et cadre de la stratégie RH responsable",
+     "bloc": "B01",
+     "module": "Module 7 : Stratégie RH responsable et indicateurs clés (KPI",
+     "competences": [
+      "C4.1"
+     ]
+    },
+    {
+     "notion": "Construction d’une stratégie RH durable et inclusive",
+     "bloc": "B01",
+     "module": "Module 7 : Stratégie RH responsable et indicateurs clés (KPI",
+     "competences": [
+      "C4.1"
+     ]
+    },
+    {
+     "notion": "Introduction à la RSE et à la transition écologique en entreprise",
+     "bloc": "B01",
+     "module": "Module 8 : RSE et transition écologique en RH",
+     "competences": [
+      "C4.1"
+     ]
+    },
+    {
+     "notion": "Analyse de matérialité et hiérarchisation des priorités RSE",
+     "bloc": "B01",
+     "module": "Module 8 : RSE et transition écologique en RH",
+     "competences": [
+      "C4.1"
+     ]
+    },
+    {
+     "notion": "Politique RH durable, verte et inclusive",
+     "bloc": "B01",
+     "module": "Module 8 : RSE et transition écologique en RH",
+     "competences": [
+      "C4.1"
+     ]
+    },
+    {
+     "notion": "Capitalisation et conduite du changement vers une organisation résiliente",
+     "bloc": "B01",
+     "module": "Module 8 : RSE et transition écologique en RH",
+     "competences": [
+      "C4.1"
+     ]
+    },
+    {
+     "notion": "Introduction à l’analyse de matérialité en contexte RSE",
+     "bloc": "B01",
+     "module": "Module 9 : Priorisation RSE et analyse de matérialité RH",
+     "competences": [
+      "C4.2"
+     ]
+    },
+    {
+     "notion": "Identification et cartographie des parties prenantes",
+     "bloc": "B01",
+     "module": "Module 9 : Priorisation RSE et analyse de matérialité RH",
+     "competences": [
+      "C4.2"
+     ]
+    },
+    {
+     "notion": "Méthodes et outils pour la réalisation d’une analyse de matérialité",
+     "bloc": "B01",
+     "module": "Module 9 : Priorisation RSE et analyse de matérialité RH",
+     "competences": [
+      "C4.2"
+     ]
+    },
+    {
+     "notion": "Utilisation de l’analyse de matérialité pour la définition d’un plan d’action RH",
+     "bloc": "B01",
+     "module": "Module 9 : Priorisation RSE et analyse de matérialité RH",
+     "competences": [
+      "C4.2"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F07",
+   "libelle": "Performance, KPI et tableaux de bord",
+   "type": "concept",
+   "blocs": [
+    "B01",
+    "B03"
+   ],
+   "modules": [
+    "Module 7 : Stratégie RH responsable et indicateurs clés (KPI",
+    "Module 22 : Stratégies de rémunération et mix salarial digita"
+   ],
+   "competences": [
+    "C4.1",
+    "C8.1"
+   ],
+   "notions": [
+    {
+     "notion": "Indicateurs clés de performance RH (KPI RH) et indicateurs ESG appliqués aux RH",
+     "bloc": "B01",
+     "module": "Module 7 : Stratégie RH responsable et indicateurs clés (KPI",
+     "competences": [
+      "C4.1"
+     ]
+    },
+    {
+     "notion": "Dispositifs de pilotage, tableaux de bord et reporting RH responsable",
+     "bloc": "B01",
+     "module": "Module 7 : Stratégie RH responsable et indicateurs clés (KPI",
+     "competences": [
+      "C4.1"
+     ]
+    },
+    {
+     "notion": "Évaluation et ajustement de la stratégie RH responsable",
+     "bloc": "B01",
+     "module": "Module 7 : Stratégie RH responsable et indicateurs clés (KPI",
+     "competences": [
+      "C4.1"
+     ]
+    },
+    {
+     "notion": "Pilotage performance et ajustements politiques rémunération",
+     "bloc": "B03",
+     "module": "Module 22 : Stratégies de rémunération et mix salarial digita",
+     "competences": [
+      "C8.1"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F08",
+   "libelle": "Gestion des risques RH",
+   "type": "concept",
+   "blocs": [
+    "B01"
+   ],
+   "modules": [
+    "Module 10 : Gestion des risques RH avec IA prédictive et approche effectuale"
+   ],
+   "competences": [
+    "C4.3"
+   ],
+   "notions": [
+    {
+     "notion": "Introduction à la gestion des risques RH",
+     "bloc": "B01",
+     "module": "Module 10 : Gestion des risques RH avec IA prédictive et approche effectuale",
+     "competences": [
+      "C4.3"
+     ]
+    },
+    {
+     "notion": "Outils et méthodes d’analyse des risques RH",
+     "bloc": "B01",
+     "module": "Module 10 : Gestion des risques RH avec IA prédictive et approche effectuale",
+     "competences": [
+      "C4.3"
+     ]
+    },
+    {
+     "notion": "Introduction à l’IA prédictive appliquée à la gestion des risques RH",
+     "bloc": "B01",
+     "module": "Module 10 : Gestion des risques RH avec IA prédictive et approche effectuale",
+     "competences": [
+      "C4.3"
+     ]
+    },
+    {
+     "notion": "Approche effectuale en gestion des risques RH",
+     "bloc": "B01",
+     "module": "Module 10 : Gestion des risques RH avec IA prédictive et approche effectuale",
+     "competences": [
+      "C4.3"
+     ]
+    },
+    {
+     "notion": "Conception et mise en œuvre de plans de prévention et indicateurs de risque",
+     "bloc": "B01",
+     "module": "Module 10 : Gestion des risques RH avec IA prédictive et approche effectuale",
+     "competences": [
+      "C4.3"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F09",
+   "libelle": "Rémunération et paie",
+   "type": "concept",
+   "blocs": [
+    "B03"
+   ],
+   "modules": [
+    "Module 22 : Stratégies de rémunération et mix salarial digita",
+    "Module 23 : Processus de paie sécurisés avec outils digitaux"
+   ],
+   "competences": [
+    "C8.1",
+    "C9.1"
+   ],
+   "notions": [
+    {
+     "notion": "Panorama complet des systèmes de rémunération et positionnement stratégique",
+     "bloc": "B03",
+     "module": "Module 22 : Stratégies de rémunération et mix salarial digita",
+     "competences": [
+      "C8.1"
+     ]
+    },
+    {
+     "notion": "Élaboration mix salarial adapté et budget prévisionnel réaliste",
+     "bloc": "B03",
+     "module": "Module 22 : Stratégies de rémunération et mix salarial digita",
+     "competences": [
+      "C8.1"
+     ]
+    },
+    {
+     "notion": "Conformité réglementaire et communication transparente rémunération",
+     "bloc": "B03",
+     "module": "Module 22 : Stratégies de rémunération et mix salarial digita",
+     "competences": [
+      "C8.1"
+     ]
+    },
+    {
+     "notion": "Maîtrise du processus complet de collecte et validation des variables de paie",
+     "bloc": "B03",
+     "module": "Module 23 : Processus de paie sécurisés avec outils digitaux",
+     "competences": [
+      "C9.1"
+     ]
+    },
+    {
+     "notion": "Connaissance approfondie de la réglementation sociale et fiscale applicable",
+     "bloc": "B03",
+     "module": "Module 23 : Processus de paie sécurisés avec outils digitaux",
+     "competences": [
+      "C9.1"
+     ]
+    },
+    {
+     "notion": "Supervision de la production et contrôles qualité dans les SIRH",
+     "bloc": "B03",
+     "module": "Module 23 : Processus de paie sécurisés avec outils digitaux",
+     "competences": [
+      "C9.1"
+     ]
+    },
+    {
+     "notion": "Conformité déclarations sociales et fiscales et posture responsable",
+     "bloc": "B03",
+     "module": "Module 23 : Processus de paie sécurisés avec outils digitaux",
+     "competences": [
+      "C9.1"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F10",
+   "libelle": "Digitalisation des processus administratifs RH",
+   "type": "concept",
+   "blocs": [
+    "B03"
+   ],
+   "modules": [
+    "Module 24 : Digitalisation des processus RH et conformité réglementaire"
+   ],
+   "competences": [
+    "C10.1"
+   ],
+   "notions": [
+    {
+     "notion": "Cartographie complète des processus administratifs RH et conformité légale",
+     "bloc": "B03",
+     "module": "Module 24 : Digitalisation des processus RH et conformité réglementaire",
+     "competences": [
+      "C10.1"
+     ]
+    },
+    {
+     "notion": "Conception de processus digitalisés sécurisés et optimisés",
+     "bloc": "B03",
+     "module": "Module 24 : Digitalisation des processus RH et conformité réglementaire",
+     "competences": [
+      "C10.1"
+     ]
+    },
+    {
+     "notion": "Rédaction administrative standardisée et conformité obligatoire",
+     "bloc": "B03",
+     "module": "Module 24 : Digitalisation des processus RH et conformité réglementaire",
+     "competences": [
+      "C10.1"
+     ]
+    },
+    {
+     "notion": "Audit et amélioration continue des processus administratifs",
+     "bloc": "B03",
+     "module": "Module 24 : Digitalisation des processus RH et conformité réglementaire",
+     "competences": [
+      "C10.1"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F11",
+   "libelle": "Dialogue social et instances représentatives",
+   "type": "concept",
+   "blocs": [
+    "B04"
+   ],
+   "modules": [
+    "Module 25 : Instances représentatives et climat social digita",
+    "Module 26 : Dialogue social responsable et valorisation RSE"
+   ],
+   "competences": [
+    "C11.1",
+    "C11.2"
+   ],
+   "notions": [
+    {
+     "notion": "Fondements des instances représentatives du personnel",
+     "bloc": "B04",
+     "module": "Module 25 : Instances représentatives et climat social digita",
+     "competences": [
+      "C11.1"
+     ]
+    },
+    {
+     "notion": "Enjeux et spécificités du climat social digital",
+     "bloc": "B04",
+     "module": "Module 25 : Instances représentatives et climat social digita",
+     "competences": [
+      "C11.1"
+     ]
+    },
+    {
+     "notion": "Préparation et animation efficace des réunions IRP",
+     "bloc": "B04",
+     "module": "Module 25 : Instances représentatives et climat social digita",
+     "competences": [
+      "C11.1"
+     ]
+    },
+    {
+     "notion": "Outils digitaux pour une gestion administrative IRP fluide",
+     "bloc": "B04",
+     "module": "Module 25 : Instances représentatives et climat social digita",
+     "competences": [
+      "C11.1"
+     ]
+    },
+    {
+     "notion": "Analyse climat social et gestion tensions préventives",
+     "bloc": "B04",
+     "module": "Module 25 : Instances représentatives et climat social digita",
+     "competences": [
+      "C11.1"
+     ]
+    },
+    {
+     "notion": "Fondements et enjeux du dialogue social responsable en PME/ETI",
+     "bloc": "B04",
+     "module": "Module 26 : Dialogue social responsable et valorisation RSE",
+     "competences": [
+      "C11.2"
+     ]
+    },
+    {
+     "notion": "Intégrer la RSE dans les réunions et échanges sociaux quotidiens",
+     "bloc": "B04",
+     "module": "Module 26 : Dialogue social responsable et valorisation RSE",
+     "competences": [
+      "C11.2"
+     ]
+    },
+    {
+     "notion": "Construire des actions RSE co-décidées et mesurables",
+     "bloc": "B04",
+     "module": "Module 26 : Dialogue social responsable et valorisation RSE",
+     "competences": [
+      "C11.2"
+     ]
+    },
+    {
+     "notion": "Mesurer l'impact et capitaliser les bonnes pratiques dialogue RSE",
+     "bloc": "B04",
+     "module": "Module 26 : Dialogue social responsable et valorisation RSE",
+     "competences": [
+      "C11.2"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F12",
+   "libelle": "Marque employeur et marketing RH",
+   "type": "concept",
+   "blocs": [
+    "B04"
+   ],
+   "modules": [
+    "Module 27 : Marketing RH digital et marque employeur responsable"
+   ],
+   "competences": [
+    "C12.1"
+   ],
+   "notions": [
+    {
+     "notion": "Comprendre les concepts et enjeux de la marque employeur en contexte RSE",
+     "bloc": "B04",
+     "module": "Module 27 : Marketing RH digital et marque employeur responsable",
+     "competences": [
+      "C12.1"
+     ]
+    },
+    {
+     "notion": "Définir l'identité marque employeur et son positionnement RSE",
+     "bloc": "B04",
+     "module": "Module 27 : Marketing RH digital et marque employeur responsable",
+     "competences": [
+      "C12.1"
+     ]
+    },
+    {
+     "notion": "Stratégies et outils digitaux pour déployer la marque employeur",
+     "bloc": "B04",
+     "module": "Module 27 : Marketing RH digital et marque employeur responsable",
+     "competences": [
+      "C12.1"
+     ]
+    },
+    {
+     "notion": "Mesure d'impact et amélioration continue de l'e-reputation",
+     "bloc": "B04",
+     "module": "Module 27 : Marketing RH digital et marque employeur responsable",
+     "competences": [
+      "C12.1"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F13",
+   "libelle": "Communication interne hybride",
+   "type": "concept",
+   "blocs": [
+    "B04"
+   ],
+   "modules": [
+    "Module 28 : Outils de communication interne hybrides et réseaux sociaux"
+   ],
+   "competences": [
+    "C13.1"
+   ],
+   "notions": [
+    {
+     "notion": "Fondements de la communication interne hybride et identification des publics",
+     "bloc": "B04",
+     "module": "Module 28 : Outils de communication interne hybrides et réseaux sociaux",
+     "competences": [
+      "C13.1"
+     ]
+    },
+    {
+     "notion": "Maîtrise des outils numériques RH courants pour une communication efficace",
+     "bloc": "B04",
+     "module": "Module 28 : Outils de communication interne hybrides et réseaux sociaux",
+     "competences": [
+      "C13.1"
+     ]
+    },
+    {
+     "notion": "Respect de la réglementation et bonnes pratiques de gouvernance communication",
+     "bloc": "B04",
+     "module": "Module 28 : Outils de communication interne hybrides et réseaux sociaux",
+     "competences": [
+      "C13.1"
+     ]
+    },
+    {
+     "notion": "Mesure d'impact et amélioration continue de la communication RH",
+     "bloc": "B04",
+     "module": "Module 28 : Outils de communication interne hybrides et réseaux sociaux",
+     "competences": [
+      "C13.1"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F14",
+   "libelle": "Posture de service et accompagnement des managers",
+   "type": "posture",
+   "blocs": [
+    "B04"
+   ],
+   "modules": [
+    "Module 29 : Méthodes de recueil terrain et posture managériale"
+   ],
+   "competences": [
+    "C14.1"
+   ],
+   "notions": [
+    {
+     "notion": "Comprendre les attentes et besoins des managers opérationnels RH",
+     "bloc": "B04",
+     "module": "Module 29 : Méthodes de recueil terrain et posture managériale",
+     "competences": [
+      "C14.1"
+     ]
+    },
+    {
+     "notion": "Concevoir un dispositif de recueil terrain adapté et réaliste",
+     "bloc": "B04",
+     "module": "Module 29 : Méthodes de recueil terrain et posture managériale",
+     "competences": [
+      "C14.1"
+     ]
+    },
+    {
+     "notion": "Développer la posture de service et de facilitateur RH",
+     "bloc": "B04",
+     "module": "Module 29 : Méthodes de recueil terrain et posture managériale",
+     "competences": [
+      "C14.1"
+     ]
+    },
+    {
+     "notion": "Transformer les remontées terrain en actions et en apprentissages",
+     "bloc": "B04",
+     "module": "Module 29 : Méthodes de recueil terrain et posture managériale",
+     "competences": [
+      "C14.1"
+     ]
+    }
+   ]
+  }
+ ],
+ "ecartees": [
+  {
+   "motif": "trame pédagogique",
+   "notions": [
+    {
+     "notion": "Étude de cas intégrée : conception d’un dispositif de veille RH",
+     "bloc": "B01",
+     "module": "Module 1 : Veille stratégique RH digitale et réglementaire"
+    },
+    {
+     "notion": "Étude de cas intégrée",
+     "bloc": "B01",
+     "module": "Module 3 : Management de l’innovation sociale et organisationnelle"
+    },
+    {
+     "notion": "Étude de cas intégrée",
+     "bloc": "B01",
+     "module": "Module 8 : RSE et transition écologique en RH"
+    },
+    {
+     "notion": "Étude de cas finale",
+     "bloc": "B01",
+     "module": "Module 4 : Méthodes collaboratives et transformation digitale RH"
+    }
+   ]
+  }
+ ]
+}

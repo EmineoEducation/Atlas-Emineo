@@ -1,0 +1,964 @@
+{
+ "cle": "",
+ "genere_le": "2026-10-05",
+ "outil": "familles-notions",
+ "methode": "regroupement hors ligne, à relire et corriger à la main",
+ "controle": {
+  "notions_distinctes": 84,
+  "occurrences": 84,
+  "classees": 84,
+  "ecartees": 0,
+  "intitules_oublies": [],
+  "intitules_inconnus": []
+ },
+ "familles": [
+  {
+   "id": "F01",
+   "libelle": "Gouvernance et protection des données RH",
+   "type": "concept",
+   "blocs": [
+    "B02"
+   ],
+   "modules": [
+    "Module 11 : Gouvernance et sécurité des données RH (RGPD et éthique"
+   ],
+   "competences": [
+    "C5.1"
+   ],
+   "notions": [
+    {
+     "notion": "Comprendre le cadre de la gouvernance des données RH et du RGPD",
+     "bloc": "B02",
+     "module": "Module 11 : Gouvernance et sécurité des données RH (RGPD et éthique",
+     "competences": [
+      "C5.1"
+     ]
+    },
+    {
+     "notion": "Sécurité, protection et bonnes pratiques sur les données RH au quotidien",
+     "bloc": "B02",
+     "module": "Module 11 : Gouvernance et sécurité des données RH (RGPD et éthique",
+     "competences": [
+      "C5.1"
+     ]
+    },
+    {
+     "notion": "Enjeux éthiques et usages responsables des données RH",
+     "bloc": "B02",
+     "module": "Module 11 : Gouvernance et sécurité des données RH (RGPD et éthique",
+     "competences": [
+      "C5.1"
+     ]
+    },
+    {
+     "notion": "Construire un mini‑plan de gouvernance des données RH à son niveau",
+     "bloc": "B02",
+     "module": "Module 11 : Gouvernance et sécurité des données RH (RGPD et éthique",
+     "competences": [
+      "C5.1"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F02",
+   "libelle": "Data RH et analytics",
+   "type": "concept",
+   "blocs": [
+    "B02"
+   ],
+   "modules": [
+    "Module 12 : Stratégie RH data-driven et outils digitaux",
+    "Module 13 : SIRH avancé et data analytics RH"
+   ],
+   "competences": [
+    "C5.1",
+    "C5.2"
+   ],
+   "notions": [
+    {
+     "notion": "Comprendre la logique d’une stratégie RH data-Driven",
+     "bloc": "B02",
+     "module": "Module 12 : Stratégie RH data-driven et outils digitaux",
+     "competences": [
+      "C5.1"
+     ]
+    },
+    {
+     "notion": "Panorama des outils digitaux RH courants et rôle des SIRH",
+     "bloc": "B02",
+     "module": "Module 12 : Stratégie RH data-driven et outils digitaux",
+     "competences": [
+      "C5.1"
+     ]
+    },
+    {
+     "notion": "Premières techniques d’analyse et d’interprétation de données RH",
+     "bloc": "B02",
+     "module": "Module 12 : Stratégie RH data-driven et outils digitaux",
+     "competences": [
+      "C5.1"
+     ]
+    },
+    {
+     "notion": "Cas d’usage concrets et mini-projet de stratégie RH data-driven",
+     "bloc": "B02",
+     "module": "Module 12 : Stratégie RH data-driven et outils digitaux",
+     "competences": [
+      "C5.1"
+     ]
+    },
+    {
+     "notion": "Découverte et navigation dans les SIRH standards",
+     "bloc": "B02",
+     "module": "Module 13 : SIRH avancé et data analytics RH",
+     "competences": [
+      "C5.2"
+     ]
+    },
+    {
+     "notion": "Nettoyage et préparation des données RH pratiques",
+     "bloc": "B02",
+     "module": "Module 13 : SIRH avancé et data analytics RH",
+     "competences": [
+      "C5.2"
+     ]
+    },
+    {
+     "notion": "Analyses statistiques RH essentielles avec Excel",
+     "bloc": "B02",
+     "module": "Module 13 : SIRH avancé et data analytics RH",
+     "competences": [
+      "C5.2"
+     ]
+    },
+    {
+     "notion": "Production de rapports RH opérationnels et partage",
+     "bloc": "B02",
+     "module": "Module 13 : SIRH avancé et data analytics RH",
+     "competences": [
+      "C5.2"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F03",
+   "libelle": "Performance, KPI et tableaux de bord",
+   "type": "concept",
+   "blocs": [
+    "B02",
+    "B05"
+   ],
+   "modules": [
+    "Module 14 : Visualisation et reporting social interactif",
+    "Module 15 : Tableaux de bord RH et décision data-driven",
+    "Module 37 : Anticipation RH via analytics et IA"
+   ],
+   "competences": [
+    "C17.2",
+    "C5.2",
+    "C5.3"
+   ],
+   "notions": [
+    {
+     "notion": "Sélection et organisation des indicateurs RH essentiels",
+     "bloc": "B02",
+     "module": "Module 14 : Visualisation et reporting social interactif",
+     "competences": [
+      "C5.2"
+     ]
+    },
+    {
+     "notion": "Création de tableaux de bord avec Excel et Power BI Service gratuit",
+     "bloc": "B02",
+     "module": "Module 14 : Visualisation et reporting social interactif",
+     "competences": [
+      "C5.2"
+     ]
+    },
+    {
+     "notion": "Design et principes de lisibilité pour managers non-data",
+     "bloc": "B02",
+     "module": "Module 14 : Visualisation et reporting social interactif",
+     "competences": [
+      "C5.2"
+     ]
+    },
+    {
+     "notion": "Publication, partage et mise à jour des tableaux de bord",
+     "bloc": "B02",
+     "module": "Module 14 : Visualisation et reporting social interactif",
+     "competences": [
+      "C5.2"
+     ]
+    },
+    {
+     "notion": "Fondamentaux des tableaux de bord RH décisionnels",
+     "bloc": "B02",
+     "module": "Module 15 : Tableaux de bord RH et décision data-driven",
+     "competences": [
+      "C5.3"
+     ]
+    },
+    {
+     "notion": "Exploitation et Fiabilisation des données pour l'analyse",
+     "bloc": "B02",
+     "module": "Module 15 : Tableaux de bord RH et décision data-driven",
+     "competences": [
+      "C5.3"
+     ]
+    },
+    {
+     "notion": "Storytelling data et communication des insights RH",
+     "bloc": "B02",
+     "module": "Module 15 : Tableaux de bord RH et décision data-driven",
+     "competences": [
+      "C5.3"
+     ]
+    },
+    {
+     "notion": "Gouvernance, sécurité et prédiction via tableaux de bord",
+     "bloc": "B02",
+     "module": "Module 15 : Tableaux de bord RH et décision data-driven",
+     "competences": [
+      "C5.3"
+     ]
+    },
+    {
+     "notion": "Pilotage, tableau de bord et reporting décisionnel",
+     "bloc": "B05",
+     "module": "Module 37 : Anticipation RH via analytics et IA",
+     "competences": [
+      "C17.2"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F04",
+   "libelle": "Conception de projets RH durables",
+   "type": "concept",
+   "blocs": [
+    "B02"
+   ],
+   "modules": [
+    "Module 16 : Conception de projets RH durables et inclusifs"
+   ],
+   "competences": [
+    "C6.1"
+   ],
+   "notions": [
+    {
+     "notion": "Analyse des transitions du monde du travail et impacts RH",
+     "bloc": "B02",
+     "module": "Module 16 : Conception de projets RH durables et inclusifs",
+     "competences": [
+      "C6.1"
+     ]
+    },
+    {
+     "notion": "Méthodologies de conception de projets de transformation RH",
+     "bloc": "B02",
+     "module": "Module 16 : Conception de projets RH durables et inclusifs",
+     "competences": [
+      "C6.1"
+     ]
+    },
+    {
+     "notion": "Intégration RSE et durabilité dans la conception projet",
+     "bloc": "B02",
+     "module": "Module 16 : Conception de projets RH durables et inclusifs",
+     "competences": [
+      "C6.1"
+     ]
+    },
+    {
+     "notion": "Spécification technique et planification projet durable",
+     "bloc": "B02",
+     "module": "Module 16 : Conception de projets RH durables et inclusifs",
+     "competences": [
+      "C6.1"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F05",
+   "libelle": "Méthodes agiles",
+   "type": "concept",
+   "blocs": [
+    "B02"
+   ],
+   "modules": [
+    "Module 17 : Méthodologies agiles en gestion de projet RH"
+   ],
+   "competences": [
+    "C6.2"
+   ],
+   "notions": [
+    {
+     "notion": "Fondamentaux des méthodologies agiles appliquées aux projets RH",
+     "bloc": "B02",
+     "module": "Module 17 : Méthodologies agiles en gestion de projet RH",
+     "competences": [
+      "C6.2"
+     ]
+    },
+    {
+     "notion": "Mise en œuvre des rituels agiles en contexte RH",
+     "bloc": "B02",
+     "module": "Module 17 : Méthodologies agiles en gestion de projet RH",
+     "competences": [
+      "C6.2"
+     ]
+    },
+    {
+     "notion": "Outils et technologies pour l'agilité RH",
+     "bloc": "B02",
+     "module": "Module 17 : Méthodologies agiles en gestion de projet RH",
+     "competences": [
+      "C6.2"
+     ]
+    },
+    {
+     "notion": "Conduite du changement et scaling agile RH",
+     "bloc": "B02",
+     "module": "Module 17 : Méthodologies agiles en gestion de projet RH",
+     "competences": [
+      "C6.2"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F06",
+   "libelle": "Budget, pilotage financier et ROI",
+   "type": "concept",
+   "blocs": [
+    "B02"
+   ],
+   "modules": [
+    "Module 18 : Contrôle budgétaire et pilotage financier RH"
+   ],
+   "competences": [
+    "C6.3"
+   ],
+   "notions": [
+    {
+     "notion": "Construction budgétaire RH : méthodologies et contraintes",
+     "bloc": "B02",
+     "module": "Module 18 : Contrôle budgétaire et pilotage financier RH",
+     "competences": [
+      "C6.3"
+     ]
+    },
+    {
+     "notion": "Outils et techniques de suivi budgétaire en temps réel",
+     "bloc": "B02",
+     "module": "Module 18 : Contrôle budgétaire et pilotage financier RH",
+     "competences": [
+      "C6.3"
+     ]
+    },
+    {
+     "notion": "Collaboration interservices et arbitrages financiers",
+     "bloc": "B02",
+     "module": "Module 18 : Contrôle budgétaire et pilotage financier RH",
+     "competences": [
+      "C6.3"
+     ]
+    },
+    {
+     "notion": "Analyse de rentabilité et calcul ROI projets RH",
+     "bloc": "B02",
+     "module": "Module 18 : Contrôle budgétaire et pilotage financier RH",
+     "competences": [
+      "C6.3"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F07",
+   "libelle": "Animation participative et intelligence collective",
+   "type": "concept",
+   "blocs": [
+    "B02"
+   ],
+   "modules": [
+    "Module 19 : Animation participative et communication inclusive"
+   ],
+   "competences": [
+    "C7.1"
+   ],
+   "notions": [
+    {
+     "notion": "Fondements de l’animation participative et de l’intelligence collective",
+     "bloc": "B02",
+     "module": "Module 19 : Animation participative et communication inclusive",
+     "competences": [
+      "C7.1"
+     ]
+    },
+    {
+     "notion": "Méthodes d’animation collaborative en présentiel et en hybride",
+     "bloc": "B02",
+     "module": "Module 19 : Animation participative et communication inclusive",
+     "competences": [
+      "C7.1"
+     ]
+    },
+    {
+     "notion": "Communication inclusive au service de la coopération",
+     "bloc": "B02",
+     "module": "Module 19 : Animation participative et communication inclusive",
+     "competences": [
+      "C7.1"
+     ]
+    },
+    {
+     "notion": "Capitalisation des bonnes pratiques et ancrage dans la durée",
+     "bloc": "B02",
+     "module": "Module 19 : Animation participative et communication inclusive",
+     "competences": [
+      "C7.1"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F08",
+   "libelle": "Partenariats et négociation responsable",
+   "type": "concept",
+   "blocs": [
+    "B02"
+   ],
+   "modules": [
+    "Module 20 : Partenariats durables et collaboration responsable"
+   ],
+   "competences": [
+    "C7.2"
+   ],
+   "notions": [
+    {
+     "notion": "Cartographie stratégique des partenaires RH",
+     "bloc": "B02",
+     "module": "Module 20 : Partenariats durables et collaboration responsable",
+     "competences": [
+      "C7.2"
+     ]
+    },
+    {
+     "notion": "Négociation et contractualisation responsable",
+     "bloc": "B02",
+     "module": "Module 20 : Partenariats durables et collaboration responsable",
+     "competences": [
+      "C7.2"
+     ]
+    },
+    {
+     "notion": "Pilotage partenariats avec KPIs ESG",
+     "bloc": "B02",
+     "module": "Module 20 : Partenariats durables et collaboration responsable",
+     "competences": [
+      "C7.2"
+     ]
+    },
+    {
+     "notion": "Gestion risques et clôture partenariats",
+     "bloc": "B02",
+     "module": "Module 20 : Partenariats durables et collaboration responsable",
+     "competences": [
+      "C7.2"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F09",
+   "libelle": "Management hybride et télétravail",
+   "type": "concept",
+   "blocs": [
+    "B02"
+   ],
+   "modules": [
+    "Module 21 : Management hybride des équipes et télétravail"
+   ],
+   "competences": [
+    "C7.3"
+   ],
+   "notions": [
+    {
+     "notion": "Fondamentaux du management hybride et télétravail",
+     "bloc": "B02",
+     "module": "Module 21 : Management hybride des équipes et télétravail",
+     "competences": [
+      "C7.3"
+     ]
+    },
+    {
+     "notion": "Méthodes et outils de management collaboratif hybride",
+     "bloc": "B02",
+     "module": "Module 21 : Management hybride des équipes et télétravail",
+     "competences": [
+      "C7.3"
+     ]
+    },
+    {
+     "notion": "Outils digitaux pour équipes hybrides performantes",
+     "bloc": "B02",
+     "module": "Module 21 : Management hybride des équipes et télétravail",
+     "competences": [
+      "C7.3"
+     ]
+    },
+    {
+     "notion": "Pilotage de la performance et reconnaissance hybride",
+     "bloc": "B02",
+     "module": "Module 21 : Management hybride des équipes et télétravail",
+     "competences": [
+      "C7.3"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F10",
+   "libelle": "Sourcing, recrutement et expérience candidat",
+   "type": "concept",
+   "blocs": [
+    "B05"
+   ],
+   "modules": [
+    "Module 30 : Sourcing et sélection pilotés par l’IA",
+    "Module 31 : Neurosciences et optimisation de l’expérience candidat"
+   ],
+   "competences": [
+    "C15.1"
+   ],
+   "notions": [
+    {
+     "notion": "Techniques de sourcing omnicanal avancées",
+     "bloc": "B05",
+     "module": "Module 30 : Sourcing et sélection pilotés par l’IA",
+     "competences": [
+      "C15.1"
+     ]
+    },
+    {
+     "notion": "Intelligence artificielle et automatisation du sourcing",
+     "bloc": "B05",
+     "module": "Module 30 : Sourcing et sélection pilotés par l’IA",
+     "competences": [
+      "C15.1"
+     ]
+    },
+    {
+     "notion": "Recrutement data driven et neurosciences",
+     "bloc": "B05",
+     "module": "Module 30 : Sourcing et sélection pilotés par l’IA",
+     "competences": [
+      "C15.1"
+     ]
+    },
+    {
+     "notion": "Expérience candidat et conformité réglementaire",
+     "bloc": "B05",
+     "module": "Module 30 : Sourcing et sélection pilotés par l’IA",
+     "competences": [
+      "C15.1"
+     ]
+    },
+    {
+     "notion": "Fondamentaux des neurosciences appliquées au recrutement",
+     "bloc": "B05",
+     "module": "Module 31 : Neurosciences et optimisation de l’expérience candidat",
+     "competences": [
+      "C15.1"
+     ]
+    },
+    {
+     "notion": "Optimisation de l'expérience candidat par les neurosciences",
+     "bloc": "B05",
+     "module": "Module 31 : Neurosciences et optimisation de l’expérience candidat",
+     "competences": [
+      "C15.1"
+     ]
+    },
+    {
+     "notion": "Assessments et outils neurosciences en recrutement",
+     "bloc": "B05",
+     "module": "Module 31 : Neurosciences et optimisation de l’expérience candidat",
+     "competences": [
+      "C15.1"
+     ]
+    },
+    {
+     "notion": "Intégration éthique et data-driven neurosciences/IA",
+     "bloc": "B05",
+     "module": "Module 31 : Neurosciences et optimisation de l’expérience candidat",
+     "competences": [
+      "C15.1"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F11",
+   "libelle": "Marque employeur et marketing RH",
+   "type": "concept",
+   "blocs": [
+    "B05"
+   ],
+   "modules": [
+    "Module 32 : Rédaction RH inclusives et marketing RH attractif"
+   ],
+   "competences": [
+    "C15.2"
+   ],
+   "notions": [
+    {
+     "notion": "Fondamentaux rédaction RH inclusive et réglementation",
+     "bloc": "B05",
+     "module": "Module 32 : Rédaction RH inclusives et marketing RH attractif",
+     "competences": [
+      "C15.2"
+     ]
+    },
+    {
+     "notion": "Marketing RH digital et EVP multigénérationnel",
+     "bloc": "B05",
+     "module": "Module 32 : Rédaction RH inclusives et marketing RH attractif",
+     "competences": [
+      "C15.2"
+     ]
+    },
+    {
+     "notion": "Techniques rédactionnelles neuro-marketing RH",
+     "bloc": "B05",
+     "module": "Module 32 : Rédaction RH inclusives et marketing RH attractif",
+     "competences": [
+      "C15.2"
+     ]
+    },
+    {
+     "notion": "Mesure performance et A/B testing annonces",
+     "bloc": "B05",
+     "module": "Module 32 : Rédaction RH inclusives et marketing RH attractif",
+     "competences": [
+      "C15.2"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F12",
+   "libelle": "Gestion prévisionnelle des compétences",
+   "type": "concept",
+   "blocs": [
+    "B05"
+   ],
+   "modules": [
+    "Module 33 : Analyse prédictive des compétences et veille marché",
+    "Module 34 : Talent marketplace et plan de succession digital"
+   ],
+   "competences": [
+    "C16.1",
+    "C16.2"
+   ],
+   "notions": [
+    {
+     "notion": "Fondamentaux de l’analyse prédictive des compétences",
+     "bloc": "B05",
+     "module": "Module 33 : Analyse prédictive des compétences et veille marché",
+     "competences": [
+      "C16.1"
+     ]
+    },
+    {
+     "notion": "Outils et techniques d’analyse",
+     "bloc": "B05",
+     "module": "Module 33 : Analyse prédictive des compétences et veille marché",
+     "competences": [
+      "C16.1"
+     ]
+    },
+    {
+     "notion": "Veille marché et prospective RH",
+     "bloc": "B05",
+     "module": "Module 33 : Analyse prédictive des compétences et veille marché",
+     "competences": [
+      "C16.1"
+     ]
+    },
+    {
+     "notion": "Application stratégique et pilotage",
+     "bloc": "B05",
+     "module": "Module 33 : Analyse prédictive des compétences et veille marché",
+     "competences": [
+      "C16.1"
+     ]
+    },
+    {
+     "notion": "Fondamentaux talent marketplace et mobilité interne",
+     "bloc": "B05",
+     "module": "Module 34 : Talent marketplace et plan de succession digital",
+     "competences": [
+      "C16.2"
+     ]
+    },
+    {
+     "notion": "Conception plan de succession data-driven",
+     "bloc": "B05",
+     "module": "Module 34 : Talent marketplace et plan de succession digital",
+     "competences": [
+      "C16.2"
+     ]
+    },
+    {
+     "notion": "Outils et implémentation marketplace talents",
+     "bloc": "B05",
+     "module": "Module 34 : Talent marketplace et plan de succession digital",
+     "competences": [
+      "C16.2"
+     ]
+    },
+    {
+     "notion": "Pilotage stratégique et mesure ROI",
+     "bloc": "B05",
+     "module": "Module 34 : Talent marketplace et plan de succession digital",
+     "competences": [
+      "C16.2"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F13",
+   "libelle": "Formation et organisation apprenante",
+   "type": "concept",
+   "blocs": [
+    "B05"
+   ],
+   "modules": [
+    "Module 35 : Formation hybride et organisation apprenante"
+   ],
+   "competences": [
+    "C16.3"
+   ],
+   "notions": [
+    {
+     "notion": "Cadre réglementaire et pilotage du plan de formation",
+     "bloc": "B05",
+     "module": "Module 35 : Formation hybride et organisation apprenante",
+     "competences": [
+      "C16.3"
+     ]
+    },
+    {
+     "notion": "Dispositifs et modalités hybrides de formation",
+     "bloc": "B05",
+     "module": "Module 35 : Formation hybride et organisation apprenante",
+     "competences": [
+      "C16.3"
+     ]
+    },
+    {
+     "notion": "Organisation apprenante et culture collaborative",
+     "bloc": "B05",
+     "module": "Module 35 : Formation hybride et organisation apprenante",
+     "competences": [
+      "C16.3"
+     ]
+    },
+    {
+     "notion": "Suivi, évaluation et engagement des apprenants",
+     "bloc": "B05",
+     "module": "Module 35 : Formation hybride et organisation apprenante",
+     "competences": [
+      "C16.3"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F14",
+   "libelle": "Onboarding et expérience collaborateur",
+   "type": "concept",
+   "blocs": [
+    "B05"
+   ],
+   "modules": [
+    "Module 36 : Acculturation digitale et parcours collaborateur"
+   ],
+   "competences": [
+    "C17.1"
+   ],
+   "notions": [
+    {
+     "notion": "Fondamentaux de l’onboarding digital et inclusif",
+     "bloc": "B05",
+     "module": "Module 36 : Acculturation digitale et parcours collaborateur",
+     "competences": [
+      "C17.1"
+     ]
+    },
+    {
+     "notion": "Supports et outils pour un onboarding efficace",
+     "bloc": "B05",
+     "module": "Module 36 : Acculturation digitale et parcours collaborateur",
+     "competences": [
+      "C17.1"
+     ]
+    },
+    {
+     "notion": "Suivi et évaluation de l’expérience collaborateur",
+     "bloc": "B05",
+     "module": "Module 36 : Acculturation digitale et parcours collaborateur",
+     "competences": [
+      "C17.1"
+     ]
+    },
+    {
+     "notion": "Personnalisation et fidélisation à long terme",
+     "bloc": "B05",
+     "module": "Module 36 : Acculturation digitale et parcours collaborateur",
+     "competences": [
+      "C17.1"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F15",
+   "libelle": "IA prédictive appliquée aux RH",
+   "type": "concept",
+   "blocs": [
+    "B05"
+   ],
+   "modules": [
+    "Module 37 : Anticipation RH via analytics et IA",
+    "Module 38 : Approche QVCT digitale et RSE intégrée"
+   ],
+   "competences": [
+    "C17.2",
+    "C17.3"
+   ],
+   "notions": [
+    {
+     "notion": "Fondamentaux de l’Analytics et IA appliqués à l’anticipation RH",
+     "bloc": "B05",
+     "module": "Module 37 : Anticipation RH via analytics et IA",
+     "competences": [
+      "C17.2"
+     ]
+    },
+    {
+     "notion": "Analyse critique et éthique des outils IA d'anticipation RH",
+     "bloc": "B05",
+     "module": "Module 37 : Anticipation RH via analytics et IA",
+     "competences": [
+      "C17.2"
+     ]
+    },
+    {
+     "notion": "Intégration de l’anticipation RH dans la stratégie QVCT",
+     "bloc": "B05",
+     "module": "Module 37 : Anticipation RH via analytics et IA",
+     "competences": [
+      "C17.2"
+     ]
+    },
+    {
+     "notion": "Data analytics et IA pour analyse QVCT",
+     "bloc": "B05",
+     "module": "Module 38 : Approche QVCT digitale et RSE intégrée",
+     "competences": [
+      "C17.3"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F16",
+   "libelle": "QVCT, santé au travail et prévention",
+   "type": "concept",
+   "blocs": [
+    "B05"
+   ],
+   "modules": [
+    "Module 38 : Approche QVCT digitale et RSE intégrée",
+    "Module 39 : Santé au travail digitale et prévention psychosociale"
+   ],
+   "competences": [
+    "C17.3",
+    "C17.4"
+   ],
+   "notions": [
+    {
+     "notion": "Diagnostic QVCT digital et cartographie des enjeux",
+     "bloc": "B05",
+     "module": "Module 38 : Approche QVCT digitale et RSE intégrée",
+     "competences": [
+      "C17.3"
+     ]
+    },
+    {
+     "notion": "Conception plans d'action QVCT RSE-intégrés",
+     "bloc": "B05",
+     "module": "Module 38 : Approche QVCT digitale et RSE intégrée",
+     "competences": [
+      "C17.3"
+     ]
+    },
+    {
+     "notion": "Pilotage continu et tableaux de bord QVCT",
+     "bloc": "B05",
+     "module": "Module 38 : Approche QVCT digitale et RSE intégrée",
+     "competences": [
+      "C17.3"
+     ]
+    },
+    {
+     "notion": "Cadre réglementaire et enjeux santé travail",
+     "bloc": "B05",
+     "module": "Module 39 : Santé au travail digitale et prévention psychosociale",
+     "competences": [
+      "C17.4"
+     ]
+    },
+    {
+     "notion": "Évaluation numérique des risques",
+     "bloc": "B05",
+     "module": "Module 39 : Santé au travail digitale et prévention psychosociale",
+     "competences": [
+      "C17.4"
+     ]
+    },
+    {
+     "notion": "Prévention et dispositifs innovants",
+     "bloc": "B05",
+     "module": "Module 39 : Santé au travail digitale et prévention psychosociale",
+     "competences": [
+      "C17.4"
+     ]
+    },
+    {
+     "notion": "Pilotage et suivi santé au travail",
+     "bloc": "B05",
+     "module": "Module 39 : Santé au travail digitale et prévention psychosociale",
+     "competences": [
+      "C17.4"
+     ]
+    }
+   ]
+  }
+ ],
+ "ecartees": [
+  {
+   "motif": "trame pédagogique",
+   "notions": []
+  }
+ ]
+}

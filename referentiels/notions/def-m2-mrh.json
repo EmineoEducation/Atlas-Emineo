@@ -1,0 +1,193 @@
+{
+ "cle": "m2-mrh",
+ "revu_le": "2026-10-05",
+ "familles": [
+  {
+   "libelle": "Gouvernance et protection des données RH",
+   "type": "concept",
+   "notions": [
+    "Comprendre le cadre de la gouvernance des données RH et du RGPD",
+    "Sécurité, protection et bonnes pratiques sur les données RH au quotidien",
+    "Enjeux éthiques et usages responsables des données RH",
+    "Construire un mini‑plan de gouvernance des données RH à son niveau"
+   ]
+  },
+  {
+   "libelle": "Data RH et analytics",
+   "type": "concept",
+   "notions": [
+    "Comprendre la logique d’une stratégie RH data-Driven",
+    "Panorama des outils digitaux RH courants et rôle des SIRH",
+    "Premières techniques d’analyse et d’interprétation de données RH",
+    "Cas d’usage concrets et mini-projet de stratégie RH data-driven",
+    "Découverte et navigation dans les SIRH standards",
+    "Nettoyage et préparation des données RH pratiques",
+    "Analyses statistiques RH essentielles avec Excel",
+    "Production de rapports RH opérationnels et partage"
+   ]
+  },
+  {
+   "libelle": "Performance, KPI et tableaux de bord",
+   "type": "concept",
+   "notions": [
+    "Sélection et organisation des indicateurs RH essentiels",
+    "Création de tableaux de bord avec Excel et Power BI Service gratuit",
+    "Design et principes de lisibilité pour managers non-data",
+    "Publication, partage et mise à jour des tableaux de bord",
+    "Fondamentaux des tableaux de bord RH décisionnels",
+    "Exploitation et Fiabilisation des données pour l'analyse",
+    "Storytelling data et communication des insights RH",
+    "Gouvernance, sécurité et prédiction via tableaux de bord",
+    "Pilotage, tableau de bord et reporting décisionnel"
+   ]
+  },
+  {
+   "libelle": "Conception de projets RH durables",
+   "type": "concept",
+   "notions": [
+    "Analyse des transitions du monde du travail et impacts RH",
+    "Méthodologies de conception de projets de transformation RH",
+    "Intégration RSE et durabilité dans la conception projet",
+    "Spécification technique et planification projet durable"
+   ]
+  },
+  {
+   "libelle": "Méthodes agiles",
+   "type": "concept",
+   "notions": [
+    "Fondamentaux des méthodologies agiles appliquées aux projets RH",
+    "Mise en œuvre des rituels agiles en contexte RH",
+    "Outils et technologies pour l'agilité RH",
+    "Conduite du changement et scaling agile RH"
+   ]
+  },
+  {
+   "libelle": "Budget, pilotage financier et ROI",
+   "type": "concept",
+   "notions": [
+    "Construction budgétaire RH : méthodologies et contraintes",
+    "Outils et techniques de suivi budgétaire en temps réel",
+    "Collaboration interservices et arbitrages financiers",
+    "Analyse de rentabilité et calcul ROI projets RH"
+   ]
+  },
+  {
+   "libelle": "Animation participative et intelligence collective",
+   "type": "concept",
+   "notions": [
+    "Fondements de l’animation participative et de l’intelligence collective",
+    "Méthodes d’animation collaborative en présentiel et en hybride",
+    "Communication inclusive au service de la coopération",
+    "Capitalisation des bonnes pratiques et ancrage dans la durée"
+   ]
+  },
+  {
+   "libelle": "Partenariats et négociation responsable",
+   "type": "concept",
+   "notions": [
+    "Cartographie stratégique des partenaires RH",
+    "Négociation et contractualisation responsable",
+    "Pilotage partenariats avec KPIs ESG",
+    "Gestion risques et clôture partenariats"
+   ]
+  },
+  {
+   "libelle": "Management hybride et télétravail",
+   "type": "concept",
+   "notions": [
+    "Fondamentaux du management hybride et télétravail",
+    "Méthodes et outils de management collaboratif hybride",
+    "Outils digitaux pour équipes hybrides performantes",
+    "Pilotage de la performance et reconnaissance hybride"
+   ]
+  },
+  {
+   "libelle": "Sourcing, recrutement et expérience candidat",
+   "type": "concept",
+   "notions": [
+    "Techniques de sourcing omnicanal avancées",
+    "Intelligence artificielle et automatisation du sourcing",
+    "Recrutement data driven et neurosciences",
+    "Expérience candidat et conformité réglementaire",
+    "Fondamentaux des neurosciences appliquées au recrutement",
+    "Optimisation de l'expérience candidat par les neurosciences",
+    "Assessments et outils neurosciences en recrutement",
+    "Intégration éthique et data-driven neurosciences/IA"
+   ]
+  },
+  {
+   "libelle": "Marque employeur et marketing RH",
+   "type": "concept",
+   "notions": [
+    "Fondamentaux rédaction RH inclusive et réglementation",
+    "Marketing RH digital et EVP multigénérationnel",
+    "Techniques rédactionnelles neuro-marketing RH",
+    "Mesure performance et A/B testing annonces"
+   ]
+  },
+  {
+   "libelle": "Gestion prévisionnelle des compétences",
+   "type": "concept",
+   "notions": [
+    "Fondamentaux de l’analyse prédictive des compétences",
+    "Outils et techniques d’analyse",
+    "Veille marché et prospective RH",
+    "Application stratégique et pilotage",
+    "Fondamentaux talent marketplace et mobilité interne",
+    "Conception plan de succession data-driven",
+    "Outils et implémentation marketplace talents",
+    "Pilotage stratégique et mesure ROI"
+   ]
+  },
+  {
+   "libelle": "Formation et organisation apprenante",
+   "type": "concept",
+   "notions": [
+    "Cadre réglementaire et pilotage du plan de formation",
+    "Dispositifs et modalités hybrides de formation",
+    "Organisation apprenante et culture collaborative",
+    "Suivi, évaluation et engagement des apprenants"
+   ]
+  },
+  {
+   "libelle": "Onboarding et expérience collaborateur",
+   "type": "concept",
+   "notions": [
+    "Fondamentaux de l’onboarding digital et inclusif",
+    "Supports et outils pour un onboarding efficace",
+    "Suivi et évaluation de l’expérience collaborateur",
+    "Personnalisation et fidélisation à long terme"
+   ]
+  },
+  {
+   "libelle": "IA prédictive appliquée aux RH",
+   "type": "concept",
+   "notions": [
+    "Fondamentaux de l’Analytics et IA appliqués à l’anticipation RH",
+    "Analyse critique et éthique des outils IA d'anticipation RH",
+    "Intégration de l’anticipation RH dans la stratégie QVCT",
+    "Data analytics et IA pour analyse QVCT"
+   ]
+  },
+  {
+   "libelle": "QVCT, santé au travail et prévention",
+   "type": "concept",
+   "notions": [
+    "Diagnostic QVCT digital et cartographie des enjeux",
+    "Conception plans d'action QVCT RSE-intégrés",
+    "Pilotage continu et tableaux de bord QVCT",
+    "Cadre réglementaire et enjeux santé travail",
+    "Évaluation numérique des risques",
+    "Prévention et dispositifs innovants",
+    "Pilotage et suivi santé au travail"
+   ]
+  }
+ ],
+ "ecartees": [
+  {
+   "motif": "trame pédagogique",
+   "pattern": "^Étude de cas (intégrée|finale)",
+   "notions": []
+  }
+ ]
+}

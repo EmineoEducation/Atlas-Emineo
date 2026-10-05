@@ -1,0 +1,174 @@
+{
+ "cle": "m1-mrh",
+ "revu_le": "2026-10-05",
+ "familles": [
+  {
+   "libelle": "Veille stratégique RH et prospective",
+   "type": "concept",
+   "notions": [
+    "Fondamentaux de la veille stratégique appliquée aux RH",
+    "Panorama réglementaire RH et veille juridique",
+    "Outils digitaux et IA pour la veille réglementaire",
+    "Méthodes d’analyse et de partage de la veille",
+    "Enjeux et périmètre de la veille économique, sociale et technologique RH",
+    "Sources et indicateurs pour la veille économique et sociale RH",
+    "Veille technologique et innovations RH",
+    "Outils digitaux et IA pour structurer la veille économique, sociale et technologique",
+    "De la veille à la décision : scénarios et recommandations RH"
+   ]
+  },
+  {
+   "libelle": "Innovation sociale et transformation organisationnelle",
+   "type": "concept",
+   "notions": [
+    "Introduction à l’innovation sociale et organisationnelle RH",
+    "Gestion des disruptions et intégration des transitions",
+    "Développement de la capacité de transformation",
+    "Accompagnement des changements organisationnels"
+   ]
+  },
+  {
+   "libelle": "Méthodes collaboratives et participatives",
+   "type": "concept",
+   "notions": [
+    "Méthodes collaboratives pour l’innovation",
+    "Fondements des méthodes collaboratives en management RH",
+    "Démarches participatives pour la transformation digitale RH",
+    "Outils numériques facilitant les méthodes collaboratives"
+   ]
+  },
+  {
+   "libelle": "Diagnostic et audit RH",
+   "type": "concept",
+   "notions": [
+    "Principes du diagnostic stratégique en ressources humaines",
+    "Identification et analyse des ressources clés",
+    "Analyse des processus RH",
+    "Synthèse et formulation d’un diagnostic stratégique RH",
+    "Introduction aux outils d’audit RH",
+    "Mise en œuvre d’un audit RH complet"
+   ]
+  },
+  {
+   "libelle": "Data RH et analytics",
+   "type": "concept",
+   "notions": [
+    "Collecte et préparation des données RH",
+    "Techniques de data analytics appliquées à l’audit RH"
+   ]
+  },
+  {
+   "libelle": "RSE, matérialité et transition écologique",
+   "type": "concept",
+   "notions": [
+    "Intégration des critères de RSE dans l’audit RH",
+    "Enjeux et cadre de la stratégie RH responsable",
+    "Construction d’une stratégie RH durable et inclusive",
+    "Introduction à la RSE et à la transition écologique en entreprise",
+    "Analyse de matérialité et hiérarchisation des priorités RSE",
+    "Politique RH durable, verte et inclusive",
+    "Capitalisation et conduite du changement vers une organisation résiliente",
+    "Introduction à l’analyse de matérialité en contexte RSE",
+    "Identification et cartographie des parties prenantes",
+    "Méthodes et outils pour la réalisation d’une analyse de matérialité",
+    "Utilisation de l’analyse de matérialité pour la définition d’un plan d’action RH"
+   ]
+  },
+  {
+   "libelle": "Performance, KPI et tableaux de bord",
+   "type": "concept",
+   "notions": [
+    "Indicateurs clés de performance RH (KPI RH) et indicateurs ESG appliqués aux RH",
+    "Dispositifs de pilotage, tableaux de bord et reporting RH responsable",
+    "Évaluation et ajustement de la stratégie RH responsable",
+    "Pilotage performance et ajustements politiques rémunération"
+   ]
+  },
+  {
+   "libelle": "Gestion des risques RH",
+   "type": "concept",
+   "notions": [
+    "Introduction à la gestion des risques RH",
+    "Outils et méthodes d’analyse des risques RH",
+    "Introduction à l’IA prédictive appliquée à la gestion des risques RH",
+    "Approche effectuale en gestion des risques RH",
+    "Conception et mise en œuvre de plans de prévention et indicateurs de risque"
+   ]
+  },
+  {
+   "libelle": "Rémunération et paie",
+   "type": "concept",
+   "notions": [
+    "Panorama complet des systèmes de rémunération et positionnement stratégique",
+    "Élaboration mix salarial adapté et budget prévisionnel réaliste",
+    "Conformité réglementaire et communication transparente rémunération",
+    "Maîtrise du processus complet de collecte et validation des variables de paie",
+    "Connaissance approfondie de la réglementation sociale et fiscale applicable",
+    "Supervision de la production et contrôles qualité dans les SIRH",
+    "Conformité déclarations sociales et fiscales et posture responsable"
+   ]
+  },
+  {
+   "libelle": "Digitalisation des processus administratifs RH",
+   "type": "concept",
+   "notions": [
+    "Cartographie complète des processus administratifs RH et conformité légale",
+    "Conception de processus digitalisés sécurisés et optimisés",
+    "Rédaction administrative standardisée et conformité obligatoire",
+    "Audit et amélioration continue des processus administratifs"
+   ]
+  },
+  {
+   "libelle": "Dialogue social et instances représentatives",
+   "type": "concept",
+   "notions": [
+    "Fondements des instances représentatives du personnel",
+    "Enjeux et spécificités du climat social digital",
+    "Préparation et animation efficace des réunions IRP",
+    "Outils digitaux pour une gestion administrative IRP fluide",
+    "Analyse climat social et gestion tensions préventives",
+    "Fondements et enjeux du dialogue social responsable en PME/ETI",
+    "Intégrer la RSE dans les réunions et échanges sociaux quotidiens",
+    "Construire des actions RSE co-décidées et mesurables",
+    "Mesurer l'impact et capitaliser les bonnes pratiques dialogue RSE"
+   ]
+  },
+  {
+   "libelle": "Marque employeur et marketing RH",
+   "type": "concept",
+   "notions": [
+    "Comprendre les concepts et enjeux de la marque employeur en contexte RSE",
+    "Définir l'identité marque employeur et son positionnement RSE",
+    "Stratégies et outils digitaux pour déployer la marque employeur",
+    "Mesure d'impact et amélioration continue de l'e-reputation"
+   ]
+  },
+  {
+   "libelle": "Communication interne hybride",
+   "type": "concept",
+   "notions": [
+    "Fondements de la communication interne hybride et identification des publics",
+    "Maîtrise des outils numériques RH courants pour une communication efficace",
+    "Respect de la réglementation et bonnes pratiques de gouvernance communication",
+    "Mesure d'impact et amélioration continue de la communication RH"
+   ]
+  },
+  {
+   "libelle": "Posture de service et accompagnement des managers",
+   "type": "posture",
+   "notions": [
+    "Comprendre les attentes et besoins des managers opérationnels RH",
+    "Concevoir un dispositif de recueil terrain adapté et réaliste",
+    "Développer la posture de service et de facilitateur RH",
+    "Transformer les remontées terrain en actions et en apprentissages"
+   ]
+  }
+ ],
+ "ecartees": [
+  {
+   "motif": "trame pédagogique",
+   "pattern": "^Étude de cas (intégrée|finale)",
+   "notions": []
+  }
+ ]
+}

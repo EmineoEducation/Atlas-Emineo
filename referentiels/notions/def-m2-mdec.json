@@ -1,0 +1,165 @@
+{
+ "cle": "m2-mdec",
+ "revu_le": "2026-10-05",
+ "familles": [
+  {
+   "libelle": "Conformité juridique et réglementaire",
+   "type": "concept",
+   "notions": [
+    "Introduction à la conformité juridique",
+    "Veille réglementaire et gestion des risques juridiques",
+    "Responsabilité juridique et pénale du dirigeant",
+    "Mise en œuvre des procédures conformes"
+   ]
+  },
+  {
+   "libelle": "Gestion RH et administration du personnel",
+   "type": "concept",
+   "notions": [
+    "Principes fondamentaux de la gestion RH",
+    "Gestion de la rémunération et avantages sociaux",
+    "Organisation du travail et qualité de vie au travail (QVT)"
+   ]
+  },
+  {
+   "libelle": "Recrutement et acquisition de talents",
+   "type": "concept",
+   "notions": [
+    "Recrutement et intégration des collaborateurs",
+    "Introduction à la stratégie de recrutement",
+    "Techniques et outils de recrutement",
+    "Processus de sélection et intégration des collaborateurs"
+   ]
+  },
+  {
+   "libelle": "Développement des compétences et gestion des talents",
+   "type": "concept",
+   "notions": [
+    "Formation et développement des compétences",
+    "Identification des besoins en compétences",
+    "Soutien et développement des collaborateurs",
+    "Capitalisation et amélioration continue"
+   ]
+  },
+  {
+   "libelle": "Achats, prestataires et services généraux",
+   "type": "concept",
+   "notions": [
+    "Introduction à la gestion des services généraux",
+    "Gestion des achats et prestataires",
+    "Gestion des infrastructures et matériels",
+    "Respect des contraintes réglementaires et sécurité"
+   ]
+  },
+  {
+   "libelle": "Organisation agile et conduite du changement",
+   "type": "concept",
+   "notions": [
+    "Introduction à l’organisation agile",
+    "Méthodes et outils pour une organisation agile",
+    "Transformation organisationnelle et conduite du changement",
+    "Introduction à la conduite du changement",
+    "Méthodes et outils pour conduire le changement",
+    "Gestion des résistances et mobilisation des équipes"
+   ]
+  },
+  {
+   "libelle": "RSE et pratiques responsables",
+   "type": "concept",
+   "notions": [
+    "Introduction à la RSE et à la qualité continue",
+    "Mise en œuvre des démarches RSE",
+    "Intégration des principes RSE dans l’organisation agile",
+    "Introduction à la RSE appliquée aux pratiques commerciales",
+    "Développement d’initiatives responsables",
+    "Introduction à la performance commerciale responsable",
+    "Développement de plans d’action responsables"
+   ]
+  },
+  {
+   "libelle": "Amélioration continue et qualité",
+   "type": "concept",
+   "notions": [
+    "Méthodes d’amélioration continue",
+    "Introduction à la Qualité, Sécurité et Environnement (QSE)"
+   ]
+  },
+  {
+   "libelle": "Management d’équipe et cohésion",
+   "type": "concept",
+   "notions": [
+    "Introduction au management des équipes",
+    "Techniques pour renforcer la cohésion d’équipe",
+    "Création d’un environnement inclusif et motivant"
+   ]
+  },
+  {
+   "libelle": "Qualité de vie au travail et prévention des risques",
+   "type": "concept",
+   "notions": [
+    "Techniques pour favoriser la qualité de vie au travail (QVT)",
+    "Prévention des risques et gestion des conflits"
+   ]
+  },
+  {
+   "libelle": "Entretien annuel et évaluation individuelle",
+   "type": "concept",
+   "notions": [
+    "Introduction à l’entretien annuel d’évaluation",
+    "Conduite de l’entretien annuel",
+    "Exploitation des informations recueillies"
+   ]
+  },
+  {
+   "libelle": "Intelligence collective et co-développement",
+   "type": "concept",
+   "notions": [
+    "Introduction au co-développement et à l’intelligence collective",
+    "Techniques pour organiser le co-développement",
+    "Exploitation de l’intelligence collective pour résoudre des problématiques"
+   ]
+  },
+  {
+   "libelle": "Politique commerciale et alliances",
+   "type": "concept",
+   "notions": [
+    "Introduction à la politique commerciale stratégique",
+    "Création d’alliances stratégiques",
+    "Développement des opportunités commerciales nouvelles"
+   ]
+  },
+  {
+   "libelle": "Stratégie client et expérience omnicanale",
+   "type": "concept",
+   "notions": [
+    "Introduction à la stratégie client",
+    "Développement d’une stratégie omnicanal",
+    "Amélioration continue de l’expérience client"
+   ]
+  },
+  {
+   "libelle": "Performance, KPI et tableaux de bord",
+   "type": "concept",
+   "notions": [
+    "Introduction à la gestion de la performance commerciale",
+    "Analyse des indicateurs clés de performance (KPI)",
+    "Évaluation et leviers de développement"
+   ]
+  },
+  {
+   "libelle": "Gestion des risques",
+   "type": "concept",
+   "notions": [
+    "Évaluation des impacts et gestion des risques liés à la démarche commerciale",
+    "Évaluation des impacts et gestion des risques liés aux pratiques commerciales"
+   ]
+  }
+ ],
+ "ecartees": [
+  {
+   "motif": "trame pédagogique",
+   "pattern": "^Études? de cas pratiques",
+   "notions": []
+  }
+ ]
+}

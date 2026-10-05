@@ -1,0 +1,794 @@
+{
+ "cle": "",
+ "genere_le": "2026-10-05",
+ "outil": "familles-notions",
+ "methode": "regroupement hors ligne, à relire et corriger à la main",
+ "controle": {
+  "notions_distinctes": 72,
+  "occurrences": 72,
+  "classees": 72,
+  "ecartees": 16,
+  "intitules_oublies": [],
+  "intitules_inconnus": []
+ },
+ "familles": [
+  {
+   "id": "F01",
+   "libelle": "Conformité juridique et réglementaire",
+   "type": "concept",
+   "blocs": [
+    "B02"
+   ],
+   "modules": [
+    "C11 Environnement règlementaire et juridique"
+   ],
+   "competences": [
+    "C11"
+   ],
+   "notions": [
+    {
+     "notion": "Introduction à la conformité juridique",
+     "bloc": "B02",
+     "module": "C11 Environnement règlementaire et juridique",
+     "competences": [
+      "C11"
+     ]
+    },
+    {
+     "notion": "Veille réglementaire et gestion des risques juridiques",
+     "bloc": "B02",
+     "module": "C11 Environnement règlementaire et juridique",
+     "competences": [
+      "C11"
+     ]
+    },
+    {
+     "notion": "Responsabilité juridique et pénale du dirigeant",
+     "bloc": "B02",
+     "module": "C11 Environnement règlementaire et juridique",
+     "competences": [
+      "C11"
+     ]
+    },
+    {
+     "notion": "Mise en œuvre des procédures conformes",
+     "bloc": "B02",
+     "module": "C11 Environnement règlementaire et juridique",
+     "competences": [
+      "C11"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F02",
+   "libelle": "Gestion RH et administration du personnel",
+   "type": "concept",
+   "blocs": [
+    "B02"
+   ],
+   "modules": [
+    "C121 Gestion RH"
+   ],
+   "competences": [
+    "C12"
+   ],
+   "notions": [
+    {
+     "notion": "Principes fondamentaux de la gestion RH",
+     "bloc": "B02",
+     "module": "C121 Gestion RH",
+     "competences": [
+      "C12"
+     ]
+    },
+    {
+     "notion": "Gestion de la rémunération et avantages sociaux",
+     "bloc": "B02",
+     "module": "C121 Gestion RH",
+     "competences": [
+      "C12"
+     ]
+    },
+    {
+     "notion": "Organisation du travail et qualité de vie au travail (QVT)",
+     "bloc": "B02",
+     "module": "C121 Gestion RH",
+     "competences": [
+      "C12"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F03",
+   "libelle": "Recrutement et acquisition de talents",
+   "type": "concept",
+   "blocs": [
+    "B02"
+   ],
+   "modules": [
+    "C121 Gestion RH",
+    "C122 Talent acquisition"
+   ],
+   "competences": [
+    "C12"
+   ],
+   "notions": [
+    {
+     "notion": "Recrutement et intégration des collaborateurs",
+     "bloc": "B02",
+     "module": "C121 Gestion RH",
+     "competences": [
+      "C12"
+     ]
+    },
+    {
+     "notion": "Introduction à la stratégie de recrutement",
+     "bloc": "B02",
+     "module": "C122 Talent acquisition",
+     "competences": []
+    },
+    {
+     "notion": "Techniques et outils de recrutement",
+     "bloc": "B02",
+     "module": "C122 Talent acquisition",
+     "competences": []
+    },
+    {
+     "notion": "Processus de sélection et intégration des collaborateurs",
+     "bloc": "B02",
+     "module": "C122 Talent acquisition",
+     "competences": []
+    }
+   ]
+  },
+  {
+   "id": "F04",
+   "libelle": "Développement des compétences et gestion des talents",
+   "type": "concept",
+   "blocs": [
+    "B02",
+    "B05"
+   ],
+   "modules": [
+    "C121 Gestion RH",
+    "C35-36 Gestion des talents"
+   ],
+   "competences": [
+    "C12",
+    "C35"
+   ],
+   "notions": [
+    {
+     "notion": "Formation et développement des compétences",
+     "bloc": "B02",
+     "module": "C121 Gestion RH",
+     "competences": [
+      "C12"
+     ]
+    },
+    {
+     "notion": "Identification des besoins en compétences",
+     "bloc": "B05",
+     "module": "C35-36 Gestion des talents",
+     "competences": [
+      "C35"
+     ]
+    },
+    {
+     "notion": "Soutien et développement des collaborateurs",
+     "bloc": "B05",
+     "module": "C35-36 Gestion des talents",
+     "competences": [
+      "C35"
+     ]
+    },
+    {
+     "notion": "Capitalisation et amélioration continue",
+     "bloc": "B05",
+     "module": "C35-36 Gestion des talents",
+     "competences": [
+      "C35"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F05",
+   "libelle": "Achats, prestataires et services généraux",
+   "type": "concept",
+   "blocs": [
+    "B02"
+   ],
+   "modules": [
+    "C13 Gestion des Services généraux"
+   ],
+   "competences": [
+    "C13"
+   ],
+   "notions": [
+    {
+     "notion": "Introduction à la gestion des services généraux",
+     "bloc": "B02",
+     "module": "C13 Gestion des Services généraux",
+     "competences": [
+      "C13"
+     ]
+    },
+    {
+     "notion": "Gestion des achats et prestataires",
+     "bloc": "B02",
+     "module": "C13 Gestion des Services généraux",
+     "competences": [
+      "C13"
+     ]
+    },
+    {
+     "notion": "Gestion des infrastructures et matériels",
+     "bloc": "B02",
+     "module": "C13 Gestion des Services généraux",
+     "competences": [
+      "C13"
+     ]
+    },
+    {
+     "notion": "Respect des contraintes réglementaires et sécurité",
+     "bloc": "B02",
+     "module": "C13 Gestion des Services généraux",
+     "competences": [
+      "C13"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F06",
+   "libelle": "Organisation agile et conduite du changement",
+   "type": "concept",
+   "blocs": [
+    "B02",
+    "B05"
+   ],
+   "modules": [
+    "C141 Organisation agile",
+    "C33 Conduite du changement"
+   ],
+   "competences": [
+    "C14",
+    "C33"
+   ],
+   "notions": [
+    {
+     "notion": "Introduction à l’organisation agile",
+     "bloc": "B02",
+     "module": "C141 Organisation agile",
+     "competences": [
+      "C14"
+     ]
+    },
+    {
+     "notion": "Méthodes et outils pour une organisation agile",
+     "bloc": "B02",
+     "module": "C141 Organisation agile",
+     "competences": [
+      "C14"
+     ]
+    },
+    {
+     "notion": "Transformation organisationnelle et conduite du changement",
+     "bloc": "B02",
+     "module": "C141 Organisation agile",
+     "competences": [
+      "C14"
+     ]
+    },
+    {
+     "notion": "Introduction à la conduite du changement",
+     "bloc": "B05",
+     "module": "C33 Conduite du changement",
+     "competences": [
+      "C33"
+     ]
+    },
+    {
+     "notion": "Méthodes et outils pour conduire le changement",
+     "bloc": "B05",
+     "module": "C33 Conduite du changement",
+     "competences": [
+      "C33"
+     ]
+    },
+    {
+     "notion": "Gestion des résistances et mobilisation des équipes",
+     "bloc": "B05",
+     "module": "C33 Conduite du changement",
+     "competences": [
+      "C33"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F07",
+   "libelle": "RSE et pratiques responsables",
+   "type": "concept",
+   "blocs": [
+    "B02",
+    "B04"
+   ],
+   "modules": [
+    "C142 RSE et Qualité continue",
+    "C141 Organisation agile",
+    "C26 RSE et pratiques commerciales",
+    "C28 Performance et pratiques responsables"
+   ],
+   "competences": [
+    "C14",
+    "C26",
+    "C28"
+   ],
+   "notions": [
+    {
+     "notion": "Introduction à la RSE et à la qualité continue",
+     "bloc": "B02",
+     "module": "C142 RSE et Qualité continue",
+     "competences": []
+    },
+    {
+     "notion": "Mise en œuvre des démarches RSE",
+     "bloc": "B02",
+     "module": "C142 RSE et Qualité continue",
+     "competences": []
+    },
+    {
+     "notion": "Intégration des principes RSE dans l’organisation agile",
+     "bloc": "B02",
+     "module": "C141 Organisation agile",
+     "competences": [
+      "C14"
+     ]
+    },
+    {
+     "notion": "Introduction à la RSE appliquée aux pratiques commerciales",
+     "bloc": "B04",
+     "module": "C26 RSE et pratiques commerciales",
+     "competences": [
+      "C26"
+     ]
+    },
+    {
+     "notion": "Développement d’initiatives responsables",
+     "bloc": "B04",
+     "module": "C26 RSE et pratiques commerciales",
+     "competences": [
+      "C26"
+     ]
+    },
+    {
+     "notion": "Introduction à la performance commerciale responsable",
+     "bloc": "B04",
+     "module": "C28 Performance et pratiques responsables",
+     "competences": [
+      "C28"
+     ]
+    },
+    {
+     "notion": "Développement de plans d’action responsables",
+     "bloc": "B04",
+     "module": "C28 Performance et pratiques responsables",
+     "competences": [
+      "C28"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F08",
+   "libelle": "Amélioration continue et qualité",
+   "type": "concept",
+   "blocs": [
+    "B02",
+    "B05"
+   ],
+   "modules": [
+    "C142 RSE et Qualité continue",
+    "C322 QSE"
+   ],
+   "competences": [],
+   "notions": [
+    {
+     "notion": "Méthodes d’amélioration continue",
+     "bloc": "B02",
+     "module": "C142 RSE et Qualité continue",
+     "competences": []
+    },
+    {
+     "notion": "Introduction à la Qualité, Sécurité et Environnement (QSE)",
+     "bloc": "B05",
+     "module": "C322 QSE",
+     "competences": []
+    }
+   ]
+  },
+  {
+   "id": "F09",
+   "libelle": "Management d’équipe et cohésion",
+   "type": "concept",
+   "blocs": [
+    "B05"
+   ],
+   "modules": [
+    "C321 Management des équipes"
+   ],
+   "competences": [
+    "C32"
+   ],
+   "notions": [
+    {
+     "notion": "Introduction au management des équipes",
+     "bloc": "B05",
+     "module": "C321 Management des équipes",
+     "competences": [
+      "C32"
+     ]
+    },
+    {
+     "notion": "Techniques pour renforcer la cohésion d’équipe",
+     "bloc": "B05",
+     "module": "C321 Management des équipes",
+     "competences": [
+      "C32"
+     ]
+    },
+    {
+     "notion": "Création d’un environnement inclusif et motivant",
+     "bloc": "B05",
+     "module": "C321 Management des équipes",
+     "competences": [
+      "C32"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F10",
+   "libelle": "Qualité de vie au travail et prévention des risques",
+   "type": "concept",
+   "blocs": [
+    "B05"
+   ],
+   "modules": [
+    "C322 QSE"
+   ],
+   "competences": [],
+   "notions": [
+    {
+     "notion": "Techniques pour favoriser la qualité de vie au travail (QVT)",
+     "bloc": "B05",
+     "module": "C322 QSE",
+     "competences": []
+    },
+    {
+     "notion": "Prévention des risques et gestion des conflits",
+     "bloc": "B05",
+     "module": "C322 QSE",
+     "competences": []
+    }
+   ]
+  },
+  {
+   "id": "F11",
+   "libelle": "Entretien annuel et évaluation individuelle",
+   "type": "concept",
+   "blocs": [
+    "B05"
+   ],
+   "modules": [
+    "C34 Entretien annuel : analyse et exploitation"
+   ],
+   "competences": [
+    "C34"
+   ],
+   "notions": [
+    {
+     "notion": "Introduction à l’entretien annuel d’évaluation",
+     "bloc": "B05",
+     "module": "C34 Entretien annuel : analyse et exploitation",
+     "competences": [
+      "C34"
+     ]
+    },
+    {
+     "notion": "Conduite de l’entretien annuel",
+     "bloc": "B05",
+     "module": "C34 Entretien annuel : analyse et exploitation",
+     "competences": [
+      "C34"
+     ]
+    },
+    {
+     "notion": "Exploitation des informations recueillies",
+     "bloc": "B05",
+     "module": "C34 Entretien annuel : analyse et exploitation",
+     "competences": [
+      "C34"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F12",
+   "libelle": "Intelligence collective et co-développement",
+   "type": "concept",
+   "blocs": [
+    "B05"
+   ],
+   "modules": [
+    "C37 Co-développement et Inteligence collective"
+   ],
+   "competences": [],
+   "notions": [
+    {
+     "notion": "Introduction au co-développement et à l’intelligence collective",
+     "bloc": "B05",
+     "module": "C37 Co-développement et Inteligence collective",
+     "competences": []
+    },
+    {
+     "notion": "Techniques pour organiser le co-développement",
+     "bloc": "B05",
+     "module": "C37 Co-développement et Inteligence collective",
+     "competences": []
+    },
+    {
+     "notion": "Exploitation de l’intelligence collective pour résoudre des problématiques",
+     "bloc": "B05",
+     "module": "C37 Co-développement et Inteligence collective",
+     "competences": []
+    }
+   ]
+  },
+  {
+   "id": "F13",
+   "libelle": "Politique commerciale et alliances",
+   "type": "concept",
+   "blocs": [
+    "B04"
+   ],
+   "modules": [
+    "C24 Politique commerciale"
+   ],
+   "competences": [
+    "C24"
+   ],
+   "notions": [
+    {
+     "notion": "Introduction à la politique commerciale stratégique",
+     "bloc": "B04",
+     "module": "C24 Politique commerciale",
+     "competences": [
+      "C24"
+     ]
+    },
+    {
+     "notion": "Création d’alliances stratégiques",
+     "bloc": "B04",
+     "module": "C24 Politique commerciale",
+     "competences": [
+      "C24"
+     ]
+    },
+    {
+     "notion": "Développement des opportunités commerciales nouvelles",
+     "bloc": "B04",
+     "module": "C24 Politique commerciale",
+     "competences": [
+      "C24"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F14",
+   "libelle": "Stratégie client et expérience omnicanale",
+   "type": "concept",
+   "blocs": [
+    "B04"
+   ],
+   "modules": [
+    "C25 Stratégie client"
+   ],
+   "competences": [
+    "C25"
+   ],
+   "notions": [
+    {
+     "notion": "Introduction à la stratégie client",
+     "bloc": "B04",
+     "module": "C25 Stratégie client",
+     "competences": [
+      "C25"
+     ]
+    },
+    {
+     "notion": "Développement d’une stratégie omnicanal",
+     "bloc": "B04",
+     "module": "C25 Stratégie client",
+     "competences": [
+      "C25"
+     ]
+    },
+    {
+     "notion": "Amélioration continue de l’expérience client",
+     "bloc": "B04",
+     "module": "C25 Stratégie client",
+     "competences": [
+      "C25"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F15",
+   "libelle": "Performance, KPI et tableaux de bord",
+   "type": "concept",
+   "blocs": [
+    "B04"
+   ],
+   "modules": [
+    "C27Performance commerciale et KPI"
+   ],
+   "competences": [
+    "C27"
+   ],
+   "notions": [
+    {
+     "notion": "Introduction à la gestion de la performance commerciale",
+     "bloc": "B04",
+     "module": "C27Performance commerciale et KPI",
+     "competences": [
+      "C27"
+     ]
+    },
+    {
+     "notion": "Analyse des indicateurs clés de performance (KPI)",
+     "bloc": "B04",
+     "module": "C27Performance commerciale et KPI",
+     "competences": [
+      "C27"
+     ]
+    },
+    {
+     "notion": "Évaluation et leviers de développement",
+     "bloc": "B04",
+     "module": "C27Performance commerciale et KPI",
+     "competences": [
+      "C27"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F16",
+   "libelle": "Gestion des risques",
+   "type": "concept",
+   "blocs": [
+    "B04"
+   ],
+   "modules": [
+    "C26 RSE et pratiques commerciales",
+    "C28 Performance et pratiques responsables"
+   ],
+   "competences": [
+    "C26",
+    "C28"
+   ],
+   "notions": [
+    {
+     "notion": "Évaluation des impacts et gestion des risques liés à la démarche commerciale",
+     "bloc": "B04",
+     "module": "C26 RSE et pratiques commerciales",
+     "competences": [
+      "C26"
+     ]
+    },
+    {
+     "notion": "Évaluation des impacts et gestion des risques liés aux pratiques commerciales",
+     "bloc": "B04",
+     "module": "C28 Performance et pratiques responsables",
+     "competences": [
+      "C28"
+     ]
+    }
+   ]
+  }
+ ],
+ "ecartees": [
+  {
+   "motif": "trame pédagogique",
+   "notions": [
+    {
+     "notion": "Études de cas pratiques en conformité juridique",
+     "bloc": "B02",
+     "module": "C11 Environnement règlementaire et juridique"
+    },
+    {
+     "notion": "Études de cas pratiques en talent acquisition",
+     "bloc": "B02",
+     "module": "C122 Talent acquisition"
+    },
+    {
+     "notion": "Études de cas pratiques en gestion des services généraux",
+     "bloc": "B02",
+     "module": "C13 Gestion des Services généraux"
+    },
+    {
+     "notion": "Études de cas pratiques en organisation agile",
+     "bloc": "B02",
+     "module": "C141 Organisation agile"
+    },
+    {
+     "notion": "Études de cas pratiques en RSE et qualité continue",
+     "bloc": "B02",
+     "module": "C142 RSE et Qualité continue"
+    },
+    {
+     "notion": "Études de cas pratiques en management des équipes",
+     "bloc": "B05",
+     "module": "C321 Management des équipes"
+    },
+    {
+     "notion": "Études de cas pratiques en QSE",
+     "bloc": "B05",
+     "module": "C322 QSE"
+    },
+    {
+     "notion": "Études de cas pratiques en conduite du changement",
+     "bloc": "B05",
+     "module": "C33 Conduite du changement"
+    },
+    {
+     "notion": "Études de cas pratiques en entretien annuel",
+     "bloc": "B05",
+     "module": "C34 Entretien annuel : analyse et exploitation"
+    },
+    {
+     "notion": "Études de cas pratiques en gestion des talents",
+     "bloc": "B05",
+     "module": "C35-36 Gestion des talents"
+    },
+    {
+     "notion": "Études de cas pratiques en co-développement et intelligence collective",
+     "bloc": "B05",
+     "module": "C37 Co-développement et Inteligence collective"
+    },
+    {
+     "notion": "Études de cas pratiques en politique commerciale",
+     "bloc": "B04",
+     "module": "C24 Politique commerciale"
+    },
+    {
+     "notion": "Études de cas pratiques en stratégie client",
+     "bloc": "B04",
+     "module": "C25 Stratégie client"
+    },
+    {
+     "notion": "Études de cas pratiques en intégration RSE",
+     "bloc": "B04",
+     "module": "C26 RSE et pratiques commerciales"
+    },
+    {
+     "notion": "Études de cas pratiques en gestion de la performance commerciale",
+     "bloc": "B04",
+     "module": "C27Performance commerciale et KPI"
+    },
+    {
+     "notion": "Études de cas pratiques en amélioration responsable",
+     "bloc": "B04",
+     "module": "C28 Performance et pratiques responsables"
+    }
+   ]
+  }
+ ]
+}
