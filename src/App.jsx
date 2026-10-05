@@ -808,7 +808,7 @@ function VueDir({user,onLogout}){
                   {syncRapport.map((r,i)=>(
                     <div key={i} style={{paddingTop:4,borderTop:i?`1px solid ${P.border}`:'none'}}>
                       <strong>{r.promotion||r.cle}</strong> — {r.etat}
-                      {r.blocs!==undefined&&<span style={{color:P.textm}}> · {r.blocs} blocs, {r.modules} modules, {r.competences} compétences{r.controles_ok?'':' · contrôles en écart'}</span>}
+                      {r.blocs!==undefined&&<span style={{color:P.textm}}> · {r.blocs} blocs, {r.modules} modules, {r.competences} compétences{r.notions?', ':''}{r.notions?<strong style={{color:P.petrole}}>{r.notions} notions</strong>:null}{r.controles_ok?'':' · contrôles en écart'}</span>}
                     </div>
                   ))}
                 </div>
