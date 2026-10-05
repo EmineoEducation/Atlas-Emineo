@@ -1,0 +1,1236 @@
+{
+ "cle": "",
+ "genere_le": "2026-10-05",
+ "outil": "familles-notions",
+ "methode": "regroupement hors ligne, à relire et corriger à la main",
+ "controle": {
+  "notions_distinctes": 85,
+  "occurrences": 119,
+  "classees": 85,
+  "ecartees": 15,
+  "intitules_oublies": [],
+  "intitules_inconnus": []
+ },
+ "familles": [
+  {
+   "id": "F01",
+   "libelle": "Brief, cahier des charges et cadrage de projet",
+   "type": "concept",
+   "blocs": [
+    "B03"
+   ],
+   "modules": [
+    "Conception de projet",
+    "Rédaction de Brief / Elevator Pitch / Rhétorique"
+   ],
+   "competences": [
+    "C13"
+   ],
+   "notions": [
+    {
+     "notion": "Enjeux et typologie des documents de cadrage projet",
+     "bloc": "B03",
+     "module": "Conception de projet",
+     "competences": [
+      "C13"
+     ]
+    },
+    {
+     "notion": "Construction et rédaction du cahier des charges et du brief",
+     "bloc": "B03",
+     "module": "Conception de projet",
+     "competences": [
+      "C13"
+     ]
+    },
+    {
+     "notion": "Formalisation et optimisation des livrables de cadrage",
+     "bloc": "B03",
+     "module": "Conception de projet",
+     "competences": [
+      "C13"
+     ]
+    },
+    {
+     "notion": "Rédaction de briefs créatifs et opérationnels",
+     "bloc": "B03",
+     "module": "Rédaction de Brief / Elevator Pitch / Rhétorique",
+     "competences": [
+      "C13"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F02",
+   "libelle": "Prise de parole, éloquence et soutenance",
+   "type": "posture",
+   "blocs": [
+    "B03",
+    "B05",
+    "B06"
+   ],
+   "modules": [
+    "Rédaction de Brief / Elevator Pitch / Rhétorique",
+    "Spé Marque & Transfo : Accompagnement PPI",
+    "Spé Créa : Accompagnement PPC"
+   ],
+   "competences": [
+    "C13",
+    "C20",
+    "C21",
+    "C22"
+   ],
+   "notions": [
+    {
+     "notion": "Techniques de synthèse et construction de l’elevator pitch",
+     "bloc": "B03",
+     "module": "Rédaction de Brief / Elevator Pitch / Rhétorique",
+     "competences": [
+      "C13"
+     ]
+    },
+    {
+     "notion": "Rhétorique et argumentation en contexte professionnel",
+     "bloc": "B03",
+     "module": "Rédaction de Brief / Elevator Pitch / Rhétorique",
+     "competences": [
+      "C13"
+     ]
+    },
+    {
+     "notion": "Préparation à la soutenance, argumentation et valorisation du projet",
+     "bloc": "B05",
+     "module": "Spé Marque & Transfo : Accompagnement PPI",
+     "competences": [
+      "C20",
+      "C21",
+      "C22"
+     ]
+    },
+    {
+     "notion": "Préparation à la soutenance, argumentation et valorisation du projet",
+     "bloc": "B06",
+     "module": "Spé Créa : Accompagnement PPC",
+     "competences": [
+      "C20",
+      "C21",
+      "C22"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F03",
+   "libelle": "Planification stratégique",
+   "type": "concept",
+   "blocs": [
+    "B03"
+   ],
+   "modules": [
+    "Planification Stratégique"
+   ],
+   "competences": [
+    "C13",
+    "C14"
+   ],
+   "notions": [
+    {
+     "notion": "Principes et enjeux de la planification stratégique",
+     "bloc": "B03",
+     "module": "Planification Stratégique",
+     "competences": [
+      "C13",
+      "C14"
+     ]
+    },
+    {
+     "notion": "Méthodes et outils de planification des actions marketing-communication",
+     "bloc": "B03",
+     "module": "Planification Stratégique",
+     "competences": [
+      "C13",
+      "C14"
+     ]
+    },
+    {
+     "notion": "Mise en œuvre et pilotage de la planification stratégique",
+     "bloc": "B03",
+     "module": "Planification Stratégique",
+     "competences": [
+      "C13",
+      "C14"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F04",
+   "libelle": "Audiovisuel et montage vidéo",
+   "type": "outil",
+   "blocs": [
+    "B03",
+    "B05",
+    "B06"
+   ],
+   "modules": [
+    "Audio-Vidéo : De la Pré-prod à la Post-prod",
+    "Hackathon Websérie",
+    "Spé Créa : Approfondissement Adobe After Effect"
+   ],
+   "competences": [
+    "C13",
+    "C14",
+    "C22"
+   ],
+   "notions": [
+    {
+     "notion": "PARTIE 1 – De la Pré-prod à la Post-prod (5 séances)",
+     "bloc": "B03",
+     "module": "Audio-Vidéo : De la Pré-prod à la Post-prod",
+     "competences": [
+      "C13",
+      "C14"
+     ]
+    },
+    {
+     "notion": "PARTIE 2 – Motion vidéo (5 séances)",
+     "bloc": "B03",
+     "module": "Audio-Vidéo : De la Pré-prod à la Post-prod",
+     "competences": [
+      "C13",
+      "C14"
+     ]
+    },
+    {
+     "notion": "Adobe Premiere : Techniques de réalisation avancées",
+     "bloc": "B05",
+     "module": "Hackathon Websérie",
+     "competences": []
+    },
+    {
+     "notion": "Adobe Premiere : Techniques de réalisation avancées",
+     "bloc": "B06",
+     "module": "Hackathon Websérie",
+     "competences": []
+    },
+    {
+     "notion": "Prod vidéo : captation multiformat (webdesign)",
+     "bloc": "B05",
+     "module": "Hackathon Websérie",
+     "competences": []
+    },
+    {
+     "notion": "Prod vidéo : captation multiformat (webdesign)",
+     "bloc": "B06",
+     "module": "Hackathon Websérie",
+     "competences": []
+    },
+    {
+     "notion": "Post-Prod vidéo : montage et motion design multicast",
+     "bloc": "B05",
+     "module": "Hackathon Websérie",
+     "competences": []
+    },
+    {
+     "notion": "Post-Prod vidéo : montage et motion design multicast",
+     "bloc": "B06",
+     "module": "Hackathon Websérie",
+     "competences": []
+    },
+    {
+     "notion": "Workflow avancé et méthodologie de projet sur After Effect",
+     "bloc": "B06",
+     "module": "Spé Créa : Approfondissement Adobe After Effect",
+     "competences": [
+      "C22"
+     ]
+    },
+    {
+     "notion": "Techniques avancées d’animation et d’effets spéciaux",
+     "bloc": "B06",
+     "module": "Spé Créa : Approfondissement Adobe After Effect",
+     "competences": [
+      "C22"
+     ]
+    },
+    {
+     "notion": "Finalisation, export, accessibilité et intégration dans une stratégie de marque",
+     "bloc": "B06",
+     "module": "Spé Créa : Approfondissement Adobe After Effect",
+     "competences": [
+      "C22"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F05",
+   "libelle": "Management d’équipe et conduite du changement",
+   "type": "concept",
+   "blocs": [
+    "B03",
+    "B05"
+   ],
+   "modules": [
+    "Management d'équipe & conduite du changement",
+    "Spé Marque & Transfo : Gestion de campagne Digitale",
+    "Spé Marque & Tranfo : Méthodes agiles de gestion de projet (SCRUM, etc.)"
+   ],
+   "competences": [
+    "C15",
+    "C20",
+    "C21",
+    "C22"
+   ],
+   "notions": [
+    {
+     "notion": "Constitution et organisation d’équipes projet",
+     "bloc": "B03",
+     "module": "Management d'équipe & conduite du changement",
+     "competences": [
+      "C15"
+     ]
+    },
+    {
+     "notion": "Animation, leadership et intelligence collective",
+     "bloc": "B03",
+     "module": "Management d'équipe & conduite du changement",
+     "competences": [
+      "C15"
+     ]
+    },
+    {
+     "notion": "Conduite du changement et accompagnement des transformations",
+     "bloc": "B03",
+     "module": "Management d'équipe & conduite du changement",
+     "competences": [
+      "C15"
+     ]
+    },
+    {
+     "notion": "Coordination, optimisation et conduite du changement",
+     "bloc": "B05",
+     "module": "Spé Marque & Transfo : Gestion de campagne Digitale",
+     "competences": [
+      "C20",
+      "C21",
+      "C22"
+     ]
+    },
+    {
+     "notion": "Pilotage agile, management collaboratif et conduite du changement",
+     "bloc": "B05",
+     "module": "Spé Marque & Tranfo : Méthodes agiles de gestion de projet (SCRUM, etc.)",
+     "competences": [
+      "C20",
+      "C21",
+      "C22"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F06",
+   "libelle": "Gestion de projet : risques, budget et pilotage",
+   "type": "concept",
+   "blocs": [
+    "B03"
+   ],
+   "modules": [
+    "Management de projet"
+   ],
+   "competences": [
+    "C16"
+   ],
+   "notions": [
+    {
+     "notion": "Identification et analyse des risques projet",
+     "bloc": "B03",
+     "module": "Management de projet",
+     "competences": [
+      "C16"
+     ]
+    },
+    {
+     "notion": "Gestion budgétaire et suivi des coûts",
+     "bloc": "B03",
+     "module": "Management de projet",
+     "competences": [
+      "C16"
+     ]
+    },
+    {
+     "notion": "Pilotage, reporting et optimisation de la performance projet",
+     "bloc": "B03",
+     "module": "Management de projet",
+     "competences": [
+      "C16"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F07",
+   "libelle": "Management interculturel et intergénérationnel",
+   "type": "concept",
+   "blocs": [
+    "B03"
+   ],
+   "modules": [
+    "Management interculturel",
+    "Management intergénérationnel et gestion des situations difficiles"
+   ],
+   "competences": [
+    "C15",
+    "C16",
+    "C17"
+   ],
+   "notions": [
+    {
+     "notion": "Fondements et enjeux du management interculturel",
+     "bloc": "B03",
+     "module": "Management interculturel",
+     "competences": [
+      "C15",
+      "C16",
+      "C17"
+     ]
+    },
+    {
+     "notion": "Pratiques et outils du management interculturel",
+     "bloc": "B03",
+     "module": "Management interculturel",
+     "competences": [
+      "C15",
+      "C16",
+      "C17"
+     ]
+    },
+    {
+     "notion": "Pilotage de projets et communication en contexte interculturel",
+     "bloc": "B03",
+     "module": "Management interculturel",
+     "competences": [
+      "C15",
+      "C16",
+      "C17"
+     ]
+    },
+    {
+     "notion": "Enjeux et leviers du management intergénérationnel",
+     "bloc": "B03",
+     "module": "Management intergénérationnel et gestion des situations difficiles",
+     "competences": [
+      "C15",
+      "C16",
+      "C17"
+     ]
+    },
+    {
+     "notion": "Adapter son management et prévenir les situations difficiles",
+     "bloc": "B03",
+     "module": "Management intergénérationnel et gestion des situations difficiles",
+     "competences": [
+      "C15",
+      "C16",
+      "C17"
+     ]
+    },
+    {
+     "notion": "Gestion des situations difficiles et résolution de conflits",
+     "bloc": "B03",
+     "module": "Management intergénérationnel et gestion des situations difficiles",
+     "competences": [
+      "C15",
+      "C16",
+      "C17"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F08",
+   "libelle": "Négociation et relations fournisseurs",
+   "type": "concept",
+   "blocs": [
+    "B03"
+   ],
+   "modules": [
+    "Négociation Commerciales & Relations fournisseurs"
+   ],
+   "competences": [
+    "C17"
+   ],
+   "notions": [
+    {
+     "notion": "Stratégies de négociation commerciale appliquées à la communication",
+     "bloc": "B03",
+     "module": "Négociation Commerciales & Relations fournisseurs",
+     "competences": [
+      "C17"
+     ]
+    },
+    {
+     "notion": "Gestion et pilotage de la relation fournisseur",
+     "bloc": "B03",
+     "module": "Négociation Commerciales & Relations fournisseurs",
+     "competences": [
+      "C17"
+     ]
+    },
+    {
+     "notion": "Intégration des enjeux RSE et gestion des risques dans la relation commerciale",
+     "bloc": "B03",
+     "module": "Négociation Commerciales & Relations fournisseurs",
+     "competences": [
+      "C17"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F09",
+   "libelle": "Mesure de la performance et data",
+   "type": "concept",
+   "blocs": [
+    "B03",
+    "B05",
+    "B06"
+   ],
+   "modules": [
+    "Indicateurs-clés de performance : définition et organisation de la collecte",
+    "Indicateurs-clés de performance : analytics & Data visualisation (+Référencement SMA /SMO)",
+    "Hackathon Podcast"
+   ],
+   "competences": [
+    "C18",
+    "C19"
+   ],
+   "notions": [
+    {
+     "notion": "PARTIE 1 – KPIs & organisation de la collecte (3 séances)",
+     "bloc": "B03",
+     "module": "Indicateurs-clés de performance : définition et organisation de la collecte",
+     "competences": [
+      "C18"
+     ]
+    },
+    {
+     "notion": "PARTIE 2 – Analytics & data visualisation (4 séances)",
+     "bloc": "B03",
+     "module": "Indicateurs-clés de performance : définition et organisation de la collecte",
+     "competences": [
+      "C18"
+     ]
+    },
+    {
+     "notion": "Mesure intégrée cross-canal",
+     "bloc": "B03",
+     "module": "Indicateurs-clés de performance : analytics & Data visualisation (+Référencement SMA /SMO)",
+     "competences": [
+      "C18",
+      "C19"
+     ]
+    },
+    {
+     "notion": "Mesures d’audience et ROI (référencements et analytics)",
+     "bloc": "B05",
+     "module": "Hackathon Podcast",
+     "competences": []
+    },
+    {
+     "notion": "Mesures d’audience et ROI (référencements et analytics)",
+     "bloc": "B06",
+     "module": "Hackathon Podcast",
+     "competences": []
+    }
+   ]
+  },
+  {
+   "id": "F10",
+   "libelle": "Référencement et visibilité",
+   "type": "concept",
+   "blocs": [
+    "B03"
+   ],
+   "modules": [
+    "Indicateurs-clés de performance : définition et organisation de la collecte",
+    "Indicateurs-clés de performance : analytics & Data visualisation (+Référencement SMA /SMO)"
+   ],
+   "competences": [
+    "C18",
+    "C19"
+   ],
+   "notions": [
+    {
+     "notion": "PARTIE 3 – Référencement SMA/SMO à l’ère de l’IA (3 séances)",
+     "bloc": "B03",
+     "module": "Indicateurs-clés de performance : définition et organisation de la collecte",
+     "competences": [
+      "C18"
+     ]
+    },
+    {
+     "notion": "SMA – Campagnes payantes à l’ère de l’IA",
+     "bloc": "B03",
+     "module": "Indicateurs-clés de performance : analytics & Data visualisation (+Référencement SMA /SMO)",
+     "competences": [
+      "C18",
+      "C19"
+     ]
+    },
+    {
+     "notion": "SMO – Visibilité organique sur les réseaux",
+     "bloc": "B03",
+     "module": "Indicateurs-clés de performance : analytics & Data visualisation (+Référencement SMA /SMO)",
+     "competences": [
+      "C18",
+      "C19"
+     ]
+    },
+    {
+     "notion": "SEO & IA générative",
+     "bloc": "B03",
+     "module": "Indicateurs-clés de performance : analytics & Data visualisation (+Référencement SMA /SMO)",
+     "competences": [
+      "C18",
+      "C19"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F11",
+   "libelle": "Gestion de campagne digitale",
+   "type": "concept",
+   "blocs": [
+    "B05",
+    "B06"
+   ],
+   "modules": [
+    "Spé Marque & Transfo : Gestion de campagne Digitale",
+    "Hackathon Websérie",
+    "Hackathon Podcast",
+    "Hackathon Media Tactique"
+   ],
+   "competences": [
+    "C20",
+    "C21",
+    "C22"
+   ],
+   "notions": [
+    {
+     "notion": "Stratégie et pilotage de campagne digitale innovante",
+     "bloc": "B05",
+     "module": "Spé Marque & Transfo : Gestion de campagne Digitale",
+     "competences": [
+      "C20",
+      "C21",
+      "C22"
+     ]
+    },
+    {
+     "notion": "Marketing digital et distribution (canaux/multicast) – Gestion de campagne",
+     "bloc": "B05",
+     "module": "Hackathon Websérie",
+     "competences": []
+    },
+    {
+     "notion": "Marketing digital et distribution (canaux/multicast) – Gestion de campagne",
+     "bloc": "B06",
+     "module": "Hackathon Websérie",
+     "competences": []
+    },
+    {
+     "notion": "Distribution et promotion (gestion de campagne)",
+     "bloc": "B05",
+     "module": "Hackathon Podcast",
+     "competences": []
+    },
+    {
+     "notion": "Distribution et promotion (gestion de campagne)",
+     "bloc": "B06",
+     "module": "Hackathon Podcast",
+     "competences": []
+    },
+    {
+     "notion": "Lancement et promotion (Design responsive…)",
+     "bloc": "B05",
+     "module": "Hackathon Media Tactique",
+     "competences": []
+    },
+    {
+     "notion": "Lancement et promotion (Design responsive…)",
+     "bloc": "B06",
+     "module": "Hackathon Media Tactique",
+     "competences": []
+    }
+   ]
+  },
+  {
+   "id": "F12",
+   "libelle": "Méthodes agiles",
+   "type": "concept",
+   "blocs": [
+    "B05"
+   ],
+   "modules": [
+    "Spé Marque & Tranfo : Méthodes agiles de gestion de projet (SCRUM, etc.)"
+   ],
+   "competences": [
+    "C20",
+    "C21",
+    "C22"
+   ],
+   "notions": [
+    {
+     "notion": "Fondamentaux et enjeux de l’agilité en gestion de projet",
+     "bloc": "B05",
+     "module": "Spé Marque & Tranfo : Méthodes agiles de gestion de projet (SCRUM, etc.)",
+     "competences": [
+      "C20",
+      "C21",
+      "C22"
+     ]
+    },
+    {
+     "notion": "SCRUM : rôles, outils et rituels appliqués à la communication",
+     "bloc": "B05",
+     "module": "Spé Marque & Tranfo : Méthodes agiles de gestion de projet (SCRUM, etc.)",
+     "competences": [
+      "C20",
+      "C21",
+      "C22"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F13",
+   "libelle": "Droit des marques et cadre juridique",
+   "type": "concept",
+   "blocs": [
+    "B05"
+   ],
+   "modules": [
+    "Spé Marque & Transfo : Droit des marques et de la communication digitale"
+   ],
+   "competences": [
+    "C21"
+   ],
+   "notions": [
+    {
+     "notion": "Droit des marques appliqué à la transformation digitale",
+     "bloc": "B05",
+     "module": "Spé Marque & Transfo : Droit des marques et de la communication digitale",
+     "competences": [
+      "C21"
+     ]
+    },
+    {
+     "notion": "Cadre juridique de la communication digitale innovante",
+     "bloc": "B05",
+     "module": "Spé Marque & Transfo : Droit des marques et de la communication digitale",
+     "competences": [
+      "C21"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F14",
+   "libelle": "Storytelling et brand content",
+   "type": "concept",
+   "blocs": [
+    "B05",
+    "B06"
+   ],
+   "modules": [
+    "Hackathon Websérie"
+   ],
+   "competences": [],
+   "notions": [
+    {
+     "notion": "Brand storytelling appliqué à la websérie",
+     "bloc": "B05",
+     "module": "Hackathon Websérie",
+     "competences": []
+    },
+    {
+     "notion": "Brand storytelling appliqué à la websérie",
+     "bloc": "B06",
+     "module": "Hackathon Websérie",
+     "competences": []
+    }
+   ]
+  },
+  {
+   "id": "F15",
+   "libelle": "Identité visuelle et direction artistique",
+   "type": "concept",
+   "blocs": [
+    "B05",
+    "B06"
+   ],
+   "modules": [
+    "Hackathon Websérie",
+    "Hackathon Podcast"
+   ],
+   "competences": [],
+   "notions": [
+    {
+     "notion": "Direction artistique : websérie",
+     "bloc": "B05",
+     "module": "Hackathon Websérie",
+     "competences": []
+    },
+    {
+     "notion": "Direction artistique : websérie",
+     "bloc": "B06",
+     "module": "Hackathon Websérie",
+     "competences": []
+    },
+    {
+     "notion": "Direction artistique : Identité sonore",
+     "bloc": "B05",
+     "module": "Hackathon Podcast",
+     "competences": []
+    },
+    {
+     "notion": "Direction artistique : Identité sonore",
+     "bloc": "B06",
+     "module": "Hackathon Podcast",
+     "competences": []
+    },
+    {
+     "notion": "Direction artistique : Identité sonore (suite)",
+     "bloc": "B05",
+     "module": "Hackathon Podcast",
+     "competences": []
+    },
+    {
+     "notion": "Direction artistique : Identité sonore (suite)",
+     "bloc": "B06",
+     "module": "Hackathon Podcast",
+     "competences": []
+    },
+    {
+     "notion": "Psychologie des couleurs : Expérimentation visuelle",
+     "bloc": "B05",
+     "module": "Hackathon Websérie",
+     "competences": []
+    },
+    {
+     "notion": "Psychologie des couleurs : Expérimentation visuelle",
+     "bloc": "B06",
+     "module": "Hackathon Websérie",
+     "competences": []
+    }
+   ]
+  },
+  {
+   "id": "F16",
+   "libelle": "Histoire de l’art et références culturelles",
+   "type": "concept",
+   "blocs": [
+    "B05",
+    "B06"
+   ],
+   "modules": [
+    "Hackathon Media Tactique"
+   ],
+   "competences": [],
+   "notions": [
+    {
+     "notion": "Histoire de l’art et tendances visuelles : Design graphique et visuel",
+     "bloc": "B05",
+     "module": "Hackathon Media Tactique",
+     "competences": []
+    },
+    {
+     "notion": "Histoire de l’art et tendances visuelles : Design graphique et visuel",
+     "bloc": "B06",
+     "module": "Hackathon Media Tactique",
+     "competences": []
+    },
+    {
+     "notion": "Histoire de l’art et tendances visuelles (suite)",
+     "bloc": "B05",
+     "module": "Hackathon Media Tactique",
+     "competences": []
+    },
+    {
+     "notion": "Histoire de l’art et tendances visuelles (suite)",
+     "bloc": "B06",
+     "module": "Hackathon Media Tactique",
+     "competences": []
+    }
+   ]
+  },
+  {
+   "id": "F17",
+   "libelle": "IA générative appliquée à la création",
+   "type": "concept",
+   "blocs": [
+    "B05",
+    "B06"
+   ],
+   "modules": [
+    "Hackathon Websérie",
+    "Hackathon Media Tactique"
+   ],
+   "competences": [],
+   "notions": [
+    {
+     "notion": "Méthodologie IA Gen : Scénarisation et storyboard",
+     "bloc": "B05",
+     "module": "Hackathon Websérie",
+     "competences": []
+    },
+    {
+     "notion": "Méthodologie IA Gen : Scénarisation et storyboard",
+     "bloc": "B06",
+     "module": "Hackathon Websérie",
+     "competences": []
+    },
+    {
+     "notion": "IAGen Créative : Mécaniques de jeu innovantes",
+     "bloc": "B05",
+     "module": "Hackathon Media Tactique",
+     "competences": []
+    },
+    {
+     "notion": "IAGen Créative : Mécaniques de jeu innovantes",
+     "bloc": "B06",
+     "module": "Hackathon Media Tactique",
+     "competences": []
+    }
+   ]
+  },
+  {
+   "id": "F18",
+   "libelle": "Création et production audio",
+   "type": "outil",
+   "blocs": [
+    "B05",
+    "B06"
+   ],
+   "modules": [
+    "Hackathon Podcast"
+   ],
+   "competences": [],
+   "notions": [
+    {
+     "notion": "Conception du contenu audio",
+     "bloc": "B05",
+     "module": "Hackathon Podcast",
+     "competences": []
+    },
+    {
+     "notion": "Conception du contenu audio",
+     "bloc": "B06",
+     "module": "Hackathon Podcast",
+     "competences": []
+    },
+    {
+     "notion": "Conception du contenu audio (suite)",
+     "bloc": "B05",
+     "module": "Hackathon Podcast",
+     "competences": []
+    },
+    {
+     "notion": "Conception du contenu audio (suite)",
+     "bloc": "B06",
+     "module": "Hackathon Podcast",
+     "competences": []
+    },
+    {
+     "notion": "Techniques d’enregistrement et de montage",
+     "bloc": "B05",
+     "module": "Hackathon Podcast",
+     "competences": []
+    },
+    {
+     "notion": "Techniques d’enregistrement et de montage",
+     "bloc": "B06",
+     "module": "Hackathon Podcast",
+     "competences": []
+    },
+    {
+     "notion": "Créativité audio : sons, voix",
+     "bloc": "B05",
+     "module": "Hackathon Podcast",
+     "competences": []
+    },
+    {
+     "notion": "Créativité audio : sons, voix",
+     "bloc": "B06",
+     "module": "Hackathon Podcast",
+     "competences": []
+    }
+   ]
+  },
+  {
+   "id": "F19",
+   "libelle": "Créativité, idéation et narration innovante",
+   "type": "concept",
+   "blocs": [
+    "B05",
+    "B06"
+   ],
+   "modules": [
+    "Hackathon Podcast",
+    "Hackathon Media Tactique"
+   ],
+   "competences": [],
+   "notions": [
+    {
+     "notion": "Créativité et pensée innovante : Narration innovante",
+     "bloc": "B05",
+     "module": "Hackathon Podcast",
+     "competences": []
+    },
+    {
+     "notion": "Créativité et pensée innovante : Narration innovante",
+     "bloc": "B06",
+     "module": "Hackathon Podcast",
+     "competences": []
+    },
+    {
+     "notion": "Créativité et pensée innovante : Narration innovante (suite)",
+     "bloc": "B05",
+     "module": "Hackathon Podcast",
+     "competences": []
+    },
+    {
+     "notion": "Créativité et pensée innovante : Narration innovante (suite)",
+     "bloc": "B06",
+     "module": "Hackathon Podcast",
+     "competences": []
+    },
+    {
+     "notion": "Conception créative du jeu",
+     "bloc": "B05",
+     "module": "Hackathon Media Tactique",
+     "competences": []
+    },
+    {
+     "notion": "Conception créative du jeu",
+     "bloc": "B06",
+     "module": "Hackathon Media Tactique",
+     "competences": []
+    },
+    {
+     "notion": "Conception créative du jeu (suite)",
+     "bloc": "B05",
+     "module": "Hackathon Media Tactique",
+     "competences": []
+    },
+    {
+     "notion": "Conception créative du jeu (suite)",
+     "bloc": "B06",
+     "module": "Hackathon Media Tactique",
+     "competences": []
+    }
+   ]
+  },
+  {
+   "id": "F20",
+   "libelle": "Média tactique et conception de jeu",
+   "type": "concept",
+   "blocs": [
+    "B05",
+    "B06"
+   ],
+   "modules": [
+    "Hackathon Media Tactique"
+   ],
+   "competences": [],
+   "notions": [
+    {
+     "notion": "Conception stratégique du jeu (media tactique) - Histoire des ID et des médias",
+     "bloc": "B05",
+     "module": "Hackathon Media Tactique",
+     "competences": []
+    },
+    {
+     "notion": "Conception stratégique du jeu (media tactique) - Histoire des ID et des médias",
+     "bloc": "B06",
+     "module": "Hackathon Media Tactique",
+     "competences": []
+    },
+    {
+     "notion": "Conception stratégique du jeu (suite)",
+     "bloc": "B05",
+     "module": "Hackathon Media Tactique",
+     "competences": []
+    },
+    {
+     "notion": "Conception stratégique du jeu (suite)",
+     "bloc": "B06",
+     "module": "Hackathon Media Tactique",
+     "competences": []
+    }
+   ]
+  },
+  {
+   "id": "F21",
+   "libelle": "UX et expérience utilisateur",
+   "type": "concept",
+   "blocs": [
+    "B05",
+    "B06"
+   ],
+   "modules": [
+    "Hackathon Media Tactique"
+   ],
+   "competences": [],
+   "notions": [
+    {
+     "notion": "Expérience utilisateur hybride (NoCode, IA…)",
+     "bloc": "B05",
+     "module": "Hackathon Media Tactique",
+     "competences": []
+    },
+    {
+     "notion": "Expérience utilisateur hybride (NoCode, IA…)",
+     "bloc": "B06",
+     "module": "Hackathon Media Tactique",
+     "competences": []
+    },
+    {
+     "notion": "Expérience utilisateur hybride (suite)",
+     "bloc": "B05",
+     "module": "Hackathon Media Tactique",
+     "competences": []
+    },
+    {
+     "notion": "Expérience utilisateur hybride (suite)",
+     "bloc": "B06",
+     "module": "Hackathon Media Tactique",
+     "competences": []
+    }
+   ]
+  },
+  {
+   "id": "F22",
+   "libelle": "Entrepreneuriat et business plan",
+   "type": "concept",
+   "blocs": [
+    "HB"
+   ],
+   "modules": [
+    "Business Game création d'entreprise"
+   ],
+   "competences": [],
+   "notions": [
+    {
+     "notion": "Fondamentaux de la création d’entreprise et de l’entrepreneuriat",
+     "bloc": "HB",
+     "module": "Business Game création d'entreprise",
+     "competences": []
+    },
+    {
+     "notion": "Élaboration du projet et construction du business plan",
+     "bloc": "HB",
+     "module": "Business Game création d'entreprise",
+     "competences": []
+    },
+    {
+     "notion": "Business Game : simulation et gestion de projet entrepreneurial",
+     "bloc": "HB",
+     "module": "Business Game création d'entreprise",
+     "competences": []
+    }
+   ]
+  }
+ ],
+ "ecartees": [
+  {
+   "motif": "trame pédagogique",
+   "notions": [
+    {
+     "notion": "Cadrage, méthodologie et planification du projet individuel",
+     "bloc": "B05",
+     "module": "Spé Marque & Transfo : Accompagnement PPI"
+    },
+    {
+     "notion": "Cadrage, méthodologie et planification du projet individuel",
+     "bloc": "B06",
+     "module": "Spé Créa : Accompagnement PPC"
+    },
+    {
+     "notion": "Accompagnement à la réalisation, à l’innovation et à la création",
+     "bloc": "B05",
+     "module": "Spé Marque & Transfo : Accompagnement PPI"
+    },
+    {
+     "notion": "Accompagnement à la réalisation, à l’innovation et à la création",
+     "bloc": "B06",
+     "module": "Spé Créa : Accompagnement PPC"
+    },
+    {
+     "notion": "TP – Production de la websérie en équipe",
+     "bloc": "B05",
+     "module": "Hackathon Websérie"
+    },
+    {
+     "notion": "TP – Production de la websérie en équipe",
+     "bloc": "B06",
+     "module": "Hackathon Websérie"
+    },
+    {
+     "notion": "TP – Production du Podcast en équipe",
+     "bloc": "B05",
+     "module": "Hackathon Podcast"
+    },
+    {
+     "notion": "TP – Production du Podcast en équipe",
+     "bloc": "B06",
+     "module": "Hackathon Podcast"
+    },
+    {
+     "notion": "TP – Production du jeu en équipe",
+     "bloc": "B05",
+     "module": "Hackathon Media Tactique"
+    },
+    {
+     "notion": "TP – Production du jeu en équipe",
+     "bloc": "B06",
+     "module": "Hackathon Media Tactique"
+    }
+   ]
+  },
+  {
+   "motif": "déroulé d’épreuve, pas un programme",
+   "notions": [
+    {
+     "notion": "Phase 1 – Cadrage (3h30)",
+     "bloc": "HB",
+     "module": "Compétition M2 (Training EC BLOC 5/6 PPI ou PPC) Décembre"
+    },
+    {
+     "notion": "Phase 2 – Semaine de Compétition (5 jours)",
+     "bloc": "HB",
+     "module": "Compétition M2 (Training EC BLOC 5/6 PPI ou PPC) Décembre"
+    },
+    {
+     "notion": "Phase 3 – Finale & Jury (1 jour)",
+     "bloc": "HB",
+     "module": "Compétition M2 (Training EC BLOC 5/6 PPI ou PPC) Décembre"
+    },
+    {
+     "notion": "Phase 4 – Débrief pédagogique",
+     "bloc": "HB",
+     "module": "Compétition M2 (Training EC BLOC 5/6 PPI ou PPC) Décembre"
+    },
+    {
+     "notion": "Phase 5 : TP d’évaluation",
+     "bloc": "HB",
+     "module": "Compétition M2 (Training EC BLOC 5/6 PPI ou PPC) Décembre"
+    }
+   ]
+  }
+ ]
+}

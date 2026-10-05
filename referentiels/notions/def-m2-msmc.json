@@ -1,0 +1,235 @@
+{
+ "cle": "m2-msmc",
+ "revu_le": "2026-10-05",
+ "familles": [
+  {
+   "libelle": "Brief, cahier des charges et cadrage de projet",
+   "type": "concept",
+   "notions": [
+    "Enjeux et typologie des documents de cadrage projet",
+    "Construction et rédaction du cahier des charges et du brief",
+    "Formalisation et optimisation des livrables de cadrage",
+    "Rédaction de briefs créatifs et opérationnels"
+   ]
+  },
+  {
+   "libelle": "Prise de parole, éloquence et soutenance",
+   "type": "posture",
+   "notions": [
+    "Techniques de synthèse et construction de l’elevator pitch",
+    "Rhétorique et argumentation en contexte professionnel",
+    "Préparation à la soutenance, argumentation et valorisation du projet"
+   ]
+  },
+  {
+   "libelle": "Planification stratégique",
+   "type": "concept",
+   "notions": [
+    "Principes et enjeux de la planification stratégique",
+    "Méthodes et outils de planification des actions marketing-communication",
+    "Mise en œuvre et pilotage de la planification stratégique"
+   ]
+  },
+  {
+   "libelle": "Audiovisuel et montage vidéo",
+   "type": "outil",
+   "notions": [
+    "PARTIE 1 – De la Pré-prod à la Post-prod (5 séances)",
+    "PARTIE 2 – Motion vidéo (5 séances)",
+    "Adobe Premiere : Techniques de réalisation avancées",
+    "Prod vidéo : captation multiformat (webdesign)",
+    "Post-Prod vidéo : montage et motion design multicast",
+    "Workflow avancé et méthodologie de projet sur After Effect",
+    "Techniques avancées d’animation et d’effets spéciaux",
+    "Finalisation, export, accessibilité et intégration dans une stratégie de marque"
+   ]
+  },
+  {
+   "libelle": "Management d’équipe et conduite du changement",
+   "type": "concept",
+   "notions": [
+    "Constitution et organisation d’équipes projet",
+    "Animation, leadership et intelligence collective",
+    "Conduite du changement et accompagnement des transformations",
+    "Coordination, optimisation et conduite du changement",
+    "Pilotage agile, management collaboratif et conduite du changement"
+   ]
+  },
+  {
+   "libelle": "Gestion de projet : risques, budget et pilotage",
+   "type": "concept",
+   "notions": [
+    "Identification et analyse des risques projet",
+    "Gestion budgétaire et suivi des coûts",
+    "Pilotage, reporting et optimisation de la performance projet"
+   ]
+  },
+  {
+   "libelle": "Management interculturel et intergénérationnel",
+   "type": "concept",
+   "notions": [
+    "Fondements et enjeux du management interculturel",
+    "Pratiques et outils du management interculturel",
+    "Pilotage de projets et communication en contexte interculturel",
+    "Enjeux et leviers du management intergénérationnel",
+    "Adapter son management et prévenir les situations difficiles",
+    "Gestion des situations difficiles et résolution de conflits"
+   ]
+  },
+  {
+   "libelle": "Négociation et relations fournisseurs",
+   "type": "concept",
+   "notions": [
+    "Stratégies de négociation commerciale appliquées à la communication",
+    "Gestion et pilotage de la relation fournisseur",
+    "Intégration des enjeux RSE et gestion des risques dans la relation commerciale"
+   ]
+  },
+  {
+   "libelle": "Mesure de la performance et data",
+   "type": "concept",
+   "notions": [
+    "PARTIE 1 – KPIs & organisation de la collecte (3 séances)",
+    "PARTIE 2 – Analytics & data visualisation (4 séances)",
+    "Mesure intégrée cross-canal",
+    "Mesures d’audience et ROI (référencements et analytics)"
+   ]
+  },
+  {
+   "libelle": "Référencement et visibilité",
+   "type": "concept",
+   "notions": [
+    "PARTIE 3 – Référencement SMA/SMO à l’ère de l’IA (3 séances)",
+    "SMA – Campagnes payantes à l’ère de l’IA",
+    "SMO – Visibilité organique sur les réseaux",
+    "SEO & IA générative"
+   ]
+  },
+  {
+   "libelle": "Gestion de campagne digitale",
+   "type": "concept",
+   "notions": [
+    "Stratégie et pilotage de campagne digitale innovante",
+    "Marketing digital et distribution (canaux/multicast) – Gestion de campagne",
+    "Distribution et promotion (gestion de campagne)",
+    "Lancement et promotion (Design responsive…)"
+   ]
+  },
+  {
+   "libelle": "Méthodes agiles",
+   "type": "concept",
+   "notions": [
+    "Fondamentaux et enjeux de l’agilité en gestion de projet",
+    "SCRUM : rôles, outils et rituels appliqués à la communication"
+   ]
+  },
+  {
+   "libelle": "Droit des marques et cadre juridique",
+   "type": "concept",
+   "notions": [
+    "Droit des marques appliqué à la transformation digitale",
+    "Cadre juridique de la communication digitale innovante"
+   ]
+  },
+  {
+   "libelle": "Storytelling et brand content",
+   "type": "concept",
+   "notions": [
+    "Brand storytelling appliqué à la websérie"
+   ]
+  },
+  {
+   "libelle": "Identité visuelle et direction artistique",
+   "type": "concept",
+   "notions": [
+    "Direction artistique : websérie",
+    "Direction artistique : Identité sonore",
+    "Direction artistique : Identité sonore (suite)",
+    "Psychologie des couleurs : Expérimentation visuelle"
+   ]
+  },
+  {
+   "libelle": "Histoire de l’art et références culturelles",
+   "type": "concept",
+   "notions": [
+    "Histoire de l’art et tendances visuelles : Design graphique et visuel",
+    "Histoire de l’art et tendances visuelles (suite)"
+   ]
+  },
+  {
+   "libelle": "IA générative appliquée à la création",
+   "type": "concept",
+   "notions": [
+    "Méthodologie IA Gen : Scénarisation et storyboard",
+    "IAGen Créative : Mécaniques de jeu innovantes"
+   ]
+  },
+  {
+   "libelle": "Création et production audio",
+   "type": "outil",
+   "notions": [
+    "Conception du contenu audio",
+    "Conception du contenu audio (suite)",
+    "Techniques d’enregistrement et de montage",
+    "Créativité audio : sons, voix"
+   ]
+  },
+  {
+   "libelle": "Créativité, idéation et narration innovante",
+   "type": "concept",
+   "notions": [
+    "Créativité et pensée innovante : Narration innovante",
+    "Créativité et pensée innovante : Narration innovante (suite)",
+    "Conception créative du jeu",
+    "Conception créative du jeu (suite)"
+   ]
+  },
+  {
+   "libelle": "Média tactique et conception de jeu",
+   "type": "concept",
+   "notions": [
+    "Conception stratégique du jeu (media tactique) - Histoire des ID et des médias",
+    "Conception stratégique du jeu (suite)"
+   ]
+  },
+  {
+   "libelle": "UX et expérience utilisateur",
+   "type": "concept",
+   "notions": [
+    "Expérience utilisateur hybride (NoCode, IA…)",
+    "Expérience utilisateur hybride (suite)"
+   ]
+  },
+  {
+   "libelle": "Entrepreneuriat et business plan",
+   "type": "concept",
+   "notions": [
+    "Fondamentaux de la création d’entreprise et de l’entrepreneuriat",
+    "Élaboration du projet et construction du business plan",
+    "Business Game : simulation et gestion de projet entrepreneurial"
+   ]
+  }
+ ],
+ "ecartees": [
+  {
+   "motif": "trame pédagogique",
+   "notions": [
+    "Cadrage, méthodologie et planification du projet individuel",
+    "Accompagnement à la réalisation, à l’innovation et à la création",
+    "TP – Production de la websérie en équipe",
+    "TP – Production du Podcast en équipe",
+    "TP – Production du jeu en équipe"
+   ]
+  },
+  {
+   "motif": "déroulé d’épreuve, pas un programme",
+   "notions": [
+    "Phase 1 – Cadrage (3h30)",
+    "Phase 2 – Semaine de Compétition (5 jours)",
+    "Phase 3 – Finale & Jury (1 jour)",
+    "Phase 4 – Débrief pédagogique",
+    "Phase 5 : TP d’évaluation"
+   ]
+  }
+ ]
+}

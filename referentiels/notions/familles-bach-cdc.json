@@ -1,0 +1,1290 @@
+{
+ "cle": "",
+ "genere_le": "2026-10-05",
+ "outil": "familles-notions",
+ "methode": "regroupement hors ligne, à relire et corriger à la main",
+ "controle": {
+  "notions_distinctes": 105,
+  "occurrences": 111,
+  "classees": 105,
+  "ecartees": 19,
+  "intitules_oublies": [],
+  "intitules_inconnus": []
+ },
+ "familles": [
+  {
+   "id": "F01",
+   "libelle": "Veille stratégique et détection des tendances",
+   "type": "concept",
+   "blocs": [
+    "B01"
+   ],
+   "modules": [
+    "Méthodologies de la veille"
+   ],
+   "competences": [
+    "C1"
+   ],
+   "notions": [
+    {
+     "notion": "Rappels fondamentaux et enjeux de la veille",
+     "bloc": "B01",
+     "module": "Méthodologies de la veille",
+     "competences": [
+      "C1"
+     ]
+    },
+    {
+     "notion": "Structuration du process de veille",
+     "bloc": "B01",
+     "module": "Méthodologies de la veille",
+     "competences": [
+      "C1"
+     ]
+    },
+    {
+     "notion": "Collecte, qualification et analyse avancée",
+     "bloc": "B01",
+     "module": "Méthodologies de la veille",
+     "competences": [
+      "C1"
+     ]
+    },
+    {
+     "notion": "Identification et hiérarchisation des tendances",
+     "bloc": "B01",
+     "module": "Méthodologies de la veille",
+     "competences": [
+      "C1"
+     ]
+    },
+    {
+     "notion": "Restitution créative et opérationnelle de la veille",
+     "bloc": "B01",
+     "module": "Méthodologies de la veille",
+     "competences": [
+      "C1"
+     ]
+    },
+    {
+     "notion": "Exploitation stratégique et évaluation",
+     "bloc": "B01",
+     "module": "Méthodologies de la veille",
+     "competences": [
+      "C1"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F02",
+   "libelle": "RSE, communication durable et inclusive",
+   "type": "concept",
+   "blocs": [
+    "B01"
+   ],
+   "modules": [
+    "Communication durable et soutenable"
+   ],
+   "competences": [
+    "C1"
+   ],
+   "notions": [
+    {
+     "notion": "Enjeux et cadre de la communication durable",
+     "bloc": "B01",
+     "module": "Communication durable et soutenable",
+     "competences": [
+      "C1"
+     ]
+    },
+    {
+     "notion": "Éco-conception et sobriété dans la communication",
+     "bloc": "B01",
+     "module": "Communication durable et soutenable",
+     "competences": [
+      "C1"
+     ]
+    },
+    {
+     "notion": "Communication inclusive, diversité et accessibilité",
+     "bloc": "B01",
+     "module": "Communication durable et soutenable",
+     "competences": [
+      "C1"
+     ]
+    },
+    {
+     "notion": "Pilotage et valorisation d’une stratégie responsable",
+     "bloc": "B01",
+     "module": "Communication durable et soutenable",
+     "competences": [
+      "C1"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F03",
+   "libelle": "Comportement du consommateur et insights",
+   "type": "concept",
+   "blocs": [
+    "B01"
+   ],
+   "modules": [
+    "Connaissance et comportement du consommateur"
+   ],
+   "competences": [
+    "C2"
+   ],
+   "notions": [
+    {
+     "notion": "Introduction et enjeux de la connaissance consommateur",
+     "bloc": "B01",
+     "module": "Connaissance et comportement du consommateur",
+     "competences": [
+      "C2"
+     ]
+    },
+    {
+     "notion": "Facteurs individuels et processus décisionnels",
+     "bloc": "B01",
+     "module": "Connaissance et comportement du consommateur",
+     "competences": [
+      "C2"
+     ]
+    },
+    {
+     "notion": "Facteurs environnementaux, sociaux et culturels",
+     "bloc": "B01",
+     "module": "Connaissance et comportement du consommateur",
+     "competences": [
+      "C2"
+     ]
+    },
+    {
+     "notion": "Facteurs situationnels et contextuels",
+     "bloc": "B01",
+     "module": "Connaissance et comportement du consommateur",
+     "competences": [
+      "C2"
+     ]
+    },
+    {
+     "notion": "Outils d’analyse et formulation d’insights",
+     "bloc": "B01",
+     "module": "Connaissance et comportement du consommateur",
+     "competences": [
+      "C2"
+     ]
+    },
+    {
+     "notion": "Applications stratégiques et atelier pratique",
+     "bloc": "B01",
+     "module": "Connaissance et comportement du consommateur",
+     "competences": [
+      "C2"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F04",
+   "libelle": "Diagnostic et positionnement de marque",
+   "type": "concept",
+   "blocs": [
+    "B02"
+   ],
+   "modules": [
+    "Stratégie et positionnement de la marque",
+    "Marketing (plan marketing stratégique & plan de communication)"
+   ],
+   "competences": [
+    "C3",
+    "C4"
+   ],
+   "notions": [
+    {
+     "notion": "Introduction : enjeux et fondamentaux du positionnement de marque",
+     "bloc": "B02",
+     "module": "Stratégie et positionnement de la marque",
+     "competences": [
+      "C3"
+     ]
+    },
+    {
+     "notion": "Diagnostic stratégique et analyse de l’environnement",
+     "bloc": "B02",
+     "module": "Stratégie et positionnement de la marque",
+     "competences": [
+      "C3"
+     ]
+    },
+    {
+     "notion": "Définition et choix du positionnement stratégique",
+     "bloc": "B02",
+     "module": "Stratégie et positionnement de la marque",
+     "competences": [
+      "C3"
+     ]
+    },
+    {
+     "notion": "Diagnostic et analyse de marché",
+     "bloc": "B02",
+     "module": "Marketing (plan marketing stratégique & plan de communication)",
+     "competences": [
+      "C4"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F05",
+   "libelle": "Plateforme de marque et proposition de valeur",
+   "type": "concept",
+   "blocs": [
+    "B02"
+   ],
+   "modules": [
+    "Stratégie et positionnement de la marque"
+   ],
+   "competences": [
+    "C3"
+   ],
+   "notions": [
+    {
+     "notion": "Construction de la plateforme de marque",
+     "bloc": "B02",
+     "module": "Stratégie et positionnement de la marque",
+     "competences": [
+      "C3"
+     ]
+    },
+    {
+     "notion": "Déclinaison opérationnelle et plan d’action",
+     "bloc": "B02",
+     "module": "Stratégie et positionnement de la marque",
+     "competences": [
+      "C3"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F06",
+   "libelle": "Plan marketing et plan de communication",
+   "type": "concept",
+   "blocs": [
+    "B02"
+   ],
+   "modules": [
+    "Marketing (plan marketing stratégique & plan de communication)"
+   ],
+   "competences": [
+    "C4"
+   ],
+   "notions": [
+    {
+     "notion": "Introduction et rappels méthodologiques",
+     "bloc": "B02",
+     "module": "Marketing (plan marketing stratégique & plan de communication)",
+     "competences": [
+      "C4"
+     ]
+    },
+    {
+     "notion": "Définition de la stratégie marketing et des axes de communication",
+     "bloc": "B02",
+     "module": "Marketing (plan marketing stratégique & plan de communication)",
+     "competences": [
+      "C4"
+     ]
+    },
+    {
+     "notion": "Construction du plan marketing et du plan de communication",
+     "bloc": "B02",
+     "module": "Marketing (plan marketing stratégique & plan de communication)",
+     "competences": [
+      "C4"
+     ]
+    },
+    {
+     "notion": "Budget, indicateurs de performance et pilotage",
+     "bloc": "B02",
+     "module": "Marketing (plan marketing stratégique & plan de communication)",
+     "competences": [
+      "C4"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F07",
+   "libelle": "Identité visuelle et direction artistique",
+   "type": "concept",
+   "blocs": [
+    "B02",
+    "B04"
+   ],
+   "modules": [
+    "Stratégies des marques : identité visuelle, storytelling et réputation",
+    "PAO/Adobe",
+    "Vidéo/Photo"
+   ],
+   "competences": [
+    "C10",
+    "C4"
+   ],
+   "notions": [
+    {
+     "notion": "Fondamentaux de l’identité visuelle de marque",
+     "bloc": "B02",
+     "module": "Stratégies des marques : identité visuelle, storytelling et réputation",
+     "competences": [
+      "C4"
+     ]
+    },
+    {
+     "notion": "Déploiement de l’identité et du récit sur les supports",
+     "bloc": "B02",
+     "module": "Stratégies des marques : identité visuelle, storytelling et réputation",
+     "competences": [
+      "C4"
+     ]
+    },
+    {
+     "notion": "Création vectorielle et identité visuelle sur Illustrator",
+     "bloc": "B04",
+     "module": "PAO/Adobe",
+     "competences": [
+      "C10"
+     ]
+    },
+    {
+     "notion": "Direction artistique, storytelling et scénarisation",
+     "bloc": "B04",
+     "module": "Vidéo/Photo",
+     "competences": [
+      "C10"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F08",
+   "libelle": "Storytelling et brand content",
+   "type": "concept",
+   "blocs": [
+    "B02",
+    "B04"
+   ],
+   "modules": [
+    "Stratégies des marques : identité visuelle, storytelling et réputation",
+    "Ecriture créative et storytelling"
+   ],
+   "competences": [
+    "C4",
+    "C9"
+   ],
+   "notions": [
+    {
+     "notion": "Storytelling de marque et narration stratégique",
+     "bloc": "B02",
+     "module": "Stratégies des marques : identité visuelle, storytelling et réputation",
+     "competences": [
+      "C4"
+     ]
+    },
+    {
+     "notion": "Fondamentaux du storytelling et de l’écriture créative",
+     "bloc": "B04",
+     "module": "Ecriture créative et storytelling",
+     "competences": [
+      "C9"
+     ]
+    },
+    {
+     "notion": "Construction de concepts narratifs et univers de marque",
+     "bloc": "B04",
+     "module": "Ecriture créative et storytelling",
+     "competences": [
+      "C9"
+     ]
+    },
+    {
+     "notion": "Techniques avancées et formats innovants",
+     "bloc": "B04",
+     "module": "Ecriture créative et storytelling",
+     "competences": [
+      "C9"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F09",
+   "libelle": "Réputation et stratégie d’influence",
+   "type": "concept",
+   "blocs": [
+    "B02"
+   ],
+   "modules": [
+    "Stratégies des marques : identité visuelle, storytelling et réputation"
+   ],
+   "competences": [
+    "C4"
+   ],
+   "notions": [
+    {
+     "notion": "Gestion de la réputation et stratégie d’influence",
+     "bloc": "B02",
+     "module": "Stratégies des marques : identité visuelle, storytelling et réputation",
+     "competences": [
+      "C4"
+     ]
+    },
+    {
+     "notion": "Évaluation, pilotage et innovation",
+     "bloc": "B02",
+     "module": "Stratégies des marques : identité visuelle, storytelling et réputation",
+     "competences": [
+      "C4"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F10",
+   "libelle": "Référencement et visibilité",
+   "type": "concept",
+   "blocs": [
+    "B02",
+    "B04"
+   ],
+   "modules": [
+    "SEO/SEA",
+    "SMA/SMO",
+    "Wordpress"
+   ],
+   "competences": [
+    "C10",
+    "C4.2"
+   ],
+   "notions": [
+    {
+     "notion": "SEO avancé : stratégie, IA et multimodalité",
+     "bloc": "B02",
+     "module": "SEO/SEA",
+     "competences": [
+      "C4.2"
+     ]
+    },
+    {
+     "notion": "SEA : campagnes intelligentes et optimisation dynamique",
+     "bloc": "B02",
+     "module": "SEO/SEA",
+     "competences": [
+      "C4.2"
+     ]
+    },
+    {
+     "notion": "Synergie SEO/SEA et pilotage de la visibilité",
+     "bloc": "B02",
+     "module": "SEO/SEA",
+     "competences": [
+      "C4.2"
+     ]
+    },
+    {
+     "notion": "Stratégie SMA : campagnes sponsorisées sur les réseaux sociaux",
+     "bloc": "B02",
+     "module": "SMA/SMO",
+     "competences": [
+      "C4.2"
+     ]
+    },
+    {
+     "notion": "Stratégie SMO : optimisation de la présence organique",
+     "bloc": "B02",
+     "module": "SMA/SMO",
+     "competences": [
+      "C4.2"
+     ]
+    },
+    {
+     "notion": "Plugins, contenus dynamiques et optimisation SEO",
+     "bloc": "B04",
+     "module": "Wordpress",
+     "competences": [
+      "C10"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F11",
+   "libelle": "Mesure de la performance et data",
+   "type": "concept",
+   "blocs": [
+    "B02",
+    "B05"
+   ],
+   "modules": [
+    "SMA/SMO",
+    "Indicateurs de Performance (Kpi's)"
+   ],
+   "competences": [
+    "C12",
+    "C4.2"
+   ],
+   "notions": [
+    {
+     "notion": "Suivi, analyse et optimisation des campagnes",
+     "bloc": "B02",
+     "module": "SMA/SMO",
+     "competences": [
+      "C4.2"
+     ]
+    },
+    {
+     "notion": "Définition des KPI et choix des indicateurs",
+     "bloc": "B05",
+     "module": "Indicateurs de Performance (Kpi's)",
+     "competences": [
+      "C12"
+     ]
+    },
+    {
+     "notion": "Collecte, organisation et visualisation des données",
+     "bloc": "B05",
+     "module": "Indicateurs de Performance (Kpi's)",
+     "competences": [
+      "C12"
+     ]
+    },
+    {
+     "notion": "Analyse, interprétation et exploitation des KPI",
+     "bloc": "B05",
+     "module": "Indicateurs de Performance (Kpi's)",
+     "competences": [
+      "C12"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F12",
+   "libelle": "Gestion de projet : risques, budget et pilotage",
+   "type": "concept",
+   "blocs": [
+    "B03",
+    "B04"
+   ],
+   "modules": [
+    "Management d'équipe & Gestion de projets (méthodologies)",
+    "Vidéo/Photo"
+   ],
+   "competences": [
+    "C10",
+    "C7"
+   ],
+   "notions": [
+    {
+     "notion": "Fondamentaux de la gestion de projet",
+     "bloc": "B03",
+     "module": "Management d'équipe & Gestion de projets (méthodologies)",
+     "competences": [
+      "C7"
+     ]
+    },
+    {
+     "notion": "Gestion des ressources, des risques et des conflits",
+     "bloc": "B03",
+     "module": "Management d'équipe & Gestion de projets (méthodologies)",
+     "competences": [
+      "C7"
+     ]
+    },
+    {
+     "notion": "Pilotage du projet et reporting",
+     "bloc": "B03",
+     "module": "Management d'équipe & Gestion de projets (méthodologies)",
+     "competences": [
+      "C7"
+     ]
+    },
+    {
+     "notion": "Gestion des parties prenantes et des prestataires",
+     "bloc": "B03",
+     "module": "Management d'équipe & Gestion de projets (méthodologies)",
+     "competences": [
+      "C7"
+     ]
+    },
+    {
+     "notion": "Gestion de projet audiovisuel et photographique",
+     "bloc": "B04",
+     "module": "Vidéo/Photo",
+     "competences": [
+      "C10"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F13",
+   "libelle": "Management d’équipe et conduite du changement",
+   "type": "concept",
+   "blocs": [
+    "B03"
+   ],
+   "modules": [
+    "Management d'équipe & Gestion de projets (méthodologies)"
+   ],
+   "competences": [
+    "C7"
+   ],
+   "notions": [
+    {
+     "notion": "Management d’équipe projet",
+     "bloc": "B03",
+     "module": "Management d'équipe & Gestion de projets (méthodologies)",
+     "competences": [
+      "C7"
+     ]
+    },
+    {
+     "notion": "Gestion du changement et accompagnement des équipes",
+     "bloc": "B03",
+     "module": "Management d'équipe & Gestion de projets (méthodologies)",
+     "competences": [
+      "C7"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F14",
+   "libelle": "Méthodes agiles",
+   "type": "concept",
+   "blocs": [
+    "B03"
+   ],
+   "modules": [
+    "Management d'équipe & Gestion de projets (méthodologies)"
+   ],
+   "competences": [
+    "C7"
+   ],
+   "notions": [
+    {
+     "notion": "Méthodes agiles et innovation managériale",
+     "bloc": "B03",
+     "module": "Management d'équipe & Gestion de projets (méthodologies)",
+     "competences": [
+      "C7"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F15",
+   "libelle": "Prise de parole, éloquence et soutenance",
+   "type": "posture",
+   "blocs": [
+    "B02",
+    "B03",
+    "HB"
+   ],
+   "modules": [
+    "Eloquence & Art oratoire",
+    "Expression Ecrite et Orale",
+    "Marketing (plan marketing stratégique & plan de communication)"
+   ],
+   "competences": [
+    "C13",
+    "C4",
+    "C6"
+   ],
+   "notions": [
+    {
+     "notion": "Fondamentaux de l’éloquence et de l’art oratoire",
+     "bloc": "B03",
+     "module": "Eloquence & Art oratoire",
+     "competences": [
+      "C6"
+     ]
+    },
+    {
+     "notion": "Structuration et adaptation du discours",
+     "bloc": "B03",
+     "module": "Eloquence & Art oratoire",
+     "competences": [
+      "C6"
+     ]
+    },
+    {
+     "notion": "Techniques avancées de persuasion et de rhétorique",
+     "bloc": "B03",
+     "module": "Eloquence & Art oratoire",
+     "competences": [
+      "C6"
+     ]
+    },
+    {
+     "notion": "Mise en situation professionnelle et feedback",
+     "bloc": "B03",
+     "module": "Eloquence & Art oratoire",
+     "competences": [
+      "C6"
+     ]
+    },
+    {
+     "notion": "Expression orale professionnelle et prise de parole",
+     "bloc": "HB",
+     "module": "Expression Ecrite et Orale",
+     "competences": [
+      "C13"
+     ]
+    },
+    {
+     "notion": "Adaptation de l’expression au public et au contexte",
+     "bloc": "HB",
+     "module": "Expression Ecrite et Orale",
+     "competences": [
+      "C13"
+     ]
+    },
+    {
+     "notion": "Présentation, argumentation et restitution",
+     "bloc": "B02",
+     "module": "Marketing (plan marketing stratégique & plan de communication)",
+     "competences": [
+      "C4"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F16",
+   "libelle": "Écrit professionnel",
+   "type": "posture",
+   "blocs": [
+    "HB"
+   ],
+   "modules": [
+    "Expression Ecrite et Orale"
+   ],
+   "competences": [
+    "C13"
+   ],
+   "notions": [
+    {
+     "notion": "Structuration et argumentation de l’écrit professionnel",
+     "bloc": "HB",
+     "module": "Expression Ecrite et Orale",
+     "competences": [
+      "C13"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F17",
+   "libelle": "Création graphique et PAO",
+   "type": "outil",
+   "blocs": [
+    "B04"
+   ],
+   "modules": [
+    "PAO/Adobe"
+   ],
+   "competences": [
+    "C10"
+   ],
+   "notions": [
+    {
+     "notion": "Cahier des charges, workflow professionnel et innovation",
+     "bloc": "B04",
+     "module": "PAO/Adobe",
+     "competences": [
+      "C10"
+     ]
+    },
+    {
+     "notion": "Création graphique avancée sur Photoshop",
+     "bloc": "B04",
+     "module": "PAO/Adobe",
+     "competences": [
+      "C10"
+     ]
+    },
+    {
+     "notion": "Mise en page professionnelle et édition sur InDesign",
+     "bloc": "B04",
+     "module": "PAO/Adobe",
+     "competences": [
+      "C10"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F18",
+   "libelle": "Audiovisuel, photo et post-production",
+   "type": "outil",
+   "blocs": [
+    "B04"
+   ],
+   "modules": [
+    "Vidéo/Photo"
+   ],
+   "competences": [
+    "C10"
+   ],
+   "notions": [
+    {
+     "notion": "Production et maîtrise technique avancée",
+     "bloc": "B04",
+     "module": "Vidéo/Photo",
+     "competences": [
+      "C10"
+     ]
+    },
+    {
+     "notion": "Post-production, diffusion et restitution professionnelle",
+     "bloc": "B04",
+     "module": "Vidéo/Photo",
+     "competences": [
+      "C10"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F19",
+   "libelle": "Web, CMS et outils no-code",
+   "type": "outil",
+   "blocs": [
+    "B04"
+   ],
+   "modules": [
+    "Wordpress"
+   ],
+   "competences": [
+    "C10"
+   ],
+   "notions": [
+    {
+     "notion": "Installation avancée, configuration et sécurité",
+     "bloc": "B04",
+     "module": "Wordpress",
+     "competences": [
+      "C10"
+     ]
+    },
+    {
+     "notion": "Choix, personnalisation et accessibilité des thèmes",
+     "bloc": "B04",
+     "module": "Wordpress",
+     "competences": [
+      "C10"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F20",
+   "libelle": "IA générative et prompting",
+   "type": "concept",
+   "blocs": [
+    "B04"
+   ],
+   "modules": [
+    "IA Generatives : Méthodologie de prompting"
+   ],
+   "competences": [
+    "C9"
+   ],
+   "notions": [
+    {
+     "notion": "Introduction à l’IA générative et au prompting",
+     "bloc": "B04",
+     "module": "IA Generatives : Méthodologie de prompting",
+     "competences": [
+      "C9"
+     ]
+    },
+    {
+     "notion": "Techniques fondamentales et avancées de prompting",
+     "bloc": "B04",
+     "module": "IA Generatives : Méthodologie de prompting",
+     "competences": [
+      "C9"
+     ]
+    },
+    {
+     "notion": "Applications professionnelles et intégration dans les workflows",
+     "bloc": "B04",
+     "module": "IA Generatives : Méthodologie de prompting",
+     "competences": [
+      "C9"
+     ]
+    },
+    {
+     "notion": "Limites, impacts et éthique du prompting",
+     "bloc": "B04",
+     "module": "IA Generatives : Méthodologie de prompting",
+     "competences": [
+      "C9"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F21",
+   "libelle": "Sémiologie et psychologie des couleurs",
+   "type": "concept",
+   "blocs": [
+    "B04"
+   ],
+   "modules": [
+    "Sémiologie de la communication et des couleurs"
+   ],
+   "competences": [
+    "C9"
+   ],
+   "notions": [
+    {
+     "notion": "Fondamentaux de la sémiologie appliquée à la communication",
+     "bloc": "B04",
+     "module": "Sémiologie de la communication et des couleurs",
+     "competences": [
+      "C9"
+     ]
+    },
+    {
+     "notion": "Sémiologie et psychologie de la couleur",
+     "bloc": "B04",
+     "module": "Sémiologie de la communication et des couleurs",
+     "competences": [
+      "C9"
+     ]
+    },
+    {
+     "notion": "Analyse sémiotique et chromatique de projets concrets",
+     "bloc": "B04",
+     "module": "Sémiologie de la communication et des couleurs",
+     "competences": [
+      "C9"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F22",
+   "libelle": "Budget, pilotage financier et négociation",
+   "type": "concept",
+   "blocs": [
+    "B05"
+   ],
+   "modules": [
+    "Budget et négociation"
+   ],
+   "competences": [
+    "C11"
+   ],
+   "notions": [
+    {
+     "notion": "Fondamentaux de la gestion budgétaire en communication",
+     "bloc": "B05",
+     "module": "Budget et négociation",
+     "competences": [
+      "C11"
+     ]
+    },
+    {
+     "notion": "Analyse financière et optimisation des coûts",
+     "bloc": "B05",
+     "module": "Budget et négociation",
+     "competences": [
+      "C11"
+     ]
+    },
+    {
+     "notion": "Techniques et stratégies de négociation",
+     "bloc": "B05",
+     "module": "Budget et négociation",
+     "competences": [
+      "C11"
+     ]
+    },
+    {
+     "notion": "Gestion de la relation client, prestataire et partenaire",
+     "bloc": "B05",
+     "module": "Budget et négociation",
+     "competences": [
+      "C11"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F23",
+   "libelle": "Stratégie digitale et community management",
+   "type": "concept",
+   "blocs": [
+    "B04"
+   ],
+   "modules": [
+    "Semaines intensives d'option (Transverse Blocs 1 à 5)"
+   ],
+   "competences": [
+    "C10",
+    "C8",
+    "C9"
+   ],
+   "notions": [
+    {
+     "notion": "Jour 1-2 :Stratégie Digitale",
+     "bloc": "B04",
+     "module": "Semaines intensives d'option (Transverse Blocs 1 à 5)",
+     "competences": [
+      "C8",
+      "C9",
+      "C10"
+     ]
+    },
+    {
+     "notion": "Jour 3-4 :Community Management & Ligne éditoriale",
+     "bloc": "B04",
+     "module": "Semaines intensives d'option (Transverse Blocs 1 à 5)",
+     "competences": [
+      "C8",
+      "C9",
+      "C10"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F24",
+   "libelle": "Anglais professionnel et interculturalité",
+   "type": "concept",
+   "blocs": [
+    "HB"
+   ],
+   "modules": [
+    "Anglais"
+   ],
+   "competences": [
+    "C13"
+   ],
+   "notions": [
+    {
+     "notion": "Anglais professionnel et vocabulaire métier",
+     "bloc": "HB",
+     "module": "Anglais",
+     "competences": [
+      "C13"
+     ]
+    },
+    {
+     "notion": "Techniques de présentation et de prise de parole",
+     "bloc": "HB",
+     "module": "Anglais",
+     "competences": [
+      "C13"
+     ]
+    },
+    {
+     "notion": "Rédaction professionnelle en anglais",
+     "bloc": "HB",
+     "module": "Anglais",
+     "competences": [
+      "C13"
+     ]
+    },
+    {
+     "notion": "Réunions, négociation et gestion de projet en anglais",
+     "bloc": "HB",
+     "module": "Anglais",
+     "competences": [
+      "C13"
+     ]
+    },
+    {
+     "notion": "Communication interculturelle et adaptation",
+     "bloc": "HB",
+     "module": "Anglais",
+     "competences": [
+      "C13"
+     ]
+    },
+    {
+     "notion": "Soutenance, argumentation et feedback",
+     "bloc": "HB",
+     "module": "Anglais",
+     "competences": [
+      "C13"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F25",
+   "libelle": "Personal branding et présence éditoriale",
+   "type": "concept",
+   "blocs": [
+    "HB"
+   ],
+   "modules": [
+    "Personal Branding"
+   ],
+   "competences": [
+    "C13"
+   ],
+   "notions": [
+    {
+     "notion": "Définir son identité professionnelle et son positionnement",
+     "bloc": "HB",
+     "module": "Personal Branding",
+     "competences": [
+      "C13"
+     ]
+    },
+    {
+     "notion": "Storytelling et prise de parole de soi",
+     "bloc": "HB",
+     "module": "Personal Branding",
+     "competences": [
+      "C13"
+     ]
+    },
+    {
+     "notion": "Création et optimisation des supports de personal branding",
+     "bloc": "HB",
+     "module": "Personal Branding",
+     "competences": [
+      "C13"
+     ]
+    },
+    {
+     "notion": "Développer sa présence numérique et son réseau",
+     "bloc": "HB",
+     "module": "Personal Branding",
+     "competences": [
+      "C13"
+     ]
+    }
+   ]
+  }
+ ],
+ "ecartees": [
+  {
+   "motif": "trame pédagogique",
+   "notions": [
+    {
+     "notion": "Atelier de synthèse et étude de cas",
+     "bloc": "B03",
+     "module": "Management d'équipe & Gestion de projets (méthodologies)"
+    },
+    {
+     "notion": "Atelier pratique et restitution professionnelle",
+     "bloc": "B05",
+     "module": "Budget et négociation"
+    },
+    {
+     "notion": "Atelier pratique et restitution professionnelle",
+     "bloc": "B05",
+     "module": "Indicateurs de Performance (Kpi's)"
+    },
+    {
+     "notion": "Projet fil rouge et restitution professionnelle",
+     "bloc": "B04",
+     "module": "PAO/Adobe"
+    },
+    {
+     "notion": "Projet fil rouge, publication et restitution professionnelle",
+     "bloc": "B04",
+     "module": "Wordpress"
+    },
+    {
+     "notion": "Restitution, critique et valorisation professionnelle",
+     "bloc": "B04",
+     "module": "Ecriture créative et storytelling"
+    },
+    {
+     "notion": "Valorisation de la singularité et restitution professionnelle",
+     "bloc": "HB",
+     "module": "Expression Ecrite et Orale"
+    },
+    {
+     "notion": "Synthèse, restitution et feedback",
+     "bloc": "HB",
+     "module": "Personal Branding"
+    }
+   ]
+  },
+  {
+   "motif": "déroulé d’épreuve, pas un programme",
+   "notions": [
+    {
+     "notion": "Phase 1 – Cadrage (3h30)",
+     "bloc": "B02",
+     "module": "Compet' Nat'"
+    },
+    {
+     "notion": "Phase 1 – Cadrage (3h30)",
+     "bloc": "HB",
+     "module": "Méthodologie compétition"
+    },
+    {
+     "notion": "Phase 2 – Semaine de Compétition (5 jours)",
+     "bloc": "B02",
+     "module": "Compet' Nat'"
+    },
+    {
+     "notion": "Phase 2 – Semaine de Compétition (5 jours)",
+     "bloc": "HB",
+     "module": "Méthodologie compétition"
+    },
+    {
+     "notion": "Phase 3 – Finale & Jury (1 jour)",
+     "bloc": "B02",
+     "module": "Compet' Nat'"
+    },
+    {
+     "notion": "Phase 3 – Finale & Jury (1 jour)",
+     "bloc": "HB",
+     "module": "Méthodologie compétition"
+    },
+    {
+     "notion": "Phase 4 – Débrief pédagogique",
+     "bloc": "B02",
+     "module": "Compet' Nat'"
+    },
+    {
+     "notion": "Phase 4 – Débrief pédagogique",
+     "bloc": "HB",
+     "module": "Méthodologie compétition"
+    },
+    {
+     "notion": "Phase 5 : TP d’évaluation",
+     "bloc": "B02",
+     "module": "Compet' Nat'"
+    },
+    {
+     "notion": "Phase 5 : TP d’évaluation",
+     "bloc": "HB",
+     "module": "Méthodologie compétition"
+    },
+    {
+     "notion": "Jour 5 : TP d’évaluation",
+     "bloc": "B04",
+     "module": "Semaines intensives d'option (Transverse Blocs 1 à 5)"
+    }
+   ]
+  }
+ ]
+}

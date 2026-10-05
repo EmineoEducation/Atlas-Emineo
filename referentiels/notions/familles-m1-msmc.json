@@ -1,0 +1,1867 @@
+{
+ "cle": "",
+ "genere_le": "2026-10-05",
+ "outil": "familles-notions",
+ "methode": "regroupement hors ligne, à relire et corriger à la main",
+ "controle": {
+  "notions_distinctes": 149,
+  "occurrences": 155,
+  "classees": 149,
+  "ecartees": 34,
+  "intitules_oublies": [],
+  "intitules_inconnus": []
+ },
+ "familles": [
+  {
+   "id": "F01",
+   "libelle": "Veille stratégique et détection des tendances",
+   "type": "concept",
+   "blocs": [
+    "B01",
+    "HB"
+   ],
+   "modules": [
+    "Veille dynamique (panel, méthodes d'interview) et Imaginaires de la conso",
+    "BT : Ateliers / Worshop/ séminaire"
+   ],
+   "competences": [
+    "C1"
+   ],
+   "notions": [
+    {
+     "notion": "Structuration d’une veille dynamique et choix des outils",
+     "bloc": "B01",
+     "module": "Veille dynamique (panel, méthodes d'interview) et Imaginaires de la conso",
+     "competences": [
+      "C1"
+     ]
+    },
+    {
+     "notion": "Collecte et analyse des données via panels et interviews",
+     "bloc": "B01",
+     "module": "Veille dynamique (panel, méthodes d'interview) et Imaginaires de la conso",
+     "competences": [
+      "C1"
+     ]
+    },
+    {
+     "notion": "Détection, hiérarchisation et interprétation des tendances sociétales",
+     "bloc": "B01",
+     "module": "Veille dynamique (panel, méthodes d'interview) et Imaginaires de la conso",
+     "competences": [
+      "C1"
+     ]
+    },
+    {
+     "notion": "Restitution et valorisation de la veille pour la décision stratégique",
+     "bloc": "B01",
+     "module": "Veille dynamique (panel, méthodes d'interview) et Imaginaires de la conso",
+     "competences": [
+      "C1"
+     ]
+    },
+    {
+     "notion": "Choix du sujet et veille sectorielle",
+     "bloc": "HB",
+     "module": "BT : Ateliers / Worshop/ séminaire",
+     "competences": [
+      "C1"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F02",
+   "libelle": "Imaginaires et insights consommateurs",
+   "type": "concept",
+   "blocs": [
+    "B01"
+   ],
+   "modules": [
+    "Veille dynamique (panel, méthodes d'interview) et Imaginaires de la conso",
+    "Insights et Analyse consommateurs",
+    "Etudes marketing stratégique et communication omnicanale"
+   ],
+   "competences": [
+    "C1",
+    "C3",
+    "C4"
+   ],
+   "notions": [
+    {
+     "notion": "Décryptage des imaginaires de consommation",
+     "bloc": "B01",
+     "module": "Veille dynamique (panel, méthodes d'interview) et Imaginaires de la conso",
+     "competences": [
+      "C1"
+     ]
+    },
+    {
+     "notion": "Articulation tendances / imaginaires : synthèse stratégique",
+     "bloc": "B01",
+     "module": "Veille dynamique (panel, méthodes d'interview) et Imaginaires de la conso",
+     "competences": [
+      "C1"
+     ]
+    },
+    {
+     "notion": "Méthodologies avancées d’études consommateurs",
+     "bloc": "B01",
+     "module": "Insights et Analyse consommateurs",
+     "competences": [
+      "C4"
+     ]
+    },
+    {
+     "notion": "Analyse et segmentation comportementale",
+     "bloc": "B01",
+     "module": "Insights et Analyse consommateurs",
+     "competences": [
+      "C4"
+     ]
+    },
+    {
+     "notion": "Formulation d’insights consommateurs et activation stratégique",
+     "bloc": "B01",
+     "module": "Insights et Analyse consommateurs",
+     "competences": [
+      "C4"
+     ]
+    },
+    {
+     "notion": "Analyse, synthèse et formulation d’insights",
+     "bloc": "B01",
+     "module": "Etudes marketing stratégique et communication omnicanale",
+     "competences": [
+      "C3"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F03",
+   "libelle": "Études quantitatives et qualitatives",
+   "type": "concept",
+   "blocs": [
+    "B01"
+   ],
+   "modules": [
+    "Etudes marketing stratégique et communication omnicanale",
+    "Méthodologie Pack Marque"
+   ],
+   "competences": [
+    "C3",
+    "C4",
+    "C5",
+    "C6"
+   ],
+   "notions": [
+    {
+     "notion": "Cadrage des études marketing stratégiques",
+     "bloc": "B01",
+     "module": "Etudes marketing stratégique et communication omnicanale",
+     "competences": [
+      "C3"
+     ]
+    },
+    {
+     "notion": "Conduite et pilotage des études quantitatives",
+     "bloc": "B01",
+     "module": "Etudes marketing stratégique et communication omnicanale",
+     "competences": [
+      "C3"
+     ]
+    },
+    {
+     "notion": "Conduite et pilotage des études qualitatives",
+     "bloc": "B01",
+     "module": "Etudes marketing stratégique et communication omnicanale",
+     "competences": [
+      "C3"
+     ]
+    },
+    {
+     "notion": "Collecte et analyse des données marché et consommateurs",
+     "bloc": "B01",
+     "module": "Méthodologie Pack Marque",
+     "competences": [
+      "C3",
+      "C4",
+      "C5",
+      "C6"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F04",
+   "libelle": "Diagnostic et positionnement de marque",
+   "type": "concept",
+   "blocs": [
+    "B01"
+   ],
+   "modules": [
+    "Méthodologie Pack Marque",
+    "Analyse de la stratégie de positionnement de la marque"
+   ],
+   "competences": [
+    "C3",
+    "C4",
+    "C5",
+    "C6"
+   ],
+   "notions": [
+    {
+     "notion": "Diagnostic interne, analyse de la marque et positionnement",
+     "bloc": "B01",
+     "module": "Méthodologie Pack Marque",
+     "competences": [
+      "C3",
+      "C4",
+      "C5",
+      "C6"
+     ]
+    },
+    {
+     "notion": "Collecte et analyse des matériaux internes et externes",
+     "bloc": "B01",
+     "module": "Analyse de la stratégie de positionnement de la marque",
+     "competences": [
+      "C5",
+      "C6"
+     ]
+    },
+    {
+     "notion": "Diagnostic du positionnement et de l’identité de marque",
+     "bloc": "B01",
+     "module": "Analyse de la stratégie de positionnement de la marque",
+     "competences": [
+      "C5",
+      "C6"
+     ]
+    },
+    {
+     "notion": "Clarification de la proposition de valeur et des avantages concurrentiels",
+     "bloc": "B01",
+     "module": "Analyse de la stratégie de positionnement de la marque",
+     "competences": [
+      "C5",
+      "C6"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F05",
+   "libelle": "Benchmark concurrentiel",
+   "type": "concept",
+   "blocs": [
+    "B05"
+   ],
+   "modules": [
+    "Spé Marque & transfo : Benchmarking (analyse des strat concurrentielles)"
+   ],
+   "competences": [
+    "C20"
+   ],
+   "notions": [
+    {
+     "notion": "Cadrage méthodologique du benchmarking stratégique",
+     "bloc": "B05",
+     "module": "Spé Marque & transfo : Benchmarking (analyse des strat concurrentielles)",
+     "competences": [
+      "C20"
+     ]
+    },
+    {
+     "notion": "Collecte et analyse des données concurrentielles",
+     "bloc": "B05",
+     "module": "Spé Marque & transfo : Benchmarking (analyse des strat concurrentielles)",
+     "competences": [
+      "C20"
+     ]
+    },
+    {
+     "notion": "Synthèse, restitution et activation stratégique du benchmark",
+     "bloc": "B05",
+     "module": "Spé Marque & transfo : Benchmarking (analyse des strat concurrentielles)",
+     "competences": [
+      "C20"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F06",
+   "libelle": "Plateforme de marque et proposition de valeur",
+   "type": "concept",
+   "blocs": [
+    "B01",
+    "B02"
+   ],
+   "modules": [
+    "Méthodologie Pack Marque",
+    "Elaboration de la stratégie de marque (plateforme de marque)"
+   ],
+   "competences": [
+    "C3",
+    "C4",
+    "C5",
+    "C6",
+    "C7",
+    "C8",
+    "C9"
+   ],
+   "notions": [
+    {
+     "notion": "Formalisation de la plateforme de marque et synthèse stratégique",
+     "bloc": "B01",
+     "module": "Méthodologie Pack Marque",
+     "competences": [
+      "C3",
+      "C4",
+      "C5",
+      "C6"
+     ]
+    },
+    {
+     "notion": "Définition du périmètre d’étude et problématisation",
+     "bloc": "B01",
+     "module": "Méthodologie Pack Marque",
+     "competences": [
+      "C3",
+      "C4",
+      "C5",
+      "C6"
+     ]
+    },
+    {
+     "notion": "Détermination des axes de communication et structuration de la plateforme",
+     "bloc": "B02",
+     "module": "Elaboration de la stratégie de marque (plateforme de marque)",
+     "competences": [
+      "C7",
+      "C8",
+      "C9"
+     ]
+    },
+    {
+     "notion": "Formulation de la proposition de valeur et des engagements RSE",
+     "bloc": "B02",
+     "module": "Elaboration de la stratégie de marque (plateforme de marque)",
+     "competences": [
+      "C7",
+      "C8",
+      "C9"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F07",
+   "libelle": "Objectifs stratégiques et segmentation des cibles",
+   "type": "concept",
+   "blocs": [
+    "B02"
+   ],
+   "modules": [
+    "Elaboration de la stratégie de marque (plateforme de marque)"
+   ],
+   "competences": [
+    "C7",
+    "C8",
+    "C9"
+   ],
+   "notions": [
+    {
+     "notion": "Définition des objectifs stratégiques et segmentation des cibles",
+     "bloc": "B02",
+     "module": "Elaboration de la stratégie de marque (plateforme de marque)",
+     "competences": [
+      "C7",
+      "C8",
+      "C9"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F08",
+   "libelle": "Storytelling et brand content",
+   "type": "concept",
+   "blocs": [
+    "B02"
+   ],
+   "modules": [
+    "Brand content : Editorialisation et narration de marque"
+   ],
+   "competences": [
+    "C8"
+   ],
+   "notions": [
+    {
+     "notion": "Construction d’une ligne éditoriale de marque",
+     "bloc": "B02",
+     "module": "Brand content : Editorialisation et narration de marque",
+     "competences": [
+      "C8"
+     ]
+    },
+    {
+     "notion": "Techniques de storytelling et scénarisation de contenus",
+     "bloc": "B02",
+     "module": "Brand content : Editorialisation et narration de marque",
+     "competences": [
+      "C8"
+     ]
+    },
+    {
+     "notion": "Déploiement, pilotage et évaluation de la stratégie de brand content",
+     "bloc": "B02",
+     "module": "Brand content : Editorialisation et narration de marque",
+     "competences": [
+      "C8"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F09",
+   "libelle": "RSE, ESS et éco-conception",
+   "type": "concept",
+   "blocs": [
+    "B02",
+    "B06"
+   ],
+   "modules": [
+    "Fondamentaux de la RSE/ ESS",
+    "Spé Strat Créa : Fabrication : RSE et communication visuelle responsable"
+   ],
+   "competences": [
+    "C21",
+    "C9"
+   ],
+   "notions": [
+    {
+     "notion": "Panorama stratégique de la RSE et de l’ESS",
+     "bloc": "B02",
+     "module": "Fondamentaux de la RSE/ ESS",
+     "competences": [
+      "C9"
+     ]
+    },
+    {
+     "notion": "Intégration de la RSE/ESS à la stratégie de marque et de communication",
+     "bloc": "B02",
+     "module": "Fondamentaux de la RSE/ ESS",
+     "competences": [
+      "C9"
+     ]
+    },
+    {
+     "notion": "Pilotage, valorisation et communication responsable",
+     "bloc": "B02",
+     "module": "Fondamentaux de la RSE/ ESS",
+     "competences": [
+      "C9"
+     ]
+    },
+    {
+     "notion": "Panorama des enjeux RSE et de l’éco-conception en communication visuelle",
+     "bloc": "B06",
+     "module": "Spé Strat Créa : Fabrication : RSE et communication visuelle responsable",
+     "competences": [
+      "C21"
+     ]
+    },
+    {
+     "notion": "Conception et fabrication responsable : méthodes, arbitrages et restitution",
+     "bloc": "B06",
+     "module": "Spé Strat Créa : Fabrication : RSE et communication visuelle responsable",
+     "competences": [
+      "C21"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F10",
+   "libelle": "Référencement et visibilité",
+   "type": "concept",
+   "blocs": [
+    "B02",
+    "B05"
+   ],
+   "modules": [
+    "Référencements (SEO, SEA, SMO, SMA)",
+    "Wordpress",
+    "Spé Marque & transfo : Référencement : Google Analytics (approfondissement)"
+   ],
+   "competences": [
+    "C10",
+    "C22"
+   ],
+   "notions": [
+    {
+     "notion": "Panorama stratégique du référencement et articulation omnicanale",
+     "bloc": "B02",
+     "module": "Référencements (SEO, SEA, SMO, SMA)",
+     "competences": [
+      "C10"
+     ]
+    },
+    {
+     "notion": "SEO avancé : stratégie, optimisation, innovation",
+     "bloc": "B02",
+     "module": "Référencements (SEO, SEA, SMO, SMA)",
+     "competences": [
+      "C10"
+     ]
+    },
+    {
+     "notion": "SEA/SMA : campagnes intelligentes et pilotage de la performance",
+     "bloc": "B02",
+     "module": "Référencements (SEO, SEA, SMO, SMA)",
+     "competences": [
+      "C10"
+     ]
+    },
+    {
+     "notion": "SMO : optimisation de la présence organique et stratégie d’engagement",
+     "bloc": "B02",
+     "module": "Référencements (SEO, SEA, SMO, SMA)",
+     "competences": [
+      "C10"
+     ]
+    },
+    {
+     "notion": "Optimisation SEO, accessibilité, sécurité et conformité",
+     "bloc": "B02",
+     "module": "Wordpress",
+     "competences": [
+      "C10"
+     ]
+    },
+    {
+     "notion": "Configuration avancée de Google Analytics (GA4) et introduction au pilotage de la visibilité dans l’IA (Search Generative Experience, GEO)",
+     "bloc": "B05",
+     "module": "Spé Marque & transfo : Référencement : Google Analytics (approfondissement)",
+     "competences": [
+      "C22"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F11",
+   "libelle": "Mesure de la performance et data",
+   "type": "concept",
+   "blocs": [
+    "B02",
+    "B05"
+   ],
+   "modules": [
+    "Spé Marque & transfo : Référencement : Google Analytics (approfondissement)",
+    "Wordpress"
+   ],
+   "competences": [
+    "C10",
+    "C22"
+   ],
+   "notions": [
+    {
+     "notion": "Collecte, segmentation et analyse comportementale (3h30)",
+     "bloc": "B05",
+     "module": "Spé Marque & transfo : Référencement : Google Analytics (approfondissement)",
+     "competences": [
+      "C22"
+     ]
+    },
+    {
+     "notion": "Data visualisation, reporting et pilotage de la performance",
+     "bloc": "B05",
+     "module": "Spé Marque & transfo : Référencement : Google Analytics (approfondissement)",
+     "competences": [
+      "C22"
+     ]
+    },
+    {
+     "notion": "Pilotage de la performance, intégration omnicanale et restitution",
+     "bloc": "B02",
+     "module": "Wordpress",
+     "competences": [
+      "C10"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F12",
+   "libelle": "Stratégie omnicanale",
+   "type": "concept",
+   "blocs": [
+    "B01"
+   ],
+   "modules": [
+    "Etudes marketing stratégique et communication omnicanale"
+   ],
+   "competences": [
+    "C3"
+   ],
+   "notions": [
+    {
+     "notion": "Traduction des enseignements en stratégie de communication omnicanale",
+     "bloc": "B01",
+     "module": "Etudes marketing stratégique et communication omnicanale",
+     "competences": [
+      "C3"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F13",
+   "libelle": "Création graphique et PAO",
+   "type": "outil",
+   "blocs": [
+    "B02",
+    "B06",
+    "HB"
+   ],
+   "modules": [
+    "Adobe - outils créatifs numériques au service de la strat",
+    "Spé Strat Créa : PAO/Adobe : Logotype & typo",
+    "Spé Strat Créa : Adobe : Montage Photo",
+    "Séminaire d'intégration et de remise à niveau PAO"
+   ],
+   "competences": [
+    "C1",
+    "C10",
+    "C22"
+   ],
+   "notions": [
+    {
+     "notion": "Création graphique avancée sur Photoshop et Illustrator",
+     "bloc": "B02",
+     "module": "Adobe - outils créatifs numériques au service de la strat",
+     "competences": [
+      "C10"
+     ]
+    },
+    {
+     "notion": "Mise en page professionnelle et édition sur InDesign",
+     "bloc": "B02",
+     "module": "Adobe - outils créatifs numériques au service de la strat",
+     "competences": [
+      "C10"
+     ]
+    },
+    {
+     "notion": "Déclinaison créative et adaptation multi-supports",
+     "bloc": "B02",
+     "module": "Adobe - outils créatifs numériques au service de la strat",
+     "competences": [
+      "C10"
+     ]
+    },
+    {
+     "notion": "Création et conception avancée de logotype sous Adobe",
+     "bloc": "B06",
+     "module": "Spé Strat Créa : PAO/Adobe : Logotype & typo",
+     "competences": [
+      "C22"
+     ]
+    },
+    {
+     "notion": "Techniques avancées de montage et retouche sous Adobe Photoshop",
+     "bloc": "B06",
+     "module": "Spé Strat Créa : Adobe : Montage Photo",
+     "competences": [
+      "C22"
+     ]
+    },
+    {
+     "notion": "Déclinaisons multi-supports, accessibilité et optimisation",
+     "bloc": "B06",
+     "module": "Spé Strat Créa : Adobe : Montage Photo",
+     "competences": [
+      "C22"
+     ]
+    },
+    {
+     "notion": "Rappels et consolidation des fondamentaux PAO",
+     "bloc": "HB",
+     "module": "Séminaire d'intégration et de remise à niveau PAO",
+     "competences": [
+      "C1"
+     ]
+    },
+    {
+     "notion": "Méthodologie de production graphique professionnelle",
+     "bloc": "HB",
+     "module": "Séminaire d'intégration et de remise à niveau PAO",
+     "competences": [
+      "C1"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F14",
+   "libelle": "Photographie",
+   "type": "outil",
+   "blocs": [
+    "B02",
+    "HB"
+   ],
+   "modules": [
+    "Photographie : techniques de prise de vue",
+    "Séminaire d'intégration et de remise à niveau Photo"
+   ],
+   "competences": [
+    "C1",
+    "C10"
+   ],
+   "notions": [
+    {
+     "notion": "Techniques avancées de prise de vue",
+     "bloc": "B02",
+     "module": "Photographie : techniques de prise de vue",
+     "competences": [
+      "C10"
+     ]
+    },
+    {
+     "notion": "Workflow professionnel, préparation à la diffusion et argumentation",
+     "bloc": "B02",
+     "module": "Photographie : techniques de prise de vue",
+     "competences": [
+      "C10"
+     ]
+    },
+    {
+     "notion": "Cadrage stratégique et intention photographique",
+     "bloc": "B02",
+     "module": "Photographie : techniques de prise de vue",
+     "competences": [
+      "C10"
+     ]
+    },
+    {
+     "notion": "Rappels et consolidation des fondamentaux photo",
+     "bloc": "HB",
+     "module": "Séminaire d'intégration et de remise à niveau Photo",
+     "competences": [
+      "C1"
+     ]
+    },
+    {
+     "notion": "Méthodologie de production photographique professionnelle",
+     "bloc": "HB",
+     "module": "Séminaire d'intégration et de remise à niveau Photo",
+     "competences": [
+      "C1"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F15",
+   "libelle": "Audiovisuel et montage vidéo",
+   "type": "outil",
+   "blocs": [
+    "B06",
+    "HB"
+   ],
+   "modules": [
+    "Spé Strat Créa : Adobe Première",
+    "Séminaire d'intégration et de remise à niveau Vidéo"
+   ],
+   "competences": [
+    "C1",
+    "C22"
+   ],
+   "notions": [
+    {
+     "notion": "Prise en main avancée d’Adobe Premiere Pro et workflow vidéo",
+     "bloc": "B06",
+     "module": "Spé Strat Créa : Adobe Première",
+     "competences": [
+      "C22"
+     ]
+    },
+    {
+     "notion": "Techniques avancées de montage et narration audiovisuelle",
+     "bloc": "B06",
+     "module": "Spé Strat Créa : Adobe Première",
+     "competences": [
+      "C22"
+     ]
+    },
+    {
+     "notion": "Déclinaisons multi-supports, optimisation et export",
+     "bloc": "B06",
+     "module": "Spé Strat Créa : Adobe Première",
+     "competences": [
+      "C22"
+     ]
+    },
+    {
+     "notion": "Rappels et consolidation des fondamentaux vidéo",
+     "bloc": "HB",
+     "module": "Séminaire d'intégration et de remise à niveau Vidéo",
+     "competences": [
+      "C1"
+     ]
+    },
+    {
+     "notion": "Méthodologie de production audiovisuelle professionnelle",
+     "bloc": "HB",
+     "module": "Séminaire d'intégration et de remise à niveau Vidéo",
+     "competences": [
+      "C1"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F16",
+   "libelle": "Identité visuelle et direction artistique",
+   "type": "concept",
+   "blocs": [
+    "B06"
+   ],
+   "modules": [
+    "Spé Strat Créa : Direction artistique",
+    "Spé Strat Créa : PAO/Adobe : Logotype & typo"
+   ],
+   "competences": [
+    "C21",
+    "C22"
+   ],
+   "notions": [
+    {
+     "notion": "Fondamentaux et posture du directeur artistique",
+     "bloc": "B06",
+     "module": "Spé Strat Créa : Direction artistique",
+     "competences": [
+      "C21"
+     ]
+    },
+    {
+     "notion": "Conception du concept créatif et déclinaison de l’identité visuelle",
+     "bloc": "B06",
+     "module": "Spé Strat Créa : Direction artistique",
+     "competences": [
+      "C21"
+     ]
+    },
+    {
+     "notion": "Pilotage du processus créatif et collaboration interdisciplinaire",
+     "bloc": "B06",
+     "module": "Spé Strat Créa : Direction artistique",
+     "competences": [
+      "C21"
+     ]
+    },
+    {
+     "notion": "Typographie : choix, création et intégration dans l’identité visuelle",
+     "bloc": "B06",
+     "module": "Spé Strat Créa : PAO/Adobe : Logotype & typo",
+     "competences": [
+      "C22"
+     ]
+    },
+    {
+     "notion": "Cadrage stratégique et inspirations logotype & typo",
+     "bloc": "B06",
+     "module": "Spé Strat Créa : PAO/Adobe : Logotype & typo",
+     "competences": [
+      "C22"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F17",
+   "libelle": "Créativité, idéation et design thinking",
+   "type": "concept",
+   "blocs": [
+    "B05",
+    "B06"
+   ],
+   "modules": [
+    "Spé Strat Créa : Créativité et pensée innovante",
+    "Spé Marque & transfo : Design thinking"
+   ],
+   "competences": [
+    "C21"
+   ],
+   "notions": [
+    {
+     "notion": "Panorama des méthodes et postures créatives",
+     "bloc": "B06",
+     "module": "Spé Strat Créa : Créativité et pensée innovante",
+     "competences": [
+      "C21"
+     ]
+    },
+    {
+     "notion": "Techniques de stimulation de la créativité individuelle et collective",
+     "bloc": "B06",
+     "module": "Spé Strat Créa : Créativité et pensée innovante",
+     "competences": [
+      "C21"
+     ]
+    },
+    {
+     "notion": "Structuration et activation de la pensée innovante",
+     "bloc": "B06",
+     "module": "Spé Strat Créa : Créativité et pensée innovante",
+     "competences": [
+      "C21"
+     ]
+    },
+    {
+     "notion": "Introduction au Design Thinking et cadrage stratégique",
+     "bloc": "B05",
+     "module": "Spé Marque & transfo : Design thinking",
+     "competences": [
+      "C21"
+     ]
+    },
+    {
+     "notion": "Empathie et définition du problème",
+     "bloc": "B05",
+     "module": "Spé Marque & transfo : Design thinking",
+     "competences": [
+      "C21"
+     ]
+    },
+    {
+     "notion": "Idéation, prototypage et test",
+     "bloc": "B05",
+     "module": "Spé Marque & transfo : Design thinking",
+     "competences": [
+      "C21"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F18",
+   "libelle": "UX, UI et design d’interface",
+   "type": "concept",
+   "blocs": [
+    "B05"
+   ],
+   "modules": [
+    "Spé Marque & transfo : UX/UI",
+    "Spé Marque & transfo : Webdesign et Design responsive"
+   ],
+   "competences": [
+    "C21",
+    "C22"
+   ],
+   "notions": [
+    {
+     "notion": "Panorama des fondamentaux, tendances et enjeux UX/UI",
+     "bloc": "B05",
+     "module": "Spé Marque & transfo : UX/UI",
+     "competences": [
+      "C22"
+     ]
+    },
+    {
+     "notion": "Méthodologie de conception UX/UI et prototypage",
+     "bloc": "B05",
+     "module": "Spé Marque & transfo : UX/UI",
+     "competences": [
+      "C22"
+     ]
+    },
+    {
+     "notion": "UI Design avancé, UX writing et accessibilité",
+     "bloc": "B05",
+     "module": "Spé Marque & transfo : UX/UI",
+     "competences": [
+      "C22"
+     ]
+    },
+    {
+     "notion": "Pilotage de projet UX/UI, restitution et accompagnement au changement",
+     "bloc": "B05",
+     "module": "Spé Marque & transfo : UX/UI",
+     "competences": [
+      "C22"
+     ]
+    },
+    {
+     "notion": "Panorama des standards et tendances du webdesign",
+     "bloc": "B05",
+     "module": "Spé Marque & transfo : Webdesign et Design responsive",
+     "competences": [
+      "C21"
+     ]
+    },
+    {
+     "notion": "Principes et techniques du design responsive",
+     "bloc": "B05",
+     "module": "Spé Marque & transfo : Webdesign et Design responsive",
+     "competences": [
+      "C21"
+     ]
+    },
+    {
+     "notion": "Intégration de l’UX, de l’innovation et de la performance",
+     "bloc": "B05",
+     "module": "Spé Marque & transfo : Webdesign et Design responsive",
+     "competences": [
+      "C21"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F19",
+   "libelle": "Web, CMS et outils no-code",
+   "type": "outil",
+   "blocs": [
+    "B02",
+    "B05"
+   ],
+   "modules": [
+    "Wordpress",
+    "Spé Marque & transfo : Wordpress perfectionnement & NoCode"
+   ],
+   "competences": [
+    "C10",
+    "C22"
+   ],
+   "notions": [
+    {
+     "notion": "Stratégie digitale et choix des solutions WordPress, NoCode et IA",
+     "bloc": "B02",
+     "module": "Wordpress",
+     "competences": [
+      "C10"
+     ]
+    },
+    {
+     "notion": "Gestion avancée des contenus et des fonctionnalités",
+     "bloc": "B02",
+     "module": "Wordpress",
+     "competences": [
+      "C10"
+     ]
+    },
+    {
+     "notion": "Wordpress avancé : personnalisation, sécurité, performance",
+     "bloc": "B05",
+     "module": "Spé Marque & transfo : Wordpress perfectionnement & NoCode",
+     "competences": [
+      "C22"
+     ]
+    },
+    {
+     "notion": "NoCode : panorama des outils et cas d’usage (3h30)",
+     "bloc": "B05",
+     "module": "Spé Marque & transfo : Wordpress perfectionnement & NoCode",
+     "competences": [
+      "C22"
+     ]
+    },
+    {
+     "notion": "Automatisation et interconnexion des outils",
+     "bloc": "B05",
+     "module": "Spé Marque & transfo : Wordpress perfectionnement & NoCode",
+     "competences": [
+      "C22"
+     ]
+    },
+    {
+     "notion": "Prototypage rapide et expérimentation digitale",
+     "bloc": "B05",
+     "module": "Spé Marque & transfo : Wordpress perfectionnement & NoCode",
+     "competences": [
+      "C22"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F20",
+   "libelle": "Supports innovants et prototypage",
+   "type": "concept",
+   "blocs": [
+    "B05"
+   ],
+   "modules": [
+    "Spé Marque & transfo : Supports de communication innovants"
+   ],
+   "competences": [
+    "C21"
+   ],
+   "notions": [
+    {
+     "notion": "Panorama des supports innovants et tendances émergentes",
+     "bloc": "B05",
+     "module": "Spé Marque & transfo : Supports de communication innovants",
+     "competences": [
+      "C21"
+     ]
+    },
+    {
+     "notion": "Conception et prototypage de supports innovants",
+     "bloc": "B05",
+     "module": "Spé Marque & transfo : Supports de communication innovants",
+     "competences": [
+      "C21"
+     ]
+    },
+    {
+     "notion": "Évaluation stratégique et opérationnelle des supports",
+     "bloc": "B05",
+     "module": "Spé Marque & transfo : Supports de communication innovants",
+     "competences": [
+      "C21"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F21",
+   "libelle": "Chaîne de fabrication et production",
+   "type": "concept",
+   "blocs": [
+    "B02"
+   ],
+   "modules": [
+    "Fabrication : de l'idée à la réalisation"
+   ],
+   "competences": [
+    "C10"
+   ],
+   "notions": [
+    {
+     "notion": "Cadrage stratégique et brief de fabrication",
+     "bloc": "B02",
+     "module": "Fabrication : de l'idée à la réalisation",
+     "competences": [
+      "C10"
+     ]
+    },
+    {
+     "notion": "Étapes et contraintes de la chaîne de fabrication",
+     "bloc": "B02",
+     "module": "Fabrication : de l'idée à la réalisation",
+     "competences": [
+      "C10"
+     ]
+    },
+    {
+     "notion": "Suivi de production, contrôle qualité et livraison",
+     "bloc": "B02",
+     "module": "Fabrication : de l'idée à la réalisation",
+     "competences": [
+      "C10"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F22",
+   "libelle": "Budget, pilotage financier et négociation",
+   "type": "concept",
+   "blocs": [
+    "B02"
+   ],
+   "modules": [
+    "Budget Pilotage financier & négociation"
+   ],
+   "competences": [
+    "C11",
+    "C12"
+   ],
+   "notions": [
+    {
+     "notion": "Cadrage stratégique et construction budgétaire",
+     "bloc": "B02",
+     "module": "Budget Pilotage financier & négociation",
+     "competences": [
+      "C11",
+      "C12"
+     ]
+    },
+    {
+     "notion": "Suivi, contrôle et optimisation du budget",
+     "bloc": "B02",
+     "module": "Budget Pilotage financier & négociation",
+     "competences": [
+      "C11",
+      "C12"
+     ]
+    },
+    {
+     "notion": "Techniques de négociation et relations avec les parties prenantes",
+     "bloc": "B02",
+     "module": "Budget Pilotage financier & négociation",
+     "competences": [
+      "C11",
+      "C12"
+     ]
+    },
+    {
+     "notion": "Restitution professionnelle et justification des choix financiers",
+     "bloc": "B02",
+     "module": "Budget Pilotage financier & négociation",
+     "competences": [
+      "C11",
+      "C12"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F23",
+   "libelle": "Prise de parole, éloquence et soutenance",
+   "type": "posture",
+   "blocs": [
+    "B01"
+   ],
+   "modules": [
+    "Eloquence et préparation à l'épreuve de certification orale",
+    "Méthodologie Pack Marque"
+   ],
+   "competences": [
+    "C3",
+    "C4",
+    "C5",
+    "C6"
+   ],
+   "notions": [
+    {
+     "notion": "Décryptage des attendus de l’épreuve orale",
+     "bloc": "B01",
+     "module": "Eloquence et préparation à l'épreuve de certification orale",
+     "competences": [
+      "C3",
+      "C4",
+      "C5",
+      "C6"
+     ]
+    },
+    {
+     "notion": "Structuration et scénarisation de la soutenance",
+     "bloc": "B01",
+     "module": "Eloquence et préparation à l'épreuve de certification orale",
+     "competences": [
+      "C3",
+      "C4",
+      "C5",
+      "C6"
+     ]
+    },
+    {
+     "notion": "Techniques avancées d’éloquence et de persuasion",
+     "bloc": "B01",
+     "module": "Eloquence et préparation à l'épreuve de certification orale",
+     "competences": [
+      "C3",
+      "C4",
+      "C5",
+      "C6"
+     ]
+    },
+    {
+     "notion": "Entraînement intensif à la soutenance et feedback",
+     "bloc": "B01",
+     "module": "Eloquence et préparation à l'épreuve de certification orale",
+     "competences": [
+      "C3",
+      "C4",
+      "C5",
+      "C6"
+     ]
+    },
+    {
+     "notion": "Préparation à la restitution et à la soutenance",
+     "bloc": "B01",
+     "module": "Méthodologie Pack Marque",
+     "competences": [
+      "C3",
+      "C4",
+      "C5",
+      "C6"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F24",
+   "libelle": "Droit de la création et éthique professionnelle",
+   "type": "concept",
+   "blocs": [
+    "B06"
+   ],
+   "modules": [
+    "Spé Strat Créa : Éthique professionnelle (propriété artistique, intellectuelle,…)"
+   ],
+   "competences": [
+    "C21"
+   ],
+   "notions": [
+    {
+     "notion": "Cadre juridique de la création et de la propriété intellectuelle",
+     "bloc": "B06",
+     "module": "Spé Strat Créa : Éthique professionnelle (propriété artistique, intellectuelle,…)",
+     "competences": [
+      "C21"
+     ]
+    },
+    {
+     "notion": "Éthique professionnelle et responsabilité dans la création",
+     "bloc": "B06",
+     "module": "Spé Strat Créa : Éthique professionnelle (propriété artistique, intellectuelle,…)",
+     "competences": [
+      "C21"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F25",
+   "libelle": "Histoire de l’art et références culturelles",
+   "type": "concept",
+   "blocs": [
+    "B06"
+   ],
+   "modules": [
+    "Spé Srat Créa : Histoire de l'art et tendances contemporaines",
+    "Spé Strat Créa : Adobe : Montage Photo"
+   ],
+   "competences": [
+    "C20",
+    "C22"
+   ],
+   "notions": [
+    {
+     "notion": "Panorama des grands courants de l’histoire de l’art",
+     "bloc": "B06",
+     "module": "Spé Srat Créa : Histoire de l'art et tendances contemporaines",
+     "competences": [
+      "C20"
+     ]
+    },
+    {
+     "notion": "Décryptage des tendances visuelles et artistiques contemporaines",
+     "bloc": "B06",
+     "module": "Spé Srat Créa : Histoire de l'art et tendances contemporaines",
+     "competences": [
+      "C20"
+     ]
+    },
+    {
+     "notion": "Intégration des références artistiques dans la stratégie créative de marque",
+     "bloc": "B06",
+     "module": "Spé Srat Créa : Histoire de l'art et tendances contemporaines",
+     "competences": [
+      "C20"
+     ]
+    },
+    {
+     "notion": "Cadrage stratégique et inspirations visuelles",
+     "bloc": "B06",
+     "module": "Spé Strat Créa : Adobe : Montage Photo",
+     "competences": [
+      "C22"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F26",
+   "libelle": "Anglais professionnel et interculturalité",
+   "type": "concept",
+   "blocs": [
+    "HB"
+   ],
+   "modules": [
+    "Anglais professionnel de la communication"
+   ],
+   "competences": [
+    "C1",
+    "C10",
+    "C11",
+    "C12",
+    "C13",
+    "C14",
+    "C15",
+    "C16",
+    "C17",
+    "C18",
+    "C19",
+    "C2",
+    "C20",
+    "C21",
+    "C22",
+    "C3",
+    "C4",
+    "C5",
+    "C6",
+    "C7",
+    "C8",
+    "C9"
+   ],
+   "notions": [
+    {
+     "notion": "Vocabulaire métier et environnement international",
+     "bloc": "HB",
+     "module": "Anglais professionnel de la communication",
+     "competences": [
+      "C1",
+      "C2",
+      "C3",
+      "C4",
+      "C5",
+      "C6",
+      "C7",
+      "C8",
+      "C9",
+      "C10",
+      "C11",
+      "C12",
+      "C13",
+      "C14",
+      "C15",
+      "C16",
+      "C17",
+      "C18",
+      "C19",
+      "C20",
+      "C21",
+      "C22"
+     ]
+    },
+    {
+     "notion": "Rédaction professionnelle et production de livrables bilingues",
+     "bloc": "HB",
+     "module": "Anglais professionnel de la communication",
+     "competences": [
+      "C1",
+      "C2",
+      "C3",
+      "C4",
+      "C5",
+      "C6",
+      "C7",
+      "C8",
+      "C9",
+      "C10",
+      "C11",
+      "C12",
+      "C13",
+      "C14",
+      "C15",
+      "C16",
+      "C17",
+      "C18",
+      "C19",
+      "C20",
+      "C21",
+      "C22"
+     ]
+    },
+    {
+     "notion": "Réunions, négociation et gestion de projet en anglais",
+     "bloc": "HB",
+     "module": "Anglais professionnel de la communication",
+     "competences": [
+      "C1",
+      "C2",
+      "C3",
+      "C4",
+      "C5",
+      "C6",
+      "C7",
+      "C8",
+      "C9",
+      "C10",
+      "C11",
+      "C12",
+      "C13",
+      "C14",
+      "C15",
+      "C16",
+      "C17",
+      "C18",
+      "C19",
+      "C20",
+      "C21",
+      "C22"
+     ]
+    },
+    {
+     "notion": "Communication interculturelle et adaptation",
+     "bloc": "HB",
+     "module": "Anglais professionnel de la communication",
+     "competences": [
+      "C1",
+      "C2",
+      "C3",
+      "C4",
+      "C5",
+      "C6",
+      "C7",
+      "C8",
+      "C9",
+      "C10",
+      "C11",
+      "C12",
+      "C13",
+      "C14",
+      "C15",
+      "C16",
+      "C17",
+      "C18",
+      "C19",
+      "C20",
+      "C21",
+      "C22"
+     ]
+    },
+    {
+     "notion": "Techniques de présentation et de prise de parole stratégique",
+     "bloc": "HB",
+     "module": "Anglais professionnel de la communication",
+     "competences": [
+      "C1",
+      "C2",
+      "C3",
+      "C4",
+      "C5",
+      "C6",
+      "C7",
+      "C8",
+      "C9",
+      "C10",
+      "C11",
+      "C12",
+      "C13",
+      "C14",
+      "C15",
+      "C16",
+      "C17",
+      "C18",
+      "C19",
+      "C20",
+      "C21",
+      "C22"
+     ]
+    },
+    {
+     "notion": "Soutenance, argumentation et feedback",
+     "bloc": "HB",
+     "module": "Anglais professionnel de la communication",
+     "competences": [
+      "C1",
+      "C2",
+      "C3",
+      "C4",
+      "C5",
+      "C6",
+      "C7",
+      "C8",
+      "C9",
+      "C10",
+      "C11",
+      "C12",
+      "C13",
+      "C14",
+      "C15",
+      "C16",
+      "C17",
+      "C18",
+      "C19",
+      "C20",
+      "C21",
+      "C22"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F27",
+   "libelle": "Personal branding et présence éditoriale",
+   "type": "concept",
+   "blocs": [
+    "HB"
+   ],
+   "modules": [
+    "BT : Ateliers / Worshop/ séminaire"
+   ],
+   "competences": [
+    "C1"
+   ],
+   "notions": [
+    {
+     "notion": "Introduction au personal branding éditorial",
+     "bloc": "HB",
+     "module": "BT : Ateliers / Worshop/ séminaire",
+     "competences": [
+      "C1"
+     ]
+    },
+    {
+     "notion": "Rédaction et optimisation de l’article",
+     "bloc": "HB",
+     "module": "BT : Ateliers / Worshop/ séminaire",
+     "competences": [
+      "C1"
+     ]
+    },
+    {
+     "notion": "Publication, diffusion et interaction",
+     "bloc": "HB",
+     "module": "BT : Ateliers / Worshop/ séminaire",
+     "competences": [
+      "C1"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "F28",
+   "libelle": "Travail collaboratif et workflow d’équipe",
+   "type": "posture",
+   "blocs": [
+    "B02",
+    "B06"
+   ],
+   "modules": [
+    "Spé Strat Créa : Outils créatifs et worflow collaboratif (Figma, Notion...)",
+    "Adobe - outils créatifs numériques au service de la strat"
+   ],
+   "competences": [
+    "C10",
+    "C22"
+   ],
+   "notions": [
+    {
+     "notion": "Panorama et prise en main des outils collaboratifs",
+     "bloc": "B06",
+     "module": "Spé Strat Créa : Outils créatifs et worflow collaboratif (Figma, Notion...)",
+     "competences": [
+      "C22"
+     ]
+    },
+    {
+     "notion": "Structuration d’un workflow collaboratif efficace",
+     "bloc": "B06",
+     "module": "Spé Strat Créa : Outils créatifs et worflow collaboratif (Figma, Notion...)",
+     "competences": [
+      "C22"
+     ]
+    },
+    {
+     "notion": "Production de livrables créatifs et restitution professionnelle",
+     "bloc": "B06",
+     "module": "Spé Strat Créa : Outils créatifs et worflow collaboratif (Figma, Notion...)",
+     "competences": [
+      "C22"
+     ]
+    },
+    {
+     "notion": "Cadrage stratégique et workflow créatif",
+     "bloc": "B02",
+     "module": "Adobe - outils créatifs numériques au service de la strat",
+     "competences": [
+      "C10"
+     ]
+    }
+   ]
+  }
+ ],
+ "ecartees": [
+  {
+   "motif": "trame pédagogique",
+   "notions": [
+    {
+     "notion": "Introduction et cadrage méthodologique",
+     "bloc": "B01",
+     "module": "Analyse de la stratégie de positionnement de la marque"
+    },
+    {
+     "notion": "Présentation de l’épreuve et cadrage méthodologique",
+     "bloc": "B01",
+     "module": "Méthodologie Pack Marque"
+    },
+    {
+     "notion": "Présentation de l’épreuve Pack Marque et cadrage du brand content",
+     "bloc": "B02",
+     "module": "Brand content : Editorialisation et narration de marque"
+    },
+    {
+     "notion": "Cas pratiques et restitution professionnelle",
+     "bloc": "B01",
+     "module": "Etudes marketing stratégique et communication omnicanale"
+    },
+    {
+     "notion": "Synthèse, restitution et intégration dans la stratégie de marque",
+     "bloc": "B01",
+     "module": "Insights et Analyse consommateurs"
+    },
+    {
+     "notion": "Restitution, feedback et préparation à la plateforme de marque",
+     "bloc": "B01",
+     "module": "Analyse de la stratégie de positionnement de la marque"
+    },
+    {
+     "notion": "Restitution, argumentation et préparation à l’épreuve certifiante",
+     "bloc": "B02",
+     "module": "Elaboration de la stratégie de marque (plateforme de marque)"
+    },
+    {
+     "notion": "Restitution professionnelle et argumentation stratégique",
+     "bloc": "B02",
+     "module": "Adobe - outils créatifs numériques au service de la strat"
+    },
+    {
+     "notion": "Restitution professionnelle et argumentation stratégique",
+     "bloc": "B05",
+     "module": "Spé Marque & transfo : Webdesign et Design responsive"
+    },
+    {
+     "notion": "Restitution professionnelle et intégration dans la stratégie de marque",
+     "bloc": "B05",
+     "module": "Spé Marque & transfo : Supports de communication innovants"
+    },
+    {
+     "notion": "Restitution professionnelle et argumentation des choix",
+     "bloc": "B02",
+     "module": "Fabrication : de l'idée à la réalisation"
+    },
+    {
+     "notion": "Restitution professionnelle et valorisation de la démarche créative",
+     "bloc": "B06",
+     "module": "Spé Strat Créa : Créativité et pensée innovante"
+    },
+    {
+     "notion": "Restitution, justification et argumentation professionnelle",
+     "bloc": "B06",
+     "module": "Spé Strat Créa : PAO/Adobe : Logotype & typo"
+    },
+    {
+     "notion": "Restitution, justification et valorisation professionnelle",
+     "bloc": "B06",
+     "module": "Spé Strat Créa : Adobe Première"
+    },
+    {
+     "notion": "Restitution, justification et valorisation professionnelle",
+     "bloc": "B06",
+     "module": "Spé Strat Créa : Adobe : Montage Photo"
+    },
+    {
+     "notion": "Justification, restitution et valorisation de la direction artistique",
+     "bloc": "B06",
+     "module": "Spé Strat Créa : Direction artistique"
+    },
+    {
+     "notion": "Justification et valorisation de la démarche :",
+     "bloc": "HB",
+     "module": "BT : Ateliers / Worshop/ séminaire"
+    },
+    {
+     "notion": "Atelier pratique et feedback",
+     "bloc": "B05",
+     "module": "Spé Marque & transfo : Benchmarking (analyse des strat concurrentielles)"
+    },
+    {
+     "notion": "Atelier pratique et restitution professionnelle",
+     "bloc": "B02",
+     "module": "Photographie : techniques de prise de vue"
+    },
+    {
+     "notion": "Atelier collaboratif et restitution",
+     "bloc": "HB",
+     "module": "Séminaire d'intégration et de remise à niveau PAO"
+    },
+    {
+     "notion": "Atelier collaboratif et restitution",
+     "bloc": "HB",
+     "module": "Séminaire d'intégration et de remise à niveau Vidéo"
+    },
+    {
+     "notion": "Atelier collaboratif et restitution",
+     "bloc": "HB",
+     "module": "Séminaire d'intégration et de remise à niveau Photo"
+    },
+    {
+     "notion": "Accueil, diagnostic et harmonisation des niveaux",
+     "bloc": "HB",
+     "module": "Séminaire d'intégration et de remise à niveau PAO"
+    },
+    {
+     "notion": "Accueil, diagnostic et harmonisation des niveaux",
+     "bloc": "HB",
+     "module": "Séminaire d'intégration et de remise à niveau Vidéo"
+    },
+    {
+     "notion": "Accueil, diagnostic et harmonisation des niveaux",
+     "bloc": "HB",
+     "module": "Séminaire d'intégration et de remise à niveau Photo"
+    },
+    {
+     "notion": "Accompagnement au changement et intégration dans la transformation digitale",
+     "bloc": "B05",
+     "module": "Spé Marque & transfo : Référencement : Google Analytics (approfondissement)"
+    },
+    {
+     "notion": "Accompagnement au changement et restitution professionnelle",
+     "bloc": "B05",
+     "module": "Spé Marque & transfo : Wordpress perfectionnement & NoCode"
+    },
+    {
+     "notion": "Intégration stratégique, restitution et argumentation",
+     "bloc": "B05",
+     "module": "Spé Marque & transfo : Design thinking"
+    },
+    {
+     "notion": "Séance unique (3,5h) – Finalisation du dossier et simulation de soutenance",
+     "bloc": "B01",
+     "module": "TD : Méthodologie Dossier de veille"
+    },
+    {
+     "notion": "Rappel des attendus Mégaka et lien avec les modules de diagnostic, de segmentation et de positionnement issus du Bloc 1 (15 min) — le cadrage détaillé du cadre certificateur est assuré par le TD Accompagnement Mégaka.",
+     "bloc": "B02",
+     "module": "Elaboration de la stratégie de marque (plateforme de marque)"
+    }
+   ]
+  },
+  {
+   "motif": "texte de présentation, pas un programme",
+   "notions": [
+    {
+     "notion": "Un ANNONCEUR, le “client”, propose aux étudiant.e.s de prendre en charge sa problématique de communication. Pendant toute une semaine, ils.elles réflechissent aux SOLUTIONS à lui proposer en réponse au Brief... L’annonceur comme la situation sont réels.",
+     "bloc": "HB",
+     "module": "Méthodologie Compétition"
+    },
+    {
+     "notion": "Les étudiant.e.s travaillent en groupe et imaginent donc la campagne de communication à mettre en œuvre. Chaque Agence [qui a travaillé son iden- tité propre] présente ses solutions tant opérationnelles que créatives sous la forme d’une recommandation stratégique.",
+     "bloc": "HB",
+     "module": "Méthodologie Compétition"
+    },
+    {
+     "notion": "Le CESACOM organise les présentations en deux phases : un jury inter- médiaire [organisé en plusieurs poules] écoute toutes les agences. Il sélectionne les agences qui iront en FINALE défendre leur projet devant le client.",
+     "bloc": "HB",
+     "module": "Méthodologie Compétition"
+    },
+    {
+     "notion": "À l’issue de la finale, deux récompenses sont remises : le PRIX ECOLE est attribué aux étudiant.e.s ayant accompli le travail le plus conforme aux attentes méthodologiques que l’exercice impose. Le prestigieux PRIX ANNONCEUR est, quant à lui, remis à l’agence ayant gagné la confiance du client qui, parfois, réalise le projet qu’il a retenu.",
+     "bloc": "HB",
+     "module": "Méthodologie Compétition"
+    }
+   ]
+  }
+ ]
+}

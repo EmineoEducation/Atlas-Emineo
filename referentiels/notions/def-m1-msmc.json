@@ -1,0 +1,335 @@
+{
+ "cle": "m1-msmc",
+ "revu_le": "2026-10-05",
+ "familles": [
+  {
+   "libelle": "Veille stratégique et détection des tendances",
+   "type": "concept",
+   "notions": [
+    "Structuration d’une veille dynamique et choix des outils",
+    "Collecte et analyse des données via panels et interviews",
+    "Détection, hiérarchisation et interprétation des tendances sociétales",
+    "Restitution et valorisation de la veille pour la décision stratégique",
+    "Choix du sujet et veille sectorielle"
+   ]
+  },
+  {
+   "libelle": "Imaginaires et insights consommateurs",
+   "type": "concept",
+   "notions": [
+    "Décryptage des imaginaires de consommation",
+    "Articulation tendances / imaginaires : synthèse stratégique",
+    "Méthodologies avancées d’études consommateurs",
+    "Analyse et segmentation comportementale",
+    "Formulation d’insights consommateurs et activation stratégique",
+    "Analyse, synthèse et formulation d’insights"
+   ]
+  },
+  {
+   "libelle": "Études quantitatives et qualitatives",
+   "type": "concept",
+   "notions": [
+    "Cadrage des études marketing stratégiques",
+    "Conduite et pilotage des études quantitatives",
+    "Conduite et pilotage des études qualitatives",
+    "Collecte et analyse des données marché et consommateurs"
+   ]
+  },
+  {
+   "libelle": "Diagnostic et positionnement de marque",
+   "type": "concept",
+   "notions": [
+    "Diagnostic interne, analyse de la marque et positionnement",
+    "Collecte et analyse des matériaux internes et externes",
+    "Diagnostic du positionnement et de l’identité de marque",
+    "Clarification de la proposition de valeur et des avantages concurrentiels"
+   ]
+  },
+  {
+   "libelle": "Benchmark concurrentiel",
+   "type": "concept",
+   "notions": [
+    "Cadrage méthodologique du benchmarking stratégique",
+    "Collecte et analyse des données concurrentielles",
+    "Synthèse, restitution et activation stratégique du benchmark"
+   ]
+  },
+  {
+   "libelle": "Plateforme de marque et proposition de valeur",
+   "type": "concept",
+   "notions": [
+    "Formalisation de la plateforme de marque et synthèse stratégique",
+    "Définition du périmètre d’étude et problématisation",
+    "Détermination des axes de communication et structuration de la plateforme",
+    "Formulation de la proposition de valeur et des engagements RSE"
+   ]
+  },
+  {
+   "libelle": "Objectifs stratégiques et segmentation des cibles",
+   "type": "concept",
+   "notions": [
+    "Définition des objectifs stratégiques et segmentation des cibles"
+   ]
+  },
+  {
+   "libelle": "Storytelling et brand content",
+   "type": "concept",
+   "notions": [
+    "Construction d’une ligne éditoriale de marque",
+    "Techniques de storytelling et scénarisation de contenus",
+    "Déploiement, pilotage et évaluation de la stratégie de brand content"
+   ]
+  },
+  {
+   "libelle": "RSE, ESS et éco-conception",
+   "type": "concept",
+   "notions": [
+    "Panorama stratégique de la RSE et de l’ESS",
+    "Intégration de la RSE/ESS à la stratégie de marque et de communication",
+    "Pilotage, valorisation et communication responsable",
+    "Panorama des enjeux RSE et de l’éco-conception en communication visuelle",
+    "Conception et fabrication responsable : méthodes, arbitrages et restitution"
+   ]
+  },
+  {
+   "libelle": "Référencement et visibilité",
+   "type": "concept",
+   "notions": [
+    "Panorama stratégique du référencement et articulation omnicanale",
+    "SEO avancé : stratégie, optimisation, innovation",
+    "SEA/SMA : campagnes intelligentes et pilotage de la performance",
+    "SMO : optimisation de la présence organique et stratégie d’engagement",
+    "Optimisation SEO, accessibilité, sécurité et conformité",
+    "Configuration avancée de Google Analytics (GA4) et introduction au pilotage de la visibilité dans l’IA (Search Generative Experience, GEO)"
+   ]
+  },
+  {
+   "libelle": "Mesure de la performance et data",
+   "type": "concept",
+   "notions": [
+    "Collecte, segmentation et analyse comportementale (3h30)",
+    "Data visualisation, reporting et pilotage de la performance",
+    "Pilotage de la performance, intégration omnicanale et restitution"
+   ]
+  },
+  {
+   "libelle": "Stratégie omnicanale",
+   "type": "concept",
+   "notions": [
+    "Traduction des enseignements en stratégie de communication omnicanale"
+   ]
+  },
+  {
+   "libelle": "Création graphique et PAO",
+   "type": "outil",
+   "notions": [
+    "Création graphique avancée sur Photoshop et Illustrator",
+    "Mise en page professionnelle et édition sur InDesign",
+    "Déclinaison créative et adaptation multi-supports",
+    "Création et conception avancée de logotype sous Adobe",
+    "Techniques avancées de montage et retouche sous Adobe Photoshop",
+    "Déclinaisons multi-supports, accessibilité et optimisation",
+    "Rappels et consolidation des fondamentaux PAO",
+    "Méthodologie de production graphique professionnelle"
+   ]
+  },
+  {
+   "libelle": "Photographie",
+   "type": "outil",
+   "notions": [
+    "Techniques avancées de prise de vue",
+    "Workflow professionnel, préparation à la diffusion et argumentation",
+    "Cadrage stratégique et intention photographique",
+    "Rappels et consolidation des fondamentaux photo",
+    "Méthodologie de production photographique professionnelle"
+   ]
+  },
+  {
+   "libelle": "Audiovisuel et montage vidéo",
+   "type": "outil",
+   "notions": [
+    "Prise en main avancée d’Adobe Premiere Pro et workflow vidéo",
+    "Techniques avancées de montage et narration audiovisuelle",
+    "Déclinaisons multi-supports, optimisation et export",
+    "Rappels et consolidation des fondamentaux vidéo",
+    "Méthodologie de production audiovisuelle professionnelle"
+   ]
+  },
+  {
+   "libelle": "Identité visuelle et direction artistique",
+   "type": "concept",
+   "notions": [
+    "Fondamentaux et posture du directeur artistique",
+    "Conception du concept créatif et déclinaison de l’identité visuelle",
+    "Pilotage du processus créatif et collaboration interdisciplinaire",
+    "Typographie : choix, création et intégration dans l’identité visuelle",
+    "Cadrage stratégique et inspirations logotype & typo"
+   ]
+  },
+  {
+   "libelle": "Créativité, idéation et design thinking",
+   "type": "concept",
+   "notions": [
+    "Panorama des méthodes et postures créatives",
+    "Techniques de stimulation de la créativité individuelle et collective",
+    "Structuration et activation de la pensée innovante",
+    "Introduction au Design Thinking et cadrage stratégique",
+    "Empathie et définition du problème",
+    "Idéation, prototypage et test"
+   ]
+  },
+  {
+   "libelle": "UX, UI et design d’interface",
+   "type": "concept",
+   "notions": [
+    "Panorama des fondamentaux, tendances et enjeux UX/UI",
+    "Méthodologie de conception UX/UI et prototypage",
+    "UI Design avancé, UX writing et accessibilité",
+    "Pilotage de projet UX/UI, restitution et accompagnement au changement",
+    "Panorama des standards et tendances du webdesign",
+    "Principes et techniques du design responsive",
+    "Intégration de l’UX, de l’innovation et de la performance"
+   ]
+  },
+  {
+   "libelle": "Web, CMS et outils no-code",
+   "type": "outil",
+   "notions": [
+    "Stratégie digitale et choix des solutions WordPress, NoCode et IA",
+    "Gestion avancée des contenus et des fonctionnalités",
+    "Wordpress avancé : personnalisation, sécurité, performance",
+    "NoCode : panorama des outils et cas d’usage (3h30)",
+    "Automatisation et interconnexion des outils",
+    "Prototypage rapide et expérimentation digitale"
+   ]
+  },
+  {
+   "libelle": "Supports innovants et prototypage",
+   "type": "concept",
+   "notions": [
+    "Panorama des supports innovants et tendances émergentes",
+    "Conception et prototypage de supports innovants",
+    "Évaluation stratégique et opérationnelle des supports"
+   ]
+  },
+  {
+   "libelle": "Chaîne de fabrication et production",
+   "type": "concept",
+   "notions": [
+    "Cadrage stratégique et brief de fabrication",
+    "Étapes et contraintes de la chaîne de fabrication",
+    "Suivi de production, contrôle qualité et livraison"
+   ]
+  },
+  {
+   "libelle": "Budget, pilotage financier et négociation",
+   "type": "concept",
+   "notions": [
+    "Cadrage stratégique et construction budgétaire",
+    "Suivi, contrôle et optimisation du budget",
+    "Techniques de négociation et relations avec les parties prenantes",
+    "Restitution professionnelle et justification des choix financiers"
+   ]
+  },
+  {
+   "libelle": "Prise de parole, éloquence et soutenance",
+   "type": "posture",
+   "notions": [
+    "Décryptage des attendus de l’épreuve orale",
+    "Structuration et scénarisation de la soutenance",
+    "Techniques avancées d’éloquence et de persuasion",
+    "Entraînement intensif à la soutenance et feedback",
+    "Préparation à la restitution et à la soutenance"
+   ]
+  },
+  {
+   "libelle": "Droit de la création et éthique professionnelle",
+   "type": "concept",
+   "notions": [
+    "Cadre juridique de la création et de la propriété intellectuelle",
+    "Éthique professionnelle et responsabilité dans la création"
+   ]
+  },
+  {
+   "libelle": "Histoire de l’art et références culturelles",
+   "type": "concept",
+   "notions": [
+    "Panorama des grands courants de l’histoire de l’art",
+    "Décryptage des tendances visuelles et artistiques contemporaines",
+    "Intégration des références artistiques dans la stratégie créative de marque",
+    "Cadrage stratégique et inspirations visuelles"
+   ]
+  },
+  {
+   "libelle": "Anglais professionnel et interculturalité",
+   "type": "concept",
+   "notions": [
+    "Vocabulaire métier et environnement international",
+    "Rédaction professionnelle et production de livrables bilingues",
+    "Réunions, négociation et gestion de projet en anglais",
+    "Communication interculturelle et adaptation",
+    "Techniques de présentation et de prise de parole stratégique",
+    "Soutenance, argumentation et feedback"
+   ]
+  },
+  {
+   "libelle": "Personal branding et présence éditoriale",
+   "type": "concept",
+   "notions": [
+    "Introduction au personal branding éditorial",
+    "Rédaction et optimisation de l’article",
+    "Publication, diffusion et interaction"
+   ]
+  },
+  {
+   "libelle": "Travail collaboratif et workflow d’équipe",
+   "type": "posture",
+   "notions": [
+    "Panorama et prise en main des outils collaboratifs",
+    "Structuration d’un workflow collaboratif efficace",
+    "Production de livrables créatifs et restitution professionnelle",
+    "Cadrage stratégique et workflow créatif"
+   ]
+  }
+ ],
+ "ecartees": [
+  {
+   "motif": "trame pédagogique",
+   "notions": [
+    "Introduction et cadrage méthodologique",
+    "Présentation de l’épreuve et cadrage méthodologique",
+    "Présentation de l’épreuve Pack Marque et cadrage du brand content",
+    "Cas pratiques et restitution professionnelle",
+    "Synthèse, restitution et intégration dans la stratégie de marque",
+    "Restitution, feedback et préparation à la plateforme de marque",
+    "Restitution, argumentation et préparation à l’épreuve certifiante",
+    "Restitution professionnelle et argumentation stratégique",
+    "Restitution professionnelle et intégration dans la stratégie de marque",
+    "Restitution professionnelle et argumentation des choix",
+    "Restitution professionnelle et valorisation de la démarche créative",
+    "Restitution, justification et argumentation professionnelle",
+    "Restitution, justification et valorisation professionnelle",
+    "Justification, restitution et valorisation de la direction artistique",
+    "Justification et valorisation de la démarche :",
+    "Atelier pratique et feedback",
+    "Atelier pratique et restitution professionnelle",
+    "Atelier collaboratif et restitution",
+    "Accueil, diagnostic et harmonisation des niveaux",
+    "Accompagnement au changement et intégration dans la transformation digitale",
+    "Accompagnement au changement et restitution professionnelle",
+    "Intégration stratégique, restitution et argumentation",
+    "Séance unique (3,5h) – Finalisation du dossier et simulation de soutenance",
+    "Rappel des attendus Mégaka et lien avec les modules de diagnostic, de segmentation et de positionnement issus du Bloc 1 (15 min) — le cadrage détaillé du cadre certificateur est assuré par le TD Accompagnement Mégaka."
+   ]
+  },
+  {
+   "motif": "texte de présentation, pas un programme",
+   "notions": [
+    "Un ANNONCEUR, le “client”, propose aux étudiant.e.s de prendre en charge sa problématique de communication. Pendant toute une semaine, ils.elles réflechissent aux SOLUTIONS à lui proposer en réponse au Brief... L’annonceur comme la situation sont réels.",
+    "Les étudiant.e.s travaillent en groupe et imaginent donc la campagne de communication à mettre en œuvre. Chaque Agence [qui a travaillé son iden- tité propre] présente ses solutions tant opérationnelles que créatives sous la forme d’une recommandation stratégique.",
+    "Le CESACOM organise les présentations en deux phases : un jury inter- médiaire [organisé en plusieurs poules] écoute toutes les agences. Il sélectionne les agences qui iront en FINALE défendre leur projet devant le client.",
+    "À l’issue de la finale, deux récompenses sont remises : le PRIX ECOLE est attribué aux étudiant.e.s ayant accompli le travail le plus conforme aux attentes méthodologiques que l’exercice impose. Le prestigieux PRIX ANNONCEUR est, quant à lui, remis à l’agence ayant gagné la confiance du client qui, parfois, réalise le projet qu’il a retenu."
+   ]
+  }
+ ]
+}
