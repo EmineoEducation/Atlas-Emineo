@@ -1,14 +1,11 @@
-import { useState, useEffect, useRef, useCallback } from 'react'
-import { api, apiFetch, setToken, clearToken, getToken, ingererDocuments, genererFicheJ1, apparierIntervenants, rapprocherModules } from './api.js'
-import { extraireTextes } from './lire-documents.js'
+import { useState, useEffect } from 'react'
+import { api, apiFetch, setToken, clearToken, getToken, apparierIntervenants } from './api.js'
 
 const P = {
   abysse:'#0B2B2D',petrole:'#134547',menthe:'#5DE298',givre:'#E3FFF0',eau:'#9DF0C4',saumon:'#E89B77',
   surface:'#FFFFFF',surface2:'#F5FDF8',border:'rgba(19,69,71,0.12)',borderm:'rgba(93,226,152,0.28)',
   textm:'#4A706E',textl:'rgba(11,43,45,0.40)',amber:'#EF9F27',amberbg:'#FFF8ED',red:'#E24B4A',redbg:'#FEF2F2',
 }
-const SCOL={nominal:'#5DE298',signal:'#9DF0C4',coordination:'#EF9F27',incoherence:'#E24B4A',vide:'#8EADA8'}
-const SFIL={nominal:'rgba(93,226,152,0.12)',signal:'rgba(157,240,196,0.14)',coordination:'rgba(239,159,39,0.10)',incoherence:'rgba(226,75,74,0.08)',vide:'rgba(19,69,71,0.04)'}
 const CAMPUS_LIST=['Le Mans','Paris','Nantes','Bordeaux','Rennes','Vannes','Poitiers','La Rochelle']
 
 function Tag({label,color='blue',small}){
@@ -30,90 +27,6 @@ function Spinner({size=20}){return <div style={{width:size,height:size,border:`2
 function card(x={}){return{background:P.surface,borderRadius:12,border:`1px solid ${P.border}`,padding:'1.25rem 1.4rem',marginBottom:'0.8rem',boxShadow:'0 1px 6px rgba(11,43,45,0.06)',...x}}
 function Empty({icon,titre,msg,action,onClick}){
   return <div style={{padding:'4rem 2rem',textAlign:'center'}}><div style={{fontSize:40,opacity:0.35,marginBottom:'0.75rem'}}>{icon}</div><div style={{fontSize:15,fontWeight:600,color:P.petrole,marginBottom:'0.3rem'}}>{titre}</div><div style={{fontSize:13,color:P.textm,lineHeight:1.6,maxWidth:320,margin:'0 auto'}}>{msg}</div>{action&&<button onClick={onClick} style={{marginTop:'1.25rem',background:P.petrole,color:P.givre,border:'none',borderRadius:8,padding:'8px 20px',fontSize:13,cursor:'pointer'}}>{action}</button>}</div>
-}
-
-/* GRAPHE */
-function GrapheCanvas({blocs,alertes,onClickBloc,showAlerts=true}){
-  const cvRef=useRef(null)
-  const [panel,setPanel]=useState(null)
-  const blocsComp=(blocs||[]).filter(b=>(b.competences||[]).length>0)
-  const nodes=blocsComp.map((b,i,arr)=>{
-    const angle=(2*Math.PI*i/Math.max(arr.length,1))-Math.PI/2
-    const r=arr.length<=3?0.28:0.30
-    const ids=(b.modules||[]).map(m=>m.id)
-    const h1=(alertes||[]).some(a=>a.niveau===1&&!(a._dismissed)&&(a.modules||[]).some(m=>ids.includes(m)))
-    const h2=(alertes||[]).some(a=>a.niveau===2&&!(a._dismissed)&&(a.modules||[]).some(m=>ids.includes(m)))
-    const h3=(alertes||[]).some(a=>a.niveau===3&&!(a._dismissed)&&(a.modules||[]).some(m=>ids.includes(m)))
-    return{...b,x:0.5+r*Math.cos(angle),y:0.45+r*0.75*Math.sin(angle),status:h1?'incoherence':h2?'coordination':h3?'signal':'nominal',comp:(b.competences||[]).length,mc:(b.modules||[]).length}
-  })
-  // Liens sémantiques réels entre blocs.
-  // Auparavant : anneau reliant chaque bloc au suivant dans l'ordre du tableau.
-  // Ce tracé ne portait aucune information — il dessinait un cercle quel que
-  // soit le contenu. Un lien signifie désormais qu'au moins une notion clé est
-  // travaillée dans les deux blocs, et son épaisseur compte ces notions
-  // partagées, conformément à l'intention d'origine (épaisseur = fréquence de
-  // résonance). Sans notion commune : aucun trait, ce qui est une information.
-  const normNotion=t=>String(t||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,' ').trim()
-  const notionsParBloc=nodes.map(n=>{
-    const set=new Set()
-    ;(n.modules||[]).forEach(m=>(m.notions_cles||[]).forEach(k=>{const v=normNotion(k);if(v.length>2)set.add(v)}))
-    return set
-  })
-  const links=[]
-  for(let i=0;i<nodes.length;i++){
-    for(let j=i+1;j<nodes.length;j++){
-      let partagees=0
-      notionsParBloc[i].forEach(v=>{if(notionsParBloc[j].has(v))partagees++})
-      if(partagees>0) links.push({a:nodes[i].id,b:nodes[j].id,w:Math.min(1+partagees*1.2,6),n:partagees})
-    }
-  }
-  const draw=useCallback(()=>{
-    const cv=cvRef.current;if(!cv)return
-    const w=cv.width=cv.parentElement.clientWidth,h=cv.height=400
-    const ctx=cv.getContext('2d');ctx.clearRect(0,0,w,h)
-    links.forEach(l=>{
-      const a=nodes.find(n=>n.id===l.a),b=nodes.find(n=>n.id===l.b);if(!a||!b)return
-      ctx.beginPath();ctx.moveTo(a.x*w,a.y*h);ctx.lineTo(b.x*w,b.y*h)
-      ctx.strokeStyle=`rgba(19,69,71,${Math.min(0.10+(l.n||1)*0.06,0.38)})`;ctx.lineWidth=l.w;ctx.stroke()
-    })
-    nodes.forEach(n=>{
-      const x=n.x*w,y=n.y*h,rc=18+n.comp*4
-      if(n.status==='incoherence'){ctx.beginPath();ctx.arc(x,y,rc+7,0,Math.PI*2);ctx.strokeStyle='rgba(226,75,74,0.18)';ctx.lineWidth=5;ctx.stroke()}
-      ctx.beginPath();ctx.arc(x,y,rc,0,Math.PI*2);ctx.fillStyle=SFIL[n.status]||SFIL.vide;ctx.fill()
-      ctx.strokeStyle=SCOL[n.status]||SCOL.vide;ctx.lineWidth=showAlerts?2:1.5;ctx.stroke()
-      ctx.fillStyle=P.abysse;ctx.textAlign='center';ctx.textBaseline='middle'
-      const fs=Math.max(9,rc*0.22);ctx.font=`600 ${fs}px Inter,system-ui`
-      ctx.fillText(n.id,x,y-4)
-      ctx.font=`400 ${Math.max(8,fs*0.85)}px Inter,system-ui`;ctx.fillStyle=P.textm
-      const short=n.titre?n.titre.split(' ').slice(0,2).join(' '):'';ctx.fillText(short,x,y+8)
-    })
-  },[nodes,links,showAlerts])
-  useEffect(()=>{draw();window.addEventListener('resize',draw);return()=>window.removeEventListener('resize',draw)},[draw])
-  function getHit(e){
-    const cv=cvRef.current;if(!cv)return null
-    const rect=cv.getBoundingClientRect()
-    const mx=(e.clientX-rect.left)*(cv.width/rect.width),my=(e.clientY-rect.top)*(cv.height/rect.height)
-    return nodes.find(n=>{const dx=mx-n.x*cv.width,dy=my-n.y*cv.height;return Math.sqrt(dx*dx+dy*dy)<=18+n.comp*4})
-  }
-  return(
-    <div style={{position:'relative',borderRadius:12,border:`1px solid ${P.border}`,overflow:'hidden',background:'rgba(227,255,240,0.3)'}}>
-      <canvas ref={cvRef} style={{display:'block',cursor:'default'}}
-        onMouseMove={e=>{const n=getHit(e);e.currentTarget.style.cursor=n?'pointer':'default'}}
-        onClick={e=>{const n=getHit(e);if(!n){setPanel(null);return}if(onClickBloc&&n.status==='incoherence'){onClickBloc(n);return}setPanel(prev=>prev?.id===n.id?null:n)}}
-      />
-      {panel&&(
-        <div style={{position:'absolute',right:0,top:0,width:220,height:'100%',background:'rgba(255,255,255,0.97)',borderLeft:`1px solid ${P.border}`,padding:'0.9rem',overflowY:'auto'}}>
-          <div style={{display:'flex',justifyContent:'space-between',marginBottom:'0.5rem'}}>
-            <span style={{fontWeight:600,fontSize:13,color:P.abysse}}>{panel.id} — {panel.titre}</span>
-            <button onClick={()=>setPanel(null)} style={{color:P.textm,fontSize:16}}>×</button>
-          </div>
-          <div style={{fontSize:11,color:P.textm,marginBottom:'0.5rem'}}>{panel.comp}C · {panel.mc}M</div>
-          {(panel.competences||[]).map(c=><div key={c.id} style={{fontSize:11,padding:'3px 0',borderBottom:`1px solid ${P.border}`,color:P.abysse}}>{c.id} — {c.libelle}</div>)}
-        </div>
-      )}
-      <div style={{position:'absolute',bottom:8,left:10,fontSize:10,color:P.textl}}>{links.length?'Trait = notion commune · épaisseur = nombre de notions partagées':'Aucune notion partagée entre blocs — ingérer les syllabi'}</div>
-    </div>
-  )
 }
 
 /* TOPBAR */
@@ -198,14 +111,6 @@ function genPassword(){
 }
 
 // Parser CSV séparateur ";" — gère les champs entre guillemets et le BOM UTF-8
-// Même normalisation que la fusion côté serveur (api/formations.js) : accents,
-// casse, ponctuation et espaces multiples neutralisés. Les deux doivent rester
-// identiques, sinon un intitulé réécrit ici ne serait pas reconnu là-bas.
-function normaliserTitre(t){
-  return String(t||'').toLowerCase().normalize('NFD')
-    .replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,' ').trim()
-}
-
 function parseCSV(text){
   const lines=text.replace(/^\uFEFF/,'').split(/\r?\n/).map(l=>l.trim()).filter(Boolean)
   if(!lines.length)return[]
@@ -684,22 +589,119 @@ function AlertesList({formations,showFormationTitle=true}){
   )
 }
 
+/* ═══ CARTOGRAPHIE D'UN TITRE — Direction et RP ═════════════════════════════
+   Remplace GrapheCanvas (05/10/2026). L'ancien graphe dessinait des cercles de
+   taille voisine reliés par les notions communes aux modules. Or les
+   référentiels versionnés ne portent aucune notion : le champ notions_cles est
+   constant et vide (api/_lib/referentiels.js), parce que l'extracteur ne lit
+   que le plan de formation. Aucun trait n'était donc jamais tracé, et la carte
+   se réduisait à des ronds muets.
+
+   On réutilise ici la rosace de L'Atelier, déjà en production côté Formateur
+   Référent : hub au sigle du titre, un cercle par bloc, détail au survol
+   (intitulé complet, compétences, modules, épreuves), contour saumon pour les
+   parcours au choix. Mode 'plan' — contours pointillés — tant qu'aucune séance
+   n'est déclarée : la carte annonce la structure prévue, elle ne prétend pas
+   décrire du réalisé.
+
+   Un même composant pour la Direction, le RP et le FR : une seule règle
+   visuelle à maintenir. */
+function CartographieTitre({formation}){
+  const [sel,setSel]=useState({kind:null,id:null})
+  const blocsRaw=formation?.blocs||[]
+  const titre=formation?.formation?.titre||''
+
+  const blocs=blocsRaw.map(b=>{
+    const mods=b.modules||[]
+    const qui=Array.from(new Set(mods.map(m=>m.intervenant).filter(Boolean)))
+    return{
+      id:b.id, titre:b.titre,
+      comp:(b.competences||[]).length,
+      mods:mods.length,
+      pct:0, anom:0, st:'idle',
+      nature:b.nature==='option'?'option':'obligatoire',
+      optGroupe:b.option_groupe||'',
+      epreuves:b.epreuves||[],
+      qui:qui.length?qui.join(' · '):'Non affecté',
+    }
+  })
+
+  const blocSel=sel.kind==='bloc'?blocsRaw.find(b=>b.id===sel.id):null
+
+  if(!blocs.length)return(
+    <Empty icon="🗺" titre="Aucun bloc de compétences"
+      msg="Ce titre n'a pas encore de référentiel chargé. Lancez la synchronisation depuis le dépôt."/>
+  )
+
+  return(
+    <>
+      <Cartographie2 blocs={blocs} mode="plan" sel={sel} titre={titre}
+        onSelect={x=>setSel(p=>p.kind==='bloc'&&p.id===x.id?{kind:null,id:null}:x)}/>
+
+      {/* Détail du bloc retenu — dépliage sous la carte plutôt qu'en panneau
+          flottant : la lecture reste dans le flux de la page. */}
+      {blocSel&&(
+        <div style={{...card({marginTop:'0.9rem'}),borderLeft:`3px solid ${blocSel.nature==='option'?P.saumon:P.menthe}`}}>
+          <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',gap:12,marginBottom:'0.75rem'}}>
+            <div>
+              <Tag label={blocSel.id} small/>
+              <span style={{marginLeft:'0.5rem',fontSize:15,fontWeight:600,color:P.abysse}}>{blocSel.titre}</span>
+              {blocSel.nature==='option'&&(
+                <div style={{fontSize:11,fontWeight:700,letterSpacing:'.05em',textTransform:'uppercase',color:AT.warnText,marginTop:3}}>
+                  Parcours au choix{blocSel.option_groupe?' · '+blocSel.option_groupe:''}
+                </div>
+              )}
+            </div>
+            <button onClick={()=>setSel({kind:null,id:null})} style={{color:P.textm,fontSize:18,cursor:'pointer',lineHeight:1}}>×</button>
+          </div>
+
+          {(blocSel.epreuves||[]).length>0&&(
+            <div style={{padding:'0.55rem 0.8rem',background:P.surface2,borderRadius:8,marginBottom:'0.75rem',fontSize:12,color:P.petrole,lineHeight:1.6}}>
+              {blocSel.epreuves.map((e,i)=>(
+                <div key={i}><strong>{e.intitule}</strong>{e.modalite?' · '+e.modalite:''}{e.duree?' · '+e.duree+' h':''}{e.date?' · le '+e.date:''}</div>
+              ))}
+            </div>
+          )}
+
+          <div style={{fontSize:10,fontWeight:700,letterSpacing:'.08em',textTransform:'uppercase',color:P.textm,marginBottom:'0.4rem'}}>
+            Compétences du référentiel
+          </div>
+          {(blocSel.competences||[]).length===0
+            ? <div style={{fontSize:12,color:P.textm,marginBottom:'0.75rem'}}>Aucune compétence rattachée à ce bloc.</div>
+            : <div style={{marginBottom:'0.9rem'}}>
+                {blocSel.competences.map(c=>(
+                  <div key={c.id} style={{display:'flex',gap:8,alignItems:'flex-start',padding:'4px 0',borderBottom:`1px solid ${P.border}`}}>
+                    <span style={{flexShrink:0}}><Tag label={c.id} small/></span>
+                    <span style={{fontSize:12,color:P.abysse,lineHeight:1.5}}>{c.libelle||'—'}</span>
+                  </div>
+                ))}
+              </div>}
+
+          <div style={{fontSize:10,fontWeight:700,letterSpacing:'.08em',textTransform:'uppercase',color:P.textm,marginBottom:'0.4rem'}}>
+            Modules ({(blocSel.modules||[]).length})
+          </div>
+          <div style={{display:'flex',flexWrap:'wrap',gap:'0.35rem'}}>
+            {(blocSel.modules||[]).map(m=>(
+              <span key={m.id} style={{fontSize:11.5,padding:'4px 10px',borderRadius:8,background:P.surface2,border:`1px solid ${P.border}`,color:P.abysse}}>
+                {m.titre}
+                {m.intervenant&&<span style={{color:P.textm}}> · {m.intervenant}</span>}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
+    </>
+  )
+}
+
 /* ═══ VUE DIRECTION DES PROGRAMMES ════════════════════════════════════════ */
 function VueDir({user,onLogout}){
   const [atelierOpen,setAtelierOpen]=useState(false)
   const [onglet,setOnglet]=useState('formations')
   const [formations,setFormations]=useState([])
   const [loading,setLoading]=useState(true)
-  const [files,setFiles]=useState([])
-  const [nomFormation,setNomFormation]=useState('')
-  const [typeDoc,setTypeDoc]=useState('pf')        // 'pf' | 'syllabus' | 'race'
-  const [ciblesSel,setCiblesSel]=useState([])      // ids de promotions visées
-  const [rapport,setRapport]=useState(null)
-  const [info,setInfo]=useState('')
   const [syncEnCours,setSyncEnCours]=useState(false)
   const [syncRapport,setSyncRapport]=useState(null)
-  const [ingLoading,setIngLoading]=useState(false)
-  const [progress,setProgress]=useState('')
   const [error,setError]=useState('')
   const [selF,setSelF]=useState(null)
   const [editCampus,setEditCampus]=useState(null)   // _id de la formation en cours d'édition campus
@@ -711,89 +713,6 @@ function VueDir({user,onLogout}){
   useEffect(()=>{loadFormations()},[])
   async function loadFormations(){
     try{const d=await api.getFormations();setFormations(d.formations);setLoading(false)}catch(e){setError(e.message);setLoading(false)}
-  }
-
-  // Ingestion vers des promotions pre-creees.
-  // Le PF pose la structure et se ventile sur les deux annees d'un Mastere ;
-  // les syllabi et le RACE viennent ensuite l'enrichir sans jamais l'ecraser.
-  async function handleIngestion(){
-    if(!files.length||!ciblesSel.length)return
-    setIngLoading(true);setError('');setInfo('');setRapport(null);setProgress('Lecture des fichiers…')
-    try{
-      let avisRapprochement='',renommages=[],aArbitrer=[]
-      const textes=await extraireTextes(files,setProgress)
-      setProgress(typeDoc==='pf'?'Analyse du plan de formation…':typeDoc==='race'?'Analyse du référentiel…':'Analyse des syllabi…')
-      const data=await ingererDocuments(textes,'Le Mans',setProgress,typeDoc)
-      // Garde-fou : une extraction vide ne doit pas passer pour un succès.
-      // C'est ce qui masquait la lecture binaire des .docx — rapport à zéro
-      // module, aucune erreur, aucun changement visible.
-      const nbMod=(data.blocs||[]).reduce((n,b)=>n+((b.modules||[]).length),0)
-      const nbComp=(data.blocs||[]).reduce((n,b)=>n+((b.competences||[]).length),0)
-      if(typeDoc==='race'?nbComp===0:nbMod===0){
-        throw new Error(typeDoc==='race'
-          ?"Aucune compétence n'a pu être extraite de ce document. Vérifier qu'il s'agit bien d'un RACE et que le texte est lisible."
-          :"Aucun module n'a pu être extraits de ce document. Vérifier la nature sélectionnée et que le fichier contient bien du texte.")
-      }
-      // ── Rapprochement sémantique syllabus → plan de formation ──────────────
-      // La fusion en base se fait sur l'intitulé exact. « Relations Presse »
-      // face à « Relations presse et influence » échouait donc, alors qu'il
-      // s'agit du même enseignement. Les intitulés sont alignés ici, AVANT
-      // l'envoi : correspondances sûres appliquées, douteuses laissées à
-      // l'arbitrage. Une fusion erronée passerait inaperçue ; une case vide se
-      // corrige.
-      if(typeDoc==='syllabus'&&ciblesSel.length===1){
-        const cible=formations.find(x=>x._id===ciblesSel[0])
-        const modulesPF=(cible?.blocs||[]).flatMap(b=>(b.modules||[]).map(m=>({titre:m.titre,bloc:b.id})))
-        const exact=new Set(modulesPF.map(m=>normaliserTitre(m.titre)))
-        const restants=(data.blocs||[]).flatMap(b=>(b.modules||[]).map(m=>m.titre))
-          .filter(t=>t&&!exact.has(normaliserTitre(t)))
-        if(modulesPF.length&&restants.length){
-          setProgress('Rapprochement des intitulés…')
-          try{
-            const r=await rapprocherModules(modulesPF,restants)
-            const SEUIL=85,prisPF=new Set(),prisSy=new Set()
-            for(const c of (r?.correspondances||[])){
-              if(!c||!c.syllabus||!c.pf)continue
-              if(prisPF.has(c.pf)||prisSy.has(c.syllabus))continue
-              if((c.confiance||0)>=SEUIL){prisPF.add(c.pf);prisSy.add(c.syllabus);renommages.push(c)}
-              else if((c.confiance||0)>=50)aArbitrer.push(c)
-            }
-            const table=new Map(renommages.map(c=>[normaliserTitre(c.syllabus),c.pf]))
-            for(const b of (data.blocs||[]))for(const m of (b.modules||[])){
-              const cible2=table.get(normaliserTitre(m.titre))
-              if(cible2){m._titre_syllabus=m.titre;m.titre=cible2}
-            }
-          }catch(e){avisRapprochement='Rapprochement sémantique indisponible ('+(e.message||e)+') — repli sur l\'intitulé exact.'}
-        }
-      }
-
-      // Signalements non bloquants : ils décrivent ce qui a été mis de côté,
-      // pas un échec. En rouge, ils laissaient croire à une interruption.
-      const avis=[]
-      if(data._lots>1)avis.push(data._lots+' lots analysés puis fusionnés (corpus volumineux).')
-      if(data._documents_tronques)avis.push('Document(s) '+data._documents_tronques.join(', ')+' au-delà de 120 000 caractères : la fin n\'a pas été analysée.')
-      if(data._lots_en_echec)avis.push(data._lots_en_echec.length+' lot(s) en échec — contenu partiel.')
-      if(data._blocs_ecartes)avis.push('Écarté(s) car hors périmètre certifiant : '+data._blocs_ecartes.map(b=>(b.titre||b.id)+' — '+b.modules+' modules').join(' · ')+'.')
-      if(avisRapprochement)avis.push(avisRapprochement)
-      if(renommages.length)avis.push(renommages.length+' intitulé(s) rapproché(s) automatiquement : '+renommages.map(c=>'« '+c.syllabus+' » → « '+c.pf+' » ('+c.confiance+' %)').join(' · ')+'.')
-      if(aArbitrer.length)avis.push(aArbitrer.length+' rapprochement(s) trop incertain(s), laissé(s) de côté : '+aArbitrer.map(c=>'« '+c.syllabus+' » ≈ « '+c.pf+' » ('+c.confiance+' %'+(c.motif?', '+c.motif:'')+')').join(' · ')+'. À trancher à la main.')
-      if(avis.length)setInfo(avis.join(' '))
-      if(nomFormation.trim()&&data.formation)data.formation.titre=nomFormation.trim()
-      // Année de cycle : _cycle vient du seed et fait foi. L'intitulé n'est
-      // qu'un repli — « Bach CDC » y donnerait « BACH », qui n'est pas un cycle.
-      const cibles=ciblesSel.map(id=>{
-        const f=formations.find(x=>x._id===id)
-        const tc=String(f?._titre_court||'')
-        const tok=(tc.split(' ')[0]||'').toUpperCase()
-        const cycle=String(f?._cycle||'').toUpperCase()||(['M1','M2','B3'].includes(tok)?tok:'B3')
-        return {id,cycle}
-      })
-      setProgress(cibles.length>1?'Ventilation sur les promotions…':'Enregistrement…')
-      const r=await api.alimenterPromotions(cibles,data,typeDoc)
-      setRapport(r.rapport||null)
-      setProgress('Terminé ✓');setFiles([]);setNomFormation('')
-      await loadFormations()
-    }catch(e){setError('Erreur : '+(e&&e.message?e.message:String(e)))}finally{setIngLoading(false)}
   }
 
   async function handleDelete(id){
@@ -842,7 +761,7 @@ function VueDir({user,onLogout}){
   return(
     <div style={{minHeight:'100vh',background:P.givre}}>
       <Topbar user={user} formationTitre="Direction des programmes" onLogout={onLogout} onglet={onglet} setOnglet={setOnglet}
-        onglets={[{id:'formations',label:'Formations'},{id:'ingestion',label:'+ Ingestion'},{id:'cartographie',label:'Cartographie'},{id:'digest',label:'Digest'},{id:'alertes',label:`Alertes (${totalAlertes})`},{id:'groupes',label:'Groupes'},{id:'comptes',label:'Comptes'}]}/>
+        onglets={[{id:'formations',label:'Formations'},{id:'cartographie',label:'Cartographie'},{id:'digest',label:'Digest'},{id:'alertes',label:`Alertes (${totalAlertes})`},{id:'groupes',label:'Groupes'},{id:'comptes',label:'Comptes'}]}/>
       <div style={{maxWidth:960,margin:'0 auto',padding:'2rem 1.5rem'}}>
 
         <button onClick={()=>setAtelierOpen(true)}
@@ -857,12 +776,47 @@ function VueDir({user,onLogout}){
 
         {onglet==='formations'&&(
           <div className="fi">
-            <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:'1.25rem'}}>
-              <div><h2 style={{fontFamily:'Georgia,serif',fontWeight:400,color:P.abysse,margin:0,fontSize:24}}>Formations chargées</h2><p style={{fontSize:13,color:P.textm,marginTop:'0.25rem'}}>{formations.length} formation{formations.length>1?'s':''}</p></div>
-              <button onClick={()=>setOnglet('ingestion')} style={{background:P.petrole,color:P.givre,border:'none',borderRadius:8,padding:'8px 16px',fontSize:13,fontWeight:500,cursor:'pointer'}}>+ Ajouter</button>
+            <div style={{marginBottom:'1.25rem'}}>
+              <h2 style={{fontFamily:'Georgia,serif',fontWeight:400,color:P.abysse,margin:0,fontSize:24}}>Référentiels</h2>
+              <p style={{fontSize:13,color:P.textm,marginTop:'0.25rem'}}>{formations.length} promotion{formations.length>1?'s':''} en base · campus modifiable par titre</p>
             </div>
+
+            {/* Synchronisation depuis le dépôt — voie unique depuis le
+                05/10/2026. Le dépôt de fichiers analysé par Claude dans le
+                navigateur a été retiré : ses résultats s'empilaient dans le
+                même data_json sans jamais rien retirer (blocs en double du
+                07/09), et la première synchronisation les effaçait de toute
+                façon. La structure d'un titre vient des référentiels
+                versionnés : reproductible, relisible en diff, remplacée en
+                bloc. */}
+            <div style={card({marginBottom:'1.25rem',background:'rgba(93,226,152,0.06)',border:`1px solid ${P.borderm}`})}>
+              <div style={{fontSize:12,fontWeight:600,color:P.abysse,marginBottom:'0.35rem'}}>Référentiels du dépôt</div>
+              <p style={{fontSize:12,color:P.textm,margin:'0 0 0.7rem',lineHeight:1.6}}>
+                Remplace intégralement la structure des promotions par les fichiers de <code style={{fontSize:11}}>referentiels/</code>, produits par l'extracteur et validés en commit. Efface tout résidu d'ingestion antérieure.
+              </p>
+              <button disabled={syncEnCours} onClick={async()=>{
+                setSyncEnCours(true);setError('');setSyncRapport(null)
+                try{ const r=await api.synchroniserReferentiels(); setSyncRapport(r.rapport||[]); await loadFormations() }
+                catch(e){ setError('Synchronisation : '+(e&&e.message?e.message:String(e))) }
+                finally{ setSyncEnCours(false) }
+              }} style={{padding:'0.6rem 1.4rem',borderRadius:8,border:'none',fontSize:13,fontWeight:600,cursor:syncEnCours?'wait':'pointer',
+                background:`linear-gradient(135deg,${P.petrole},${P.menthe})`,color:P.abysse}}>
+                {syncEnCours?'Synchronisation…':'Synchroniser depuis le dépôt'}
+              </button>
+              {syncRapport&&(
+                <div style={{marginTop:'0.75rem',fontSize:12,color:P.abysse,lineHeight:1.7}}>
+                  {syncRapport.map((r,i)=>(
+                    <div key={i} style={{paddingTop:4,borderTop:i?`1px solid ${P.border}`:'none'}}>
+                      <strong>{r.promotion||r.cle}</strong> — {r.etat}
+                      {r.blocs!==undefined&&<span style={{color:P.textm}}> · {r.blocs} blocs, {r.modules} modules, {r.competences} compétences{r.controles_ok?'':' · contrôles en écart'}</span>}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
             {loading?<div style={{textAlign:'center',padding:'2rem'}}><Spinner/></div>:
-              formations.length===0?<Empty icon="🎓" titre="Aucune formation" msg="Utilisez l'onglet Ingestion pour analyser vos documents." action="Aller à l'ingestion →" onClick={()=>setOnglet('ingestion')}/>:
+              formations.length===0?<Empty icon="🎓" titre="Aucun référentiel en base" msg="Lancez la synchronisation depuis le dépôt ci-dessus."/>:
               formations.map(f=>{
                 const isSel=fCarto?._id===f._id
                 return(
@@ -895,158 +849,19 @@ function VueDir({user,onLogout}){
           </div>
         )}
 
-        {onglet==='ingestion'&&(
-          <div className="fi">
-            <h2 style={{fontFamily:'Georgia,serif',fontWeight:400,color:P.abysse,marginTop:0,fontSize:24,marginBottom:'0.4rem'}}>Alimenter une promotion</h2>
-
-            {/* Synchronisation depuis le dépôt — voie de référence.
-                Le dépôt de fichiers ci-dessous reste disponible pour les
-                syllabi, mais la structure d'un titre vient désormais des
-                référentiels versionnés : reproductible, relisible en diff, et
-                surtout remplacée en bloc plutôt que cumulée. */}
-            <div style={card({marginBottom:'1.25rem',background:'rgba(93,226,152,0.06)',border:`1px solid ${P.borderm}`})}>
-              <div style={{fontSize:12,fontWeight:600,color:P.abysse,marginBottom:'0.35rem'}}>Référentiels du dépôt</div>
-              <p style={{fontSize:12,color:P.textm,margin:'0 0 0.7rem',lineHeight:1.6}}>
-                Remplace intégralement la structure des promotions par les fichiers de <code style={{fontSize:11}}>referentiels/</code>, produits par l'extracteur et validés en commit. Efface tout résidu d'ingestion antérieure.
-              </p>
-              <button disabled={syncEnCours} onClick={async()=>{
-                setSyncEnCours(true);setError('');setInfo('');setSyncRapport(null)
-                try{ const r=await api.synchroniserReferentiels(); setSyncRapport(r.rapport||[]); await loadFormations() }
-                catch(e){ setError('Synchronisation : '+(e&&e.message?e.message:String(e))) }
-                finally{ setSyncEnCours(false) }
-              }} style={{padding:'0.6rem 1.4rem',borderRadius:8,border:'none',fontSize:13,fontWeight:600,cursor:syncEnCours?'wait':'pointer',
-                background:`linear-gradient(135deg,${P.petrole},${P.menthe})`,color:P.abysse}}>
-                {syncEnCours?'Synchronisation…':'Synchroniser depuis le dépôt'}
-              </button>
-              {syncRapport&&(
-                <div style={{marginTop:'0.75rem',fontSize:12,color:P.abysse,lineHeight:1.7}}>
-                  {syncRapport.map((r,i)=>(
-                    <div key={i} style={{paddingTop:4,borderTop:i?`1px solid ${P.border}`:'none'}}>
-                      <strong>{r.promotion||r.cle}</strong> — {r.etat}
-                      {r.blocs!==undefined&&<span style={{color:P.textm}}> · {r.blocs} blocs, {r.modules} modules, {r.competences} compétences{r.controles_ok?'':' · contrôles en écart'}</span>}
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-            <p style={{fontSize:13,color:P.textm,marginBottom:'1.5rem',lineHeight:1.7}}>
-              Les sept promotions du Mans sont déjà créées. Le plan de formation pose la structure et se répartit sur les deux années ; les syllabi et le RACE viennent ensuite l'enrichir.
-            </p>
-
-            {/* Nature du document */}
-            <div style={card({marginBottom:'1rem'})}>
-              <div style={{fontSize:12,fontWeight:600,color:P.abysse,marginBottom:'0.6rem'}}>1 · Nature du document</div>
-              <div style={{display:'flex',flexWrap:'wrap',gap:'0.4rem',marginBottom:'0.6rem'}}>
-                {[{v:'pf',l:'Plan de formation'},{v:'syllabus',l:'Syllabi'},{v:'race',l:'RACE'}].map(({v,l})=>{
-                  const sel=typeDoc===v
-                  return <button key={v} onClick={()=>{setTypeDoc(v);setRapport(null)}}
-                    style={{padding:'6px 16px',borderRadius:20,fontSize:13,border:`1px solid ${sel?P.borderm:P.border}`,background:sel?'rgba(93,226,152,0.12)':P.surface,color:sel?P.petrole:P.textm,fontWeight:sel?600:400,cursor:'pointer',transition:'all 0.15s'}}>{l}</button>
-                })}
-              </div>
-              <div style={{fontSize:12,color:P.textm,lineHeight:1.6}}>
-                {typeDoc==='pf'&&"Donne la liste des modules et leur année. Remplace la structure de la promotion visée."}
-                {typeDoc==='syllabus'&&"Donne le détail d'un module déjà créé : séances, notions, compétences. N'écrase pas le plan de formation."}
-                {typeDoc==='race'&&"Donne la grille de certification : blocs, compétences, critères. Ne crée aucun module."}
-              </div>
-            </div>
-
-            {/* Promotions visées */}
-            <div style={card({marginBottom:'1rem'})}>
-              <div style={{fontSize:12,fontWeight:600,color:P.abysse,marginBottom:'0.6rem'}}>2 · Promotion(s) alimentée(s)</div>
-              {formations.length===0
-                ? <div style={{fontSize:12,color:P.textm}}>Aucune promotion en base — lancer /api/setup.</div>
-                : <div style={{display:'flex',flexWrap:'wrap',gap:'0.4rem'}}>
-                    {formations.map(f=>{
-                      const tc=f._titre_court||f.formation?.titre||'?'
-                      const sel=ciblesSel.includes(f._id)
-                      const nbMod=(f.blocs||[]).reduce((n,b)=>n+((b.modules||[]).length),0)
-                      return <button key={f._id} onClick={()=>setCiblesSel(p=>sel?p.filter(x=>x!==f._id):[...p,f._id])}
-                        style={{padding:'6px 14px',borderRadius:20,fontSize:13,border:`1px solid ${sel?P.borderm:P.border}`,background:sel?'rgba(93,226,152,0.12)':P.surface,color:sel?P.petrole:P.textm,fontWeight:sel?600:400,cursor:'pointer',transition:'all 0.15s'}}>
-                        {tc}<span style={{fontSize:11,opacity:0.7,marginLeft:6}}>{nbMod?nbMod+' mod.':'vide'}</span>
-                      </button>
-                    })}
-                  </div>}
-              {typeDoc==='pf'&&ciblesSel.length>1&&(
-                <div style={{fontSize:12,color:P.petrole,marginTop:'0.6rem',lineHeight:1.6}}>
-                  Ventilation : chaque module ira vers l'année indiquée dans le document. Ceux dont l'année n'est pas déterminable seront listés à part, sans être rattachés.
-                </div>
-              )}
-              {typeDoc!=='pf'&&ciblesSel.length>1&&(
-                <div style={{fontSize:12,color:P.amber,marginTop:'0.6rem',lineHeight:1.6}}>
-                  Un syllabus ou un RACE s'applique à une promotion à la fois — le même contenu sera appliqué à chacune des promotions cochées.
-                </div>
-              )}
-            </div>
-
-            {/* Nom de la formation */}
-            <div style={card({marginBottom:'1rem'})}>
-              <div style={{fontSize:12,fontWeight:600,color:P.abysse,marginBottom:'0.5rem'}}>3 · Intitulé <span style={{fontWeight:400,color:P.textm}}>(optionnel — prioritaire sur l'intitulé extrait)</span></div>
-              <input value={nomFormation} onChange={e=>setNomFormation(e.target.value)} placeholder="Laisser vide pour conserver l'intitulé de la promotion"
-                style={{width:'100%',border:`1px solid ${P.border}`,borderRadius:8,padding:'0.6rem 0.8rem',fontSize:13,color:P.abysse,outline:'none',boxSizing:'border-box'}}/>
-            </div>
-
-            {/* Zone de dépôt */}
-            <div onDragOver={e=>e.preventDefault()} onDrop={e=>{e.preventDefault();setFiles(prev=>[...prev,...Array.from(e.dataTransfer.files)])}} onClick={()=>document.getElementById('fi2').click()}
-              style={{border:`2px dashed ${P.borderm}`,borderRadius:16,padding:'2.5rem 2rem',textAlign:'center',background:'rgba(93,226,152,0.04)',marginBottom:'1rem',cursor:'pointer'}}>
-              <input id="fi2" type="file" multiple accept=".txt,.md,.csv,.json,.pdf,.docx,.xlsx,.xlsm" style={{display:'none'}} onChange={e=>setFiles(prev=>[...prev,...Array.from(e.target.files)])}/>
-              <div style={{fontSize:28,marginBottom:'0.6rem',opacity:0.45}}>📄</div>
-              <div style={{fontSize:14,fontWeight:500,color:P.petrole}}>4 · Glisser-déposer ou cliquer</div>
-              <div style={{fontSize:12,color:P.textm}}>.md .txt .pdf .docx .xlsx</div>
-              <div style={{fontSize:11,color:P.textm,marginTop:'0.5rem',opacity:0.85}}>Tous les fichiers d'un même dépôt doivent être de la nature choisie ci-dessus. Un RACE déposé avec un plan de formation serait lu comme un plan de formation.</div>
-            </div>
-
-            {files.length>0&&<div style={{marginBottom:'1rem'}}>{files.map((f,i)=><div key={i} style={{display:'flex',alignItems:'center',justifyContent:'space-between',padding:'0.5rem 0.75rem',background:P.surface,borderRadius:8,border:`1px solid ${P.border}`,marginBottom:'0.35rem'}}><div style={{fontSize:13,fontWeight:500,color:P.abysse}}>{f.name} <span style={{fontSize:11,color:P.textm}}>({(f.size/1024).toFixed(1)} Ko)</span></div><button onClick={()=>setFiles(prev=>prev.filter((_,j)=>j!==i))} style={{color:P.red,fontSize:16,cursor:'pointer'}}>×</button></div>)}</div>}
-
-            <button onClick={handleIngestion} disabled={ingLoading||!files.length||!ciblesSel.length}
-              style={{width:'100%',padding:'0.9rem',borderRadius:10,fontSize:14,fontWeight:600,border:'none',transition:'all 0.2s',cursor:(!ingLoading&&files.length&&ciblesSel.length)?'pointer':'not-allowed',
-                background:(!ingLoading&&files.length&&ciblesSel.length)?`linear-gradient(135deg,${P.petrole},${P.menthe})`:'rgba(19,69,71,0.08)',color:(!ingLoading&&files.length&&ciblesSel.length)?P.abysse:P.textm}}>
-              {ingLoading?<span style={{display:'flex',alignItems:'center',justifyContent:'center',gap:'0.5rem'}}><Spinner size={16}/>{progress}</span>:'Analyser avec Claude →'}
-            </button>
-
-            {error&&<div style={{marginTop:'1rem',padding:'0.75rem 1rem',background:P.redbg,border:`1px solid ${P.red}`,borderRadius:8,fontSize:12,color:'#8B1A1A'}}>{error}</div>}
-            {info&&<div style={{marginTop:'1rem',padding:'0.75rem 1rem',background:'#FDF1EB',border:'1px solid #E89B77',borderRadius:8,fontSize:12,color:'#B5643C',lineHeight:1.6}}>{info}</div>}
-
-            {/* Rapport d'ingestion — ce qui est passé, et surtout ce qui ne l'est pas */}
-            {rapport&&(
-              <div style={card({marginTop:'1rem'})}>
-                <div style={{fontSize:12,fontWeight:600,color:P.abysse,marginBottom:'0.6rem'}}>Rapport d'ingestion</div>
-                {(rapport.cibles||[]).map((c,i)=>(
-                  <div key={i} style={{fontSize:13,color:P.abysse,padding:'0.35rem 0',borderBottom:`1px solid ${P.border}`}}>
-                    <strong>{c.promotion}</strong>
-                    {c.modules!==undefined&&<span style={{color:P.textm}}> — {c.modules} module(s), {c.blocs} bloc(s){c.blocs_option?', dont '+c.blocs_option+' au choix':''}</span>}
-                    {c.modules_rapproches!==undefined&&<span style={{color:P.textm}}> — {c.modules_rapproches} module(s) enrichi(s), {c.modules_non_rapproches} sans correspondance</span>}
-                  </div>
-                ))}
-                {(rapport.non_ventiles||[]).length>0&&(
-                  <div style={{marginTop:'0.75rem',padding:'0.6rem 0.8rem',background:P.amberbg,border:`1px solid ${P.amber}`,borderRadius:8,fontSize:12,color:'#7A4E06',lineHeight:1.6}}>
-                    <strong>{rapport.non_ventiles.length} module(s) sans année identifiable</strong> — non rattachés : {rapport.non_ventiles.join(' · ')}.
-                    <div style={{marginTop:4}}>Faire apparaître l'année sur ces lignes du plan de formation, puis redéposer.</div>
-                  </div>
-                )}
-                {(rapport.non_rapproches||[]).length>0&&(
-                  <div style={{marginTop:'0.75rem',padding:'0.6rem 0.8rem',background:P.amberbg,border:`1px solid ${P.amber}`,borderRadius:8,fontSize:12,color:'#7A4E06',lineHeight:1.6}}>
-                    <strong>{rapport.non_rapproches.length} module(s) sans correspondance dans le plan de formation</strong> : {rapport.non_rapproches.map(x=>x.module).join(' · ')}.
-                    <div style={{marginTop:4}}>Placés en attente. Soit l'intitulé diverge du plan, soit le module en est absent.</div>
-                  </div>
-                )}
-              </div>
-            )}
-          </div>
-        )}
-
         {onglet==='cartographie'&&(
           <div className="fi">
-            {formations.length===0?<Empty icon="🗺" titre="Aucune formation" msg="Chargez une formation d'abord." action="Ingestion →" onClick={()=>setOnglet('ingestion')}/>:<>
+            {formations.length===0?<Empty icon="🗺" titre="Aucune formation" msg="Aucun référentiel en base — synchroniser depuis le dépôt dans l'onglet Formations." action="Formations →" onClick={()=>setOnglet('formations')}/>:<>
               {formations.length>1&&<div style={{display:'flex',gap:'0.4rem',marginBottom:'1rem',flexWrap:'wrap'}}>{formations.map(f=><button key={f._id} onClick={()=>setSelF(f)} style={{padding:'5px 14px',borderRadius:8,fontSize:12,fontWeight:500,cursor:'pointer',border:`1px solid ${fCarto?._id===f._id?P.borderm:P.border}`,background:fCarto?._id===f._id?'rgba(93,226,152,0.12)':P.surface,color:fCarto?._id===f._id?P.petrole:P.textm}}>{f.formation?.titre||'?'}</button>)}</div>}
               <h2 style={{fontFamily:'Georgia,serif',fontWeight:400,color:P.abysse,marginTop:0,fontSize:22,marginBottom:'1rem'}}>{fCarto?.formation?.titre||'Cartographie'}</h2>
-              <GrapheCanvas blocs={fCarto?.blocs||[]} alertes={fCarto?.alertes_detectees||[]} showAlerts/>
+              <CartographieTitre formation={fCarto}/>
             </>}
           </div>
         )}
 
         {onglet==='digest'&&(
           <div className="fi">
-            {formations.length===0?<Empty icon="✉" titre="Aucune formation" msg="Chargez une formation d'abord." action="Ingestion →" onClick={()=>setOnglet('ingestion')}/>:<>
+            {formations.length===0?<Empty icon="✉" titre="Aucune formation" msg="Aucun référentiel en base — synchroniser depuis le dépôt dans l'onglet Formations." action="Formations →" onClick={()=>setOnglet('formations')}/>:<>
               {formations.length>1&&<div style={{display:'flex',gap:'0.4rem',marginBottom:'1rem',flexWrap:'wrap'}}>{formations.map(f=><button key={f._id} onClick={()=>setSelF(f)} style={{padding:'5px 14px',borderRadius:8,fontSize:12,fontWeight:500,cursor:'pointer',border:`1px solid ${fCarto?._id===f._id?P.borderm:P.border}`,background:fCarto?._id===f._id?'rgba(93,226,152,0.12)':P.surface,color:fCarto?._id===f._id?P.petrole:P.textm}}>{f.formation?.titre||'?'}</button>)}</div>}
               <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:'1rem'}}>
                 <h2 style={{fontFamily:'Georgia,serif',fontWeight:400,color:P.abysse,margin:0,fontSize:22}}>{fCarto?.formation?.titre||'Digest'}</h2>
@@ -1112,7 +927,7 @@ function VueRP({user,onLogout}){
         </button>
         {loading?<div style={{textAlign:'center',padding:'2rem'}}><Spinner/></div>:!f?<Empty icon="🎓" titre="Aucune formation" msg="Aucune formation sur votre campus. Contacter la Direction des programmes."/>:<>
           {onglet==='formations'&&<div className="fi"><h2 style={{fontFamily:'Georgia,serif',fontWeight:400,color:P.abysse,marginTop:0,fontSize:22,marginBottom:'1rem'}}>Mes formations — {user.campus}</h2>{formations.map(fo=>{const isSel=selF?._id===fo._id;return<div key={fo._id} onClick={()=>setSelF(fo)} style={{...card({cursor:'pointer'}),background:isSel?P.petrole:P.surface,border:`1px solid ${isSel?P.petrole:P.border}`,boxShadow:isSel?'0 4px 18px rgba(19,69,71,0.25)':'0 1px 6px rgba(11,43,45,0.06)',transition:'all 0.18s'}}><div style={{fontSize:14,fontWeight:600,color:isSel?P.menthe:P.abysse}}>{fo.formation?.titre}</div><div style={{fontSize:11,color:isSel?'rgba(227,255,240,0.55)':P.textm,marginTop:3}}>{(fo.blocs||[]).length}B · {(fo.blocs||[]).flatMap(b=>b.modules||[]).length}M</div></div>})}</div>}
-          {onglet==='cartographie'&&<div className="fi"><h2 style={{fontFamily:'Georgia,serif',fontWeight:400,color:P.abysse,marginTop:0,fontSize:22,marginBottom:'1rem'}}>{f.formation?.titre}</h2><GrapheCanvas blocs={f.blocs||[]} alertes={alertes} showAlerts/></div>}
+          {onglet==='cartographie'&&<div className="fi"><h2 style={{fontFamily:'Georgia,serif',fontWeight:400,color:P.abysse,marginTop:0,fontSize:22,marginBottom:'1rem'}}>{f.formation?.titre}</h2><CartographieTitre formation={f}/></div>}
           {onglet==='blocs'&&<div className="fi"><h2 style={{fontFamily:'Georgia,serif',fontWeight:400,color:P.abysse,marginTop:0,fontSize:22,marginBottom:'1rem'}}>Blocs</h2>{(f.blocs||[]).map(b=><details key={b.id} style={{...card(),marginBottom:'0.6rem'}}><summary style={{listStyle:'none',display:'flex',justifyContent:'space-between',cursor:'pointer'}}><div><Tag label={b.id} small/><span style={{marginLeft:'0.5rem',fontSize:14,fontWeight:600,color:P.abysse}}>{b.titre}</span><div style={{fontSize:11,color:P.textm,marginTop:3}}>{(b.competences||[]).length}C · {(b.modules||[]).length}M</div></div><span style={{fontSize:18,color:P.textm}}>▾</span></summary><div style={{marginTop:'0.75rem',paddingTop:'0.75rem',borderTop:`1px solid ${P.border}`}}>{(b.modules||[]).map(m=><div key={m.id} style={{background:P.surface2,borderRadius:8,padding:'0.5rem 0.75rem',marginBottom:'0.35rem',border:`1px solid ${P.border}`}}><div style={{fontSize:13,fontWeight:500,color:P.abysse}}>{m.titre}</div>{m.intervenant&&<div style={{fontSize:11,color:P.textm}}>{m.intervenant}</div>}{m.notions_cles?.length>0&&<div style={{display:'flex',flexWrap:'wrap',gap:'0.25rem',marginTop:'0.3rem'}}>{m.notions_cles.map(n=><Tag key={n} label={n} small/>)}</div>}</div>)}</div></details>)}</div>}
           {onglet==='alertes'&&<div className="fi"><h2 style={{fontFamily:'Georgia,serif',fontWeight:400,color:P.abysse,marginTop:0,fontSize:22,marginBottom:'0.5rem'}}>Alertes</h2><p style={{fontSize:12,color:P.textm,marginBottom:'1.25rem'}}>Ignorez les alertes non pertinentes — elles restent réactivables.</p><AlertesList formations={[f]} showFormationTitle={false}/></div>}
           {onglet==='groupes'&&<GroupesOptions formations={formations}/>}
