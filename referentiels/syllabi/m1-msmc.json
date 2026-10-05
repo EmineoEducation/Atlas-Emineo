@@ -1,0 +1,3009 @@
+{
+ "genere_le": "2026-10-05",
+ "outil": "extraire-syllabus",
+ "sources": [
+  {
+   "fichier": "Prog_M1_26-27_RNCP38504.docx",
+   "modules": [
+    {
+     "titre": "Veille dynamique (panel, méthodes d’interview) et imaginaires de la consommation",
+     "bloc": "Bloc 1 : Diagnostiquer le positionnement et la proposition de valeur distinctive de la marque",
+     "formation": "M1 – Manager des stratégies marketing et communication",
+     "rncp": "38504 (France Compétences)",
+     "activite": "",
+     "intervenant": "",
+     "volume": "21h",
+     "sequencage": "S1-S2 – 6 séances de 3,5h",
+     "objectif": "Permettre à l'étudiant·e de concevoir et déployer un dispositif de veille avancé, en mobilisant panels et méthodes d'interview pour collecter des insights consommateurs. Note : ce module porte sur les méthodes d'investigation terrain et la posture de veilleur stratégique. La construction formelle du dossier de veille certificateur (BC1 A.1) est traitée dans le TD Accompagnement veille.",
+     "commentaire": "",
+     "competences_prose": "Piloter une veille dynamique et structurée, mobiliser panels et méthodes d’interview pour collecter des données qualitatives et quantitatives, analyser et hiérarchiser les tendances sociétales, décrypter les imaginaires de consommation qui sous-tendent les comportements de marché, et restituer une synthèse opérationnelle pour la stratégie de marque.",
+     "competences_liees": [
+      "C.1",
+      "C.2"
+     ],
+     "notions_cles": [
+      "Structuration d’une veille dynamique et choix des outils",
+      "Collecte et analyse des données via panels et interviews",
+      "Détection, hiérarchisation et interprétation des tendances sociétales",
+      "Restitution et valorisation de la veille pour la décision stratégique",
+      "Décryptage des imaginaires de consommation",
+      "Articulation tendances / imaginaires : synthèse stratégique"
+     ],
+     "programme": [
+      {
+       "titre": "Structuration d’une veille dynamique et choix des outils",
+       "points": [
+        "Rappels méthodologiques pour harmoniser le niveau (veille documentaire, veille automatisée, veille collaborative)",
+        "Introduction aux panels consommateurs/professionnels, méthodes d’interview (qualitative, semi-directive, focus group)",
+        "Sélection et justification des sources (études, réseaux, bases de données, outils digitaux, IA)",
+        "Construction d’un plan de veille adapté à l’environnement de la marque"
+       ]
+      },
+      {
+       "titre": "Collecte et analyse des données via panels et interviews",
+       "points": [
+        "Recrutement et animation d’un panel, préparation et conduite d’interviews",
+        "Techniques de questionnement, gestion des biais, recueil de verbatims et d’insights",
+        "Exploitation croisée des données qualitatives et quantitatives (tri, codage, synthèse)",
+        "Atelier pratique : simulation d’un mini-panel ou d’un focus group sur une problématique de marque"
+       ]
+      },
+      {
+       "titre": "Détection, hiérarchisation et interprétation des tendances sociétales",
+       "points": [
+        "Analyse des tendances macro (sociétales, technologiques, réglementaires, culturelles) et micro (signaux faibles, émergences sectorielles)",
+        "Méthodes de mapping et de hiérarchisation des tendances (impact/opportunité/risque)",
+        "Mise en perspective avec les enjeux de la marque (positionnement, innovation, RSE, risques réputationnels)",
+        "Étude de cas : analyse de l’impact d’une tendance sur la stratégie d’une marque réelle ou fictive"
+       ]
+      },
+      {
+       "titre": "Restitution et valorisation de la veille pour la décision stratégique",
+       "points": [
+        "Synthèse visuelle et opérationnelle des résultats (infographie, mapping, planche de tendances, executive summary)",
+        "Argumentation des choix, formulation de recommandations pour la marque",
+        "Critères d’évaluation professionnels : clarté, pertinence, hiérarchisation, utilité pour la prise de décision",
+        "Atelier : présentation orale ou écrite d’une synthèse de veille devant un jury ou un commanditaire fictif"
+       ]
+      },
+      {
+       "titre": "Décryptage des imaginaires de consommation",
+       "points": [
+        "Qu’est-ce qu’un imaginaire de consommation ? Concepts fondamentaux : mythes de marque, cultural codes, désirs latents, récits dominants",
+        "Méthodes de lecture des imaginaires : netnographie, analyse de corpus visuels, social listening qualitatif",
+        "Outils IA au service de l’analyse d’imaginaires : exploitation de corpus textuels et visuels (ChatGPT, Gemini, Midjourney comme outil de projection)",
+        "Atelier : cartographie des imaginaires associés à une marque ou à un secteur à partir d’un corpus de contenus collectés"
+       ]
+      },
+      {
+       "titre": "Articulation tendances / imaginaires : synthèse stratégique",
+       "points": [
+        "Mise en dialogue des deux lectures : tendances détectées vs imaginaires construits — complémentarité et tensions",
+        "Identification des zones d’opportunité pour la marque à l’intersection des signaux faibles et des représentations culturelles",
+        "Construction d’une synthèse intégrée tendances + imaginaires, exploitable pour la plateforme de marque",
+        "Atelier final : restitution croisée en binôme — une équipe défend la lecture « tendances », l’autre la lecture « imaginaires », confrontation et synthèse commune"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Ateliers pratiques sur la constitution et l’animation de panels, la conduite d’interviews, la synthèse de verbatims",
+      "Utilisation d’outils numériques et d’IA pour l’automatisation de la veille, l’analyse de tendances et la cartographie d’imaginaires (Feedly, Mention, ChatGPT, Gemini)",
+      "Classe inversée : analyse de benchmarks, veille collaborative, retours d’expérience",
+      "Défis créatifs : « 1 tendance, 3 formats », « cartographier une émergence », « panel express »"
+     ],
+     "evaluations": [
+      "Formative : quiz sur les méthodes de veille et d’interview, mini-exercices de constitution de panel, analyse de tendances, synthèses intermédiaires",
+      "Sommative : rendu d’une synthèse de veille dynamique (écrite et visuelle) intégrant données issues de panels/interviews et analyse de tendances, présentation orale/écrite, évaluation sur la pertinence du dispositif, la qualité de l’analyse et la capacité à formuler des recommandations stratégiques"
+     ]
+    },
+    {
+     "titre": "TD : Méthodologie Dossier de veille",
+     "bloc": "Bloc 1 – Diagnostiquer le positionnement et la proposition de valeur distinctive de la marque",
+     "formation": "M1 – Manager des stratégies marketing et communication",
+     "rncp": "38504 (France Compétences)",
+     "activite": "",
+     "intervenant": "",
+     "volume": "14h",
+     "sequencage": "4 séances de 3,5h",
+     "objectif": "Permettre à l'étudiant·e de construire un dossier de veille stratégique rigoureux et actionnable, conforme aux exigences de l'épreuve de certification BC1 A.1 (Note de synthèse). Développer la capacité à organiser, analyser et hiérarchiser les tendances de l'environnement d'une marque pour formuler des recommandations concrètes.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.1",
+      "C.2"
+     ],
+     "notions_cles": [],
+     "programme": [
+      {
+       "titre": "Cadrage et architecture du dossier de veille",
+       "points": [
+        "Présentation du cadre certificateur : attendus BC1 A.1, critères d'évaluation, grille jury",
+        "Les 4 périmètres de veille obligatoires : Technologies, Réglementation, Socio-comportemental, Pratiques de marché",
+        "Structure du dossier attendu (15 pages max) : introduction, méthodologie, synthèse des tendances, implications stratégiques, recommandations",
+        "Choix et validation de la marque : critères de pertinence, problématique de veille",
+        "Mise en place des outils : Feedly, Google Alerts, Mention – travaux pratiques"
+       ]
+      },
+      {
+       "titre": "Méthodologie de collecte et qualification des sources",
+       "points": [
+        "Panorama des sources : médias, think tanks, rapports sectoriels, bases de données (minimum 15 sources françaises et internationales)",
+        "Qualification et hiérarchisation des sources : fiabilité, fraîcheur, diversité",
+        "Protocole de collecte : routine de veille, outils de tri et de classement",
+        "Identification des premiers signaux faibles et tendances émergentes",
+        "Atelier : construction du portefeuille de sources et lancement de la veille active"
+       ]
+      },
+      {
+       "titre": "Analyse et hiérarchisation des tendances",
+       "points": [
+        "Méthode d'analyse des tendances : description, données chiffrées, signaux faibles",
+        "Matrice d'impact : Score = Intensité × 2 + Urgence + Probabilité (note sur 20)",
+        "Cartographie des tendances par périmètre (2 à 4 tendances majeures par dimension)",
+        "Liens explicites tendances / enjeux de la marque : comment démontrer la pertinence",
+        "Atelier : rédaction des fiches tendances et première version de la synthèse"
+       ]
+      },
+      {
+       "titre": "Prospective, recommandations et finalisation",
+       "points": [
+        "Analyse globale : méga-tendances, convergences, identification des opportunités et risques",
+        "Construction des scénarios prospectifs (2 à 3 scénarios d'évolution)",
+        "Recommandations stratégiques actionnables : Quoi, Pourquoi, Comment, Qui, Quand, Combien",
+        "Mise en page, relecture, exigences formelles du rendu",
+        "Simulation de soutenance orale (15 min présentation / 15 min questions jury)"
+       ]
+      }
+     ],
+     "seances": [
+      {
+       "numero": 1,
+       "duree": "3,5h",
+       "titre": "Cadrage et architecture du dossier de veille",
+       "points": [
+        "Présentation du cadre certificateur : attendus BC1 A.1, critères d'évaluation, grille jury",
+        "Les 4 périmètres de veille obligatoires : Technologies, Réglementation, Socio-comportemental, Pratiques de marché",
+        "Structure du dossier attendu (15 pages max) : introduction, méthodologie, synthèse des tendances, implications stratégiques, recommandations",
+        "Choix et validation de la marque : critères de pertinence, problématique de veille",
+        "Mise en place des outils : Feedly, Google Alerts, Mention – travaux pratiques"
+       ]
+      },
+      {
+       "numero": 2,
+       "duree": "3,5h",
+       "titre": "Méthodologie de collecte et qualification des sources",
+       "points": [
+        "Panorama des sources : médias, think tanks, rapports sectoriels, bases de données (minimum 15 sources françaises et internationales)",
+        "Qualification et hiérarchisation des sources : fiabilité, fraîcheur, diversité",
+        "Protocole de collecte : routine de veille, outils de tri et de classement",
+        "Identification des premiers signaux faibles et tendances émergentes",
+        "Atelier : construction du portefeuille de sources et lancement de la veille active"
+       ]
+      },
+      {
+       "numero": 3,
+       "duree": "3,5h",
+       "titre": "Analyse et hiérarchisation des tendances",
+       "points": [
+        "Méthode d'analyse des tendances : description, données chiffrées, signaux faibles",
+        "Matrice d'impact : Score = Intensité × 2 + Urgence + Probabilité (note sur 20)",
+        "Cartographie des tendances par périmètre (2 à 4 tendances majeures par dimension)",
+        "Liens explicites tendances / enjeux de la marque : comment démontrer la pertinence",
+        "Atelier : rédaction des fiches tendances et première version de la synthèse"
+       ]
+      },
+      {
+       "numero": 4,
+       "duree": "3,5h",
+       "titre": "Prospective, recommandations et finalisation",
+       "points": [
+        "Analyse globale : méga-tendances, convergences, identification des opportunités et risques",
+        "Construction des scénarios prospectifs (2 à 3 scénarios d'évolution)",
+        "Recommandations stratégiques actionnables : Quoi, Pourquoi, Comment, Qui, Quand, Combien",
+        "Mise en page, relecture, exigences formelles du rendu",
+        "Simulation de soutenance orale (15 min présentation / 15 min questions jury)"
+       ]
+      }
+     ],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Ateliers pratiques sur briefs réels – travail sur la marque choisie par l’étudiant·e",
+      "Peer review : échanges croisés sur les dossiers en cours (séance 3)",
+      "Simulation de soutenance devant jury (séance 4)",
+      "Utilisation d’outils numériques de veille : Feedly, Google Alerts, Mention, Scoop.it",
+      "Classe inversée sur les méthodes de sourcing et d’analyse des tendances"
+     ],
+     "evaluations": [
+      "Formative : quiz sur les méthodologies de veille, exercices de qualification des sources, mini-fiches tendances, feedback collectif sur les dossiers intermédiaires",
+      "Sommative : rendu du dossier de veille stratégique complet conforme aux exigences BC1 A.1 (4 périmètres, 15 sources min, matrice d’impact, scénarios prospectifs, recommandations), suivi d’une simulation de soutenance orale"
+     ]
+    },
+    {
+     "titre": "TD : Accompagnement veille (dossier de veille)",
+     "bloc": "Bloc 1 : Diagnostiquer le positionnement et la proposition de valeur distinctive de la marque",
+     "formation": "M1 – Manager des stratégies marketing et communication",
+     "rncp": "38504 (France Compétences)",
+     "activite": "",
+     "intervenant": "",
+     "volume": "7h",
+     "sequencage": "S1 – 2 séances de 3h30 (en cours d'année, synchronisées avec les jalons du dossier de veille)",
+     "objectif": "Accompagner chaque étudiant·e dans la construction progressive de son dossier de veille (BC1 A.1) : validation de la marque choisie, structuration des périmètres de veille, montée en puissance sur la collecte, l'analyse et les recommandations stratégiques",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.1",
+      "C.2"
+     ],
+     "notions_cles": [],
+     "programme": [
+      {
+       "titre": "Lancement et validation du dossier de veille",
+       "points": [
+        "Tour de table : présentation de la marque choisie, des 4 périmètres retenus et des premières sources collectées",
+        "Validation collective : pertinence de la marque, cohérence des périmètres, diversité des sources",
+        "Feedback individualisé : identification des blocages méthodologiques, ajustements ciblés",
+        "Atelier : consolidation des premières fiches tendances, vérification de la matrice d'impact (Score = Intensité × 2 + Urgence + Probabilité)"
+       ]
+      },
+      {
+       "titre": "Consolidation, finalisation et préparation à la soutenance",
+       "points": [
+        "Peer review : lecture critique d'un dossier pair, retours argumentés sur la rigueur méthodologique et la pertinence des recommandations",
+        "Vérification de la conformité BC1 A.1 : 15 pages max, 4 périmètres couverts, 15 sources minimum qualifiées, scénarios prospectifs, recommandations actionnables",
+        "Simulation de soutenance (5 min par étudiant·e + 5 min questions jury) : synthèse des résultats, argumentation des recommandations, posture professionnelle",
+        "Ajustements finaux avant rendu : mise en page, cohérence de l'ensemble, relecture croisée"
+       ]
+      }
+     ],
+     "seances": [
+      {
+       "numero": 1,
+       "duree": "3,5h",
+       "titre": "Lancement et validation du dossier de veille",
+       "points": [
+        "Tour de table : présentation de la marque choisie, des 4 périmètres retenus et des premières sources collectées",
+        "Validation collective : pertinence de la marque, cohérence des périmètres, diversité des sources",
+        "Feedback individualisé : identification des blocages méthodologiques, ajustements ciblés",
+        "Atelier : consolidation des premières fiches tendances, vérification de la matrice d'impact (Score = Intensité × 2 + Urgence + Probabilité)"
+       ]
+      },
+      {
+       "numero": 2,
+       "duree": "3,5h",
+       "titre": "Consolidation, finalisation et préparation à la soutenance",
+       "points": [
+        "Peer review : lecture critique d'un dossier pair, retours argumentés sur la rigueur méthodologique et la pertinence des recommandations",
+        "Vérification de la conformité BC1 A.1 : 15 pages max, 4 périmètres couverts, 15 sources minimum qualifiées, scénarios prospectifs, recommandations actionnables",
+        "Simulation de soutenance (5 min par étudiant·e + 5 min questions jury) : synthèse des résultats, argumentation des recommandations, posture professionnelle",
+        "Ajustements finaux avant rendu : mise en page, cohérence de l'ensemble, relecture croisée"
+       ]
+      }
+     ],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Atelier de relecture croisée et de feedback pair (peer review) sur les dossiers en cours ; Points de progression individualisés avec l'intervenant·e ; Simulation de soutenance orale (15 min présentation + 15 min Q&R jury) ; Checklist de conformité BC1 A.1 : 4 périmètres, 15 sources minimum, matrice d'impact, scénarios prospectifs, recommandations actionnables",
+      "Atelier de mapping ou de structuration d’une veille en direct",
+      "Utilisation d’outils collaboratifs pour organiser la collecte de matériaux",
+      "Peer review sur les premières idées de problématique ou de mapping",
+      "Conseils individualisés pour planifier la démarche sur l’année"
+     ],
+     "evaluations": [
+      "Formative : exercice de structuration d’un plan de veille ou d’un mapping de tendances, auto-évaluation sur la compréhension des attendus, feedback collectif sur la pertinence des premières pistes proposées"
+     ]
+    },
+    {
+     "titre": "Méthodologie Pack Marque",
+     "bloc": "Bloc 1 : Diagnostiquer le positionnement et la proposition de valeur distinctive de la marque",
+     "formation": "M1 – Manager des stratégies marketing et communication",
+     "rncp": "38504 (France Compétences)",
+     "activite": "",
+     "intervenant": "",
+     "volume": "21h",
+     "sequencage": "S1 – 6 séances de 3h30",
+     "objectif": "Permettre à chaque étudiant de maîtriser la méthodologie complète du pack marque : cadrage des études, collecte et analyse de données, diagnostic interne/externe, formulation de la proposition de valeur, restitution structurée et préparation à la soutenance individuelle et orale.",
+     "commentaire": "",
+     "competences_prose": "Concevoir, organiser et piloter la démarche d’investigation nécessaire à la constitution d’un pack marque : études de marché, analyse consommateurs, diagnostic interne, identification des insights, formalisation du positionnement et de la plateforme de marque. Savoir articuler les différentes étapes, méthodes et livrables pour aboutir à une recommandation stratégique solide et argumentée.",
+     "competences_liees": [
+      "C.3",
+      "C.4",
+      "C.5",
+      "C.6"
+     ],
+     "notions_cles": [
+      "Présentation de l’épreuve et cadrage méthodologique",
+      "Définition du périmètre d’étude et problématisation",
+      "Collecte et analyse des données marché et consommateurs",
+      "Diagnostic interne, analyse de la marque et positionnement",
+      "Formalisation de la plateforme de marque et synthèse stratégique",
+      "Préparation à la restitution et à la soutenance"
+     ],
+     "programme": [
+      {
+       "titre": "Présentation de l’épreuve et cadrage méthodologique",
+       "points": [
+        "Analyse détaillée du guide méthodologique pack marque et du syllabus associé",
+        "Présentation des grandes étapes du pack marque : cadrage, études, diagnostic, synthèse, plateforme",
+        "Conseils pour anticiper la démarche et organiser la collecte des matériaux"
+       ]
+      },
+      {
+       "titre": "Définition du périmètre d’étude et problématisation",
+       "points": [
+        "Définition de la problématique, des enjeux et des objectifs de la démarche pack marque",
+        "Sélection des outils et méthodes d’étude (quantitatif, qualitatif, data, entretiens, observation, benchmark)",
+        "Construction du plan d’étude et organisation du rétroplanning",
+        "Atelier : formulation de la problématique et du plan d’étude"
+       ]
+      },
+      {
+       "titre": "Collecte et analyse des données marché et consommateurs",
+       "points": [
+        "Méthodologies d’études marketing : questionnaire, panel, focus group, interviews, analyse documentaire, data mining",
+        "Exploitation des données internes et externes, veille sectorielle, analyse de la concurrence",
+        "Identification et formulation des insights consommateurs",
+        "Atelier pratique : analyse de données et formulation d’insights activables"
+       ]
+      },
+      {
+       "titre": "Diagnostic interne, analyse de la marque et positionnement",
+       "points": [
+        "Méthodologie du diagnostic interne : analyse des ressources, culture, valeurs, forces/faiblesses, vision, mission",
+        "Identification des caractères distinctifs, des axes de différenciation, des engagements éthiques, sociétaux et environnementaux",
+        "Benchmark concurrentiel et mapping de positionnement",
+        "Atelier : diagnostic de marque et formulation d’un positionnement argumenté"
+       ]
+      },
+      {
+       "titre": "Formalisation de la plateforme de marque et synthèse stratégique",
+       "points": [
+        "Construction de la plateforme de marque : vision, mission, promesse, valeurs, personnalité, raison d’être, engagements RSE",
+        "Mise en forme du pack marque : structuration, storytelling, articulation des parties, cohérence globale",
+        "Critères de réussite : clarté, pertinence, originalité, alignement stratégique",
+        "Atelier : rédaction d’une plateforme de marque à partir des analyses menées"
+       ]
+      },
+      {
+       "titre": "Préparation à la restitution et à la soutenance",
+       "points": [
+        "Structuration du dossier écrit et préparation de la soutenance orale (argumentation, storytelling, gestion du temps, anticipation des questions)",
+        "Conseils pour valoriser la démarche, défendre ses choix, convaincre un jury",
+        "Atelier : simulation de soutenance, feedback collectif, axes d’amélioration"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Ateliers pratiques à chaque étape",
+      "Classe inversée : analyse de packs marque existants, benchmark sectoriel",
+      "Travail collaboratif sur des études de cas réels ou simulés",
+      "Utilisation d’outils numériques pour l’organisation du projet",
+      "Peer review et feedback croisé sur les livrables intermédiaires",
+      "Simulations de soutenance avec feedback collectif"
+     ],
+     "evaluations": [
+      "Formative : exercices d’application à chaque séance (problématisation, analyse, diagnostic, rédaction), quiz sur les étapes-clés, feedback collectif",
+      "Sommative : rendu d’un pack marque complet (dossier écrit structuré, plateforme de marque, synthèse stratégique), soutenance orale individuelle, évaluation sur la rigueur méthodologique, la pertinence de l’analyse, la clarté du positionnement et la capacité à défendre ses choix"
+     ]
+    },
+    {
+     "titre": "Études marketing stratégique et communication omnicanale",
+     "bloc": "Bloc 1 : Diagnostiquer le positionnement et la proposition de valeur distinctive de la marque",
+     "formation": "M1 – Manager des stratégies marketing et communication",
+     "rncp": "38504 (France Compétences)",
+     "activite": "",
+     "intervenant": "",
+     "volume": "21h",
+     "sequencage": "S1/S2 – 6 séances de 3h30",
+     "objectif": "Permettre à l’étudiant de maîtriser la démarche complète d’étude marketing stratégique : cadrage, choix méthodologique, collecte et analyse de données, synthèse, formulation d’insights et recommandations, articulation avec la stratégie de communication omnicanale.",
+     "commentaire": "",
+     "competences_prose": "Concevoir, piloter et exploiter des études marketing stratégiques (quantitatives, qualitatives, data, panels, entretiens, focus groups) pour éclairer la prise de décision ; traduire les enseignements en recommandations opérationnelles pour une communication omnicanale et intégrée.",
+     "competences_liees": [
+      "C.3",
+      "C.4"
+     ],
+     "notions_cles": [
+      "Cadrage des études marketing stratégiques",
+      "Conduite et pilotage des études quantitatives",
+      "Conduite et pilotage des études qualitatives",
+      "Analyse, synthèse et formulation d’insights",
+      "Traduction des enseignements en stratégie de communication omnicanale",
+      "Cas pratiques et restitution professionnelle"
+     ],
+     "programme": [
+      {
+       "titre": "Cadrage des études marketing stratégiques",
+       "points": [
+        "Définition de la problématique, des objectifs et du périmètre de l’étude",
+        "Choix des méthodes : études quantitatives (enquêtes, sondages, panels), études qualitatives (entretiens, focus groups, observation, ethnographie)",
+        "Sélection des sources et des outils de collecte (questionnaires, plateformes d’enquête, outils digitaux, data internes/externes)",
+        "Rappels méthodologiques pour harmoniser le niveau (rôle des études dans la stratégie, articulation avec la veille et l’analyse consommateurs)"
+       ]
+      },
+      {
+       "titre": "Conduite et pilotage des études quantitatives",
+       "points": [
+        "Construction d’un questionnaire, échantillonnage, administration, collecte des données",
+        "Traitement statistique : analyse descriptive, croisée, segmentation, scoring",
+        "Exploitation des panels, études barométriques, data analytics",
+        "Atelier pratique : conception et analyse d’une enquête marketing"
+       ]
+      },
+      {
+       "titre": "Conduite et pilotage des études qualitatives",
+       "points": [
+        "Préparation et conduite d’entretiens, focus groups, observation directe ou participante",
+        "Techniques d’analyse qualitative : codage, analyse thématique, identification d’insights",
+        "Triangulation des données, croisement quali/quanti",
+        "Atelier pratique : réalisation et analyse d’un focus group ou d’entretiens"
+       ]
+      },
+      {
+       "titre": "Analyse, synthèse et formulation d’insights",
+       "points": [
+        "Méthodes d’analyse avancée : mapping perceptuel, analyse de la valeur perçue, scoring d’attractivité",
+        "Formulation d’insights actionnables pour la marque, identification des opportunités et risques",
+        "Mise en forme des résultats : synthèse structurée, data visualisation, storytelling des données",
+        "Atelier : restitution d’une synthèse d’étude et formulation de recommandations"
+       ]
+      },
+      {
+       "titre": "Traduction des enseignements en stratégie de communication omnicanale",
+       "points": [
+        "Définition des cibles prioritaires, segmentation avancée, persona",
+        "Articulation entre insights consommateurs et choix des canaux (owned, paid, earned, shared)",
+        "Construction d’un plan de communication omnicanal : points de contact, parcours client, logique intégrée",
+        "Atelier : élaboration d’un schéma de communication omnicanale à partir des résultats d’études"
+       ]
+      },
+      {
+       "titre": "Cas pratiques et restitution professionnelle",
+       "points": [
+        "Étude de cas réelle ou simulée (marché, marque, secteur)",
+        "Production d’un livrable professionnel (rapport d’étude, synthèse, recommandations, plan de communication associé)",
+        "Soutenance orale, feedback collectif, axes d’amélioration pour la suite du cursus"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Ateliers pratiques à chaque étape (construction de questionnaires, conduite d’entretiens, analyse de données)",
+      "Utilisation d’outils numériques et d’IA pour la collecte et l’analyse (Google Forms, Sphinx, Notion, Excel, outils de data visualisation)",
+      "Classe inversée : analyse de rapports d’études réels, benchmark sectoriel",
+      "Peer review et feedback croisé sur les synthèses et plans produits"
+     ],
+     "evaluations": [
+      "Formative : quiz sur les méthodes d’étude, exercices de construction d’outils, analyse de jeux de données, restitution intermédiaire",
+      "Sommative : rendu d’un rapport d’étude complet (problématique, méthodologie, collecte, analyse, synthèse, recommandations, plan de communication omnicanale), présentation orale, évaluation sur la rigueur méthodologique, la pertinence des analyses et la capacité à traduire les résultats en stratégie de communication"
+     ]
+    },
+    {
+     "titre": "Insights et Analyse consommateurs",
+     "bloc": "Bloc 1 : Diagnostiquer le positionnement et la proposition de valeur distinctive de la marque",
+     "formation": "M1 – Manager des stratégies marketing et communication",
+     "rncp": "38504 (France Compétences)",
+     "activite": "",
+     "intervenant": "",
+     "volume": "14h",
+     "sequencage": "S1/S2 – 4 séances de 3h30",
+     "objectif": "Permettre à l’étudiant d’analyser et d’interpréter les données issues d’études consommateurs (entretiens, focus groups, panels, data), de formuler des insights actionnables, de segmenter les publics, d’anticiper les évolutions comportementales et d’intégrer ces analyses dans la recommandation stratégique.",
+     "commentaire": "",
+     "competences_prose": "Décrypter en profondeur les attentes, motivations, freins et comportements des consommateurs ; maîtriser la formulation d’insights pertinents ; utiliser des méthodes avancées d’analyse qualitative et quantitative pour éclairer la stratégie de marque et la prise de décision.",
+     "competences_liees": [
+      "C.4"
+     ],
+     "notions_cles": [
+      "Méthodologies avancées d’études consommateurs",
+      "Analyse et segmentation comportementale",
+      "Formulation d’insights consommateurs et activation stratégique",
+      "Synthèse, restitution et intégration dans la stratégie de marque"
+     ],
+     "programme": [
+      {
+       "titre": "Méthodologies avancées d’études consommateurs",
+       "points": [
+        "Rappels méthodologiques pour harmoniser le niveau (bases B1/B2/B3) : études quali/quanti, persona, parcours client",
+        "Approfondissement des méthodes : focus groups, interviews semi-directifs, observation, ethnographie, analyse de data clients",
+        "Triangulation des données, croisement quali/quanti, validation des insights",
+        "Atelier pratique : préparation et conduite d’un mini-focus group ou d’entretiens sur place (Campus ?)"
+       ]
+      },
+      {
+       "titre": "Analyse et segmentation comportementale",
+       "points": [
+        "Identification et hiérarchisation des motivations, freins, attentes, leviers émotionnels",
+        "Segmentation avancée : critères descriptifs, comportementaux, psychographiques, intentionnistes",
+        "Construction et actualisation de typologies de cibles, mapping des parcours clients, analyse des micro-moments",
+        "Atelier : création de typologies de cibles et mapping de parcours à partir de données réelles ou simulées"
+       ]
+      },
+      {
+       "titre": "Formulation d’insights consommateurs et activation stratégique",
+       "points": [
+        "Définition d’un insight : critères de pertinence, activation, valeur stratégique",
+        "Techniques de formulation d’insights actionnables pour la marque (méthode « tension », storytelling, data-driven insight)",
+        "Mise en perspective avec la stratégie : comment transformer un insight en recommandation opérationnelle",
+        "Atelier : rédaction et argumentation d’insights à partir d’études de cas"
+       ]
+      },
+      {
+       "titre": "Synthèse, restitution et intégration dans la stratégie de marque",
+       "points": [
+        "Structuration d’une synthèse d’analyse consommateurs (rapport, infographie, présentation orale)",
+        "Valorisation des insights dans la recommandation stratégique, articulation avec le positionnement et la plateforme de marque",
+        "Prise en compte des enjeux éthiques, sociétaux et environnementaux (RGPD, inclusion, diversité, RSE)",
+        "Atelier : restitution d’une synthèse et feedback collectif | IA au service des insights consommateurs : utilisation de ChatGPT / Claude pour l'analyse de verbatims qualitatifs et la synthèse d'études ; outils d'analyse de sentiments (MonkeyLearn, Brandwatch IA, Talkwalker) pour l'écoute sociale et la détection de signaux faibles ; scoring automatisé de personas via outils IA (Crystal Knows, SparkToro) ; génération de grilles d'interview et de guides de focus group assistée par IA ; limites éthiques : biais algorithmiques, protection des données, nécessité du regard critique humain"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Ateliers pratiques d’analyse de données, conduite d’entretiens, focus groups",
+      "Utilisation d’outils numériques (tableaux de bord, IA pour l’analyse de verbatims, data visualisation)",
+      "Classe inversée : analyse de rapports d’études, benchmark sectoriel",
+      "- Peer review et feedback croisé sur les analyses produites ; Atelier IA : analyse de verbatims et production d'insights assistée par ChatGPT ou Claude (prompt engineering appliqué aux études consommateurs)"
+     ],
+     "evaluations": [
+      "Formative : exercices de segmentation, création de persona, formulation d’insights, analyse de cas",
+      "Sommative : rendu d’une synthèse d’analyse consommateurs (étude de cas, segmentation, formulation d’insights, recommandations stratégiques), présentation orale ou écrite, évaluation sur la pertinence de l’analyse, la qualité des insights et la capacité à activer les résultats"
+     ]
+    },
+    {
+     "titre": "Analyse de la stratégie de positionnement de la marque",
+     "bloc": "Bloc 1 : Diagnostiquer le positionnement et la proposition de valeur distinctive de la marque",
+     "formation": "M1 – Manager des stratégies marketing et communication",
+     "rncp": "38504 (France Compétences)",
+     "activite": "",
+     "intervenant": "",
+     "volume": "17,5h",
+     "sequencage": "S1/S2 – 5 séances de 3h30",
+     "objectif": "Permettre à l’étudiant de réaliser un diagnostic stratégique approfondi du positionnement d’une marque, de formuler une analyse critique et argumentée, et de préparer la formalisation de la plateforme de marque en vue de la recommandation stratégique.",
+     "commentaire": "",
+     "competences_prose": "Maîtriser les outils et méthodes d’analyse stratégique pour évaluer la pertinence et la singularité du positionnement d’une marque ; conduire une démarche d’investigation interne/externe (documentaire, entretiens, ateliers, observation) ; identifier et valoriser les caractères distinctifs, atouts concurrentiels et engagements RSE de la marque.",
+     "competences_liees": [
+      "C.5",
+      "C.6"
+     ],
+     "notions_cles": [
+      "Introduction et cadrage méthodologique",
+      "Collecte et analyse des matériaux internes et externes",
+      "Diagnostic du positionnement et de l’identité de marque",
+      "Clarification de la proposition de valeur et des avantages concurrentiels",
+      "Restitution, feedback et préparation à la plateforme de marque"
+     ],
+     "programme": [
+      {
+       "titre": "Introduction et cadrage méthodologique",
+       "points": [
+        "Présentation des attendus du diagnostic stratégique dans le référentiel RNCP 38504",
+        "Rappel des notions clés : positionnement, identité, proposition de valeur, territoire de marque, valeurs, engagements RSE",
+        "Présentation des méthodes d’investigation : analyse documentaire, benchmark, entretiens, ateliers, observation directe"
+       ]
+      },
+      {
+       "titre": "Collecte et analyse des matériaux internes et externes",
+       "points": [
+        "Analyse documentaire (rapports internes, communication de la marque, études antérieures)",
+        "Organisation et conduite d’entretiens avec parties prenantes internes (direction, équipes, collaborateurs) et externes (clients, partenaires, experts)",
+        "Animation d’ateliers collaboratifs pour faire émerger la vision, les valeurs, les perceptions et les points de différenciation",
+        "Observation in situ (espaces de travail, points de vente, expérience client)"
+       ]
+      },
+      {
+       "titre": "Diagnostic du positionnement et de l’identité de marque",
+       "points": [
+        "Identification des caractères distinctifs, des atouts concurrentiels, des axes de différenciation",
+        "Analyse des valeurs, de la raison d’être, des engagements sociétaux et environnementaux",
+        "Benchmark concurrentiel et mapping de positionnement",
+        "Mise en perspective des résultats avec les attentes du marché et les insights consommateurs"
+       ]
+      },
+      {
+       "titre": "Clarification de la proposition de valeur et des avantages concurrentiels",
+       "points": [
+        "Formalisation de la proposition de valeur : bénéfices clés, preuves, éléments différenciants",
+        "Mise en cohérence avec la stratégie globale, les engagements RSE, la plateforme de marque",
+        "Préparation à la restitution : structuration d’une synthèse claire et argumentée du diagnostic",
+        "Atelier : rédaction d’une analyse critique du positionnement pour un cas réel ou simulé"
+       ]
+      },
+      {
+       "titre": "Restitution, feedback et préparation à la plateforme de marque",
+       "points": [
+        "Présentation orale ou écrite du diagnostic, argumentation des choix et axes d’amélioration",
+        "Feedback collectif, analyse critique des démarches menées",
+        "Lien avec le module « Élaboration de la stratégie de marque (plateforme de marque) » et préparation à la formalisation de la plateforme"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Ateliers pratiques d’analyse documentaire, conduite d’entretiens, animation d’ateliers collaboratifs",
+      "Utilisation d’outils numériques pour le benchmark, le mapping et la restitution visuelle",
+      "Classe inversée : analyse de diagnostics réels, benchmark sectoriel",
+      "Peer review et feedback croisé sur les analyses produites"
+     ],
+     "evaluations": [
+      "Formative : exercices de diagnostic, analyse de cas, restitution orale intermédiaire",
+      "Sommative : rendu d’un diagnostic stratégique complet (analyse documentaire, entretiens, benchmark, synthèse critique), présentation orale ou écrite, évaluation sur la rigueur méthodologique, la pertinence de l’analyse, la capacité à clarifier la proposition de valeur et à préparer la formalisation de la plateforme de marque"
+     ]
+    },
+    {
+     "titre": "Éloquence et préparation à l’épreuve de certification orale (Pack Marque)",
+     "bloc": "Bloc 1 : Diagnostiquer le positionnement et la proposition de valeur distinctive de la marque",
+     "formation": "M1 – Manager des stratégies marketing et communication",
+     "rncp": "38504 (France Compétences)",
+     "activite": "",
+     "intervenant": "",
+     "volume": "10,5h",
+     "sequencage": "S2 – 3 séances de 3h30, à programmer en juin, en amont des soutenances",
+     "objectif": "Permettre à chaque étudiant de transformer son pack marque en une présentation orale convaincante, de maîtriser les codes de l’épreuve, de s’entraîner à la prise de parole longue et à la gestion des questions, et de s’approprier les techniques d’éloquence et de persuasion attendues à ce niveau de certification.",
+     "commentaire": "",
+     "competences_prose": "Structurer et délivrer une soutenance orale professionnelle : clarté, impact, gestion du temps, adaptation au jury, argumentation stratégique, gestion des objections, valorisation de la singularité du projet et de la posture managériale.",
+     "competences_liees": [
+      "C.3",
+      "C.6"
+     ],
+     "notions_cles": [
+      "Décryptage des attendus de l’épreuve orale",
+      "Structuration et scénarisation de la soutenance",
+      "Techniques avancées d’éloquence et de persuasion",
+      "Entraînement intensif à la soutenance et feedback"
+     ],
+     "programme": [
+      {
+       "titre": "Décryptage des attendus de l’épreuve orale",
+       "points": [
+        "Présentation des critères d’évaluation de la soutenance (structure, argumentation, gestion du temps, posture, adaptation au jury, gestion des questions)",
+        "Analyse de vidéos ou d’extraits de soutenances antérieures (points forts, axes d’amélioration)",
+        "Explication du déroulé de l’épreuve, des attentes du jury, des pièges à éviter"
+       ]
+      },
+      {
+       "titre": "Structuration et scénarisation de la soutenance",
+       "points": [
+        "Construction d’un plan oral efficace : introduction, problématique, analyse, recommandation, plateforme de marque, conclusion, ouverture",
+        "Storytelling et techniques d’accroche, valorisation des points différenciants, gestion des transitions",
+        "Préparation des supports visuels (slides, annexes) adaptés à l’oral"
+       ]
+      },
+      {
+       "titre": "Techniques avancées d’éloquence et de persuasion",
+       "points": [
+        "Travail sur la voix, la posture, la gestion du stress, l’impact non verbal",
+        "Exercices de prise de parole longue, gestion du rythme, de l’émotion, de l’interaction avec le jury",
+        "Simulation d’objections et d’imprévus, techniques de réponse et de rebond",
+        "Atelier pratique : pitch minute, argumentation sur un point clé, gestion des questions difficiles"
+       ]
+      },
+      {
+       "titre": "Entraînement intensif à la soutenance et feedback",
+       "points": [
+        "Simulation de soutenance complète devant pairs et/ou formateurs",
+        "Feedback collectif et individuel sur la forme (éloquence, posture, temps) et le fond (clarté, stratégie, pertinence des réponses)",
+        "Ajustements personnalisés, conseils pour la veille de l’épreuve, gestion du stress et de la récupération"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Analyse de vidéos de soutenances réelles ou simulées",
+      "Ateliers de pitch, improvisation, argumentation, gestion des questions",
+      "Jeux de rôle : jury, candidat, observateur",
+      "Utilisation d’outils numériques pour l’enregistrement et l’auto-évaluation",
+      "Feedback croisé et coaching individualisé"
+     ],
+     "evaluations": [
+      "Formative : exercices de structuration, pitchs, simulations de questions, feedback continu",
+      "Sommative : simulation de soutenance orale complète, évaluation sur la clarté, la force de conviction, la gestion du temps, la capacité à défendre le projet et à répondre au jury"
+     ]
+    },
+    {
+     "titre": "Élaboration de la stratégie de marque (plateforme de marque)",
+     "bloc": "Bloc 2 : Élaborer une stratégie marketing communication alignée avec les valeurs de la marque et favorisant l’engagement de son public cible",
+     "formation": "M1 – Manager des stratégies marketing et communication",
+     "rncp": "38504 (France Compétences)",
+     "activite": "",
+     "intervenant": "",
+     "volume": "14h",
+     "sequencage": "S1-S2 – 4 séances de 3,5h",
+     "objectif": "Permettre à l’étudiant de traduire le diagnostic stratégique (marché, consommateurs, positionnement) en une plateforme de marque claire, différenciante et activable, servant de socle à la stratégie marketing communication et à la recommandation certifiante Megaka.",
+     "commentaire": "",
+     "competences_prose": "Maîtriser la construction d’une plateforme de marque stratégique : définition des objectifs, segmentation des cibles, formulation de la proposition de valeur, détermination des axes de communication et intégration des engagements RSE. Savoir structurer et argumenter une recommandation stratégique conforme aux attendus de l’épreuve Megaka.",
+     "competences_liees": [
+      "C.7",
+      "C.8",
+      "C.9"
+     ],
+     "notions_cles": [
+      "Rappel des attendus Mégaka et lien avec les modules de diagnostic, de segmentation et de positionnement issus du Bloc 1 (15 min) — le cadrage détaillé du cadre certificateur est assuré par le TD Accompagnement Mégaka.",
+      "Définition des objectifs stratégiques et segmentation des cibles",
+      "Formulation de la proposition de valeur et des engagements RSE",
+      "Détermination des axes de communication et structuration de la plateforme",
+      "Restitution, argumentation et préparation à l’épreuve certifiante"
+     ],
+     "programme": [
+      {
+       "titre": "Rappel des attendus Mégaka et lien avec les modules de diagnostic, de segmentation et de positionnement issus du Bloc 1 (15 min) — le cadrage détaillé du cadre certificateur est assuré par le TD Accompagnement Mégaka.",
+       "points": []
+      },
+      {
+       "titre": "Définition des objectifs stratégiques et segmentation des cibles",
+       "points": [
+        "Définition d’objectifs SMART (qualitatifs, quantitatifs), alignement avec les ambitions de l’entreprise et le diagnostic préalable",
+        "Segmentation du marché, identification du cœur de cible et des cibles secondaires, critères descriptifs, comportementaux, intentionnistes et affinitaires",
+        "Construction de personas avancés et mapping des cibles",
+        "Atelier : formulation d’objectifs et segmentation pour une marque réelle ou simulée"
+       ]
+      },
+      {
+       "titre": "Formulation de la proposition de valeur et des engagements RSE",
+       "points": [
+        "Définition de la proposition de valeur : bénéfices clés, preuves, différenciation, alignement avec les attentes du public cible",
+        "Intégration des engagements RSE : identification des axes porteurs, traduction dans la plateforme de marque, articulation avec la stratégie globale",
+        "Benchmark des meilleures pratiques sectorielles",
+        "Atelier : rédaction collaborative d’une proposition de valeur et d’engagements RSE"
+       ]
+      },
+      {
+       "titre": "Détermination des axes de communication et structuration de la plateforme",
+       "points": [
+        "Choix des axes de communication : expression de la proposition de valeur, adaptation au public cible, cohérence avec les valeurs de la marque",
+        "Déclinaison en messages clés, tonalité, storytelling, éléments visuels",
+        "Structuration de la plateforme de marque : vision, mission, valeurs, promesse, personnalité, engagements",
+        "Atelier : élaboration d’une plateforme de marque complète à partir d’un cas pratique"
+       ]
+      },
+      {
+       "titre": "Restitution, argumentation et préparation à l’épreuve certifiante",
+       "points": [
+        "Structuration du dossier écrit et préparation de la présentation orale (argumentation, storytelling, gestion du temps, anticipation des questions)",
+        "Conseils pour valoriser la démarche, défendre ses choix",
+        "Simulation de restitution, feedback collectif, axes d’amélioration"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Ateliers pratiques à chaque étape (objectifs, segmentation, proposition de valeur, axes de communication)",
+      "Analyse de plateformes de marque existantes, benchmark sectoriel",
+      "Travail collaboratif sur des cas réels ou simulés",
+      "Utilisation d’outils numériques pour la structuration du dossier (Notion, Figma, IA pour la rédaction ou la veille)",
+      "Peer review et feedback croisé sur les livrables intermédiaires"
+     ],
+     "evaluations": [
+      "Formative : exercices d’application à chaque séance (objectifs, cibles, proposition de valeur, axes), quiz sur les étapes-clés, feedback collectif",
+      "Sommative : rendu d’une plateforme de marque complète (dossier écrit structuré, segmentation, proposition de valeur, axes de communication, engagements RSE), présentation orale, évaluation sur la clarté, la pertinence, la cohérence stratégique et la capacité à défendre ses choix devant un jury"
+     ]
+    },
+    {
+     "titre": "Brand content : Éditorialisation et narration de marque",
+     "bloc": "Bloc 2 : Élaborer une stratégie marketing communication alignée avec les valeurs de la marque et favorisant l’engagement de son public cible",
+     "formation": "M1 – Manager des stratégies marketing et communication",
+     "rncp": "38504 (France Compétences)",
+     "activite": "",
+     "intervenant": "",
+     "volume": "14h",
+     "sequencage": "S1/S2 – 4 séances de 3h30",
+     "objectif": "Permettre à l’étudiant de structurer et déployer une stratégie éditoriale de marque, de scénariser des contenus engageants et différenciants, d’adapter la narration aux cibles et aux canaux, et de préparer un livrable conforme aux attendus de l’épreuve Megaka.",
+     "commentaire": "",
+     "competences_prose": "Concevoir une stratégie de brand content alignée avec la plateforme de marque ; construire une ligne éditoriale cohérente ; maîtriser les techniques de storytelling et d’adaptation multi-formats ; intégrer les enjeux RSE et d’engagement dans la narration de marque.",
+     "competences_liees": [
+      "C.8",
+      "C.9"
+     ],
+     "notions_cles": [
+      "Présentation de l’épreuve Pack Marque et cadrage du brand content",
+      "Construction d’une ligne éditoriale de marque",
+      "Techniques de storytelling et scénarisation de contenus",
+      "Déploiement, pilotage et évaluation de la stratégie de brand content"
+     ],
+     "programme": [
+      {
+       "titre": "Présentation de l’épreuve Pack Marque et cadrage du brand content",
+       "points": [
+        "Analyse des attendus spécifiques du guide Pack Marque pour la partie brand content : livrables, critères d’évaluation, articulation avec la plateforme de marque",
+        "Exemples de stratégies éditoriales et de narrations de marque réussies",
+        "Conseils pour organiser la démarche éditoriale et anticiper les difficultés"
+       ]
+      },
+      {
+       "titre": "Construction d’une ligne éditoriale de marque",
+       "points": [
+        "Définition des objectifs éditoriaux : notoriété, engagement, fidélisation, image",
+        "Identification du cœur de cible et segmentation des audiences (critères, typologies de cibles, parcours)",
+        "Choix des thèmes, formats, tonalité, calendrier éditorial, adaptation aux canaux (owned, paid, earned)",
+        "Atelier : élaboration d’une ligne éditoriale à partir d’une plateforme de marque"
+       ]
+      },
+      {
+       "titre": "Techniques de storytelling et scénarisation de contenus",
+       "points": [
+        "Principes du storytelling appliqué à la marque : structure narrative, archétypes, voix, univers, promesse",
+        "Déclinaison multi-formats : articles, vidéos, podcasts, réseaux sociaux, brand journalism, formats immersifs",
+        "Intégration des engagements RSE et des valeurs dans la narration",
+        "Atelier : production de contenus narratifs adaptés à différents formats et cibles"
+       ]
+      },
+      {
+       "titre": "Déploiement, pilotage et évaluation de la stratégie de brand content",
+       "points": [
+        "Mise en œuvre opérationnelle : workflow éditorial, coordination des parties prenantes, outils de pilotage",
+        "Mesure de la performance éditoriale : KPIs, analyse de l’engagement, ajustements stratégiques",
+        "Préparation du livrable : structuration, justification des choix, storytelling de la démarche",
+        "Atelier : restitution orale ou écrite d’une stratégie de brand content, feedback collectif"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Ateliers pratiques à chaque étape (ligne éditoriale, storytelling, production multi-formats)",
+      "Analyse de stratégies éditoriales de marques inspirantes",
+      "Utilisation d’outils collaboratifs (Notion, Figma, IA générative pour la création de contenus)",
+      "Simulations de briefs réels, peer review et feedback croisé"
+     ],
+     "evaluations": [
+      "Formative : exercices d’application à chaque séance (ligne éditoriale, storytelling, production), quiz sur les concepts, feedback collectif",
+      "Sommative : rendu d’une stratégie de brand content complète (ligne éditoriale, scénarisation multi-formats, intégration RSE), présentation orale ou écrite, évaluation sur la cohérence, l’originalité, la capacité à engager et à argumenter les choix devant un jury"
+     ]
+    },
+    {
+     "titre": "Fondamentaux de la RSE/ESS",
+     "bloc": "Bloc 2 : Élaborer une stratégie marketing communication alignée avec les valeurs de la marque et favorisant l’engagement de son public cible",
+     "formation": "M1 – Manager des stratégies marketing et communication",
+     "rncp": "38504 (France Compétences)",
+     "activite": "",
+     "intervenant": "",
+     "volume": "10,5h",
+     "sequencage": "S2 – 3 séances de 3h30",
+     "objectif": "Permettre à chaque étudiant de maîtriser les concepts, référentiels et enjeux de la RSE et de l’ESS, d’identifier les leviers d’action pour les marques, de distinguer engagement sincère et opportuniste, et de préparer l’intégration de ces dimensions dans la stratégie de marque et la recommandation certifiante Megaka.",
+     "commentaire": "",
+     "competences_prose": "Acquérir une vision systémique de la Responsabilité Sociétale des Entreprises (RSE) et de l’Économie Sociale et Solidaire (ESS) ; comprendre leurs enjeux pour la stratégie de marque ; intégrer les principes, référentiels et outils RSE/ESS dans la conception de stratégies et dispositifs de communication responsables et engageants.",
+     "competences_liees": [
+      "C.9"
+     ],
+     "notions_cles": [
+      "Panorama stratégique de la RSE et de l’ESS",
+      "Intégration de la RSE/ESS à la stratégie de marque et de communication",
+      "Pilotage, valorisation et communication responsable"
+     ],
+     "programme": [
+      {
+       "titre": "Panorama stratégique de la RSE et de l’ESS",
+       "points": [
+        "Définitions, histoire et enjeux contemporains de la RSE et de l’ESS (cadres réglementaires, loi Pacte, CSRD, taxonomie verte, labels, normes ISO, ESS et statuts spécifiques)",
+        "Différences et complémentarités entre RSE, ESS, impact positif, utilité sociale, raison d’être",
+        "Attentes des parties prenantes (consommateurs, collaborateurs, investisseurs, société civile)",
+        "Étude de cas : analyse critique d’engagements RSE/ESS de marques ou d’organisations"
+       ]
+      },
+      {
+       "titre": "Intégration de la RSE/ESS à la stratégie de marque et de communication",
+       "points": [
+        "Identification des leviers d’action RSE/ESS pour la marque (gouvernance, environnement, social, inclusion, diversité, éthique, achats responsables, innovation sociale)",
+        "Méthodes d’analyse d’impact (matrice de matérialité, analyse parties prenantes, scoring d’impact)",
+        "Traduction stratégique : formulation d’engagements crédibles, mesurables et activables, intégration dans la plateforme de marque et la stratégie de communication",
+        "Atelier : mapping des leviers RSE/ESS et élaboration d’un axe de communication responsable"
+       ]
+      },
+      {
+       "titre": "Pilotage, valorisation et communication responsable",
+       "points": [
+        "Indicateurs, reporting, communication de la preuve (rapport RSE, communication intégrée, labels, preuves d’impact)",
+        "Gestion des risques d’impact washing (greenwashing, social washing, purpose washing), anticipation des crises réputationnelles",
+        "Bonnes pratiques de communication responsable (éco-conception, inclusion, accessibilité, sobriété numérique)",
+        "Atelier : restitution d’une mini-stratégie RSE/ESS pour une marque ou une organisation, feedback collectif"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Classe inversée : analyse de stratégies RSE/ESS, veille sur les innovations responsables",
+      "Ateliers pratiques d’audit, de mapping, de formulation d’engagements",
+      "Études de cas réels, débats mouvants sur les dilemmes éthiques, jeux de rôle (marque, ONG, agence, consommateur)",
+      "Utilisation d’outils d’IA pour l’analyse d’impact ou la veille réglementaire"
+     ],
+     "evaluations": [
+      "Formative : quiz sur les concepts et référentiels, mini-exercices d’audit ou de mapping, analyse critique de campagnes",
+      "Sommative : rendu d’une mini-stratégie ou d’un axe de communication RSE/ESS (diagnostic, recommandations, justification des choix, analyse des impacts et axes d’amélioration), soutenance orale argumentée"
+     ]
+    },
+    {
+     "titre": "TD : Accompagnement Mégaka – Élaborer une stratégie marketing communication",
+     "bloc": "Bloc 2 – Élaborer une stratégie marketing communication alignée avec les valeurs de la marque et favorisant l'engagement de son public cible",
+     "formation": "M1 – Manager des stratégies marketing et communication",
+     "rncp": "38504 (France Compétences)",
+     "activite": "",
+     "intervenant": "",
+     "volume": "7h",
+     "sequencage": "2 séances de 3,5h",
+     "objectif": "Accompagner les étudiant·es dans la construction et la finalisation de leur recommandation stratégique marketing communication (Mégaka), en s'assurant de la présence et de la cohérence des 6 exigences obligatoires du référentiel RNCP 38504 : axes stratégiques, déclinaison en actions, traduction financière, présentation de l'entreprise/plateforme de marque, intégration RSE, démonstration ROI.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.7",
+      "C.8",
+      "C.9"
+     ],
+     "notions_cles": [],
+     "programme": [
+      {
+       "titre": "Diagnostic du dossier et stratégie",
+       "points": [
+        "Rappel des 6 exigences obligatoires et de leurs critères d'évaluation jury",
+        "Point d'avancement individuel : identification des manques, recadrage stratégique",
+        "Exigences 1 & 2 – objectifs SMART, cohérence cibles / axe de communication / actions",
+        "Exigences 4 & 5 – plateforme de marque, diagnostic SWOT, intégration RSE dans les orientations stratégiques",
+        "Atelier de correction et de renforcement des parties stratégiques du dossier"
+       ]
+      },
+      {
+       "titre": "Budget, ROI et préparation à la soutenance",
+       "points": [
+        "Exigence 3 – construction du budget ventilé par action et par poste, consolidation globale",
+        "Exigence 6 – calcul du ROI, KPI sourcés, retombées estimées, justification méthodologique",
+        "Checklist finale des 6 exigences : contrôle croisé dossier / référentiel avant rendu",
+        "Simulation de soutenance (15 min présentation + 15 min Q&R jury) : argumentation des choix stratégiques, anticipation des questions sur le ROI et la RSE"
+       ]
+      }
+     ],
+     "seances": [
+      {
+       "numero": 1,
+       "duree": "3,5h",
+       "titre": "Diagnostic du dossier et stratégie",
+       "points": [
+        "Rappel des 6 exigences obligatoires et de leurs critères d'évaluation jury",
+        "Point d'avancement individuel : identification des manques, recadrage stratégique",
+        "Exigences 1 & 2 – objectifs SMART, cohérence cibles / axe de communication / actions",
+        "Exigences 4 & 5 – plateforme de marque, diagnostic SWOT, intégration RSE dans les orientations stratégiques",
+        "Atelier de correction et de renforcement des parties stratégiques du dossier"
+       ]
+      },
+      {
+       "numero": 2,
+       "duree": "3,5h",
+       "titre": "Budget, ROI et préparation à la soutenance",
+       "points": [
+        "Exigence 3 – construction du budget ventilé par action et par poste, consolidation globale",
+        "Exigence 6 – calcul du ROI, KPI sourcés, retombées estimées, justification méthodologique",
+        "Checklist finale des 6 exigences : contrôle croisé dossier / référentiel avant rendu",
+        "Simulation de soutenance (15 min présentation + 15 min Q&R jury) : argumentation des choix stratégiques, anticipation des questions sur le ROI et la RSE"
+       ]
+      }
+     ],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Points d’avancement individualisés – feedback direct sur le dossier en cours",
+      "Sérialisation de la checklist des 6 exigences : contrôle par binôme ou en groupe",
+      "Simulation chronométrée de soutenance orale et debriefing collectif"
+     ],
+     "evaluations": [
+      "Formative : revue de dossier en séance, feedback oral sur les 6 exigences, simulation de questions jury",
+      "Sommative : suivi de la progression du dossier Mégaka via les livrables intermédiaires et la note de soutenance finale"
+     ]
+    },
+    {
+     "titre": "Référencements (SEO, SEA, SMO, SMA)",
+     "bloc": "Bloc 2 : Élaborer une stratégie marketing communication alignée avec les valeurs de la marque et favorisant l’engagement de son public cible",
+     "formation": "M1 – Manager des stratégies marketing et communication",
+     "rncp": "38504 (France Compétences)",
+     "activite": "",
+     "intervenant": "",
+     "volume": "14h",
+     "sequencage": "S2 – 4 séances de 3h30",
+     "objectif": "Permettre à chaque étudiant d’élaborer une stratégie de référencement complète, multi-leviers et adaptée à la stratégie de marque : choix des canaux, optimisation technique et éditoriale, gestion de campagnes, analyse des performances, intégration des innovations (IA, automation), argumentation des arbitrages auprès d’un commanditaire ou d’un jury.",
+     "commentaire": "",
+     "competences_prose": "Concevoir et piloter une stratégie de référencement globale (SEO, SEA, SMO, SMA) ; arbitrer entre organique et payant selon les objectifs ; intégrer les enjeux d’accessibilité, de performance, d’innovation et de RSE dans les dispositifs de visibilité digitale.",
+     "competences_liees": [
+      "C.10"
+     ],
+     "notions_cles": [
+      "Panorama stratégique du référencement et articulation omnicanale",
+      "SEO avancé : stratégie, optimisation, innovation",
+      "SEA/SMA : campagnes intelligentes et pilotage de la performance",
+      "SMO : optimisation de la présence organique et stratégie d’engagement"
+     ],
+     "programme": [
+      {
+       "titre": "Panorama stratégique du référencement et articulation omnicanale",
+       "points": [
+        "Rappel des fondamentaux (SEO, SEA, SMO, SMA) et de leur évolution (IA, data, privacy, search multimodal, GEO - Generative Engine Optimization)",
+        "Analyse des synergies et arbitrages entre référencement organique (SEO/SMO) et payant (SEA/SMA)",
+        "Intégration du référencement dans la stratégie de communication globale et le parcours client",
+        "Atelier : diagnostic de visibilité pour une marque réelle ou simulée, identification des leviers prioritaires"
+       ]
+      },
+      {
+       "titre": "SEO avancé : stratégie, optimisation, innovation",
+       "points": [
+        "Audit technique et éditorial, optimisation on-site et off-site, maillage, accessibilité",
+        "Recherche et structuration des mots-clés (intentions, longue traîne, clustering), rédaction optimisée, balisage sémantique",
+        "SEO local, vocal, vidéo, IA générative pour l’optimisation des contenus GEO (Generative Engine Optimization) : optimiser la visibilité dans les moteurs génératifs (ChatGPT, Perplexity, Google SGE/AI Overviews) — structuration des contenus, citation par les LLMs, données structurées avancées",
+        "Atelier : élaboration d’une mini-stratégie SEO intégrée, simulation d’audit ou de plan d’action"
+       ]
+      },
+      {
+       "titre": "SEA/SMA : campagnes intelligentes et pilotage de la performance",
+       "points": [
+        "Création et structuration de campagnes Google Ads, Meta Ads, LinkedIn, TikTok, etc.",
+        "Ciblage avancé (audiences, lookalike, retargeting), gestion des budgets, automatisation des enchères",
+        "A/B testing, personnalisation dynamique des annonces, analyse du ROI et des KPI",
+        "Atelier : simulation de paramétrage et d’optimisation d’une campagne SEA/SMA, analyse des résultats et recommandations"
+       ]
+      },
+      {
+       "titre": "SMO : optimisation de la présence organique et stratégie d’engagement",
+       "points": [
+        "Audit et optimisation des comptes sociaux (contenus, formats, calendrier éditorial, algorithmes)",
+        "Animation de communautés, gestion de l’e-réputation, synergie avec SMA",
+        "Mesure de la performance (reach, engagement, taux de conversion, earned media value)",
+        "Atelier : élaboration d’une stratégie SMO intégrée à un plan de visibilité globale, restitution orale ou écrite"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Ateliers pratiques à chaque étape (audit, paramétrage, optimisation, reporting)",
+      "Utilisation d’outils professionnels et d’IA (SEMrush, Google Ads, Meta Business Suite, ChatGPT, outils de dataviz)",
+      "Analyse de cas réels, benchmark sectoriel, veille sur les innovations"
+     ],
+     "evaluations": [
+      "Formative : quiz sur les concepts, mini-exercices d’audit, simulation de campagnes, restitution intermédiaire",
+      "Sommative : rendu d’une stratégie de référencement globale (audit, recommandations, plan d’actions, reporting), présentation orale ou écrite, évaluation sur la cohérence, la pertinence des arbitrages, la capacité à intégrer l’innovation et à justifier les choix auprès d’un commanditaire ou d’un jury"
+     ]
+    },
+    {
+     "titre": "Adobe – outils créatifs numériques au service de la stratégie",
+     "bloc": "Bloc 2 : Élaborer une stratégie marketing communication alignée avec les valeurs de la marque et favorisant l’engagement de son public cible",
+     "formation": "M1 – Manager des stratégies marketing et communication",
+     "rncp": "38504 (France Compétences)",
+     "activite": "",
+     "intervenant": "",
+     "volume": "17,5h",
+     "sequencage": "S1/S2 – 5 séances de 3h30",
+     "objectif": "Permettre à l’étudiant de piloter la création de livrables créatifs et techniquement irréprochables, adaptés à différents supports (print, digital, social media), de justifier ses choix graphiques et techniques dans une logique stratégique, et d’intégrer les dernières innovations Adobe et IA dans la production.",
+     "commentaire": "",
+     "competences_prose": "Maîtriser la suite Adobe (Photoshop, Illustrator, InDesign) à un niveau avancé pour concevoir, décliner et produire des supports de communication professionnels, multi-formats, accessibles et innovants, en cohérence avec la stratégie de marque et les objectifs omnicanaux. Savoir intégrer IA et automatisation, respecter les contraintes d’accessibilité, de RSE et de performance.",
+     "competences_liees": [
+      "C.10"
+     ],
+     "notions_cles": [
+      "Cadrage stratégique et workflow créatif",
+      "Création graphique avancée sur Photoshop et Illustrator",
+      "Mise en page professionnelle et édition sur InDesign",
+      "Déclinaison créative et adaptation multi-supports",
+      "Restitution professionnelle et argumentation stratégique"
+     ],
+     "programme": [
+      {
+       "titre": "Cadrage stratégique et workflow créatif",
+       "points": [
+        "Analyse de briefs stratégiques, identification des enjeux de marque et des objectifs de communication",
+        "Organisation du workflow : gestion des versions, collaboration, intégration des outils IA et automatisation",
+        "Prise en compte des contraintes d’accessibilité, d’éco-conception, de performance et de RSE",
+        "Benchmark de campagnes et supports innovants alignés avec la stratégie de marque"
+       ]
+      },
+      {
+       "titre": "Création graphique avancée sur Photoshop et Illustrator",
+       "points": [
+        "Retouche et montage complexes, gestion avancée des calques, photomontage créatif",
+        "Création de logotypes, pictogrammes, chartes graphiques, déclinaisons multi-formats",
+        "Automatisation (actions, scripts), IA générative pour la création d’assets avec Adobe Firefly (Generative Fill, Generative Expand, Text to Image), Generative Recolor, adaptation à la stratégie omnicanale",
+        "Atelier : production d’un kit visuel complet pour une campagne stratégique"
+       ]
+      },
+      {
+       "titre": "Mise en page professionnelle et édition sur InDesign",
+       "points": [
+        "Conception de supports éditoriaux complexes (brochures, rapports, dossiers de presse, ebooks)",
+        "Gestion des gabarits, styles, interactivité, exportation pour le print et le digital",
+        "Accessibilité des documents (balises, FALC, lecture écran), optimisation pour la diffusion omnicanale",
+        "Atelier : création d’un support éditorial aligné avec la stratégie de marque"
+       ]
+      },
+      {
+       "titre": "Déclinaison créative et adaptation multi-supports",
+       "points": [
+        "Déclinaison des concepts sur différents canaux (social media, print, web, événementiel)",
+        "Adaptation des messages et visuels selon les cibles, contextes et formats",
+        "Intégration des innovations Adobe (Firefly Services, IA générative, Express pour la déclinaison en masse, automation cloud, collaboration Adobe Creative Cloud)",
+        "Atelier : adaptation d’une campagne stratégique sur plusieurs supports, justification des choix"
+       ]
+      },
+      {
+       "titre": "Restitution professionnelle et argumentation stratégique",
+       "points": [
+        "Structuration d’un dossier de création : moodboard, justification des partis-pris, storytelling visuel",
+        "Présentation orale ou écrite des livrables, argumentation devant un jury ou un commanditaire",
+        "Feedback collectif, axes d’amélioration, veille sur les tendances créatives et technologiques"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Ateliers pratiques sur des briefs réels ou simulés, analyse critique de campagnes",
+      "Utilisation des dernières fonctionnalités Adobe (IA générative, automatisation, collaboration cloud)",
+      "Peer review et feedback croisé sur les productions",
+      "Classe inversée : tutoriels avancés, analyse de portfolios professionnels"
+     ],
+     "evaluations": [
+      "Formative : exercices d’application à chaque séance (création, retouche, mise en page, automatisation), quiz sur les nouveautés Adobe, feedback collectif",
+      "Sommative : rendu d’un projet graphique complet et multi-supports, aligné avec une stratégie de marque, intégrant accessibilité, innovation et justification stratégique, compilation dans un book, présentation orale ou écrite"
+     ]
+    },
+    {
+     "titre": "Photographie : techniques de prise de vue",
+     "bloc": "Bloc 2 : Élaborer une stratégie marketing communication alignée avec les valeurs de la marque et favorisant l’engagement de son public cible",
+     "formation": "M1 – Manager des stratégies marketing et communication",
+     "rncp": "38504 (France Compétences)",
+     "activite": "",
+     "intervenant": "",
+     "volume": "10,5h",
+     "sequencage": "S1/S2 – 3 séances de 3h30",
+     "objectif": "Permettre à l’étudiant de réaliser des images professionnelles répondant à un brief stratégique, d’argumenter ses choix techniques et esthétiques, d’intégrer la photographie dans une stratégie de communication omnicanale, et de préparer des livrables adaptés aux standards du secteur.",
+     "commentaire": "",
+     "competences_prose": "Maîtriser les techniques avancées de prise de vue (cadrage, lumière, composition, choix du matériel), adapter la production photographique à une intention stratégique, à une ligne éditoriale ou à un univers de marque, et intégrer l’accessibilité, l’innovation et la RSE dans la démarche créative.",
+     "competences_liees": [
+      "C.10"
+     ],
+     "notions_cles": [
+      "Cadrage stratégique et intention photographique",
+      "Techniques avancées de prise de vue",
+      "Workflow professionnel, préparation à la diffusion et argumentation",
+      "Atelier pratique et restitution professionnelle"
+     ],
+     "programme": [
+      {
+       "titre": "Cadrage stratégique et intention photographique",
+       "points": [
+        "Analyse du brief et des objectifs de la marque ou de la campagne",
+        "Définition de l’intention photographique : storytelling visuel, univers de marque, adaptation à la cible et aux supports",
+        "Choix du style, du format, de la série (portrait, packshot, reportage, lifestyle, événementiel, réseaux sociaux)",
+        "Benchmark de campagnes et d’images inspirantes, analyse critique"
+       ]
+      },
+      {
+       "titre": "Techniques avancées de prise de vue",
+       "points": [
+        "Maîtrise du matériel : boîtiers, optiques, éclairages (naturel, studio, mixte), accessoires",
+        "Réglages avancés : exposition, balance des blancs, gestion du bruit, profondeur de champ, vitesse, ISO",
+        "Composition : cadrage, lignes de force, plans, gestion de l’espace, couleurs et contrastes",
+        "Direction de modèle, gestion de l’émotion, scénarisation de la prise de vue",
+        "Prise en compte des contraintes d’accessibilité, d’inclusion et de RSE (représentativité, diversité, éco-responsabilité de la production)",
+        "Exercices pratiques sur différents formats et contextes (en intérieur, extérieur, lumière naturelle, studio)"
+       ]
+      },
+      {
+       "titre": "Workflow professionnel, préparation à la diffusion et argumentation",
+       "points": [
+        "Organisation du shooting : repérage, moodboard, plan de prise de vue, gestion du temps et des ressources",
+        "Gestion des rushs : tri, sélection, préparation des fichiers pour la post-production (lien avec module Adobe)",
+        "Préparation des livrables pour différents supports (print, digital, réseaux sociaux, dossiers de presse, campagnes omnicanales)",
+        "Argumentation des choix techniques et esthétiques devant un commanditaire ou un jury, justification au regard des enjeux stratégiques de la marque"
+       ]
+      },
+      {
+       "titre": "Atelier pratique et restitution professionnelle",
+       "points": [
+        "Réalisation d’un mini-projet photographique en réponse à un brief stratégique (individuel ou en binôme)",
+        "Restitution orale ou écrite, feedback collectif, axes d’amélioration",
+        "Mutualisation des bonnes pratiques, veille sur les innovations techniques et créatives"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Ateliers pratiques sur des briefs réels ou simulés, travail en binômes ou petits groupes",
+      "Analyse critique de campagnes photographiques de marque",
+      "Utilisation de matériel professionnel et d’outils innovants (éclairages, IA pour la préparation du shooting, moodboard digital)",
+      "Peer review et feedback croisé sur les productions",
+      "Simulation de présentation client/jury pour défendre ses choix"
+     ],
+     "evaluations": [
+      "Formative : exercices pratiques à chaque séance (prise de vue, cadrage, gestion de la lumière, argumentation), quiz sur les techniques avancées, feedback collectif",
+      "Sommative : rendu d’un mini-projet photographique complet (série d’images, moodboard, justification stratégique), présentation orale ou écrite, évaluation sur la qualité technique, la pertinence créative, l’adéquation au brief et la capacité à argumenter ses choix"
+     ]
+    },
+    {
+     "titre": "Fabrication : de l’idée à la réalisation",
+     "bloc": "Bloc 2 : Élaborer une stratégie marketing communication alignée avec les valeurs de la marque et favorisant l’engagement de son public cible",
+     "formation": "M1 – Manager des stratégies marketing et communication",
+     "rncp": "38504 (France Compétences)",
+     "activite": "",
+     "intervenant": "",
+     "volume": "10,5h",
+     "sequencage": "S2 – 3 séances de 3h30",
+     "objectif": "Permettre à l’étudiant de transformer une idée créative ou stratégique en produit fini : maîtriser les étapes de fabrication, anticiper les contraintes, optimiser les choix techniques et budgétaires, assurer la qualité et la conformité, et piloter la relation avec les fournisseurs et partenaires.",
+     "commentaire": "",
+     "competences_prose": "Piloter la chaîne de fabrication d’un support de communication (print ou digital) : du brief créatif à la livraison, en intégrant les contraintes techniques, budgétaires, réglementaires, RSE et d’accessibilité. Savoir dialoguer avec les prestataires, arbitrer les choix de fabrication et garantir la conformité du livrable à la stratégie de marque.",
+     "competences_liees": [
+      "C.10"
+     ],
+     "notions_cles": [
+      "Cadrage stratégique et brief de fabrication",
+      "Étapes et contraintes de la chaîne de fabrication",
+      "Suivi de production, contrôle qualité et livraison",
+      "Restitution professionnelle et argumentation des choix"
+     ],
+     "programme": [
+      {
+       "titre": "Cadrage stratégique et brief de fabrication",
+       "points": [
+        "Analyse du brief stratégique et traduction en cahier des charges technique",
+        "Identification des enjeux de fabrication : objectifs, cibles, supports, quantités, délais, budget, RSE, accessibilité",
+        "Dialogue avec les équipes créatives et stratégiques pour garantir la cohérence du projet",
+        "Atelier : rédaction d’un brief de fabrication à partir d’un cas réel ou simulé"
+       ]
+      },
+      {
+       "titre": "Étapes et contraintes de la chaîne de fabrication",
+       "points": [
+        "Panorama des étapes de production : prépresse, choix des matériaux (papier, encres, supports digitaux), impression, façonnage, finition, contrôle qualité, livraison",
+        "Contraintes techniques : formats, colorimétrie, marges, BAT, gestion des fichiers, normes d’accessibilité (print et digital)",
+        "Prise en compte des critères RSE : éco-conception, choix responsables, labels, gestion des déchets",
+        "Dialogue et négociation avec les fournisseurs : demande de devis, analyse des offres, gestion des imprévus",
+        "Atelier : simulation de gestion de production (print ou digital), analyse de devis, arbitrage des choix"
+       ]
+      },
+      {
+       "titre": "Suivi de production, contrôle qualité et livraison",
+       "points": [
+        "Organisation du suivi de fabrication : planning, points de contrôle, gestion des aléas",
+        "Contrôle qualité : vérification des BAT, conformité aux attentes, gestion des non-conformités",
+        "Livraison, réception, validation finale, gestion des litiges",
+        "Atelier : étude de cas sur un incident de production et proposition de solutions correctives"
+       ]
+      },
+      {
+       "titre": "Restitution professionnelle et argumentation des choix",
+       "points": [
+        "Présentation orale ou écrite du process de fabrication, justification des choix techniques, budgétaires, RSE et d’accessibilité",
+        "Retour d’expérience sur la relation avec les prestataires et la gestion de projet",
+        "Feedback collectif, axes d’amélioration, veille sur les innovations techniques et responsables"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Ateliers pratiques : rédaction de briefs, analyse de devis, gestion de planning, simulation d’incidents",
+      "Études de cas réels ou simulés (fabrication print, digital, événementiel)",
+      "Visite virtuelle ou réelle d’une imprimerie ou d’un atelier de production",
+      "Utilisation d’outils numériques pour la gestion de projet et le suivi de production",
+      "Peer review et feedback croisé sur les dossiers produits"
+     ],
+     "evaluations": [
+      "Formative : exercices de rédaction de brief, analyse de devis, simulation de gestion de production, quiz sur les contraintes techniques",
+      "Sommative : rendu d’un dossier de fabrication complet (brief, planning, analyse de devis, justification des choix), présentation orale ou écrite, évaluation sur la rigueur, la pertinence des arbitrages, la capacité à anticiper et à résoudre les difficultés"
+     ]
+    },
+    {
+     "titre": "Wordpress",
+     "bloc": "Bloc 2 : Élaborer une stratégie marketing communication alignée avec les valeurs de la marque et favorisant l’engagement de son public cible",
+     "formation": "M1 – Manager des stratégies marketing et communication",
+     "rncp": "38504 (France Compétences)",
+     "activite": "",
+     "intervenant": "",
+     "volume": "14h",
+     "sequencage": "S1/S2 – 4 séances de 3h30",
+     "objectif": "Permettre à l’étudiant de maîtriser Wordpress comme levier central de la présence digitale de la marque : création de sites avancés, optimisation de l’expérience utilisateur, intégration des outils de conversion et de tracking, adaptation aux enjeux d’accessibilité, de sécurité, de performance et de RSE. Préparer à la restitution professionnelle et à la gestion de projets digitaux complexes.",
+     "commentaire": "",
+     "competences_prose": "Concevoir, personnaliser et piloter un site Wordpress professionnel : choix stratégique des templates, gestion avancée des contenus, intégration de plugins et d’outils marketing, optimisation SEO, accessibilité, sécurité, responsive design, conformité RGPD, et analyse de la performance. Savoir intégrer Wordpress dans une stratégie omnicanale et justifier ses choix techniques et éditoriaux dans une logique de marque.",
+     "competences_liees": [
+      "C.10"
+     ],
+     "notions_cles": [
+      "Stratégie digitale et choix des solutions WordPress, NoCode et IA",
+      "Gestion avancée des contenus et des fonctionnalités",
+      "Optimisation SEO, accessibilité, sécurité et conformité",
+      "Pilotage de la performance, intégration omnicanale et restitution"
+     ],
+     "programme": [
+      {
+       "titre": "Stratégie digitale et choix des solutions WordPress, NoCode et IA",
+       "points": [
+        "Analyse des besoins stratégiques de la marque, choix du type de site (vitrine, blog, e-commerce, landing page, portail, etc.)",
+        "Sélection et personnalisation avancée des thèmes : critères de performance, accessibilité, responsive design, compatibilité avec les objectifs marketing",
+        "Benchmark de sites Wordpress performants et analyse critique",
+        "Atelier : cadrage d’un projet Wordpress aligné avec la stratégie de marque"
+       ]
+      },
+      {
+       "titre": "Gestion avancée des contenus et des fonctionnalités",
+       "points": [
+        "Création et structuration de contenus dynamiques : custom post types, taxonomies, champs personnalisés (ACF), gestion des médias",
+        "Intégration de plugins stratégiques : SEO, analytics, sécurité, RGPD, formulaires, e-commerce, automatisation marketing",
+        "Gestion des utilisateurs, rôles, droits, workflow éditorial collaboratif",
+        "Atelier : mise en place d’un site Wordpress multi-fonctions, en équipe projet"
+       ]
+      },
+      {
+       "titre": "Optimisation SEO, accessibilité, sécurité et conformité",
+       "points": [
+        "Optimisation technique (vitesse, cache, images, mobile first), structure des URLs, balisage sémantique, plan de site, rich snippets",
+        "Mise en conformité RGPD, gestion des cookies, privacy by design",
+        "Accessibilité numérique (RGAA, contrastes, navigation clavier, textes alternatifs), bonnes pratiques d’inclusion",
+        "Sécurisation avancée (backups, firewall, monitoring, gestion des mises à jour)",
+        "Atelier : audit et optimisation d’un site Wordpress existant"
+       ]
+      },
+      {
+       "titre": "Pilotage de la performance, intégration omnicanale et restitution",
+       "points": [
+        "Intégration des outils de tracking, analytics, conversion (Google Analytics, Tag Manager, pixels publicitaires, CRM)",
+        "Connexion à l’écosystème omnicanal (social media, emailing, automation, API, NoCode) Intégration de l’IA dans WordPress : plugins IA (Divi AI, Elementor AI, WPCode), génération de contenus assistée, chatbots, personnalisation dynamique, SEO IA (Rank Math AI, SurferSEO) Expérimentation NoCode pour l’extension des fonctionnalités sans développement (Make/Zapier + WP, Webhooks, intégrations tierces)",
+        "Tableaux de bord de performance, reporting, analyse des KPI, optimisation continue",
+        "Restitution professionnelle : présentation orale ou écrite du projet, argumentation des choix techniques et stratégiques, feedback collectif"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Ateliers pratiques sur des briefs réels ou simulés, travail en équipe projet",
+      "Utilisation d’outils avancés (constructeurs de pages, plugins premium, outils d’audit SEO, solutions d’accessibilité)",
+      "Classe inversée : tutoriels avancés, analyse critique de sites inspirants, veille sur les tendances Wordpress et NoCode"
+     ],
+     "evaluations": [
+      "Formative : exercices d’intégration et de personnalisation, quiz sur la structure et la conformité, mini-projets de configuration avancée, analyse critique de sites existants",
+      "Sommative : rendu d’un site Wordpress complet et personnalisé (multi-fonctions, optimisation SEO, accessibilité, sécurité, conformité RGPD, intégration omnicanale), évaluation sur la qualité technique, la pertinence stratégique et la capacité à répondre à un brief, présentation orale ou écrite du projet"
+     ]
+    },
+    {
+     "titre": "Budget Pilotage financier & négociation",
+     "bloc": "Bloc 2 : Élaborer une stratégie marketing communication alignée avec les valeurs de la marque et favorisant l’engagement de son public cible",
+     "formation": "M1 – Manager des stratégies marketing et communication",
+     "rncp": "38504 (France Compétences)",
+     "activite": "",
+     "intervenant": "",
+     "volume": "14h",
+     "sequencage": "S2 – 4 séances de 3h30",
+     "objectif": "Permettre à chaque étudiant d’élaborer, piloter et défendre un budget de communication, de négocier efficacement avec les parties prenantes (internes et externes), d’anticiper les risques financiers et d’optimiser l’allocation des ressources pour maximiser la performance des actions de communication.",
+     "commentaire": "",
+     "competences_prose": "Maîtriser la construction, le suivi et l’optimisation d’un budget de communication ; estimer les coûts, calculer le ROI, arbitrer les ressources ; négocier avec des prestataires ou une direction ; défendre ses choix financiers dans un contexte stratégique et opérationnel.",
+     "competences_liees": [
+      "C.11",
+      "C.12"
+     ],
+     "notions_cles": [
+      "Cadrage stratégique et construction budgétaire",
+      "Suivi, contrôle et optimisation du budget",
+      "Techniques de négociation et relations avec les parties prenantes",
+      "Restitution professionnelle et justification des choix financiers"
+     ],
+     "programme": [
+      {
+       "titre": "Cadrage stratégique et construction budgétaire",
+       "points": [
+        "Présentation des enjeux budgétaires dans la communication (planification, allocation, arbitrage)",
+        "Définition des postes de coût (création, production, diffusion, achats médias, honoraires, imprévus)",
+        "Méthodologie de construction d’un budget prévisionnel (tableaux de bord, rétroplanning financier)",
+        "Atelier : élaboration d’un budget pour une campagne ou un projet de communication"
+       ]
+      },
+      {
+       "titre": "Suivi, contrôle et optimisation du budget",
+       "points": [
+        "Outils de suivi financier : tableaux de bord, reporting, indicateurs de performance budgétaire",
+        "Gestion des écarts, ajustements en cours de projet, anticipation des risques (surcoûts, sous-consommation, imprévus)",
+        "Calcul et analyse du ROI, critères d’arbitrage entre actions",
+        "Atelier : simulation de suivi budgétaire et prise de décision corrective"
+       ]
+      },
+      {
+       "titre": "Techniques de négociation et relations avec les parties prenantes",
+       "points": [
+        "Préparation et conduite d’une négociation budgétaire (avec la direction, les fournisseurs, les partenaires)",
+        "Techniques d’argumentation, gestion des objections, recherche de compromis gagnant-gagnant",
+        "Prise en compte des enjeux contractuels, juridiques et RSE dans la négociation",
+        "Atelier : jeu de rôle de négociation sur un cas réel ou simulé"
+       ]
+      },
+      {
+       "titre": "Restitution professionnelle et justification des choix financiers",
+       "points": [
+        "Structuration d’un dossier budgétaire et préparation à la présentation orale (clarté, pédagogie, justification des arbitrages)",
+        "Défense des choix financiers devant un jury ou un commanditaire, gestion des questions et objections",
+        "Feedback collectif, mutualisation des bonnes pratiques, veille sur les innovations en pilotage financier et négociation",
+        "Atelier : restitution orale ou écrite d’un budget et d’une stratégie de négociation"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Ateliers pratiques de construction et de suivi budgétaire, simulations de négociation",
+      "Analyse de cas réels, utilisation d’outils numériques (Excel, Google Sheets, simulateurs de ROI)",
+      "Jeux de rôle, peer review, feedback croisé"
+     ],
+     "evaluations": [
+      "Formative : exercices de construction budgétaire, simulations de suivi, jeux de rôle de négociation",
+      "Sommative : rendu d’un dossier budgétaire complet (tableau, justification, plan d’action), simulation de négociation, présentation orale ou écrite, évaluation sur la rigueur, la pertinence des arbitrages et la capacité à défendre ses choix financiers."
+     ]
+    },
+    {
+     "titre": "Spé Marque & transfo : Benchmarking (analyse des stratégies concurrentielles)",
+     "bloc": "Bloc 5 : Engager l’innovation et la transformation digitale de la communication de la marque (Bloc 4-II)",
+     "formation": "M1 – Manager des stratégies marketing et communication",
+     "rncp": "38504 (France Compétences)",
+     "activite": "",
+     "intervenant": "",
+     "volume": "10,5h",
+     "sequencage": "S2 – 3 séances de 3h30",
+     "objectif": "Permettre à l’étudiant de piloter une démarche de benchmarking stratégique, d’identifier les axes d’innovation et de rupture dans les stratégies concurrentielles, de restituer une analyse opérationnelle et de formuler des recommandations pour la transformation digitale et l’innovation de la marque.",
+     "commentaire": "",
+     "competences_prose": "Maîtriser les méthodes de veille et d’analyse comparative des stratégies concurrentielles ; repérer les facteurs d’innovation et de transformation digitale dans les stratégies de marque ; synthétiser et restituer un benchmark opérationnel pour nourrir la stratégie d’innovation et la réflexion sur le positionnement digital de la marque.",
+     "competences_liees": [
+      "C.20-II"
+     ],
+     "notions_cles": [
+      "Cadrage méthodologique du benchmarking stratégique",
+      "Collecte et analyse des données concurrentielles",
+      "Synthèse, restitution et activation stratégique du benchmark",
+      "Atelier pratique et feedback"
+     ],
+     "programme": [
+      {
+       "titre": "Cadrage méthodologique du benchmarking stratégique",
+       "points": [
+        "Présentation des attendus du projet pro M2 (innovation/transformation digitale)",
+        "Définition des objectifs du benchmark : veille prospective, analyse de la concurrence, identification des facteurs de différenciation et d’innovation",
+        "Sélection des critères d’analyse : positionnement, innovation digitale, expérience client, business model, communication, RSE",
+        "Construction d’une grille d’analyse comparative adaptée à la problématique de la marque"
+       ]
+      },
+      {
+       "titre": "Collecte et analyse des données concurrentielles",
+       "points": [
+        "Veille sur les stratégies des acteurs du marché avec IA (outils : Perplexity, ChatGPT, Copilot, Semrush AI, Mention, Brandwatch) et sources qualifiées (études sectorielles, rapports annuels, réseaux sociaux)",
+        "Analyse des forces et faiblesses : mapping concurrentiel, scoring d’innovation",
+        "Repérage des ruptures technologiques, des usages émergents et des modèles disruptifs dans la communication de marque",
+        "Mise en perspective avec les tendances et les attentes des consommateurs",
+        "Atelier : réalisation d’un benchmark sur un secteur ou une problématique donnée"
+       ]
+      },
+      {
+       "titre": "Synthèse, restitution et activation stratégique du benchmark",
+       "points": [
+        "Structuration d’une synthèse visuelle et opérationnelle (tableaux, infographies, mapping, executive summary)",
+        "Identification des opportunités d’innovation et des axes de transformation digitale pour la marque",
+        "Formulation de recommandations : leviers d’innovation, axes de différenciation, risques à anticiper",
+        "Lien avec la production du projet pro M2 : intégration du benchmark dans la réflexion stratégique et la proposition de valeur"
+       ]
+      },
+      {
+       "titre": "Atelier pratique et feedback",
+       "points": [
+        "Mutualisation des bonnes pratiques, veille sur les outils et méthodes de benchmarking innovants Prompting stratégique pour la veille IA : construction de prompts efficaces pour l’analyse concurrentielle, synthèse automatisée avec les LLMs, détection des signaux faibles via le social listening IA",
+        "Conseils pour la poursuite de la démarche en M2 et articulation avec les autres modules de Spé Marque & Transfo"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Ateliers pratiques de veille et d’analyse comparative",
+      "Utilisation d’outils numériques et d’IA pour l’automatisation de la veille et la datavisualisation",
+      "Études de cas réels et simulations de restitution devant un jury ou un commanditaire",
+      "Peer review et feedback croisé sur les benchmarks produits"
+     ],
+     "evaluations": [
+      "Formative : mini-exercices d’analyse comparative, restitution intermédiaire",
+      "Sommative : rendu d’un benchmark stratégique (grille d’analyse, synthèse, recommandations pour l’innovation et la transformation digitale), présentation orale ou écrite, évaluation sur la pertinence de l’analyse, la qualité de la restitution et la capacité à formuler des recommandations innovantes (préparation au projet pro M2)"
+     ]
+    },
+    {
+     "titre": "Spé Marque & transfo : Supports de communication innovants",
+     "bloc": "Bloc 5 : Engager l’innovation et la transformation digitale de la communication de la marque (4-II)",
+     "formation": "M1 – Manager des stratégies marketing et communication",
+     "rncp": "38504 (France Compétences)",
+     "activite": "",
+     "intervenant": "",
+     "volume": "14h",
+     "sequencage": "S2 – 4 séances de 3h30",
+     "objectif": "Permettre à chaque étudiant d’explorer, de benchmarker et de prototyper des supports de communication nouveaux ou émergents, d’argumenter leur intégration dans une stratégie de marque innovante, et de préparer la restitution professionnelle attendue dans le projet pro M2 (transformation digitale).",
+     "commentaire": "",
+     "competences_prose": "Identifier, concevoir et recommander des supports et formats de communication innovants (visuels, interactifs, immersifs, hybrides, IA, data-driven, etc.) ; évaluer leur pertinence stratégique et leur faisabilité ; anticiper les enjeux réglementaires, technologiques, éthiques et RSE liés à leur mise en œuvre.",
+     "competences_liees": [
+      "C.21-II"
+     ],
+     "notions_cles": [
+      "Panorama des supports innovants et tendances émergentes",
+      "Conception et prototypage de supports innovants",
+      "Évaluation stratégique et opérationnelle des supports",
+      "Restitution professionnelle et intégration dans la stratégie de marque"
+     ],
+     "programme": [
+      {
+       "titre": "Panorama des supports innovants et tendances émergentes",
+       "points": [
+        "Veille sur les nouveaux formats : contenus immersifs (AR/VR, 3D), interactifs (webapps, podcasts interactifs, live streaming), générés par IA, data-driven, supports phygitaux, objets connectés, etc.",
+        "Analyse des usages, des tendances sectorielles, des ruptures technologiques et des attentes des publics",
+        "Benchmark de campagnes et dispositifs remarquables, décryptage des facteurs de succès ou d’échec",
+        "Atelier : mapping des supports innovants pertinents pour différents secteurs ou problématiques de marque"
+       ]
+      },
+      {
+       "titre": "Conception et prototypage de supports innovants",
+       "points": [
+        "Méthodologie de conception : du brief à l’idéation, prototypage rapide (NoCode, IA, outils collaboratifs)",
+        "Intégration de l’UX/UI, design inclusif, accessibilité, personnalisation des parcours utilisateurs",
+        "Prise en compte des contraintes réglementaires (RGPD, propriété intellectuelle), de cybersécurité et de RSE",
+        "Atelier : prototypage d’un support innovant (ex : mini-site interactif, expérience immersive, contenu IA, etc.)"
+       ]
+      },
+      {
+       "titre": "Évaluation stratégique et opérationnelle des supports",
+       "points": [
+        "Critères d’évaluation : pertinence pour la marque, potentiel d’engagement, faisabilité technique, coût, ROI, risques et opportunités",
+        "Méthodes de test et d’itération (POC, A/B testing, retours utilisateurs)",
+        "Anticipation des risques (cybersécurité, éthique, impact environnemental, accessibilité)",
+        "Atelier : analyse critique d’un projet ou d’un prototype, formulation de recommandations pour le déploiement"
+       ]
+      },
+      {
+       "titre": "Restitution professionnelle et intégration dans la stratégie de marque",
+       "points": [
+        "Structuration d’un dossier de recommandation : justification du choix du support, articulation avec la stratégie de marque, plan de déploiement, gestion des parties prenantes",
+        "Présentation orale ou écrite du prototype ou de la recommandation, feedback collectif",
+        "Lien avec le projet pro M2 : intégration du support innovant dans une démarche globale de transformation digitale et d’innovation de la marque"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Ateliers pratiques de veille, mapping, prototypage (NoCode, IA, outils immersifs)",
+      "Analyse critique de campagnes et de dispositifs innovants",
+      "Utilisation d’outils collaboratifs (Figma, Notion, Webflow, Runway, etc.)",
+      "Peer review et feedback croisé sur les prototypes ou dossiers produits"
+     ],
+     "evaluations": [
+      "Formative : exercices de veille, mapping, prototypage, analyse critique, restitution intermédiaire",
+      "Sommative : rendu d’un dossier ou d’un prototype de support innovant (benchmark, justification, prototype, plan de déploiement, analyse des risques), présentation orale ou écrite, évaluation sur la pertinence de l’innovation, la faisabilité, l’intégration stratégique et la capacité à argumenter devant un jury ou dans le cadre du projet pro M2"
+     ]
+    },
+    {
+     "titre": "Spé Marque & transfo : Référencement – Google Analytics (approfondissement)",
+     "bloc": "Bloc 5 : Engager l’innovation et la transformation digitale de la communication de la marque (4-II)",
+     "formation": "M1 – Manager des stratégies marketing et communication",
+     "rncp": "38504 (France Compétences)",
+     "activite": "",
+     "intervenant": "",
+     "volume": "14h",
+     "sequencage": "S2 – 4 séances de 3h30",
+     "objectif": "Permettre à chaque étudiant d’exploiter pleinement Google Analytics dans une logique d’optimisation de la stratégie digitale, de piloter l’accompagnement des équipes sur la data, d’intégrer la mesure de la performance dans la transformation digitale, et de préparer des restitutions professionnelles pour le projet pro M2.",
+     "commentaire": "",
+     "competences_prose": "Maîtriser l’analyse avancée de la performance digitale via Google Analytics (GA4) : configuration, collecte, segmentation, analyse comportementale, data visualisation, reporting stratégique. Savoir traduire les données en recommandations opérationnelles pour l’innovation et la transformation digitale de la marque.",
+     "competences_liees": [
+      "C.22-II"
+     ],
+     "notions_cles": [
+      "Configuration avancée de Google Analytics (GA4) et introduction au pilotage de la visibilité dans l’IA (Search Generative Experience, GEO)",
+      "Collecte, segmentation et analyse comportementale (3h30)",
+      "Data visualisation, reporting et pilotage de la performance",
+      "Accompagnement au changement et intégration dans la transformation digitale"
+     ],
+     "programme": [
+      {
+       "titre": "Configuration avancée de Google Analytics (GA4) et introduction au pilotage de la visibilité dans l’IA (Search Generative Experience, GEO)",
+       "points": [
+        "Paramétrage des propriétés, flux de données, événements personnalisés, objectifs, conversions",
+        "Intégration avec Google Tag Manager, Data Studio, outils CRM/marketing automation",
+        "Gestion des accès, sécurité, conformité RGPD, anonymisation des données",
+        "Atelier : configuration complète d’un compte GA4 pour une marque réelle ou simulée"
+       ]
+      },
+      {
+       "titre": "Collecte, segmentation et analyse comportementale (3h30)",
+       "points": [
+        "Analyse des parcours utilisateurs, entonnoirs de conversion, segmentation avancée (audiences, comportements, sources)",
+        "Utilisation des rapports personnalisés, exploration, analyse des cohortes, événements clés",
+        "Identification des points de friction, opportunités d’optimisation, analyse multi-canal",
+        "Atelier : analyse de la performance d’un site ou d’une campagne, extraction d’insights stratégiques"
+       ]
+      },
+      {
+       "titre": "Data visualisation, reporting et pilotage de la performance",
+       "points": [
+        "Création de dashboards interactifs (Data Studio/Looker Studio, Tableau), choix des KPI, storytelling des données Analyse prédictive avec IA : Google Analytics Predictive Audiences, BigQuery ML, anomaly detection, attribution ML",
+        "Automatisation du reporting, partage et collaboration avec les parties prenantes",
+        "Mise en perspective des résultats : ROI, attribution, analyse cross-canal, recommandations d’optimisation",
+        "Atelier : production d’un dashboard stratégique et restitution orale ou écrite des analyses"
+       ]
+      },
+      {
+       "titre": "Accompagnement au changement et intégration dans la transformation digitale",
+       "points": [
+        "Stratégies d’acculturation et de formation des équipes à la data et à la mesure de la performance",
+        "Gestion de la conduite du changement : implication des parties prenantes, gestion des résistances, valorisation des quick wins",
+        "Intégration de la data dans la réflexion d’innovation et de transformation digitale (veille, benchmark, expérimentation)",
+        "Atelier : élaboration d’un plan d’accompagnement interne à la data, simulation de restitution à un comité de direction"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Ateliers pratiques sur comptes réels ou simulés (paramétrage, analyse, reporting)",
+      "Utilisation d’outils avancés (GA4, Tag Manager, Data Studio, CRM, IA pour l’analyse prédictive)",
+      "Simulations de restitution devant un comité de pilotage ou un commanditaire",
+      "Peer review et feedback croisé sur les dashboards et plans d’accompagnement"
+     ],
+     "evaluations": [
+      "Formative : exercices de configuration, d’analyse et de reporting, quiz sur les fonctionnalités avancées, restitution intermédiaire",
+      "Sommative : rendu d’un dashboard stratégique complet (configuration, analyse, recommandations), élaboration d’un plan d’accompagnement interne, présentation orale ou écrite, évaluation sur la pertinence des analyses, la capacité à piloter la transformation digitale et à accompagner les équipes (préparation au projet pro M2)"
+     ]
+    },
+    {
+     "titre": "Spé Marque & transfo : Design Thinking",
+     "bloc": "Bloc 5 : Engager l’innovation et la transformation digitale de la communication de la marque (4-II)",
+     "formation": "M1 – Manager des stratégies marketing et communication",
+     "rncp": "38504 (France Compétences)",
+     "activite": "",
+     "intervenant": "",
+     "volume": "14h",
+     "sequencage": "S1/S2 – 4 séances de 3h30",
+     "objectif": "Permettre à chaque étudiant de piloter une démarche d’innovation centrée utilisateur, d’intégrer la co-création et l’expérimentation dans la stratégie de marque, d’argumenter l’intérêt du Design Thinking pour la transformation digitale, et de préparer la restitution professionnelle attendue dans le projet pro M2.",
+     "commentaire": "",
+     "competences_prose": "Maîtriser la démarche Design Thinking pour innover dans la stratégie de marque : empathie, définition de problème, idéation, prototypage, test, itération. Savoir intégrer cette méthode dans la résolution de problématiques stratégiques, la conception de nouveaux services, produits ou dispositifs de communication, en tenant compte des enjeux technologiques, réglementaires et RSE.",
+     "competences_liees": [
+      "C.21-II"
+     ],
+     "notions_cles": [
+      "Introduction au Design Thinking et cadrage stratégique",
+      "Empathie et définition du problème",
+      "Idéation, prototypage et test",
+      "Intégration stratégique, restitution et argumentation"
+     ],
+     "programme": [
+      {
+       "titre": "Introduction au Design Thinking et cadrage stratégique",
+       "points": [
+        "Présentation des origines, principes et étapes du Design Thinking (empathie, définition, idéation, prototypage, test)",
+        "Intérêt pour la transformation digitale, l’innovation de marque, la résolution de problèmes complexes",
+        "Exemples de démarches réussies dans la communication et le marketing",
+        "Atelier : cadrage d’une problématique réelle ou simulée à traiter par le Design Thinking"
+       ]
+      },
+      {
+       "titre": "Empathie et définition du problème",
+       "points": [
+        "Techniques d’empathie : observation, entretiens utilisateurs, cartographie d’expérience, typologies de cibles  avancées",
+        "Analyse des besoins, attentes, irritants, aspirations des parties prenantes",
+        "Reformulation et cadrage du problème à résoudre (How might we…?)",
+        "Atelier : construction de typologies de cibles et cartographie d’expérience utilisateur"
+       ]
+      },
+      {
+       "titre": "Idéation, prototypage et test",
+       "points": [
+        "Techniques de créativité : brainstorming, mind mapping, SCAMPER, co-création, divergence/convergence",
+        "Sélection et priorisation des idées innovantes, validation rapide — facilitée par des outils IA (ChatGPT pour l’idéation, Miro AI pour le brainstorming collectif)",
+        "Prototypage rapide (papier, digital, NoCode, IA générative) : Figma pour les wireframes, Canva pour les moodboards et storyboards, outils IA (Midjourney, DALL-E, ChatGPT) pour la génération d’idées et de visuels de concept, scénarisation de l’expérience",
+        "Méthodes de test : retours utilisateurs, itération, ajustement",
+        "Atelier : production d’un prototype simple et organisation d’un test utilisateur"
+       ]
+      },
+      {
+       "titre": "Intégration stratégique, restitution et argumentation",
+       "points": [
+        "Intégration du Design Thinking dans la stratégie de marque et la transformation digitale",
+        "Prise en compte des enjeux réglementaires, technologiques, RSE et éthiques",
+        "Structuration d’une restitution professionnelle (présentation, rapport, storytelling du process)",
+        "Atelier : présentation orale ou écrite du projet, feedback collectif, axes d’amélioration"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Ateliers pratiques à chaque étape (empathie, idéation, prototypage, test)",
+      "Utilisation d’outils collaboratifs (Miro, Figma, Notion, IA générative pour le prototypage)",
+      "Analyse de cas réels d’innovation par le Design Thinking"
+     ],
+     "evaluations": [
+      "Formative : exercices d’empathie, de cadrage, d’idéation, de prototypage, restitution intermédiaire",
+      "Sommative : rendu d’un dossier ou d’un prototype innovant (cartographie, persona, prototype, test, recommandations stratégiques), présentation orale ou écrite, évaluation sur la capacité à piloter la démarche, à argumenter les choix et à intégrer le Design Thinking dans la stratégie de transformation de la marque (préparation au projet pro M2)"
+     ]
+    },
+    {
+     "titre": "Spé Marque & transfo : Webdesign et Design responsive",
+     "bloc": "Bloc 5 : Engager l’innovation et la transformation digitale de la communication de la marque (4-II)",
+     "formation": "M1 – Manager des stratégies marketing et communication",
+     "rncp": "38504 (France Compétences)",
+     "activite": "",
+     "intervenant": "",
+     "volume": "10,5h",
+     "sequencage": "S2 – 3 séances de 3h30",
+     "objectif": "Permettre à chaque étudiant de concevoir, prototyper et argumenter des interfaces et supports digitaux innovants, inclusifs et performants, en cohérence avec la stratégie de marque et les attentes des utilisateurs, et de préparer la restitution professionnelle attendue dans le projet pro M2 (transformation digitale).",
+     "commentaire": "",
+     "competences_prose": "Maîtriser les fondamentaux et les tendances du webdesign et du design responsive ; concevoir des interfaces et supports digitaux adaptés à tous les écrans et usages ; intégrer l’accessibilité, l’UX, la performance et l’innovation dans la conception ; anticiper les contraintes techniques, réglementaires et RSE.",
+     "competences_liees": [
+      "C.21-II"
+     ],
+     "notions_cles": [
+      "Panorama des standards et tendances du webdesign",
+      "Principes et techniques du design responsive",
+      "Intégration de l’UX, de l’innovation et de la performance",
+      "Restitution professionnelle et argumentation stratégique"
+     ],
+     "programme": [
+      {
+       "titre": "Panorama des standards et tendances du webdesign",
+       "points": [
+        "État de l’art du design digital : tendances graphiques, typographiques, couleurs, micro-interactions, motion design, mobile first, dark mode, etc.",
+        "Benchmark de sites et apps innovants, analyse critique des choix UX/UI et responsive",
+        "Introduction aux référentiels d’accessibilité (RGAA, WCAG), design universel et RSE appliquée au web",
+        "Atelier : mapping des tendances et inspirations pour différents secteurs"
+       ]
+      },
+      {
+       "titre": "Principes et techniques du design responsive",
+       "points": [
+        "Fondamentaux du responsive design : grilles fluides, breakpoints, flexbox, media queries, images adaptatives",
+        "Méthodologie de conception mobile first, adaptation aux écrans multiples (desktop, tablette, smartphone, TV, bornes, etc.)",
+        "Accessibilité numérique : contrastes, navigation clavier, ARIA, bonnes pratiques inclusives",
+        "Atelier : prototypage rapide d’un site ou d’une landing page responsive sur Figma, Canva (Canva Websites) ou outil équivalent"
+       ]
+      },
+      {
+       "titre": "Intégration de l’UX, de l’innovation et de la performance",
+       "points": [
+        "Articulation UX/UI : parcours utilisateur, wireframes, zoning, architecture de l’information, micro-interactions",
+        "Intégration de l’IA et des outils NoCode/LowCode dans le processus de design : Framer AI, Relume AI pour la génération de wireframes, Canva Magic Design, Webflow pour l’intégration sans code, outils de tests automatisés UX",
+        "Optimisation de la performance : poids des pages, temps de chargement, SEO technique, accessibilité",
+        "Atelier : amélioration d’un parcours utilisateur existant, justification des choix UX/UI et responsive"
+       ]
+      },
+      {
+       "titre": "Restitution professionnelle et argumentation stratégique",
+       "points": [
+        "Structuration d’un dossier ou d’un prototype : moodboard, wireframes, maquettes responsives, justification des partis-pris",
+        "Présentation orale ou écrite du projet, feedback collectif, axes d’amélioration",
+        "Lien avec le projet pro M2 : intégration du webdesign et du design responsive dans la réflexion globale de transformation digitale et d’innovation de la marque"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Ateliers pratiques de prototypage (Figma, Adobe XD, Webflow, outils NoCode)",
+      "Analyse critique de sites et apps, veille sur les innovations UX/UI",
+      "Utilisation d’outils d’audit d’accessibilité et de performance",
+      "Peer review et feedback croisé sur les prototypes et dossiers produits"
+     ],
+     "evaluations": [
+      "Formative : exercices de veille, prototypage, audit, restitution intermédiaire",
+      "Sommative : rendu d’un prototype ou d’un dossier de webdesign responsive (maquettes, justification, plan d’intégration), présentation orale ou écrite, évaluation sur la créativité, la cohérence, la conformité aux standards et la capacité à argumenter devant un jury ou dans le cadre du projet pro M2"
+     ]
+    },
+    {
+     "titre": "Spé Marque & transfo : UX/UI",
+     "bloc": "Bloc 5 : Engager l’innovation et la transformation digitale de la communication de la marque (4-II)",
+     "formation": "M1 – Manager des stratégies marketing et communication",
+     "rncp": "38504 (France Compétences)",
+     "activite": "",
+     "intervenant": "",
+     "volume": "14h",
+     "sequencage": "S2 – 4 séances de 3h30",
+     "objectif": "Permettre à chaque étudiant de piloter la conception d’interfaces et d’expériences utilisateurs en mode projet, d’argumenter et de prototyper des solutions UX/UI adaptées à des enjeux stratégiques, et de préparer la restitution professionnelle attendue dans le projet pro M2 (transformation digitale).",
+     "commentaire": "",
+     "competences_prose": "Maîtriser les fondamentaux et les tendances du design d’expérience utilisateur (UX) et d’interface (UI) ; concevoir des parcours et interfaces digitales efficaces, inclusives, innovantes et alignées avec la stratégie de marque ; intégrer l’accessibilité, l’UX writing, la performance, l’itération et l’accompagnement au changement dans la démarche de transformation digitale.",
+     "competences_liees": [
+      "C.22-II"
+     ],
+     "notions_cles": [
+      "Panorama des fondamentaux, tendances et enjeux UX/UI",
+      "Méthodologie de conception UX/UI et prototypage",
+      "UI Design avancé, UX writing et accessibilité",
+      "Pilotage de projet UX/UI, restitution et accompagnement au changement"
+     ],
+     "programme": [
+      {
+       "titre": "Panorama des fondamentaux, tendances et enjeux UX/UI",
+       "points": [
+        "Définitions, différences et complémentarités UX (expérience utilisateur) / UI (interface)",
+        "Tendances actuelles : design inclusif, micro-interactions, dark mode, mobile first, design system, IA générative",
+        "Analyse critique de parcours et d’interfaces (benchmark, best practices, erreurs courantes)",
+        "Enjeux d’accessibilité, de performance, de RSE et de conformité réglementaire (RGAA, RGPD)"
+       ]
+      },
+      {
+       "titre": "Méthodologie de conception UX/UI et prototypage",
+       "points": [
+        "Recherche utilisateur : interviews, personas, parcours, carte d’empathie, user journey",
+        "Définition des besoins, cadrage des objectifs, rédaction du brief UX",
+        "Wireframing, zoning, architecture de l’information, prototypage rapide (Figma, Adobe XD, outils NoCode)",
+        "Tests utilisateurs, itération, prise en compte des retours",
+        "Atelier : réalisation d’un prototype d’interface ou de parcours utilisateur"
+       ]
+      },
+      {
+       "titre": "UI Design avancé, UX writing et accessibilité",
+       "points": [
+        "Principes de UI Design : grilles, couleurs, typographie, iconographie, animation",
+        "Création ou adaptation d’un design system, cohérence graphique multi-supports",
+        "UX writing : micro-contenus, messages d’erreur, onboarding, tonalité adaptée à la marque",
+        "Accessibilité : contrastes, navigation clavier, ARIA, tests d’accessibilité",
+        "Atelier : amélioration d’une interface existante, rédaction de micro-contenus, audit d’accessibilité"
+       ]
+      },
+      {
+       "titre": "Pilotage de projet UX/UI, restitution et accompagnement au changement",
+       "points": [
+        "Accompagnement des parties prenantes internes (acculturation, formation, gestion des résistances)",
+        "Structuration d’une restitution professionnelle (présentation, storytelling, justification des choix)",
+        "Atelier : présentation orale ou écrite du projet UX/UI, feedback collectif, axes d’amélioration",
+        "Lien avec le projet pro M2 : intégration de la démarche UX/UI dans la réflexion stratégique globale sur la transformation digitale"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Ateliers pratiques de prototypage et d’audit UX/UI (Figma, Adobe XD, outils NoCode)",
+      "Analyse critique de parcours utilisateurs et d’interfaces réelles",
+      "Simulations de tests utilisateurs, restitution de feedbacks",
+      "Utilisation d’outils d’audit d’accessibilité et de performance",
+      "Peer review, feedback croisé, coaching sur la restitution professionnelle"
+     ],
+     "evaluations": [
+      "Formative : exercices de veille, prototypage, audit, restitution intermédiaire, tests utilisateurs",
+      "Sommative : rendu d’un prototype ou d’un dossier UX/UI (parcours, wireframes, maquettes, justification, plan d’accompagnement), présentation orale ou écrite, évaluation sur la créativité, la cohérence, la conformité aux standards, la capacité à intégrer l’UX/UI dans la transformation digitale et à accompagner le changement (préparation au projet pro M2)"
+     ]
+    },
+    {
+     "titre": "Spé Marque & transfo : Wordpress perfectionnement & NoCode",
+     "bloc": "Bloc 5 : Engager l’innovation et la transformation digitale de la communication de la marque (4-II)",
+     "formation": "M1 – Manager des stratégies marketing et communication",
+     "rncp": "38504 (France Compétences)",
+     "activite": "",
+     "intervenant": "",
+     "volume": "17,5h",
+     "sequencage": "S2 – 5 séances de 3h30",
+     "objectif": "Permettre à chaque étudiant de concevoir et déployer des solutions web avancées (site, landing page, portail, espace collaboratif…) en s’appuyant sur Wordpress et les outils NoCode (Webflow, Notion, Airtable, Zapier, Make, etc.), d’automatiser des tâches, d’intégrer des fonctionnalités innovantes, et de préparer la restitution professionnelle attendue dans le projet pro M2 (transformation digitale).",
+     "commentaire": "",
+     "competences_prose": "Maîtriser la création et la personnalisation avancée de sites Wordpress ; intégrer des solutions NoCode pour automatiser, connecter et enrichir l’écosystème digital de la marque ; piloter des projets web innovants sans développement lourd ; accompagner les parties prenantes dans l’appropriation de ces outils.",
+     "competences_liees": [
+      "C.22-II"
+     ],
+     "notions_cles": [
+      "Wordpress avancé : personnalisation, sécurité, performance",
+      "NoCode : panorama des outils et cas d’usage (3h30)",
+      "Automatisation et interconnexion des outils",
+      "Prototypage rapide et expérimentation digitale",
+      "Accompagnement au changement et restitution professionnelle"
+     ],
+     "programme": [
+      {
+       "titre": "Wordpress avancé : personnalisation, sécurité, performance",
+       "points": [
+        "Choix et personnalisation avancée des thèmes (child themes, builders, hooks)",
+        "Intégration de plugins stratégiques (SEO, sécurité, e-commerce, multilingue, analytics, RGPD/RGAA)",
+        "Optimisation de la performance (caching, CDN, optimisation images, mobile first)",
+        "Atelier : audit et optimisation d’un site Wordpress existant ou création avancée à partir d’un brief stratégique"
+       ]
+      },
+      {
+       "titre": "NoCode : panorama des outils et cas d’usage (3h30)",
+       "points": [
+        "Présentation des principaux outils NoCode (Webflow, Notion, Airtable, Zapier, Make, Softr, Glide)",
+        "Critères de choix selon les besoins (site, app, bdd, automatisation, workflow collaboratif)",
+        "Benchmark de solutions NoCode innovantes dans la communication de marque",
+        "Atelier : mapping des outils adaptés à différents cas d’usage (site événementiel, portail collaboratif, automatisation marketing…)"
+       ]
+      },
+      {
+       "titre": "Automatisation et interconnexion des outils",
+       "points": [
+        "Création de workflows automatisés (Zapier, Make) pour connecter Wordpress à d’autres outils (CRM, emailing, analytics, réseaux sociaux, IA)",
+        "Automatisation de tâches répétitives : génération de leads, notifications, reporting, synchronisation de bases de données",
+        "Sécurisation des automatisations, gestion des droits et des accès",
+        "Atelier : conception et déploiement d’un workflow automatisé sur un projet réel ou simulé"
+       ]
+      },
+      {
+       "titre": "Prototypage rapide et expérimentation digitale",
+       "points": [
+        "Prototypage d’applications web ou mobiles sans code (Webflow, Softr, Glide)",
+        "Intégration de fonctionnalités avancées (formulaires dynamiques, bases de données, espaces membres, e-commerce, chatbots)",
+        "Tests utilisateurs, itération, prise en compte des retours et optimisation",
+        "Atelier : création d’un prototype fonctionnel répondant à un besoin stratégique de la marque"
+       ]
+      },
+      {
+       "titre": "Accompagnement au changement et restitution professionnelle",
+       "points": [
+        "Stratégies d’accompagnement des équipes internes à l’adoption de Wordpress et des outils NoCode (formation, documentation, gestion des résistances)",
+        "Structuration d’une restitution professionnelle : présentation du projet, justification des choix, démonstration des workflows et des bénéfices pour la marque",
+        "Feedback collectif, axes d’amélioration, préparation à l’intégration du livrable dans le projet pro M2"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Ateliers pratiques sur des briefs réels ou simulés, travail en équipe projet",
+      "Utilisation d’outils avancés (constructeurs de pages, plugins premium, plateformes NoCode, outils d’automatisation)",
+      "Classe inversée : tutoriels avancés, analyse critique de solutions NoCode innovantes, veille sur les tendances du secteur"
+     ],
+     "evaluations": [
+      "Formative : exercices d’intégration et de personnalisation, quiz sur les outils et workflows, mini-projets d’automatisation, analyse critique de solutions existantes",
+      "Sommative : rendu d’un projet web ou d’un prototype avancé (site, workflow, automatisation, documentation d’accompagnement), évaluation sur la qualité technique, la pertinence stratégique, la capacité à accompagner le changement et à justifier les choix, présentation orale ou écrite du projet (préparation au projet pro M2)"
+     ]
+    },
+    {
+     "titre": "Spé Strat Créa : Histoire de l’art et tendances contemporaines",
+     "bloc": "Bloc 6 : Développer la stratégie créative de la marque dans des supports et contenus originaux et innovants (4-III)",
+     "formation": "M1 – Manager des stratégies marketing et communication",
+     "rncp": "38504 (France Compétences)",
+     "activite": "",
+     "intervenant": "",
+     "volume": "10,5h",
+     "sequencage": "S1/S2 – 3 séances de 3h30",
+     "objectif": "Permettre à chaque étudiant d’enrichir son univers créatif, de contextualiser ses choix esthétiques et conceptuels, d’identifier les tendances émergentes et de les intégrer de façon pertinente et différenciante dans des projets de communication contemporaine ou innovante.",
+     "commentaire": "",
+     "competences_prose": "Mobiliser une culture artistique et visuelle solide pour nourrir la réflexion créative ; analyser les grands courants de l’histoire de l’art et les tendances contemporaines ; relier références artistiques et innovations visuelles aux enjeux stratégiques de la communication de marque.",
+     "competences_liees": [
+      "C.20-III"
+     ],
+     "notions_cles": [
+      "Panorama des grands courants de l’histoire de l’art",
+      "Décryptage des tendances visuelles et artistiques contemporaines",
+      "Intégration des références artistiques dans la stratégie créative de marque"
+     ],
+     "programme": [
+      {
+       "titre": "Panorama des grands courants de l’histoire de l’art",
+       "points": [
+        "Repères chronologiques : de l’Antiquité à l’art contemporain",
+        "Analyse des grands mouvements : Renaissance, Baroque, Romantisme, Impressionnisme, Modernisme, Avant-gardes, Pop Art, Postmodernisme, etc.",
+        "Identification des ruptures, des filiations et des influences majeures sur la création visuelle contemporaine",
+        "Atelier : mapping visuel des références artistiques"
+       ]
+      },
+      {
+       "titre": "Décryptage des tendances visuelles et artistiques contemporaines",
+       "points": [
+        "Veille sur les tendances actuelles : design graphique, photographie, illustration, art numérique, street art, installations, IA générative, NFT, etc.",
+        "Analyse des tendances émergentes : hybridation des médias, esthétique de la data, minimalisme, maximalisme, glitch, néo-craft, éco-design, etc.",
+        "Benchmark de campagnes et dispositifs créatifs inspirants",
+        "Atelier : sélection et argumentation de tendances à intégrer dans une stratégie de marque"
+       ]
+      },
+      {
+       "titre": "Intégration des références artistiques dans la stratégie créative de marque",
+       "points": [
+        "Articulation entre histoire de l’art, tendances et stratégie créative : comment nourrir un concept, un territoire visuel, une identité de marque",
+        "Construction d’un moodboard ou d’un cahier de tendances appliqué à un brief réel ou simulé",
+        "Justification des choix esthétiques au regard de la cible, du message, des valeurs de la marque et du contexte sociétal",
+        "Atelier : restitution orale ou écrite d’une proposition créative argumentée"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Ateliers de mapping visuel, moodboard, veille collaborative",
+      "Analyse critique de campagnes et dispositifs artistiques"
+     ],
+     "evaluations": [
+      "Formative : quiz sur les courants artistiques, exercices de veille et de mapping, analyse critique de campagnes, restitution intermédiaire",
+      "Sommative : rendu d’un moodboard ou d’un cahier de tendances appliqué à un projet de marque, présentation orale ou écrite, évaluation sur la capacité à justifier les choix créatifs et à relier références artistiques, tendances et stratégie de marque (préparation au projet pro M2)"
+     ]
+    },
+    {
+     "titre": "Spé Strat Créa : Direction artistique",
+     "bloc": "Bloc 6 : Développer la stratégie créative de la marque dans des supports et contenus originaux et innovants (4-III)",
+     "formation": "M1 – Manager des stratégies marketing et communication",
+     "rncp": "38504 (France Compétences)",
+     "activite": "",
+     "intervenant": "",
+     "volume": "14h",
+     "sequencage": "S1/S2 – 4 séances de 3h30",
+     "objectif": "Permettre à chaque étudiant de maîtriser la démarche de direction artistique : du concept à la déclinaison opérationnelle, en passant par la gestion d’équipe créative, la veille, la justification des choix et l’intégration des contraintes stratégiques, techniques, budgétaires, RSE et d’accessibilité.",
+     "commentaire": "",
+     "competences_prose": "Concevoir et piloter une direction artistique cohérente, différenciante et innovante ; décliner une identité visuelle sur des supports variés ; encadrer la création d’univers graphiques et narratifs en lien avec la stratégie de marque ; argumenter et justifier les partis-pris artistiques auprès d’un commanditaire ou d’un jury.",
+     "competences_liees": [
+      "C.21-III"
+     ],
+     "notions_cles": [
+      "Fondamentaux et posture du directeur artistique",
+      "Conception du concept créatif et déclinaison de l’identité visuelle",
+      "Pilotage du processus créatif et collaboration interdisciplinaire",
+      "Justification, restitution et valorisation de la direction artistique"
+     ],
+     "programme": [
+      {
+       "titre": "Fondamentaux et posture du directeur artistique",
+       "points": [
+        "Rôle, missions et responsabilités du directeur artistique dans la chaîne de valeur créative",
+        "Articulation entre stratégie de marque, identité visuelle, concept créatif et direction artistique",
+        "Posture managériale : encadrement d’équipe, gestion des talents, pilotage d’un processus créatif",
+        "Atelier : analyse critique de directions artistiques emblématiques et identification des facteurs de succès"
+       ]
+      },
+      {
+       "titre": "Conception du concept créatif et déclinaison de l’identité visuelle",
+       "points": [
+        "Méthodologie de conceptualisation : brief créatif, moodboard, storytelling visuel, territoire graphique",
+        "Déclinaisons multi-supports : print, digital, social media, événementiel, audiovisuel, formats innovants",
+        "Prise en compte des contraintes : cibles, canaux, budget, accessibilité, RSE, éco-design",
+        "Atelier : création d’un concept créatif et d’un moodboard pour un projet de marque réel (ou simulé)"
+       ]
+      },
+      {
+       "titre": "Pilotage du processus créatif et collaboration interdisciplinaire",
+       "points": [
+        "Organisation du workflow créatif : phases, outils, gestion de projet, feedback, itération",
+        "Collaboration avec graphistes, rédacteurs, motion designers, développeurs, etc.",
+        "Intégration des tendances, de la veille et de l’innovation dans la direction artistique",
+        "Atelier : animation d’une séance de brainstorming créatif et pilotage d’une équipe projet"
+       ]
+      },
+      {
+       "titre": "Justification, restitution et valorisation de la direction artistique",
+       "points": [
+        "Argumentation des choix artistiques : storytelling, justification stratégique, prise en compte du contexte et des enjeux de la marque",
+        "Préparation et présentation d’un dossier de DA (concept, moodboard, déclinaisons, supports, justification)",
+        "Restitution orale ou écrite devant un jury ou un commanditaire, feedback collectif",
+        "Mutualisation des bonnes pratiques, veille sur les innovations créatives et managériales"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Ateliers pratiques (moodboard, concept, pilotage d’équipe, restitution)",
+      "Analyse critique de directions artistiques de référence",
+      "Travail collaboratif sur des briefs réels ou simulés",
+      "Utilisation d’outils numériques (Figma, Notion, Adobe, IA générative)",
+      "Simulations de présentation devant un jury, peer review, feedback croisé"
+     ],
+     "evaluations": [
+      "Formative : exercices de création de moodboard, analyse de DA, animation de brainstorming, restitution intermédiaire",
+      "Sommative : rendu d’un dossier de direction artistique (concept, moodboard, déclinaisons, justification), présentation orale ou écrite, évaluation sur la cohérence, la créativité, la capacité à piloter et à argumenter les choix devant un jury (préparation au projet pro M2)"
+     ]
+    },
+    {
+     "titre": "Spé Strat Créa : Créativité et pensée innovante",
+     "bloc": "Bloc 6 : Développer la stratégie créative de la marque dans des supports et contenus originaux et innovants (4-III)",
+     "formation": "M1 – Manager des stratégies marketing et communication",
+     "rncp": "38504 (France Compétences)",
+     "activite": "",
+     "intervenant": "",
+     "volume": "14h",
+     "sequencage": "S1/S2 – 4 séances de 3h30",
+     "objectif": "Permettre à chaque étudiant de générer, structurer et défendre des idées créatives et innovantes dans des contextes stratégiques, de piloter des ateliers d’idéation, d’intégrer l’expérimentation et la disruption dans la démarche créative, et de préparer la restitution professionnelle attendue dans le projet pro M2 (stratégie créative).",
+     "commentaire": "",
+     "competences_prose": "Maîtriser les techniques de stimulation de la créativité individuelle et collective ; structurer une démarche d’idéation stratégique ; mobiliser des outils de pensée innovante (brainstorming, design thinking, pensée latérale, IA générative, etc.) pour produire des concepts créatifs adaptés aux enjeux de la marque et aux attentes du public cible.",
+     "competences_liees": [
+      "C.21-III"
+     ],
+     "notions_cles": [
+      "Panorama des méthodes et postures créatives",
+      "Techniques de stimulation de la créativité individuelle et collective",
+      "Structuration et activation de la pensée innovante",
+      "Restitution professionnelle et valorisation de la démarche créative"
+     ],
+     "programme": [
+      {
+       "titre": "Panorama des méthodes et postures créatives",
+       "points": [
+        "Présentation des grands courants de la créativité (pensée divergente/convergente, pensée latérale, design thinking, créativité augmentée par l’IA)",
+        "Analyse des postures créatives : curiosité, remise en question, droit à l’erreur, expérimentation",
+        "Exemples de dispositifs créatifs disruptifs dans la communication et la publicité",
+        "Atelier : autodiagnostic créatif et mapping des leviers d’innovation personnelle"
+       ]
+      },
+      {
+       "titre": "Techniques de stimulation de la créativité individuelle et collective",
+       "points": [
+        "Outils d’idéation : brainstorming, brainwriting, SCAMPER, mind mapping, métaphores visuelles, jeux de rôle, hackathons, IA générative",
+        "Animation d’ateliers de créativité : préparation, cadrage, gestion du temps et des dynamiques de groupe",
+        "Déconstruction des freins à la créativité : gestion des biais, du jugement, de la peur de l’échec",
+        "Atelier : pilotage d’un atelier d’idéation sur un brief réel ou simulé"
+       ]
+      },
+      {
+       "titre": "Structuration et activation de la pensée innovante",
+       "points": [
+        "Méthodologie de structuration de concepts : du flash d’idée à la formalisation d’un concept exploitable",
+        "Sélection, évaluation et priorisation des idées (matrices d’impact, vote, prototypage rapide)",
+        "Intégration des attentes de la marque, de la cible et des canaux dans la démarche créative",
+        "Atelier : formalisation et argumentation de concepts créatifs pour une marque ou une campagne"
+       ]
+      },
+      {
+       "titre": "Restitution professionnelle et valorisation de la démarche créative",
+       "points": [
+        "Structuration d’un dossier ou d’une présentation de concepts créatifs (storytelling, moodboard, justification stratégique)",
+        "Valorisation de la singularité créative, argumentation des choix, anticipation des objections",
+        "Feedback collectif, mutualisation des bonnes pratiques, veille sur les innovations créatives et les tendances émergentes",
+        "Lien avec le projet pro M2 : intégration de la démarche et des concepts dans la stratégie créative globale"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Ateliers pratiques d’idéation et de prototypage",
+      "Utilisation d’outils numériques et d’IA pour la stimulation créative (Miro, Figma, Notion AI, Runway, ChatGPT, etc.)",
+      "Peer review, feedback croisé, coaching sur la restitution professionnelle",
+      "Classe inversée : analyse de campagnes disruptives, benchmark de concepts innovants"
+     ],
+     "evaluations": [
+      "Formative : exercices d’idéation, animation d’ateliers, analyse critique de concepts, restitution intermédiaire",
+      "Sommative : rendu d’un dossier ou d’une présentation de concepts créatifs innovants (storytelling, justification, moodboard), présentation orale ou écrite, évaluation sur la capacité à générer, structurer, défendre et valoriser des idées originales et adaptées (préparation au projet pro M2)"
+     ]
+    },
+    {
+     "titre": "Spé Strat Créa : Éthique professionnelle (propriété artistique, intellectuelle, …)",
+     "bloc": "Bloc 6 : Développer la stratégie créative de la marque dans des supports et contenus originaux et innovants (4-III)",
+     "formation": "M1 – Manager des stratégies marketing et communication",
+     "rncp": "38504 (France Compétences)",
+     "activite": "",
+     "intervenant": "",
+     "volume": "7h",
+     "sequencage": "S2 – 2 séances de 3h30",
+     "objectif": "Permettre à chaque étudiant d’évoluer dans un cadre respectueux des droits d’auteur et des pratiques responsables ; de sécuriser ses créations et celles de ses équipes ; d’anticiper les risques juridiques et réputationnels ; de défendre l’éthique dans la production et la diffusion de supports de communication innovants.",
+     "commentaire": "",
+     "competences_prose": "Identifier, comprendre et appliquer les règles fondamentales du droit d’auteur, de la propriété intellectuelle, du droit à l’image et des droits voisins ; intégrer l’éthique professionnelle dans la gestion des projets créatifs ; anticiper les risques juridiques et adopter des pratiques responsables dans la création, la diffusion et la valorisation des contenus.",
+     "competences_liees": [
+      "C.21-III"
+     ],
+     "notions_cles": [
+      "Cadre juridique de la création et de la propriété intellectuelle",
+      "Éthique professionnelle et responsabilité dans la création"
+     ],
+     "programme": [
+      {
+       "titre": "Cadre juridique de la création et de la propriété intellectuelle",
+       "points": [
+        "Droit d’auteur : œuvres protégées, conditions de protection, durée, exceptions (courte citation, parodie, etc.)",
+        "Droits voisins, droit à l’image, droits des marques, gestion des contrats (cession, licence, commande)",
+        "Spécificités du digital : créations numériques, IA générative, open source, Creative Commons, RGPD",
+        "Étude de cas : analyse de situations concrètes de litiges ou de questions juridiques dans le cadre de la  création de contenus"
+       ]
+      },
+      {
+       "titre": "Éthique professionnelle et responsabilité dans la création",
+       "points": [
+        "Principes d’éthique appliqués à la création : originalité, sincérité, respect de la diversité, inclusion, lutte contre le plagiat et la contrefaçon",
+        "Gestion des crédits, mentions obligatoires, valorisation des auteurs et des parties prenantes",
+        "Pratiques responsables : éco-conception, sobriété, accessibilité, anticipation des risques réputationnels et juridiques",
+        "Atelier : audit éthique d’un projet créatif (identification des points de vigilance, recommandations, argumentation)"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Études de cas réels, analyse de jurisprudence et de campagnes litigieuses",
+      "Ateliers d’audit éthique et juridique de projets créatifs",
+      "Simulations de gestion de crise liée à la propriété intellectuelle ou à l’éthique"
+     ],
+     "evaluations": [
+      "Formative : quiz sur les notions juridiques, exercices d’analyse de cas, audit éthique de projets, restitution orale ou écrite",
+      "Sommative : rendu d’un dossier d’audit éthique et juridique appliqué à un projet créatif (identification des risques, recommandations, justification), présentation orale ou écrite, évaluation sur la capacité à sécuriser, argumenter et défendre les choix éthiques et juridiques (préparation au projet pro M2)"
+     ]
+    },
+    {
+     "titre": "Spé Strat Créa : Fabrication – RSE et communication visuelle responsable",
+     "bloc": "Bloc 6 : Développer la stratégie créative de la marque dans des supports et contenus originaux et innovants (4-III)",
+     "formation": "M1 – Manager des stratégies marketing et communication",
+     "rncp": "38504 (France Compétences)",
+     "activite": "",
+     "intervenant": "",
+     "volume": "7h",
+     "sequencage": "S2 – 2 séances de 3h30",
+     "objectif": "Permettre à chaque étudiant de transformer une intention créative en produit fini responsable : intégrer la RSE à toutes les étapes de fabrication, arbitrer entre innovation, impact environnemental, contraintes techniques et budget, et préparer la restitution professionnelle attendue dans le projet pro M2 (stratégie créative).",
+     "commentaire": "",
+     "competences_prose": "Concevoir et produire des supports de communication visuelle intégrant les principes de la responsabilité sociétale et environnementale (RSE) ; maîtriser l’éco-conception, le choix de matériaux et techniques durables, l’accessibilité, l’inclusion et l’éthique dans la chaîne de fabrication ; justifier ses choix auprès d’un commanditaire ou d’un jury.",
+     "competences_liees": [
+      "C.21-III"
+     ],
+     "notions_cles": [
+      "Panorama des enjeux RSE et de l’éco-conception en communication visuelle",
+      "Conception et fabrication responsable : méthodes, arbitrages et restitution"
+     ],
+     "programme": [
+      {
+       "titre": "Panorama des enjeux RSE et de l’éco-conception en communication visuelle",
+       "points": [
+        "Définitions et enjeux de la RSE appliquée à la création visuelle (éco-conception, sobriété, inclusion, diversité, accessibilité, éthique)",
+        "Analyse de l’impact environnemental des supports : choix des matériaux (papier recyclé, encres végétales, supports digitaux responsables…), procédés d’impression, logistique, cycle de vie",
+        "Benchmark de campagnes et supports responsables, identification des bonnes pratiques et des labels (FSC, PEFC, Imprim’Vert, Green IT, RGAA, etc.)",
+        "Atelier : diagnostic d’un support existant et identification des leviers d’amélioration RSE"
+       ]
+      },
+      {
+       "titre": "Conception et fabrication responsable : méthodes, arbitrages et restitution",
+       "points": [
+        "Intégration de la RSE dans le brief créatif et le cahier des charges de fabrication",
+        "Choix des prestataires et fournisseurs responsables, gestion des appels d’offres, analyse des devis en intégrant les critères sociaux et environnementaux",
+        "Accessibilité et design universel : principes, checklists, adaptation des visuels pour tous les publics",
+        "Arbitrage entre innovation, impact, contraintes techniques et budget",
+        "Atelier : conception d’un mini-projet de support visuel responsable (print ou digital), justification des choix, restitution orale ou écrite, feedback collectif"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Ateliers d’audit et de conception responsable sur des cas réels ou simulés",
+      "Analyse critique de campagnes et supports labellisés ou innovants",
+      "Utilisation de checklists RSE, d’outils d’éco-conception et de simulateurs d’impact"
+     ],
+     "evaluations": [
+      "Formative : quiz sur les enjeux RSE, exercices d’audit, mini-projets de conception responsable, restitution intermédiaire",
+      "Sommative : rendu d’un dossier ou d’un support visuel responsable (diagnostic, cahier des charges, justification des choix RSE, plan d’action), présentation orale ou écrite, évaluation sur la capacité à intégrer la RSE dans la fabrication, à arbitrer et à argumenter ses choix (préparation au projet pro M2)"
+     ]
+    },
+    {
+     "titre": "Spé Strat Créa : Outils créatifs et workflow collaboratif",
+     "bloc": "Bloc 6 : Développer la stratégie créative de la marque dans des supports et contenus originaux et innovants (4-III)",
+     "formation": "M1 – Manager des stratégies marketing et communication",
+     "rncp": "38504 (France Compétences)",
+     "activite": "",
+     "intervenant": "",
+     "volume": "10,5h",
+     "sequencage": "S2 – 3 séances de 3h30",
+     "objectif": "Permettre à chaque étudiant de piloter un projet créatif collaboratif, de choisir et d’articuler les bons outils selon le contexte et les besoins, d’optimiser la gestion de l’information, la co-création et la restitution, et de préparer des livrables professionnels pour le projet pro M2 (stratégie créative).",
+     "commentaire": "",
+     "competences_prose": "Maîtriser les outils numériques collaboratifs (Figma, Notion, Miro, IA générative, etc.) pour la conception, la gestion, la documentation et la production de projets créatifs ; structurer un workflow collaboratif efficace ; produire des livrables visuels et interactifs adaptés aux standards professionnels et à la stratégie créative de la marque.",
+     "competences_liees": [
+      "C.22-III"
+     ],
+     "notions_cles": [
+      "Panorama et prise en main des outils collaboratifs",
+      "Structuration d’un workflow collaboratif efficace",
+      "Production de livrables créatifs et restitution professionnelle"
+     ],
+     "programme": [
+      {
+       "titre": "Panorama et prise en main des outils collaboratifs",
+       "points": [
+        "Présentation des outils phares : Figma (design collaboratif, prototypage, UI/UX), Notion (organisation, documentation), Miro (idéation, brainstorming visuel), IA générative : ChatGPT/Claude (rédaction, briefs, scripts), Midjourney/DALL-E (visuels), Runway ML (vidéo IA), ElevenLabs (voix IA), Udio/Suno (musique), Adobe Firefly, Canva AI",
+        "Cas d’usage dans la création contemporaine et la gestion d’équipe créative",
+        "Atelier : création d’un espace projet partagé (Notion/Figma) pour un brief créatif"
+       ]
+      },
+      {
+       "titre": "Structuration d’un workflow collaboratif efficace",
+       "points": [
+        "Organisation du travail en équipe : gestion des droits, versioning, commentaires, validation des livrables",
+        "Méthodologie de gestion de projet agile : kanban, rétroplanning, suivi des tâches, documentation vivante",
+        "Intégration de l’IA et des outils d’automatisation : génération d’assets (images, vidéos courtes, voix, musique), rédaction assistée (briefs, scripts, captions), automatisation de déclinaisons multi-formats avec Make/Zapier, prompting pour la créativité",
+        "Atelier : mise en place d’un workflow complet pour un mini-projet créatif (de l’idéation à la restitution)"
+       ]
+      },
+      {
+       "titre": "Production de livrables créatifs et restitution professionnelle",
+       "points": [
+        "Création de prototypes interactifs (Figma, Framer), moodboards dynamiques avec IA (Midjourney, Adobe Firefly, Canva AI), bases de données de ressources (Notion), présentations visuelles et interactives (Gamma, Beautiful.ai)",
+        "Critères de qualité : accessibilité, clarté, interactivité, cohérence graphique et narrative",
+        "Préparation à la restitution orale ou écrite : partage, export, présentation devant un commanditaire ou un jury",
+        "Atelier : restitution d’un livrable collaboratif, feedback collectif, axes d’amélioration"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Ateliers pratiques sur des briefs réels ou simulés, travail en équipe projet",
+      "Utilisation d’outils numériques avancés (Figma, Notion, Miro, IA générative)",
+      "Classe inversée : tutoriels avancés, analyse critique de workflows professionnels, veille sur les innovations collaboratives"
+     ],
+     "evaluations": [
+      "Formative : exercices de prise en main, structuration de workflows, mini-projets collaboratifs, restitution intermédiaire",
+      "Sommative : rendu d’un livrable créatif collaboratif (prototype, moodboard, documentation projet, workflow), évaluation sur la qualité du livrable, l’efficacité du workflow, la capacité à collaborer et à restituer dans un contexte professionnel (préparation au projet pro M2)"
+     ]
+    },
+    {
+     "titre": "Spé Strat Créa : PAO/Adobe : Logotype & typo",
+     "bloc": "Bloc 6 : Développer la stratégie créative de la marque dans des supports et contenus originaux et innovants (4-III)",
+     "formation": "M1 – Manager des stratégies marketing et communication",
+     "rncp": "38504 (France Compétences)",
+     "activite": "",
+     "intervenant": "",
+     "volume": "10,5h",
+     "sequencage": "S2 – 3 séances de 3h30",
+     "objectif": "Permettre à chaque étudiant de piloter la création d’un logotype et d’une identité typographique forte, cohérente et différenciante, en lien avec la plateforme de marque, et de préparer des livrables professionnels pour le projet pro M2 (stratégie créative).",
+     "commentaire": "",
+     "competences_prose": "Concevoir un logotype professionnel et original, maîtriser la typographie dans une logique de création d’identité visuelle, décliner et justifier ses choix graphiques dans des supports multiformats, en intégrant les enjeux d’accessibilité, d’innovation et de stratégie de marque.",
+     "competences_liees": [
+      "C.22-III"
+     ],
+     "notions_cles": [
+      "Cadrage stratégique et inspirations logotype & typo",
+      "Création et conception avancée de logotype sous Adobe",
+      "Typographie : choix, création et intégration dans l’identité visuelle",
+      "Restitution, justification et argumentation professionnelle"
+     ],
+     "programme": [
+      {
+       "titre": "Cadrage stratégique et inspirations logotype & typo",
+       "points": [
+        "Analyse du brief de marque, identification des valeurs, des cibles et des usages",
+        "Panorama des tendances contemporaines en logotype et typographie (formes, couleurs, styles, animation, responsive logo)",
+        "Benchmark de logos et systèmes typographiques emblématiques, analyse critique des partis-pris",
+        "Atelier : moodboard d’inspirations pour un projet de logotype"
+       ]
+      },
+      {
+       "titre": "Création et conception avancée de logotype sous Adobe",
+       "points": [
+        "Méthodologie de création : croquis, vectorisation, choix des formes et des couleurs, construction du signe, variantes (monochrome, responsive, animé)",
+        "Maîtrise des outils Adobe (Illustrator principalement) : pathfinder, grilles, gestion des calques, symboles, export multi-formats",
+        "Déclinaison du logo sur différents supports (print, digital, social media, favicon, animation simple)",
+        "Prise en compte de l’accessibilité, de l’inclusivité et des contraintes techniques",
+        "Atelier : création d’un logotype original pour une marque réelle (ou fictive)"
+       ]
+      },
+      {
+       "titre": "Typographie : choix, création et intégration dans l’identité visuelle",
+       "points": [
+        "Sélection et association de polices, création de variantes, gestion des hiérarchies typographiques",
+        "Initiation à la création ou à la modification de caractères (glyphes, lettrines, titrages personnalisés)",
+        "Cohérence typographique dans la charte graphique, accessibilité et lisibilité",
+        "Atelier : intégration du logotype dans un système typographique complet (charte, affiche, site web, réseaux sociaux)"
+       ]
+      },
+      {
+       "titre": "Restitution, justification et argumentation professionnelle",
+       "points": [
+        "Structuration d’un dossier de création : moodboard, croquis, logo final, déclinaisons, système typographique, justification des partis-pris",
+        "Présentation orale ou écrite devant un jury ou un commanditaire, feedback collectif",
+        "Mutualisation des bonnes pratiques, veille sur les innovations typographiques et logotypes"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Ateliers pratiques sur des briefs réels ou simulés, travail en binômes ou petits groupes",
+      "Utilisation avancée d’Adobe Illustrator, intégration d’outils IA pour la génération d’inspirations",
+      "Analyse critique de logos et chartes typographiques emblématiques"
+     ],
+     "evaluations": [
+      "Formative : exercices de création, restitution intermédiaire, feedback collectif",
+      "Sommative : rendu d’un dossier complet (logotype, déclinaisons, système typographique, justification stratégique), présentation orale ou écrite, évaluation sur la créativité, la cohérence, la qualité technique et la capacité à argumenter et défendre ses choix (préparation au projet pro M2)"
+     ]
+    },
+    {
+     "titre": "Spé Strat Créa : Adobe Première",
+     "bloc": "Bloc 6 : Développer la stratégie créative de la marque dans des supports et contenus originaux et innovants (4-III)",
+     "formation": "M1 – Manager des stratégies marketing et communication",
+     "rncp": "38504 (France Compétences)",
+     "activite": "",
+     "intervenant": "",
+     "volume": "10,5h",
+     "sequencage": "S2 – 3 séances de 3h30",
+     "objectif": "Permettre à chaque étudiant de réaliser des vidéos professionnelles et impactantes, en lien avec un brief stratégique ou créatif, de justifier ses choix techniques et narratifs, et de préparer des livrables vidéo pour le projet professionnel de M2 (stratégie créative).",
+     "commentaire": "",
+     "competences_prose": "Maîtriser les techniques avancées de montage vidéo avec Adobe Premiere Pro ; structurer une narration audiovisuelle cohérente avec la stratégie de marque ; intégrer des éléments visuels, sonores et typographiques adaptés aux supports et aux publics ; produire des vidéos créatives, accessibles et innovantes pour différents canaux de diffusion.",
+     "competences_liees": [
+      "C.22-III"
+     ],
+     "notions_cles": [
+      "Prise en main avancée d’Adobe Premiere Pro et workflow vidéo",
+      "Techniques avancées de montage et narration audiovisuelle",
+      "Déclinaisons multi-supports, optimisation et export",
+      "Restitution, justification et valorisation professionnelle"
+     ],
+     "programme": [
+      {
+       "titre": "Prise en main avancée d’Adobe Premiere Pro et workflow vidéo",
+       "points": [
+        "Organisation du projet, gestion des médias, synchronisation audio/vidéo",
+        "Paramétrage des séquences, formats, codecs, gestion des rushs multi-caméras",
+        "Introduction aux workflows collaboratifs et à l’intégration avec After Effects et Photoshop",
+        "Atelier : préparation d’un projet vidéo à partir d’un brief créatif"
+       ]
+      },
+      {
+       "titre": "Techniques avancées de montage et narration audiovisuelle",
+       "points": [
+        "Découpage, montage narratif, transitions, rythme, gestion du temps et de l’émotion",
+        "Intégration de titrages, sous-titres, éléments graphiques et animations simples",
+        "Mixage audio, gestion de la bande-son, bruitages, voix-off, synchronisation",
+        "Effets spéciaux de base, correction colorimétrique, étalonnage, LUTs",
+        "Prise en compte de l’accessibilité (sous-titres, contrastes, lisibilité)",
+        "Atelier : montage d’une vidéo créative ou d’un spot de marque selon un concept stratégique"
+       ]
+      },
+      {
+       "titre": "Déclinaisons multi-supports, optimisation et export",
+       "points": [
+        "Adaptation des vidéos aux différents canaux : réseaux sociaux, web, événementiel, formats verticaux/horizontaux, teasers",
+        "Optimisation des exports selon les plateformes (YouTube, Instagram, TikTok, LinkedIn, site web, DOOH)",
+        "Vérification de la qualité, de la conformité technique et de l’accessibilité",
+        "Atelier : export et adaptation d’un projet vidéo sur plusieurs supports"
+       ]
+      },
+      {
+       "titre": "Restitution, justification et valorisation professionnelle",
+       "points": [
+        "Structuration d’un dossier de création vidéo : moodboard, storyboard, version finale, déclinaisons, justification des partis-pris",
+        "Présentation orale ou écrite devant un jury ou un commanditaire, feedback collectif",
+        "Mutualisation des bonnes pratiques, veille sur les innovations vidéo et les tendances créatives"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Ateliers pratiques sur des briefs réels ou simulés, travail en binômes ou petits groupes",
+      "Utilisation avancée d’Adobe Premiere Pro et intégration avec After Effects/Photoshop",
+      "Analyse critique de vidéos de marque et de campagnes innovantes"
+     ],
+     "evaluations": [
+      "Formative : exercices de montage, quiz sur les techniques, restitution intermédiaire, feedback collectif",
+      "Sommative : rendu d’un dossier vidéo complet (storyboard, vidéo montée, déclinaisons, justification stratégique), présentation orale ou écrite, évaluation sur la créativité, la qualité technique, la cohérence narrative et la capacité à argumenter et défendre ses choix (préparation au projet pro M2)"
+     ]
+    },
+    {
+     "titre": "Spé Strat Créa : Adobe – Montage Photo",
+     "bloc": "Bloc 6 : Développer la stratégie créative de la marque dans des supports et contenus originaux et innovants (4-III)",
+     "formation": "M1 – Manager des stratégies marketing et communication",
+     "rncp": "38504 (France Compétences)",
+     "activite": "",
+     "intervenant": "",
+     "volume": "10,5h",
+     "sequencage": "S2 – 3 séances de 3h30",
+     "objectif": "Permettre à chaque étudiant de réaliser des montages photo professionnels et créatifs, alignés avec un brief stratégique ou créatif, de justifier ses choix esthétiques et techniques, et de préparer des livrables visuels pour le projet pro de M2 (stratégie créative).",
+     "commentaire": "",
+     "competences_prose": "Maîtriser les techniques avancées de montage et de retouche photo avec Adobe Photoshop ; concevoir des images créatives et impactantes pour différents supports ; intégrer la retouche dans une démarche stratégique de marque ; justifier ses partis-pris graphiques et techniques dans une restitution professionnelle.",
+     "competences_liees": [
+      "C.22-III"
+     ],
+     "notions_cles": [
+      "Cadrage stratégique et inspirations visuelles",
+      "Techniques avancées de montage et retouche sous Adobe Photoshop",
+      "Déclinaisons multi-supports, accessibilité et optimisation",
+      "Restitution, justification et valorisation professionnelle"
+     ],
+     "programme": [
+      {
+       "titre": "Cadrage stratégique et inspirations visuelles",
+       "points": [
+        "Analyse du brief, identification des objectifs, des cibles et des usages",
+        "Panorama des tendances contemporaines en montage photo (compositing, collage digital, retouche créative, photomontage narratif, IA générative)",
+        "Benchmark de campagnes et d’artistes inspirants, analyse critique des partis-pris",
+        "Atelier : moodboard d’inspirations et analyse d’un brief créatif"
+       ]
+      },
+      {
+       "titre": "Techniques avancées de montage et retouche sous Adobe Photoshop",
+       "points": [
+        "Détourage complexe, gestion avancée des calques et masques, fusion d’images, photomontage réaliste ou créatif",
+        "Retouche colorimétrique, correction des défauts, gestion de la lumière et des textures",
+        "Intégration d’éléments graphiques, typographiques ou illustratifs, travail sur la composition et la narration visuelle",
+        "Automatisation des tâches, intégration d’outils IA pour la retouche ou la génération d’éléments",
+        "Atelier : réalisation d’un montage photo original répondant à un brief de marque ou de campagne"
+       ]
+      },
+      {
+       "titre": "Déclinaisons multi-supports, accessibilité et optimisation",
+       "points": [
+        "Adaptation des images à différents formats (print, digital, réseaux sociaux, affichage, DOOH)",
+        "Optimisation pour la diffusion (poids, résolution, colorimétrie, profils ICC)",
+        "Prise en compte de l’accessibilité visuelle (contrastes, lisibilité, FALC, design inclusif)",
+        "Atelier : déclinaison d’un montage photo sur plusieurs supports, vérification des contraintes techniques et d’accessibilité"
+       ]
+      },
+      {
+       "titre": "Restitution, justification et valorisation professionnelle",
+       "points": [
+        "Structuration d’un dossier de création : moodboard, croquis, montage final, déclinaisons, justification des partis-pris",
+        "Présentation orale ou écrite devant un jury ou un commanditaire, feedback collectif",
+        "Mutualisation des bonnes pratiques, veille sur les innovations en retouche photo et IA créative"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Ateliers pratiques sur des briefs réels ou simulés, travail en binômes ou petits groupes",
+      "Utilisation avancée d’Adobe Photoshop et d’outils IA (génération d’éléments, automatisation)",
+      "Analyse critique de campagnes et d’artistes emblématiques du montage photo"
+     ],
+     "evaluations": [
+      "Formative : exercices de montage et de retouche, quiz sur les techniques et tendances, restitution intermédiaire, feedback collectif",
+      "Sommative : rendu d’un dossier complet (montage photo, déclinaisons, justification stratégique), présentation orale ou écrite, évaluation sur la créativité, la qualité technique, la cohérence narrative et la capacité à argumenter et défendre ses choix (préparation au projet pro M2)"
+     ]
+    },
+    {
+     "titre": "Anglais professionnel de la communication",
+     "bloc": "Compétences transversales (C1 à C22) – Mobilisation de l’anglais dans l’environnement professionnel de la marque",
+     "formation": "M1 – Manager des stratégies marketing et communication",
+     "rncp": "38504 (France Compétences)",
+     "activite": "",
+     "intervenant": "",
+     "volume": "21h",
+     "sequencage": "S1/S2 – 6 séances de 3h30",
+     "objectif": "Permettre à chaque étudiant d’interagir de façon fluide, précise et stratégique en anglais, de produire des documents professionnels bilingues, de s’adapter à la diversité des contextes et d’enrichir sa posture internationale dans la communication de marque.",
+     "commentaire": "",
+     "competences_prose": "Maîtriser l’anglais professionnel à l’oral et à l’écrit dans des situations de communication stratégique, de réunion, de négociation, de présentation, de rédaction de rapports et de production de livrables bilingues. Savoir interagir dans un environnement international, défendre une recommandation, argumenter et s’adapter à des interlocuteurs multiculturels.",
+     "competences_liees": [],
+     "notions_cles": [
+      "Vocabulaire métier et environnement international",
+      "Techniques de présentation et de prise de parole stratégique",
+      "Rédaction professionnelle et production de livrables bilingues",
+      "Réunions, négociation et gestion de projet en anglais",
+      "Communication interculturelle et adaptation",
+      "Soutenance, argumentation et feedback"
+     ],
+     "programme": [
+      {
+       "titre": "Vocabulaire métier et environnement international",
+       "points": [
+        "Acquisition et réactivation du vocabulaire spécifique à la communication, au marketing, aux médias, à la stratégie, à la RSE et à l’innovation",
+        "Exercices de compréhension et d’expression orales et écrites sur des situations professionnelles réelles (emails, briefs, réunions, appels, échanges interculturels)",
+        "Jeux de rôle et simulations de situations internationales"
+       ]
+      },
+      {
+       "titre": "Techniques de présentation et de prise de parole stratégique",
+       "points": [
+        "Structuration d’un discours, pitch, présentation de projet ou de recommandation en anglais",
+        "Travail sur la prononciation, l’intonation, la posture, la gestion du stress",
+        "Exercices de storytelling, d’argumentation, de persuasion et de défense d’une stratégie devant un jury ou un client anglophone"
+       ]
+      },
+      {
+       "titre": "Rédaction professionnelle et production de livrables bilingues",
+       "points": [
+        "Rédaction de rapports, synthèses, executive summaries, dossiers de veille, recommandations stratégiques, posts social media, communiqués de presse",
+        "Correction des erreurs fréquentes, optimisation de la clarté et de la concision",
+        "Atelier pratique sur la production de documents professionnels bilingues"
+       ]
+      },
+      {
+       "titre": "Réunions, négociation et gestion de projet en anglais",
+       "points": [
+        "Animation et participation active à des réunions, gestion des objections, négociation de briefs ou de budgets",
+        "Simulation de situations de gestion de projet internationales, gestion de conflits, résolution de problèmes",
+        "Travail en binômes ou en groupes pour favoriser l’interaction et la collaboration interculturelle"
+       ]
+      },
+      {
+       "titre": "Communication interculturelle et adaptation",
+       "points": [
+        "Sensibilisation aux différences culturelles, aux codes et aux usages dans un environnement international",
+        "Analyse de cas et décryptage d’incidents interculturels",
+        "Exercices d’adaptation du discours et de la posture selon les interlocuteurs et les contextes"
+       ]
+      },
+      {
+       "titre": "Soutenance, argumentation et feedback",
+       "points": [
+        "Entraînement à la soutenance de projet ou à la présentation d’une recommandation devant un jury ou un client anglophone",
+        "Feedback collectif et individuel, axes de progression personnalisés",
+        "Évaluation finale sur la capacité à convaincre, à argumenter et à interagir dans un contexte exigeant"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Simulations de situations professionnelles réelles (réunions, négociations, présentations, entretiens)",
+      "Jeux de rôle, débats, ateliers de storytelling",
+      "Travail en groupes mixtes pour favoriser l’entraide et l’interaction",
+      "Utilisation de ressources authentiques (vidéos, articles, podcasts, briefs réels)"
+     ],
+     "evaluations": [
+      "Formative : quiz de vocabulaire, exercices de compréhension et d’expression, simulations de situations, feedback continu",
+      "Sommative : présentation orale ou soutenance en anglais, rédaction d’un document professionnel bilingue, évaluation sur la fluidité, la précision, la capacité à convaincre et à s’adapter à différents contextes"
+     ]
+    },
+    {
+     "titre": "Séminaire d’intégration et de remise à niveau PAO",
+     "bloc": "BC1 à BC3 (compétences transversales de production de contenus visuels et accessibles)",
+     "formation": "M1 – Manager des stratégies marketing et communication",
+     "rncp": "38504 (France Compétences)",
+     "activite": "",
+     "intervenant": "",
+     "volume": "7h",
+     "sequencage": "S1 – Semaine de rentrée (2 séances de 3h30)",
+     "objectif": "Permettre à chaque étudiant, qu’il soit issu ou non du cursus B1-B3, d’atteindre un socle commun de compétences PAO, de s’approprier les outils et méthodes nécessaires à la réussite des projets du M1, et de préparer l’accès aux modules avancés de création graphique et de direction artistique.",
+     "commentaire": "",
+     "competences_prose": "Maîtriser les fondamentaux de la PAO (Photoshop, Illustrator, InDesign) pour produire des supports de communication professionnels, accessibles et conformes aux standards du secteur. Savoir appliquer les bonnes pratiques de composition, typographie, gestion des couleurs et d’export multi-formats. Être capable de justifier ses choix techniques et créatifs dans le cadre d’un brief stratégique.",
+     "competences_liees": [],
+     "notions_cles": [
+      "Accueil, diagnostic et harmonisation des niveaux",
+      "Rappels et consolidation des fondamentaux PAO",
+      "Méthodologie de production graphique professionnelle",
+      "Atelier collaboratif et restitution"
+     ],
+     "programme": [
+      {
+       "titre": "Accueil, diagnostic et harmonisation des niveaux",
+       "points": [
+        "Présentation des enjeux du module et des attendus du M1/M2",
+        "Diagnostic des acquis PAO (quiz, exercices courts, partage d’expériences)",
+        "Constitution de groupes de niveau pour favoriser l’entraide et la collaboration"
+       ]
+      },
+      {
+       "titre": "Rappels et consolidation des fondamentaux PAO",
+       "points": [
+        "Prise en main des interfaces Adobe (Photoshop, Illustrator, InDesign)",
+        "Rappels sur la gestion des calques, outils de sélection, typographie, couleurs, formats de fichiers",
+        "Exercices pratiques : création de supports simples (affiche, post social media, flyer)"
+       ]
+      },
+      {
+       "titre": "Méthodologie de production graphique professionnelle",
+       "points": [
+        "Respect des contraintes de brief : format, charte graphique, accessibilité, export multi-supports",
+        "Introduction à l’éco-conception graphique (poids des fichiers, choix des couleurs, typographies responsables)",
+        "Bonnes pratiques d’organisation des fichiers et de workflow collaboratif"
+       ]
+      },
+      {
+       "titre": "Atelier collaboratif et restitution",
+       "points": [
+        "Réalisation d’un mini-projet en binôme ou en petits groupes (ex : déclinaison d’un visuel sur plusieurs formats)",
+        "Présentation orale des productions, justification des choix techniques et créatifs",
+        "Feedback collectif, conseils personnalisés pour la suite du cursus"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Ateliers pratiques et collaboratifs, peer learning entre étudiants de niveaux différents",
+      "Défis créatifs : « 1 brief, 2 formats », « affiche express », « analyse critique »",
+      "Utilisation de tutoriels vidéo, fiches techniques, quiz interactifs",
+      "Feedback croisé, auto-évaluation, coaching individualisé"
+     ],
+     "evaluations": [
+      "Diagnostic initial, exercices pratiques, mini-projet en groupe, restitution orale, feedback continu"
+     ]
+    },
+    {
+     "titre": "Séminaire d’intégration et de remise à niveau Vidéo",
+     "bloc": "BC1 à BC3 (compétences transversales de production de contenus audiovisuels et accessibles)",
+     "formation": "M1 – Manager des stratégies marketing et communication",
+     "rncp": "38504 (France Compétences)",
+     "activite": "",
+     "intervenant": "",
+     "volume": "7h",
+     "sequencage": "S1 – Semaine de rentrée (2 séances de 3h30)",
+     "objectif": "Permettre à chaque étudiant, issu ou non du cursus B1-B3, d’atteindre un socle commun de compétences vidéo, de s’approprier les outils et méthodes nécessaires à la réussite des projets du M1, et de préparer l’accès aux modules avancés de création audiovisuelle et de direction artistique.",
+     "commentaire": "",
+     "competences_prose": "Maîtriser les fondamentaux de la production vidéo (cadrage, lumière, prise de son, montage) pour réaliser des formats courts professionnels et accessibles. Savoir appliquer les bonnes pratiques de narration audiovisuelle, de gestion de projet et d’export multi-formats. Être capable de justifier ses choix techniques et créatifs dans le cadre d’un brief stratégique.",
+     "competences_liees": [],
+     "notions_cles": [
+      "Accueil, diagnostic et harmonisation des niveaux",
+      "Rappels et consolidation des fondamentaux vidéo",
+      "Méthodologie de production audiovisuelle professionnelle",
+      "Atelier collaboratif et restitution"
+     ],
+     "programme": [
+      {
+       "titre": "Accueil, diagnostic et harmonisation des niveaux",
+       "points": [
+        "Présentation des enjeux du module et des attendus du M1/M2",
+        "Diagnostic des acquis vidéo (quiz, exercices courts, partage d’expériences)",
+        "Constitution de groupes de niveau pour favoriser l’entraide et la collaboration"
+       ]
+      },
+      {
+       "titre": "Rappels et consolidation des fondamentaux vidéo",
+       "points": [
+        "Prise en main du matériel (caméras, smartphones, micros, lumières)",
+        "Rappels sur le cadrage, la lumière, la prise de son, la gestion des plans et mouvements",
+        "Exercices pratiques : tournage de séquences courtes selon un brief simple"
+       ]
+      },
+      {
+       "titre": "Méthodologie de production audiovisuelle professionnelle",
+       "points": [
+        "Respect des contraintes de brief : format, cible, message, accessibilité, export multi-supports",
+        "Introduction au storytelling audiovisuel (structure, rythme, transitions)",
+        "Bonnes pratiques d’organisation des rushs, workflow de montage (Adobe Premiere ou équivalent)"
+       ]
+      },
+      {
+       "titre": "Atelier collaboratif et restitution",
+       "points": [
+        "Réalisation d’un mini-projet vidéo en binôme ou en petits groupes (ex : capsule de présentation, interview, teaser)",
+        "Présentation orale des productions, justification des choix techniques et créatifs",
+        "Feedback collectif, conseils personnalisés pour la suite du cursus"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Ateliers pratiques et collaboratifs, peer learning entre étudiants de niveaux différents",
+      "Défis créatifs : « 1 brief, 2 formats », « capsule express », « analyse critique »",
+      "Utilisation de tutoriels vidéo, fiches techniques, quiz interactifs",
+      "Feedback croisé, auto-évaluation, coaching individualisé"
+     ],
+     "evaluations": [
+      "Diagnostic initial, exercices pratiques, mini-projet en groupe, restitution orale, feedback continu"
+     ]
+    },
+    {
+     "titre": "Séminaire d’intégration et de remise à niveau Photo",
+     "bloc": "BC1 à BC3 (compétences transversales : production de contenus visuels, accessibilité, narration)",
+     "formation": "M1 – Manager des stratégies marketing et communication",
+     "rncp": "38504 (France Compétences)",
+     "activite": "",
+     "intervenant": "",
+     "volume": "7h",
+     "sequencage": "S1 – Semaine de rentrée (2 séances de 3h30)",
+     "objectif": "Permettre à chaque étudiant d’atteindre un socle commun de compétences photo, de s’approprier les outils et méthodes nécessaires à la réussite des projets du M1, et de préparer l’accès aux modules avancés de photographie, création visuelle et direction artistique.",
+     "commentaire": "",
+     "competences_prose": "Maîtriser les fondamentaux de la prise de vue et de la composition photographique : cadrage, lumière, réglages techniques de base, intention créative, respect du brief. Être capable de produire des images cohérentes avec une intention professionnelle, de justifier ses choix techniques/esthétiques, et de préparer des livrables pour les projets du M1.",
+     "competences_liees": [],
+     "notions_cles": [
+      "Accueil, diagnostic et harmonisation des niveaux",
+      "Rappels et consolidation des fondamentaux photo",
+      "Méthodologie de production photographique professionnelle",
+      "Atelier collaboratif et restitution"
+     ],
+     "programme": [
+      {
+       "titre": "Accueil, diagnostic et harmonisation des niveaux",
+       "points": [
+        "Présentation des enjeux du module et des attendus du M1/M2",
+        "Diagnostic des acquis photo (quiz, exercices courts, partage d’expériences)",
+        "Constitution de groupes de niveau pour favoriser l’entraide et la collaboration"
+       ]
+      },
+      {
+       "titre": "Rappels et consolidation des fondamentaux photo",
+       "points": [
+        "Prise en main du matériel (appareils, smartphones, objectifs, lumière)",
+        "Rappels sur le cadrage, la composition, la gestion de la lumière, les réglages de base (ISO, ouverture, vitesse)",
+        "Exercices pratiques : prise de vue sur brief simple (portrait, objet, ambiance)"
+       ]
+      },
+      {
+       "titre": "Méthodologie de production photographique professionnelle",
+       "points": [
+        "Respect des contraintes du brief : intention, cible, usage, accessibilité, formats",
+        "Introduction à la narration visuelle (série, storytelling par l’image)",
+        "Bonnes pratiques d’organisation des rushs, workflow de sélection et préparation à la post-production"
+       ]
+      },
+      {
+       "titre": "Atelier collaboratif et restitution",
+       "points": [
+        "Réalisation d’un mini-projet photo en binôme ou petits groupes (ex : série pour un support de communication)",
+        "Présentation orale des productions, justification des choix techniques et créatifs",
+        "Feedback collectif, conseils personnalisés pour la suite du cursus"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Ateliers pratiques et collaboratifs, peer learning entre étudiants de niveaux différents",
+      "Défis créatifs : « 1 brief, 2 cadrages », « lumière express », « analyse critique »",
+      "Utilisation de tutoriels vidéo, fiches techniques, quiz interactifs",
+      "Feedback croisé, auto-évaluation, coaching individualisé"
+     ],
+     "evaluations": [
+      "Diagnostic initial, exercices pratiques, mini-projet en groupe, restitution orale, feedback continu"
+     ]
+    },
+    {
+     "titre": "Compétition",
+     "bloc": "Compétences transversales",
+     "formation": "M1 – Manager des stratégies marketing et communication",
+     "rncp": "38504 (France Compétences)",
+     "activite": "",
+     "intervenant": "",
+     "volume": "6 jours",
+     "sequencage": "Une compétition régionale en décembre, la compétition nationale en juin",
+     "objectif": "Permettre à chaque étudiant de partager ses compétences dans le cadre d’une compétition en temps réel afin de répondre à un brief annonceur.",
+     "commentaire": "",
+     "competences_prose": "Répondre à un appel d’offres, depuis le brief annonceur jusqu’à la recommandation stratégique et créative, par le travail commun de plusieurs étudiants couvrant les compétences de toute la formation sur un format court et intense",
+     "competences_liees": [],
+     "notions_cles": [
+      "Un ANNONCEUR, le “client”, propose aux étudiant.e.s de prendre en charge sa problématique de communication. Pendant toute une semaine, ils.elles réflechissent aux SOLUTIONS à lui proposer en réponse au Brief... L’annonceur comme la situation sont réels.",
+      "Les étudiant.e.s travaillent en groupe et imaginent donc la campagne de communication à mettre en œuvre. Chaque Agence [qui a travaillé son iden- tité propre] présente ses solutions tant opérationnelles que créatives sous la forme d’une recommandation stratégique.",
+      "Le CESACOM organise les présentations en deux phases : un jury inter- médiaire [organisé en plusieurs poules] écoute toutes les agences. Il sélectionne les agences qui iront en FINALE défendre leur projet devant le client.",
+      "À l’issue de la finale, deux récompenses sont remises : le PRIX ECOLE est attribué aux étudiant.e.s ayant accompli le travail le plus conforme aux attentes méthodologiques que l’exercice impose. Le prestigieux PRIX ANNONCEUR est, quant à lui, remis à l’agence ayant gagné la confiance du client qui, parfois, réalise le projet qu’il a retenu."
+     ],
+     "programme": [
+      {
+       "titre": "Un ANNONCEUR, le “client”, propose aux étudiant.e.s de prendre en charge sa problématique de communication. Pendant toute une semaine, ils.elles réflechissent aux SOLUTIONS à lui proposer en réponse au Brief... L’annonceur comme la situation sont réels.",
+       "points": []
+      },
+      {
+       "titre": "Les étudiant.e.s travaillent en groupe et imaginent donc la campagne de communication à mettre en œuvre. Chaque Agence [qui a travaillé son iden- tité propre] présente ses solutions tant opérationnelles que créatives sous la forme d’une recommandation stratégique.",
+       "points": []
+      },
+      {
+       "titre": "Le CESACOM organise les présentations en deux phases : un jury inter- médiaire [organisé en plusieurs poules] écoute toutes les agences. Il sélectionne les agences qui iront en FINALE défendre leur projet devant le client.",
+       "points": []
+      },
+      {
+       "titre": "À l’issue de la finale, deux récompenses sont remises : le PRIX ECOLE est attribué aux étudiant.e.s ayant accompli le travail le plus conforme aux attentes méthodologiques que l’exercice impose. Le prestigieux PRIX ANNONCEUR est, quant à lui, remis à l’agence ayant gagné la confiance du client qui, parfois, réalise le projet qu’il a retenu.",
+       "points": []
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Travail autour de l’ID d’agence qui permet aux étudiants de travailler en groupe autour d’une compétiton"
+     ],
+     "evaluations": [
+      "Formative : Pour les M1, la compétition est formative, n’implique aucun critère de la certification."
+     ]
+    },
+    {
+     "titre": "Personal Branding publication de contenu : expertise métier",
+     "bloc": "Compétences transversales",
+     "formation": "M1 – Manager des stratégies marketing et communication",
+     "rncp": "38504 (France Compétences)",
+     "activite": "",
+     "intervenant": "",
+     "volume": "14h",
+     "sequencage": "S1/S2 – 4 séances de 3h30",
+     "objectif": "Permettre à chaque étudiant de structurer et valoriser son expertise métier, de produire un contenu à forte valeur ajoutée, d’optimiser sa présence en ligne et d’attirer l’attention des recruteurs à l’issue de la formation.",
+     "commentaire": "",
+     "competences_prose": "Concevoir, rédiger et publier un article professionnel sur un réseau social (LinkedIn, Medium, etc.) en lien avec le métier visé et la spécialité choisie ; optimiser sa visibilité et son attractivité auprès des recruteurs ; argumenter et valoriser sa démarche de personal branding.",
+     "competences_liees": [],
+     "notions_cles": [
+      "Introduction au personal branding éditorial",
+      "Choix du sujet et veille sectorielle",
+      "Rédaction et optimisation de l’article",
+      "Publication, diffusion et interaction",
+      "Justification et valorisation de la démarche :"
+     ],
+     "programme": [
+      {
+       "titre": "Introduction au personal branding éditorial",
+       "points": [
+        "Enjeux de la publication d’expertise sur les réseaux professionnels",
+        "Analyse de profils et d’articles à succès dans le secteur visé",
+        "Définition des objectifs personnels et professionnels de la publication"
+       ]
+      },
+      {
+       "titre": "Choix du sujet et veille sectorielle",
+       "points": [
+        "Sélection d’une thématique métier en lien avec la spécialité, les tendances et les attentes du marché",
+        "Structuration d’une veille pour nourrir l’article (sources, tendances, données)",
+        "Validation du sujet et du plan avec le formateur"
+       ]
+      },
+      {
+       "titre": "Rédaction et optimisation de l’article",
+       "points": [
+        "Techniques de rédaction professionnelle : accroche, structure, argumentation, storytelling, accessibilité (FALC, responsive content)",
+        "Contraintes légales (propriété intellectuelle, droits d’auteur, RGPD)",
+        "Optimisation SEO/SMO pour la visibilité (mots-clés, hashtags, visuels adaptés)",
+        "Atelier d’écriture, peer review, corrections"
+       ]
+      },
+      {
+       "titre": "Publication, diffusion et interaction",
+       "points": [
+        "Mise en forme sur la plateforme choisie (LinkedIn, Medium, etc.), intégration de visuels, call-to-action",
+        "Stratégies de diffusion : timing, relais, interaction avec la communauté, gestion des commentaires",
+        "Analyse des premiers retours et ajustements éventuels"
+       ]
+      },
+      {
+       "titre": "Justification et valorisation de la démarche :",
+       "points": [
+        "Présentation orale ou écrite de l’article et des choix éditoriaux/stratégiques",
+        "Argumentation de l’intérêt de la publication pour le personal branding et l’insertion professionnelle",
+        "Mutualisation des bonnes pratiques et retours d’expérience"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Ateliers pratiques d’écriture, peer review, coaching individuel, analyse critique de publications, utilisation d’outils d’IA pour la veille et la génération de visuels, simulations de publication et gestion de l’interaction en ligne"
+     ],
+     "evaluations": [
+      "Formative : exercices d’idéation, rédaction, peer review, feedback continu",
+      "Sommative : publication effective d’un article sur un réseau social, rendu d’une note de justification stratégique, présentation orale ou écrite. Évaluation sur la pertinence du sujet, la qualité rédactionnelle, l’optimisation pour la visibilité, la capacité à argumenter et à valoriser la démarche"
+     ]
+    },
+    {
+     "titre": "TD : Finalisation et soutenance du dossier de veille (BC1 A.1)",
+     "bloc": "Compétences transversales – Préparation aux épreuves de certification",
+     "formation": "M1 – Manager des stratégies marketing et communication",
+     "rncp": "38504 (France Compétences)",
+     "activite": "",
+     "intervenant": "",
+     "volume": "3,5h",
+     "sequencage": "CT – 1 séance de 3,5h en fin de S1, avant le rendu du dossier",
+     "objectif": "Module de finalisation : accompagner la dernière ligne droite avant le rendu du dossier BC1 A.1. Ce module CT complète le TD Accompagnement veille (Bloc 1) en ciblant la relecture finale, la conformité formelle, la qualité des recommandations et la préparation à la soutenance orale.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.1",
+      "C.2"
+     ],
+     "notions_cles": [
+      "Séance unique (3,5h) – Finalisation du dossier et simulation de soutenance"
+     ],
+     "programme": [
+      {
+       "titre": "Séance unique (3,5h) – Finalisation du dossier et simulation de soutenance",
+       "points": [
+        "Revue collective des dossiers : vérification de la conformité formelle (4 périmètres, 15 sources min., matrice d'impact, scénarios prospectifs, recommandations actionnables)",
+        "Points individuels ciblés : corrections de dernière minute sur les parties les plus fragiles (synthèse, recommandations, mise en page)",
+        "Simulation de soutenance orale (5 min par étudiant·e + 5 min questions jury) : structuration de la prise de parole, argumentation des recommandations stratégiques",
+        "Retours collectifs sur les erreurs fréquentes et conseils finaux avant le rendu officiel"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    }
+   ]
+  }
+ ]
+}
