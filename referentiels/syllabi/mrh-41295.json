@@ -1,0 +1,2619 @@
+{
+ "genere_le": "2026-10-05",
+ "outil": "extraire-syllabus",
+ "sources": [
+  {
+   "fichier": "Syllabi MRH ISME.docx",
+   "modules": [
+    {
+     "titre": "Module 1 : Veille stratégique RH digitale et réglementaire",
+     "bloc": "BC01 – Élaborer la stratégie RH de son périmètre en responsabilité",
+     "formation": "Manager des ressources humaines",
+     "rncp": "",
+     "activite": "A1 – Pilotage de la veille stratégique RH",
+     "intervenant": "",
+     "volume": "21 heures",
+     "sequencage": "",
+     "objectif": "Expliquer les enjeux stratégiques et opérationnels de la veille RH réglementaire et digitale pour sécuriser les pratiques et éclairer la décision RH. Concevoir un dispositif de veille RH structuré intégrant les 4 domaines (réglementaire, concurrentiel, technologique, socioéconomique) et aligné sur les transformations du travail à l’horizon 20262028. Sélectionner, configurer et piloter des outils digitaux et d’IA pour automatiser la collecte, l’analyse et la diffusion de la veille, dans le respect du RGPD et des exigences émergentes de régulation de l’IA. Intégrer les résultats de la veille dans un processus d’amélioration continue de la stratégie RH (indicateurs, tableaux de bord, arbitrages), en articulant conformité, performance et RSE.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.1"
+     ],
+     "notions_cles": [
+      "Fondamentaux de la veille stratégique appliquée aux RH",
+      "Panorama réglementaire RH et veille juridique",
+      "Outils digitaux et IA pour la veille réglementaire",
+      "Méthodes d’analyse et de partage de la veille",
+      "Étude de cas intégrée : conception d’un dispositif de veille RH"
+     ],
+     "programme": [
+      {
+       "titre": "Fondamentaux de la veille stratégique appliquée aux RH",
+       "points": [
+        "Définitions et concepts : veille, intelligence économique, business intelligence RH ; distinctions entre veille réactive et veille proactive.",
+        "Les 4 domaines de veille intégrée (réglementaire, concurrentiel, technologique, socioéconomique) et leurs apports à la fonction RH.",
+        "Le cycle de veille : expression des besoins, cartographie des sources, collecte, tri, analyse, diffusion, exploitation décisionnelle.",
+        "Enjeux 20262028 : numérisation des organisations, transitions écologique et démographique, évolution des modèles d’emploi et du « futur of work »."
+       ]
+      },
+      {
+       "titre": "Panorama réglementaire RH et veille juridique",
+       "points": [
+        "Rappels structurés sur le droit du travail, conventions collectives et grandes obligations de l’employeur en matière de relations individuelles et collectives.",
+        "Évolutions récentes et à venir : renforcement des obligations de transparence (notamment salariale), encadrement de l’usage de l’IA dans les processus RH, exigences de devoir de vigilance et de RSE, renforcement des exigences de cybersécurité.",
+        "Spécificités RGPD dans le traitement des données RH (bases légales, données sensibles, droits des salariés, registre de traitements, DPIA).",
+        "Déclinaisons possibles dans différents contextes (France, Europe, éventuellement Canada dans une logique de benchmark).",
+        "Méthodes de suivi juridique : sources officielles, abonnements, bulletins, réseaux professionnels.",
+        "Minicas : lecture guidée d’un extrait de nouvelle obligation légale et identification des impacts RH."
+       ]
+      },
+      {
+       "titre": "Outils digitaux et IA pour la veille réglementaire",
+       "points": [
+        "Tour d’horizon des solutions : plateformes spécialisées de veille juridique, modules de conformité intégrés aux SIRH (par ex. Eurecia, Sialé) et services d’alertes.",
+        "Principales fonctionnalités utiles aux RH : paramétrage d’alertes ciblées, moteurs de recherche avancés, filtres thématiques, synthèses automatisées via IA, espaces de partage interne.",
+        "Usage de l’IA générative pour la synthèse de textes réglementaires, la préparation de notes de cadrage ou de supports de sensibilisation.",
+        "Atelier pratique : paramétrer une veille sur des thématiques RH prioritaires (temps de travail, égalité professionnelle, santé au travail, usage de l’IA, etc.), tester la pertinence des résultats et ajuster la configuration."
+       ]
+      },
+      {
+       "titre": "Méthodes d’analyse et de partage de la veille",
+       "points": [
+        "Approches d’analyse qualitative et quantitative (tri par risque, urgence, impact, opportunité).",
+        "Construction de matrices d’impact (juridique, financier, organisationnel, social) et de priorisation (cartographie risques/opportunités).",
+        "Conception de supports de restitution : notes de synthèse, infographies, tableaux de bord (présentation des indicateurs, choix des visualisations).",
+        "Exercices : transformer un flux d’informations brutes en livrable opérationnel (note pour la direction ou fiche d’impact à destination des managers)."
+       ]
+      },
+      {
+       "titre": "Étude de cas intégrée : conception d’un dispositif de veille RH",
+       "points": [
+        "Présentation d’un contexte d’entreprise fictif (taille, secteur, maturité numérique, enjeux RH).",
+        "Travail en sous-groupes : identification des besoins de veille, choix des périmètres et des sources, répartition des rôles, sélection d’outils, définition des fréquences et canaux de diffusion, articulation avec les autres processus RH (audit, stratégie, RSE).",
+        "Production d’un schéma ou d’un miniréférentiel de veille pour la structure cible.",
+        "Présentation orale courte de chaque dispositif et feedback croisé."
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    },
+    {
+     "titre": "Module 2 : Veille économique, sociale et technologique avec outils IA",
+     "bloc": "BC01 – Élaborer la stratégie RH de son périmètre en responsabilité",
+     "formation": "Manager des ressources humaines",
+     "rncp": "",
+     "activite": "A1 – Pilotage de la veille stratégique RH",
+     "intervenant": "",
+     "volume": "21 heures",
+     "sequencage": "",
+     "objectif": "1) Expliquer les enjeux de la veille économique, sociale et technologique pour la fonction RH dans un contexte de transformations profondes du travail et des organisations à l’horizon 20262028. 2) Identifier, sélectionner et exploiter des sources de veille (études économiques, données emploi/compétences, tendances marché du travail, innovations technologiques RH) pertinentes pour son périmètre. 3) Paramétrer et utiliser des outils digitaux et des solutions d’IA (analytics, IA générative et prédictive) pour automatiser la collecte, la consolidation et l’analyse de données économiques, sociales et technologiques utiles à la stratégie RH. 4) Traduire les résultats de la veille en scénarios et recommandations opérationnelles pour ajuster les politiques RH (recrutement, développement des compétences, organisation du travail, QVCT, RSE), en cohérence avec le référentiel de compétences du bloc BC01.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.1"
+     ],
+     "notions_cles": [
+      "Enjeux et périmètre de la veille économique, sociale et technologique RH",
+      "Sources et indicateurs pour la veille économique et sociale RH",
+      "Veille technologique et innovations RH",
+      "Outils digitaux et IA pour structurer la veille économique, sociale et technologique",
+      "De la veille à la décision : scénarios et recommandations RH"
+     ],
+     "programme": [
+      {
+       "titre": "Enjeux et périmètre de la veille économique, sociale et technologique RH",
+       "points": [
+        "Positionnement du module 2 dans l’A1 – Pilotage de la veille stratégique RH, en continuité avec la veille réglementaire du module 1.",
+        "Les grands axes de veille non réglementaire : veille économique (conjoncture, secteur, coûts), veille sociale (emploi, compétences, attentes des salariés, climat social), veille technologique (outils RH, IA, automatisation, plateformes de travail).",
+        "Cartographie des impacts sur la fonction RH : recrutement, GPEC/GEPP, organisation du travail hybride, rémunération, QVCT, RSE, marque employeur.",
+        "Tendances 20252028 concernant le futur du travail : essor de l’IA générative, nouvelles formes d’organisation (plateformes, travail à distance élargi), tensions sur certaines compétences, attentes renforcées en termes de sens, d’équité et de durabilité."
+       ]
+      },
+      {
+       "titre": "Sources et indicateurs pour la veille économique et sociale RH",
+       "points": [
+        "Identification des sources macro et sectorielles : données INSEE, DARES, Eurostat, observatoires de branches, études cabinets (futurs de l’emploi, pénuries de compétences, salaires, conditions de travail).",
+        "Indicateurs à suivre pour éclairer la stratégie RH : taux de chômage, taux de rotation, tensions de recrutement par métier, projections d’emplois, inflation, indices de climat social, baromètres QVCT.",
+        "Analyse des études sur les tendances RH 20252026 (attentes des salariés, flexibilité, IA, RSE) et extraction de messages clés pour les politiques RH.",
+        "Atelier : choisir et justifier, pour un secteur donné, un « panier » d’indicateurs économiques et sociaux à suivre régulièrement pour alimenter la stratégie RH."
+       ]
+      },
+      {
+       "titre": "Veille technologique et innovations RH",
+       "points": [
+        "Panorama des principales innovations technologiques impactant les RH : SIRH et suites intégrées, talent marketplaces, outils de recrutement IA, plateformes de formation et d’upskilling, solutions de mesure QVCT et d’engagement.",
+        "Tendances IA en RH : analytics RH, IA prédictive pour le turnover et les compétences, IA générative pour la communication RH, chatbots RH, automatisation de tâches administratives.",
+        "Approche critique : bénéfices (efficience, personnalisation, rapidité) et risques (biais, opacité, dépendance technologique, acceptabilité sociale).",
+        "Atelier : analyser un cas d’introduction d’un outil IA en RH (recrutement ou pilotage des effectifs) et identifier les prérequis, risques et leviers d’acceptation."
+       ]
+      },
+      {
+       "titre": "Outils digitaux et IA pour structurer la veille économique, sociale et technologique",
+       "points": [
+        "Outils de collecte et d’agrégation de contenus : agrégateurs de flux, newsletters spécialisées, plateformes d’études RH, observatoires sectoriels, monitoring réseaux sociaux professionnels.",
+        "Outils d’analytics et de datavisualisation pour l’emploi et les compétences (tableurs avancés, outils BI, tableaux de bord emploi/compétences).",
+        "Utilisation de l’IA générative pour analyser des rapports de tendance, comparer des scénarios, générer des synthèses adaptées aux différentes parties prenantes.",
+        "Introduction à l’IA prédictive appliquée aux données RH : principes, exemples d’algorithmes, types de données nécessaires, limites et conditions de bon usage.",
+        "Atelier pratique : créer un minitableau de bord de veille économique/sociale/technologique sur un périmètre donné, à partir de données fournies ou ouvertes."
+       ]
+      },
+      {
+       "titre": "De la veille à la décision : scénarios et recommandations RH",
+       "points": [
+        "Méthodes pour transformer les données de veille en scénarios RH (scénarios d’évolution des besoins en effectifs et compétences, des attentes des salariés, des risques sociaux).",
+        "Construction de fiches de recommandations RH basées sur la veille : ajustement des politiques de recrutement, de formation, de mobilité, d’organisation du travail, de QVCT, de dialogue social.",
+        "Étude de cas intégrée : à partir d’un dossier de veille économique, sociale et technologique sur un secteur, élaborer une synthèse et des recommandations RH pour une entreprise fictive (ou pour l’entreprise d’alternance des apprenants), en identifiant priorités à 1224 mois.",
+        "Restitution orale des scénarios et plans d’action devant le groupe, en articulant les apports des modules 1 et 2 sur la veille stratégique."
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    },
+    {
+     "titre": "Module 3 : Management de l’innovation sociale et organisationnelle",
+     "bloc": "BC01 – Élaborer la stratégie RH de son périmètre en responsabilité",
+     "formation": "Manager des ressources humaines",
+     "rncp": "",
+     "activite": "A2 – Management de l’innovation RH",
+     "intervenant": "",
+     "volume": "21 heures",
+     "sequencage": "",
+     "objectif": "1) Comprendre les concepts clés de l’innovation sociale et organisationnelle dans le contexte des ressources humaines, en lien avec les évolutions du futur du travail et les enjeux RSE. 2) Appliquer des méthodes collaboratives et participatives (design thinking, agilité, co-création) pour favoriser l’émergence et la gestion d’innovations sociales et organisationnelles. 3) Intégrer les disruptions technologiques et les transitions sociétales (écologiques, démographiques) dans la conception des stratégies RH innovantes. 4) Développer la capacité de transformation et d’adaptation des organisations grâce à des pratiques managériales inclusives et responsables, alignées sur la stratégie globale de l’entreprise.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.2"
+     ],
+     "notions_cles": [
+      "Introduction à l’innovation sociale et organisationnelle RH",
+      "Méthodes collaboratives pour l’innovation",
+      "Gestion des disruptions et intégration des transitions",
+      "Développement de la capacité de transformation",
+      "Étude de cas intégrée"
+     ],
+     "programme": [
+      {
+       "titre": "Introduction à l’innovation sociale et organisationnelle RH",
+       "points": [
+        "Définitions et typologies (innovation sociale, organisationnelle, technologique).",
+        "Enjeux pour les organisations et la fonction RH : performance, engagement, attractivité, responsabilité sociale.",
+        "Contexte futur du travail 2026-2028 : transformations technologiques, écologiques et sociétales, exigences de durabilité."
+       ]
+      },
+      {
+       "titre": "Méthodes collaboratives pour l’innovation",
+       "points": [
+        "Présentation des principales méthodes : design thinking, agilité, co-création, créativité collective.",
+        "Techniques d’animation d’ateliers collaboratifs, facilitation et animation participative.",
+        "Mise en œuvre dans un contexte RH : cas pratiques, gestion de projets innovants, accompagnement du changement."
+       ]
+      },
+      {
+       "titre": "Gestion des disruptions et intégration des transitions",
+       "points": [
+        "Analyse des disruptions technologiques et organisationnelles : impact de l’IA, automatisation, télétravail, plateformes.",
+        "Prise en compte des transitions écologiques et démographiques : RSE, diversités, nouveaux besoins de formation.",
+        "Stratégies pour une innovation responsable, inclusive, éthique."
+       ]
+      },
+      {
+       "titre": "Développement de la capacité de transformation",
+       "points": [
+        "Approches managériales pour accompagner le changement : leadership, communication, mobilisation des parties prenantes.",
+        "Culture d’entreprise et ouverture à l’innovation continue.",
+        "Outils et indicateurs pour mesurer l’impact des innovations RH."
+       ]
+      },
+      {
+       "titre": "Étude de cas intégrée",
+       "points": [
+        "Analyse d’une entreprise réelle ou fictive confrontée à un enjeu d’innovation sociale ou organisationnelle.",
+        "Diagnostic, propositions de solutions innovantes et plan d’action détaillé.",
+        "Présentation collective des projets et échanges."
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    },
+    {
+     "titre": "Module 4 : Méthodes collaboratives et transformation digitale RH.",
+     "bloc": "BC01 – Élaborer la stratégie RH de son périmètre en responsabilité.",
+     "formation": "Manager des ressources humaines.",
+     "rncp": "",
+     "activite": "A2 – Management de l’innovation RH.",
+     "intervenant": "",
+     "volume": "24,5 heures.",
+     "sequencage": "",
+     "objectif": "1) Comprendre les principes des méthodes collaboratives et leur rôle dans l'accompagnement de la transformation digitale des ressources humaines. 2) Mettre en œuvre des démarches participatives et inclusives favorisant l’adhésion des acteurs internes aux projets de transformation digitale RH. 3) Utiliser des outils numériques adaptés pour faciliter la collaboration, la communication et la gestion du changement dans les processus RH digitalisés. 4) Accompagner efficacement les changements organisationnels induits par la transformation digitale, en intégrant les enjeux humains, technologiques et sociaux de façon agile et responsable.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.2"
+     ],
+     "notions_cles": [
+      "Fondements des méthodes collaboratives en management RH",
+      "Démarches participatives pour la transformation digitale RH",
+      "Outils numériques facilitant les méthodes collaboratives",
+      "Accompagnement des changements organisationnels",
+      "Étude de cas finale"
+     ],
+     "programme": [
+      {
+       "titre": "Fondements des méthodes collaboratives en management RH",
+       "points": [
+        "Historique et concepts clés des méthodes collaboratives : agilité, co-création, intelligence collective, postures collaboratives.",
+        "Bénéfices et limites dans la gestion de la transformation digitale RH.",
+        "Typologie des acteurs et mobilisation des parties prenantes.",
+        "Études de cas illustratives de transformations RH réussies basées sur la collaboration."
+       ]
+      },
+      {
+       "titre": "Démarches participatives pour la transformation digitale RH",
+       "points": [
+        "Techniques d’animation participative : ateliers collaboratifs, forums, groupes de travail, hackathons RH.",
+        "Inclusion et diversité dans les processus participatifs.",
+        "Gestion des résistances au changement et stratégies d’adhésion.",
+        "Communication interne collaborative et montée en compétences digitales."
+       ]
+      },
+      {
+       "titre": "Outils numériques facilitant les méthodes collaboratives",
+       "points": [
+        "Panorama des outils numériques : plateformes collaboratives (Miro, Teams, Slack), outils de gestion de projet agile (Jira, Trello).",
+        "Utilisation des espaces partagés, wikis, chatbots et outils de brainstorming numérique.",
+        "Ancrage des outils dans les processus RH (gestion des talents, formation, paie, dialogue social).",
+        "Ateliers pratiques d’utilisation d’outils collaboratifs numériques en contexte RH."
+       ]
+      },
+      {
+       "titre": "Accompagnement des changements organisationnels",
+       "points": [
+        "Approches agiles pour piloter la transformation digitale RH.",
+        "Méthodes d’écoute et recueil de feedback utilisateurs.",
+        "Formation et coaching des équipes RH et managers.",
+        "Mesure de la performance et indicateurs de succès de la transformation."
+       ]
+      },
+      {
+       "titre": "Étude de cas finale",
+       "points": [
+        "Travail collectif sur un cas de transformation digitale RH intégrant méthodes collaboratives.",
+        "Diagnostic, plan d’action, mise en œuvre d’une démarche participative.",
+        "Présentation des propositions devant le groupe et feedback."
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    },
+    {
+     "titre": "Module 5 : Diagnostic stratégique RH et analyse des processus",
+     "bloc": "BC01 – Élaborer la stratégie RH de son périmètre en responsabilité",
+     "formation": "Manager des ressources humaines",
+     "rncp": "",
+     "activite": "A3 – Conduite d’audit RH",
+     "intervenant": "",
+     "volume": "21 heures",
+     "sequencage": "",
+     "objectif": "1) Réaliser un diagnostic stratégique RH en tenant compte de l’écosystème global de l’entreprise et ses spécificités. 2) Identifier les besoins en ressources clés, les forces et faiblesses RH à court, moyen et long terme. 3) Analyser les processus RH, pratiques, outils et leurs efficacités à partir d’une démarche systémique et analytique. 4) Elaborer des recommandations et orientations stratégiques RH pour concevoir une stratégie adaptée, performante et responsable.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.3"
+     ],
+     "notions_cles": [
+      "Principes du diagnostic stratégique en ressources humaines",
+      "Identification et analyse des ressources clés",
+      "Analyse des processus RH",
+      "Synthèse et formulation d’un diagnostic stratégique RH"
+     ],
+     "programme": [
+      {
+       "titre": "Principes du diagnostic stratégique en ressources humaines",
+       "points": [
+        "Concepts clés : diagnostic, audit, diagnostic stratégique RH.",
+        "Méthodologies et outils utilisés pour le diagnostic : analyse SWOT, PESTEL, matrice d’incertitude, cartographie des parties prenantes.",
+        "Le rôle du diagnostic dans l’élaboration de la stratégie RH.",
+        "Étude de cas d’introduction."
+       ]
+      },
+      {
+       "titre": "Identification et analyse des ressources clés",
+       "points": [
+        "Repérer les ressources humaines stratégiques : talents, compétences clés, savoirs organisationnels.",
+        "Analyse des capacités présentes, besoins futurs, et risques d’obsolescence.",
+        "Étude comparative sectorielle pour benchmarker les ressources.",
+        "Cartographie des compétences et outils associés."
+       ]
+      },
+      {
+       "titre": "Analyse des processus RH",
+       "points": [
+        "Cartographie des processus RH : recrutement, formation, gestion des carrières, paie, administration du personnel, dialogue social.",
+        "Analyse de l’efficacité, de l’efficience, des goulots d’étranglement et des risques dans les processus.",
+        "Outils d’évaluation : entretiens, questionnaires, audits terrain, indicateurs de performance. d) Atelier pratique de cartographie processus."
+       ]
+      },
+      {
+       "titre": "Synthèse et formulation d’un diagnostic stratégique RH",
+       "points": [
+        "Regroupement et hiérarchisation des observations.",
+        "Élaboration de recommandations opérationnelles et stratégiques.",
+        "Préparation d’un rapport de diagnostic RH à différents niveaux (direction générale, managers, équipes RH).",
+        "Étude de cas intégrée."
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    },
+    {
+     "titre": "Module 6 : Outils d’audit RH et utilisation de data analytics",
+     "bloc": "BC01 – Élaborer la stratégie RH de son périmètre en responsabilité",
+     "formation": "Manager des ressources humaines",
+     "rncp": "",
+     "activite": "A3 – Conduite d’audit RH",
+     "intervenant": "",
+     "volume": "21 heures",
+     "sequencage": "",
+     "objectif": "1) Maîtriser les outils digitaux et méthodologies nécessaires à la conduite d’un audit RH complet et performant. 2) S’appuyer sur les données RH et les techniques de data analytics pour étayer ses analyses et conclusions d’audit. 3) Intégrer la dimension RSE et conformité réglementaire dans la démarche d’audit RH. 4) Réaliser un audit RH dans un contexte organisationnel et réglementaire complexe, en utilisant efficacement les outils numériques.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.3"
+     ],
+     "notions_cles": [
+      "Introduction aux outils d’audit RH",
+      "Collecte et préparation des données RH",
+      "Techniques de data analytics appliquées à l’audit RH",
+      "Intégration des critères de RSE dans l’audit RH",
+      "Mise en œuvre d’un audit RH complet"
+     ],
+     "programme": [
+      {
+       "titre": "Introduction aux outils d’audit RH",
+       "points": [
+        "Panorama des outils digitaux disponibles : suites SIRH, outils spécifiques d’audit, plateformes d’analyse de données.",
+        "Critères de choix selon la taille, le secteur et la maturité digitale de l’entreprise.",
+        "Présentation des bonnes pratiques d’utilisation."
+       ]
+      },
+      {
+       "titre": "Collecte et préparation des données RH",
+       "points": [
+        "Sources des données : bases internes, SIRH, enquêtes, données externes.",
+        "Nettoyage, structuration et validation des données pour analyse fiable.",
+        "Respect des contraintes réglementaires sur les données (confidentialité, RGPD)."
+       ]
+      },
+      {
+       "titre": "Techniques de data analytics appliquées à l’audit RH",
+       "points": [
+        "Analyse descriptive : indicateurs classiques (absentéisme, turnover, formation, diversité).",
+        "Analyse exploratoire et détection d’anomalies via data mining.",
+        "Analyses prédictives : méthodes et limites (ex : prévision turnover, gestion des compétences).",
+        "Visualisation des données : tableaux de bord et narratifs data-driven."
+       ]
+      },
+      {
+       "titre": "Intégration des critères de RSE dans l’audit RH",
+       "points": [
+        "Critères ESG appliqués aux ressources humaines.",
+        "Indicateurs de diversité, d’équité, de bien-être et de qualité de vie au travail.",
+        "Recommandations pour une politique RH durable.",
+        "Cas pratiques et études de benchmarks."
+       ]
+      },
+      {
+       "titre": "Mise en œuvre d’un audit RH complet",
+       "points": [
+        "Organisation et planification d’un audit RH.",
+        "Animation des parties prenantes et collecte terrain.",
+        "Rédaction de rapports d’audit précis, objectifs et argumentés.",
+        "Communication des résultats et recommandations stratégiques."
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    },
+    {
+     "titre": "Module 7 : Stratégie RH responsable et indicateurs clés (KPI)",
+     "bloc": "BC01 – Élaborer la stratégie RH de son périmètre en responsabilité",
+     "formation": "Manager des ressources humaines",
+     "rncp": "",
+     "activite": "A4 – Définition et évaluation d’une stratégie RH RSE",
+     "intervenant": "",
+     "volume": "21 heures",
+     "sequencage": "",
+     "objectif": "1) Définir une stratégie RH durable et inclusive alignée sur la vision et la stratégie globale de l’entreprise, en intégrant les enjeux de transitions numérique, écologique et démographique. 2) Identifier et construire des indicateurs de performance RH (KPI) et des indicateurs ESG pertinents pour piloter cette stratégie dans une logique de responsabilité sociale et de performance globale. 3) Mettre en place un dispositif de suivi et de reporting RH responsable permettant d’évaluer l’impact des actions RH et d’ajuster la stratégie en continu. 4) Articuler les résultats issus de la veille et des démarches d’audit pour documenter et objectiver les choix stratégiques RH.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.4"
+     ],
+     "notions_cles": [
+      "Enjeux et cadre de la stratégie RH responsable",
+      "Construction d’une stratégie RH durable et inclusive",
+      "Indicateurs clés de performance RH (KPI RH) et indicateurs ESG appliqués aux RH",
+      "Dispositifs de pilotage, tableaux de bord et reporting RH responsable",
+      "Évaluation et ajustement de la stratégie RH responsable"
+     ],
+     "programme": [
+      {
+       "titre": "Enjeux et cadre de la stratégie RH responsable",
+       "points": [
+        "Rappels sur la notion de stratégie RH et son articulation avec la stratégie d’entreprise : rôle de la fonction RH comme partenaire business et acteur de la RSE.",
+        "Les piliers d’une stratégie RH responsable : équité, inclusion, QVCT, développement des compétences, employabilité, transition écologique et numérique, ancrage territorial.",
+        "Apports de la loi Pacte, des cadres ESG et des référentiels RSE pour structurer une stratégie RH durable.",
+        "Lien avec la veille et l’innovation : comment les informations issues des modules de veille et d’audit nourrissent la stratégie RH responsable."
+       ]
+      },
+      {
+       "titre": "Construction d’une stratégie RH durable et inclusive",
+       "points": [
+        "Analyse de la vision et des priorités stratégiques de l’entreprise (business model, risques, opportunités, parties prenantes).",
+        "Définition des axes de la stratégie RH responsable : attractivité et marque employeur responsable, gestion des compétences et des parcours, politique de rémunération et de reconnaissance, QVCT et santé au travail, dialogue social, impact environnemental des pratiques RH.",
+        "Intégration des transitions numérique, écologique et démographique : anticipation des effets sur les emplois et compétences, nouveaux métiers, organisation du travail, attentes des générations.",
+        "Ateliers : à partir d’un cas d’entreprise, formuler 3 à 5 axes de stratégie RH responsable hiérarchisés et argumentés."
+       ]
+      },
+      {
+       "titre": "Indicateurs clés de performance RH (KPI RH) et indicateurs ESG appliqués aux RH",
+       "points": [
+        "Rappels sur la notion de KPI : spécificité, mesurabilité, pertinence, réalisme et inscription dans un horizon temporel (SMART).",
+        "Catégories de KPI RH : recrutement (délai de recrutement, coût par embauche, qualité d’embauche), fidélisation (turnover, turnover des nouveaux entrants, eNPS, engagement), développement (taux de couverture du plan de développement des compétences, mobilité interne), conditions de travail (absentéisme, accidents, indicateurs QVCT), diversité et inclusion (égalité professionnelle, mixité, handicap).",
+        "Indicateurs ESG et RSE pour la dimension RH : indicateurs sociaux (conditions de travail, égalité, formation, dialogue social), indicateurs environnementaux liés aux pratiques RH (mobilités, télétravail, empreinte des déplacements), indicateurs de gouvernance (instances, éthique, conformité).",
+        "Exercices : choisir et définir un portefeuille restreint de KPI RH et ESG pour une stratégie RH donnée, en évitant la surabondance d’indicateurs."
+       ]
+      },
+      {
+       "titre": "Dispositifs de pilotage, tableaux de bord et reporting RH responsable",
+       "points": [
+        "Conception de tableaux de bord RH responsables : structuration autour des axes de la stratégie RH, équilibre entre indicateurs de résultats et indicateurs de moyens/effets, visualisation et lisibilité.",
+        "Intégration des KPI RH dans les dispositifs de reporting ESG et RSE (rapport extra-financier, rapport social, reporting interne au COMEX, etc.).",
+        "Utilisation d’outils de datavisualisation et de SIRH pour alimenter automatiquement les tableaux de bord, fiabiliser les données et faciliter le suivi dans le temps.",
+        "Ateliers pratiques : construction d’un mini tableau de bord RH responsable et simulation d’une présentation synthétique à la direction."
+       ]
+      },
+      {
+       "titre": "Évaluation et ajustement de la stratégie RH responsable",
+       "points": [
+        "Lecture critique des indicateurs : analyser les écarts entre objectifs et réalisations, identifier les causes et les leviers d’action.",
+        "Mise en place de boucles de rétroaction : points de passage réguliers, revues de stratégie, implication des parties prenantes (managers, IRP, collaborateurs).",
+        "Cas fil rouge : à partir d’un jeu de données RH simplifié, analyser l’impact d’actions RH (formation, évolution des pratiques managériales, politique de télétravail) sur les indicateurs et proposer des adaptations de la stratégie RH responsable."
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    },
+    {
+     "titre": "Module 8 : RSE et transition écologique en RH",
+     "bloc": "BC01 – Élaborer la stratégie RH de son périmètre en responsabilité",
+     "formation": "Manager des ressources humaines",
+     "rncp": "",
+     "activite": "A4 – Définition et évaluation d’une stratégie RH RSE",
+     "intervenant": "",
+     "volume": "24,5 heures",
+     "sequencage": "",
+     "objectif": "1) Comprendre les concepts, enjeux et cadres réglementaires de la responsabilité sociétale des entreprises (RSE) appliqués aux ressources humaines. 2) Mettre en œuvre une stratégie RH intégrée à la transition écologique, en hiérarchisant les priorités RSE en fonction des enjeux matérialisés et des parties prenantes. 3) Concevoir et déployer des politiques et pratiques RH durables, vertes et inclusives, en cohérence avec les objectifs de développement durable (ODD) et les engagements RSE de l’entreprise. 4) Capitaliser sur les bonnes pratiques et conduire le changement vers une organisation plus résiliente, tout en mesurant les impacts sociaux et environnementaux des actions RH.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.4"
+     ],
+     "notions_cles": [
+      "Introduction à la RSE et à la transition écologique en entreprise",
+      "Analyse de matérialité et hiérarchisation des priorités RSE",
+      "Politique RH durable, verte et inclusive",
+      "Capitalisation et conduite du changement vers une organisation résiliente",
+      "Étude de cas intégrée"
+     ],
+     "programme": [
+      {
+       "titre": "Introduction à la RSE et à la transition écologique en entreprise",
+       "points": [
+        "Définitions clés : RSE, développement durable, ODD, neutralité carbone.",
+        "Cadres réglementaires et normatifs (loi Pacte, Grenelle, accréditations, reporting extra-financier).",
+        "Rôle et responsabilités de la fonction RH dans la transition écologique.",
+        "Cas pratiques d’intégration de la RSE dans les politiques RH."
+       ]
+      },
+      {
+       "titre": "Analyse de matérialité et hiérarchisation des priorités RSE",
+       "points": [
+        "Méthodologie d’analyse de matérialité RSE : identification, consultation des parties prenantes, évaluation des enjeux prioritaires.",
+        "Cartographie des parties prenantes internes et externes et de leurs attentes.",
+        "Intégration des résultats dans la gouvernance et la stratégie RH.",
+        "Exemples pratiques d’analyses de matérialité sectorielles et territoriales."
+       ]
+      },
+      {
+       "titre": "Politique RH durable, verte et inclusive",
+       "points": [
+        "Engagements et pratiques RH verts : mobilité durable, réduction de l’empreinte carbone, achats responsables, gestion des déchets en milieu de travail.",
+        "Promotion de l’inclusion, de la diversité et de la qualité de vie au travail dans une perspective RSE.",
+        "Déploiement d’actions concrètes : formation, communication interne, sensibilisation et mobilisation des collaborateurs.",
+        "Mesure et pilotage des impacts sociaux et environnementaux des politiques RH."
+       ]
+      },
+      {
+       "titre": "Capitalisation et conduite du changement vers une organisation résiliente",
+       "points": [
+        "Outils et méthodes pour capitaliser les bonnes pratiques et valoriser les succès RSE.",
+        "Implication des acteurs RH et managériaux dans la conduite du changement.",
+        "Suivi des engagements RSE et retours d’expérience.",
+        "Amélioration continue : audits, plan d’action, reporting."
+       ]
+      },
+      {
+       "titre": "Étude de cas intégrée",
+       "points": [
+        "Analyse d’une démarche RSE appliquée à la fonction RH dans une organisation réelle ou fictive.",
+        "Élaboration d’un plan d’actions RH aligné avec la transition écologique et la stratégie globale.",
+        "Présentation collective et débats sur les leviers, freins et impacts."
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    },
+    {
+     "titre": "Module 9 : Priorisation RSE et analyse de matérialité RH",
+     "bloc": "BC01 – Élaborer la stratégie RH de son périmètre en responsabilité",
+     "formation": "Manager des ressources humaines",
+     "rncp": "",
+     "activite": "A4 – Définition et évaluation d’une stratégie RH RSE",
+     "intervenant": "",
+     "volume": "14 heures",
+     "sequencage": "",
+     "objectif": "1) Réaliser une analyse de matérialité pour identifier, prioriser et hiérarchiser les enjeux RSE majeurs relatifs aux ressources humaines dans un contexte organisationnel donné. 2) Identifier et cartographier les parties prenantes internes et externes influentes, et comprendre leurs attentes en matière de responsabilité sociale et environnementale. 3) Utiliser les résultats de l’analyse de matérialité pour orienter et ajuster la stratégie RH responsable, en cohérence avec les enjeux économiques, sociaux et environnementaux de l’entreprise. 4) Concevoir un plan d’action RSE RH fondé sur une priorisation rigoureuse des enjeux et des besoins identifiés.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.4"
+     ],
+     "notions_cles": [
+      "Introduction à l’analyse de matérialité en contexte RSE",
+      "Identification et cartographie des parties prenantes",
+      "Méthodes et outils pour la réalisation d’une analyse de matérialité",
+      "Utilisation de l’analyse de matérialité pour la définition d’un plan d’action RH"
+     ],
+     "programme": [
+      {
+       "titre": "Introduction à l’analyse de matérialité en contexte RSE",
+       "points": [
+        "Définition et intérêt de l’analyse de matérialité pour la stratégie d’entreprise et la fonction RH.",
+        "Cadre réglementaire et référentiels normatifs associés (GRI, ISO 26000, loi Pacte).",
+        "Liens entre matérialité, gestion des risques, et création de valeur durable."
+       ]
+      },
+      {
+       "titre": "Identification et cartographie des parties prenantes",
+       "points": [
+        "Méthodologies d’identification des parties prenantes internes et externes (salariés, syndicats, clients, fournisseurs, collectivités, etc.).",
+        "Analyse des attentes, besoins, et influences des parties prenantes sur la stratégie RH.",
+        "Outils de cartographie des parties prenantes et diagnostics associés."
+       ]
+      },
+      {
+       "titre": "Méthodes et outils pour la réalisation d’une analyse de matérialité",
+       "points": [
+        "Collecte des données quantitatives et qualitatives (enquêtes, entretiens, études documentaires).",
+        "Techniques d’analyse et de hiérarchisation des enjeux (scoring, matrices d’impact et de priorité).",
+        "Gestion de la communication et de la transparence autour des résultats."
+       ]
+      },
+      {
+       "titre": "Utilisation de l’analyse de matérialité pour la définition d’un plan d’action RH",
+       "points": [
+        "Traduction des priorités en objectifs et actions RH alignées avec la stratégie globale.",
+        "Intégration des principes de durabilité, inclusion et innovation responsable.",
+        "Mise en place d’indicateurs de suivi et de mesures d’impact."
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    },
+    {
+     "titre": "Module 10 : Gestion des risques RH avec IA prédictive et approche effectuale",
+     "bloc": "BC01 – Élaborer la stratégie RH de son périmètre en responsabilité",
+     "formation": "Manager des ressources humaines",
+     "rncp": "",
+     "activite": "A4 – Définition et évaluation d’une stratégie RH RSE",
+     "intervenant": "",
+     "volume": "21 heures",
+     "sequencage": "",
+     "objectif": "1) Identifier et évaluer les risques stratégiques et opérationnels liés aux ressources humaines dans un contexte organisationnel complexe. 2) Utiliser des outils d’intelligence artificielle prédictive pour anticiper les impacts des risques sur la performance RH et la continuité de l’activité. 3) Appliquer l’approche effectuale pour sécuriser la stratégie RH en situation d’incertitude et de changement. 4) Mettre en place des indicateurs de risque (KRI) et concevoir des plans de prévention adaptés.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.4"
+     ],
+     "notions_cles": [
+      "Introduction à la gestion des risques RH",
+      "Outils et méthodes d’analyse des risques RH",
+      "Introduction à l’IA prédictive appliquée à la gestion des risques RH",
+      "Approche effectuale en gestion des risques RH",
+      "Conception et mise en œuvre de plans de prévention et indicateurs de risque"
+     ],
+     "programme": [
+      {
+       "titre": "Introduction à la gestion des risques RH",
+       "points": [
+        "Définitions fondamentales : risques stratégiques, opérationnels, RH.",
+        "Enjeux et typologies des risques RH : conformité, turnover, absentéisme, compétence, réputation, cybersécurité.",
+        "Normes et cadres réglementaires applicables.",
+        "Rôle de la fonction RH dans la gestion des risques organisationnels."
+       ]
+      },
+      {
+       "titre": "Outils et méthodes d’analyse des risques RH",
+       "points": [
+        "Méthodes qualitatives : brainstorming, analyse SWOT, cartographie des risques, analyse d’impact.",
+        "Méthodes quantitatives : indicateurs, évaluations de probabilité et d’impact, matrices de risque.",
+        "Mise en place de tableaux de bord de suivi des risques (KRI)."
+       ]
+      },
+      {
+       "titre": "Introduction à l’IA prédictive appliquée à la gestion des risques RH",
+       "points": [
+        "Concepts clés de l’IA prédictive et différences avec l’analyse traditionnelle.",
+        "Typologies d’algorithmes utilisés en RH pour la prédiction : machine learning, réseaux de neurones, IA explicable.",
+        "Données nécessaires, qualité des données et limites.",
+        "Cas pratiques d’utilisation pour anticiper turnover, risques psychosociaux, pénurie de compétences."
+       ]
+      },
+      {
+       "titre": "Approche effectuale en gestion des risques RH",
+       "points": [
+        "Principes de l’approche effectuale : flexibilité, pilotage par les moyens, co-création de l’avenir organisationnel.",
+        "Intégration de l’approche dans la stratégie RH : gestion agile des risques et opportunités.",
+        "Exercices pratiques : scénarios d’adaptation en situation d’incertitude."
+       ]
+      },
+      {
+       "titre": "Conception et mise en œuvre de plans de prévention et indicateurs de risque",
+       "points": [
+        "Élaboration des plans d’action pour réduire les risques prioritaires identifiés.",
+        "Définition des indicateurs clés de risque (KRI) pertinents.",
+        "Communication et mobilisation des acteurs autour de la gestion des risques.",
+        "Étude de cas intégrée : élaboration d’un plan de gestion des risques RH dans une entreprise fictive."
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    },
+    {
+     "titre": "Module 22 : Stratégies de rémunération et mix salarial digital",
+     "bloc": "BC03 – Superviser l’administration du personnel",
+     "formation": "Manager des ressources humaines",
+     "rncp": "",
+     "activite": "A8 – Définition et pilotage de la politique de rémunération globale",
+     "intervenant": "",
+     "volume": "28 heures",
+     "sequencage": "",
+     "objectif": "1. Comprendre les différents modèles de rémunération globale adaptés aux contextes d'entreprise PME/ETI et élaborer une politique salariale cohérente intégrant rémunération fixe, variable, avantages et avantages sociaux, en lien avec la stratégie globale de l'entreprise. 2. Maîtriser l'utilisation des outils digitaux courants (SIRH Eurecia/SILAE, Excel, Teams) pour la conception, le suivi budgétaire et la communication transparente des politiques de rémunération auprès des managers et collaborateurs. 3. Assurer la conformité réglementaire des pratiques de rémunération (convention collective, égalité professionnelle, indexation inflation, seuils légaux) tout en conciliant attractivité externe, motivation interne et contraintes budgétaires réalistes. 4. Développer une posture stratégique RH capable d'articuler la politique de rémunération avec les objectifs business (croissance, fidélisation talents, équité interne) et de mesurer son impact sur la performance globale de l'entreprise.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.8"
+     ],
+     "notions_cles": [
+      "Panorama complet des systèmes de rémunération et positionnement stratégique",
+      "Élaboration mix salarial adapté et budget prévisionnel réaliste",
+      "Conformité réglementaire et communication transparente rémunération",
+      "Pilotage performance et ajustements politiques rémunération"
+     ],
+     "programme": [
+      {
+       "titre": "Panorama complet des systèmes de rémunération et positionnement stratégique",
+       "points": [
+        "Connaissance détaillée des composantes rémunération globale : fixe garanti (salaire base, minimum conventionnel, grille classification), variable individualisée (commissions, primes objectifs, intéressement), variable collective (participation, PEE/Perco), avantages en nature (tickets restaurant, CSE, mutuelle), avantages sociaux (formation, mobilité).",
+        "Maîtrise des logiques stratégiques par taille entreprise : PME (<50 salariés budget limité fixe + primes discrétionnaires), ETI (50-250 salariés grille formelle + intéressement obligatoire), alignement vision business (PME croissance : variable forte, ETI stabilité : fixe garanti + participation).",
+        "Compréhension benchmarking salarial : sources accessibles (INSEE salaires moyennes secteur, études Apec cadres, enquêtes sectorielles CC, comparables locaux Glassdoor), positionnement entreprise (médiane secteur, +10% talents critiques, -5% volume).",
+        "Savoir-faire construction grille salariale : amplitude 40-60% par niveau, progression annuelle 2-4%, fourchettes classification CC, anticipation inflation/promotions collectives. ​"
+       ]
+      },
+      {
+       "titre": "Élaboration mix salarial adapté et budget prévisionnel réaliste",
+       "points": [
+        "Méthodologie construction mix optimal : analyse attractivité externe (benchmark secteur), équité interne (écarts H/F <5%, ancienneté valorisée), budget masse salariale (35-45% CA PME), ROI variable (retour objectifs atteints).",
+        "Maîtrise calculs financiers essentiels : coût total salarié (salaire brut x 1,45 cotisations patronales), budget annuel par collaborateur (fixe + variable cible + avantages), simulation inflation/promotions (+2,5% général + individuel), impact hausse minimaux conventionnels.",
+        "Connaissance dispositifs légaux attractifs : intéressement/performance (versement libre >7% masse), PEE/Perco (abondement employeur 100-300%), primes obligatoires CC (panier, froid, ancienneté), exonérations fiscales (forfait mobilité, prime pouvoir d'achat).",
+        "Savoir-faire budgétisation Excel : prévisionnel 12 mois par population (cadres, ETAM, ouvriers), scénarios pessimiste/réalisé/optimiste, variance mensuelle, alerte dépassement 5%. ​"
+       ]
+      },
+      {
+       "titre": "Conformité réglementaire et communication transparente rémunération",
+       "points": [
+        "Maîtrise obligations légales : égalité professionnelle (index >85/100, transparence anonymisée), NAO annuelle (consultation CSE obligatoire), indexation inflation (minimums CC), bulletins paie conformes (mentions légales 14 points).",
+        "Gestion situations sensibles : négociations salariales CSE (argumentaire chiffré, calendrier clair), communication hausses différenciées (criterias objectifs publiés), gel salaires exceptionnel (alternatives avantages sociaux).",
+        "Utilisation SIRH rémunération : Eurecia/SILAE reporting grille salariale (écarts analytiques), exports Excel masse salariale, simulations hausses collectives, portail collaborateur évolution salaire.",
+        "Développement posture transparente : explication individuel décision salaire (3 critères objectifs), communication collective grille (progression carrière), réponse demandes managers (budget par poste). ​"
+       ]
+      },
+      {
+       "titre": "Pilotage performance et ajustements politiques rémunération",
+       "points": [
+        "Mise en place indicateurs clés rémunération : taux turnover volontaire (<10%), ratio masse salariale/CA (35-45%), satisfaction rémunération (sondage >75%), temps recrutement profils critiques (<45 jours).",
+        "Analyse écarts et actions correctives : surcoût masse salariale (gel variable, optimisation avantages), sous-attractivité talents (prime signature ciblée), inégalités détectées (plan rattrapage femmes).",
+        "Méthodologie NAO annuelle : calendrier légal (sept-déc), consultation CSE (2 réunions min), budget validé direction, communication résultats (affichage + Teams).",
+        "Savoir-être stratégique : anticipation inflation/promotions NAO, arbitrage budget rémunération vs investissements, alignement RH-finance (ROI rémunération prouvé), posture conseil direction rémunération."
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    },
+    {
+     "titre": "Module 23 : Processus de paie sécurisés avec outils digitaux",
+     "bloc": "BC03 – Superviser l’administration du personnel",
+     "formation": "Manager des ressources humaines",
+     "rncp": "",
+     "activite": "A9 – Supervision de la production des bulletins de paie",
+     "intervenant": "",
+     "volume": "17,5 heures",
+     "sequencage": "",
+     "objectif": "1. Maîtriser le processus complet de production des bulletins de paie depuis la collecte des variables jusqu'à la déclaration fiscale, en identifiant les points de contrôle critiques pour garantir la fiabilité et la conformité légale. 2. Comprendre les spécificités de la législation sociale et fiscale applicable à la paie (convention collective, minimums conventionnels, cotisations, exonérations) et savoir les appliquer correctement dans les logiciels courants. 3. Superviser la validation des variables de paie et la production finale en identifiant les anomalies fréquentes (erreurs de saisie, oublis primes, calculs incorrects heures supplémentaires) avant envoi aux salariés. 4. Assurer la conformité des déclarations sociales et fiscales (DSN, attestations employeur) et développer une posture responsable garantissant la sécurité juridique de l'entreprise et la satisfaction des collaborateurs.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.9"
+     ],
+     "notions_cles": [
+      "Maîtrise du processus complet de collecte et validation des variables de paie",
+      "Connaissance approfondie de la réglementation sociale et fiscale applicable",
+      "Supervision de la production et contrôles qualité dans les SIRH",
+      "Conformité déclarations sociales et fiscales et posture responsable"
+     ],
+     "programme": [
+      {
+       "titre": "Maîtrise du processus complet de collecte et validation des variables de paie",
+       "points": [
+        "Connaissance détaillée des éléments constitutifs d'un bulletin de paie : salaire de base (temps plein/partiel, heures supplémentaires majorées 25%/50%), éléments variables (primes, heures complémentaires, indemnités), cotisations sociales salariales/patronales par acronyme (URSSAF, retraite complémentaire, prévoyance, formation).",
+        "Identification des sources de données obligatoires : contrat de travail (classification, salaire garanti), pointage heures (badges, déclarations managers), variables exceptionnelles (arrêts maladie, congés payés indemnisés, primes exceptionnelles).",
+        "Compréhension des contrôles qualité pré-production : cohérence heures travaillées/repos, plafonds cotisations (4 PASS), minimum conventionnel par coefficient, droits acquis (congés, RTT, 13ème mois).",
+        "Maîtrise des délais critiques : collecte variables terminée D-3, validation complète D-1, production bulletins J-1, mise à disposition salariés minuit J0. ​"
+       ]
+      },
+      {
+       "titre": "Connaissance approfondie de la réglementation sociale et fiscale applicable",
+       "points": [
+        "Application précise des spécificités conventionnelles : grille classification/coeff, minimums garantis, primes obligatoires (panier, 13ème mois, prime ancienneté), majorations heures nuit/dimanche/férié.",
+        "Calcul exact des cotisations et exonérations : seuils exonération cotisations (contrats aidés, apprentis), allégements ZFU/QPV, réductions Fillon remplacées, cotisations spécifiques (mutuelle obligatoire 50% employeur).",
+        "Gestion des cas particuliers fréquents : interruption maladie non indemnisée (maintien salaire après carence), congé maternité (indemnités journalières SS + complément employeur), rupture conventionnelle (indemnité spécifique légale/conventionnelle).",
+        "Compréhension des impacts fiscaux : impôt à la source (prélèvement taux effectif/libre), exonérations fiscales primes (intéressement, participation, PEE), attestations fiscales annuelles. ​"
+       ]
+      },
+      {
+       "titre": "Supervision de la production et contrôles qualité dans les SIRH",
+       "points": [
+        "Utilisation des fonctionnalités contrôle Eurecia/SILAE : lettrage automatique anomalies (heures impossibles, cotisations aberrantes), exports pré-production Excel, simulations bulletins test.",
+        "Mise en place protocoles validation : contrôle 100% anomalies signalées, échantillonnage 10% bulletins aléatoires, double vérification primes exceptionnelles, validation finale N+1.",
+        "Gestion des corrections post-production : anomalies détectées après envoi (erreur collective primes, recalcul cotisations), procédure virement complémentaire, DUE rectificative.",
+        "Connaissance procédures archivage légal : conservation bulletins 5 ans, accès salarié instantané portail SIRH, transmission justificatifs URSSAF sur demande. ​"
+       ]
+      },
+      {
+       "titre": "Conformité déclarations sociales et fiscales et posture responsable",
+       "points": [
+        "Maîtrise DSN mensuelle : N-1 S-3, contrôles bloquants SILAE/Eurecia, annexes spécifiques (DPAE, arrêts longue maladie), pénalités retard (0,2%/jour).",
+        "Production attestations employeur obligatoires : Pôle emploi (Cerfa conforme), mutuelle/prévoyance, vigilance (déclaration annuelle), qualification (Code NAF/ROME).",
+        "Pilotage indicateurs qualité paie : taux erreur bulletins (<1%), satisfaction salariés (sondage annuel >90%), incidents URSSAF (0/an), délais respectés (100%).",
+        "Développement posture responsable : anticipation problèmes récurrents, formation collaborateurs portail paie, communication transparente anomalies, escalade proactif direction."
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    },
+    {
+     "titre": "Module 24 : Digitalisation des processus RH et conformité réglementaire",
+     "bloc": "BC03 – Superviser l’administration du personnel",
+     "formation": "Manager des ressources humaines",
+     "rncp": "",
+     "activite": "A10 – Gestion administrative du personnel (hors paie)",
+     "intervenant": "",
+     "volume": "21 heures",
+     "sequencage": "",
+     "objectif": "1. Élaborer ou améliorer les processus de gestion administrative du personnel (contrats, déclarations sociales, suivi médical, archives) pour l'ensemble de la vie du contrat de travail, en s'appuyant sur les procédures standardisées des organismes extérieurs (URSSAF, Médecine du travail, mutuelles). 2. Assurer la conformité stricte des pratiques administratives avec la législation sociale et la convention collective en vigueur, en identifiant les points de vigilance et les risques de non-conformité les plus fréquents dans les PME/ETI. 3. Optimiser les circuits RH numériques pour améliorer le service rendu aux collaborateurs (portail collaborateur, signatures électroniques, suivi en ligne) tout en réduisant les délais et les erreurs manuelles. 4. Maîtriser les outils bureautiques et digitaux RH courants (Teams, SharePoint, Excel, SIRH standards) pour digitaliser les processus administratifs de manière simple, sécurisée et conforme RGPD.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.10"
+     ],
+     "notions_cles": [
+      "Cartographie complète des processus administratifs RH et conformité légale",
+      "Conception de processus digitalisés sécurisés et optimisés",
+      "Rédaction administrative standardisée et conformité obligatoire",
+      "Audit et amélioration continue des processus administratifs"
+     ],
+     "programme": [
+      {
+       "titre": "Cartographie complète des processus administratifs RH et conformité légale",
+       "points": [
+        "Identification exhaustive des processus administratifs couvrant toute la vie du contrat : pré-embauche (promesse d'embauche, DPI), entrée (contrat CDI/CDD, visite médicale, immatriculation), vie du contrat (avenants, congés, attestations diverses, DUE), sortie (solde de tout compte, attestation Pôle emploi, certificat travail).",
+        "Maîtrise des obligations légales par étape : pièces justificatives obligatoires (identité, diplôme, KBIS), mentions obligatoires contrats (salaire, durée, période essai), délais URSSAF (DPAE 24h avant, DUE 30 jours après), spécificités convention collective.",
+        "Compréhension des interactions avec organismes externes : URSSAF (DPAE, attestation vigilance), Médecine du travail (visite d'info mutuelle), CPAM (déclarations accidents), avec calendrier des échéances critiques.",
+        "Connaissance des sanctions encourues : absence DPAE (amende 750€), contrat non conforme (nullité, requalification), retard DUE (pénalités journalières). ​"
+       ]
+      },
+      {
+       "titre": "Conception de processus digitalisés sécurisés et optimisés",
+       "points": [
+        "Structuration des circuits numériques adaptés PME/ETI : dossiers candidats digitalisés (Teams/SharePoint), contrats électroniques conformes (signature Yousign/DocuSign ou scan certifié), workflow validation N+1 (Power Automate gratuit ou Excel partagé).",
+        "Mise en place de procédures de contrôle qualité administrative : double vérification contrats (checklist 20 points), audit trimestriel dossiers entrants (échantillon 10%), traçabilité numérique (historique modifications Word track changes).",
+        "Optimisation service collaborateurs : portail collaborateur SIRH (Eurecia/SILAE demandes congés en ligne), FAQ administrative Teams, kit onboarding digital (liens contrats/attestations un clic).",
+        "Sécurisation juridique : archivage légal 5 ans contrats/historique paie (SharePoint dossiers sécurisés), sauvegarde externe hebdomadaire, accès restreint par rôle (RH uniquement contrats actifs). ​"
+       ]
+      },
+      {
+       "titre": "Rédaction administrative standardisée et conformité obligatoire",
+       "points": [
+        "Maîtrise des modèles officiels contrats CDI/CDD (cerfa URSSAF, mentions légales 18 points Code du travail), avenants salaire/horaires (format légal inchangé), promesses embauche conditionnelles.",
+        "Rédaction attestations conformes : Pôle emploi (modèle Cerfa), employeur mutuelle/prévoyance, vigilance (attestation annuelle), travail (modèle URSSAF), avec mentions obligatoires précises.",
+        "Gestion DUE digitalisée : logiciel SILAE/Eurecia automatique ou Excel modèle URSSAF validé, transmission sécurisée destinataires (salarié, Pôle emploi, caisse retraite).",
+        "Adaptation convention collective : clauses spécifiques (primes, durée travail, repos compensateurs), grille classification, annexes sectorielles critiques PME. ​"
+       ]
+      },
+      {
+       "titre": "Audit et amélioration continue des processus administratifs",
+       "points": [
+        "Méthodologie audit simple : checklist 50 points (conformité contrats 20pts, délais 10pts, archivage 10pts, service 10pts), fréquence trimestrielle échantillon 20 dossiers.",
+        "Indicateurs pilotage : taux conformité contrats (95% objectif), délai DPAE (100% <24h), satisfaction service (sondage Forms trimestriel >80%), incidents URSSAF (0/mois).",
+        "Actions correctives standardisées : formation ciblée non-conformité récurrente, refonte process défaillant, procédure d'escalade N+2 urgence légale.",
+        "Reporting direction : synthèse trimestrielle 1 page (audit résultats, 3 actions prioritaires, échéances critiques suivantes), avec focus risques juridiques majeurs."
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    },
+    {
+     "titre": "Module 25 : Instances représentatives et climat social digital",
+     "bloc": "BC04 – Piloter le dialogue social et la communication RH",
+     "formation": "Manager des ressources humaines",
+     "rncp": "",
+     "activite": "A11 – Conduite du dialogue social",
+     "intervenant": "",
+     "volume": "24,5 heures",
+     "sequencage": "",
+     "objectif": "1) Comprendre le rôle et le fonctionnement des instances représentatives du personnel (IRP) en environnement numérique. 2) Maîtriser la réglementation sociale applicable aux IRP, intégrant les spécificités du dialogue social digitalisé. 3) Analyser la dynamique sociale et anticiper les tensions dans un contexte digital. 4) Utiliser les outils numériques et collaboratifs pour gérer et communiquer avec les IRP, en favorisant un climat social apaisé et constructif.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.11"
+     ],
+     "notions_cles": [
+      "Fondements des instances représentatives du personnel",
+      "Enjeux et spécificités du climat social digital",
+      "Préparation et animation efficace des réunions IRP",
+      "Outils digitaux pour une gestion administrative IRP fluide",
+      "Analyse climat social et gestion tensions préventives"
+     ],
+     "programme": [
+      {
+       "titre": "Fondements des instances représentatives du personnel",
+       "points": [
+        "Organisation, types et rôles/attributions des IRP : comité social et économique (CSE), délégués syndicaux, CHSCT, autres.",
+        "Cadre légal et réglementaire applicable, notamment avec les évolutions récentes (ordonnances, lois Travail).",
+        "Processus électoral complet : calendrier légal (tous les 4 ans), rôle commission électorale, scrutin majoritaire proportionnel, élection secrétaire DP/CSE, moyens accordés (heures délégation, locaux).",
+        "Droits, devoirs et responsabilités des acteurs du dialogue social.",
+        "Atelier pratique : simulation organisation élections CSE PME 80 salariés (dossier candidature, bulletin vote, dépouillement, PV résultats)."
+       ]
+      },
+      {
+       "titre": "Enjeux et spécificités du climat social digital",
+       "points": [
+        "Réglementation sociale et veille juridique appliquée aux IRP",
+        "Impact du digital sur la relation entre IRP et salariés : nouveaux modes de communication, consultation électronique, télétravail.",
+        "Outils numériques de communication et gestion des instances : plateformes collaboratives, réunions hybrides, vote électronique.",
+        "Prévention et gestion des conflits en environnement digital."
+       ]
+      },
+      {
+       "titre": "Préparation et animation efficace des réunions IRP",
+       "points": [
+        "Construction ordre du jour cohérent : 50% obligations légales (consultations imposées), 30% actualité sociale (QVCT, égalité pro), 20% projets futurs (RSE, télétravail), avec convocation 15 jours minimum.",
+        "Préparation supports RH : rapports chiffrés simples Excel (absentéisme par service, turnover, budget activités sociales), graphiques Canva lisibles, projets détaillés Teams.",
+        "Techniques animation constructive : cadrage temps (2h max), prise parole alternée, reformulation systématique positions (\"Si je résume, la DP considère que...\"), recherche compromis terrain.",
+        "Jeu de rôle guidé : réunion CSE 90 min sur sujet réel (nouveau télétravail hybride), rôles alternés (président, secrétaire, RH, délégués métiers), feedback posture/chronométrage."
+       ]
+      },
+      {
+       "titre": "Outils digitaux pour une gestion administrative IRP fluide",
+       "points": [
+        "Organisation réunions hybrides : Teams/Zoom (salles breakout DP/commission), partage documents sécurisé SharePoint, sondages Forms pré-réunion (attentes délégués).",
+        "Suivi PV et décisions : canaux Teams dédiés CSE (\"PV réunion mars\", \"Décisions suivies\"), tableaux Excel partagé (action, responsable, échéance, statut).",
+        "Communication quotidienne délégués : messagerie Teams dédiée (questions urgentes), calendrier Outlook partagé réunions/consultations, portail SIRH accès délégués (statistiques sociales).",
+        "Sécurisation et confidentialité des échanges électroniques.",
+        "Atelier numérique : création canal Teams CSE complet (canaux PV/suivi/réunions, calendrier 6 mois, tableau Excel décisions, 3 modèles mail convocation)."
+       ]
+      },
+      {
+       "titre": "Analyse climat social et gestion tensions préventives",
+       "points": [
+        "Indicateurs simples climat social : participation réunions CSE (>70%), taux réponse sondages délégués, délais respectés décisions, conflits signalés (nb/mois), satisfaction sociale (baromètre annuel).",
+        "Signaux d'alerte précoces : hausse absentéisme ciblé, turnover explicite, plaintes récurrentes délégués, chute participation activités sociales.",
+        "Techniques désamorçage : consultations informelles CSE avant crise, médiation tripartite (salarié-manager-RH), transparence chiffres (\"voici nos contraintes budgétaires\").",
+        "Restitution : kit gestion CSE PME (dossier électoral, modèles réunion, canal Teams, 5 indicateurs climat, procédure tension), présentation 10 min + simulation question piège."
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    },
+    {
+     "titre": "Module 26 : Dialogue social responsable et valorisation RSE",
+     "bloc": "BC04 – Piloter le dialogue social et la communication RH",
+     "formation": "Manager des ressources humaines",
+     "rncp": "",
+     "activite": "A12 – Conduite du dialogue social",
+     "intervenant": "",
+     "volume": "14 heures",
+     "sequencage": "",
+     "objectif": "1. Favoriser un dialogue social orienté vers la responsabilité sociétale de l'entreprise en identifiant les attentes communes entre direction, représentants du personnel et salariés sur les enjeux RSE, pour construire des positions partagées viables à long terme. 2. Intégrer les enjeux RSE dans les relations sociales quotidiennes de l'entreprise, en traduisant les grandes orientations stratégiques (transition écologique, inclusion, équité) en actions concrètes discutées et co-construites avec les instances représentatives. 3. Développer des actions durables pour améliorer le climat social, en s'appuyant sur des méthodologies participatives simples qui valorisent les contributions des salariés et renforcent la légitimité de la fonction RH comme facilitatrice du dialogue. 4. Mesurer l'impact des pratiques de dialogue social responsable sur la perception RSE de l'entreprise et ajuster les approches en fonction des retours terrain et des indicateurs de climat social.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.11"
+     ],
+     "notions_cles": [
+      "Fondements et enjeux du dialogue social responsable en PME/ETI",
+      "Intégrer la RSE dans les réunions et échanges sociaux quotidiens",
+      "Construire des actions RSE co-décidées et mesurables",
+      "Mesurer l'impact et capitaliser les bonnes pratiques dialogue RSE"
+     ],
+     "programme": [
+      {
+       "titre": "Fondements et enjeux du dialogue social responsable en PME/ETI",
+       "points": [
+        "Rappel des instances représentatives et de leurs attributions RSE : rôle du CSE dans la santé/sécurité, égalité pro, QVCT, avec focus sur les obligations renforcées depuis les ordonnances Macron et la loi climat.",
+        "Analyse des attentes croisées : direction (performance durable), représentants (amélioration conditions travail), salariés (sens, équité, impact sociétal), avec exemples concrets PME (télétravail équitable, prime verte, inclusion handicap).",
+        "Enjeux actuels dialogue social RSE : tensions greenwashing vs actions concrètes, rôle RH facilitateur neutre, articulation dialogue social/négociations annuelles obligatoires (NAO RSE).",
+        "Atelier diagnostic : chaque apprenant cartographie les 3 principaux enjeux RSE discutés dans son entreprise (ou secteur) et identifie les positions des 3 parties prenantes. ​"
+       ]
+      },
+      {
+       "titre": "Intégrer la RSE dans les réunions et échanges sociaux quotidiens",
+       "points": [
+        "Préparation de réunions CSE RSE : ordre du jour co-construit (2 sujets prioritaires/mois), supports visuels simples (Excel graphiques, Canva infographies), questions ouvertes neutres.",
+        "Techniques d’animation neutre : reformulation des positions (\"Si je comprends bien, vous proposez...\"), recherche d’un terrain commun (\"Quels exemples terrain valident cette approche ?\"), chronométrage équitable.",
+        "Sujets RSE prioritaires PME : télétravail équitable (équipements, santé), égalité salariale (transparence anonymisée), insertion alternants/contrats courts, réduction déchets RH (impressions, déplacements).",
+        "Simulation guidée : préparation + animation 20 min réunion CSE sur sujet réel (\"équipements télétravail équitables\"), feedback posture facilitatrice. ​"
+       ]
+      },
+      {
+       "titre": "Construire des actions RSE co-décidées et mesurables",
+       "points": [
+        "Méthode d’actions SMART RSE sociales : Spécifique (prime verte précise), Mesurable (nb bénéficiaires), Accessible (tous services), Réaliste (budget PME), Temporel (trimestre).",
+        "Outils de suivi : tableau Excel partagé CSE (action, responsable, budget, échéance, indicateur), calendrier Outlook récurrent, photos avant/après Canva.",
+        "Communication des résultats : mini-rapport trimestriel 2 pages (3 actions réussies, 3 leçons, 3 prochaines), affichage résultats CSE, Teams canal dédié.",
+        "Atelier co-construction : chaque binôme définit 3 actions RSE sociales SMART pour PME fictive (budget 5000€), avec tableau suivi + mockup communication résultats. ​"
+       ]
+      },
+      {
+       "titre": "Mesurer l'impact et capitaliser les bonnes pratiques dialogue RSE",
+       "points": [
+        "Indicateurs accessibles du climat social RSE : participation réunions CSE (taux présence), satisfaction actions (sondage Forms anonyme), conflits sociaux liés RSE (nb/mois), engagement salariés (eNPS RSE).",
+        "Retours qualitatifs : débrief post-réunion CSE (1 point fort, 1 à améliorer), entretiens informels représentants/salariés, veille réseaux sociaux internes.",
+        "Amélioration continue : ajustement quarterly pratiques selon retours, capitalisation 1 fiche par action réussie (problème, solution, impact, réplicabilité).",
+        "Restitution : chaque groupe présente son \"kit dialogue RSE PME\" (diagnostic, 3 actions, tableau suivi, 3 indicateurs, fiche capitalisation), 7 min + questions CSE simulées."
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    },
+    {
+     "titre": "Module 27 : Marketing RH digital et marque employeur responsable",
+     "bloc": "BC04 – Piloter le dialogue social et la communication RH",
+     "formation": "Manager des ressources humaines",
+     "rncp": "",
+     "activite": "A12 Communication RH externe",
+     "intervenant": "",
+     "volume": "21 heures",
+     "sequencage": "",
+     "objectif": "1) Définir et encadrer la marque employeur en cohérence avec la stratégie RH globale et la démarche RSE de l’entreprise. 2) Utiliser les outils digitaux et les techniques de marketing RH pour valoriser l’attractivité et la réputation de l’organisation. 3) Intégrer les valeurs RSE et les principes d’inclusivité dans la communication employeur. 4) Concevoir et piloter des campagnes de marketing RH responsables adaptées aux cibles internes et externes.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.12"
+     ],
+     "notions_cles": [
+      "Comprendre les concepts et enjeux de la marque employeur en contexte RSE",
+      "Définir l'identité marque employeur et son positionnement RSE",
+      "Stratégies et outils digitaux pour déployer la marque employeur",
+      "Mesure d'impact et amélioration continue de l'e-reputation"
+     ],
+     "programme": [
+      {
+       "titre": "Comprendre les concepts et enjeux de la marque employeur en contexte RSE",
+       "points": [
+        "Définition claire de la marque employeur : ce que les candidats et collaborateurs perçoivent de l'entreprise comme employeur (culture, valeurs, quotidien, évolution), au-delà du produit ou service vendu.",
+        "Analyse des enjeux actuels pour les PME/ETI : concurrence accrue sur les talents, attentes fortes des nouvelles générations sur sens/projet, transparence exigée par les réseaux sociaux, intégration RSE comme critère de choix majeur.",
+        "Cartographie des publics cibles : candidats actifs/passifs par métier/niveau, collaborateurs actuels (ambassadeurs), alumni (retours possibles), avec leurs sources d'information privilégiées (LinkedIn, site carrière, bouche-à-oreille).",
+        "Atelier diagnostic : chaque apprenant analyse la marque employeur actuelle de son entreprise d'alternance (3 forces, 3 faiblesses perçues, 3 attentes non satisfaites) à partir d'entretiens informels ou avis Glassdoor/Indeed. ​"
+       ]
+      },
+      {
+       "titre": "Définir l'identité marque employeur et son positionnement RSE",
+       "points": [
+        "Méthode simple de définition : 5 valeurs clés (ex: proximité, innovation responsable, équité, agilité, engagement collectif), 1 promesse employeur unique (\"chez nous, vous évoluez au rythme de vos ambitions\"), 3 preuves concrètes (témoignages, chiffres évolution interne, actions RSE).",
+        "Intégration RSE authentique : choix d'1-2 engagements forts et mesurables (insertion jeunes, égalité femmes/hommes, réduction empreinte carbone RH, économie solidaire), avec preuves visibles (chiffres, photos actions).",
+        "Création baseline et tone of voice : phrase impactante courte (ex: \"Rejoignez une équipe qui a du sens\"), langage accessible/authentique (pas de jargon corporate), visuels cohérents (photos équipes terrain, pas de stock photos).",
+        "Atelier création : chaque binôme définit identité marque employeur pour son alternance (5 valeurs, 1 promesse, 3 preuves RSE, baseline), avec mockup visuel Canva simple. ​"
+       ]
+      },
+      {
+       "titre": "Stratégies et outils digitaux pour déployer la marque employeur",
+       "points": [
+        "Canaux prioritaires PME/ETI : LinkedIn entreprise/équipes (posts hebdo, stories), site carrière optimisé (3 pages max: qui nous sommes, métiers ouverts, rejoindre), Google My Business (avis locaux), réseaux personnels recruteurs.",
+        "Contenus engageants simples : portraits collaborateurs (\"1 semaine avec Marie, chargée production\"), process recrutement transparent (\"5 étapes pour nous rejoindre\"), focus RSE (\"nos actions concret 2025\"), événements virtuels (afterworks métiers).",
+        "Bonnes pratiques publication : régularité (2 posts/semaine), formats courts (texte 100 mots max, visuel 80% surface), hashtags ciblés (#RHResponsable #PMEquiRecrute #Alternance), réponses commentaires sous 24h.",
+        "Atelier pratique : création 3 posts LinkedIn types (portrait, process, RSE) avec Canva gratuit + calendrier éditorial 1 mois, publication test page entreprise fictive. ​"
+       ]
+      },
+      {
+       "titre": "Mesure d'impact et amélioration continue de l'e-reputation",
+       "points": [
+        "Indicateurs accessibles : nombre vues/impressions posts, taux engagement (clics/partages), candidatures spontanées, temps recrutement moyen, notes Glassdoor/Indeed, trafic site carrière.",
+        "Outils gratuits suivi : LinkedIn Analytics natif, Google Analytics site carrière, Excel suivi KPI mensuels, sondages candidats (\"Comment nous avez-vous connus ?\").",
+        "Gestion e-reputation : réponse systématique avis négatifs (excuses sincères + actions), amplification positifs (reposts internes), veille alertes Google.",
+        "Restitution : chaque groupe présente plan marque employeur complet (identité, 6 contenus, calendrier, 5 KPI, budget 0€), avec démo LinkedIn live + benchmark concurrent local."
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    },
+    {
+     "titre": "Module 28 : Outils de communication interne hybrides et réseaux sociaux",
+     "bloc": "BC04 – Piloter le dialogue social et la communication RH",
+     "formation": "Manager des ressources humaines",
+     "rncp": "",
+     "activite": "A13 – Communication RH interne",
+     "intervenant": "",
+     "volume": "14 heures",
+     "sequencage": "",
+     "objectif": "1. Structurer un circuit de communication RH interne adapté aux environnements hybrides présentiel-distanciel, en combinant intelligemment les canaux physiques et numériques selon les publics et les messages. 2. Maîtriser l'usage des canaux digitaux phygitaux (intranet, réseaux sociaux d'entreprise, événements, outils collaboratifs, SIRH) pour diffuser efficacement les informations RH tout en respectant la réglementation sociale en vigueur. 3. Promouvoir la mutualisation des informations et la création de valeur au sein des équipes grâce à une communication fluide, inclusive et engageante qui favorise l'appropriation des politiques RH. 4. Animer des communautés internes et développer des pratiques collaboratives numériques qui renforcent le lien social et la compréhension mutuelle dans des organisations hybrides.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.13"
+     ],
+     "notions_cles": [
+      "Fondements de la communication interne hybride et identification des publics",
+      "Maîtrise des outils numériques RH courants pour une communication efficace",
+      "Respect de la réglementation et bonnes pratiques de gouvernance communication",
+      "Mesure d'impact et amélioration continue de la communication RH"
+     ],
+     "programme": [
+      {
+       "titre": "Fondements de la communication interne hybride et identification des publics",
+       "points": [
+        "Présentation des enjeux spécifiques de la communication RH en contexte hybride : maintien du lien social malgré la distance, adaptation des messages aux contraintes terrain, équilibre information descendante/montante, respect des différences générationnelles et culturelles.",
+        "Cartographie détaillée des publics internes RH : managers opérationnels (besoin d'info rapide/actionnable), équipes terrain (langage simple/concret), fonctions support (détails process), direction (synthèses stratégiques), avec leurs préférences canal par type de message.",
+        "Typologie des canaux phygitaux complémentaires : affichage physique stratégique (pauses café, réfectoires), événements hybrides (réunions Teams + présentiel), communications numériques (Teams, intranet, mail ciblé).",
+        "Atelier cartographie : chaque apprenant identifie ses 5 publics prioritaires en alternance et assigne à chaque public 3 canaux préférentiels selon le type d'info RH (recrutement, formation, paie, QVCT). ​"
+       ]
+      },
+      {
+       "titre": "Maîtrise des outils numériques RH courants pour une communication efficace",
+       "points": [
+        "Découverte guidée des fonctionnalités communication des outils déjà présents en entreprise : canaux Teams dédiés RH (actualités, Q&R, sondages), pages SharePoint intranet RH, Yammer/Viva Engage pour échanges informels, actualités SIRH (Eurecia/Lucca).",
+        "Bonnes pratiques de publication RH : titre accrocheur concret (\"Congés 2026 : 3 changements à connaître\"), visuels simples (infographies Canva), durée de vie limitée des messages, appel à l'action clair, lien vers détail.",
+        "Techniques d'animation de communautés : questions ouvertes hebdomadaires (\"Quel est votre + gros frein formation ?\"), sondages engageants (3 options max), partages de success stories terrain, remerciements nominatifs.",
+        "Atelier pratique : création d'un message RH type (nouveau process paie) adapté à 3 publics différents, publié sur canal Teams fictif avec sondage intégré et visuel Canva. ​"
+       ]
+      },
+      {
+       "titre": "Respect de la réglementation et bonnes pratiques de gouvernance communication",
+       "points": [
+        "Rappel RGPD communication interne : consentement sondages, anonymisation retours, durée conservation commentaires, droits des personnes sur leurs données partagées.",
+        "Charte d'usage simple des outils collaboratifs : validation contenus sensibles par N+1, modération commentaires, effacement automatique des messages périmés, traçabilité publications critiques.",
+        "Gestion des situations sensibles : communication crise (conflit social, restructuration), bad news (suppression avantage), sujets clivants (télétravail, égalité salariale).",
+        "Simulation guidée : rédaction message crise \"retard paie exceptionnel\" pour 3 canaux (mail direction, Teams général, affichage), avec vérification conformité par pairs. ​"
+       ]
+      },
+      {
+       "titre": "Mesure d'impact et amélioration continue de la communication RH",
+       "points": [
+        "Indicateurs simples d'efficacité : taux ouverture mail/Teams, participation sondages, commentaires positifs/négatifs, demandes de précision post-communication, retours informels.",
+        "Outils gratuits de suivi : stats intégrées Teams/Forms, tableaux Excel suivi indicateurs, sondages satisfaction communication trimestriels.",
+        "Méthode d'amélioration : analyse mensuelle 3 messages phares (succès/échecs), ajustement canaux/fréquence selon retours, test A/B formats sur petits groupes.",
+        "Restitution : chaque binôme présente son plan communication RH 1 mois (5 messages prévus, canaux, indicateurs, calendrier), avec démo publication Teams live."
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    },
+    {
+     "titre": "Module 29 : Méthodes de recueil terrain et posture managériale",
+     "bloc": "BC04 – Piloter le dialogue social et la communication RH",
+     "formation": "Manager des ressources humaines",
+     "rncp": "",
+     "activite": "A14 – Accompagnement des managers et déploiement de la relation de proximité",
+     "intervenant": "",
+     "volume": "28 heures",
+     "sequencage": "",
+     "objectif": "1) Mettre en place un dispositif de recueil et traitement des problématiques RH rencontrées sur le terrain. 2) Adopter une posture de proximité et de service auprès des opérationnels et des managers. 3) Accompagner les managers dans la mise en œuvre de la politique RH et dans leur rôle de relais terrain. 4) Favoriser l’intelligence collective et la résilience organisationnelle au travers d’actions de communication et de capitalisation.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.14"
+     ],
+     "notions_cles": [
+      "Comprendre les attentes et besoins des managers opérationnels RH",
+      "Concevoir un dispositif de recueil terrain adapté et réaliste",
+      "Développer la posture de service et de facilitateur RH",
+      "Transformer les remontées terrain en actions et en apprentissages"
+     ],
+     "programme": [
+      {
+       "titre": "Comprendre les attentes et besoins des managers opérationnels RH",
+       "points": [
+        "Cartographie des principaux “clients internes” RH selon la taille d’entreprise : managers de production, chefs d’équipe terrain, responsables administratifs, services support, avec leurs attentes spécifiques (recrutement rapide, gestion des absences, formation métier, conflits d’équipe).",
+        "Analyse des moments critiques où les managers ont besoin du soutien RH : pics d’activité saisonniers, turnovers importants, intégrations urgentes, problèmes disciplinaires, changements d’organisation.",
+        "Identification des freins fréquents à la relation RH-managers : jargon RH, lenteur des process, manque de compréhension des contraintes terrain, sentiment de “petits chefs” du côté des managers.",
+        "Atelier de cartographie : chaque apprenant dessine le réseau de ses interlocuteurs clés dans son entreprise d’alternance et liste leurs 3 principales demandes RH actuelles. ​"
+       ]
+      },
+      {
+       "titre": "Concevoir un dispositif de recueil terrain adapté et réaliste",
+       "points": [
+        "Méthodes de collecte simples et complémentaires : points réguliers informels (café hebdo, déjeuners managers), permanences RH ouvertes, formulaires courts en ligne (Teams Forms, Google Forms), réunions ciblées post-événement critique.",
+        "Construction d’un calendrier de proximité réaliste : fréquence adaptée à la taille (quotidien PME, hebdo ETI), durée courte (15-30 min), lieux accessibles (atelier, pause-café, Teams rapide).",
+        "Outils gratuits pour organiser le recueil : calendriers partagés Outlook/Google, notes structurées Excel/Word, tableaux de suivi Teams, formulaires simples avec 5 questions maximum.",
+        "Atelier pratique : création d’un formulaire de recueil terrain 5 questions (problématique urgente, impact business, délai souhaité, niveau de priorité) et d’un calendrier type sur 1 mois. ​"
+       ]
+      },
+      {
+       "titre": "Développer la posture de service et de facilitateur RH",
+       "points": [
+        "Les 5 piliers de la posture de proximité : écoute active sans jugement, reformulation pour vérifier compréhension, empathie face aux contraintes terrain, proactivité dans les solutions, suivi systématique des actions promises.",
+        "Techniques de communication terrain : questions ouvertes (“Qu’est-ce qui bloque le plus ?”), langage concret sans jargon (“temps de recrutement” plutôt que “ATS”), focus sur l’impact business avant les process RH.",
+        "Gestion des demandes impossibles ou non prioritaires : cadrage bienveillant, proposition d’alternatives, escalade transparente vers la direction quand nécessaire.",
+        "Jeu de rôle guidé : simulation d’un échange manager RH sur une demande urgente (remplacement intérim, conflit d’équipe), avec feedback pairs sur la posture adoptée. ​"
+       ]
+      },
+      {
+       "titre": "Transformer les remontées terrain en actions et en apprentissages",
+       "points": [
+        "Tri et priorisation des signalements : matrice urgence/impact, distinction demandes individuelles vs problèmes structurels, consultation rapide avec N+1 si nécessaire.",
+        "Circuit de traitement simple : accusé de réception immédiat, délai de réponse clair (24h réponse, 5 jours solution), suivi systématique avec relance automatique.",
+        "Capitalisation des bonnes pratiques : base Excel partagée des solutions terrain validées, mini-newsletter mensuelle “RH répond”, ateliers retours d’expérience trimestriels.",
+        "Restitution finale : chaque binôme présente son “kit relation de proximité” (formulaire + calendrier + 3 exemples de traitement de demande + fiche posture) en 7 minutes."
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    },
+    {
+     "titre": "Module 11 : Gouvernance et sécurité des données RH (RGPD et éthique)",
+     "bloc": "BC02 – Manager les data, projets et équipes RH",
+     "formation": "Manager des ressources humaines",
+     "rncp": "",
+     "activite": "A5 – Management de la donnée RH",
+     "intervenant": "",
+     "volume": "28 heures",
+     "sequencage": "",
+     "objectif": "1) Comprendre les principes de gouvernance des données RH dans un cadre réglementaire strict, notamment le RGPD. 2) Maîtriser les exigences de sécurité, protection et confidentialité des données personnelles des collaborateurs. 3) Intégrer les enjeux éthiques liés à l’usage des données RH dans une démarche responsable. 4) Mettre en place une politique data-driven responsable pour optimiser la gestion et la protection des données RH.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.5"
+     ],
+     "notions_cles": [
+      "Comprendre le cadre de la gouvernance des données RH et du RGPD",
+      "Sécurité, protection et bonnes pratiques sur les données RH au quotidien",
+      "Enjeux éthiques et usages responsables des données RH",
+      "Construire un mini‑plan de gouvernance des données RH à son niveau"
+     ],
+     "programme": [
+      {
+       "titre": "Comprendre le cadre de la gouvernance des données RH et du RGPD",
+       "points": [
+        "Rappel clair des notions de base : données personnelles, données sensibles, responsable de traitement, sous‑traitant, durée de conservation, avec exemples très concrets appliqués aux dossiers du personnel, aux entretiens annuels, aux données de paie et aux fichiers Excel RH. ​",
+        "Présentation structurée des grands principes du RGPD adaptés au contexte RH (finalité, minimisation des données, information des salariés, droits d’accès et de rectification, droit à l’oubli) en s’appuyant sur des cas simples de la vie d’un alternant RH (demande de copie de dossier, suppression de CV anciens, etc.). ​",
+        "Introduction à la notion de gouvernance des données RH : qui fait quoi entre la DRH, les managers, l’IT, le DPO, et comment ces acteurs se coordonnent pour éviter les risques de fuite ou de mauvaise utilisation des informations. ​",
+        "Atelier en demi‑groupes : à partir d’un schéma d’organisation type, les apprenants placent les différents acteurs (RH, managers, DPO, IT) et décrivent, avec des mots simples, leurs responsabilités principales en matière de données RH (qui collecte, qui décide, qui contrôle). ​"
+       ]
+      },
+      {
+       "titre": "Sécurité, protection et bonnes pratiques sur les données RH au quotidien",
+       "points": [
+        "Identification des situations à risques les plus fréquentes dans les services RH : fichiers partagés sans mot de passe, documents envoyés à une mauvaise personne, impressions abandonnées en salle de réunion, stockage sur clé USB personnelle, etc., et discussion sur les conséquences possibles. ​",
+        "Présentation des gestes de sécurité simples et réalistes dans un environnement d’apprentis : utilisation de mots de passe robustes et non partagés, activation de la double authentification lorsque c’est possible, verrouillage de session, limitation des fichiers RH sur supports non sécurisés, utilisation de versions “restreintes” dans Teams ou SharePoint. ​",
+        "Illustration des bonnes pratiques de partage d’informations RH : choix du bon canal (mail, Teams, SharePoint), contrôle des destinataires, utilisation de droits d’accès limités, suppression des fichiers obsolètes, en privilégiant les outils disponibles gratuitement ou déjà présents dans les entreprises (Office 365, Google Workspace). ​",
+        "Atelier pratique : à partir d’une mini‑étude de cas (incident de fichier de paie envoyé à un mauvais destinataire, capture d’écran d’un SIRH partagée sans anonymisation), les apprenants identifient ce qui pose problème, proposent des mesures de prévention simples et rédigent une courte consigne de “bonne pratique” sous forme de phrase claire. ​"
+       ]
+      },
+      {
+       "titre": "Enjeux éthiques et usages responsables des données RH",
+       "points": [
+        "Discussion guidée sur les questions éthiques liées à l’usage des données : jusqu’où peut‑on aller dans le suivi des absences, de la performance, du temps passé sur certains outils, sans tomber dans la surveillance, avec exemples concrets (tableaux de suivi de connexion, indicateurs de productivité par personne). ​",
+        "Mise en lumière des risques de biais et de discrimination involontaire lorsque l’on utilise des indicateurs ou des algorithmes, même simples : par exemple, interprétation trop rapide de chiffres liés à un service, confusion entre corrélation et causalité, stigmatisation de certains profils. ​<br)c) Travail sur la transparence vis‑à‑vis des collaborateurs : comment expliquer les suivis mis en place, quels types d’informations doivent être partagés (ou non), comment rassurer sur l’usage qui est fait des données, en particulier dans un contexte d’augmentation des outils digitaux. ​",
+        "Atelier en petits groupes : chaque groupe reçoit un scénario (mise en place d’un suivi détaillé des retards, utilisation d’un questionnaire bien‑être, analyse fine des résultats d’entretiens annuels) et doit répondre à trois questions : quelles données sont vraiment nécessaires, comment les présenter de manière respectueuse, et que dire aux salariés pour être transparent. ​"
+       ]
+      },
+      {
+       "titre": "Construire un mini‑plan de gouvernance des données RH à son niveau",
+       "points": [
+        "Identification des principaux “moments de vie” des données RH : collecte (recrutement, intégration), mise à jour (changement de poste, formation), consultation (manager, RH), archivage et suppression (départ, fin de conservation), avec un schéma simple appliqué à une PME ou ETI. ​",
+        "Travail sur quelques règles internes de base : qui peut consulter quels types de dossiers, combien de temps conserver certains documents, que faire lorsqu’un alternant quitte l’entreprise (accès, fichiers, mails), en se basant sur des recommandations générales et sur le bon sens organisationnel. ​",
+        "Mise en lien avec la stratégie RH data‑driven (module 12) : montrer qu’une bonne gouvernance n’est pas là pour empêcher l’usage des données mais pour le rendre possible de manière sécurisée et responsable, en mettant l’accent sur la traçabilité et la clarté des règles plutôt que sur la technicité. ​",
+        "Restitution en fin de module : chaque binôme produit un mini‑plan de gouvernance très opérationnel sur un périmètre limité (par exemple “gestion des dossiers du personnel au format numérique”), composé de quelques règles écrites, d’un schéma de flux simple et d’une liste de points de vigilance, puis le présente en 5 minutes au groupe."
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    },
+    {
+     "titre": "Module 12 : Stratégie RH data-driven et outils digitaux",
+     "bloc": "BC02 – Manager les data, projets et équipes RH",
+     "formation": "Manager des ressources humaines",
+     "rncp": "",
+     "activite": "A5 – Management de la donnée RH",
+     "intervenant": "",
+     "volume": "17,5 heures",
+     "sequencage": "",
+     "objectif": "1. Comprendre ce que signifie une stratégie RH “data‑Driven” et en quoi l’utilisation structurée des données change la manière de décider en RH, du quotidien opérationnel jusqu’aux choix plus stratégiques. 2. Identifier les principaux outils digitaux et SIRH utilisés en entreprise (Eurecia, Lucca, Talentsoft, exports Excel…) et savoir comment ils contribuent concrètement à cette stratégie basée sur les données. 3. Savoir relier les enjeux de transformation digitale des organisations aux pratiques RH courantes (recrutement, formation, gestion des temps, QVCT) afin de repérer des opportunités simples d’amélioration. 4. Commencer à piloter la performance RH à partir d’un petit nombre d’indicateurs essentiels, présentés sous une forme claire et accessible, sans entrer dans des techniques d’Analytics trop complexes.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.5"
+     ],
+     "notions_cles": [
+      "Comprendre la logique d’une stratégie RH data-Driven",
+      "Panorama des outils digitaux RH courants et rôle des SIRH",
+      "Premières techniques d’analyse et d’interprétation de données RH",
+      "Cas d’usage concrets et mini-projet de stratégie RH data-driven"
+     ],
+     "programme": [
+      {
+       "titre": "Comprendre la logique d’une stratégie RH data-Driven",
+       "points": [
+        "Clarification pas à pas de la notion de “RH guidée par les données” : différence entre décisions prises uniquement à l’intuition et décisions appuyées sur des éléments chiffrés simples (taux de turnover, absentéisme, temps de recrutement), avec exemples concrets de situations rencontrées par des apprentis en entreprise.",
+        "Mise en évidence des bénéfices pour la fonction RH et pour les managers : capacité à objectiver les problèmes, à suivre l’effet d’une action (par exemple un plan d’intégration ou une nouvelle politique de télétravail), et à dialoguer plus facilement avec la direction en s’appuyant sur quelques indicateurs partagés.",
+        "Travail sur la “culture data” dans les équipes RH : repérer les freins les plus fréquents (peur des chiffres, manque de temps, manque de clarté sur les données disponibles) et les leviers d’appropriation (exemples simples, supports visuels, accompagnement).",
+        "Atelier en sous‑groupes : chaque groupe décrit, à partir d’une situation réelle ou d’un cas fourni, comment une décision RH a été prise, puis reformule la même situation en imaginant ce que l’on aurait pu mesurer pour éclairer cette décision (liste de 5 indicateurs simples).​"
+       ]
+      },
+      {
+       "titre": "Panorama des outils digitaux RH courants et rôle des SIRH",
+       "points": [
+        "Présentation très concrète des principaux types d’outils présents dans les entreprises : SIRH (Eurecia, Lucca, Talentsoft), logiciels de paie, outils de gestion des temps, plateformes de formation et outils de sondage internes, en insistant sur ce que chacun peut fournir comme données utiles pour les RH.",
+        "Exploration guidée (captures ou démonstrations) de fonctions de base : recherches par filtre, exports de listes vers Excel, consultation d’indicateurs standards (effectifs, absences, suivi des entretiens, budget formation consommé) sans entrer dans des paramétrages complexes.",
+        "Mise en évidence de la nécessité de relier ces outils entre eux au moins “dans la tête” des acteurs RH : même si les logiciels ne sont pas tous interconnectés techniquement, montrer comment croiser les informations (par exemple rapprocher données d’absentéisme et données de charge de formation).",
+        "Atelier pratique : à partir d’un jeu de captures d’écran et d’exports CSV/Excel simulant un SIRH, les apprenants identifient quelles questions concrètes de managers (ex. “pourquoi mon équipe a‑t‑elle tant d’absences ?”) peuvent trouver une première réponse grâce à ces données et listent les extractions nécessaires.​"
+       ]
+      },
+      {
+       "titre": "Premières techniques d’analyse et d’interprétation de données RH",
+       "points": [
+        "Rappel des notions de base indispensables pour analyser des données sans entrer dans la technicité : moyenne, évolution dans le temps, comparaison entre deux services, identification de hausses ou baisses importantes, en les appliquant à des exemples RH simples.",
+        "Utilisation d’Excel ou Google Sheets pour faire ces analyses : tri par service, filtre par période, calcul de pourcentages (taux de turnover, taux d’absentéisme), création de petits tableaux récapitulatifs lisibles pour un manager.",
+        "Lecture de graphiques élémentaires (courbe d’évolution, histogramme comparatif) : apprendre à repérer rapidement les messages principaux (amélioration, dégradation, stabilité) et à formuler une phrase d’interprétation compréhensible pour un non‑spécialiste.",
+        "Cas pratique guidé : à partir d’un fichier anonymisé (effectifs, entrées/sorties, absences par service, données de formation), chaque binôme calcule quelques indicateurs de base et rédige trois phrases d’analyse qui pourraient figurer dans un mail de synthèse adressé à un manager.​"
+       ]
+      },
+      {
+       "titre": "Cas d’usage concrets et mini-projet de stratégie RH data-driven",
+       "points": [
+        "Parcours de plusieurs scénarios d’application à partir du référentiel : recrutement (suivi des candidatures et du délai de recrutement), formation (taux de participation et satisfaction), gestion des talents (suivi des entretiens annuels), fidélisation (turnover par population), en montrant à chaque fois quels indicateurs simples peuvent être mis en place.",
+        "Construction progressive d’une “mini feuille de route data RH” sur un périmètre restreint (par exemple un service ou un site) : choix d’un objectif concret (réduire le turnover, mieux suivre les absences, sécuriser l’intégration), sélection de 5 indicateurs maximum, définition d’une fréquence de suivi réaliste et des destinataires des informations.",
+        "Mise en lien avec les enjeux de transformation digitale et de gouvernance des données vus dans le module 11 : rappeler, avec des mots simples, les règles essentielles de protection des données (RGPD, confidentialité) à respecter lorsque l’on met en place des suivis et des tableaux de bord.",
+        "Restitution en fin de module : chaque groupe présente, en format court, son mini‑projet de stratégie RH data‑driven pour un cas donné (objectif, indicateurs, outils utilisés, fréquence, points de vigilance RGPD), avec un temps de questions/réponses centré sur la faisabilité dans un contexte d’alternance."
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    },
+    {
+     "titre": "Module 13 : SIRH avancé et data analytics RH",
+     "bloc": "BC02 – Manager les data, projets et équipes RH",
+     "formation": "Manager des ressources humaines",
+     "rncp": "",
+     "activite": "A5 – Management de la donnée RH",
+     "intervenant": "",
+     "volume": "17,5 heures",
+     "sequencage": "",
+     "objectif": "1. Maîtriser l'exploration et l'exploitation quotidienne des données disponibles dans les SIRH standards (Eurecia, Lucca, Talentsoft) pour répondre aux besoins opérationnels des managers RH. 2. Apprendre à extraire, nettoyer et structurer simplement les données RH brutes pour créer des analyses exploitables par les équipes métiers sans compétences techniques avancées. 3. Réaliser des analyses statistiques de base (moyennes, tendances, comparaisons) permettant d'identifier rapidement les priorités d'action en recrutement, formation et gestion des talents. 4. Produire des rapports RH clairs et visuels à partir des données SIRH, destinés à être partagés avec les managers opérationnels et la direction via les outils bureautiques courants en entreprise.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.5"
+     ],
+     "notions_cles": [
+      "Découverte et navigation dans les SIRH standards",
+      "Nettoyage et préparation des données RH pratiques",
+      "Analyses statistiques RH essentielles avec Excel",
+      "Production de rapports RH opérationnels et partage"
+     ],
+     "programme": [
+      {
+       "titre": "Découverte et navigation dans les SIRH standards",
+       "points": [
+        "Présentation pratique des interfaces SIRH les plus courants en PME/ETI : Eurecia (tableau de bord global), Lucca (paie et ADH), Talentsoft (gestion talents), avec screenshots et accès démo pour chaque apprenant.",
+        "Identification des données disponibles par module : paie (masse salariale, primes), ADH (absences, congés), formation (CPF consommé, sessions suivies), talents (entretiens annuels, notes).",
+        "Extraction simple des données : exports Excel natifs, filtres avancés, copies d'écran structurées pour rapports rapides.",
+        "Atelier guidé : connexion SIRH démo Eurecia + extraction dataset 100 lignes (absences départementales 12 derniers mois) avec validation qualité immédiate."
+       ]
+      },
+      {
+       "titre": "Nettoyage et préparation des données RH pratiques",
+       "points": [
+        "Diagnostic qualité données SIRH : doublons noms, incohérences statuts, dates mal formatées, valeurs manquantes fréquentes.",
+        "Techniques Excel simples : suppression doublons, remplissage cellules vides (formule SI), tri/filtre multi-critères, conversion texte/chiffres.",
+        "Création de colonnes calculées utiles.",
+        "Atelier pratique : nettoyage complet du dataset absences extrait (avant/après comparatif, checklist 10 points qualité validée par binôme)."
+       ]
+      },
+      {
+       "titre": "Analyses statistiques RH essentielles avec Excel",
+       "points": [
+        "Calculs statistiques descriptives : MOYENNE (absentéisme par service), ECARTYPE (variabilité turnover), MAX/MIN (temps recrutement extrêmes).",
+        "Tableaux croisés dynamiques RH : ventilation absentéisme par service/antériorité/genre, masse salariale par classification, taux promotion.",
+        "Graphiques analytiques prioritaires : évolution turnover 24 mois, comparaison services, histogrammes écarts salariaux.",
+        "Cas concret guidé : analyse turnover service commercial vs production (dataset 200 lignes) avec 5 insights actionnables identifiés."
+       ]
+      },
+      {
+       "titre": "Production de rapports RH opérationnels et partage",
+       "points": [
+        "Structuration rapport standard 2 pages : Executive summary (3 insights clés), graphiques (4 max), recommandations (3 actions SMART).",
+        "Mise en forme professionnelle Excel : couleurs conditionnelles (rouge >15% turnover), mise en page PDF, en-têtes/pieds de page.",
+        "Partage sécurisé Teams/SharePoint : lien Excel modifiable, PDF final, présentation PowerPoint 5 slides.",
+        "Restitution finale : chaque apprenant présente son rapport turnover (5 min + 2 min questions) avec démonstration Excel live."
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    },
+    {
+     "titre": "Module 14 : Visualisation et reporting social interactif",
+     "bloc": "BC02 – Manager les data, projets et équipes RH",
+     "formation": "Manager des ressources humaines",
+     "rncp": "",
+     "activite": "A5 – Management de la donnée RH",
+     "intervenant": "",
+     "volume": "21 heures",
+     "sequencage": "",
+     "objectif": "1. Concevoir des tableaux de bord RH interactifs simples à comprendre et à utiliser par tous les managers, en s'appuyant sur les données disponibles dans les SIRH courants et les outils bureautiques standards. 2. Apprendre à sélectionner et organiser visuellement les indicateurs RH les plus pertinents pour chaque niveau de management (opérationnel, fonctionnel, stratégique) afin de faciliter la prise de décision rapide. 3. Maîtriser les techniques essentielles de mise en forme et de présentation des données RH qui rendent les tableaux de bord lisibles, intuitifs et engageants pour des publics non-spécialistes des données. 4. Développer l'autonomie dans la création, la mise à jour et la personnalisation de tableaux de bord RH adaptés aux besoins concrets des entreprises, en utilisant exclusivement des outils gratuits ou déjà disponibles en entreprise.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.5"
+     ],
+     "notions_cles": [
+      "Sélection et organisation des indicateurs RH essentiels",
+      "Création de tableaux de bord avec Excel et Power BI Service gratuit",
+      "Design et principes de lisibilité pour managers non-data",
+      "Publication, partage et mise à jour des tableaux de bord"
+     ],
+     "programme": [
+      {
+       "titre": "Sélection et organisation des indicateurs RH essentiels",
+       "points": [
+        "Présentation détaillée des 20 indicateurs RH incontournables classés par priorité métier : turnover global et par population (départs volontaires/involontaires), absentéisme (maladie courte/longue durée), masse salariale réelle vs budgétisée, taux de vacance des postes, temps de recrutement, satisfaction formation, eNPS collaborateur.",
+        "Méthode de priorisation adaptée aux différents publics : 5 indicateurs clés pour les managers opérationnels (équipe), 8 pour les responsables fonctionnels (périmètre), 12 pour la direction générale (stratégie globale).",
+        "Organisation logique des données : structure arborescente département/service/équipe, comparaisons temporelles (mois/année glissante), benchmarks internes/externes simples (moyenne entreprise secteur).",
+        "Atelier pratique guidé : à partir d'un fichier Excel anonymisé fourni (données SIRH réelles), chaque apprenant sélectionne et organise ses 8 indicateurs prioritaires selon son domaine RH (recrutement, paie, formation ou QVCT)."
+       ]
+      },
+      {
+       "titre": "Création de tableaux de bord avec Excel et Power BI Service gratuit",
+       "points": [
+        "Préparation des données en Excel : nettoyage basique (suppression doublons, formatage dates, calculs simples SUMIF/COUNTIF), création tableaux croisés dynamiques pour ventilation département/service/antériorité.",
+        "Premiers graphiques impactants : courbes d'évolution turnover, histogrammes comparatifs absentéisme, camemberts répartition masse salariale, graphiques en barres empilées temps de recrutement.",
+        "Passage à Power BI Desktop gratuit : connexion simple Excel/CSV, création visuels drag & drop, filtres interactifs (slicer département/service), mise en page tableau de bord une page A4.",
+        "Atelier pratique en binôme : transformation du fichier Excel de l'exercice 1 en tableau de bord Power BI avec 6 visuels interactifs, 3 filtres slicers et mise en page professionnelle."
+       ]
+      },
+      {
+       "titre": "Design et principes de lisibilité pour managers non-data",
+       "points": [
+        "Règles d'or de la visualisation RH : maximum 6 visuels par page, couleurs cohérentes (vert=positif, rouge=critique), tailles proportionnelles aux enjeux, titres explicites avec unités et périodes, légende intégrée.",
+        "Éviter les pièges classiques : courbes 3D trompeuses, trop de couleurs, axes tronqués, graphiques sans légende, tableaux de chiffres bruts sans synthèse visuelle.",
+        "Adaptation au public manager : focus sur l'action immédiate (évolution récente, alerte rouge, comparaison rapide équipe vs moyenne), mise en avant des 3 priorités du mois.",
+        "Atelier critique : analyse en groupe de 5 tableaux de bord RH \"ratés\" réels (anonymisés) et refonte immédiate en 20 minutes avec les règles apprises, vote collectif meilleur avant/après."
+       ]
+      },
+      {
+       "titre": "Publication, partage et mise à jour des tableaux de bord",
+       "points": [
+        "Publication Power BI Service gratuit : partage lien sécurisé, embedding Teams/SharePoint, export PDF/Excel/PowerPoint.",
+        "Accès contrôlé simple : rôles Lecteur/Contributeur, mise à jour automatique toutes les 24h via refresh dataset.",
+        "Communication du tableau de bord : email ciblé managers avec 3 insights clés + lien direct, mise en agenda récurrente revue mensuelle 30 minutes.",
+        "Restitution finale : chaque apprenant publie son tableau de bord Power BI Service, présente ses 3 insights prioritaires en 5 minutes et démontre le partage Teams live devant le groupe."
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    },
+    {
+     "titre": "Module 15 : Tableaux de bord RH et décision data-driven",
+     "bloc": "BC02 – Manager les data, projets et équipes RH",
+     "formation": "Manager des ressources humaines",
+     "rncp": "",
+     "activite": "A5 – Management de la donnée RH",
+     "intervenant": "",
+     "volume": "21 heures",
+     "sequencage": "",
+     "objectif": "1. Concevoir et paramétrer des tableaux de bord RH décisionnels intégrant des indicateurs multi-sources (SIRH, données externes, retours qualitatifs) permettant un suivi en temps réel des performances RH stratégiques et opérationnelles. 2. Maîtriser les techniques avancées de data visualisation et de storytelling data pour communiquer efficacement les insights RH auprès de publics non-techniques (direction générale, managers opérationnels, partenaires sociaux). 3. Exploiter les tableaux de bord pour anticiper les besoins RH futurs, ajuster les priorités stratégiques en continu et mesurer l'impact des actions RH sur la performance globale de l'entreprise. 4. Assurer la fiabilité, la conformité RGPD et la sécurité des données alimentant les tableaux de bord RH, en intégrant des mécanismes de gouvernance data et de qualité des données.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.5"
+     ],
+     "notions_cles": [
+      "Fondamentaux des tableaux de bord RH décisionnels",
+      "Exploitation et Fiabilisation des données pour l'analyse",
+      "Storytelling data et communication des insights RH",
+      "Gouvernance, sécurité et prédiction via tableaux de bord"
+     ],
+     "programme": [
+      {
+       "titre": "Fondamentaux des tableaux de bord RH décisionnels",
+       "points": [
+        "Typologie complète des indicateurs RH stratégiques (turnover volontaire, time-to-productivity, ROI formation, eNPS collaborateur) et opérationnels (masse salariale réelle vs prévisionnelle, taux vacance poste).",
+        "Méthodologie de sélection des KPIs : SMART RH et alignement avec stratégie business et cascade vers managers.",
+        "Architecture data multi-sources : SIRH (Eurecia, Workday), données externes (DARES, INSEE), retours qualitatifs (NPS, enquêtes CSE).",
+        "Atelier pratique : audit SIRH existant et identification 15 KPIs prioritaires à visualiser."
+       ]
+      },
+      {
+       "titre": "Exploitation et Fiabilisation des données pour l'analyse",
+       "points": [
+        "Compréhension du flux de données (ETL) : rôle de Power Query dans l'extraction et la transformation simple des données (nettoyage de base, uniformisation) pour assurer leur qualité, sans entrer dans la modélisation technique complexe de data warehouse.",
+        "Utilisation de Power BI Desktop (ou Excel avancé) pour le calcul des indicateurs complexes : savoir utiliser des modèles pré-paramétrés et appliquer des mesures DAX simples (SUM, COUNT, calculate basic ratios) pour la restitution stratégique, sans paramétrage avancé.",
+        "Lecture critique des indicateurs avancés : comprendre le calcul de métriques comme le turnover par ancienneté ou les coûts d'acquisition, en se concentrant sur l'interprétation et la recherche de tendances.",
+        "Cas d'étude guidé : Reverse engineering d'un tableau de bord RH existant (Power BI fourni) pour identifier les insights clés et la logique de visualisation, et non la reconstruction technique des calculs DAX internes."
+       ]
+      },
+      {
+       "titre": "Storytelling data et communication des insights RH",
+       "points": [
+        "Structure narrative complète : problème business → insight data → recommandation actionnable → impact projeté KPI.",
+        "Adaptation au public : executive summary (1 slide), managers opérationnels (tableau bord drill-down), CSE (focus social/diversité).",
+        "Techniques persuasion data : anchoring effect, contrast principle, visualisation comparative avant/après.",
+        "Atelier de présentation : pitch 5 minutes d'un insight critique (ex : \"Flight risk managers seniors\") avec Q&A simulé direction générale."
+       ]
+      },
+      {
+       "titre": "Gouvernance, sécurité et prédiction via tableaux de bord",
+       "points": [
+        "Conformité RGPD tableaux de bord : anonymisation, granularité contrôlée, audit trail accès, DPO validation.",
+        "Qualité data pipeline : vérification de la Data Lineage et des alertes data freshness (sans implémentation technique des outils).",
+        "Utilisation stratégique de la prédiction : interprétation des forecasts natifs des outils BI et des simulations de scénarios (utilisation des what-if parameters simples) pour prédire les besoins RH.",
+        "Restitution finale : déploiement d'un tableau de bord RH orienté décision (KPI, visualisations interactives, présentation stratégique)."
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    },
+    {
+     "titre": "Module 16 : Conception de projets RH durables et inclusifs",
+     "bloc": "BC02 – Manager les data, projets et équipes RH",
+     "formation": "Manager des ressources humaines",
+     "rncp": "",
+     "activite": "A6 – Conduite de projets de transformation durable",
+     "intervenant": "",
+     "volume": "17,5 heures",
+     "sequencage": "",
+     "objectif": "1. Identifier les transitions actuelles et futures du monde du travail (numérique, écologique, démographique) pour concevoir des projets RH anticipant ces évolutions et garantissant la pérennité de l'activité. 2. Élaborer des projets de transformation de l'organisation du travail intégrant pleinement les dimensions de durabilité environnementale, résilience sociale et performance économique. 3. Appliquer des méthodologies de conception de projet structurées (CQQCOQP, Design Thinking durable, OKR verts) permettant de répondre aux enjeux complexes et incertains des transformations RH. 4. Intégrer les exigences RSE et les Objectifs de Développement Durable (ODD ONU) dans la définition des objectifs, livrables et impacts mesurables des projets RH.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.6"
+     ],
+     "notions_cles": [
+      "Analyse des transitions du monde du travail et impacts RH",
+      "Méthodologies de conception de projets de transformation RH",
+      "Intégration RSE et durabilité dans la conception projet",
+      "Spécification technique et planification projet durable"
+     ],
+     "programme": [
+      {
+       "titre": "Analyse des transitions du monde du travail et impacts RH",
+       "points": [
+        "Cartographie exhaustive des mégatrend actuelles et prospectives 2025-2030 : accélération IA générative, verdissement accéléré des supply chains, hybridation généralisée du travail, tensions démographiques sur compétences critiques, attentes renforcées en matière de sens et de contribution sociétale.",
+        "Méthodologie d'impact analysis : matrice croisée transitions RH (recrutement, formation, organisation, rétention) x intensité transformation (faible, modérée, disruptive).",
+        "Identification des signaux faibles et signaux forts via sources multiples : DARES, INSEE, cabinets prospective (BCG, Deloitte Future of Work), plateformes sectorielles.",
+        "Atelier pratique : élaboration d'une matrice d'impact sectorielle personnalisée (15 lignes x 6 colonnes) pour l'entreprise d'alternance de chaque apprenant."
+       ]
+      },
+      {
+       "titre": "Méthodologies de conception de projets de transformation RH",
+       "points": [
+        "Application détaillée de la méthode CQQCOQP (Combien ? Quoi ? Qui ? Comment ? Outils ? Quand ? Pourquoi ?) adaptée aux projets RH durables, avec exemples concrets de livrables attendus par dimension.",
+        "Design Thinking durable : 5 étapes adaptées (empathie inclusive, définition RSE, ideation collective, prototypage bas carbone, test impact mesurable), intégrant les principes de l'économie circulaire dans les process RH.",
+        "Formulation d'OKR verts : Objectives alignés ODD ONU (ODD 4 éducation, ODD 8 travail décent, ODD 9 innovation durable), Key Results quantitatifs (réduction turnover 20%, 100% formations certifiantes, 30% réduction empreinte carbone télétravail).",
+        "Étude de cas guidée : déconstruction d'un projet RH durable réussi (exemple Schneider Electric \"Factory of the Future\" RH) selon les 3 méthodologies pour extraction des best practices transférables."
+       ]
+      },
+      {
+       "titre": "Intégration RSE et durabilité dans la conception projet",
+       "points": [
+        "Analyse de matérialité RH : cartographie parties prenantes internes (salariés, CSE, managers) et externes (OPCO, Pôle emploi, collectivités) avec mapping de leurs attentes en matière de durabilité et inclusion.",
+        "Intégration ODD ONU prioritaires dans les livrables projet : ODD 5 égalité genres (quotas formation), ODD 10 réduction inégalités (dispositifs madskills), ODD 13 action climatique (digitalisation process).",
+        "Conception universelle et accessibilité : application RGAA 4.1.2 aux supports formation, FALC pour communications RH, sous-titrage IA vidéos tutoriels.",
+        "Atelier de co-conception : élaboration d'un cahier des charges RSE-compliant pour un projet formation durable (8 pages minimum, 5 ODD intégrés, matrice matérialité)."
+       ]
+      },
+      {
+       "titre": "Spécification technique et planification projet durable",
+       "points": [
+        "Définition des livrables concrets et mesurables : user stories durables (\"En tant que manager télétravailleur, je veux un kit ergonomique éco-conçu pour réduire ma fatigue cognitive\"), Definition of Done RSE (audit carbone, validation diversité).",
+        "Planification réaliste intégrant contraintes calendaires RH : synchronisation NAO annuelle, respect périodes DSN, intégration calendrier OPCO.",
+        "Budgeting vert : calcul coût total ownership (TCO) incluant externalités environnementales, recherche financements verts (FSE+, fonds transition écologique).",
+        "Restitution finale : présentation complète du projet de transformation RH durable (cahier charges, OKR, roadmap 12 mois, business case RSE) devant jury mixte (apprenants + formateur)."
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    },
+    {
+     "titre": "Module 17 : Méthodologies agiles en gestion de projet RH",
+     "bloc": "BC02 – Manager les data, projets et équipes RH",
+     "formation": "Manager des ressources humaines",
+     "rncp": "",
+     "activite": "A6 – Conduite de projets de transformation durable",
+     "intervenant": "",
+     "volume": "28 heures",
+     "sequencage": "",
+     "objectif": "1. Maîtriser les méthodologies agiles (Scrum, Kanban, SAFe) adaptées aux projets de transformation RH et aux contraintes réglementaires du secteur. 2. Concevoir et animer des rituels agiles (daily, rétrospectives, sprint reviews) favorisant la collaboration interservices et l'adaptation continue. 3. Piloter la conduite du changement dans les projets RH agiles en intégrant les spécificités des parties prenantes métiers, IT et direction générale. 4. Mesurer et optimiser la performance des projets RH agiles via des métriques adaptées (velocity, lead time, business value delivery).",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.6"
+     ],
+     "notions_cles": [
+      "Fondamentaux des méthodologies agiles appliquées aux projets RH",
+      "Mise en œuvre des rituels agiles en contexte RH",
+      "Outils et technologies pour l'agilité RH",
+      "Conduite du changement et scaling agile RH"
+     ],
+     "programme": [
+      {
+       "titre": "Fondamentaux des méthodologies agiles appliquées aux projets RH",
+       "points": [
+        "Panorama complet des approches agiles adaptées au secteur RH : Scrum classique (équipes <10), Kanban continu (process paie), Scrumban hybride (projets mixtes), SAFe pour transformations multi-équipes.",
+        "Articulation avec contraintes RH : respect des calendriers légaux (négociations CSE, DSN mensuelles), gestion des pics d'activité (rentrée, bilans sociaux), intégration des parties prenantes externes (OPCO, cabinets).",
+        "Rôles et responsabilités dans les équipes agiles RH : Product Owner métiers RH, Scrum Master facilitateur process, équipe de livraison pluridisciplinaire (RH, IT, communication).",
+        "Atelier pratique : création d'un Product Backlog fictif pour refonte SIRH (20 user stories + priorisation MoSCoW)."
+       ]
+      },
+      {
+       "titre": "Mise en œuvre des rituels agiles en contexte RH",
+       "points": [
+        "Daily Scrum optimisé RH (15 min max) : blocages réglementaires, priorités urgentes, avancement livrables métiers.",
+        "Sprint Planning détaillé : estimation points, définition Definition of Done RH (conformité, UX collaborateurs, sécurité données).",
+        "Sprint Review orienté valeur métier : démo fonctionnelle auprès sponsors, feedback CSE, mesure satisfaction parties prenantes.",
+        "Rétrospective à 360° : process techniques, dynamique équipe, ressenti collaborateurs impactés, ajustements organisationnels.",
+        "Cas d'étude : déroulé complet d'un sprint SIRH (vidéo + analyse défaillances)."
+       ]
+      },
+      {
+       "titre": "Outils et technologies pour l'agilité RH",
+       "points": [
+        "Paramétrage outils agiles : Jira Align (SAFe), Trello/Kanbanize (process continus), Azure DevOps (intégration SIRH).",
+        "Intégration SIRH agiles : Eurecia API, Workday extensibilité, Power Automate workflows RH.",
+        "Mesure performance temps réel : burndown charts, cycle time, throughput, escaped defects.",
+        "Atelier technique : configuration d'un board Kanban RH dans Jira (colonnes customisées, WIP limits, swimlanes)."
+       ]
+      },
+      {
+       "titre": "Conduite du changement et scaling agile RH",
+       "points": [
+        "Cartographie résistance au changement : managers traditionnels, équipes admin, direction générale.",
+        "Communication agile : roadmaps visuelles, townhalls sprint, newsletters succès.",
+        "Scaling frameworks RH : SAFe pour >50 personnes, LeSS pour équipes métiers, Spotify model RH.",
+        "Métriques business value : ROI sprint, valeur perçue stakeholders, réduction time-to-market RH.",
+        "Restitution finale : simulation d'un PI Planning SAFe RH (roadmap 6 mois + 3 sprints détaillés)."
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    },
+    {
+     "titre": "Module 18 : Contrôle budgétaire et pilotage financier RH",
+     "bloc": "BC02 – Manager les data, projets et équipes RH",
+     "formation": "Manager des ressources humaines",
+     "rncp": "",
+     "activite": "A6 – Conduite de projets de transformation durable",
+     "intervenant": "",
+     "volume": "24,5 heures",
+     "sequencage": "",
+     "objectif": "1. Élaborer des budgets RH réalistes et détaillés en intégrant les contraintes réglementaires, les priorités stratégiques et les spécificités des projets de transformation durable. 2. Mettre en place des outils et méthodes de suivi budgétaire permettant un pilotage en temps réel des écarts et une réactivité aux aléas projets. 3. Collaborer efficacement avec les directions financières et administratives pour optimiser les arbitrages et sécuriser les financements RH. 4. Maîtriser les techniques d'analyse de rentabilité et de calcul de retour sur investissement (ROI) applicables aux projets RH, y compris les impacts ESG et sociaux non-financiers.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.6"
+     ],
+     "notions_cles": [
+      "Construction budgétaire RH : méthodologies et contraintes",
+      "Outils et techniques de suivi budgétaire en temps réel",
+      "Collaboration interservices et arbitrages financiers",
+      "Analyse de rentabilité et calcul ROI projets RH"
+     ],
+     "programme": [
+      {
+       "titre": "Construction budgétaire RH : méthodologies et contraintes",
+       "points": [
+        "Typologie des budgets RH : OPEX/CAPEX formation, recrutement externe/interne, mobilité géographique, digitalisation SIRH, mesures QVCT.",
+        "Méthodes prévisionnelles détaillées : budgeting bottom-up par manager, top-down stratégique, rolling forecast mensuel, zero-based budgeting.",
+        "Contraintes réglementaires et conventionnelles : cotisations formation (0,55%-1,60%), réserves CPF, heures CPF, obligations seniors.",
+        "Atelier pratique : élaboration d'un budget formation 2026 à partir d'un plan de développement des compétences fourni (Excel)."
+       ]
+      },
+      {
+       "titre": "Outils et techniques de suivi budgétaire en temps réel",
+       "points": [
+        "Paramétrage tableaux de bord financiers RH dans SIRH : Eurecia Finance, Workday Budgeting, SAP Concur RH.",
+        "Méthodes de contrôle : variance analysis mensuelle, forecast vs actuals, alertes seuils automatisées.",
+        "Articulation avec comptabilité analytique : imputation précise par projet/activité, codes analytiques RH.",
+        "Cas d'étude guidé : diagnostic d'écarts budgétaires sur un projet SIRH réel et recommandations d'ajustement (Power BI)."
+       ]
+      },
+      {
+       "titre": "Collaboration interservices et arbitrages financiers",
+       "points": [
+        "Mapping des interlocuteurs financiers : DAF, contrôleur de gestion, direction comptable, trésorerie.",
+        "Préparation des réunions d'arbitrage : cadrage enjeux RH, arguments ROI, scénarios alternatifs.",
+        "Négociation des priorités : techniques de défense budgétaire, gestion des objections financières.",
+        "Atelier de simulation : présentation budget formation devant comité financier fictif avec questions/réponses en direct."
+       ]
+      },
+      {
+       "titre": "Analyse de rentabilité et calcul ROI projets RH",
+       "points": [
+        "Méthodes ROI : NPV (Net Present Value), IRR (Internal Rate of Return), Payback Period, ROI classique.",
+        "Intégration impacts ESG : coût social évité, réduction turnover, empreinte carbone formation digitale vs présentielle.",
+        "Indicateurs non-financiers monétisables : productivité horaire, taux rétention, NPS collaborateur.",
+        "Restitution finale : business case complet d'un projet RH avec calculs ROI détaillés et recommandations stratégiques (présentation PowerPoint 10 min)."
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    },
+    {
+     "titre": "Module 19 : Animation participative et communication inclusive.",
+     "bloc": "BC02 – Manager les data, projets et équipes RH.",
+     "formation": "Manager des ressources humaines.",
+     "rncp": "",
+     "activite": "A7 – Management d’équipes en modes projet et hiérarchique.",
+     "intervenant": "",
+     "volume": "14 heures",
+     "sequencage": "",
+     "objectif": "1. Concevoir et animer des dispositifs de travail collectifs favorisant la participation active, l’expression de tous et la co‑construction de solutions RH, en contexte présentiel, distanciel et hybride. 2. Mettre en œuvre une communication véritablement inclusive, qui tienne compte des diversités de profils, de cultures, de niveaux de langage et de besoins spécifiques au sein des équipes. 3. Structurer des pratiques de capitalisation des expériences et des bonnes pratiques, permettant de transformer les échanges collectifs en apprentissages organisationnels durables. 4. Adapter en continu sa posture managériale et d’animation en fonction des dynamiques de groupe observées, des signaux faibles et des enjeux de pouvoir, afin de sécuriser un cadre de coopération respectueux et efficace.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.7"
+     ],
+     "notions_cles": [
+      "Fondements de l’animation participative et de l’intelligence collective",
+      "Méthodes d’animation collaborative en présentiel et en hybride",
+      "Communication inclusive au service de la coopération",
+      "Capitalisation des bonnes pratiques et ancrage dans la durée"
+     ],
+     "programme": [
+      {
+       "titre": "Fondements de l’animation participative et de l’intelligence collective",
+       "points": [
+        "Clarification des objectifs d’une démarche participative en RH : distinction entre information descendante, consultation, co‑construction et co‑décision, avec illustration par plusieurs situations concrètes d’entreprise.",
+        "Analyse des principaux leviers d’engagement collectif : sentiment d’utilité, reconnaissance, sécurité psychologique, clarté du cadre et transparence sur les suites données aux travaux du groupe.",
+        "Exploration des postures d’animateur·rice : facilitateur neutre, leader d’opinion, garant du cadre, et des risques associés lorsque ces rôles ne sont pas assumés de façon explicite.",
+        "Atelier en sous‑groupes : construction d’une « charte de participation » pour un atelier RH (règles de fonctionnement, droits et devoirs des participants, modalités de prise de parole)."
+       ]
+      },
+      {
+       "titre": "Méthodes d’animation collaborative en présentiel et en hybride",
+       "points": [
+        "Présentation détaillée de différentes méthodes collaboratives : brainstorming structuré, world café, forum ouvert, ateliers de co‑design, avec exemples d’usages adaptés à des projets RH (refonte process, nouveau dispositif QVCT, etc.).",
+        "Conception pas à pas d’un déroulé de séquence participative (objectif, durée, consignes, supports, rôles, critères de réussite) permettant d’éviter l’improvisation et la perte de sens pour les participants.",
+        "Gestion opérationnelle des temps collectifs à distance : répartition des rôles (animateur, gardien du temps, rapporteur), articulation plénière / sous‑groupes, gestion des silences et des dominances, utilisation des fonctionnalités des outils (salles virtuelles, sondages, tableaux blancs).",
+        "Étude de cas guidée : analyse d’une séquence d’atelier participatif filmé (ou scénarisé) pour repérer les éléments facilitant la contribution de chacun et les points de vigilance (personnes en retrait, conflits latents, malentendus)."
+       ]
+      },
+      {
+       "titre": "Communication inclusive au service de la coopération",
+       "points": [
+        "Décryptage des biais de langage fréquents en contexte professionnel (jargon, anglicismes, stéréotypes, humour excluant) et de leurs effets sur la participation et le sentiment de légitimité de certains profils.",
+        "Principes d’une communication inclusive : choix des mots, formulation des consignes, prise en compte des différences culturelles, de genre, de handicap, et adaptation du rythme et des supports aux publics visés.",
+        "Construction de supports de communication accessibles (supports écrits structurés, visuels lisibles, formats multimédias, sous‑titres) permettant à chacun de se repérer et de participer pleinement, y compris en mode asynchrone.",
+        "Atelier pratique : réécriture d’une invitation à un atelier RH et d’un compte‑rendu de réunion en version inclusive et clarifiée, en intégrant des points de vigilance identifiés (ton, vocabulaire, structure, mentions utiles)."
+       ]
+      },
+      {
+       "titre": "Capitalisation des bonnes pratiques et ancrage dans la durée",
+       "points": [
+        "Identification des risques de « perte de valeur » après les temps collectifs (non‑suivi, absence de traces, décisions non mises en œuvre) et des leviers permettant de transformer les ateliers en apprentissages durables pour l’organisation.",
+        "Mise en place de mécanismes de capitalisation : comptes‑rendus visuels, synthèses structurées, fiches bonnes pratiques, bibliothèques de cas, et modalités de diffusion ciblée auprès des parties prenantes concernées.",
+        "Élaboration de circuits de retour d’expérience (RETEX) : temps de débriefing, enquêtes à froid, ajustements des dispositifs d’animation, partage inter‑équipes des enseignements clés, afin de faire évoluer les pratiques managériales et RH.",
+        "Restitution en fin de module : conception et présentation par chaque binôme d’un « kit d’animation participative inclusive » pour un contexte RH réel (objectifs, déroulé, supports, modalités de capitalisation)."
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    },
+    {
+     "titre": "Module 20 : Partenariats durables et collaboration responsable",
+     "bloc": "BC02 – Manager les data, projets et équipes RH",
+     "formation": "Manager des ressources humaines",
+     "rncp": "",
+     "activite": "A7 – Management d’équipes en modes projet et hiérarchique",
+     "intervenant": "",
+     "volume": "21 heures",
+     "sequencage": "",
+     "objectif": "1. Cartographier et développer un réseau stratégique de partenaires RH aligné sur les priorités RSE de l'entreprise. 2. Négocier et contractualiser des collaborations durables intégrant les critères ESG. 3. Piloter des partenariats responsables avec indicateurs de performance et de durabilité. 4. Mesurer l'impact économique, social et environnemental des collaborations externes.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.7"
+     ],
+     "notions_cles": [
+      "Cartographie stratégique des partenaires RH",
+      "Négociation et contractualisation responsable",
+      "Pilotage partenariats avec KPIs ESG",
+      "Gestion risques et clôture partenariats"
+     ],
+     "programme": [
+      {
+       "titre": "Cartographie stratégique des partenaires RH",
+       "points": [
+        "Typologie partenaires : cabinets recrutement, organismes formation, startups SIRH, associations sectorielles.",
+        "Critères de sélection ESG : scoring responsabilité sociale, empreinte carbone, diversité fournisseurs.",
+        "Matrice décisionnelle : impact stratégique vs maturité RSE.",
+        "Atelier : cartographie 15 partenaires prioritaires secteur (Miro)."
+       ]
+      },
+      {
+       "titre": "Négociation et contractualisation responsable",
+       "points": [
+        "Clauses RSE contractuelles : audit fournisseurs, pénalités carbone, clauses sociales.",
+        "Négociation win-win durable : partage valeur, innovation co-créée.",
+        "Outils digitaux contractualisation : DocuSign ESG, blockchain certification.",
+        "Cas pratique : simulation négociation cabinet formation RSE (roleplay)."
+       ]
+      },
+      {
+       "titre": "Pilotage partenariats avec KPIs ESG",
+       "points": [
+        "Indicateurs performance : ROI partenariat, taux satisfaction, innovation générée.",
+        "KPIs RSE : réduction empreinte, diversité sous-traitants, inclusion économique.",
+        "Tableaux de bord Power BI : suivi temps réel performance/durabilité.",
+        "Atelier : conception dashboard partenariat (Excel/Power BI)."
+       ]
+      },
+      {
+       "titre": "Gestion risques et clôture partenariats",
+       "points": [
+        "Identification risques partenaires : défaillance RSE, sous-traitance illégale.",
+        "Exit strategies responsables : reprise savoir-faire, continuité sociale.",
+        "Bilan et capitalisation : lessons learned, base connaissances partagée.",
+        "Restitution : business case partenariat + dashboard ESG (présentation 7 min)."
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    },
+    {
+     "titre": "Module 21 : Management hybride des équipes et télétravail",
+     "bloc": "BC02 – Manager les data, projets et équipes RH",
+     "formation": "Manager des ressources humaines",
+     "rncp": "",
+     "activite": "A7 – Management d’équipes en modes projet et hiérarchique",
+     "intervenant": "",
+     "volume": "28 heures",
+     "sequencage": "",
+     "objectif": "1. Maîtriser les spécificités du management d'équipes hybrides présentiel/distanciel. 2. Appliquer des méthodes et techniques de management collaboratives et inclusives adaptées au télétravail. 3. Superviser des collaborations professionnelles en mode hybride avec cadrage institutionnel et reconnaissance individuelle/collective. 4. Utiliser les outils digitaux collaboratifs pour maintenir la cohésion, la motivation et la performance des équipes hybrides.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.7"
+     ],
+     "notions_cles": [
+      "Fondamentaux du management hybride et télétravail",
+      "Méthodes et outils de management collaboratif hybride",
+      "Outils digitaux pour équipes hybrides performantes",
+      "Pilotage de la performance et reconnaissance hybride"
+     ],
+     "programme": [
+      {
+       "titre": "Fondamentaux du management hybride et télétravail",
+       "points": [
+        "Typologie des organisations hybrides et enjeux managériaux.",
+        "Réglementation télétravail : accord obligatoire, droit à la déconnexion, frais.",
+        "Impact sur performance : productivité, créativité, rétention talents.",
+        "Atelier : autodiagnostic maturité hybride de son organisation."
+       ]
+      },
+      {
+       "titre": "Méthodes et outils de management collaboratif hybride",
+       "points": [
+        "Cadres de référence : OKR hybrides, agile@scale, Holacracy partielle.",
+        "Techniques entretien collaboratif : feedback 360° digital, rétrospectives Teams.",
+        "Gestion des dynamiques de groupe hybrides : inclusion, équité parole.",
+        "Cas pratique : analyse vidéo 3 entretiens hybrides (écoute active, reformulation)."
+       ]
+      },
+      {
+       "titre": "Outils digitaux pour équipes hybrides performantes",
+       "points": [
+        "Communication synchrone/asynchrone : Teams, Slack, Loom vidéo.",
+        "Cohésion virtuelle : icebreakers digitaux, serious games Teams.",
+        "Mesure de l’engagement : Microsoft Viva, Culture Amp, Officevibe.",
+        "Atelier pratique : paramétrage kit manager hybride (5 outils essentiels)."
+       ]
+      },
+      {
+       "titre": "Pilotage de la performance et reconnaissance hybride",
+       "points": [
+        "KPIs hybrides : engagement digital, NPS manager, taux rétention télétravail.",
+        "Reconnaissance multicanale : Kudos Slack, badges Microsoft Viva, rituels Teams.",
+        "Gestion conflits hybrides : médiation digitale, escalade protocoles.",
+        "Restitution : plan management hybride + dashboard performance."
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    },
+    {
+     "titre": "Module 30 : Sourcing et sélection, pilotés par l’IA",
+     "bloc": "BC05 – Manager les talents et l’expérience collaborateur",
+     "formation": "Manager des ressources humaines",
+     "rncp": "",
+     "activite": "A15 – Politique d’acquisition de talents",
+     "intervenant": "",
+     "volume": "21 heures",
+     "sequencage": "",
+     "objectif": "1. Maîtriser les techniques de sourcing omnicanal assistées par IA générative et prédictive. 2. Paramétrer et utiliser les algorithmes IA pour optimiser la présélection et la sélection candidats. 3. Appliquer une démarche data-driven recruiting pour améliorer performance et expérience candidat. 4. Assurer la conformité RGPD et éthique dans l'usage des technologies IA en recrutement.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.15"
+     ],
+     "notions_cles": [
+      "Techniques de sourcing omnicanal avancées",
+      "Intelligence artificielle et automatisation du sourcing",
+      "Recrutement data driven et neurosciences",
+      "Expérience candidat et conformité réglementaire"
+     ],
+     "programme": [
+      {
+       "titre": "Techniques de sourcing omnicanal avancées",
+       "points": [
+        "Panorama des canaux digitaux : LinkedIn Recruiter, Jobboards, GitHub, TikTok, forums experts.",
+        "Approche multicanale et ciblage précis des talents passifs et actifs.",
+        "Méthodes d'optimisation de la visibilité tout au long du processus de recrutement : SEO jobboards, sponsored content LinkedIn, employee advocacy..",
+        "Atelier : construction d’une stratégie sourcing multicanale sur cas secteur."
+       ]
+      },
+      {
+       "titre": "Intelligence artificielle et automatisation du sourcing",
+       "points": [
+        "Algorithmes IA appliqués au sourcing : matching sémantique, scoring profils.",
+        "Automatisation de tâches (candidatures, préqualification, chatbots).",
+        "Analyse prédictive pour optimisation pipeline candidats.",
+        "Cas pratique : utilisation d’un outil IA d’aide au sourcing (demo Workday, Eightfold)."
+       ]
+      },
+      {
+       "titre": "Recrutement data driven et neurosciences",
+       "points": [
+        "Intégration données sourcing et analyse neuroscience sur qualité candidature.",
+        "Optimisation processus recrutement via micro-segmentation candidat.",
+        "Risques éthiques, biais algorithmiques et compliance RGPD.",
+        "Atelier : audit performance sourcing et plan d’amélioration."
+       ]
+      },
+      {
+       "titre": "Expérience candidat et conformité réglementaire",
+       "points": [
+        "Parcours candidat omnicanal digital : temps, transparence et feedback.",
+        "Garanties RGPD : consentement, stockage, suppression des données.",
+        "Inclusivité dans sourcing : langage, canaux, accessibilité.",
+        "Restitution : rapport sourcing+expérience candidat + recommandations (présentation 5 min)."
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    },
+    {
+     "titre": "Module 31 : Neurosciences et optimisation de l’expérience candidat.",
+     "bloc": "BC05 – Manager les talents et l’expérience collaborateur.",
+     "formation": "Manager des ressources humaines.",
+     "rncp": "",
+     "activite": "A15 – Politique d’acquisition de talents.",
+     "intervenant": "",
+     "volume": "7 heures.",
+     "sequencage": "",
+     "objectif": "1. Comprendre les apports fondamentaux des neurosciences cognitives et sociales à l'optimisation des processus de recrutement et de sélection. 2. Identifier les leviers neuroscientifiques pour améliorer l'expérience candidat (engagement, réduction du stress, prise de décision optimisée). 3. Appliquer des techniques basées sur les neurosciences pour concevoir des entretiens, assessments et parcours candidats inclusifs et performants. 4. Intégrer les neurosciences dans une approche data-driven du recrutement en complément des outils IA (module 30), en respectant l'éthique et la conformité RGPD.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.15"
+     ],
+     "notions_cles": [
+      "Fondamentaux des neurosciences appliquées au recrutement",
+      "Optimisation de l'expérience candidat par les neurosciences",
+      "Assessments et outils neurosciences en recrutement",
+      "Intégration éthique et data-driven neurosciences/IA"
+     ],
+     "programme": [
+      {
+       "titre": "Fondamentaux des neurosciences appliquées au recrutement",
+       "points": [
+        "Concepts clés : neurosciences cognitives (biais cognitifs, charge cognitive), neurosciences sociales (miroir, empathie), neuromarketing candidat.",
+        "Le cerveau en situation de recrutement : stress, prise de décision sous pression, effet de primauté.",
+        "Atelier : autodiagnostic biais cognitifs en recrutement (questionnaire + débriefing)."
+       ]
+      },
+      {
+       "titre": "Optimisation de l'expérience candidat par les neurosciences",
+       "points": [
+        "Parcours candidat neuro-friendly : pré-boarding, accueil, durée entretien, pauses cognitives.",
+        "Techniques d'entretien neuro-optimisées : questions ouvertes, reformulation empathique, gestion charge cognitive.",
+        "Réduction stress candidat : environnement physique/numérique, communication non-verbale, feedback immédiat.",
+        "Étude de cas : analyse vidéo entretien réel avec cartographie neuro-comportementale (regards, postures, rythme)."
+       ]
+      },
+      {
+       "titre": "Assessments et outils neurosciences en recrutement",
+       "points": [
+        "Tests cognitifs validés scientifiquement (attention, mémoire de travail, raisonnement inductif).",
+        "Eye-tracking et biométrie pour analyse comportementale (attention sélective, engagement).",
+        "Gamification neuroscientifique : serious games mesurant dopamine/motivation intrinsèque.",
+        "Atelier pratique : conception d'un mini-assessment neuro (3 questions + matrice évaluation)."
+       ]
+      },
+      {
+       "titre": "Intégration éthique et data-driven neurosciences/IA",
+       "points": [
+        "Biais neuro vs biais IA : complémentarité ou risque d'amplification ?",
+        "Conformité RGPD : données biométriques, consentement explicite, anonymisation.",
+        "Mesure ROI neuro-recrutement : time-to-hire, qualité hire, Net Promoter Score candidat.",
+        "Restitution : pitch \"neuro-recrutement\" de 3 min intégrant apports modules 30-31 pour A15."
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    },
+    {
+     "titre": "Module 32 : Rédaction RH inclusives et marketing RH attractif",
+     "bloc": "BC05 – Manager les talents et l’expérience collaborateur",
+     "formation": "Manager des ressources humaines",
+     "rncp": "",
+     "activite": "A15 – Politique d’acquisition de talents",
+     "intervenant": "",
+     "volume": "7 heures",
+     "sequencage": "",
+     "objectif": "1. Maîtriser les techniques de rédaction inclusive pour fiches de poste et annonces RH conformes RGPD et Loi pour l'égalité professionnelle. 2. Appliquer les principes du marketing RH digital pour créer des contenus attractifs adaptés aux générations Z/Alpha et profils en tension. 3. Optimiser le champ lexical et les arguments EVP (Employee Value Proposition) pour maximiser la conversion candidat. 4. Intégrer les apports neurosciences (module 31) et IA sourcing (module 30) dans une stratégie omnicanale d'attractivité employer branding.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.15"
+     ],
+     "notions_cles": [
+      "Fondamentaux rédaction RH inclusive et réglementation",
+      "Marketing RH digital et EVP multigénérationnel",
+      "Techniques rédactionnelles neuro-marketing RH",
+      "Mesure performance et A/B testing annonces"
+     ],
+     "programme": [
+      {
+       "titre": "Fondamentaux rédaction RH inclusive et réglementation",
+       "points": [
+        "Cadre légal : RGPD (données sensibles), Loi Rixain égalité salariale, accessibilité FALC, non-discrimination.",
+        "Audit conformité : checklist 12 points (sexe, âge, origine, madskills, etc.).",
+        "Atelier : diagnostic annonce existante (détection 5 biais illégaux + reformulation)."
+       ]
+      },
+      {
+       "titre": "Marketing RH digital et EVP multigénérationnel",
+       "points": [
+        "Psychologie du candidat : pain points Z/Alpha (sens, flexibilité, RSE, madskills).",
+        "Construction EVP : 5 piliers (culture, croissance, impact, équilibre, récompenses).",
+        "Canaux omnicanal : LinkedIn (70%), TikTok (GenZ), sites carrière ATS-friendly.",
+        "Étude cas : benchmark 3 annonces sectorielles (IT, Commerce, Industrie) avec matrice attractivité."
+       ]
+      },
+      {
+       "titre": "Techniques rédactionnelles neuro-marketing RH",
+       "points": [
+        "Champ lexical neuro-friendly : mots-action dopamine, storytelling empathique, chiffres impactants.",
+        "Formules gagnantes : \"Rejoins-nous si...\", \"Tes superpouvoirs...\", madskills valorisés.",
+        "Optimisation ATS/SEO : mots-clés, structure H1/H2, microdata schema.org/JobPosting.",
+        "Atelier pratique : rédaction fiche poste 300 mots (1 offre + ATS checker)."
+       ]
+      },
+      {
+       "titre": "Mesure performance et A/B testing annonces",
+       "points": [
+        "KPIs marketing RH : apply rate, time-to-apply, source quality, diversity ratio.",
+        "Outils tracking : Google Analytics 4 UTM, LinkedIn Campaign Manager.",
+        "A/B testing méthodologie : titre/vous/tutoiement, CTA, visuels (3 variantes).",
+        "Restitution : portfolio 2 annonces optimisées + rapport KPI projeté (3 min pitch)."
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    },
+    {
+     "titre": "Module 33 : Analyse prédictive des compétences et veille marché",
+     "bloc": "BC05 – Manager les talents et l’expérience collaborateur",
+     "formation": "Manager des ressources humaines",
+     "rncp": "",
+     "activite": "A16 – Management des compétences et GPEC",
+     "intervenant": "",
+     "volume": "17,5 heures",
+     "sequencage": "",
+     "objectif": "1. Identifier les besoins futurs en compétences via l’analyse prédictive intégrant données marché et internes. 2. Anticiper les évolutions des métiers, obsolescence des compétences, et reconversions nécessaires. 3. Utiliser des outils d’analyse de données pour mesure fine du capital compétences et ajustement des plans RH. 4. Intégrer la veille marché des emplois/compétences en mode agile au service de la stratégie RH et développement durable.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.16"
+     ],
+     "notions_cles": [
+      "Fondamentaux de l’analyse prédictive des compétences",
+      "Outils et techniques d’analyse",
+      "Veille marché et prospective RH",
+      "Application stratégique et pilotage"
+     ],
+     "programme": [
+      {
+       "titre": "Fondamentaux de l’analyse prédictive des compétences",
+       "points": [
+        "Concepts clés : obsolescence, renouvellement, compétences clés, meta-compétences.",
+        "Sources de données : marché emploi, données internes SIRH, tendances économiques.",
+        "Méthodologies agiles pour veille et ajustement rapide des compétences.",
+        "Atelier : collecte et préparation d’un jeu de données RH/emploi (exercice Excel)."
+       ]
+      },
+      {
+       "titre": "Outils et techniques d’analyse",
+       "points": [
+        "Data analytics, text mining, machine learning appliqués à la gestion des compétences.",
+        "Tableaux de bord dynamiques : conception, indicateurs KPIs, interprétations.",
+        "Cas pratiques : outil Eurecia, Power BI, Tableau pour analyse « skills gap ».",
+        "Étude de cas : diagnostic prévisionnel et plan d’action pour une PME/ETI."
+       ]
+      },
+      {
+       "titre": "Veille marché et prospective RH",
+       "points": [
+        "Cartographie des acteurs et signaux faibles sur le marché du travail.",
+        "Tendances 2025-2030 : IA, automatisation, green jobs, nouveaux métiers.",
+        "Intégration RSE et inclusion dans stratégies compétences.",
+        "Atelier pratique : création d’une veille sur secteur stratégique (scénarisation)."
+       ]
+      },
+      {
+       "titre": "Application stratégique et pilotage",
+       "points": [
+        "Construction de scénarios RH en fonction des résultats prédictifs.",
+        "Intégration à la gestion des carrières et mobilité interne.",
+        "Méthodologies d’accompagnement du changement et communication.",
+        "Restitution écrite et orale : diagnostic + plan stratégique (dossier 5 pages)."
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    },
+    {
+     "titre": "Module 34 : Talent marketplace et plan de succession digital",
+     "bloc": "BC05 – Manager les talents et l’expérience collaborateur",
+     "formation": "Manager des ressources humaines",
+     "rncp": "",
+     "activite": "A16 – Management des compétences et GPEC",
+     "intervenant": "",
+     "volume": "17,5 heures",
+     "sequencage": "",
+     "objectif": "1) Mettre en œuvre et piloter une démarche de talent marketplace intégrée au plan de succession digital. 2) Intégrer la dimension RSE dans la gestion des carrières et la sécurisation des parcours professionnels. 3) Développer les compétences relatives à la diversité, équité et inclusion (DEI) tout au long de la chaîne de valeur des talents. 4) Utiliser les outils digitaux et data analytics pour l’optimisation des mobilités internes et la planification des successions.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.16"
+     ],
+     "notions_cles": [
+      "Fondamentaux talent marketplace et mobilité interne",
+      "Conception plan de succession data-driven",
+      "Outils et implémentation marketplace talents",
+      "Pilotage stratégique et mesure ROI"
+     ],
+     "programme": [
+      {
+       "titre": "Fondamentaux talent marketplace et mobilité interne",
+       "points": [
+        "Concepts : internal talent pool, skills inventory, gig economy interne, liquid workforce.",
+        "Architecture plateforme : matching algorithmique, skills ontology, blockchain certification.",
+        "Atelier : audit compétences internes (Excel → matrice readiness)."
+       ]
+      },
+      {
+       "titre": "Conception plan de succession data-driven",
+       "points": [
+        "Identification postes critiques et compétences rares (9-box grid digitalisé).",
+        "Analytics succession : flight risk, readiness score, diversity pipeline.",
+        "Intégration RSE/DEI : quotas succession, biais algorithmiques, équité parcours.",
+        "Étude de cas : plan succession GE/SAP (avant/après marketplace)."
+       ]
+      },
+      {
+       "titre": "Outils et implémentation marketplace talents",
+       "points": [
+        "Panorama solutions : Workday Skills Cloud, Eightfold, Fuel50, Beamery.",
+        "Paramétrage matching : skills-based vs job-based, recommandations IA.",
+        "Intégration SIRH : Eurecia/Workday → marketplace fluide.",
+        "Atelier pratique : simulation marketplace (Miro template + matching fictif)."
+       ]
+      },
+      {
+       "titre": "Pilotage stratégique et mesure ROI",
+       "points": [
+        "KPIs marketplace : fill rate interne, time-to-fill, retention rate, diversity index.",
+        "Communication changement : sponsoring CODIR, adoption managers.",
+        "ROI calcul : coût externe vs interne, productivité onboarding.",
+        "Restitution : business case marketplace + plan rollout (présentation 5 min)."
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    },
+    {
+     "titre": "Module 35 : Formation hybride et organisation apprenante",
+     "bloc": "BC05 – Manager les talents et l’expérience collaborateur",
+     "formation": "Manager des ressources humaines",
+     "rncp": "",
+     "activite": "A16 – Management des compétences et GPEC",
+     "intervenant": "",
+     "volume": "24,5 heures",
+     "sequencage": "",
+     "objectif": "1) Concevoir et déployer des dispositifs de formation hybrides intégrés dans une organisation apprenante. 2) Favoriser l’engagement, l’autonomie et le développement continu des collaborateurs. 3) Utiliser les outils digitaux et les méthodes pédagogiques innovantes pour optimiser les parcours d’apprentissage. 4) Piloter les actions de formation en cohérence avec la stratégie RH et les besoins évolutifs des compétences.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.16"
+     ],
+     "notions_cles": [
+      "Cadre réglementaire et pilotage du plan de formation",
+      "Dispositifs et modalités hybrides de formation",
+      "Organisation apprenante et culture collaborative",
+      "Suivi, évaluation et engagement des apprenants"
+     ],
+     "programme": [
+      {
+       "titre": "Cadre réglementaire et pilotage du plan de formation",
+       "points": [
+        "Réforme de la formation professionnelle et obligations entreprises.",
+        "Construction du plan de formation : parties prenantes, budgétisation, priorisation.",
+        "Indicateurs clés de performance formation (KPI) et reporting réglementaire.",
+        "Atelier : Élaboration budgétaire simplifiée avec Excel."
+       ]
+      },
+      {
+       "titre": "Dispositifs et modalités hybrides de formation",
+       "points": [
+        "Présentiel vs distanciel : avantages, contraintes, usages.",
+        "Innovations pédagogiques numériques : MOOCs, serious games, mobile learning.",
+        "Intégration de l’IA dans les parcours d’apprentissage (personnalisation, tutorat).",
+        "Cas pratique : conception d’un parcours hybride pour un métier ciblé."
+       ]
+      },
+      {
+       "titre": "Organisation apprenante et culture collaborative",
+       "points": [
+        "Concepts clés : apprentissage continu, sharing knowledge, capitalisation.",
+        "Communication interne et réseaux d’expertise.",
+        "Méthodes agiles appliquées à la formation.",
+        "Atelier : animation d’une communauté de pratique virtuelles."
+       ]
+      },
+      {
+       "titre": "Suivi, évaluation et engagement des apprenants",
+       "points": [
+        "Outils de suivi : LMS, solutions analytics, feedback en temps réel.",
+        "Méthodes d’évaluation formatives et certificatives.",
+        "Engagement & motivation : gamification, badges, reconnaissance sociale.",
+        "Restitution : rapport sur business impact formation (5 pages)."
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    },
+    {
+     "titre": "Module 36 : Acculturation digitale et parcours collaborateur",
+     "bloc": "BC05 – Manager les talents et l’expérience collaborateur",
+     "formation": "Manager des ressources humaines",
+     "rncp": "",
+     "activite": "A17 – Management de l’expérience collaborateur",
+     "intervenant": "",
+     "volume": "14 heures",
+     "sequencage": "",
+     "objectif": "1. Mettre en œuvre une démarche onboarding digitale, hybride et inclusive, intégrant supports accessibles pour tous les profils. 2. Concevoir un parcours collaborateur adapté favorisant acculturation, engagement et fidélisation. 3. Intégrer les dispositifs de gestion adaptative en fonction des différents contextes organisationnels et niveaux de maturité digitale. 4. Utiliser les outils digitaux pour personnaliser et suivre l’expérience collaborateur tout au long du cycle de vie.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.17"
+     ],
+     "notions_cles": [
+      "Fondamentaux de l’onboarding digital et inclusif",
+      "Supports et outils pour un onboarding efficace",
+      "Suivi et évaluation de l’expérience collaborateur",
+      "Personnalisation et fidélisation à long terme"
+     ],
+     "programme": [
+      {
+       "titre": "Fondamentaux de l’onboarding digital et inclusif",
+       "points": [
+        "Concepts clés : acculturation, inclusivité, accessibilité digitale (RGAA, FALC).",
+        "Typologies de parcours collaborateurs en contextes hybrides.",
+        "Atelier : cartographie parcours collaborateur sectoriel (analyse besoins)."
+       ]
+      },
+      {
+       "titre": "Supports et outils pour un onboarding efficace",
+       "points": [
+        "Plateformes digitales d’accompagnement : LMS, SIRH, chatbots IA.",
+        "Supports inclusifs : vidéos sous-titrées, documents FALC, accessibilité mobile.",
+        "Automatisation personnalisée : workflow onboarding, notifications adaptatives.",
+        "Cas pratique : conception de kit digital onboarding (template Canva)."
+       ]
+      },
+      {
+       "titre": "Suivi et évaluation de l’expérience collaborateur",
+       "points": [
+        "KPIs : taux d’absentéisme en période d’intégration, NPS collaborateur, feedbacks qualifiés.",
+        "Outils d’enquête digitale : SurveyMonkey, Qualtrics, Microsoft Forms.",
+        "Méthodes d’analyse des données : tableaux de bord Power BI, dashboards SIRH.",
+        "Atelier : simulation collecte et analyse feedback onboarding."
+       ]
+      },
+      {
+       "titre": "Personnalisation et fidélisation à long terme",
+       "points": [
+        "Adaptation des parcours selon profils (âge, poste, maturité digitale).",
+        "Engagement via gamification, badges et reconnaissance sociale digitale.",
+        "Gestion proactive des risques de désengagement (early warning).",
+        "Restitution : plan digital onboarding + fidélisation (présentation 5 min)."
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    },
+    {
+     "titre": "Module 37 : Anticipation RH via Analytics et IA",
+     "bloc": "BC05 – Manager les talents et l’expérience collaborateur",
+     "formation": "Manager des ressources humaines",
+     "rncp": "",
+     "activite": "A17 – Management de l’expérience collaborateur",
+     "intervenant": "",
+     "volume": "21 heures",
+     "sequencage": "",
+     "objectif": "1. Planifier la gestion anticipative des départs et des successions en exploitant les résultats de l'Analytics RH et de l'IA, sans nécessiter la construction de modèles techniques. 2. Analyser et interpréter de manière critique les tableaux de bord prédictifs, en comprenant les sources de données et les limites des modèles pour évaluer les risques de turnover. 3. Garantir l'usage éthique et responsable des solutions d'IA en RH (offboarding, succession), en identifiant et en gérant les biais potentiels et en assurant la conformité (RGPD, CNIL). 4. Transformer les alertes d'anticipation RH issues de la data en plans d’action stratégiques concrets d’amélioration QVCT et de bien-être collaborateur.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.17"
+     ],
+     "notions_cles": [
+      "Fondamentaux de l’Analytics et IA appliqués à l’anticipation RH",
+      "Analyse critique et éthique des outils IA d'anticipation RH",
+      "Intégration de l’anticipation RH dans la stratégie QVCT",
+      "Pilotage, tableau de bord et reporting décisionnel"
+     ],
+     "programme": [
+      {
+       "titre": "Fondamentaux de l’Analytics et IA appliqués à l’anticipation RH",
+       "points": [
+        "Concepts clés : offboarding, flight risk, Analytics prédictive.",
+        "Types de données utiles : turnover, engagement, performance, historique formation.",
+        "Atelier : étude dataset turnover, visualisation KPIs."
+       ]
+      },
+      {
+       "titre": "Analyse critique et éthique des outils IA d'anticipation RH",
+       "points": [
+        "Compréhension fonctionnelle des outils IA du marché (Visier, Workday, IBM Watson Talent) : rôle des scores de risque (flight risk) et des readiness score de succession.",
+        "Analyse critique de l'opacité et des biais algorithmiques : identification des risques de discrimination et nécessité du droit à l’explication (IA explicable).",
+        "Qualité des données et conformité : les données nécessaires à la prédiction (turnover, engagement) doivent être conformes RGPD et CNIL.",
+        "Cas pratique : Interprétation et validation des résultats d'un modèle prédictif (modèle de données fourni, sans construction technique) pour élaborer un plan de rétention et de succession ciblé."
+       ]
+      },
+      {
+       "titre": "Intégration de l’anticipation RH dans la stratégie QVCT",
+       "points": [
+        "Identification des leviers QVCT liés au turnover et à la santé au travail.",
+        "Collaboration avec services santé, RH, managers pour plans d’action.",
+        "Communication et gestion du changement autour des données prédictives.",
+        "Atelier simulation plan d’action QVCT préventif."
+       ]
+      },
+      {
+       "titre": "Pilotage, tableau de bord et reporting décisionnel",
+       "points": [
+        "KPIs : taux turnover, coût départ, indice satisfaction, NPS collaborateur.",
+        "Tableau de bord interactif : conception et analyse sur Power BI/Tableau.",
+        "Restitution : présentation d’un plan d’action prédictif et son reporting (oral 5 min)."
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    },
+    {
+     "titre": "Module 38 : Approche QVCT digitale et RSE intégrée",
+     "bloc": "BC05 – Manager les talents et l’expérience collaborateur",
+     "formation": "Manager des ressources humaines",
+     "rncp": "",
+     "activite": "A17 – Management de l’expérience collaborateur",
+     "intervenant": "",
+     "volume": "21 heures",
+     "sequencage": "",
+     "objectif": "1. Déployer une démarche QVCT hybride intégrant outils digitaux, data RH et IA dans une approche RSE. 2. Maîtriser les outils de mesure et d'analyse des facteurs QVCT (organisation, conditions, relations). 3. Concevoir des plans d'action QVCT data-driven alignés sur les priorités RSE de l'entreprise. 4. Piloter l'amélioration continue de la qualité de vie au travail via tableaux de bord et indicateurs prédictifs.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.17"
+     ],
+     "notions_cles": [
+      "Diagnostic QVCT digital et cartographie des enjeux",
+      "Data analytics et IA pour analyse QVCT",
+      "Conception plans d'action QVCT RSE-intégrés",
+      "Pilotage continu et tableaux de bord QVCT"
+     ],
+     "programme": [
+      {
+       "titre": "Diagnostic QVCT digital et cartographie des enjeux",
+       "points": [
+        "Cadre réglementaire QVCT : DUERP numérique, obligations employeur hybride.",
+        "Facteurs QVCT : organisation travail (flexibilité, télétravail), conditions matérielles, relations sociales.",
+        "Outils diagnostic : questionnaires digitaux, NPS collaborateur, baromètres eNPS.",
+        "Atelier : conception questionnaire QVCT 15 questions (Qualtrics)."
+       ]
+      },
+      {
+       "titre": "Data analytics et IA pour analyse QVCT",
+       "points": [
+        "Sources données : SIRH, badges connectés, outils collaboration (Teams Analytics).",
+        "Indicateurs avancés : burnout index, engagement score, cohésion équipe, bien-être subjectif.",
+        "IA prédictive : anticipation RPS, détection signaux faibles démissions.",
+        "Cas pratique : analyse dataset QVCT anonymisé (Power BI dashboard)."
+       ]
+      },
+      {
+       "titre": "Conception plans d'action QVCT RSE-intégrés",
+       "points": [
+        "Matrice priorisation : impact business vs urgence collaborateur.",
+        "Actions digitales : plateformes bien-être, formations anti-stress, coaching IA.",
+        "Intégration RSE : empreinte carbone télétravail, inclusion neurodiversité.",
+        "Atelier : plan d'action QVCT 90 jours (5 leviers prioritaires)."
+       ]
+      },
+      {
+       "titre": "Pilotage continu et tableaux de bord QVCT",
+       "points": [
+        "KPIs temps réel : satisfaction hebdo, absentéisme, turnover prédictif.",
+        "Communication résultats : townhalls digitaux, intranet collaboratif.",
+        "Amélioration continue : PDCA digitalisé, feedback loops.",
+        "Restitution : dashboard QVCT + plan d'action 6 mois (présentation 7 min)."
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    },
+    {
+     "titre": "Module 39 : Santé au travail digitale et prévention psychosociale",
+     "bloc": "BC05 – Manager les talents et l’expérience collaborateur",
+     "formation": "Manager des ressources humaines",
+     "rncp": "",
+     "activite": "A17 – Management de l’expérience collaborateur",
+     "intervenant": "",
+     "volume": "21 heures",
+     "sequencage": "",
+     "objectif": "1) Évaluer et prévenir les risques physiques et psychosociaux en environnement digitalisé. 2) Mettre en place une organisation du travail conciliant santé des collaborateurs et performance globale. 3) Utiliser les outils digitaux et collaboratifs dans la gestion de la santé au travail. 4) Intégrer les exigences réglementaires et normatives de la prévention psychosociale.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.17"
+     ],
+     "notions_cles": [
+      "Cadre réglementaire et enjeux santé travail",
+      "Évaluation numérique des risques",
+      "Prévention et dispositifs innovants",
+      "Pilotage et suivi santé au travail"
+     ],
+     "programme": [
+      {
+       "titre": "Cadre réglementaire et enjeux santé travail",
+       "points": [
+        "Obligations légales SST, DUERP, prévention RPS.",
+        "Identification et typologie risques psychosociaux et physiques (stress, harcèlement, TMS).",
+        "Impacts santé/performance : absentéisme, turnover, engagement.",
+        "Atelier : cartographie risques et facteurs organisationnels par secteur."
+       ]
+      },
+      {
+       "titre": "Évaluation numérique des risques",
+       "points": [
+        "Outils digitaux de collecte : enquêtes anonymes, capteurs biométriques, apps mobiles.",
+        "Analyse data RH : tableau bord, indicateurs TMS, signaux faibles psychosociaux.",
+        "Méthodes d’interprétation et alertes précoces via IA.",
+        "Cas pratique : interprétation Dashboard santé (Power BI)."
+       ]
+      },
+      {
+       "titre": "Prévention et dispositifs innovants",
+       "points": [
+        "Actions préventives traditionnelles et digitales (télétravail ergonomie, sophrologie en ligne).",
+        "Intégration des nouvelles technologies : réalité virtuelle, apps bien-être.",
+        "Programmes personnalisés de bien-être et suivi continu.",
+        "Atelier : conception d’un plan de prévention numérique et humain."
+       ]
+      },
+      {
+       "titre": "Pilotage et suivi santé au travail",
+       "points": [
+        "Tableaux de bord santé : KPI absentéisme, engagement, satisfaction.",
+        "Communication et formation : culture prévention et sensibilisation digitales.",
+        "Gestion de la conformité et audit interne.",
+        "Restitution : rapport santé travail digitalisé + recommandations (présentation 5 min)."
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    }
+   ]
+  }
+ ]
+}

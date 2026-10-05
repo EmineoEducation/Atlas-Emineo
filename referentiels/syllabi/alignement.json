@@ -747,6 +747,558 @@
      "titre": "Identité d'agence"
     }
    ]
+  },
+  {
+   "cle": "mdec-39354",
+   "liens": [
+    {
+     "syllabus": "C1 Veille, analyse et stratégie",
+     "bloc": "B01",
+     "module_pf": "C1 Veille, analyse et stratégie",
+     "origine": "code"
+    },
+    {
+     "syllabus": "C2 Diagnostic stratégique",
+     "bloc": "B01",
+     "module_pf": "C2 Diagnostic stratégique",
+     "origine": "code"
+    },
+    {
+     "syllabus": "C3 La Reflexion collaborative",
+     "bloc": "B01",
+     "module_pf": "C3 La Reflexion collaborative",
+     "origine": "code"
+    },
+    {
+     "syllabus": "C41 Culture et Gouvernance",
+     "bloc": "B01",
+     "module_pf": "C41 Culture et Gouvernance",
+     "origine": "code"
+    },
+    {
+     "syllabus": "C42 RSE",
+     "bloc": "B01",
+     "module_pf": "C42 RSE",
+     "origine": "code"
+    },
+    {
+     "syllabus": "C5 Plan d'action stratégique",
+     "bloc": "B01",
+     "module_pf": "C5 Plan d'action stratégique",
+     "origine": "code"
+    },
+    {
+     "syllabus": "C6 Communication et Leadership",
+     "bloc": "B01",
+     "module_pf": "C6 Communication et Leadership",
+     "origine": "code"
+    },
+    {
+     "syllabus": "C7 Management de projet",
+     "bloc": "B01",
+     "module_pf": "C7 Management de projet",
+     "origine": "code"
+    },
+    {
+     "syllabus": "C81 Négociation",
+     "bloc": "B01",
+     "module_pf": "C81 Négociation",
+     "origine": "code"
+    },
+    {
+     "syllabus": "C82 L'accompagnement stratégique",
+     "bloc": "B01",
+     "module_pf": "C82 L'accompagnement stratégique",
+     "origine": "code"
+    },
+    {
+     "syllabus": "C9 Stratégie de la Performance",
+     "bloc": "B01",
+     "module_pf": "C9 Stratégie de la Performance",
+     "origine": "code"
+    },
+    {
+     "syllabus": "C101 Maîtriser Excel",
+     "bloc": "B02",
+     "module_pf": "C101 Maîtriser Excel",
+     "origine": "code"
+    },
+    {
+     "syllabus": "C102 Gestion budget",
+     "bloc": "B02",
+     "module_pf": "C102 Gestion budget",
+     "origine": "code"
+    },
+    {
+     "syllabus": "C103 Analyse financière et financement",
+     "bloc": "B02",
+     "module_pf": "C103 Analyse financière et financement",
+     "origine": "code"
+    },
+    {
+     "syllabus": "C11 Environnement réglementaire et juridique",
+     "bloc": "B02",
+     "module_pf": "C11 Environnement règlementaire et juridique",
+     "origine": "code"
+    },
+    {
+     "syllabus": "C121 Gestion RH",
+     "bloc": "B02",
+     "module_pf": "C121 Gestion RH",
+     "origine": "code"
+    },
+    {
+     "syllabus": "C122 Talent Acquisition",
+     "bloc": "B02",
+     "module_pf": "C122 Talent acquisition",
+     "origine": "code"
+    },
+    {
+     "syllabus": "C13 Gestion des Services Généraux",
+     "bloc": "B02",
+     "module_pf": "C13 Gestion des Services généraux",
+     "origine": "code"
+    },
+    {
+     "syllabus": "C141 Organisation agile",
+     "bloc": "B02",
+     "module_pf": "C141 Organisation agile",
+     "origine": "code"
+    },
+    {
+     "syllabus": "C142 RSE et Qualité continue",
+     "bloc": "B02",
+     "module_pf": "C142 RSE et Qualité continue",
+     "origine": "code"
+    },
+    {
+     "syllabus": "C15 Veille et Innovation",
+     "bloc": "B03",
+     "module_pf": "C15 Veille et Innovation",
+     "origine": "code"
+    },
+    {
+     "syllabus": "C16 Analyse du marché et ciblage",
+     "bloc": "B03",
+     "module_pf": "C16 Analyse du marché et ciblage",
+     "origine": "code"
+    },
+    {
+     "syllabus": "C17 Benchmarking et diagnostic",
+     "bloc": "B03",
+     "module_pf": "C17 Benchmarking et diagnostic",
+     "origine": "code"
+    },
+    {
+     "syllabus": "C18 Stratégie commerciale",
+     "bloc": "B03",
+     "module_pf": "C18 Stratégie commerciale",
+     "origine": "code"
+    },
+    {
+     "syllabus": "C19 PAC et développement réseau",
+     "bloc": "B03",
+     "module_pf": "C19 PAC et développement réseau",
+     "origine": "code"
+    },
+    {
+     "syllabus": "C201 Gestion des risques",
+     "bloc": "B03",
+     "module_pf": "C201 Gestion des risques",
+     "origine": "code"
+    },
+    {
+     "syllabus": "C202 Analyse et sécurisation de stratégie",
+     "bloc": "B03",
+     "module_pf": "C202 Analyse et sécurisation de stratégie",
+     "origine": "code"
+    },
+    {
+     "syllabus": "C21 Business Plan",
+     "bloc": "B03",
+     "module_pf": "C21 Business plan",
+     "origine": "code"
+    },
+    {
+     "syllabus": "C221 Budget et Négociation approfondie",
+     "bloc": "B03",
+     "module_pf": "C221 Budget et Négociation approfondie",
+     "origine": "code"
+    },
+    {
+     "syllabus": "C222 Pitch",
+     "bloc": "B03",
+     "module_pf": "C222 Pitch",
+     "origine": "code"
+    },
+    {
+     "syllabus": "C24 Politique commerciale",
+     "bloc": "B02",
+     "module_pf": "C24 Politique commerciale",
+     "origine": "code"
+    },
+    {
+     "syllabus": "C25 Stratégie client",
+     "bloc": "B02",
+     "module_pf": "C25 Stratégie client",
+     "origine": "code"
+    },
+    {
+     "syllabus": "C26 RSE et pratiques commerciales",
+     "bloc": "B02",
+     "module_pf": "C26 RSE et pratiques commerciales",
+     "origine": "code"
+    },
+    {
+     "syllabus": "C28 Performance et pratiques responsables",
+     "bloc": "B02",
+     "module_pf": "C28 Performance et pratiques responsables",
+     "origine": "code"
+    },
+    {
+     "syllabus": "C29 Structure et Organisation",
+     "bloc": "B05",
+     "module_pf": "C29 Structure et Organisation",
+     "origine": "code"
+    },
+    {
+     "syllabus": "C30 Optimisation des processus RH",
+     "bloc": "B05",
+     "module_pf": "C30 Optimisation des processus RH",
+     "origine": "code"
+    },
+    {
+     "syllabus": "C31 Performance RH",
+     "bloc": "B05",
+     "module_pf": "C31 Performance RH",
+     "origine": "code"
+    },
+    {
+     "syllabus": "C321 Management des équipes",
+     "bloc": "B05",
+     "module_pf": "C321 Management des équipes",
+     "origine": "code"
+    },
+    {
+     "syllabus": "C322 QSE",
+     "bloc": "B05",
+     "module_pf": "C322 QSE",
+     "origine": "code"
+    },
+    {
+     "syllabus": "C33 Conduite du changement",
+     "bloc": "B05",
+     "module_pf": "C33 Conduite du changement",
+     "origine": "code"
+    },
+    {
+     "syllabus": "C34 Entretien annuel : analyse et exploitation",
+     "bloc": "B05",
+     "module_pf": "C34 Entretien annuel : analyse et exploitation",
+     "origine": "code"
+    },
+    {
+     "syllabus": "C35-36 Gestion des talents",
+     "bloc": "B05",
+     "module_pf": "C35-36 Gestion des talents",
+     "origine": "code"
+    },
+    {
+     "syllabus": "C37 Co-développement et Intelligence collective",
+     "bloc": "B05",
+     "module_pf": "C37 Co-développement et Inteligence collective",
+     "origine": "code"
+    },
+    {
+     "syllabus": "C27 Performance commerciale et KPI",
+     "bloc": "B02",
+     "module_pf": "C27Performance commerciale et KPI",
+     "origine": "corrige"
+    }
+   ],
+   "ecartes": [],
+   "fusions": [],
+   "resume": {
+    "liens": 44,
+    "modules_alimentes": 44,
+    "syllabi_ecartes": 0,
+    "modules_sans_syllabus": 4
+   },
+   "modules_sans_syllabus": [
+    {
+     "bloc": "HB",
+     "titre": "Intégration - Coaching",
+     "section": "Transversal"
+    },
+    {
+     "bloc": "HB",
+     "titre": "BT Masterclass Séminaire Workshop",
+     "section": "Transversal"
+    },
+    {
+     "bloc": "HB",
+     "titre": "BT Masterclass Workshop",
+     "section": "Transversal"
+    },
+    {
+     "bloc": "HB",
+     "titre": "A developper",
+     "section": "Transversal"
+    }
+   ]
+  },
+  {
+   "cle": "mrh-41295",
+   "liens": [
+    {
+     "syllabus": "Module 1 : Veille stratégique RH digitale et réglementaire",
+     "bloc": "B01",
+     "module_pf": "Module 1 : Veille stratégique RH digitale et réglementaire",
+     "origine": "code"
+    },
+    {
+     "syllabus": "Module 2 : Veille économique, sociale et technologique avec outils IA",
+     "bloc": "B01",
+     "module_pf": "Module 2 : Veille économique, sociale et technologique avec outils IA",
+     "origine": "code"
+    },
+    {
+     "syllabus": "Module 3 : Management de l’innovation sociale et organisationnelle",
+     "bloc": "B01",
+     "module_pf": "Module 3 : Management de l’innovation sociale et organisationnelle",
+     "origine": "code"
+    },
+    {
+     "syllabus": "Module 4 : Méthodes collaboratives et transformation digitale RH.",
+     "bloc": "B01",
+     "module_pf": "Module 4 : Méthodes collaboratives et transformation digitale RH",
+     "origine": "code"
+    },
+    {
+     "syllabus": "Module 5 : Diagnostic stratégique RH et analyse des processus",
+     "bloc": "B01",
+     "module_pf": "Module 5 : Diagnostic stratégique RH et analyse des processus",
+     "origine": "code"
+    },
+    {
+     "syllabus": "Module 6 : Outils d’audit RH et utilisation de data analytics",
+     "bloc": "B01",
+     "module_pf": "Module 6 : Outils d’audit RH et utilisation de data analytics",
+     "origine": "code"
+    },
+    {
+     "syllabus": "Module 7 : Stratégie RH responsable et indicateurs clés (KPI)",
+     "bloc": "B01",
+     "module_pf": "Module 7 : Stratégie RH responsable et indicateurs clés (KPI",
+     "origine": "code"
+    },
+    {
+     "syllabus": "Module 8 : RSE et transition écologique en RH",
+     "bloc": "B01",
+     "module_pf": "Module 8 : RSE et transition écologique en RH",
+     "origine": "code"
+    },
+    {
+     "syllabus": "Module 9 : Priorisation RSE et analyse de matérialité RH",
+     "bloc": "B01",
+     "module_pf": "Module 9 : Priorisation RSE et analyse de matérialité RH",
+     "origine": "code"
+    },
+    {
+     "syllabus": "Module 10 : Gestion des risques RH avec IA prédictive et approche effectuale",
+     "bloc": "B01",
+     "module_pf": "Module 10 : Gestion des risques RH avec IA prédictive et approche effectuale",
+     "origine": "code"
+    },
+    {
+     "syllabus": "Module 22 : Stratégies de rémunération et mix salarial digital",
+     "bloc": "B03",
+     "module_pf": "Module 22 : Stratégies de rémunération et mix salarial digita",
+     "origine": "code"
+    },
+    {
+     "syllabus": "Module 23 : Processus de paie sécurisés avec outils digitaux",
+     "bloc": "B03",
+     "module_pf": "Module 23 : Processus de paie sécurisés avec outils digitaux",
+     "origine": "code"
+    },
+    {
+     "syllabus": "Module 24 : Digitalisation des processus RH et conformité réglementaire",
+     "bloc": "B03",
+     "module_pf": "Module 24 : Digitalisation des processus RH et conformité réglementaire",
+     "origine": "code"
+    },
+    {
+     "syllabus": "Module 25 : Instances représentatives et climat social digital",
+     "bloc": "B04",
+     "module_pf": "Module 25 : Instances représentatives et climat social digita",
+     "origine": "code"
+    },
+    {
+     "syllabus": "Module 26 : Dialogue social responsable et valorisation RSE",
+     "bloc": "B04",
+     "module_pf": "Module 26 : Dialogue social responsable et valorisation RSE",
+     "origine": "code"
+    },
+    {
+     "syllabus": "Module 27 : Marketing RH digital et marque employeur responsable",
+     "bloc": "B04",
+     "module_pf": "Module 27 : Marketing RH digital et marque employeur responsable",
+     "origine": "code"
+    },
+    {
+     "syllabus": "Module 28 : Outils de communication interne hybrides et réseaux sociaux",
+     "bloc": "B04",
+     "module_pf": "Module 28 : Outils de communication interne hybrides et réseaux sociaux",
+     "origine": "code"
+    },
+    {
+     "syllabus": "Module 29 : Méthodes de recueil terrain et posture managériale",
+     "bloc": "B04",
+     "module_pf": "Module 29 : Méthodes de recueil terrain et posture managériale",
+     "origine": "code"
+    },
+    {
+     "syllabus": "Module 11 : Gouvernance et sécurité des données RH (RGPD et éthique)",
+     "bloc": "B02",
+     "module_pf": "Module 11 : Gouvernance et sécurité des données RH (RGPD et éthique",
+     "origine": "code"
+    },
+    {
+     "syllabus": "Module 12 : Stratégie RH data-driven et outils digitaux",
+     "bloc": "B02",
+     "module_pf": "Module 12 : Stratégie RH data-driven et outils digitaux",
+     "origine": "code"
+    },
+    {
+     "syllabus": "Module 13 : SIRH avancé et data analytics RH",
+     "bloc": "B02",
+     "module_pf": "Module 13 : SIRH avancé et data analytics RH",
+     "origine": "code"
+    },
+    {
+     "syllabus": "Module 14 : Visualisation et reporting social interactif",
+     "bloc": "B02",
+     "module_pf": "Module 14 : Visualisation et reporting social interactif",
+     "origine": "code"
+    },
+    {
+     "syllabus": "Module 15 : Tableaux de bord RH et décision data-driven",
+     "bloc": "B02",
+     "module_pf": "Module 15 : Tableaux de bord RH et décision data-driven",
+     "origine": "code"
+    },
+    {
+     "syllabus": "Module 16 : Conception de projets RH durables et inclusifs",
+     "bloc": "B02",
+     "module_pf": "Module 16 : Conception de projets RH durables et inclusifs",
+     "origine": "code"
+    },
+    {
+     "syllabus": "Module 17 : Méthodologies agiles en gestion de projet RH",
+     "bloc": "B02",
+     "module_pf": "Module 17 : Méthodologies agiles en gestion de projet RH",
+     "origine": "code"
+    },
+    {
+     "syllabus": "Module 18 : Contrôle budgétaire et pilotage financier RH",
+     "bloc": "B02",
+     "module_pf": "Module 18 : Contrôle budgétaire et pilotage financier RH",
+     "origine": "code"
+    },
+    {
+     "syllabus": "Module 19 : Animation participative et communication inclusive.",
+     "bloc": "B02",
+     "module_pf": "Module 19 : Animation participative et communication inclusive",
+     "origine": "code"
+    },
+    {
+     "syllabus": "Module 20 : Partenariats durables et collaboration responsable",
+     "bloc": "B02",
+     "module_pf": "Module 20 : Partenariats durables et collaboration responsable",
+     "origine": "code"
+    },
+    {
+     "syllabus": "Module 21 : Management hybride des équipes et télétravail",
+     "bloc": "B02",
+     "module_pf": "Module 21 : Management hybride des équipes et télétravail",
+     "origine": "code"
+    },
+    {
+     "syllabus": "Module 30 : Sourcing et sélection, pilotés par l’IA",
+     "bloc": "B05",
+     "module_pf": "Module 30 : Sourcing et sélection pilotés par l’IA",
+     "origine": "code"
+    },
+    {
+     "syllabus": "Module 31 : Neurosciences et optimisation de l’expérience candidat.",
+     "bloc": "B05",
+     "module_pf": "Module 31 : Neurosciences et optimisation de l’expérience candidat",
+     "origine": "code"
+    },
+    {
+     "syllabus": "Module 32 : Rédaction RH inclusives et marketing RH attractif",
+     "bloc": "B05",
+     "module_pf": "Module 32 : Rédaction RH inclusives et marketing RH attractif",
+     "origine": "code"
+    },
+    {
+     "syllabus": "Module 33 : Analyse prédictive des compétences et veille marché",
+     "bloc": "B05",
+     "module_pf": "Module 33 : Analyse prédictive des compétences et veille marché",
+     "origine": "code"
+    },
+    {
+     "syllabus": "Module 34 : Talent marketplace et plan de succession digital",
+     "bloc": "B05",
+     "module_pf": "Module 34 : Talent marketplace et plan de succession digital",
+     "origine": "code"
+    },
+    {
+     "syllabus": "Module 35 : Formation hybride et organisation apprenante",
+     "bloc": "B05",
+     "module_pf": "Module 35 : Formation hybride et organisation apprenante",
+     "origine": "code"
+    },
+    {
+     "syllabus": "Module 36 : Acculturation digitale et parcours collaborateur",
+     "bloc": "B05",
+     "module_pf": "Module 36 : Acculturation digitale et parcours collaborateur",
+     "origine": "code"
+    },
+    {
+     "syllabus": "Module 37 : Anticipation RH via Analytics et IA",
+     "bloc": "B05",
+     "module_pf": "Module 37 : Anticipation RH via analytics et IA",
+     "origine": "code"
+    },
+    {
+     "syllabus": "Module 38 : Approche QVCT digitale et RSE intégrée",
+     "bloc": "B05",
+     "module_pf": "Module 38 : Approche QVCT digitale et RSE intégrée",
+     "origine": "code"
+    },
+    {
+     "syllabus": "Module 39 : Santé au travail digitale et prévention psychosociale",
+     "bloc": "B05",
+     "module_pf": "Module 39 : Santé au travail digitale et prévention psychosociale",
+     "origine": "code"
+    }
+   ],
+   "ecartes": [],
+   "fusions": [],
+   "resume": {
+    "liens": 39,
+    "modules_alimentes": 39,
+    "syllabi_ecartes": 0,
+    "modules_sans_syllabus": 1
+   },
+   "modules_sans_syllabus": [
+    {
+     "bloc": "B05",
+     "titre": "CT TUTORAT EPREUVE COMPLEMENTAIRE - Dossier P2O"
+    }
+   ]
   }
  ]
 }

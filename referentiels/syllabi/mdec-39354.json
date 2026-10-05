@@ -1,0 +1,2941 @@
+{
+ "genere_le": "2026-10-05",
+ "outil": "extraire-syllabus",
+ "sources": [
+  {
+   "fichier": "Syllabi du module _C1 Veille, analyse et stratégie.docx",
+   "modules": [
+    {
+     "titre": "C1 Veille, analyse et stratégie",
+     "bloc": "BC 1 - Elaborer la stratégie générale de développement de l'entreprise",
+     "formation": "",
+     "rncp": "",
+     "activite": "1. Analyse de l'environnement interne et externe de l'entreprise",
+     "intervenant": "",
+     "volume": "",
+     "sequencage": "",
+     "objectif": "À l'issue de ce module, l'apprenant sera capable de mettre en place un système de veille stratégique efficace, d'analyser l'environnement externe et interne de l'entreprise, et d'identifier les tendances et signaux faibles pour guider la prise de décision stratégique.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.1"
+     ],
+     "notions_cles": [
+      "Fondamentaux de la Business Intelligence et de la veille stratégique",
+      "Outils et techniques de veille",
+      "Analyse de l'environnement concurrentiel",
+      "Environnement international et intelligence économique",
+      "De la veille à la décision stratégique"
+     ],
+     "programme": [
+      {
+       "titre": "Fondamentaux de la Business Intelligence et de la veille stratégique",
+       "points": [
+        "Définition et enjeux de la business intelligence",
+        "Différents types de veille (concurrentielle, technologique, juridique, sociétale)",
+        "Cycle de la veille et méthodologie"
+       ]
+      },
+      {
+       "titre": "Outils et techniques de veille",
+       "points": [
+        "Cartographie des sources d'information pertinentes",
+        "Outils digitaux de collecte, d'analyse et de diffusion de l'information",
+        "Intelligence artificielle appliquée à la veille stratégique",
+        "Évaluation de la fiabilité des sources et de l'information"
+       ]
+      },
+      {
+       "titre": "Analyse de l'environnement concurrentiel",
+       "points": [
+        "Méthodologies d'analyse concurrentielle (5 forces de Porter, SWOT, PESTEL)",
+        "Analyse des concurrents directs et indirects",
+        "Benchmarking stratégique et veille concurrentielle"
+       ]
+      },
+      {
+       "titre": "Environnement international et intelligence économique",
+       "points": [
+        "Spécificités de la veille internationale et géopolitique",
+        "Analyse des marchés internationaux et tendances globales",
+        "Risques et opportunités à l'international"
+       ]
+      },
+      {
+       "titre": "De la veille à la décision stratégique",
+       "points": [
+        "Traitement et analyse des informations collectées",
+        "Identification des signaux faibles et anticipation des tendances",
+        "Élaboration de recommandations stratégiques basées sur la veille"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    }
+   ]
+  },
+  {
+   "fichier": "Syllabi du module _C2 Diagnostic stratégique_.docx",
+   "modules": [
+    {
+     "titre": "C2 Diagnostic stratégique",
+     "bloc": "BC 1 - Elaborer la stratégie générale de développement de l'entreprise",
+     "formation": "",
+     "rncp": "",
+     "activite": "1. Analyse de l'environnement interne et externe de l'entreprise",
+     "intervenant": "",
+     "volume": "",
+     "sequencage": "",
+     "objectif": "À l'issue de ce module, l'apprenant sera capable de réaliser un diagnostic stratégique complet d'une organisation, d'identifier ses forces et faiblesses, et de déterminer les leviers d'action stratégiques pertinents pour son développement.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.2"
+     ],
+     "notions_cles": [
+      "Fondamentaux du diagnostic stratégique",
+      "Diagnostic interne de l'organisation",
+      "Outils et méthodes d'analyse stratégique",
+      "Du diagnostic aux leviers d'action"
+     ],
+     "programme": [
+      {
+       "titre": "Fondamentaux du diagnostic stratégique",
+       "points": [
+        "Définition et enjeux du diagnostic stratégique",
+        "Place du diagnostic dans le processus de planification stratégique",
+        "Approches contemporaines du diagnostic stratégique"
+       ]
+      },
+      {
+       "titre": "Diagnostic interne de l'organisation",
+       "points": [
+        "Analyse de la chaîne de valeur",
+        "Audit des ressources et compétences",
+        "Analyse des capacités dynamiques",
+        "Diagnostic financier et extra-financier"
+       ]
+      },
+      {
+       "titre": "Outils et méthodes d'analyse stratégique",
+       "points": [
+        "Matrice SWOT et ses déclinaisons avancées",
+        "Matrices d'aide à la décision (BCG, McKinsey, ADL)",
+        "Business Model Canvas et Lean Canvas",
+        "Méthode des 7S de McKinsey"
+       ]
+      },
+      {
+       "titre": "Du diagnostic aux leviers d'action",
+       "points": [
+        "Identification des facteurs clés de succès",
+        "Analyse des avantages concurrentiels",
+        "Détermination des options stratégiques",
+        "Priorisation des leviers d'action stratégiques"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    }
+   ]
+  },
+  {
+   "fichier": "Syllabi du module _C3 La Reflexion collaborative_.docx",
+   "modules": [
+    {
+     "titre": "C3 La Reflexion collaborative",
+     "bloc": "BC 1 - Elaborer la stratégie générale de développement de l'entreprise",
+     "formation": "",
+     "rncp": "",
+     "activite": "1. Analyse de l'environnement interne et externe de l'entreprise",
+     "intervenant": "",
+     "volume": "",
+     "sequencage": "",
+     "objectif": "À l'issue de ce module, l'apprenant sera capable de mettre en œuvre des méthodes d'intelligence collective et d'animation de réunion efficaces pour synthétiser les informations stratégiques et faciliter la réflexion collaborative au sein de l'organisation.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.3"
+     ],
+     "notions_cles": [
+      "Fondamentaux de l'intelligence collective",
+      "Techniques d'animation de réunion",
+      "Méthodes de brainstorming avancées",
+      "Synthèse et capitalisation des informations stratégiques"
+     ],
+     "programme": [
+      {
+       "titre": "Fondamentaux de l'intelligence collective",
+       "points": [
+        "Principes et enjeux de l'intelligence collective dans la prise de décision stratégique",
+        "Rôle du manager dans l'animation de la réflexion stratégique collective",
+        "Conditions de réussite d'une démarche collaborative"
+       ]
+      },
+      {
+       "titre": "Techniques d'animation de réunion",
+       "points": [
+        "Préparation et structuration de réunions stratégiques efficaces",
+        "Méthodes d'animation selon les objectifs (information, consultation, co-construction)",
+        "Gestion des dynamiques de groupe et des personnalités"
+       ]
+      },
+      {
+       "titre": "Méthodes de brainstorming avancées",
+       "points": [
+        "Techniques de créativité et d'idéation structurée",
+        "Méthodes de brainstorming hybrides (présentiel/distanciel)",
+        "Outils digitaux collaboratifs pour le brainstorming"
+       ]
+      },
+      {
+       "titre": "Synthèse et capitalisation des informations stratégiques",
+       "points": [
+        "Techniques de synthèse et de priorisation des informations",
+        "Méthodes de représentation visuelle des données (mind mapping, infographies)",
+        "Élaboration de documents de synthèse percutants pour la prise de décision"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    }
+   ]
+  },
+  {
+   "fichier": "Syllabi du module _C41 Culture et Gouvernance_.docx",
+   "modules": [
+    {
+     "titre": "C41 Culture et Gouvernance",
+     "bloc": "BC 1 - Elaborer la stratégie générale de développement de l'entreprise",
+     "formation": "",
+     "rncp": "",
+     "activite": "2. Définition de la stratégie générale de développement de l'entreprise",
+     "intervenant": "",
+     "volume": "",
+     "sequencage": "",
+     "objectif": "À l'issue de ce module, l'apprenant sera capable de déterminer une vision stratégique cohérente pour l'entreprise, de l'articuler avec les principes de gouvernance et la culture organisationnelle, et de fédérer les parties prenantes autour d'un projet d'entreprise éthique et durable.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.4"
+     ],
+     "notions_cles": [
+      "Fondamentaux de la gouvernance d'entreprise",
+      "Vision et projet stratégique",
+      "Culture d'entreprise comme levier stratégique",
+      "Gouvernance collaborative et parties prenantes"
+     ],
+     "programme": [
+      {
+       "titre": "Fondamentaux de la gouvernance d'entreprise",
+       "points": [
+        "Modèles et systèmes de gouvernance",
+        "Rôles et responsabilités des instances de gouvernance",
+        "Gouvernance et création de valeur",
+        "Éthique et transparence dans la gouvernance"
+       ]
+      },
+      {
+       "titre": "Vision et projet stratégique",
+       "points": [
+        "Processus d'élaboration de la vision d'entreprise",
+        "Articulation vision/mission/valeurs",
+        "Déclinaison de la vision en objectifs stratégiques",
+        "Communication de la vision aux parties prenantes"
+       ]
+      },
+      {
+       "titre": "Culture d'entreprise comme levier stratégique",
+       "points": [
+        "Dimension stratégique de la culture organisationnelle",
+        "Évaluation et diagnostic de la culture d'entreprise",
+        "Transformation culturelle et conduite du changement",
+        "Alignement culture/stratégie"
+       ]
+      },
+      {
+       "titre": "Gouvernance collaborative et parties prenantes",
+       "points": [
+        "Cartographie et gestion des parties prenantes",
+        "Mécanismes de collaboration dans la définition stratégique",
+        "Co-construction du projet d'entreprise",
+        "Gestion des conflits d'intérêts"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    }
+   ]
+  },
+  {
+   "fichier": "Syllabi du module _C42 RSE_.docx",
+   "modules": [
+    {
+     "titre": "C42 RSE",
+     "bloc": "BC 1 - Elaborer la stratégie générale de développement de l'entreprise",
+     "formation": "",
+     "rncp": "",
+     "activite": "2. Définition de la stratégie générale de développement de l’entreprise",
+     "intervenant": "",
+     "volume": "",
+     "sequencage": "",
+     "objectif": "À l'issue de ce module, l'apprenant sera capable d'intégrer les principes de la Responsabilité Sociétale des Entreprises (RSE) dans la stratégie globale de l'entreprise, en tenant compte des enjeux sociétaux, environnementaux et éthiques.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.4"
+     ],
+     "notions_cles": [
+      "Introduction à la RSE",
+      "Enjeux sociétaux et environnementaux",
+      "Mise en œuvre d'une stratégie RSE",
+      "Études de cas pratiques en RSE"
+     ],
+     "programme": [
+      {
+       "titre": "Introduction à la RSE",
+       "points": [
+        "Concepts et enjeux de la RSE",
+        "Normes et référentiels (ISO 26000, Global Compact, etc.)",
+        "Intégration de la RSE dans la stratégie d'entreprise"
+       ]
+      },
+      {
+       "titre": "Enjeux sociétaux et environnementaux",
+       "points": [
+        "Analyse des impacts environnementaux des activités",
+        "Transition écologique et économie circulaire",
+        "Inclusion sociale et diversité dans les organisations"
+       ]
+      },
+      {
+       "titre": "Mise en œuvre d'une stratégie RSE",
+       "points": [
+        "Élaboration d'une politique RSE alignée sur les objectifs stratégiques",
+        "Identification des parties prenantes et gestion collaborative",
+        "Indicateurs de performance RSE et reporting extra-financier"
+       ]
+      },
+      {
+       "titre": "Études de cas pratiques en RSE",
+       "points": [
+        "Analyse critique des pratiques RSE d'entreprises exemplaires",
+        "Évaluation des bénéfices économiques, sociaux et environnementaux d'une démarche RSE"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    }
+   ]
+  },
+  {
+   "fichier": "Syllabi du module _C5 Plan d'action stratégique_.docx",
+   "modules": [
+    {
+     "titre": "C5 Plan d'action stratégique",
+     "bloc": "BC 1 - Elaborer la stratégie générale de développement de l'entreprise",
+     "formation": "",
+     "rncp": "",
+     "activite": "2. Définition de la stratégie générale de développement de l’entreprise",
+     "intervenant": "",
+     "volume": "",
+     "sequencage": "",
+     "objectif": "À l'issue de ce module, l'apprenant sera capable de définir et prioriser des objectifs stratégiques alignés avec la stratégie générale, en utilisant des outils d'analyse de la valeur pour maximiser l'impact stratégique.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.5"
+     ],
+     "notions_cles": [
+      "Fondamentaux du plan d'action stratégique",
+      "Outils d'analyse et priorisation stratégique",
+      "Planification et mise en œuvre des actions stratégiques",
+      "Études de cas pratiques"
+     ],
+     "programme": [
+      {
+       "titre": "Fondamentaux du plan d'action stratégique",
+       "points": [
+        "Définition et rôle des plans d'action dans le cadre stratégique",
+        "Processus d'élaboration et priorisation des objectifs",
+        "Alignement entre stratégie globale et actions opérationnelles"
+       ]
+      },
+      {
+       "titre": "Outils d'analyse et priorisation stratégique",
+       "points": [
+        "Analyse de la valeur : principes et méthodologie",
+        "Matrices décisionnelles (impact/effort, Eisenhower)",
+        "Méthodes quantitatives et qualitatives pour la priorisation"
+       ]
+      },
+      {
+       "titre": "Planification et mise en œuvre des actions stratégiques",
+       "points": [
+        "Structuration des plans d'action : étapes clés et ressources nécessaires",
+        "Identification des risques liés à la mise en œuvre",
+        "Suivi et évaluation des actions stratégiques"
+       ]
+      },
+      {
+       "titre": "Études de cas pratiques",
+       "points": [
+        "Analyse critique de plans stratégiques réussis ou échoués",
+        "Simulation de création et mise en œuvre d'un plan stratégique pour une entreprise fictive ou réelle"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    }
+   ]
+  },
+  {
+   "fichier": "Syllabi du module _C6 Communication et Leadership_.docx",
+   "modules": [
+    {
+     "titre": "C6 Communication et Leadership",
+     "bloc": "BC 1 - Elaborer la stratégie générale de développement de l'entreprise",
+     "formation": "",
+     "rncp": "",
+     "activite": "2. Définition de la stratégie générale de développement de l’entreprise",
+     "intervenant": "",
+     "volume": "",
+     "sequencage": "",
+     "objectif": "À l'issue de ce module, l'apprenant sera capable de communiquer efficacement les objectifs stratégiques à tous les niveaux de l'organisation, en mobilisant des techniques de leadership et de force de conviction pour garantir l'adhésion des équipes.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.6"
+     ],
+     "notions_cles": [
+      "Principes fondamentaux de la communication stratégique",
+      "Leadership et force de conviction",
+      "Prise de parole en public et communication interpersonnelle",
+      "Communication en situation complexe"
+     ],
+     "programme": [
+      {
+       "titre": "Principes fondamentaux de la communication stratégique",
+       "points": [
+        "Rôle de la communication dans la mise en œuvre des objectifs stratégiques",
+        "Techniques de structuration des messages stratégiques",
+        "Adaptation du discours selon les publics (hiérarchie, équipes, partenaires)"
+       ]
+      },
+      {
+       "titre": "Leadership et force de conviction",
+       "points": [
+        "Styles de leadership et impact sur la communication",
+        "Techniques pour inspirer et motiver les équipes",
+        "Gestion des résistances au changement par la communication"
+       ]
+      },
+      {
+       "titre": "Prise de parole en public et communication interpersonnelle",
+       "points": [
+        "Techniques avancées pour une prise de parole efficace",
+        "Gestion du stress et optimisation des performances orales",
+        "Communication assertive et écoute active"
+       ]
+      },
+      {
+       "titre": "Communication en situation complexe",
+       "points": [
+        "Communication de crise : principes et outi",
+        "Négociation stratégique et gestion des conflits par la communication",
+        "Utilisation des outils digitaux pour renforcer l’impact des messages stratégiques"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    }
+   ]
+  },
+  {
+   "fichier": "Syllabi du module _C7 Management de projet_ (1).docx",
+   "modules": [
+    {
+     "titre": "C7 Management de projet",
+     "bloc": "BC 1 - Elaborer la stratégie générale de développement de l'entreprise",
+     "formation": "",
+     "rncp": "",
+     "activite": "3. Planification et évaluation de la stratégie générale de développement de l’entreprise",
+     "intervenant": "",
+     "volume": "",
+     "sequencage": "",
+     "objectif": "À l'issue de ce module, l'apprenant sera capable d'élaborer des plans stratégiques détaillés en identifiant les ressources, les étapes clés et les risques pour atteindre les objectifs fixés, tout en assurant le suivi et l'évaluation des projets stratégiques.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.7"
+     ],
+     "notions_cles": [
+      "Introduction au management de projet stratégique",
+      "Méthodologies et outils de planification stratégique",
+      "Suivi et évaluation des projets stratégiques",
+      "Études de cas pratiques en gestion de projet stratégique"
+     ],
+     "programme": [
+      {
+       "titre": "Introduction au management de projet stratégique",
+       "points": [
+        "Définition et principes fondamentaux du management de projet",
+        "Rôle du management de projet dans la mise en œuvre des stratégies",
+        "Différences entre gestion opérationnelle et gestion stratégique"
+       ]
+      },
+      {
+       "titre": "Méthodologies et outils de planification stratégique",
+       "points": [
+        "Techniques d'élaboration d'un plan stratégique (PERT, Gantt)",
+        "Identification des ressources nécessaires (humaines, techniques, financières)",
+        "Analyse des risques et gestion des imprévus"
+       ]
+      },
+      {
+       "titre": "Suivi et évaluation des projets stratégiques",
+       "points": [
+        "Indicateurs clés de performance (KPI) pour le suivi",
+        "Méthodes d'évaluation des résultats (ROI, Balanced Scorecard)",
+        "Gestion des écarts entre prévisions et réalisations"
+       ]
+      },
+      {
+       "titre": "Études de cas pratiques en gestion de projet stratégique",
+       "points": [
+        "Analyse critique de projets réussis ou échoués",
+        "Simulation d'élaboration et suivi d'un projet stratégique pour une entreprise fictive ou réelle"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    }
+   ]
+  },
+  {
+   "fichier": "Syllabi du module _C81 Négociation_.docx",
+   "modules": [
+    {
+     "titre": "C81 Négociation",
+     "bloc": "BC 1 - Elaborer la stratégie générale de développement de l'entreprise",
+     "formation": "",
+     "rncp": "",
+     "activite": "3. Planification et évaluation de la stratégie générale de développement de l’entreprise",
+     "intervenant": "",
+     "volume": "",
+     "sequencage": "",
+     "objectif": "À l'issue de ce module, l'apprenant sera capable d'accompagner les directions opérationnelles dans la déclinaison des objectifs stratégiques sur leur périmètre en responsabilité, tout en assurant l'alignement et la cohérence des plans d'action.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.8"
+     ],
+     "notions_cles": [
+      "Fondamentaux de la négociation stratégique",
+      "Techniques et outils de négociation",
+      "Alignement stratégique et cohérence des actions",
+      "Études de cas pratiques en négociation stratégique"
+     ],
+     "programme": [
+      {
+       "titre": "Fondamentaux de la négociation stratégique",
+       "points": [
+        "Définition et enjeux de la négociation dans un contexte stratégique",
+        "Différences entre négociation opérationnelle et stratégique",
+        "Rôle du manager dans les processus de négociation"
+       ]
+      },
+      {
+       "titre": "Techniques et outils de négociation",
+       "points": [
+        "Méthodologies avancées (Harvard, BATNA, ZOPA)",
+        "Préparation et structuration des négociations",
+        "Gestion des objections et des conflits"
+       ]
+      },
+      {
+       "titre": "Alignement stratégique et cohérence des actions",
+       "points": [
+        "Déclinaison des objectifs stratégiques en actions concrètes",
+        "Collaboration interservices pour garantir l’alignement",
+        "Suivi et ajustement des plans d’action"
+       ]
+      },
+      {
+       "titre": "Études de cas pratiques en négociation stratégique",
+       "points": [
+        "Analyse critique de négociations réussies ou échouées",
+        "Simulation de négociations stratégiques dans un contexte fictif ou réel"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    }
+   ]
+  },
+  {
+   "fichier": "Syllabi du module _C82 L'accompagnement stratégiqu.docx",
+   "modules": [
+    {
+     "titre": "C82 L'accompagnement stratégique",
+     "bloc": "BC 1 - Elaborer la stratégie générale de développement de l'entreprise",
+     "formation": "",
+     "rncp": "",
+     "activite": "3. Planification et évaluation de la stratégie générale de développement de l’entreprise",
+     "intervenant": "",
+     "volume": "",
+     "sequencage": "",
+     "objectif": "À l'issue de ce module, l'apprenant sera capable d'accompagner les équipes opérationnelles dans la mise en œuvre des objectifs stratégiques, en mobilisant des outils adaptés pour garantir leur cohérence avec les orientations globales.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.8"
+     ],
+     "notions_cles": [
+      "Fondamentaux de l'accompagnement stratégique",
+      "Techniques d'accompagnement des équipes opérationnelles",
+      "Outils pour garantir la cohérence stratégique",
+      "Études de cas pratiques en accompagnement stratégique"
+     ],
+     "programme": [
+      {
+       "titre": "Fondamentaux de l'accompagnement stratégique",
+       "points": [
+        "Rôle du manager dans l'accompagnement des équipes",
+        "Processus d'alignement entre stratégie globale et actions opérationnelles",
+        "La stratégie de délégation : Importance de la communication et de la mobilisation"
+       ]
+      },
+      {
+       "titre": "Techniques d'accompagnement des équipes opérationnelles",
+       "points": [
+        "Méthodes collaboratives pour décliner les objectifs stratégiques",
+        "Gestion des résistances au changement",
+        "Techniques d'adaptation aux contextes spécifiques des équipes"
+       ]
+      },
+      {
+       "titre": "Outils pour garantir la cohérence stratégique",
+       "points": [
+        "Tableaux de bord et indicateurs clés pour le suivi",
+        "Analyse des écarts entre prévisions et réalisations",
+        "Outils digitaux pour le pilotage stratégique collaboratif"
+       ]
+      },
+      {
+       "titre": "Études de cas pratiques en accompagnement stratégique",
+       "points": [
+        "Analyse critique d'exemples d'accompagnement réussis ou échoués",
+        "Simulation d'accompagnement stratégique dans un contexte fictif ou réel"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    }
+   ]
+  },
+  {
+   "fichier": "Syllabi du module _C9 Stratégie de la Performance_.docx",
+   "modules": [
+    {
+     "titre": "C9 Stratégie de la Performance",
+     "bloc": "BC 1 - Elaborer la stratégie générale de développement de l'entreprise",
+     "formation": "",
+     "rncp": "",
+     "activite": "3. Planification et évaluation de la stratégie générale de développement de l’entreprise",
+     "intervenant": "",
+     "volume": "",
+     "sequencage": "",
+     "objectif": "À l'issue de ce module, l'apprenant sera capable de construire un dispositif d’évaluation de la performance des plans stratégiques définis, en utilisant des indicateurs clés pour identifier les ajustements nécessaires et améliorer la pertinence des plans.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.9"
+     ],
+     "notions_cles": [
+      "Introduction à l’évaluation stratégique",
+      "Indicateurs clés de performance (KPI)",
+      "Outils et tableaux de bord pour le suivi stratégique",
+      "Analyse et ajustement des plans stratégiques",
+      "Études de cas pratiques en évaluation stratégique"
+     ],
+     "programme": [
+      {
+       "titre": "Introduction à l’évaluation stratégique",
+       "points": [
+        "Rôle et enjeux de l’évaluation dans le cycle stratégique",
+        "Processus d’évaluation : étapes clés",
+        "Alignement entre objectifs stratégiques et évaluation"
+       ]
+      },
+      {
+       "titre": "Indicateurs clés de performance (KPI)",
+       "points": [
+        "Définition et sélection des KPI pertinents",
+        "Méthodologies pour mesurer la performance stratégique",
+        "Utilisation des KPI pour le pilotage stratégique"
+       ]
+      },
+      {
+       "titre": "Outils et tableaux de bord pour le suivi stratégique",
+       "points": [
+        "Conception et mise en œuvre des tableaux de bord stratégiques",
+        "Analyse visuelle des données pour faciliter la prise de décision",
+        "Intégration des outils digitaux dans le suivi stratégique"
+       ]
+      },
+      {
+       "titre": "Analyse et ajustement des plans stratégiques",
+       "points": [
+        "Diagnostic des écarts entre prévisions et résultats",
+        "Identification des leviers d’amélioration",
+        "Techniques d’ajustement et optimisation continue"
+       ]
+      },
+      {
+       "titre": "Études de cas pratiques en évaluation stratégique",
+       "points": [
+        "Analyse critique d’exemples réels ou fictifs",
+        "Simulation d’élaboration d’un dispositif d’évaluation pour une entreprise fictive ou réelle"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    }
+   ]
+  },
+  {
+   "fichier": "Syllabi du module _C10 Maîtriser Excel_.docx",
+   "modules": [
+    {
+     "titre": "C101 Maîtriser Excel",
+     "bloc": "BC 2 - Piloter un centre de profit",
+     "formation": "",
+     "rncp": "",
+     "activite": "4. Gestion des ressources financières et analyse de rentabilité",
+     "intervenant": "",
+     "volume": "",
+     "sequencage": "",
+     "objectif": "À l'issue de ce module, l'apprenant sera capable de manipuler efficacement Excel pour réaliser des prévisions budgétaires, des analyses de rentabilité et des tableaux de bord financiers adaptés à la gestion d’un centre de profit.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.10"
+     ],
+     "notions_cles": [
+      "Introduction à Excel pour la gestion financière",
+      "Prévisions budgétaires avec Excel",
+      "Analyse de rentabilité et indicateurs financiers",
+      "Conception de tableaux de bord financiers"
+     ],
+     "programme": [
+      {
+       "titre": "Introduction à Excel pour la gestion financière",
+       "points": [
+        "Principes fondamentaux d’Excel : formules, fonctions, mises en forme",
+        "Utilisation des tableaux croisés dynamiques",
+        "Gestion des bases de données financières"
+       ]
+      },
+      {
+       "titre": "Prévisions budgétaires avec Excel",
+       "points": [
+        "Création et gestion de budgets prévisionnels",
+        "Analyse des écarts entre prévisions et résultats",
+        "Automatisation des calculs budgétaires"
+       ]
+      },
+      {
+       "titre": "Analyse de rentabilité et indicateurs financiers",
+       "points": [
+        "Calculs avancés : ROI, coûts fixes/variables, seuil de rentabilité",
+        "Construction de modèles financiers simples",
+        "Utilisation des graphiques pour visualiser les performances"
+       ]
+      },
+      {
+       "titre": "Conception de tableaux de bord financiers",
+       "points": [
+        "Structuration des tableaux de bord adaptés aux centres de profit",
+        "Indicateurs clés pour le suivi financier",
+        "Reporting automatisé avec Excel"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    }
+   ]
+  },
+  {
+   "fichier": "Syllabi du module _C102 Gestion budget_.docx",
+   "modules": [
+    {
+     "titre": "C102 Gestion budget",
+     "bloc": "BC 2 - Piloter un centre de profit",
+     "formation": "",
+     "rncp": "",
+     "activite": "4. Gestion des ressources financières et analyse de rentabilité",
+     "intervenant": "",
+     "volume": "",
+     "sequencage": "",
+     "objectif": "À l'issue de ce module, l'apprenant sera capable de concevoir, gérer et optimiser un budget en tenant compte des contraintes financières et des objectifs stratégiques du centre de profit.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.10"
+     ],
+     "notions_cles": [
+      "Fondamentaux de la gestion budgétaire",
+      "Techniques d’optimisation budgétaire",
+      "Outils pour la gestion budgétaire",
+      "Études de cas pratiques en gestion budgétaire"
+     ],
+     "programme": [
+      {
+       "titre": "Fondamentaux de la gestion budgétaire",
+       "points": [
+        "Rôle et enjeux du budget dans la gestion d’un centre de profit",
+        "Processus d’élaboration budgétaire",
+        "Typologie des budgets (fonctionnel, opérationnel, stratégique)"
+       ]
+      },
+      {
+       "titre": "Techniques d’optimisation budgétaire",
+       "points": [
+        "Analyse des coûts fixes et variables",
+        "Techniques de réduction des coûts",
+        "Gestion des écarts budgétaires"
+       ]
+      },
+      {
+       "titre": "Outils pour la gestion budgétaire",
+       "points": [
+        "Tableaux financiers automatisés",
+        "Logiciels spécialisés en gestion budgétaire",
+        "Reporting financier et tableaux de bord"
+       ]
+      },
+      {
+       "titre": "Études de cas pratiques en gestion budgétaire",
+       "points": [
+        "Analyse critique d’exemples réels ou fictifs",
+        "Simulation d’élaboration et optimisation d’un budget pour une entreprise fictive ou réelle"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    }
+   ]
+  },
+  {
+   "fichier": "Syllabi du module _C103 Analyse financière et fina.docx",
+   "modules": [
+    {
+     "titre": "C103 Analyse financière et financement",
+     "bloc": "BC 2 - Piloter un centre de profit",
+     "formation": "",
+     "rncp": "",
+     "activite": "4. Gestion des ressources financières et analyse de rentabilité",
+     "intervenant": "",
+     "volume": "",
+     "sequencage": "",
+     "objectif": "À l'issue de ce module, l'apprenant sera capable d’analyser les performances financières d’un centre de profit, d’évaluer les besoins en financement et de proposer des solutions adaptées pour garantir la pérennité et le développement.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.10"
+     ],
+     "notions_cles": [
+      "Principes fondamentaux de l’analyse financière",
+      "Évaluation des besoins en financement",
+      "Techniques de financement des entreprises",
+      "Études de cas pratiques en analyse financière"
+     ],
+     "programme": [
+      {
+       "titre": "Principes fondamentaux de l’analyse financière",
+       "points": [
+        "Comprendre les états financiers (bilan, compte de résultat, tableau des flux de trésorerie)",
+        "Techniques d’analyse des ratios financiers (liquidité, solvabilité, rentabilité)",
+        "Diagnostic financier : forces et faiblesses"
+       ]
+      },
+      {
+       "titre": "Évaluation des besoins en financement",
+       "points": [
+        "Identification des besoins à court, moyen et long terme",
+        "Analyse des options de financement interne et externe",
+        "Calcul du coût du capital (WACC)"
+       ]
+      },
+      {
+       "titre": "Techniques de financement des entreprises",
+       "points": [
+        "Financement bancaire : négociation et gestion",
+        "Financement alternatif : crowdfunding, private equity",
+        "Gestion des relations avec les investisseurs"
+       ]
+      },
+      {
+       "titre": "Études de cas pratiques en analyse financière",
+       "points": [
+        "Analyse critique d’exemples réels ou fictifs",
+        "Simulation d’élaboration d’un plan de financement pour une entreprise fictive ou réelle"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    }
+   ]
+  },
+  {
+   "fichier": "Syllabi du module _C11 Environnement réglementaire.docx",
+   "modules": [
+    {
+     "titre": "C11 Environnement réglementaire et juridique",
+     "bloc": "BC 2 - Piloter un centre de profit",
+     "formation": "",
+     "rncp": "",
+     "activite": "4. Gestion des ressources financières et analyse de rentabilité",
+     "intervenant": "",
+     "volume": "",
+     "sequencage": "",
+     "objectif": "À l'issue de ce module, l'apprenant sera capable d’assurer la conformité juridique des activités d’un centre de profit en réalisant une veille réglementaire et en garantissant l’application de procédures conformes aux normes légales en vigueur, afin de limiter les risques liés aux activités.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.11"
+     ],
+     "notions_cles": [
+      "Introduction à la conformité juridique",
+      "Veille réglementaire et gestion des risques juridiques",
+      "Responsabilité juridique et pénale du dirigeant",
+      "Mise en œuvre des procédures conformes",
+      "Études de cas pratiques en conformité juridique"
+     ],
+     "programme": [
+      {
+       "titre": "Introduction à la conformité juridique",
+       "points": [
+        "Principes fondamentaux du droit des affaires",
+        "Enjeux de la conformité pour un centre de profit",
+        "Identification des risques juridiques"
+       ]
+      },
+      {
+       "titre": "Veille réglementaire et gestion des risques juridiques",
+       "points": [
+        "Méthodologies de veille juridique",
+        "Analyse des contraintes réglementaires spécifiques à l’activité",
+        "Techniques d’évaluation et prévention des risques juridiques"
+       ]
+      },
+      {
+       "titre": "Responsabilité juridique et pénale du dirigeant",
+       "points": [
+        "Obligations légales et responsabilités associées",
+        "Droit pénal des affaires : principes clés",
+        "Gestion proactive des litiges"
+       ]
+      },
+      {
+       "titre": "Mise en œuvre des procédures conformes",
+       "points": [
+        "Élaboration et déploiement des politiques internes conformes",
+        "Audits juridiques internes",
+        "Collaboration avec les parties prenantes externes (avocats, experts juridiques)"
+       ]
+      },
+      {
+       "titre": "Études de cas pratiques en conformité juridique",
+       "points": [
+        "Analyse critique d’exemples réels ou fictifs",
+        "Simulation d’élaboration d’une stratégie juridique pour une entreprise fictive ou réelle"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    }
+   ]
+  },
+  {
+   "fichier": "Syllabi du module _C121 Gestion RH_.docx",
+   "modules": [
+    {
+     "titre": "C121 Gestion RH",
+     "bloc": "BC 2 - Piloter un centre de profit",
+     "formation": "",
+     "rncp": "",
+     "activite": "5. Optimisation de l’organisation d’un centre de profit",
+     "intervenant": "",
+     "volume": "",
+     "sequencage": "",
+     "objectif": "À l'issue de ce module, l'apprenant sera capable de piloter la gestion des ressources humaines d’un centre de profit, en mettant en place des politiques adaptées aux enjeux et au contexte, notamment en matière de recrutement, rémunération, formation et organisation du travail.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.12"
+     ],
+     "notions_cles": [
+      "Principes fondamentaux de la gestion RH",
+      "Recrutement et intégration des collaborateurs",
+      "Gestion de la rémunération et avantages sociaux",
+      "Formation et développement des compétences",
+      "Organisation du travail et qualité de vie au travail (QVT)"
+     ],
+     "programme": [
+      {
+       "titre": "Principes fondamentaux de la gestion RH",
+       "points": [
+        "Rôle stratégique des RH dans un centre de profit",
+        "Enjeux liés à la gestion des talents et des compétences",
+        "Cadre légal et réglementaire (droit du travail)"
+       ]
+      },
+      {
+       "titre": "Recrutement et intégration des collaborateurs",
+       "points": [
+        "Processus de recrutement : définition des besoins et outils",
+        "Techniques d’entretien et sélection",
+        "Stratégies d’intégration pour favoriser l’engagement"
+       ]
+      },
+      {
+       "titre": "Gestion de la rémunération et avantages sociaux",
+       "points": [
+        "Élaboration d’une politique salariale équitable",
+        "Gestion des avantages sociaux et motivation financière",
+        "Techniques pour aligner rémunération et performance"
+       ]
+      },
+      {
+       "titre": "Formation et développement des compétences",
+       "points": [
+        "Identification des besoins en formation",
+        "Mise en place de plans de formation adaptés",
+        "Suivi et évaluation des impacts des formations"
+       ]
+      },
+      {
+       "titre": "Organisation du travail et qualité de vie au travail (QVT)",
+       "points": [
+        "Structuration des postes et gestion des horaires",
+        "Politiques favorisant la QVT",
+        "Prévention des risques psychosociaux"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    }
+   ]
+  },
+  {
+   "fichier": "Syllabi du module _C122 Talent Acquisition_.docx",
+   "modules": [
+    {
+     "titre": "C122 Talent Acquisition",
+     "bloc": "BC 2 - Piloter un centre de profit",
+     "formation": "",
+     "rncp": "",
+     "activite": "5. Optimisation de l’organisation d’un centre de profit",
+     "intervenant": "",
+     "volume": "",
+     "sequencage": "",
+     "objectif": "À l'issue de ce module, l'apprenant sera capable de concevoir et mettre en œuvre une stratégie de recrutement efficace, en identifiant les besoins en talents, en attirant des profils adaptés et en optimisant les processus d'acquisition pour répondre aux objectifs stratégiques du centre de profit.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.12"
+     ],
+     "notions_cles": [
+      "Introduction à la stratégie de recrutement",
+      "Techniques et outils de recrutement",
+      "Processus de sélection et intégration des collaborateurs",
+      "Études de cas pratiques en talent acquisition"
+     ],
+     "programme": [
+      {
+       "titre": "Introduction à la stratégie de recrutement",
+       "points": [
+        "Enjeux stratégiques liés au recrutement",
+        "Identification des besoins en talents et analyse des postes",
+        "Alignement entre stratégie d’entreprise et stratégie RH",
+        "Stratégie de rémunération"
+       ]
+      },
+      {
+       "titre": "Techniques et outils de recrutement",
+       "points": [
+        "Rédaction d’offres attractives",
+        "Sourcing : canaux traditionnels et digitaux",
+        "Utilisation des outils numériques (ATS, réseaux sociaux professionnels)"
+       ]
+      },
+      {
+       "titre": "Processus de sélection et intégration des collaborateurs",
+       "points": [
+        "Techniques d’entretien et évaluation des candidats",
+        "Tests psychométriques et assessment centers",
+        "Stratégies d’intégration pour favoriser la rétention"
+       ]
+      },
+      {
+       "titre": "Études de cas pratiques en talent acquisition",
+       "points": [
+        "Analyse critique d’exemples réels ou fictifs",
+        "Simulation d’un processus complet de recrutement pour une entreprise fictive ou réelle"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    }
+   ]
+  },
+  {
+   "fichier": "Syllabi du module _C13 Gestion des Services Généra.docx",
+   "modules": [
+    {
+     "titre": "C13 Gestion des Services Généraux",
+     "bloc": "BC 2 - Piloter un centre de profit",
+     "formation": "",
+     "rncp": "",
+     "activite": "5. Optimisation de l’organisation d’un centre de profit",
+     "intervenant": "",
+     "volume": "",
+     "sequencage": "",
+     "objectif": "À l'issue de ce module, l'apprenant sera capable de garantir la gestion efficace des services généraux (achats, gestion des bâtiments, matériels) en interne ou externalisés, tout en respectant les contraintes réglementaires et en assurant la qualité de service.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.13"
+     ],
+     "notions_cles": [
+      "Introduction à la gestion des services généraux",
+      "Gestion des achats et prestataires",
+      "Gestion des infrastructures et matériels",
+      "Respect des contraintes réglementaires et sécurité",
+      "Études de cas pratiques en gestion des services généraux"
+     ],
+     "programme": [
+      {
+       "titre": "Introduction à la gestion des services généraux",
+       "points": [
+        "Rôle et enjeux stratégiques des services généraux",
+        "Organisation et structuration des fonctions support",
+        "Objectifs liés à la qualité et à la conformité"
+       ]
+      },
+      {
+       "titre": "Gestion des achats et prestataires",
+       "points": [
+        "Processus d’achat : sélection, négociation et contractualisation",
+        "Gestion des relations avec les prestataires externes",
+        "Suivi et évaluation des performances fournisseurs"
+       ]
+      },
+      {
+       "titre": "Gestion des infrastructures et matériels",
+       "points": [
+        "Maintenance préventive et corrective des bâtiments",
+        "Gestion des équipements techniques et informatiques",
+        "Optimisation des ressources matérielles"
+       ]
+      },
+      {
+       "titre": "Respect des contraintes réglementaires et sécurité",
+       "points": [
+        "Conformité aux normes légales (sécurité, environnement)",
+        "Gestion proactive des risques liés aux infrastructures",
+        "Sécurité des personnes et des biens"
+       ]
+      },
+      {
+       "titre": "Études de cas pratiques en gestion des services généraux",
+       "points": [
+        "Analyse critique d’exemples réels ou fictifs",
+        "Simulation de gestion intégrée pour une entreprise fictive ou réelle"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    }
+   ]
+  },
+  {
+   "fichier": "Syllabi du module _C141 Organisation agile_.docx",
+   "modules": [
+    {
+     "titre": "C141 Organisation agile",
+     "bloc": "BC 2 - Piloter un centre de profit",
+     "formation": "",
+     "rncp": "",
+     "activite": "5. Optimisation de l’organisation d’un centre de profit",
+     "intervenant": "",
+     "volume": "",
+     "sequencage": "",
+     "objectif": "À l'issue de ce module, l'apprenant sera capable de diriger les opérations d’ajustement ou de transformation organisationnelle dans une logique RSE et d’amélioration continue pour garantir la pérennité et l’agilité du centre de profit.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.14"
+     ],
+     "notions_cles": [
+      "Introduction à l’organisation agile",
+      "Méthodes et outils pour une organisation agile",
+      "Transformation organisationnelle et conduite du changement",
+      "Intégration des principes RSE dans l’organisation agile",
+      "Études de cas pratiques en organisation agile"
+     ],
+     "programme": [
+      {
+       "titre": "Introduction à l’organisation agile",
+       "points": [
+        "Principes fondamentaux de l’agilité organisationnelle",
+        "Enjeux stratégiques liés à l’agilité",
+        "Différences entre organisation classique et agile"
+       ]
+      },
+      {
+       "titre": "Méthodes et outils pour une organisation agile",
+       "points": [
+        "Méthodologies agiles (Scrum, Kanban, Lean)",
+        "Techniques d’amélioration continue",
+        "Outils digitaux pour piloter une organisation agile"
+       ]
+      },
+      {
+       "titre": "Transformation organisationnelle et conduite du changement",
+       "points": [
+        "Processus d’ajustement ou transformation",
+        "Gestion des résistances au changement",
+        "Communication stratégique lors des transformations"
+       ]
+      },
+      {
+       "titre": "Intégration des principes RSE dans l’organisation agile",
+       "points": [
+        "Application des principes RSE à la structure organisationnelle",
+        "Développement durable et responsabilité sociétale dans les opérations",
+        "Impact positif sur les parties prenantes internes et externes"
+       ]
+      },
+      {
+       "titre": "Études de cas pratiques en organisation agile",
+       "points": [
+        "Analyse critique d’exemples réels ou fictifs",
+        "Simulation de transformation organisationnelle pour une entreprise fictive ou réelle"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    }
+   ]
+  },
+  {
+   "fichier": "Syllabi du module _C142 RSE et Qualité continue_.docx",
+   "modules": [
+    {
+     "titre": "C142 RSE et Qualité continue",
+     "bloc": "BC 2 - Piloter un centre de profit",
+     "formation": "",
+     "rncp": "",
+     "activite": "5. Optimisation de l’organisation d’un centre de profit",
+     "intervenant": "",
+     "volume": "",
+     "sequencage": "",
+     "objectif": "À l'issue de ce module, l'apprenant sera capable d’intégrer les principes de la Responsabilité Sociétale des Entreprises (RSE) et d’amélioration continue dans les processus organisationnels pour renforcer la durabilité et la performance du centre de profit.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.14"
+     ],
+     "notions_cles": [
+      "Introduction à la RSE et à la qualité continue",
+      "Mise en œuvre des démarches RSE",
+      "Méthodes d’amélioration continue",
+      "Études de cas pratiques en RSE et qualité continue"
+     ],
+     "programme": [
+      {
+       "titre": "Introduction à la RSE et à la qualité continue",
+       "points": [
+        "Concepts fondamentaux de la RSE appliquée à l’organisation",
+        "Enjeux stratégiques de la qualité continue",
+        "Alignement entre stratégie RSE et objectifs organisationnels"
+       ]
+      },
+      {
+       "titre": "Mise en œuvre des démarches RSE",
+       "points": [
+        "Définition et déploiement d’une politique RSE",
+        "Intégration des principes environnementaux, sociaux et éthiques",
+        "Collaboration avec les parties prenantes internes et externes"
+       ]
+      },
+      {
+       "titre": "Méthodes d’amélioration continue",
+       "points": [
+        "Techniques Lean Management pour optimiser les processus",
+        "Outils de gestion de la qualité (PDCA, Six Sigma)",
+        "Suivi des indicateurs de performance liés à la qualité"
+       ]
+      },
+      {
+       "titre": "Études de cas pratiques en RSE et qualité continue",
+       "points": [
+        "Analyse critique d’exemples réels ou fictifs",
+        "Simulation d’élaboration d’un plan RSE intégré à une démarche qualité pour une entreprise fictive ou réelle"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    }
+   ]
+  },
+  {
+   "fichier": "Syllabi du module _C15 Veille et Innovation_.docx",
+   "modules": [
+    {
+     "titre": "C15 Veille et Innovation",
+     "bloc": "BC 3 - Concevoir la stratégie de développement commercial",
+     "formation": "",
+     "rncp": "",
+     "activite": "6. Analyse du marché et des perspectives d’évolution commerciale",
+     "intervenant": "",
+     "volume": "",
+     "sequencage": "",
+     "objectif": "À l'issue de ce module, l’apprenant sera capable d’élaborer une stratégie de veille commerciale en exploitant les technologies intelligentes (IA, Big Data, CRM…) pour identifier les opportunités d’innovation profitables et renforcer la compétitivité de l’entreprise.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.15"
+     ],
+     "notions_cles": [
+      "Introduction à la veille stratégique et à l’innovation",
+      "Technologies au service de la veille commerciale",
+      "Stratégie d’innovation commerciale",
+      "Études de cas pratiques en veille et innovation"
+     ],
+     "programme": [
+      {
+       "titre": "Introduction à la veille stratégique et à l’innovation",
+       "points": [
+        "Concepts fondamentaux de la veille commerciale",
+        "Rôle de l’innovation dans la compétitivité des entreprises",
+        "Alignement entre stratégie d’entreprise et innovation"
+       ]
+      },
+      {
+       "titre": "Technologies au service de la veille commerciale",
+       "points": [
+        "Utilisation des outils digitaux pour la veille (CRM, IA, Big Data)",
+        "Méthodologies pour collecter et analyser les données commerciales",
+        "Techniques pour identifier les signaux faibles et tendances émergentes"
+       ]
+      },
+      {
+       "titre": "Stratégie d’innovation commerciale",
+       "points": [
+        "Processus d’identification des opportunités innovantes",
+        "Analyse des besoins clients pour orienter l’innovation",
+        "Développement d’un plan stratégique basé sur les résultats de la veille"
+       ]
+      },
+      {
+       "titre": "Études de cas pratiques en veille et innovation",
+       "points": [
+        "Analyse critique d’exemples réels ou fictifs",
+        "Simulation d’élaboration d’une stratégie de veille et innovation pour une entreprise fictive ou réelle"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    }
+   ]
+  },
+  {
+   "fichier": "Syllabi du module _C16 Analyse du marché et ciblag.docx",
+   "modules": [
+    {
+     "titre": "C16 Analyse du marché et ciblage",
+     "bloc": "BC 3 - Concevoir la stratégie de développement commercial",
+     "formation": "",
+     "rncp": "",
+     "activite": "6. Analyse du marché et des perspectives d’évolution commerciale",
+     "intervenant": "",
+     "volume": "",
+     "sequencage": "",
+     "objectif": "À l'issue de ce module, l’apprenant sera capable d’identifier les segments de marché les plus lucratifs en analysant les comportements et attentes des clients, afin d’allouer efficacement les efforts de marketing et de vente.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.16"
+     ],
+     "notions_cles": [
+      "Introduction à l’analyse de marché",
+      "Étude des comportements clients",
+      "Segmentation et ciblage des marchés",
+      "Développement stratégique basé sur l’analyse de marché"
+     ],
+     "programme": [
+      {
+       "titre": "Introduction à l’analyse de marché",
+       "points": [
+        "Concepts fondamentaux : segmentation, ciblage, positionnement",
+        "Enjeux stratégiques liés à l’analyse des marchés",
+        "Méthodologies d’analyse qualitative et quantitative"
+       ]
+      },
+      {
+       "titre": "Étude des comportements clients",
+       "points": [
+        "Techniques pour analyser les attentes et comportements des consommateurs",
+        "Utilisation des outils digitaux (Big Data, CRM) pour collecter des données",
+        "Identification des tendances émergentes"
+       ]
+      },
+      {
+       "titre": "Segmentation et ciblage des marchés",
+       "points": [
+        "Définition des critères de segmentation pertinents",
+        "Analyse comparative des segments de marché",
+        "Évaluation du potentiel lucratif des segments ciblés"
+       ]
+      },
+      {
+       "titre": "Développement stratégique basé sur l’analyse de marché",
+       "points": [
+        "Alignement entre analyse de marché et stratégie commerciale",
+        "Élaboration d’un plan marketing adapté aux segments ciblés",
+        "Suivi et ajustement des actions commerciales en fonction des résultats"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    }
+   ]
+  },
+  {
+   "fichier": "Syllabi du module _C17 Benchmarking et diagnostic_.docx",
+   "modules": [
+    {
+     "titre": "C17 Benchmarking et diagnostic",
+     "bloc": "BC 3 - Concevoir la stratégie de développement commercial",
+     "formation": "",
+     "rncp": "",
+     "activite": "6. Analyse du marché et des perspectives d’évolution commerciale",
+     "intervenant": "",
+     "volume": "",
+     "sequencage": "",
+     "objectif": "À l'issue de ce module, l’apprenant sera capable de diagnostiquer les avantages concurrentiels et les lacunes à combler de l’entreprise en évaluant comparativement la concurrence pour définir les axes de la stratégie de développement commerciale.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.17"
+     ],
+     "notions_cles": [
+      "Introduction au benchmarking stratégique",
+      "Évaluation des avantages concurrentiels",
+      "Diagnostic des lacunes à combler",
+      "Développement stratégique basé sur le benchmarking"
+     ],
+     "programme": [
+      {
+       "titre": "Introduction au benchmarking stratégique",
+       "points": [
+        "Concepts fondamentaux : benchmarking interne et externe",
+        "Objectifs et enjeux du benchmarking dans le développement commercial",
+        "Méthodologies d’analyse comparative"
+       ]
+      },
+      {
+       "titre": "Évaluation des avantages concurrentiels",
+       "points": [
+        "Identification des forces distinctives de l’entreprise",
+        "Analyse des facteurs clés de succès sur le marché",
+        "Positionnement stratégique par rapport à la concurrence"
+       ]
+      },
+      {
+       "titre": "Diagnostic des lacunes à combler",
+       "points": [
+        "Identification des faiblesses internes et externes",
+        "Analyse SWOT appliquée au benchmarking",
+        "Définition des axes d’amélioration prioritaires"
+       ]
+      },
+      {
+       "titre": "Développement stratégique basé sur le benchmarking",
+       "points": [
+        "Alignement entre diagnostic concurrentiel et stratégie commerciale",
+        "Élaboration d’un plan d’action pour renforcer la compétitivité",
+        "Suivi et ajustement des actions en fonction des résultats"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    }
+   ]
+  },
+  {
+   "fichier": "Syllabi du module _C18 Stratégie commerciale_.docx",
+   "modules": [
+    {
+     "titre": "C18 Stratégie commerciale",
+     "bloc": "BC 3 - Concevoir la stratégie de développement commercial",
+     "formation": "",
+     "rncp": "",
+     "activite": "7. Élaboration de la stratégie commerciale",
+     "intervenant": "",
+     "volume": "",
+     "sequencage": "",
+     "objectif": "À l'issue de ce module, l’apprenant sera capable d’élaborer une stratégie commerciale alignée avec les orientations définies par la direction générale, en vue de garantir la pérennité et le développement des activités commerciales.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.18"
+     ],
+     "notions_cles": [
+      "Introduction à la stratégie commerciale",
+      "Développement de la stratégie commerciale",
+      "Communication et mise en œuvre de la stratégie commerciale",
+      "Études de cas pratiques en stratégie commerciale"
+     ],
+     "programme": [
+      {
+       "titre": "Introduction à la stratégie commerciale",
+       "points": [
+        "Concepts fondamentaux : objectifs, moyens et ressources",
+        "Alignement entre stratégie globale et stratégie commerciale",
+        "Enjeux liés à la pérennité et au développement des activités"
+       ]
+      },
+      {
+       "titre": "Développement de la stratégie commerciale",
+       "points": [
+        "Analyse des opportunités commerciales",
+        "Définition des objectifs commerciaux prioritaires",
+        "Élaboration des plans d’action stratégiques"
+       ]
+      },
+      {
+       "titre": "Communication et mise en œuvre de la stratégie commerciale",
+       "points": [
+        "Techniques pour mobiliser les équipes autour des objectifs commerciaux",
+        "Gestion des ressources nécessaires à l’exécution de la stratégie",
+        "Suivi et ajustement des actions commerciales en fonction des résultats obtenus"
+       ]
+      },
+      {
+       "titre": "Études de cas pratiques en stratégie commerciale",
+       "points": [
+        "Analyse critique d’exemples réels ou fictifs",
+        "Simulation d’élaboration d’une stratégie commerciale pour une entreprise fictive ou réelle"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    }
+   ]
+  },
+  {
+   "fichier": "Syllabi du module _C19 PAC et développement réseau.docx",
+   "modules": [
+    {
+     "titre": "C19 PAC et développement réseau",
+     "bloc": "BC 3 - Concevoir la stratégie de développement commercial",
+     "formation": "",
+     "rncp": "",
+     "activite": "7. Élaboration de la stratégie commerciale",
+     "intervenant": "",
+     "volume": "",
+     "sequencage": "",
+     "objectif": "À l'issue de ce module, l’apprenant sera capable de superviser l’élaboration des Plans d’Action Commercial (PAC) établis par les responsables de périmètre, secteur ou produit, en vue de garantir leur cohérence avec la stratégie commerciale globale et de développer un réseau commercial performant.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.19"
+     ],
+     "notions_cles": [
+      "Introduction aux Plans d’Action Commercial (PAC)",
+      "Supervision des PAC par secteur ou produit",
+      "Développement du réseau commercial",
+      "Études de cas pratiques en PAC et développement réseau"
+     ],
+     "programme": [
+      {
+       "titre": "Introduction aux Plans d’Action Commercial (PAC)",
+       "points": [
+        "Concepts fondamentaux : objectifs, structuration et mise en œuvre",
+        "Rôle des PAC dans le développement commercial",
+        "Alignement entre PAC et stratégie commerciale globale"
+       ]
+      },
+      {
+       "titre": "Supervision des PAC par secteur ou produit",
+       "points": [
+        "Méthodologies pour élaborer des PAC efficaces",
+        "Techniques pour garantir la cohérence entre les différents niveaux",
+        "Suivi et ajustement des actions commerciales"
+       ]
+      },
+      {
+       "titre": "Développement du réseau commercial",
+       "points": [
+        "Stratégies pour créer et renforcer les alliances commerciales",
+        "Gestion des relations avec les partenaires externes",
+        "Techniques pour élargir le réseau commercial"
+       ]
+      },
+      {
+       "titre": "Études de cas pratiques en PAC et développement réseau",
+       "points": [
+        "Analyse critique d’exemples réels ou fictifs",
+        "Simulation d’élaboration d’un PAC pour une entreprise fictive ou réelle"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    }
+   ]
+  },
+  {
+   "fichier": "Syllabi du module _C201 Gestion des risques_.docx",
+   "modules": [
+    {
+     "titre": "C201 Gestion des risques",
+     "bloc": "BC 3 - Concevoir la stratégie de développement commercial",
+     "formation": "",
+     "rncp": "",
+     "activite": "8. Allocation des ressources et moyens nécessaires à la mise en œuvre de la stratégie commerciale",
+     "intervenant": "",
+     "volume": "",
+     "sequencage": "",
+     "objectif": "À l'issue de ce module, l’apprenant sera capable de sécuriser la stratégie commerciale en identifiant, analysant et évaluant les aléas internes et externes pour réajuster les objectifs commerciaux et les moyens déployés.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.20"
+     ],
+     "notions_cles": [
+      "Introduction à la gestion des risques commerciaux",
+      "Méthodes d’identification et d’analyse des risques",
+      "Évaluation et gestion proactive des risques",
+      "Études de cas pratiques en gestion des risques commerciaux"
+     ],
+     "programme": [
+      {
+       "titre": "Introduction à la gestion des risques commerciaux",
+       "points": [
+        "Concepts fondamentaux : identification, analyse et évaluation des risques",
+        "Typologie des aléas internes et externes",
+        "Enjeux stratégiques liés à la sécurisation commerciale"
+       ]
+      },
+      {
+       "titre": "Méthodes d’identification et d’analyse des risques",
+       "points": [
+        "Techniques d’identification des risques (brainstorming, cartographie)",
+        "Analyse qualitative et quantitative des impacts",
+        "Outils numériques pour la gestion des risques"
+       ]
+      },
+      {
+       "titre": "Évaluation et gestion proactive des risques",
+       "points": [
+        "Techniques pour prioriser les risques identifiés",
+        "Élaboration de plans d’action pour réduire ou prévenir les impacts",
+        "Suivi et ajustement en fonction des évolutions commerciales"
+       ]
+      },
+      {
+       "titre": "Études de cas pratiques en gestion des risques commerciaux",
+       "points": [
+        "Analyse critique d’exemples réels ou fictifs",
+        "Simulation d’élaboration d’un plan de gestion des risques pour une entreprise fictive ou réelle"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    }
+   ]
+  },
+  {
+   "fichier": "Syllabi du module _C202 Analyse et sécurisation de.docx",
+   "modules": [
+    {
+     "titre": "C202 Analyse et sécurisation de stratégie",
+     "bloc": "BC 3 - Concevoir la stratégie de développement commercial",
+     "formation": "",
+     "rncp": "",
+     "activite": "8. Allocation des ressources et moyens nécessaires à la mise en œuvre de la stratégie commerciale",
+     "intervenant": "",
+     "volume": "",
+     "sequencage": "",
+     "objectif": "À l'issue de ce module, l’apprenant sera capable d’analyser les indicateurs commerciaux et d’évaluer les risques liés à la mise en œuvre de la stratégie commerciale, afin de proposer des ajustements pour garantir sa sécurisation et son efficacité.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.20"
+     ],
+     "notions_cles": [
+      "Introduction à l’analyse stratégique et sécurisation",
+      "Évaluation des indicateurs commerciaux",
+      "Gestion proactive des risques commerciaux",
+      "Études de cas pratiques en analyse et sécurisation stratégique"
+     ],
+     "programme": [
+      {
+       "titre": "Introduction à l’analyse stratégique et sécurisation",
+       "points": [
+        "Concepts fondamentaux : indicateurs commerciaux et gestion des risques",
+        "Enjeux liés à la sécurisation des stratégies commerciales",
+        "Méthodologies d’analyse des performances commerciales"
+       ]
+      },
+      {
+       "titre": "Évaluation des indicateurs commerciaux",
+       "points": [
+        "Identification des KPI stratégiques",
+        "Techniques pour mesurer l’efficacité commerciale",
+        "Utilisation des tableaux de bord pour le suivi"
+       ]
+      },
+      {
+       "titre": "Gestion proactive des risques commerciaux",
+       "points": [
+        "Analyse qualitative et quantitative des risques",
+        "Mise en œuvre de plans d’action pour prévenir ou réduire les impacts",
+        "Suivi et ajustement en fonction des évolutions commerciales"
+       ]
+      },
+      {
+       "titre": "Études de cas pratiques en analyse et sécurisation stratégique",
+       "points": [
+        "Analyse critique d’exemples réels ou fictifs",
+        "Simulation d’élaboration d’un plan d’ajustement stratégique pour une entreprise fictive ou réelle"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    }
+   ]
+  },
+  {
+   "fichier": "Syllabi du module _C21 Business Plan_.docx",
+   "modules": [
+    {
+     "titre": "C21 Business Plan",
+     "bloc": "BC 3 - Concevoir la stratégie de développement commercial",
+     "formation": "",
+     "rncp": "",
+     "activite": "8. Allocation des ressources et moyens nécessaires à la mise en œuvre de la stratégie commerciale",
+     "intervenant": "",
+     "volume": "",
+     "sequencage": "",
+     "objectif": "À l'issue de ce module, l’apprenant sera capable d’inventorier les moyens et ressources disponibles (humains, techniques, budgétaires, matériels…) nécessaires à la mise en œuvre de la stratégie commerciale et d’élaborer un business plan structuré et opérationnel.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.21"
+     ],
+     "notions_cles": [
+      "Introduction au business plan",
+      "Inventaire des moyens et ressources disponibles",
+      "Élaboration du business plan",
+      "Études de cas pratiques en business plan"
+     ],
+     "programme": [
+      {
+       "titre": "Introduction au business plan",
+       "points": [
+        "Concepts fondamentaux : structure, objectifs et utilité",
+        "Rôle du business plan dans la stratégie commerciale",
+        "Enjeux liés à l’allocation des ressources"
+       ]
+      },
+      {
+       "titre": "Inventaire des moyens et ressources disponibles",
+       "points": [
+        "Identification des ressources humaines nécessaires",
+        "Analyse des besoins techniques et matériels",
+        "Évaluation des contraintes budgétaires"
+       ]
+      },
+      {
+       "titre": "Élaboration du business plan",
+       "points": [
+        "Structuration : executive summary, analyse de marché, stratégie commerciale",
+        "Prévisions financières : budgets, projections de rentabilité",
+        "Techniques pour présenter le business plan aux parties prenantes"
+       ]
+      },
+      {
+       "titre": "Études de cas pratiques en business plan",
+       "points": [
+        "Analyse critique d’exemples réels ou fictifs",
+        "Simulation d’élaboration d’un business plan pour une entreprise fictive ou réelle"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    }
+   ]
+  },
+  {
+   "fichier": "Syllabi du module _C221 Budget et Négociation appr.docx",
+   "modules": [
+    {
+     "titre": "C221 Budget et Négociation approfondie",
+     "bloc": "BC 3 - Concevoir la stratégie de développement commercial",
+     "formation": "",
+     "rncp": "",
+     "activite": "8. Allocation des ressources et moyens nécessaires à la mise en œuvre de la stratégie commerciale",
+     "intervenant": "",
+     "volume": "",
+     "sequencage": "",
+     "objectif": "À l'issue de ce module, l’apprenant sera capable de négocier avec la direction générale l’attribution des moyens et ressources complémentaires nécessaires à la mise en œuvre de la stratégie commerciale, tout en gérant efficacement le budget alloué pour atteindre les objectifs fixés.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.22",
+      "C.23"
+     ],
+     "notions_cles": [
+      "Introduction à la gestion budgétaire stratégique",
+      "Techniques avancées de négociation budgétaire",
+      "Gestion efficace du budget alloué",
+      "Études de cas pratiques en négociation et gestion budgétaire"
+     ],
+     "programme": [
+      {
+       "titre": "Introduction à la gestion budgétaire stratégique",
+       "points": [
+        "Concepts fondamentaux : élaboration, suivi et optimisation budgétaire",
+        "Enjeux liés à la négociation des ressources complémentaires",
+        "Alignement entre budget et stratégie commerciale"
+       ]
+      },
+      {
+       "titre": "Techniques avancées de négociation budgétaire",
+       "points": [
+        "Préparation des arguments pour une négociation efficace",
+        "Techniques de persuasion et gestion des objections",
+        "Collaboration avec les parties prenantes internes"
+       ]
+      },
+      {
+       "titre": "Gestion efficace du budget alloué",
+       "points": [
+        "Suivi des dépenses et optimisation des coûts",
+        "Utilisation d’outils numériques pour le reporting budgétaire",
+        "Techniques pour respecter les contraintes financières tout en atteignant les objectifs stratégiques"
+       ]
+      },
+      {
+       "titre": "Études de cas pratiques en négociation et gestion budgétaire",
+       "points": [
+        "Analyse critique d’exemples réels ou fictifs",
+        "Simulation de négociation budgétaire pour une entreprise fictive ou réelle"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    }
+   ]
+  },
+  {
+   "fichier": "Syllabi du module _C222 Pitch_.docx",
+   "modules": [
+    {
+     "titre": "C222 Pitch",
+     "bloc": "BC 3 - Concevoir la stratégie de développement commercial",
+     "formation": "",
+     "rncp": "",
+     "activite": "8. Allocation des ressources et moyens nécessaires à la mise en œuvre de la stratégie commerciale",
+     "intervenant": "",
+     "volume": "",
+     "sequencage": "",
+     "objectif": "À l'issue de ce module, l’apprenant sera capable de structurer et présenter un pitch convaincant pour défendre la stratégie commerciale et mobiliser les parties prenantes autour des objectifs stratégiques.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.22",
+      "C.23"
+     ],
+     "notions_cles": [
+      "Introduction au pitch stratégique",
+      "Techniques avancées de présentation orale",
+      "Simulation de pitch stratégique",
+      "Études de cas pratiques en pitching stratégique"
+     ],
+     "programme": [
+      {
+       "titre": "Introduction au pitch stratégique",
+       "points": [
+        "Principes fondamentaux d’un pitch efficace",
+        "Objectifs : convaincre, mobiliser et inspirer",
+        "Structuration du discours selon les parties prenantes"
+       ]
+      },
+      {
+       "titre": "Techniques avancées de présentation orale",
+       "points": [
+        "Gestion du stress et optimisation des performances",
+        "Utilisation d’outils visuels pour renforcer l’impact",
+        "Techniques de storytelling pour captiver l’audience"
+       ]
+      },
+      {
+       "titre": "Simulation de pitch stratégique",
+       "points": [
+        "Mise en pratique : élaboration et présentation d’un pitch",
+        "Feedback sur la pertinence, clarté et impact"
+       ]
+      },
+      {
+       "titre": "Études de cas pratiques en pitching stratégique",
+       "points": [
+        "Analyse critique d’exemples réels ou fictifs",
+        "Simulation d’un pitch pour une entreprise fictive ou réelle"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    }
+   ]
+  },
+  {
+   "fichier": "Syllabi du module _C24 Politique commerciale_.docx",
+   "modules": [
+    {
+     "titre": "C24 Politique commerciale",
+     "bloc": "BC 4 - Superviser la mise en œuvre de la performance commerciale",
+     "formation": "",
+     "rncp": "",
+     "activite": "9. Déploiement des politiques de développement commercial et de satisfaction client",
+     "intervenant": "",
+     "volume": "",
+     "sequencage": "",
+     "objectif": "À l'issue de ce module, l’apprenant sera capable de développer une politique commerciale innovante, alignée sur les objectifs de la stratégie commerciale, en collaboration avec les directions internes et en privilégiant la création d’alliances stratégiques pour générer des opportunités nouvelles.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.24"
+     ],
+     "notions_cles": [
+      "Introduction à la politique commerciale stratégique",
+      "Création d’alliances stratégiques",
+      "Développement des opportunités commerciales nouvelles",
+      "Études de cas pratiques en politique commerciale"
+     ],
+     "programme": [
+      {
+       "titre": "Introduction à la politique commerciale stratégique",
+       "points": [
+        "Concepts fondamentaux : objectifs, structure et mise en œuvre",
+        "Enjeux liés à l’innovation dans les politiques commerciales",
+        "Alignement entre stratégie globale et politique commerciale"
+       ]
+      },
+      {
+       "titre": "Création d’alliances stratégiques",
+       "points": [
+        "Identification des partenaires potentiels",
+        "Techniques pour négocier et établir des alliances durables",
+        "Suivi et gestion des relations stratégiques"
+       ]
+      },
+      {
+       "titre": "Développement des opportunités commerciales nouvelles",
+       "points": [
+        "Analyse des besoins du marché et des tendances émergentes",
+        "Techniques pour identifier et exploiter les opportunités",
+        "Mise en œuvre d’actions innovantes pour capter de nouveaux segments"
+       ]
+      },
+      {
+       "titre": "Études de cas pratiques en politique commerciale",
+       "points": [
+        "Analyse critique d’exemples réels ou fictifs",
+        "Simulation d’élaboration d’une politique commerciale pour une entreprise fictive ou réelle"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    }
+   ]
+  },
+  {
+   "fichier": "Syllabi du module _C25 Stratégie client_.docx",
+   "modules": [
+    {
+     "titre": "C25 Stratégie client",
+     "bloc": "BC 4 - Superviser la mise en œuvre de la performance commerciale",
+     "formation": "",
+     "rncp": "",
+     "activite": "9. Déploiement des politiques de développement commercial et de satisfaction client",
+     "intervenant": "",
+     "volume": "",
+     "sequencage": "",
+     "objectif": "À l'issue de ce module, l’apprenant sera capable de concevoir et déployer une stratégie de satisfaction client omnicanal centrée sur l’excellence du service, la personnalisation des offres et la réactivité aux besoins des clients afin de favoriser la fidélisation de la clientèle.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.25"
+     ],
+     "notions_cles": [
+      "Introduction à la stratégie client",
+      "Développement d’une stratégie omnicanal",
+      "Amélioration continue de l’expérience client",
+      "Études de cas pratiques en stratégie client"
+     ],
+     "programme": [
+      {
+       "titre": "Introduction à la stratégie client",
+       "points": [
+        "Concepts fondamentaux : satisfaction client, fidélisation et omnicanalité",
+        "Enjeux stratégiques liés à l’expérience client",
+        "Alignement entre stratégie commerciale et orientation client"
+       ]
+      },
+      {
+       "titre": "Développement d’une stratégie omnicanal",
+       "points": [
+        "Analyse des besoins et attentes des clients",
+        "Techniques pour personnaliser les offres et services",
+        "Mise en œuvre d’une approche omnicanal intégrée"
+       ]
+      },
+      {
+       "titre": "Amélioration continue de l’expérience client",
+       "points": [
+        "Suivi des indicateurs clés de satisfaction (NPS, CSAT)",
+        "Techniques pour collecter et analyser les retours clients",
+        "Développement d’actions correctives pour améliorer les performances"
+       ]
+      },
+      {
+       "titre": "Études de cas pratiques en stratégie client",
+       "points": [
+        "Analyse critique d’exemples réels ou fictifs",
+        "Simulation d’élaboration d’une stratégie client pour une entreprise fictive ou réelle"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    }
+   ]
+  },
+  {
+   "fichier": "Syllabi du module _C26 RSE et pratiques commercial 1.docx",
+   "modules": [
+    {
+     "titre": "C26 RSE et pratiques commerciales",
+     "bloc": "BC 4 - Superviser la mise en œuvre de la performance commerciale",
+     "formation": "",
+     "rncp": "",
+     "activite": "9. Déploiement des politiques de développement commercial et de satisfaction client",
+     "intervenant": "",
+     "volume": "",
+     "sequencage": "",
+     "objectif": "À l'issue de ce module, l’apprenant sera capable d’élaborer des stratégies et des initiatives visant à intégrer la RSE dans les pratiques commerciales, en collaboration avec les différentes parties prenantes de l’entreprise, pour renforcer la contribution positive de l’entreprise à la société et à l’environnement.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.26"
+     ],
+     "notions_cles": [
+      "Introduction à la RSE appliquée aux pratiques commerciales",
+      "Développement d’initiatives responsables",
+      "Évaluation des impacts et gestion des risques liés à la démarche commerciale",
+      "Études de cas pratiques en intégration RSE"
+     ],
+     "programme": [
+      {
+       "titre": "Introduction à la RSE appliquée aux pratiques commerciales",
+       "points": [
+        "Concepts fondamentaux : responsabilité sociétale et développement durable",
+        "Enjeux liés à l’intégration de la RSE dans les stratégies commerciales",
+        "Alignement entre stratégie commerciale et principes RSE"
+       ]
+      },
+      {
+       "titre": "Développement d’initiatives responsables",
+       "points": [
+        "Techniques pour intégrer les principes RSE dans les processus commerciaux",
+        "Collaboration avec les parties prenantes internes et externes",
+        "Mise en œuvre d’actions concrètes pour renforcer l’impact positif"
+       ]
+      },
+      {
+       "titre": "Évaluation des impacts et gestion des risques liés à la démarche commerciale",
+       "points": [
+        "Analyse des impacts sociaux, environnementaux et économiques",
+        "Techniques pour identifier et gérer les risques liés aux pratiques commerciales",
+        "Suivi des indicateurs clés de performance RSE"
+       ]
+      },
+      {
+       "titre": "Études de cas pratiques en intégration RSE",
+       "points": [
+        "Analyse critique d’exemples réels ou fictifs",
+        "Simulation d’élaboration d’une stratégie commerciale responsable pour une entreprise fictive ou réelle"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    }
+   ]
+  },
+  {
+   "fichier": "Syllabi du module _C27 Performance commerciale et.docx",
+   "modules": [
+    {
+     "titre": "C27 Performance commerciale et KPI",
+     "bloc": "BC 4 - Superviser la mise en œuvre de la performance commerciale",
+     "formation": "",
+     "rncp": "",
+     "activite": "10. Management d’un système d’amélioration de la performance commerciale",
+     "intervenant": "",
+     "volume": "",
+     "sequencage": "",
+     "objectif": "À l'issue de ce module, l’apprenant sera capable d’évaluer la performance des équipes commerciales en analysant les indicateurs de performance (KPI) issus des processus mis en place, afin de mesurer l’atteinte des objectifs commerciaux fixés et repérer les leviers de développement.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.27"
+     ],
+     "notions_cles": [
+      "Introduction à la gestion de la performance commerciale",
+      "Analyse des indicateurs clés de performance (KPI)",
+      "Évaluation et leviers de développement",
+      "Études de cas pratiques en gestion de la performance commerciale"
+     ],
+     "programme": [
+      {
+       "titre": "Introduction à la gestion de la performance commerciale",
+       "points": [
+        "Concepts fondamentaux : objectifs, KPI et analyse",
+        "Enjeux liés à l’évaluation des performances commerciales",
+        "Alignement entre stratégie commerciale et mesure de performance"
+       ]
+      },
+      {
+       "titre": "Analyse des indicateurs clés de performance (KPI)",
+       "points": [
+        "Identification des KPI pertinents pour les équipes commerciales",
+        "Techniques pour collecter et analyser les données",
+        "Utilisation d’outils numériques pour le reporting"
+       ]
+      },
+      {
+       "titre": "Évaluation et leviers de développement",
+       "points": [
+        "Analyse qualitative et quantitative des écarts",
+        "Techniques pour identifier les leviers d’amélioration",
+        "Suivi et ajustement des actions commerciales en fonction des résultats"
+       ]
+      },
+      {
+       "titre": "Études de cas pratiques en gestion de la performance commerciale",
+       "points": [
+        "Analyse critique d’exemples réels ou fictifs",
+        "Simulation d’élaboration d’un dispositif KPI pour une entreprise fictive ou réelle"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    }
+   ]
+  },
+  {
+   "fichier": "Syllabi du module _C28 Performance et pratiques re.docx",
+   "modules": [
+    {
+     "titre": "C28 Performance et pratiques responsables",
+     "bloc": "BC 4 - Superviser la mise en œuvre de la performance commerciale",
+     "formation": "",
+     "rncp": "",
+     "activite": "10. Management d’un système d’amélioration de la performance commerciale",
+     "intervenant": "",
+     "volume": "",
+     "sequencage": "",
+     "objectif": "À l'issue de ce module, l’apprenant sera capable de piloter un dispositif d’amélioration de la performance commerciale en développant des plans d’action intégrant des pratiques responsables pour renforcer la qualité et la durabilité des processus commerciaux.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.28"
+     ],
+     "notions_cles": [
+      "Introduction à la performance commerciale responsable",
+      "Développement de plans d’action responsables",
+      "Évaluation des impacts et gestion des risques liés aux pratiques commerciales",
+      "Études de cas pratiques en amélioration responsable"
+     ],
+     "programme": [
+      {
+       "titre": "Introduction à la performance commerciale responsable",
+       "points": [
+        "Concepts fondamentaux : qualité, durabilité et responsabilité",
+        "Enjeux liés à l’intégration des pratiques responsables dans les processus commerciaux",
+        "Alignement entre stratégie commerciale et principes RSE"
+       ]
+      },
+      {
+       "titre": "Développement de plans d’action responsables",
+       "points": [
+        "Techniques pour intégrer les principes RSE dans les processus commerciaux",
+        "Collaboration avec les parties prenantes internes et externes",
+        "Mise en œuvre d’actions concrètes pour renforcer l’impact positif"
+       ]
+      },
+      {
+       "titre": "Évaluation des impacts et gestion des risques liés aux pratiques commerciales",
+       "points": [
+        "Analyse des impacts sociaux, environnementaux et économiques",
+        "Techniques pour identifier et gérer les risques liés aux pratiques commerciales",
+        "Suivi des indicateurs clés de performance responsable"
+       ]
+      },
+      {
+       "titre": "Études de cas pratiques en amélioration responsable",
+       "points": [
+        "Analyse critique d’exemples réels ou fictifs",
+        "Simulation d’élaboration d’un plan d’action responsable pour une entreprise fictive ou réelle"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    }
+   ]
+  },
+  {
+   "fichier": "Syllabi du module _C29 Structure et Organisation_.docx",
+   "modules": [
+    {
+     "titre": "C29 Structure et Organisation",
+     "bloc": "BC 5 - Manager une équipe",
+     "formation": "",
+     "rncp": "",
+     "activite": "11. Organisation et supervision des activités de l’équipe managée",
+     "intervenant": "",
+     "volume": "",
+     "sequencage": "",
+     "objectif": "À l'issue de ce module, l’apprenant sera capable de planifier les activités en établissant une feuille de route pour chaque membre de l’équipe, afin de répartir la charge de travail de manière équitable et garantir la fluidité des opérations.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.29"
+     ],
+     "notions_cles": [
+      "Introduction à la structuration organisationnelle",
+      "Techniques de planification des activités",
+      "Répartition équitable des charges de travail",
+      "Études de cas pratiques en structuration organisationnelle"
+     ],
+     "programme": [
+      {
+       "titre": "Introduction à la structuration organisationnelle",
+       "points": [
+        "Concepts clés : organisation, planification et supervision",
+        "Enjeux liés à la répartition équitable des tâches",
+        "Alignement entre objectifs stratégiques et organisation opérationnelle"
+       ]
+      },
+      {
+       "titre": "Techniques de planification des activités",
+       "points": [
+        "Élaboration d’une feuille de route individuelle et collective",
+        "Utilisation d’outils numériques pour organiser les tâches",
+        "Gestion des priorités et des délais"
+       ]
+      },
+      {
+       "titre": "Répartition équitable des charges de travail",
+       "points": [
+        "Analyse des compétences et disponibilités des membres",
+        "Techniques pour équilibrer les charges selon les capacités",
+        "Suivi et ajustement en fonction des évolutions opérationnelles"
+       ]
+      },
+      {
+       "titre": "Études de cas pratiques en structuration organisationnelle",
+       "points": [
+        "Analyse critique d’exemples réels ou fictifs",
+        "Simulation d’élaboration d’une structure organisationnelle pour une équipe fictive ou réelle"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    }
+   ]
+  },
+  {
+   "fichier": "Syllabi du module _C30 Optimisation des processus.docx",
+   "modules": [
+    {
+     "titre": "C30 Optimisation des processus RH",
+     "bloc": "BC 5 - Manager une équipe",
+     "formation": "",
+     "rncp": "",
+     "activite": "11. Organisation et supervision des activités de l’équipe managée",
+     "intervenant": "",
+     "volume": "",
+     "sequencage": "",
+     "objectif": "À l'issue de ce module, l’apprenant sera capable d’élaborer des procédures opérationnelles en modélisant et optimisant les pratiques existantes des acteurs concernés, afin de consolider l’organisation du travail et la rendre plus efficiente.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.30"
+     ],
+     "notions_cles": [
+      "Introduction à l’optimisation des processus RH",
+      "Techniques de modélisation des processus RH",
+      "Optimisation des pratiques RH opérationnelles",
+      "Études de cas pratiques en optimisation RH"
+     ],
+     "programme": [
+      {
+       "titre": "Introduction à l’optimisation des processus RH",
+       "points": [
+        "Concepts fondamentaux : organisation, modélisation et optimisation",
+        "Enjeux stratégiques liés à l’amélioration des pratiques RH",
+        "Alignement entre objectifs organisationnels et pratiques RH"
+       ]
+      },
+      {
+       "titre": "Techniques de modélisation des processus RH",
+       "points": [
+        "Cartographie des processus existants",
+        "Identification des points d’amélioration",
+        "Utilisation d’outils numériques pour modéliser les processus"
+       ]
+      },
+      {
+       "titre": "Optimisation des pratiques RH opérationnelles",
+       "points": [
+        "Techniques pour simplifier et automatiser les tâches",
+        "Gestion proactive des interactions entre acteurs RH",
+        "Suivi et ajustement en fonction des évolutions organisationnelles"
+       ]
+      },
+      {
+       "titre": "Études de cas pratiques en optimisation RH",
+       "points": [
+        "Analyse critique d’exemples réels ou fictifs",
+        "Simulation d’élaboration de procédures optimisées pour une entreprise fictive ou réelle"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    }
+   ]
+  },
+  {
+   "fichier": "Syllabi du module _C31 Performance RH_.docx",
+   "modules": [
+    {
+     "titre": "C31 Performance RH",
+     "bloc": "BC 5 - Manager une équipe",
+     "formation": "",
+     "rncp": "",
+     "activite": "11. Organisation et supervision des activités de l’équipe managée",
+     "intervenant": "",
+     "volume": "",
+     "sequencage": "",
+     "objectif": "À l'issue de ce module, l’apprenant sera capable de mesurer les performances individuelles et collectives via des tableaux de bord et des remontées d’information, afin d’évaluer les écarts et décider des ajustements nécessaires.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.31"
+     ],
+     "notions_cles": [
+      "Introduction à la mesure de la performance RH",
+      "Outils pour mesurer la performance RH",
+      "Évaluation et ajustement des performances",
+      "Études de cas pratiques en performance RH"
+     ],
+     "programme": [
+      {
+       "titre": "Introduction à la mesure de la performance RH",
+       "points": [
+        "Concepts fondamentaux : performance individuelle et collective",
+        "Enjeux liés à l’évaluation des écarts",
+        "Alignement entre objectifs stratégiques et indicateurs RH"
+       ]
+      },
+      {
+       "titre": "Outils pour mesurer la performance RH",
+       "points": [
+        "Conception et utilisation de tableaux de bord RH",
+        "Techniques pour collecter et analyser les données",
+        "Utilisation d’outils numériques pour le reporting RH"
+       ]
+      },
+      {
+       "titre": "Évaluation et ajustement des performances",
+       "points": [
+        "Analyse qualitative et quantitative des écarts",
+        "Techniques pour décider des ajustements nécessaires",
+        "Suivi des actions correctives mises en place"
+       ]
+      },
+      {
+       "titre": "Études de cas pratiques en performance RH",
+       "points": [
+        "Analyse critique d’exemples réels ou fictifs",
+        "Simulation d’élaboration d’un tableau de bord pour une équipe fictive ou réelle"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    }
+   ]
+  },
+  {
+   "fichier": "Syllabi du module _C321 Management des équipes_.docx",
+   "modules": [
+    {
+     "titre": "C321 Management des équipes",
+     "bloc": "BC 5 - Manager une équipe",
+     "formation": "",
+     "rncp": "",
+     "activite": "12. Mobilisation de l’équipe managée",
+     "intervenant": "",
+     "volume": "",
+     "sequencage": "",
+     "objectif": "À l'issue de ce module, l’apprenant sera capable de développer la cohésion et l’esprit d’équipe en valorisant le sens des actions menées, la complémentarité entre les membres et la plus-value apportée par chacun, tout en instaurant un environnement inclusif et collaboratif pour renforcer l’engagement et la motivation.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.32"
+     ],
+     "notions_cles": [
+      "Introduction au management des équipes",
+      "Techniques pour renforcer la cohésion d’équipe",
+      "Création d’un environnement inclusif et motivant",
+      "Études de cas pratiques en management des équipes"
+     ],
+     "programme": [
+      {
+       "titre": "Introduction au management des équipes",
+       "points": [
+        "Concepts fondamentaux : cohésion, complémentarité et engagement",
+        "Enjeux liés à la mobilisation des équipes",
+        "Alignement entre objectifs stratégiques et management opérationnel"
+       ]
+      },
+      {
+       "titre": "Techniques pour renforcer la cohésion d’équipe",
+       "points": [
+        "Méthodes pour valoriser les contributions individuelles et collectives",
+        "Techniques pour gérer les dynamiques interpersonnelles",
+        "Utilisation d’outils numériques pour favoriser la collaboration"
+       ]
+      },
+      {
+       "titre": "Création d’un environnement inclusif et motivant",
+       "points": [
+        "Stratégies pour intégrer les principes de diversité et inclusion",
+        "Techniques pour stimuler l’engagement et la motivation",
+        "Suivi des actions mises en place pour renforcer l’esprit d’équipe"
+       ]
+      },
+      {
+       "titre": "Études de cas pratiques en management des équipes",
+       "points": [
+        "Analyse critique d’exemples réels ou fictifs",
+        "Simulation de gestion d’équipe pour une organisation fictive ou réelle"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    }
+   ]
+  },
+  {
+   "fichier": "Syllabi du module _C322 QSE_.docx",
+   "modules": [
+    {
+     "titre": "C322 QSE",
+     "bloc": "BC 5 - Manager une équipe",
+     "formation": "",
+     "rncp": "",
+     "activite": "12. Mobilisation de l’équipe managée",
+     "intervenant": "",
+     "volume": "",
+     "sequencage": "",
+     "objectif": "À l'issue de ce module, l’apprenant sera capable de mettre en œuvre des actions favorisant la qualité de vie au travail (QVT), la prévention des risques et la gestion des conflits au sein de l’équipe, afin de garantir un environnement de travail sain et motivant.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.32"
+     ],
+     "notions_cles": [
+      "Introduction à la Qualité, Sécurité et Environnement (QSE)",
+      "Techniques pour favoriser la qualité de vie au travail (QVT)",
+      "Prévention des risques et gestion des conflits",
+      "Études de cas pratiques en QSE"
+     ],
+     "programme": [
+      {
+       "titre": "Introduction à la Qualité, Sécurité et Environnement (QSE)",
+       "points": [
+        "Concepts fondamentaux : QVT, prévention des risques et gestion des conflits",
+        "Enjeux stratégiques liés au bien-être au travail",
+        "Alignement entre objectifs organisationnels et pratiques QSE"
+       ]
+      },
+      {
+       "titre": "Techniques pour favoriser la qualité de vie au travail (QVT)",
+       "points": [
+        "Identification des leviers pour améliorer le bien-être",
+        "Mise en place d’actions concrètes pour renforcer l’engagement",
+        "Suivi des indicateurs clés liés à la QVT"
+       ]
+      },
+      {
+       "titre": "Prévention des risques et gestion des conflits",
+       "points": [
+        "Techniques pour identifier les risques psychosociaux",
+        "Méthodes pour prévenir les conflits interpersonnels",
+        "Stratégies pour résoudre les tensions au sein de l’équipe"
+       ]
+      },
+      {
+       "titre": "Études de cas pratiques en QSE",
+       "points": [
+        "Analyse critique d’exemples réels ou fictifs",
+        "Simulation d’élaboration d’un plan QSE pour une organisation fictive ou réelle"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    }
+   ]
+  },
+  {
+   "fichier": "Syllabi du module _C33 Conduite du changement_.docx",
+   "modules": [
+    {
+     "titre": "C33 Conduite du changement",
+     "bloc": "BC 5 - Manager une équipe",
+     "formation": "",
+     "rncp": "",
+     "activite": "12. Mobilisation de l’équipe managée",
+     "intervenant": "",
+     "volume": "",
+     "sequencage": "",
+     "objectif": "À l'issue de ce module, l’apprenant sera capable d’assurer la conduite du changement en déployant des méthodes et outils adaptés pour garantir la pérennité, l’agilité de l’organisation et l’adhésion des équipes.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.33"
+     ],
+     "notions_cles": [
+      "Introduction à la conduite du changement",
+      "Méthodes et outils pour conduire le changement",
+      "Gestion des résistances et mobilisation des équipes",
+      "Études de cas pratiques en conduite du changement"
+     ],
+     "programme": [
+      {
+       "titre": "Introduction à la conduite du changement",
+       "points": [
+        "Concepts fondamentaux : transformation organisationnelle et adaptation",
+        "Enjeux liés à la pérennité et à l’agilité des organisations",
+        "Alignement entre stratégie globale et gestion du changement"
+       ]
+      },
+      {
+       "titre": "Méthodes et outils pour conduire le changement",
+       "points": [
+        "Techniques pour identifier les leviers de transformation",
+        "Méthodologies adaptées (Kotter, ADKAR, etc.)",
+        "Utilisation d’outils numériques pour piloter le changement"
+       ]
+      },
+      {
+       "titre": "Gestion des résistances et mobilisation des équipes",
+       "points": [
+        "Techniques pour anticiper et gérer les résistances",
+        "Stratégies pour favoriser l’adhésion des équipes",
+        "Suivi des actions mises en place pour garantir le succès des transformations"
+       ]
+      },
+      {
+       "titre": "Études de cas pratiques en conduite du changement",
+       "points": [
+        "Analyse critique d’exemples réels ou fictifs",
+        "Simulation d’élaboration d’un plan de conduite du changement pour une organisation fictive ou réelle"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    }
+   ]
+  },
+  {
+   "fichier": "Syllabi du module _C34 Entretien annuel _ analyse.docx",
+   "modules": [
+    {
+     "titre": "C34 Entretien annuel : analyse et exploitation",
+     "bloc": "BC 5 - Manager une équipe",
+     "formation": "",
+     "rncp": "",
+     "activite": "13. Développement des compétences des membres de l’équipe",
+     "intervenant": "",
+     "volume": "",
+     "sequencage": "",
+     "objectif": "À l'issue de ce module, l’apprenant sera capable de conduire des entretiens annuels pour définir des objectifs individuels et collectifs mobilisateurs, en tenant compte des compétences, aspirations et objectifs de l’unité dirigée, afin de fixer un cap clair pour son équipe.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.34"
+     ],
+     "notions_cles": [
+      "Introduction à l’entretien annuel d’évaluation",
+      "Conduite de l’entretien annuel",
+      "Exploitation des informations recueillies",
+      "Études de cas pratiques en entretien annuel"
+     ],
+     "programme": [
+      {
+       "titre": "Introduction à l’entretien annuel d’évaluation",
+       "points": [
+        "Concepts fondamentaux : objectifs, structure et enjeux",
+        "Rôle stratégique de l’entretien dans le management d’équipe",
+        "Alignement entre stratégie organisationnelle et objectifs individuels"
+       ]
+      },
+      {
+       "titre": "Conduite de l’entretien annuel",
+       "points": [
+        "Techniques pour préparer et structurer les entretiens",
+        "Méthodes pour identifier les compétences et aspirations des collaborateurs",
+        "Techniques pour fixer des objectifs mobilisateurs"
+       ]
+      },
+      {
+       "titre": "Exploitation des informations recueillies",
+       "points": [
+        "Analyse des données issues des entretiens",
+        "Élaboration de plans d’action individuels et collectifs",
+        "Suivi et ajustement en fonction des évolutions organisationnelles"
+       ]
+      },
+      {
+       "titre": "Études de cas pratiques en entretien annuel",
+       "points": [
+        "Analyse critique d’exemples réels ou fictifs",
+        "Simulation d’élaboration d’un dispositif d’entretien annuel pour une organisation fictive ou réelle"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    }
+   ]
+  },
+  {
+   "fichier": "Syllabi du module _C35-36 Gestion des talents_.docx",
+   "modules": [
+    {
+     "titre": "C35-36 Gestion des talents",
+     "bloc": "BC 5 - Manager une équipe",
+     "formation": "",
+     "rncp": "",
+     "activite": "13. Développement des compétences des membres de l’équipe",
+     "intervenant": "",
+     "volume": "",
+     "sequencage": "",
+     "objectif": "À l'issue de ce module, l’apprenant sera capable d’identifier les besoins en compétences de chaque membre de l’équipe en fonction des exigences du poste, de soutenir les collaborateurs dans la réalisation de leur mission par la formation-action ou le tutorat, et d’organiser la capitalisation des bonnes pratiques pour inscrire l’équipe dans une dynamique d’amélioration continue.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.35",
+      "C.36",
+      "C.37"
+     ],
+     "notions_cles": [
+      "Identification des besoins en compétences",
+      "Soutien et développement des collaborateurs",
+      "Capitalisation et amélioration continue",
+      "Études de cas pratiques en gestion des talents"
+     ],
+     "programme": [
+      {
+       "titre": "Identification des besoins en compétences",
+       "points": [
+        "Analyse des exigences des postes et profils nécessaires",
+        "Techniques pour évaluer les besoins individuels et collectifs",
+        "Utilisation des entretiens annuels comme outil d’identification"
+       ]
+      },
+      {
+       "titre": "Soutien et développement des collaborateurs",
+       "points": [
+        "Méthodes de formation-action et tutorat",
+        "Techniques pour accompagner les collaborateurs dans leurs missions",
+        "Stratégies pour renforcer les compétences clés au sein de l’équipe"
+       ]
+      },
+      {
+       "titre": "Capitalisation et amélioration continue",
+       "points": [
+        "Techniques pour organiser et partager les bonnes pratiques",
+        "Exploitation de l’intelligence collective pour résoudre les problématiques",
+        "Mise en place d’une démarche structurée de co-développement"
+       ]
+      },
+      {
+       "titre": "Études de cas pratiques en gestion des talents",
+       "points": [
+        "Analyse critique d’exemples réels ou fictifs",
+        "Simulation d’élaboration d’un plan de gestion des talents pour une organisation fictive ou réelle"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    }
+   ]
+  },
+  {
+   "fichier": "Syllabi du module _C37 Co-développement et Intelli.docx",
+   "modules": [
+    {
+     "titre": "C37 Co-développement et Intelligence collective",
+     "bloc": "BC 5 - Manager une équipe",
+     "formation": "",
+     "rncp": "",
+     "activite": "13. Développement des compétences des membres de l’équipe",
+     "intervenant": "",
+     "volume": "",
+     "sequencage": "",
+     "objectif": "À l'issue de ce module, l’apprenant sera capable d’organiser des démarches de co-développement en exploitant l’intelligence collective pour résoudre des problématiques complexes, renforcer les compétences de l’équipe et inscrire son fonctionnement dans une dynamique d’amélioration continue.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.37"
+     ],
+     "notions_cles": [
+      "Introduction au co-développement et à l’intelligence collective",
+      "Techniques pour organiser le co-développement",
+      "Exploitation de l’intelligence collective pour résoudre des problématiques",
+      "Études de cas pratiques en co-développement et intelligence collective"
+     ],
+     "programme": [
+      {
+       "titre": "Introduction au co-développement et à l’intelligence collective",
+       "points": [
+        "Concepts fondamentaux : collaboration, partage et apprentissage collectif",
+        "Enjeux liés à la mobilisation de l’intelligence collective",
+        "Alignement entre objectifs organisationnels et démarches collaboratives"
+       ]
+      },
+      {
+       "titre": "Techniques pour organiser le co-développement",
+       "points": [
+        "Méthodes pour structurer les démarches collaboratives",
+        "Techniques pour valoriser les contributions individuelles et collectives",
+        "Utilisation d’outils numériques pour faciliter le partage des pratiques"
+       ]
+      },
+      {
+       "titre": "Exploitation de l’intelligence collective pour résoudre des problématiques",
+       "points": [
+        "Techniques pour analyser les situations complexes",
+        "Stratégies pour mobiliser les compétences et expériences des membres",
+        "Mise en œuvre d’actions concrètes pour renforcer la dynamique d’équipe"
+       ]
+      },
+      {
+       "titre": "Études de cas pratiques en co-développement et intelligence collective",
+       "points": [
+        "Analyse critique d’exemples réels ou fictifs",
+        "Simulation d’élaboration d’une démarche collaborative pour une organisation fictive ou réelle"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    }
+   ]
+  }
+ ]
+}
