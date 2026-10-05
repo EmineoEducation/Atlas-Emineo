@@ -1,0 +1,575 @@
+{
+ "genere_le": "2026-10-05",
+ "outil": "extraire-pf-isme",
+ "formation": {
+  "rncp": "39354",
+  "titre": "Mastère Manager du développement commercial",
+  "titre_court": "M2 MDEC",
+  "campus": "Le Mans",
+  "annee_cycle": "M2",
+  "source": "PP_MDEC_25_ISME_V1.xlsx",
+  "feuille": "MDEC 25 P.ENTREPREUNARIAT  (2)"
+ },
+ "race": {},
+ "blocs": [
+  {
+   "id": "B02",
+   "titre": "Piloter un centre de profit",
+   "nature": "obligatoire",
+   "competences": [
+    "C11",
+    "C12",
+    "C13",
+    "C14",
+    "C24",
+    "C25",
+    "C26",
+    "C27",
+    "C28"
+   ],
+   "modules": [
+    {
+     "titre": "C11 Environnement règlementaire et juridique",
+     "code": "C11",
+     "libelle": "Environnement règlementaire et juridique",
+     "volume": 35,
+     "competences_liees": [
+      "C11"
+     ],
+     "competences_plage": false,
+     "activite": "A.4",
+     "annee": "2",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "1 RAPPORT D'ANALYSE (4 parties) \"PILOTAGE OPERATIONNEL ET OPTIMISATION DE L'ORGANISATION D'UN CENTRE DE PROFIT\" DOSSIER Individuel (FIN de M2)",
+     "commentaire": "A partir du contexte de l’entreprise dans laquelle le candidat est en mission, il lui est demandé de mettre en œuvre une démarche critique et factuelle : Périmètre juridique - Identifier le périmètre juridique de l’activité de l’entreprise. - Analyser les contraintes règlementaires et les principaux risques juridiques. - Décrire la stratégie déployée pour se mettre en conformité et ses pistes d’amélioration. Périmètre ‘GRH’ - Analyser les principales politiques RH déclinées par l’entreprise (recrutement, rémunération, formation, organisation du travail et politique d’inclusion). - Formuler des préconisations en vue de remédier aux difficultés identifiées. Périmètre ‘gestion des services généraux’ - Analyser l’organisation des services généraux dans l’entreprise ; - Formuler des préconisations en vue de remédier aux difficultés identifiées. Optimisation de l’organisation - Analyser la démarche RSE et qualité de l’entreprise. - Formuler des préconisations en vue de remédier aux difficultés identifiées.",
+     "sous_modules": [],
+     "themes": [
+      "Stratégie de veille règlementaire",
+      "Analyse et prévention des risques juridiques",
+      "Droit pénal des affaires",
+      "Responsabilité juridique du dirigeant"
+     ]
+    },
+    {
+     "titre": "C121 Gestion RH",
+     "code": "C121",
+     "libelle": "Gestion RH",
+     "volume": 21,
+     "competences_liees": [
+      "C12"
+     ],
+     "competences_plage": false,
+     "activite": "A.4",
+     "annee": "2",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "",
+     "commentaire": "",
+     "sous_modules": [],
+     "themes": [
+      "Initiation à la gestion des ressources humaines",
+      "Droit du travail"
+     ]
+    },
+    {
+     "titre": "C122 Talent acquisition",
+     "code": "C122",
+     "libelle": "Talent acquisition",
+     "volume": 21,
+     "competences_liees": [],
+     "competences_plage": false,
+     "activite": "A.4",
+     "annee": "2",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "",
+     "commentaire": "",
+     "sous_modules": [],
+     "themes": [
+      "Stratégie de recrutement",
+      "Stratégie de rémunération"
+     ]
+    },
+    {
+     "titre": "C13 Gestion des Services généraux",
+     "code": "C13",
+     "libelle": "Gestion des Services généraux",
+     "volume": 28,
+     "competences_liees": [
+      "C13"
+     ],
+     "competences_plage": false,
+     "activite": "A.4",
+     "annee": "2",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "",
+     "commentaire": "",
+     "sous_modules": [],
+     "themes": [
+      "Achats et supply chain",
+      "Gestion des prestataires de services et respect des contraintes règlementaires",
+      "Sécurité des personnes et des bâtiments",
+      "Qualité de service interne"
+     ]
+    },
+    {
+     "titre": "C141 Organisation agile",
+     "code": "C141",
+     "libelle": "Organisation agile",
+     "volume": 28,
+     "competences_liees": [
+      "C14"
+     ],
+     "competences_plage": false,
+     "activite": "A.5",
+     "annee": "2",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "",
+     "commentaire": "",
+     "sous_modules": [],
+     "themes": [
+      "Organisation d’entreprise",
+      "Construction d’une organisation agile"
+     ]
+    },
+    {
+     "titre": "C142 RSE et Qualité continue",
+     "code": "C142",
+     "libelle": "RSE et Qualité continue",
+     "volume": 17.5,
+     "competences_liees": [],
+     "competences_plage": false,
+     "activite": "A.5",
+     "annee": "2",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "",
+     "commentaire": "",
+     "sous_modules": [],
+     "themes": [
+      "Stratégie d’amélioration continue de la qualité",
+      "Qualité de service interne",
+      "BC – 4 Superviser la mise en œuvre de la performance commerciale"
+     ]
+    },
+    {
+     "titre": "C24 Politique commerciale",
+     "code": "C24",
+     "libelle": "Politique commerciale",
+     "volume": 24.5,
+     "competences_liees": [
+      "C24"
+     ],
+     "competences_plage": false,
+     "activite": "A.9",
+     "annee": "2",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "",
+     "commentaire": "",
+     "sous_modules": [],
+     "themes": [
+      "Développement de réseau",
+      "Résolution de problèmes"
+     ]
+    },
+    {
+     "titre": "C25 Stratégie client",
+     "code": "C25",
+     "libelle": "Stratégie client",
+     "volume": 21,
+     "competences_liees": [
+      "C25"
+     ],
+     "competences_plage": false,
+     "activite": "A.9",
+     "annee": "2",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "",
+     "commentaire": "",
+     "sous_modules": [],
+     "themes": [
+      "Démarche de recueil de la satisfaction client"
+     ]
+    },
+    {
+     "titre": "C26 RSE et pratiques commerciales",
+     "code": "C26",
+     "libelle": "RSE et pratiques commerciales",
+     "volume": 14,
+     "competences_liees": [
+      "C26"
+     ],
+     "competences_plage": false,
+     "activite": "A.9",
+     "annee": "2",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "",
+     "commentaire": "",
+     "sous_modules": [],
+     "themes": [
+      "La démarche RSE appliquée aux pratiques commerciales : principes et plan d’actions",
+      "Les impacts et risques de la démarche commerciale"
+     ]
+    },
+    {
+     "titre": "C27Performance commerciale et KPI",
+     "code": "C27",
+     "libelle": "Performance commerciale et KPI",
+     "volume": 35,
+     "competences_liees": [
+      "C27"
+     ],
+     "competences_plage": false,
+     "activite": "A.10",
+     "annee": "2",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "",
+     "commentaire": "",
+     "sous_modules": [],
+     "themes": [
+      "Stratégie de rémunération de l’équipe commerciale",
+      "Indicateurs et tableaux de bord commerciaux",
+      "Analyse de la performance individuelle et collective"
+     ]
+    },
+    {
+     "titre": "C28 Performance et pratiques responsables",
+     "code": "C28",
+     "libelle": "Performance et pratiques responsables",
+     "volume": 21,
+     "competences_liees": [
+      "C28"
+     ],
+     "competences_plage": false,
+     "activite": "A.10",
+     "annee": "2",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "",
+     "commentaire": "",
+     "sous_modules": [],
+     "themes": [
+      "Démarche d’amélioration continue de la qualité de la démarche commerciale"
+     ]
+    }
+   ],
+   "epreuves": [
+    {
+     "intitule": "BC 2.4 - C10 à programmer avant fin MARS",
+     "activite": "A.4",
+     "observations": "Epreuve relative à la compétence C.10 de l’activité 4 (Gérer les ressources financières en réalisant des prévisions budgétaires et des analyses de rentabilité afin de garantir une saine gestion financière et d’atteindre les objectifs économiques.) A partir d’une étude de cas, il est demandé au candidat de réaliser des prévisions budgétaires et d’analyser la rentabilité du centre de profit."
+    },
+    {
+     "intitule": "Mémoire P2O \"PROJET D'OPTIMISATION OPERATIONNEL\" 1 ECRIT + 1 EPREUVE ORALE Individuel",
+     "activite": "A.9",
+     "observations": "A partir d’une commande de l’entreprise, et en lien avec la mission réalisée en entreprise, il est demandé au candidat de résoudre une problématique de performance commerciale, qu’il présente dans un mémoire professionnel, soutenu devant un jury Durée de l’oral : 20 minutes de présentation + 20 minutes de questions/réponses"
+    },
+    {
+     "intitule": "EC BC4 Soutenance",
+     "activite": "",
+     "observations": ""
+    },
+    {
+     "intitule": "EC BC5 Etude de cas",
+     "activite": "",
+     "observations": ""
+    }
+   ],
+   "competences_mentionnees": [
+    {
+     "id": "C11",
+     "libelle": "Assurer la conformité juridique des activités en réalisant une veille réglementaire et en garantissant l’application de procédures conformes aux normes légales en vigueur, afin de limiter les risques liés aux activités du centre de profit."
+    },
+    {
+     "id": "C12",
+     "libelle": "Piloter la gestion des ressources humaines, en matière de recrutement, de rémunération, de formation et d’organisation du travail, en mettant en place des politiques adaptées aux enjeux et au contexte des activités du centre de profit."
+    },
+    {
+     "id": "C13",
+     "libelle": "Garantir la gestion des services généraux (achats, gestion des bâtiments, gestion des matériels) réalisés en interne ou externalisés, pour assurer le bon fonctionnement du centre de profit."
+    },
+    {
+     "id": "C14",
+     "libelle": "Diriger les opérations d’ajustement/ transformation dans une logique RSE et d’amélioration continue de la qualité, pour assurer la pérennité et l’agilité de l’organisation."
+    },
+    {
+     "id": "C24",
+     "libelle": "Développer une politique commerciale innovante, alignée sur les objectifs de la stratégie commerciale, en collaboration avec les directions internes, et en privilégiant la création d’alliances stratégiques dans le but de créer des opportunités nouvelles."
+    },
+    {
+     "id": "C25",
+     "libelle": "Concevoir et déployer une stratégie de satisfaction client omnicanal centrée sur l’excellence du service, la personnalisation des offres et la réactivité aux besoins des clients afin de favoriser la fidélisation de la clientèle."
+    },
+    {
+     "id": "C26",
+     "libelle": "Elaborer des stratégies et des initiatives visant à intégrer la RSE dans les pratiques commerciales, en collaboration avec les différentes parties prenantes de l’entreprise, pour renforcer la contribution positive de l’entreprise à la société et à l’environnement."
+    },
+    {
+     "id": "C27",
+     "libelle": "Evaluer la performance des équipes commerciales en analysant les indicateurs de performance (KPI) issus des process mis en place, pour mesurer l’atteinte des objectifs commerciaux fixés et repérer les leviers de développement."
+    },
+    {
+     "id": "C28",
+     "libelle": "Piloter le dispositif d’amélioration de la performance commerciale en développant des plans d’action intégrant des pratiques responsables afin de renforcer la qualité et la performance du processus commercial."
+    }
+   ],
+   "competences_race": [],
+   "bloc_race": "",
+   "volume_annonce": 231
+  },
+  {
+   "id": "B05",
+   "titre": "Manager une équipe",
+   "nature": "obligatoire",
+   "competences": [
+    "C32",
+    "C33",
+    "C34",
+    "C35"
+   ],
+   "modules": [
+    {
+     "titre": "C321 Management des équipes",
+     "code": "C321",
+     "libelle": "Management des équipes",
+     "volume": 31.5,
+     "competences_liees": [
+      "C32"
+     ],
+     "competences_plage": false,
+     "activite": "A.12",
+     "annee": "2",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "",
+     "commentaire": "",
+     "sous_modules": [],
+     "themes": [
+      "Théorie de la motivation",
+      "Management d’équipe",
+      "Communication interpersonnelle",
+      "Prévention et gestion de conflits"
+     ]
+    },
+    {
+     "titre": "C322 QSE",
+     "code": "C322",
+     "libelle": "QSE",
+     "volume": 10.5,
+     "competences_liees": [],
+     "competences_plage": false,
+     "activite": "A.12",
+     "annee": "2",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "",
+     "commentaire": "",
+     "sous_modules": [],
+     "themes": [
+      "Qualité de vie au travail – Prévention, identification et gestion"
+     ]
+    },
+    {
+     "titre": "C33 Conduite du changement",
+     "code": "C33",
+     "libelle": "Conduite du changement",
+     "volume": 21,
+     "competences_liees": [
+      "C33"
+     ],
+     "competences_plage": false,
+     "activite": "A.12",
+     "annee": "2",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "",
+     "commentaire": "",
+     "sous_modules": [],
+     "themes": [
+      "Conduite du changement"
+     ]
+    },
+    {
+     "titre": "C34 Entretien annuel : analyse et exploitation",
+     "code": "C34",
+     "libelle": "Entretien annuel : analyse et exploitation",
+     "volume": 14,
+     "competences_liees": [
+      "C34"
+     ],
+     "competences_plage": false,
+     "activite": "A.12",
+     "annee": "2",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "",
+     "commentaire": "",
+     "sous_modules": [],
+     "themes": [
+      "Mener un entretien annuel d’évaluation",
+      "Les outils de gestion des entretiens annuels",
+      "Dispositif d’exploitation des informations recueillies",
+      "13, Développement des compétences des membres de l'équipe"
+     ]
+    },
+    {
+     "titre": "C35-36 Gestion des talents",
+     "code": "C35",
+     "libelle": "36 Gestion des talents",
+     "volume": 21,
+     "competences_liees": [
+      "C35"
+     ],
+     "competences_plage": false,
+     "activite": "A.12",
+     "annee": "2",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "",
+     "commentaire": "",
+     "sous_modules": [],
+     "themes": [
+      "La notion de compétence",
+      "Profil de poste et besoin en compétences"
+     ]
+    },
+    {
+     "titre": "C37 Co-développement et Inteligence collective",
+     "code": "C37",
+     "libelle": "Co-développement et Inteligence collective",
+     "volume": 17.5,
+     "competences_liees": [],
+     "competences_plage": false,
+     "activite": "A.12",
+     "annee": "2",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "",
+     "commentaire": "",
+     "sous_modules": [],
+     "themes": [
+      "Définition d’objectif opérationnel de formation",
+      "ACTIONS TRANSVERSES"
+     ]
+    }
+   ],
+   "epreuves": [
+    {
+     "intitule": "EPREUVE EN FIN DE M2",
+     "activite": "A.11",
+     "observations": ""
+    },
+    {
+     "intitule": "EC BC1 Etude de cas",
+     "activite": "A.11",
+     "observations": ""
+    },
+    {
+     "intitule": "EC BC2 Etude de cas",
+     "activite": "A.11",
+     "observations": ""
+    },
+    {
+     "intitule": "EC BC3 Etude de cas",
+     "activite": "A.11",
+     "observations": ""
+    },
+    {
+     "intitule": "1 ETUDE DE CAS \"MANAGEMENT D'EQUIPE\" EPREUVE ECRITE Individuelle",
+     "activite": "A.12",
+     "observations": "Il est demandé au candidat, à partir d’un regard réflexif sur les pratiques à mettre en œuvre, de produire un dossier écrit dans lequel : Il propose des solutions pour organiser, ou réorganiser, mobiliser et accompagner le dirigeant dans le management de son équipe."
+    }
+   ],
+   "competences_mentionnees": [
+    {
+     "id": "C32",
+     "libelle": "Développer la cohésion et l’esprit d’équipe, en valorisant le sens des actions menées, la complémentarité entre les acteurs et la plus-value apportée par chacun, en vue d’instaurer un environnement de travail inclusif et collaboratif, où chacun se sent motivé et engagé."
+    },
+    {
+     "id": "C33",
+     "libelle": "Assurer la conduite du changement en déployant des méthodes et outils adaptés, pour assurer la pérennité et l’agilité de l’organisation et l’adhésion de l’équipe."
+    },
+    {
+     "id": "C34",
+     "libelle": "Définir des objectifs individuels et collectifs mobilisateurs en tenant compte des compétences et aspirations de chaque membre et des objectifs de l’unité dirigée, afin de fixer un cap clair pour son équipe."
+    },
+    {
+     "id": "C35",
+     "libelle": "Identifier les besoins en compétences de chaque membre de l’équipe en fonction des exigences du poste au travers de l’entretien annuel pour répondre aux besoins du service et C.36 Soutenir les collaborateurs dans la réalisation de leur mission en mettant à disposition son expertise, par la formation-action ou le tutorat, afin de renforcer les compétences de son équipe et C.37 Organiser la capitalisation des bonnes pratiques en exploitant l’intelligence collective à travers l’analyse de situation, afin d‘inscrire le fonctionnement de l’équipe dans une visée d’amélioration continue et de co-développement."
+    }
+   ],
+   "competences_race": [],
+   "bloc_race": "",
+   "volume_annonce": 143.5
+  }
+ ],
+ "modules_hors_bloc": [
+  {
+   "titre": "BT Masterclass Workshop",
+   "code": "",
+   "libelle": "BT Masterclass Workshop",
+   "volume": 14,
+   "competences_liees": [],
+   "competences_plage": false,
+   "activite": "",
+   "annee": "2",
+   "sequencage": "",
+   "seances": null,
+   "epreuve": "",
+   "commentaire": "",
+   "sous_modules": [],
+   "themes": [
+    "Masterclass Workshop"
+   ],
+   "section": "Transversal"
+  },
+  {
+   "titre": "A developper",
+   "code": "",
+   "libelle": "A developper",
+   "volume": 35,
+   "competences_liees": [],
+   "competences_plage": false,
+   "activite": "",
+   "annee": "2",
+   "sequencage": "",
+   "seances": null,
+   "epreuve": "",
+   "commentaire": "",
+   "sous_modules": [],
+   "themes": [
+    "Parcours Entrepreneuriat"
+   ],
+   "section": "Transversal"
+  }
+ ],
+ "hors_bloc_ecartes": [],
+ "epreuves_planifiees": [],
+ "hors_perimetre": [],
+ "controles": [
+  {
+   "titre": "Piloter un centre de profit",
+   "annonce": 231,
+   "calcule": 266,
+   "ok": false
+  },
+  {
+   "titre": "Manager une équipe",
+   "annonce": 143.5,
+   "calcule": 115.5,
+   "ok": false
+  }
+ ],
+ "anomalies": [],
+ "couverture": {
+  "competences_sans_module": [],
+  "competences_couvertes_par_transverse": []
+ }
+}

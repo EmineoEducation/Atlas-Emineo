@@ -1,0 +1,868 @@
+{
+ "genere_le": "2026-10-05",
+ "outil": "extraire-pf-isme",
+ "formation": {
+  "rncp": "39354",
+  "titre": "Mastère Manager du développement commercial",
+  "titre_court": "M1 MDEC",
+  "campus": "Le Mans",
+  "annee_cycle": "M1",
+  "source": "PP_MDEC_25_ISME_V1.xlsx",
+  "feuille": "MDEC 25 P.ENTREPREUNARIAT  (2)"
+ },
+ "race": {},
+ "blocs": [
+  {
+   "id": "B01",
+   "titre": "Elaborer la stratégie générale de développement de l'entreprise",
+   "nature": "obligatoire",
+   "competences": [
+    "C1",
+    "C2",
+    "C3",
+    "C4",
+    "C5",
+    "C6",
+    "C7",
+    "C8",
+    "C9"
+   ],
+   "modules": [
+    {
+     "titre": "C1 Veille, analyse et stratégie",
+     "code": "C1",
+     "libelle": "Veille, analyse et stratégie",
+     "volume": 17.5,
+     "competences_liees": [
+      "C1"
+     ],
+     "competences_plage": false,
+     "activite": "A.1",
+     "annee": "1",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "",
+     "commentaire": "",
+     "sous_modules": [],
+     "themes": [
+      "Business intelligence",
+      "veille informative et concurrentielle",
+      "Environnement international de l’entreprise"
+     ]
+    },
+    {
+     "titre": "C2 Diagnostic stratégique",
+     "code": "C2",
+     "libelle": "Diagnostic stratégique",
+     "volume": 14,
+     "competences_liees": [
+      "C2"
+     ],
+     "competences_plage": false,
+     "activite": "A.1",
+     "annee": "1",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "",
+     "commentaire": "",
+     "sous_modules": [],
+     "themes": [
+      "Diagnostic stratégique"
+     ]
+    },
+    {
+     "titre": "C3 La Reflexion collaborative",
+     "code": "C3",
+     "libelle": "La Reflexion collaborative",
+     "volume": 7,
+     "competences_liees": [
+      "C3"
+     ],
+     "competences_plage": false,
+     "activite": "A.1",
+     "annee": "1",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "",
+     "commentaire": "",
+     "sous_modules": [],
+     "themes": [
+      "Animation de réunion",
+      "Brainstorming"
+     ]
+    },
+    {
+     "titre": "C41 Culture et Gouvernance",
+     "code": "C41",
+     "libelle": "Culture et Gouvernance",
+     "volume": 14,
+     "competences_liees": [
+      "C4"
+     ],
+     "competences_plage": false,
+     "activite": "A.2",
+     "annee": "1",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "",
+     "commentaire": "",
+     "sous_modules": [],
+     "themes": [
+      "Gouvernance et stratégie générale d’entreprise",
+      "Culture d’entreprise"
+     ]
+    },
+    {
+     "titre": "C42 RSE",
+     "code": "C42",
+     "libelle": "RSE",
+     "volume": 14,
+     "competences_liees": [],
+     "competences_plage": false,
+     "activite": "A.2",
+     "annee": "1",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "",
+     "commentaire": "",
+     "sous_modules": [],
+     "themes": [
+      "Management du développement durable",
+      "Initiation à la RSE"
+     ]
+    },
+    {
+     "titre": "C5 Plan d'action stratégique",
+     "code": "C5",
+     "libelle": "Plan d'action stratégique",
+     "volume": 21,
+     "competences_liees": [
+      "C5"
+     ],
+     "competences_plage": false,
+     "activite": "A.2",
+     "annee": "1",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "",
+     "commentaire": "",
+     "sous_modules": [],
+     "themes": [
+      "Analyse de la valeur",
+      "Plan d’actions stratégiques"
+     ]
+    },
+    {
+     "titre": "C6 Communication et Leadership",
+     "code": "C6",
+     "libelle": "Communication et Leadership",
+     "volume": 17.5,
+     "competences_liees": [
+      "C6"
+     ],
+     "competences_plage": false,
+     "activite": "A.2",
+     "annee": "1",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "",
+     "commentaire": "",
+     "sous_modules": [],
+     "themes": [
+      "Prise de parole en public",
+      "Communication de crise",
+      "Leadership et force de conviction"
+     ]
+    },
+    {
+     "titre": "C7 Management de projet",
+     "code": "C7",
+     "libelle": "Management de projet",
+     "volume": 21,
+     "competences_liees": [
+      "C7"
+     ],
+     "competences_plage": false,
+     "activite": "A.3",
+     "annee": "1",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "",
+     "commentaire": "",
+     "sous_modules": [],
+     "themes": [
+      "Management de projet",
+      "Déclinaisons de la stratégie en plan d’actions"
+     ]
+    },
+    {
+     "titre": "C81 Négociation",
+     "code": "C81",
+     "libelle": "Négociation",
+     "volume": 10.5,
+     "competences_liees": [
+      "C8"
+     ],
+     "competences_plage": false,
+     "activite": "A.3",
+     "annee": "1",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "",
+     "commentaire": "",
+     "sous_modules": [],
+     "themes": [
+      "Négociation"
+     ]
+    },
+    {
+     "titre": "C82 L'accompagnement stratégique",
+     "code": "C82",
+     "libelle": "L'accompagnement stratégique",
+     "volume": 17.5,
+     "competences_liees": [],
+     "competences_plage": false,
+     "activite": "A.3",
+     "annee": "1",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "",
+     "commentaire": "",
+     "sous_modules": [],
+     "themes": [
+      "Stratégie de délégation",
+      "Conduite du changement"
+     ]
+    },
+    {
+     "titre": "C9 Stratégie de la Performance",
+     "code": "C9",
+     "libelle": "Stratégie de la Performance",
+     "volume": 28,
+     "competences_liees": [
+      "C9"
+     ],
+     "competences_plage": false,
+     "activite": "A.3",
+     "annee": "1",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "",
+     "commentaire": "",
+     "sous_modules": [],
+     "themes": [
+      "Stratégie d’évaluation de la performance",
+      "Indicateurs de performance",
+      "Tableaux de bord"
+     ]
+    }
+   ],
+   "epreuves": [
+    {
+     "intitule": "1 ETUDE DE CAS \"ELABORATION DE LA STRATEGIE GENERALE DE DEVELOPPEMENT DE L'ENTREPRISE\" EPREUVE ECRITE Individuelle - (Avril M1)",
+     "activite": "A.1",
+     "observations": "A partir des données issues de projets réels/fictifs, le candidat doit : - Analyser l’environnement. - Définir une stratégie globale de développement de l’entreprise - Elaborer un plan d’action stratégique Rendu : synthèse écrite."
+    }
+   ],
+   "competences_mentionnees": [
+    {
+     "id": "C1",
+     "libelle": "Analyser les opportunités et les menaces potentielles en repérant et interprétant les tendances de l’environnement pour guider la prise de décision stratégique."
+    },
+    {
+     "id": "C2",
+     "libelle": "Diagnostiquer les forces et faiblesses de l’organisation par des outils d’analyse stratégique pour déterminer les leviers d’action stratégiques."
+    },
+    {
+     "id": "C3",
+     "libelle": "Synthétiser les informations recueillies pour nourrir la réflexion collective quant à la stratégie de développement à élaborer."
+    },
+    {
+     "id": "C4",
+     "libelle": "Déterminer la vision et le projet stratégique de l’entreprise en collaboration avec les parties prenantes en tenant compte des enjeux scientifiques, sociétaux et éthiques dans une logique RSE, pour garantir la pérennité et le développement."
+    },
+    {
+     "id": "C5",
+     "libelle": "Définir et prioriser les objectifs stratégiques alignés avec la stratégie générale de l’entreprise en utilisant des outils d’analyse de la valeur pour maximiser l’impact stratégique."
+    },
+    {
+     "id": "C6",
+     "libelle": "Communiquer les objectifs stratégiques de manière claire et convaincante à tous les niveaux de l’organisation pour garantir leur compréhension et l’adhésion des équipes."
+    },
+    {
+     "id": "C7",
+     "libelle": "Elaborer des plans stratégiques détaillés en identifiant les ressources et les étapes clés pour atteindre les objectifs stratégiques fixés"
+    },
+    {
+     "id": "C8",
+     "libelle": "Accompagner les directions opérationnelles dans la déclinaison des objectifs stratégiques sur leur périmètre en responsabilité pour assurer l’alignement et la cohérence de leurs plans d’action."
+    },
+    {
+     "id": "C9",
+     "libelle": "Construire un dispositif d’évaluation de la performance des plans stratégiques définis en utilisant des indicateurs clés de performance pour identifier les ajustements nécessaires et améliorer la pertinence des plans."
+    }
+   ],
+   "competences_race": [],
+   "bloc_race": "",
+   "volume_annonce": 182
+  },
+  {
+   "id": "B02",
+   "titre": "Piloter un centre de profit",
+   "nature": "obligatoire",
+   "competences": [
+    "C10"
+   ],
+   "modules": [
+    {
+     "titre": "C101 Maîtriser Excel",
+     "code": "C101",
+     "libelle": "Maîtriser Excel",
+     "volume": 10.5,
+     "competences_liees": [
+      "C10"
+     ],
+     "competences_plage": false,
+     "activite": "A.4",
+     "annee": "1",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "1 ETUDE DE CAS \"PILOTAGE FINANCIER D'UN CENTRE DE PROFIT\" EPREUVE ECRITE Individuelle (Fin MARS - début AVRIL)",
+     "commentaire": "",
+     "sous_modules": [],
+     "themes": [
+      "Maîtriser Excel"
+     ]
+    },
+    {
+     "titre": "C102 Gestion budget",
+     "code": "C102",
+     "libelle": "Gestion budget",
+     "volume": 21,
+     "competences_liees": [],
+     "competences_plage": false,
+     "activite": "A.4",
+     "annee": "1",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "",
+     "commentaire": "",
+     "sous_modules": [],
+     "themes": [
+      "Contrôle de gestion",
+      "Gestion de trésorerie"
+     ]
+    },
+    {
+     "titre": "C103 Analyse financière et financement",
+     "code": "C103",
+     "libelle": "Analyse financière et financement",
+     "volume": 28,
+     "competences_liees": [],
+     "competences_plage": false,
+     "activite": "A.4",
+     "annee": "1",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "",
+     "commentaire": "",
+     "sous_modules": [],
+     "themes": [
+      "Analyse financière et budgétaire",
+      "Evaluation financière d’entreprise",
+      "Techniques de financement des entreprises"
+     ]
+    }
+   ],
+   "epreuves": [
+    {
+     "intitule": "BC 2.4 - C10 à programmer avant fin MARS",
+     "activite": "A.4",
+     "observations": "Epreuve relative à la compétence C.10 de l’activité 4 (Gérer les ressources financières en réalisant des prévisions budgétaires et des analyses de rentabilité afin de garantir une saine gestion financière et d’atteindre les objectifs économiques.) A partir d’une étude de cas, il est demandé au candidat de réaliser des prévisions budgétaires et d’analyser la rentabilité du centre de profit."
+    },
+    {
+     "intitule": "Mémoire P2O \"PROJET D'OPTIMISATION OPERATIONNEL\" 1 ECRIT + 1 EPREUVE ORALE Individuel",
+     "activite": "A.9",
+     "observations": "A partir d’une commande de l’entreprise, et en lien avec la mission réalisée en entreprise, il est demandé au candidat de résoudre une problématique de performance commerciale, qu’il présente dans un mémoire professionnel, soutenu devant un jury Durée de l’oral : 20 minutes de présentation + 20 minutes de questions/réponses"
+    },
+    {
+     "intitule": "EC BC4 Soutenance",
+     "activite": "",
+     "observations": ""
+    },
+    {
+     "intitule": "EC BC5 Etude de cas",
+     "activite": "",
+     "observations": ""
+    }
+   ],
+   "competences_mentionnees": [
+    {
+     "id": "C10",
+     "libelle": "Gérer les ressources financières en réalisant des prévisions budgétaires et des analyses de rentabilité afin de garantir une saine gestion financière et d’atteindre les objectifs économiques."
+    }
+   ],
+   "competences_race": [],
+   "bloc_race": "",
+   "volume_annonce": 231
+  },
+  {
+   "id": "B03",
+   "titre": "Concevoir la stratégie de développement commercial",
+   "nature": "obligatoire",
+   "competences": [
+    "C15",
+    "C16",
+    "C17",
+    "C18",
+    "C19",
+    "C20",
+    "C21",
+    "C22"
+   ],
+   "modules": [
+    {
+     "titre": "C15 Veille et Innovation",
+     "code": "C15",
+     "libelle": "Veille et Innovation",
+     "volume": 17.5,
+     "competences_liees": [
+      "C15"
+     ],
+     "competences_plage": false,
+     "activite": "A.6",
+     "annee": "1",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "",
+     "commentaire": "",
+     "sous_modules": [],
+     "themes": [
+      "Stratégie de veille marché",
+      "Management de l’innovation"
+     ]
+    },
+    {
+     "titre": "C16 Analyse du marché et ciblage",
+     "code": "C16",
+     "libelle": "Analyse du marché et ciblage",
+     "volume": 24.5,
+     "competences_liees": [
+      "C16"
+     ],
+     "competences_plage": false,
+     "activite": "A.6",
+     "annee": "1",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "",
+     "commentaire": "",
+     "sous_modules": [],
+     "themes": [
+      "Analyse marché",
+      "Parcours client / satisfaction client",
+      "Segmentation et ciblage"
+     ]
+    },
+    {
+     "titre": "C17 Benchmarking et diagnostic",
+     "code": "C17",
+     "libelle": "Benchmarking et diagnostic",
+     "volume": 17.5,
+     "competences_liees": [
+      "C17"
+     ],
+     "competences_plage": false,
+     "activite": "A.6",
+     "annee": "1",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "",
+     "commentaire": "",
+     "sous_modules": [],
+     "themes": [
+      "Diagnostic interne",
+      "Stratégie de benchmarking"
+     ]
+    },
+    {
+     "titre": "C18 Stratégie commerciale",
+     "code": "C18",
+     "libelle": "Stratégie commerciale",
+     "volume": 14,
+     "competences_liees": [
+      "C18"
+     ],
+     "competences_plage": false,
+     "activite": "A.7",
+     "annee": "1",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "",
+     "commentaire": "",
+     "sous_modules": [],
+     "themes": [
+      "Stratégie commerciale"
+     ]
+    },
+    {
+     "titre": "C19 PAC et développement réseau",
+     "code": "C19",
+     "libelle": "PAC et développement réseau",
+     "volume": 21,
+     "competences_liees": [
+      "C19"
+     ],
+     "competences_plage": false,
+     "activite": "A.7",
+     "annee": "1",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "",
+     "commentaire": "",
+     "sous_modules": [],
+     "themes": [
+      "Plan d’action commerciale",
+      "Développement commercial d’entreprise en réseau"
+     ]
+    },
+    {
+     "titre": "C201 Gestion des risques",
+     "code": "C201",
+     "libelle": "Gestion des risques",
+     "volume": 10.5,
+     "competences_liees": [
+      "C20"
+     ],
+     "competences_plage": false,
+     "activite": "A.7",
+     "annee": "1",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "",
+     "commentaire": "",
+     "sous_modules": [],
+     "themes": [
+      "Analyse et gestion des risques"
+     ]
+    },
+    {
+     "titre": "C202 Analyse et sécurisation de stratégie",
+     "code": "C202",
+     "libelle": "Analyse et sécurisation de stratégie",
+     "volume": 14,
+     "competences_liees": [],
+     "competences_plage": false,
+     "activite": "A.7",
+     "annee": "1",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "",
+     "commentaire": "",
+     "sous_modules": [],
+     "themes": [
+      "Indicateurs et tableaux de bord commerciaux",
+      "Revue de direction commerciale"
+     ]
+    },
+    {
+     "titre": "C21 Business plan",
+     "code": "C21",
+     "libelle": "Business plan",
+     "volume": 17.5,
+     "competences_liees": [
+      "C21"
+     ],
+     "competences_plage": false,
+     "activite": "A.8",
+     "annee": "1",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "",
+     "commentaire": "",
+     "sous_modules": [],
+     "themes": [
+      "Business plan"
+     ]
+    },
+    {
+     "titre": "C221 Budget et Négociation approfondie",
+     "code": "C221",
+     "libelle": "Budget et Négociation approfondie",
+     "volume": 21,
+     "competences_liees": [
+      "C22"
+     ],
+     "competences_plage": false,
+     "activite": "A.8",
+     "annee": "1",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "",
+     "commentaire": "",
+     "sous_modules": [],
+     "themes": [
+      "Rédaction de synthèse",
+      "Elaboration des budgets"
+     ]
+    },
+    {
+     "titre": "C222 Pitch",
+     "code": "C222",
+     "libelle": "Pitch",
+     "volume": 3.5,
+     "competences_liees": [],
+     "competences_plage": false,
+     "activite": "A.8",
+     "annee": "1",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "",
+     "commentaire": "",
+     "sous_modules": [],
+     "themes": [
+      "Technique du pitch"
+     ]
+    }
+   ],
+   "epreuves": [
+    {
+     "intitule": "1 ETUDE DE CAS \"CONCEPTION ET DEPLOIEMENT DE LA STRATEGIE COMMERCIALE DE L'ENTREPRISE\" en Collectif EPREUVE ORALE Collective (3 candidats) + 1 EPREUVE ECRITE Individuelle (Fin de M1)",
+     "activite": "A.6",
+     "observations": "Dans le cadre d’une entreprise fictive reconstituée, il est demandé au candidat de : - Analyser le marché et les perspectives d’évolution commerciale. Chaque candidat présente son analyse sous forme d’une synthèse écrite individuelle. Dans un second temps, il est demandé aux candidats de : - Elaborer la stratégie commerciale de l’entreprise ; - Mettre en œuvre cette stratégie en allouant les moyens et ressources nécessaires. A l’oral et par groupe de 3 candidats, les candidats présentent et défendent leur proposition de stratégie commerciale, en se répartissant la prise de parole débouchant sur une évaluation individuelle. Durée de l’oral : 15 minutes de présentation + 15 minutes de questions/réponses"
+    }
+   ],
+   "competences_mentionnees": [
+    {
+     "id": "C15",
+     "libelle": "Elaborer une stratégie de veille à l’aide de technologies intelligentes (IA, Big Data, CRM…) pour saisir les opportunités d’innovation remarquables et profitables"
+    },
+    {
+     "id": "C16",
+     "libelle": "Identifier les segments de marché les plus lucratifs en analysant les comportements et les attentes des clients pour allouer efficacement les efforts de marketing et de vente."
+    },
+    {
+     "id": "C17",
+     "libelle": "Diagnostiquer les avantages concurrentiels et les lacunes à combler de l’entreprise en évaluant comparativement la concurrence pour définir les axes de la stratégie de développement commerciale."
+    },
+    {
+     "id": "C18",
+     "libelle": "Elaborer la stratégie commerciale en alignement avec les orientations définies par la direction générale, en vue de garantir la pérennité et le développement des activités commerciales."
+    },
+    {
+     "id": "C19",
+     "libelle": "Assurer la traduction de la stratégie commerciale à un niveau intermédiaire en supervisant l’élaboration des Plan d’Action Commercial (PAC) établis par les responsables de périmètre, secteur ou produit, en vue de garantir leur cohérence avec la stratégie commerciale."
+    },
+    {
+     "id": "C20",
+     "libelle": "Sécuriser la stratégie commerciale en identifiant, analysant et évaluant les aléas internes et externes, dans le but de réajuster les objectifs commerciaux et les moyens déployés."
+    },
+    {
+     "id": "C21",
+     "libelle": "Inventorier les moyens et ressources disponibles (humains, techniques, budgétaires, matériels…) nécessaires, en interne et en externe, à la mise en œuvre de la stratégie commerciale."
+    },
+    {
+     "id": "C22",
+     "libelle": "Négocier avec la direction générale l’attribution des moyens et ressources complémentaires pour permettre la mise en œuvre de la stratégie commerciale, et C.23 Gérer efficacement et équitablement l’utilisation des moyens et des ressources disponibles en accord avec les objectifs fixés, afin de garantir le respect du budget défini."
+    }
+   ],
+   "competences_race": [],
+   "bloc_race": "",
+   "volume_annonce": 161
+  },
+  {
+   "id": "B05",
+   "titre": "Manager une équipe",
+   "nature": "obligatoire",
+   "competences": [
+    "C29",
+    "C30",
+    "C31"
+   ],
+   "modules": [
+    {
+     "titre": "C29 Structure et Organisation",
+     "code": "C29",
+     "libelle": "Structure et Organisation",
+     "volume": 10.5,
+     "competences_liees": [
+      "C29"
+     ],
+     "competences_plage": false,
+     "activite": "A.11",
+     "annee": "1",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "",
+     "commentaire": "",
+     "sous_modules": [],
+     "themes": [
+      "Organisation du travail",
+      "Définition de postes"
+     ]
+    },
+    {
+     "titre": "C30 Optimisation des processus RH",
+     "code": "C30",
+     "libelle": "Optimisation des processus RH",
+     "volume": 10.5,
+     "competences_liees": [
+      "C30"
+     ],
+     "competences_plage": false,
+     "activite": "A.11",
+     "annee": "1",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "",
+     "commentaire": "",
+     "sous_modules": [],
+     "themes": [
+      "Initiation à la cartographie des processus RH",
+      "Création de procédures",
+      "Intégration des personnes en situation de handicap"
+     ]
+    },
+    {
+     "titre": "C31 Performance RH",
+     "code": "C31",
+     "libelle": "Performance RH",
+     "volume": 7,
+     "competences_liees": [
+      "C31"
+     ],
+     "competences_plage": false,
+     "activite": "A.11",
+     "annee": "1",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "",
+     "commentaire": "",
+     "sous_modules": [],
+     "themes": [
+      "Indicateurs et tableaux de bord RH pour un manager de proximité",
+      "ACTIONS TRANSVERSES"
+     ]
+    }
+   ],
+   "epreuves": [
+    {
+     "intitule": "EPREUVE EN FIN DE M2",
+     "activite": "A.11",
+     "observations": ""
+    },
+    {
+     "intitule": "EC BC1 Etude de cas",
+     "activite": "A.11",
+     "observations": ""
+    },
+    {
+     "intitule": "EC BC2 Etude de cas",
+     "activite": "A.11",
+     "observations": ""
+    },
+    {
+     "intitule": "EC BC3 Etude de cas",
+     "activite": "A.11",
+     "observations": ""
+    },
+    {
+     "intitule": "1 ETUDE DE CAS \"MANAGEMENT D'EQUIPE\" EPREUVE ECRITE Individuelle",
+     "activite": "A.12",
+     "observations": "Il est demandé au candidat, à partir d’un regard réflexif sur les pratiques à mettre en œuvre, de produire un dossier écrit dans lequel : Il propose des solutions pour organiser, ou réorganiser, mobiliser et accompagner le dirigeant dans le management de son équipe."
+    }
+   ],
+   "competences_mentionnees": [
+    {
+     "id": "C29",
+     "libelle": "Planifier les activités en établissant une feuille de route de chacun afin de répartir la charge de travail de manière équitable."
+    },
+    {
+     "id": "C30",
+     "libelle": "Elaborer des procédures opérationnelles, en modélisant et optimisant les pratiques existantes des acteurs concernés, en vue de consolider l’organisation du travail et la rendre plus efficiente."
+    },
+    {
+     "id": "C31",
+     "libelle": "Mesurer les performances individuelles et collectives via des tableaux de bord et des remontés d’information pour évaluer les écarts et décider des ajustements"
+    }
+   ],
+   "competences_race": [],
+   "bloc_race": "",
+   "volume_annonce": 143.5
+  }
+ ],
+ "modules_hors_bloc": [
+  {
+   "titre": "Intégration - Coaching",
+   "code": "",
+   "libelle": "Intégration - Coaching",
+   "volume": 10.5,
+   "competences_liees": [],
+   "competences_plage": false,
+   "activite": "A.11",
+   "annee": "1",
+   "sequencage": "",
+   "seances": null,
+   "epreuve": "",
+   "commentaire": "",
+   "sous_modules": [],
+   "themes": [
+    "Intégration - Coaching"
+   ],
+   "section": "Transversal"
+  },
+  {
+   "titre": "BT Masterclass Séminaire Workshop",
+   "code": "",
+   "libelle": "BT Masterclass Séminaire Workshop",
+   "volume": 21,
+   "competences_liees": [],
+   "competences_plage": false,
+   "activite": "A.11",
+   "annee": "1",
+   "sequencage": "",
+   "seances": null,
+   "epreuve": "",
+   "commentaire": "",
+   "sous_modules": [],
+   "themes": [
+    "Masterclass Séminaire Workshop"
+   ],
+   "section": "Transversal"
+  }
+ ],
+ "hors_bloc_ecartes": [],
+ "epreuves_planifiees": [],
+ "hors_perimetre": [],
+ "controles": [
+  {
+   "titre": "Elaborer la stratégie générale de développement de l'entreprise",
+   "annonce": 182,
+   "calcule": 182,
+   "ok": true
+  },
+  {
+   "titre": "Piloter un centre de profit",
+   "annonce": 231,
+   "calcule": 59.5,
+   "ok": false
+  },
+  {
+   "titre": "Concevoir la stratégie de développement commercial",
+   "annonce": 161,
+   "calcule": 161,
+   "ok": true
+  },
+  {
+   "titre": "Manager une équipe",
+   "annonce": 143.5,
+   "calcule": 28,
+   "ok": false
+  }
+ ],
+ "anomalies": [],
+ "couverture": {
+  "competences_sans_module": [],
+  "competences_couvertes_par_transverse": []
+ }
+}

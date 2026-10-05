@@ -1,0 +1,474 @@
+{
+ "genere_le": "2026-10-05",
+ "outil": "extraire-pf-isme",
+ "formation": {
+  "rncp": "41295",
+  "titre": "Mastère Management des ressources humaines",
+  "titre_court": "M1 MRH",
+  "campus": "Le Mans",
+  "annee_cycle": "M1",
+  "source": "PF_MRH_ISME_2026_-_V0126.xlsx",
+  "feuille": "MRH GLOBAL"
+ },
+ "race": {},
+ "blocs": [
+  {
+   "id": "B01",
+   "titre": "Élaborer la stratégie RH de son périmètre en responsabilité",
+   "nature": "obligatoire",
+   "competences": [
+    "C1",
+    "C2.1",
+    "C3.1",
+    "C4.1",
+    "C4.2",
+    "C4.3"
+   ],
+   "modules": [
+    {
+     "titre": "Module 1 : Veille stratégique RH digitale et réglementaire",
+     "code": "C11",
+     "libelle": "Module 1 : Veille stratégique RH digitale et réglementaire",
+     "volume": 21,
+     "competences_liees": [
+      "C1"
+     ],
+     "competences_plage": false,
+     "activite": "A.1",
+     "annee": "1",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "",
+     "commentaire": "",
+     "sous_modules": [],
+     "themes": []
+    },
+    {
+     "titre": "Module 2 : Veille économique, sociale et technologique avec outils IA",
+     "code": "C12",
+     "libelle": "Module 2 : Veille économique, sociale et technologique avec outils IA",
+     "volume": 21,
+     "competences_liees": [
+      "C1"
+     ],
+     "competences_plage": false,
+     "activite": "A.1",
+     "annee": "1",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "",
+     "commentaire": "",
+     "sous_modules": [],
+     "themes": []
+    },
+    {
+     "titre": "Module 3 : Management de l’innovation sociale et organisationnelle",
+     "code": "C13",
+     "libelle": "Module 3 : Management de l’innovation sociale et organisationnelle",
+     "volume": 21,
+     "competences_liees": [
+      "C2.1"
+     ],
+     "competences_plage": false,
+     "activite": "A.2",
+     "annee": "1",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "",
+     "commentaire": "",
+     "sous_modules": [],
+     "themes": []
+    },
+    {
+     "titre": "Module 4 : Méthodes collaboratives et transformation digitale RH",
+     "code": "C14",
+     "libelle": "Module 4 : Méthodes collaboratives et transformation digitale RH",
+     "volume": 24.5,
+     "competences_liees": [
+      "C2.1"
+     ],
+     "competences_plage": false,
+     "activite": "A.2",
+     "annee": "1",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "",
+     "commentaire": "",
+     "sous_modules": [],
+     "themes": []
+    },
+    {
+     "titre": "Module 5 : Diagnostic stratégique RH et analyse des processus",
+     "code": "C15",
+     "libelle": "Module 5 : Diagnostic stratégique RH et analyse des processus",
+     "volume": 21,
+     "competences_liees": [
+      "C3.1"
+     ],
+     "competences_plage": false,
+     "activite": "A.3",
+     "annee": "1",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "",
+     "commentaire": "",
+     "sous_modules": [],
+     "themes": []
+    },
+    {
+     "titre": "Module 6 : Outils d’audit RH et utilisation de data analytics",
+     "code": "C16",
+     "libelle": "Module 6 : Outils d’audit RH et utilisation de data analytics",
+     "volume": 21,
+     "competences_liees": [
+      "C3.1"
+     ],
+     "competences_plage": false,
+     "activite": "A.3",
+     "annee": "1",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "",
+     "commentaire": "",
+     "sous_modules": [],
+     "themes": []
+    },
+    {
+     "titre": "Module 7 : Stratégie RH responsable et indicateurs clés (KPI",
+     "code": "C17",
+     "libelle": "Module 7 : Stratégie RH responsable et indicateurs clés (KPI",
+     "volume": 21,
+     "competences_liees": [
+      "C4.1"
+     ],
+     "competences_plage": false,
+     "activite": "A.4",
+     "annee": "1",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "",
+     "commentaire": "",
+     "sous_modules": [],
+     "themes": []
+    },
+    {
+     "titre": "Module 8 : RSE et transition écologique en RH",
+     "code": "C18",
+     "libelle": "Module 8 : RSE et transition écologique en RH",
+     "volume": 24.5,
+     "competences_liees": [
+      "C4.1"
+     ],
+     "competences_plage": false,
+     "activite": "A.4",
+     "annee": "1",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "",
+     "commentaire": "",
+     "sous_modules": [],
+     "themes": []
+    },
+    {
+     "titre": "Module 9 : Priorisation RSE et analyse de matérialité RH",
+     "code": "C19",
+     "libelle": "Module 9 : Priorisation RSE et analyse de matérialité RH",
+     "volume": 14,
+     "competences_liees": [
+      "C4.2"
+     ],
+     "competences_plage": false,
+     "activite": "A.4",
+     "annee": "1",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "",
+     "commentaire": "",
+     "sous_modules": [],
+     "themes": []
+    },
+    {
+     "titre": "Module 10 : Gestion des risques RH avec IA prédictive et approche effectuale",
+     "code": "C110",
+     "libelle": "Module 10 : Gestion des risques RH avec IA prédictive et approche effectuale",
+     "volume": 21,
+     "competences_liees": [
+      "C4.3"
+     ],
+     "competences_plage": false,
+     "activite": "A.4",
+     "annee": "1",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "",
+     "commentaire": "",
+     "sous_modules": [],
+     "themes": []
+    }
+   ],
+   "epreuves": [
+    {
+     "intitule": "Prépa EC BC 1",
+     "activite": "A.4",
+     "observations": ""
+    }
+   ],
+   "competences_mentionnees": [
+    {
+     "id": "C1",
+     "libelle": "Piloter un dispositif de veille, basé sur un process structuré incluant les domaines règlementaire, concurrentielle, technologique et socio-économique, via des outils digitaux et à l’aide de l’IA, dans une double visée de performance et conformité"
+    },
+    {
+     "id": "C2.1",
+     "libelle": "Favoriser le développement d’innovations sociale, organisationnelle et/ou technologique, par la mise en oeuvre de méthodes collaboratives en gestion de l’innovation, en considération des évolutions et disruptions prévues pour le monde du travail de demain (‘futur of work’), dans une optique de développement de la capacité de transformation de l’entreprise"
+    },
+    {
+     "id": "C3.1",
+     "libelle": "Elaborer un audit RH, en tenant compte de l’écosystème de l’entreprise, en identifiant les besoins en ressources clés de l’entreprise, à court, moyen et long termes, en analysant les process, pratiques et outils RH, au travers d’outils de diagnostic stratégique, dans le but de concevoir une stratégie RH adaptée aux spécificités de l’entreprise"
+    },
+    {
+     "id": "C4.1",
+     "libelle": "Définir et évaluer l’impact d’une stratégie RH durable et inclusive (sur son périmètre en responsabilité), en l’élaborant à partir de la vision d’entreprise élaborée par la direction générale, et sur la base des éléments de veille et d’innovation, notamment en ce qui concerne les évolutions des organisations de travail, en lui adossant des ICP, ceci dans l’optique de permettre à l’entreprise d'assurer la cohérence entre sa vision, l’organisation de ses ressources et les évolutions du monde du travail"
+    },
+    {
+     "id": "C4.2",
+     "libelle": "Contribuer au verdissement de l’entreprise, en hiérarchisant les priorités RSE, au travers d’une analyse de matérialité, afin d’inscrire la stratégie RH au service d’une transition écologique et numérique résiliente"
+    },
+    {
+     "id": "C4.3",
+     "libelle": "Sécuriser la stratégie RH, en évaluant les risques associés, via une méthode d’analyse des risques ainsi que l’IA prédictive, et au travers d’une approche effectuale, dans le but de réduire les incidences stratégiques et opérationnelles"
+    }
+   ],
+   "competences_race": [],
+   "bloc_race": ""
+  },
+  {
+   "id": "B03",
+   "titre": "Superviser l’administration du personnel",
+   "nature": "obligatoire",
+   "competences": [
+    "C8.1",
+    "C9.1",
+    "C10.1"
+   ],
+   "modules": [
+    {
+     "titre": "Module 22 : Stratégies de rémunération et mix salarial digita",
+     "code": "C31",
+     "libelle": "Module 22 : Stratégies de rémunération et mix salarial digita",
+     "volume": 28,
+     "competences_liees": [
+      "C8.1"
+     ],
+     "competences_plage": false,
+     "activite": "A.8",
+     "annee": "1",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "",
+     "commentaire": "",
+     "sous_modules": [],
+     "themes": []
+    },
+    {
+     "titre": "Module 23 : Processus de paie sécurisés avec outils digitaux",
+     "code": "C32",
+     "libelle": "Module 23 : Processus de paie sécurisés avec outils digitaux",
+     "volume": 17.5,
+     "competences_liees": [
+      "C9.1"
+     ],
+     "competences_plage": false,
+     "activite": "A.9",
+     "annee": "1",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "",
+     "commentaire": "",
+     "sous_modules": [],
+     "themes": []
+    },
+    {
+     "titre": "Module 24 : Digitalisation des processus RH et conformité réglementaire",
+     "code": "C33",
+     "libelle": "Module 24 : Digitalisation des processus RH et conformité réglementaire",
+     "volume": 21,
+     "competences_liees": [
+      "C10.1"
+     ],
+     "competences_plage": false,
+     "activite": "A.10",
+     "annee": "1",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "",
+     "commentaire": "",
+     "sous_modules": [],
+     "themes": []
+    }
+   ],
+   "epreuves": [],
+   "competences_mentionnees": [
+    {
+     "id": "C8.1",
+     "libelle": "Participer à l’élaboration et au contrôle des process relatifs au système de rémunération globale, en fonction de la vision d’entreprise, en intégrant un mix salarial adapté, en conformité avec la règlementation en vigueur et en adéquation avec les motivations des candidats et collaborateurs, via des outils bureautiques et digitaux RH et SIRH, dans une visée de management des talents"
+    },
+    {
+     "id": "C9.1",
+     "libelle": "Superviser la production sécurisée de bulletins de paie, au travers de process liés à la collecte, la validation des variables de paie et la production de la paie, ainsi que des déclarations fiscales afférentes, en fonction de la législation, de la règlementation sociale ainsi que de la convention collective en vigueur, via des outils bureautiques et digitaux RH et SIRH, dans une optique de valorisation du capital humain de l’entreprise, de cadrage de la relation de travail, ainsi que de performance globale"
+    },
+    {
+     "id": "C10.1",
+     "libelle": "Elaborer ou améliorer les processus de gestion administrative du personnel relatifs à l’ensemble de la vie du contrat de travail, en fonction de la législation, de la règlementation sociale ainsi que de la convention collective en vigueur, selon les procédures de rédaction administrative et directives fournies par les organismes extérieurs (URSSAF, Médecine du travail, Mutuelle, …), en digitalisant les process via des outils bureautiques et digitaux RH et SIRH, dans une triple visée de service rendu aux collaborateurs, optimisation du circuit RH et sécurité juridique de l’entreprise"
+    }
+   ],
+   "competences_race": [],
+   "bloc_race": ""
+  },
+  {
+   "id": "B04",
+   "titre": "Piloter le dialogue social et la communication RH",
+   "nature": "obligatoire",
+   "competences": [
+    "C11.1",
+    "C11.2",
+    "C12.1",
+    "C13.1",
+    "C14.1"
+   ],
+   "modules": [
+    {
+     "titre": "Module 25 : Instances représentatives et climat social digita",
+     "code": "C41",
+     "libelle": "Module 25 : Instances représentatives et climat social digita",
+     "volume": 24.5,
+     "competences_liees": [
+      "C11.1"
+     ],
+     "competences_plage": false,
+     "activite": "A.11",
+     "annee": "1",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "",
+     "commentaire": "",
+     "sous_modules": [],
+     "themes": []
+    },
+    {
+     "titre": "Module 26 : Dialogue social responsable et valorisation RSE",
+     "code": "C42",
+     "libelle": "Module 26 : Dialogue social responsable et valorisation RSE",
+     "volume": 14,
+     "competences_liees": [
+      "C11.2"
+     ],
+     "competences_plage": false,
+     "activite": "A.11",
+     "annee": "1",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "",
+     "commentaire": "",
+     "sous_modules": [],
+     "themes": []
+    },
+    {
+     "titre": "Module 27 : Marketing RH digital et marque employeur responsable",
+     "code": "C43",
+     "libelle": "Module 27 : Marketing RH digital et marque employeur responsable",
+     "volume": 21,
+     "competences_liees": [
+      "C12.1"
+     ],
+     "competences_plage": false,
+     "activite": "A.12",
+     "annee": "1",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "",
+     "commentaire": "",
+     "sous_modules": [],
+     "themes": []
+    },
+    {
+     "titre": "Module 28 : Outils de communication interne hybrides et réseaux sociaux",
+     "code": "C44",
+     "libelle": "Module 28 : Outils de communication interne hybrides et réseaux sociaux",
+     "volume": 14,
+     "competences_liees": [
+      "C13.1"
+     ],
+     "competences_plage": false,
+     "activite": "A.13",
+     "annee": "1",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "",
+     "commentaire": "",
+     "sous_modules": [],
+     "themes": []
+    },
+    {
+     "titre": "Module 29 : Méthodes de recueil terrain et posture managériale",
+     "code": "C45",
+     "libelle": "Module 29 : Méthodes de recueil terrain et posture managériale",
+     "volume": 28,
+     "competences_liees": [
+      "C14.1"
+     ],
+     "competences_plage": false,
+     "activite": "A.14",
+     "annee": "1",
+     "sequencage": "",
+     "seances": null,
+     "epreuve": "",
+     "commentaire": "",
+     "sous_modules": [],
+     "themes": []
+    }
+   ],
+   "epreuves": [
+    {
+     "intitule": "CT Prépa EC BC4",
+     "activite": "A.14",
+     "observations": ""
+    }
+   ],
+   "competences_mentionnees": [
+    {
+     "id": "C11.1",
+     "libelle": "Garantir le bon fonctionnement des IRP, dans le respect de la règlementation en vigueur, afin d’oeuvrer pour le développement économique et social de l’entreprise"
+    },
+    {
+     "id": "C11.2",
+     "libelle": "Favoriser les conditions d’un dialogue social orienté vers la valorisation de la responsabilité sociétale de l’entreprise, afin d’inscrire son fonctionnement dans une perspective viable, vivable et équitable"
+    },
+    {
+     "id": "C12.1",
+     "libelle": "Participer à la définition et l’encadrement de la marque employeur, en lien avec la direction communication, dans une dimension RSE, au travers de la stratégie digitale et d’e-réputation / du marketing RH digital, afin de développer l’attractivité de l’entreprise, aussi bien auprès des futures recrues que des collaborateurs"
+    },
+    {
+     "id": "C13.1",
+     "libelle": "Structurer le circuit de communication RH interne, par le biais de canaux phygitaux (réseau social, intranet, évènements, …), outils collaboratifs et autre SIRH, dans le respect de la règlementation sociale en vigueur, dans une visée de mutualisation et génération de valeur"
+    },
+    {
+     "id": "C14.1",
+     "libelle": "Instaurer un dispositif de recueil et traitement des problématiques RH rencontrées par les opérationnels, par le biais d’une méthodologie adaptée à la taille et au fonctionnement de l’entreprise, au travers d’une posture de proximité et service auprès de ses clients internes, ainsi que de promoteur et facilitateur, dans une visée de résilience organisationnelle"
+    }
+   ],
+   "competences_race": [],
+   "bloc_race": ""
+  }
+ ],
+ "modules_hors_bloc": [],
+ "hors_bloc_ecartes": [],
+ "epreuves_planifiees": [],
+ "hors_perimetre": [],
+ "controles": [],
+ "anomalies": [],
+ "couverture": {
+  "competences_sans_module": [],
+  "competences_couvertes_par_transverse": []
+ }
+}
