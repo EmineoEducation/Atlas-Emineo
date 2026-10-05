@@ -1,0 +1,2558 @@
+{
+ "genere_le": "2026-10-05",
+ "outil": "extraire-syllabus",
+ "sources": [
+  {
+   "fichier": "Prog_M2_2026_28_RNCP38504.docx",
+   "modules": [
+    {
+     "titre": "Conception de projet (documents et livrables de cadrage projet)",
+     "bloc": "BC03 – Piloter le déploiement d’une stratégie marketing communication responsable",
+     "formation": "Mastère 2 – Manager des stratégies marketing et communication",
+     "rncp": "RNCP 38504 – Fiche France Compétences",
+     "activite": "",
+     "intervenant": "",
+     "volume": "10,5h",
+     "sequencage": "début de S1, en articulation avec les modules de planification et de management de projet",
+     "objectif": "Maîtriser la conception et la formalisation des documents de cadrage projet (cahier des charges, brief, livrables de cadrage) Intégrer les exigences de qualité, de coût, de délai, ainsi que les critères sociaux et environnementaux Structurer et produire des livrables professionnels adaptés à la gestion de projets marketing et communication Préparer la production des livrables attendus pour l’épreuve certifiante du bloc BC03",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.13"
+     ],
+     "notions_cles": [
+      "Enjeux et typologie des documents de cadrage projet",
+      "Construction et rédaction du cahier des charges et du brief",
+      "Formalisation et optimisation des livrables de cadrage"
+     ],
+     "programme": [
+      {
+       "titre": "Enjeux et typologie des documents de cadrage projet",
+       "points": [
+        "Rôle du cadrage dans la conduite de projet marketing-communication",
+        "Panorama des documents de référence : cahier des charges, brief, note de cadrage",
+        "Exigences formelles, critères de qualité et intégration RSE"
+       ]
+      },
+      {
+       "titre": "Construction et rédaction du cahier des charges et du brief",
+       "points": [
+        "Définition des objectifs, livrables, indicateurs de réussite",
+        "Intégration des critères sociaux et environnementaux (inclusion, conditions de travail, impact environnemental)",
+        "Méthodologie de rédaction, structuration, validation"
+       ]
+      },
+      {
+       "titre": "Formalisation et optimisation des livrables de cadrage",
+       "points": [
+        "Plans-types, outils, templates et bonnes pratiques",
+        "Gestion des parties prenantes et processus de validation",
+        "Analyse critique et amélioration de documents existants (cas pratiques)",
+        "Préparation à l’épreuve certifiante : production d’un livrable de cadrage projet"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Ateliers méthodologiques et exercices pratiques",
+      "Analyse de cas réels ou simulés",
+      "Travaux de groupe et mises en situation",
+      "Feedback individualisé sur les productions"
+     ],
+     "evaluations": [
+      "Formative : Participation active, exercices d’application, retours sur livrables intermédiaires",
+      "Sommative : Production d’un document de cadrage projet (cahier des charges ou brief) évalué selon les critères du référentiel (qualité formelle, intégration des critères RSE, pertinence des objectifs et indicateurs, structuration professionnelle), intégré à l’épreuve certifiante du bloc BC03 dite PiloPlan"
+     ]
+    },
+    {
+     "titre": "Rédaction de Brief / Elevator Pitch / Rhétorique",
+     "bloc": "BC03 – Piloter le déploiement d’une stratégie marketing communication responsable",
+     "formation": "Mastère 2 – Manager des stratégies marketing et communication",
+     "rncp": "RNCP 38504 – Fiche France Compétences",
+     "activite": "",
+     "intervenant": "",
+     "volume": "10,5h",
+     "sequencage": "S1, en articulation avec les modules de conception de projet et de management d’équipe",
+     "objectif": "Maîtriser la rédaction de briefs professionnels à destination d’équipes créatives et de prestataires Savoir synthétiser et défendre une recommandation stratégique à l’oral (elevator pitch) Mobiliser les techniques de rhétorique et d’argumentation pour convaincre en contexte professionnel Intégrer les exigences RSE et les critères de qualité dans la formalisation et la présentation des briefs",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.13"
+     ],
+     "notions_cles": [
+      "Rédaction de briefs créatifs et opérationnels",
+      "Techniques de synthèse et construction de l’elevator pitch",
+      "Rhétorique et argumentation en contexte professionnel"
+     ],
+     "programme": [
+      {
+       "titre": "Rédaction de briefs créatifs et opérationnels",
+       "points": [
+        "Structure et attendus d’un brief professionnel (objectifs, contexte, livrables, critères RSE)",
+        "Traduction des enjeux stratégiques en consignes opérationnelles",
+        "Outils et templates de brief",
+        "Exemples et analyse critique de briefs réels"
+       ]
+      },
+      {
+       "titre": "Techniques de synthèse et construction de l’elevator pitch",
+       "points": [
+        "Méthodologie du pitch : identification du message clé, structuration du discours, adaptation à la cible",
+        "Exercices de synthèse à l’écrit et à l’oral",
+        "Mise en situation : présentation d’un projet ou d’une recommandation en temps limité"
+       ]
+      },
+      {
+       "titre": "Rhétorique et argumentation en contexte professionnel",
+       "points": [
+        "Principes fondamentaux de la rhétorique appliquée au management et à la communication de projet",
+        "Techniques d’argumentation, gestion des objections et adaptation du discours",
+        "Prise de parole : posture, voix, langage non verbal",
+        "Atelier d’entraînement : simulation de brief oral, feedback collectif"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Ateliers pratiques (rédaction, pitch, simulations)",
+      "Analyse de cas réels",
+      "Exercices d’expression orale et feedback personnalisé",
+      "Travaux de groupe et mises en situation"
+     ],
+     "evaluations": [
+      "Formative : Participation active, exercices de rédaction et de pitch, retours sur productions intermédiaires",
+      "Sommative : Production d’un brief écrit professionnel (évaluation sur la structure, la clarté, l’intégration des critères RSE et la pertinence des consignes). Présentation orale type elevator pitch d’un projet ou d’une recommandation devant jury (évaluation sur la capacité de synthèse, l’argumentation, la posture et la gestion du temps) pendant la compétition."
+     ]
+    },
+    {
+     "titre": "Droit appliqué aux stratégies de communication",
+     "bloc": "BC03 – Piloter le déploiement d’une stratégie marketing communication responsable",
+     "formation": "Mastère 2 – Manager des stratégies marketing et communication",
+     "rncp": "RNCP 38504 – Fiche France Compétences",
+     "activite": "",
+     "intervenant": "",
+     "volume": "7h",
+     "sequencage": "– 2 séances de 3,5h (S1",
+     "objectif": "",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.13"
+     ],
+     "notions_cles": [],
+     "programme": [
+      {
+       "titre": "Cadre juridique de la communication digitale & RGPD",
+       "points": [
+        "Rappel des fondamentaux : droit de la publicité, mentions légales, obligations des annonceurs",
+        "RGPD en pratique : consentement, gestion des cookies, data marketing (CRM, tracking, retargeting)",
+        "Responsabilité des marques dans les campagnes d’influence : cadre ARPP, obligations de transparence",
+        "Cas pratiques : identifier les non-conformités dans des campagnes réelles"
+       ]
+      },
+      {
+       "titre": "AI Act & droits des contenus générés par IA",
+       "points": [
+        "L’AI Act européen : calendrier d’application, classification des systèmes IA par niveau de risque",
+        "Droits d’auteur et IA générative : propriété des contenus produits par LLM ou par un outil image",
+        "Responsabilité de la marque en cas de contenu litigieux généré par IA",
+        "Deepfakes et usurpation d’identité visuelle : cadre légal et gestion du risque",
+        "Atelier : audit juridique d’un cas de campagne intégrant des contenus IA"
+       ]
+      }
+     ],
+     "seances": [
+      {
+       "numero": 1,
+       "duree": "",
+       "titre": "Cadre juridique de la communication digitale & RGPD",
+       "points": [
+        "Rappel des fondamentaux : droit de la publicité, mentions légales, obligations des annonceurs",
+        "RGPD en pratique : consentement, gestion des cookies, data marketing (CRM, tracking, retargeting)",
+        "Responsabilité des marques dans les campagnes d’influence : cadre ARPP, obligations de transparence",
+        "Cas pratiques : identifier les non-conformités dans des campagnes réelles"
+       ]
+      },
+      {
+       "numero": 2,
+       "duree": "",
+       "titre": "AI Act & droits des contenus générés par IA",
+       "points": [
+        "L’AI Act européen : calendrier d’application, classification des systèmes IA par niveau de risque",
+        "Droits d’auteur et IA générative : propriété des contenus produits par LLM ou par un outil image",
+        "Responsabilité de la marque en cas de contenu litigieux généré par IA",
+        "Deepfakes et usurpation d’identité visuelle : cadre légal et gestion du risque",
+        "Atelier : audit juridique d’un cas de campagne intégrant des contenus IA"
+       ]
+      }
+     ],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    },
+    {
+     "titre": "Planification Stratégique",
+     "bloc": "BC03 – Piloter le déploiement d’une stratégie marketing communication responsable",
+     "formation": "Mastère 2 – Manager des stratégies marketing et communication",
+     "rncp": "RNCP 38504 – Fiche France Compétences",
+     "activite": "",
+     "intervenant": "",
+     "volume": "14h",
+     "sequencage": "S1, en articulation avec les modules de cadrage projet, management de projet et communication responsable",
+     "objectif": "Maîtriser la planification stratégique des actions marketing et communication dans une logique omnicanale et responsable Savoir organiser, séquencer et piloter la mise en œuvre des actions, en intégrant les contraintes de coût, de qualité, de délai et de RSE Être capable de choisir et d’utiliser les outils professionnels de planification, de suivi et d’évaluation Préparer la production des livrables attendus dans le cadre du projet pro",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.13",
+      "C.14"
+     ],
+     "notions_cles": [
+      "Principes et enjeux de la planification stratégique",
+      "Méthodes et outils de planification des actions marketing-communication",
+      "Mise en œuvre et pilotage de la planification stratégique"
+     ],
+     "programme": [
+      {
+       "titre": "Principes et enjeux de la planification stratégique",
+       "points": [
+        "Définition et rôle de la planification dans le pilotage de la stratégie marketing-communication",
+        "Articulation entre stratégie, objectifs, plan d’actions et gestion des ressources",
+        "Intégration des critères RSE et des exigences de qualité, coût, délai"
+       ]
+      },
+      {
+       "titre": "Méthodes et outils de planification des actions marketing-communication",
+       "points": [
+        "Choix des méthodes de conduite de projet adaptées (cycle en V, agile, hybride, etc.)",
+        "Construction de rétroplannings, Gantt, roadmaps et jalons clés",
+        "Outils digitaux de planification, de suivi et d’évaluation (tableaux de bord, KPI, reporting)",
+        "Gestion des risques et des aléas dans la planification"
+       ]
+      },
+      {
+       "titre": "Mise en œuvre et pilotage de la planification stratégique",
+       "points": [
+        "Organisation du déploiement des actions : séquencement, allocation des ressources, coordination des parties prenantes",
+        "Suivi de l’avancement, gestion des écarts, reporting et ajustements",
+        "Formalisation des livrables de planification (plan d’actions, calendrier, outils de suivi)",
+        "Application à un cas pratique ou projet collectif en lien avec l’épreuve certifiante"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Ateliers pratiques et études de cas",
+      "Travaux de groupe sur des projets réels ou simulés",
+      "Utilisation d’outils professionnels de planification (logiciels, templates)",
+      "Feedback individualisé et collectif"
+     ],
+     "evaluations": [
+      "Formative : Participation active, exercices d’application, retours sur livrables intermédiaires",
+      "Sommative : Production d’un plan de déploiement stratégique (planification d’actions, calendrier, outils de suivi), évalué selon les critères du référentiel (cohérence, exhaustivité, intégration des contraintes, qualité de la formalisation)"
+     ]
+    },
+    {
+     "titre": "Communication responsable & durable",
+     "bloc": "BC03 – Piloter le déploiement d’une stratégie marketing communication responsable",
+     "formation": "Mastère 2 – Manager des stratégies marketing et communication",
+     "rncp": "RNCP 38504 – Fiche France Compétences",
+     "activite": "",
+     "intervenant": "",
+     "volume": "10,5h",
+     "sequencage": "– 3 séances de 3,5h",
+     "objectif": "",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.13"
+     ],
+     "notions_cles": [],
+     "programme": [
+      {
+       "titre": "Fondamentaux de la communication responsable & RSE",
+       "points": [
+        "RSE et communication : distinguer l’engagement réel de la mise en scène",
+        "Attentes des consommateurs en 2026 : études et données sur l’évolution des comportements",
+        "Les grandes dimensions : environnement, inclusion, diversité, accessibilité",
+        "Cohérence entre valeurs déclarées, pratiques internes et prises de parole externes"
+       ]
+      },
+      {
+       "titre": "Cadre réglementaire & lutte contre le greenwashing",
+       "points": [
+        "Directive européenne Green Claims : contenu, calendrier d’application, obligations pour les annonceurs",
+        "Greenwashing : définition juridique, exemples sanctionnés, risques réputationnels et financiers",
+        "Allégations environnementales : ce qui est autorisé, prouvé, interdit",
+        "Bilan carbone des campagnes digitales : méthodes de calcul, outils disponibles, référentiels sectoriels",
+        "Atelier : audit d’une communication de marque – identifier les allégations à risque"
+       ]
+      },
+      {
+       "titre": "Construire une stratégie de communication responsable",
+       "points": [
+        "De l’audit à la recommandation : méthodologie d’intégration de la responsabilité",
+        "Éco-conception des supports : formats légers, hébergement bas-carbone, typographies durables",
+        "Communication responsable sur les réseaux sociaux : sobriété éditoriale",
+        "Cas pratique marque réelle : diagnostic, axes de transformation, plan d’action – restitution collective"
+       ]
+      }
+     ],
+     "seances": [
+      {
+       "numero": 1,
+       "duree": "",
+       "titre": "Fondamentaux de la communication responsable & RSE",
+       "points": [
+        "RSE et communication : distinguer l’engagement réel de la mise en scène",
+        "Attentes des consommateurs en 2026 : études et données sur l’évolution des comportements",
+        "Les grandes dimensions : environnement, inclusion, diversité, accessibilité",
+        "Cohérence entre valeurs déclarées, pratiques internes et prises de parole externes"
+       ]
+      },
+      {
+       "numero": 2,
+       "duree": "",
+       "titre": "Cadre réglementaire & lutte contre le greenwashing",
+       "points": [
+        "Directive européenne Green Claims : contenu, calendrier d’application, obligations pour les annonceurs",
+        "Greenwashing : définition juridique, exemples sanctionnés, risques réputationnels et financiers",
+        "Allégations environnementales : ce qui est autorisé, prouvé, interdit",
+        "Bilan carbone des campagnes digitales : méthodes de calcul, outils disponibles, référentiels sectoriels",
+        "Atelier : audit d’une communication de marque – identifier les allégations à risque"
+       ]
+      },
+      {
+       "numero": 3,
+       "duree": "",
+       "titre": "Construire une stratégie de communication responsable",
+       "points": [
+        "De l’audit à la recommandation : méthodologie d’intégration de la responsabilité",
+        "Éco-conception des supports : formats légers, hébergement bas-carbone, typographies durables",
+        "Communication responsable sur les réseaux sociaux : sobriété éditoriale",
+        "Cas pratique marque réelle : diagnostic, axes de transformation, plan d’action – restitution collective"
+       ]
+      }
+     ],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    },
+    {
+     "titre": "Communication de crise",
+     "bloc": "BC03 – Piloter le déploiement d’une stratégie marketing communication responsable",
+     "formation": "Mastère 2 – Manager des stratégies marketing et communication",
+     "rncp": "RNCP 38504 – Fiche France Compétences",
+     "activite": "",
+     "intervenant": "",
+     "volume": "10,5h",
+     "sequencage": "– 3 séances de 3,5h",
+     "objectif": "",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.13"
+     ],
+     "notions_cles": [],
+     "programme": [
+      {
+       "titre": "Fondamentaux de la gestion de crise",
+       "points": [
+        "Typologies de crises : accident, scandale, polémique, crise systémique",
+        "Les phases d’une crise : signal faible, déclenchement, escalade, résolution, réhabilitation",
+        "Principes fondamentaux : transparence, réactivité, cohérence, responsabilité",
+        "Cellule de crise : composition, rôles, protocoles de décision",
+        "Prise de parole en crise : qui parle, quand, sur quels canaux",
+        "Cas d’analyse : déconstruire la gestion d’une crise de marque récente"
+       ]
+      },
+      {
+       "titre": "Crise digitale & réseaux sociaux",
+       "points": [
+        "Mécanique du bad buzz : déclencheurs, viralité, effets de meute",
+        "Social listening en situation de crise : outils et protocoles de veille accélérée",
+        "Gestion des commentaires et prises de parole : modération, réponses publiques",
+        "La question du silence : quand ne pas communiquer",
+        "Influenceurs en crise : alliés ou accélérateurs de risque ?",
+        "Atelier : cartographie des parties prenantes et plan de réponse pour un cas réel"
+       ]
+      },
+      {
+       "titre": "Crise algorithmique & IA : les nouveaux risques réputationnels",
+       "points": [
+        "Deepfakes impliquant la marque ou ses dirigeants : détection, qualification, réponse juridique et communicationnelle",
+        "Fake news générées par IA : mécaniques de propagation, fact-checking, protocoles de démenti",
+        "Bad buzz algorithmique : quand les plateformes amplifient hors de tout contrôle",
+        "Usurpation d’identité de marque par IA : cas documentés et réponses",
+        "Simulation : gestion d’une crise deepfake en temps contraint – plan de réponse 45 min + restitution"
+       ]
+      }
+     ],
+     "seances": [
+      {
+       "numero": 1,
+       "duree": "",
+       "titre": "Fondamentaux de la gestion de crise",
+       "points": [
+        "Typologies de crises : accident, scandale, polémique, crise systémique",
+        "Les phases d’une crise : signal faible, déclenchement, escalade, résolution, réhabilitation",
+        "Principes fondamentaux : transparence, réactivité, cohérence, responsabilité",
+        "Cellule de crise : composition, rôles, protocoles de décision",
+        "Prise de parole en crise : qui parle, quand, sur quels canaux",
+        "Cas d’analyse : déconstruire la gestion d’une crise de marque récente"
+       ]
+      },
+      {
+       "numero": 2,
+       "duree": "",
+       "titre": "Crise digitale & réseaux sociaux",
+       "points": [
+        "Mécanique du bad buzz : déclencheurs, viralité, effets de meute",
+        "Social listening en situation de crise : outils et protocoles de veille accélérée",
+        "Gestion des commentaires et prises de parole : modération, réponses publiques",
+        "La question du silence : quand ne pas communiquer",
+        "Influenceurs en crise : alliés ou accélérateurs de risque ?",
+        "Atelier : cartographie des parties prenantes et plan de réponse pour un cas réel"
+       ]
+      },
+      {
+       "numero": 3,
+       "duree": "",
+       "titre": "Crise algorithmique & IA : les nouveaux risques réputationnels",
+       "points": [
+        "Deepfakes impliquant la marque ou ses dirigeants : détection, qualification, réponse juridique et communicationnelle",
+        "Fake news générées par IA : mécaniques de propagation, fact-checking, protocoles de démenti",
+        "Bad buzz algorithmique : quand les plateformes amplifient hors de tout contrôle",
+        "Usurpation d’identité de marque par IA : cas documentés et réponses",
+        "Simulation : gestion d’une crise deepfake en temps contraint – plan de réponse 45 min + restitution"
+       ]
+      }
+     ],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    },
+    {
+     "titre": "Audio-Vidéo : Pré-prod, motion, post-prod",
+     "bloc": "BC03 – Piloter le déploiement d’une stratégie marketing communication responsable",
+     "formation": "Mastère 2 – Manager des stratégies marketing et communication",
+     "rncp": "RNCP 38504 – Fiche France Compétences",
+     "activite": "",
+     "intervenant": "",
+     "volume": "35h",
+     "sequencage": "– 10 séances de 3,5h (S1 et S2",
+     "objectif": "",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.13",
+      "C.14"
+     ],
+     "notions_cles": [
+      "PARTIE 1 – De la Pré-prod à la Post-prod (5 séances)",
+      "PARTIE 2 – Motion vidéo (5 séances)"
+     ],
+     "programme": [
+      {
+       "titre": "PARTIE 1 – De la Pré-prod à la Post-prod (5 séances)",
+       "points": [
+        "S1 – La pré-production augmentée : note d’intention, storyboard (traditionnel vs. IA), moodboard DA",
+        "Atelier S1 : storyboard complet 60″ avec et sans IA – analyse comparative",
+        "S2 – Organisation et logistique de tournage : équipe, plan de travail, droits à l’image",
+        "S3 – Captation : grammaire cinématographique, multi-format (16:9, 9:16, carré), direction d’acteurs",
+        "S4 – Post-production : montage (Premiere AI, Descript), étalonnage (DaVinci), sound design (Suno/Udio)",
+        "S5 – Atelier de synthèse : production d’un format court 30″–60″ pour une marque réelle"
+       ]
+      },
+      {
+       "titre": "PARTIE 2 – Motion vidéo (5 séances)",
+       "points": [
+        "S6 – Fondamentaux du motion design : grammaire, timing, easing – initiation After Effects",
+        "S7 – Animation et effets After Effects : expressions, puppet tool, intégration assets IA (Runway, Kling)",
+        "S8 – Motion IA : Runway Gen-3, Kling, Pika, Adobe Firefly Video – prompting, cas d’usage, limites juridiques",
+        "S9 – Motion social media : formats par plateforme, accessibilité, déclinaison multi-formats par IA",
+        "S10 – Atelier de synthèse : kit motion complet pour une marque réelle"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    },
+    {
+     "titre": "Management d’équipe & conduite du changement",
+     "bloc": "BC03 – Piloter le déploiement d’une stratégie marketing communication responsable",
+     "formation": "Mastère 2 – Manager des stratégies marketing et communication",
+     "rncp": "RNCP 38504 – Fiche France Compétences",
+     "activite": "",
+     "intervenant": "",
+     "volume": "14h",
+     "sequencage": "S1 ou S2, en articulation avec les modules de gestion de projet, communication responsable et management interculturel",
+     "objectif": "Maîtriser les fondamentaux du management d’équipe dans un contexte de projets marketing-communication Savoir constituer, organiser et animer des équipes pluridisciplinaires et inclusives Développer des compétences en conduite du changement et en accompagnement de la transformation organisationnelle Préparer la production de livrables intégrant la dimension managériale et la gestion du changement, en cohérence avec les attendus du référentiel RNCP",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.15",
+      "C.16"
+     ],
+     "notions_cles": [
+      "Constitution et organisation d’équipes projet",
+      "Animation, leadership et intelligence collective",
+      "Conduite du changement et accompagnement des transformations"
+     ],
+     "programme": [
+      {
+       "titre": "Constitution et organisation d’équipes projet",
+       "points": [
+        "Identification des compétences et profils nécessaires",
+        "Dimensionnement et structuration des équipes internes et externes",
+        "Inclusion, diversité et gestion des situations de handicap",
+        "Rôles, responsabilités et modes de collaboration"
+       ]
+      },
+      {
+       "titre": "Animation, leadership et intelligence collective",
+       "points": [
+        "Styles et postures managériales adaptés au contexte de la communication",
+        "Outils et méthodes d’animation d’équipe (réunions, ateliers collaboratifs, feedback, co-développement)",
+        "Management collaboratif, gestion des talents et valorisation de la créativité",
+        "Gestion des conflits, motivation et cohésion d’équipe"
+       ]
+      },
+      {
+       "titre": "Conduite du changement et accompagnement des transformations",
+       "points": [
+        "Enjeux et leviers de la conduite du changement dans les organisations",
+        "Identification des résistances et stratégies d’accompagnement",
+        "Communication interne et mobilisation des parties prenantes",
+        "Outils et méthodes pour piloter un projet de transformation (diagnostic, plan d’action, suivi, évaluation)",
+        "Études de cas et retours d’expérience sectoriels"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Ateliers pratiques (constitution d’équipe, résolution de cas, simulations de situations managériales)",
+      "Apports méthodologiques et outils professionnels",
+      "Travaux de groupe et mises en situation",
+      "Analyse de cas réels et retours d’expérience",
+      "Feedback individualisé et collectif"
+     ],
+     "evaluations": [
+      "Formative : Participation active, exercices d’application, retours sur mises en situation",
+      "Sommative : Production d’un livrable professionnel (note de cadrage managérial ou plan d’accompagnement du changement), évalué selon les critères du référentiel (pertinence du dimensionnement, qualité de l’animation, intégration des enjeux d’inclusion et d’innovation managériale), intégré à l’épreuve certifiante du bloc BC03"
+     ]
+    },
+    {
+     "titre": "Management de projet : gestion du risque et des coûts",
+     "bloc": "BC03 – Piloter le déploiement d’une stratégie marketing communication responsable",
+     "formation": "Mastère 2 – Manager des stratégies marketing et communication",
+     "rncp": "RNCP 38504 – Fiche France Compétences",
+     "activite": "",
+     "intervenant": "",
+     "volume": "10,5h",
+     "sequencage": "S1 ou S2, en articulation avec les modules de planification stratégique, management d’équipe et indicateurs de performance",
+     "objectif": "Maîtriser les méthodes et outils de gestion du risque et des coûts dans le pilotage de projets marketing et communication. Savoir anticiper, évaluer et piloter les risques projet (financiers, opérationnels, réputationnels, RSE). Être capable de construire, suivre et ajuster un budget projet, en lien avec les objectifs stratégiques et les contraintes organisationnelles. Préparer la production de livrables professionnels intégrant la gestion des risques et des coûts, en cohérence avec les attendus du référentiel RNCP.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.14",
+      "C.18"
+     ],
+     "notions_cles": [
+      "Identification et analyse des risques projet",
+      "Gestion budgétaire et suivi des coûts",
+      "Pilotage, reporting et optimisation de la performance projet"
+     ],
+     "programme": [
+      {
+       "titre": "Identification et analyse des risques projet",
+       "points": [
+        "Typologie des risques dans les projets marketing-communication (financiers, opérationnels, juridiques, réputationnels, RSE)",
+        "Méthodologie d’analyse et de cartographie des risques (matrice de criticité, scénarios, priorisation)",
+        "Outils de veille et d’anticipation des risques"
+       ]
+      },
+      {
+       "titre": "Gestion budgétaire et suivi des coûts",
+       "points": [
+        "Construction du budget projet (ressources, postes de coûts, marges, imprévus)",
+        "Suivi budgétaire, outils de contrôle et d’alerte",
+        "Arbitrages et ajustements en cours de projet",
+        "Intégration des critères RSE et des exigences de conformité dans le pilotage financier"
+       ]
+      },
+      {
+       "titre": "Pilotage, reporting et optimisation de la performance projet",
+       "points": [
+        "Outils de suivi et de pilotage des risques et des coûts (tableaux de bord, indicateurs, reporting)",
+        "Analyse des écarts, gestion des alertes et mise en place de plans d’action correctifs",
+        "Retour d’expérience, capitalisation et amélioration continue",
+        "Application à un cas pratique : élaboration d’un plan de gestion des risques et des coûts pour un projet de communication"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Apports méthodologiques et illustrés par des cas concrets",
+      "Ateliers pratiques (cartographie des risques, construction budgétaire, reporting)",
+      "Travaux de groupe et simulations",
+      "Feedback individualisé et collectif"
+     ],
+     "evaluations": [
+      "Formative : Participation active, exercices d’application, retours sur travaux intermédiaires",
+      "Sommative : Production d’un livrable professionnel (plan de gestion des risques et des coûts pour un projet), évalué selon les critères du référentiel (pertinence de l’analyse, qualité du pilotage, intégration des critères RSE, capacité d’anticipation et de réactivité), intégré à l’épreuve certifiante du bloc BC03"
+     ]
+    },
+    {
+     "titre": "Management interculturel",
+     "bloc": "BC03 – Piloter le déploiement d’une stratégie marketing communication responsable",
+     "formation": "Mastère 2 – Manager des stratégies marketing et communication",
+     "rncp": "RNCP 38504 – Fiche France Compétences",
+     "activite": "",
+     "intervenant": "",
+     "volume": "10,5h",
+     "sequencage": "S1 ou S2, en articulation avec les modules de management d’équipe, gestion de projet et communication responsable",
+     "objectif": "Comprendre les enjeux et les spécificités du management interculturel dans un contexte de projets marketing-communication internationaux ou multiculturels Savoir constituer, animer et coordonner des équipes multiculturelles et des réseaux de parties prenantes internationaux Développer des compétences d’adaptation, de médiation et de communication interculturelle pour piloter des projets et partenariats dans la diversité Préparer la production de livrables professionnels intégrant la dimension interculturelle et la gestion de la diversité",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.15",
+      "C.16",
+      "C.17"
+     ],
+     "notions_cles": [
+      "Fondements et enjeux du management interculturel",
+      "Pratiques et outils du management interculturel",
+      "Pilotage de projets et communication en contexte interculturel"
+     ],
+     "programme": [
+      {
+       "titre": "Fondements et enjeux du management interculturel",
+       "points": [
+        "Définition, concepts clés et modèles d’analyse interculturelle (Hofstede, Trompenaars, Hall, etc.)",
+        "Enjeux de la diversité culturelle dans les organisations et les projets de communication",
+        "Risques, opportunités et leviers de la diversité dans la performance collective"
+       ]
+      },
+      {
+       "titre": "Pratiques et outils du management interculturel",
+       "points": [
+        "Constitution et animation d’équipes multiculturelles (recrutement, intégration, inclusion, gestion des situations de handicap)",
+        "Outils et méthodes pour faciliter la collaboration, la communication et la résolution de conflits interculturels",
+        "Gestion des parties prenantes et des réseaux internationaux (prestataires, partenaires, clients, influenceurs)"
+       ]
+      },
+      {
+       "titre": "Pilotage de projets et communication en contexte interculturel",
+       "points": [
+        "Adaptation des pratiques managériales et de communication aux contextes culturels",
+        "Leadership, négociation, médiation et gestion des situations sensibles",
+        "Études de cas et simulations : management à distance, gestion de projet international, communication multilingue",
+        "Préparation à l’épreuve certifiante : intégration de la dimension interculturelle dans le pilotage d’actions marketing-communication"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Apports méthodologiques et études de cas réels",
+      "Ateliers pratiques (mise en situation, jeux de rôles, simulations de gestion de projet interculturel)",
+      "Travaux de groupe et analyse réflexive",
+      "Feedback individualisé et collectif"
+     ],
+     "evaluations": [
+      "Formative : Participation active, exercices d’application, retours sur mises en situation",
+      "Sommative : Production d’un livrable professionnel (note de cadrage ou plan d’action intégrant la dimension interculturelle), évalué selon les critères du référentiel (pertinence de la prise en compte de la diversité, capacité d’adaptation, qualité de la coordination et du pilotage)"
+     ]
+    },
+    {
+     "titre": "Management intergénérationnel et gestion des situations difficiles",
+     "bloc": "BC03 – Piloter le déploiement d’une stratégie marketing communication responsable",
+     "formation": "Mastère 2 – Manager des stratégies marketing et communication",
+     "rncp": "RNCP 38504 – Fiche France Compétences",
+     "activite": "",
+     "intervenant": "",
+     "volume": "10,5h",
+     "sequencage": "S1 ou S2, en articulation avec les modules de management d’équipe, management interculturel et gestion de projet",
+     "objectif": "Comprendre les spécificités, atouts et défis du management intergénérationnel dans les organisations de communication. Savoir adapter son management pour fédérer et motiver des équipes composées de plusieurs générations. Développer des compétences pour prévenir, diagnostiquer et gérer les situations difficiles ou conflictuelles (tensions, conflits, démotivation, résistance au changement, etc.). Intégrer la dimension inclusive et responsable dans la gestion des relations humaines et des parties prenantes.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.15",
+      "C.17"
+     ],
+     "notions_cles": [
+      "Enjeux et leviers du management intergénérationnel",
+      "Adapter son management et prévenir les situations difficiles",
+      "Gestion des situations difficiles et résolution de conflits"
+     ],
+     "programme": [
+      {
+       "titre": "Enjeux et leviers du management intergénérationnel",
+       "points": [
+        "Caractéristiques et attentes des différentes générations (Baby-boomers, X, Y, Z)",
+        "Valeurs, motivations, modes de communication et de collaboration",
+        "Identifier les dénominateurs communs et valoriser la diversité générationnelle",
+        "Outils et méthodes pour favoriser la coopération intergénérationnelle et la transmission des savoirs"
+       ]
+      },
+      {
+       "titre": "Adapter son management et prévenir les situations difficiles",
+       "points": [
+        "Styles de management et postures adaptés à la diversité des profils",
+        "Fixer des objectifs partagés, créer du sens et de l’engagement",
+        "Méthodes de feedback, reconnaissance et accompagnement personnalisé",
+        "Prévention des tensions et identification des signaux faibles"
+       ]
+      },
+      {
+       "titre": "Gestion des situations difficiles et résolution de conflits",
+       "points": [
+        "Diagnostic et typologie des situations difficiles (conflits, démotivation, résistance, situations de harcèlement ou discrimination)",
+        "Méthodes et outils de gestion des conflits (ex : DESC, écoute active, médiation, négociation)",
+        "Communication non violente et gestion des émotions",
+        "Cas pratiques : résolution de situations réelles ou simulées, élaboration de plans d’action adaptés"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Ateliers interactifs et études de cas",
+      "Jeux de rôle et simulations de situations managériales",
+      "Apports méthodologiques et outils opérationnels (grilles d’analyse, méthodes DESC et DISC, feedback structuré, etc.)",
+      "Travaux de groupe et retours d’expérience"
+     ],
+     "evaluations": [
+      "Formative : Participation active, exercices d’application, mises en situation",
+      "Sommative : Production d’un livrable professionnel (plan d’action ou note de cadrage sur le management intergénérationnel et la gestion d’une situation difficile), évalué selon les critères du référentiel (pertinence de l’analyse, qualité des solutions proposées, capacité à intégrer la dimension inclusive et responsable), intégré à l’épreuve certifiante du bloc BC03"
+     ]
+    },
+    {
+     "titre": "Négociation Commerciale & Relations fournisseurs",
+     "bloc": "BC03 – Piloter le déploiement d’une stratégie marketing communication responsable",
+     "formation": "Mastère 2 – Manager des stratégies marketing et communication",
+     "rncp": "RNCP 38504 – Fiche France Compétences",
+     "activite": "",
+     "intervenant": "",
+     "volume": "7h",
+     "sequencage": "S1 ou S2, en articulation avec les modules de management de projet, gestion budgétaire et communication responsable",
+     "objectif": "Maîtriser les méthodes et techniques de négociation commerciale dans le secteur de la communication Savoir sélectionner, contractualiser et piloter la relation avec des fournisseurs et prestataires dans une logique responsable et durable Intégrer les critères RSE, la conformité contractuelle et la gestion des risques dans la relation fournisseur Préparer la production de livrables professionnels intégrant la dimension négociation et relation fournisseur, en cohérence avec les attendus du référentiel RNCP",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.17"
+     ],
+     "notions_cles": [
+      "Stratégies de négociation commerciale appliquées à la communication",
+      "Gestion et pilotage de la relation fournisseur",
+      "Intégration des enjeux RSE et gestion des risques dans la relation commerciale"
+     ],
+     "programme": [
+      {
+       "titre": "Stratégies de négociation commerciale appliquées à la communication",
+       "points": [
+        "Principes et étapes clés de la négociation commerciale (préparation, conduite, conclusion)",
+        "Spécificités de la négociation dans les métiers de la communication (prestations créatives, médias, production, événementiel, etc.)",
+        "Techniques de négociation éthique et responsable (win-win, gestion des conflits, argumentation, adaptation aux profils d’acheteurs et de vendeurs)"
+       ]
+      },
+      {
+       "titre": "Gestion et pilotage de la relation fournisseur",
+       "points": [
+        "Sélection et évaluation des prestataires et fournisseurs (critères de choix, appels d’offres, benchmark, due diligence)",
+        "Contractualisation, suivi et animation de la relation (contrats, clauses RSE, indicateurs de performance, gestion des litiges)",
+        "Développement d’une relation durable et équilibrée (fidélisation, co-construction, innovation, évaluation continue)"
+       ]
+      },
+      {
+       "titre": "Intégration des enjeux RSE et gestion des risques dans la relation commerciale",
+       "points": [
+        "Alignement des pratiques fournisseurs avec les engagements RSE de la marque (charte fournisseur, audits, reporting)",
+        "Gestion des risques contractuels, réputationnels et opérationnels",
+        "Études de cas et simulations : négociation, gestion de crise fournisseur, adaptation aux enjeux sectoriels",
+        "Préparation à l’épreuve certifiante : formalisation d’un plan de gestion de la relation fournisseur"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Ateliers pratiques de négociation (jeux de rôle, simulations)",
+      "Études de cas réels (analyse de contrats, benchmark fournisseurs)",
+      "Travaux de groupe et retours d’expérience",
+      "Apports méthodologiques et outils professionnels"
+     ],
+     "evaluations": [
+      "Formative : Participation active, exercices de négociation, feedback sur simulations",
+      "Sommative : Production d’un livrable professionnel (plan de gestion ou note stratégique sur la négociation et la relation fournisseur), évalué selon les critères du référentiel (pertinence de la sélection, qualité de la négociation, intégration des critères RSE, gestion des risques)"
+     ]
+    },
+    {
+     "titre": "Indicateurs-clés de performance : définition et organisation de la collecte, Analytics et data visualisation",
+     "bloc": "BC03 – Piloter le déploiement d’une stratégie marketing communication responsable",
+     "formation": "Mastère 2 – Manager des stratégies marketing et communication",
+     "rncp": "RNCP 38504 – Fiche France Compétences",
+     "activite": "",
+     "intervenant": "",
+     "volume": "35h",
+     "sequencage": "– 10 séances de 3,5h (S1 et S2",
+     "objectif": "",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.18",
+      "C.19"
+     ],
+     "notions_cles": [
+      "PARTIE 1 – KPIs & organisation de la collecte (3 séances)",
+      "PARTIE 2 – Analytics & data visualisation (4 séances)",
+      "PARTIE 3 – Référencement SMA/SMO à l’ère de l’IA (3 séances)"
+     ],
+     "programme": [
+      {
+       "titre": "PARTIE 1 – KPIs & organisation de la collecte (3 séances)",
+       "points": [
+        "Définir les bons indicateurs : métriques, KPIs, OKRs – vanity metrics vs. actionable metrics",
+        "Hiérarchisation des KPIs par objectif business et par canal",
+        "Architecture de collecte : plan de taggage, Google Tag Manager, gouvernance de la donnée",
+        "RGPD et collecte : consentement, durées de conservation, documentation des traitements post-cookie",
+        "IA dans la collecte et l’analyse : apports (automatisation, prédictif) et limites (biais, boîtes noires)",
+        "Atelier : plan de mesure complet pour une marque réelle (KPIs + architecture de collecte)"
+       ]
+      },
+      {
+       "titre": "PARTIE 2 – Analytics & data visualisation (4 séances)",
+       "points": [
+        "Écosystème analytics en 2026 : GA4, Matomo, Piano Analytics – critères de choix",
+        "GA4 : modèle événementiel, configuration, rapports d’exploration, segments, cohortes",
+        "Alternatives GA4 : Matomo (auto-hébergé) et Piano Analytics – cas d’usage",
+        "Construction d’un tableau de bord Looker Studio orienté décision",
+        "Storytelling de la donnée pour un reporting CODIR"
+       ]
+      },
+      {
+       "titre": "PARTIE 3 – Référencement SMA/SMO à l’ère de l’IA (3 séances)",
+       "points": [
+        "SMA : Google Ads & Meta Ads – automatisation (Smart Bidding, Performance Max, Advantage+)",
+        "SMO : algorithmes des plateformes 2026, visibilité organique, mesure de la performance sociale",
+        "SEO & IA générative : SGE, AEO (Answer Engine Optimization), GEO (Generative Engine Optimization)",
+        "Attribution multi-touch, trafic dark social, vision unifiée cross-canal",
+        "Atelier de synthèse : audit performance digitale d’une marque réelle"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    },
+    {
+     "titre": "Google Analytics",
+     "bloc": "BC03 – Piloter le déploiement d’une stratégie marketing communication responsable",
+     "formation": "Mastère 2 – Manager des stratégies marketing et communication",
+     "rncp": "RNCP 38504 – Fiche France Compétences",
+     "activite": "",
+     "intervenant": "",
+     "volume": "24,5h",
+     "sequencage": "– 7 séances de 3,5h",
+     "objectif": "",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.18",
+      "C.19"
+     ],
+     "notions_cles": [],
+     "programme": [
+      {
+       "titre": "L’écosystème analytics en 2026",
+       "points": [
+        "Panorama des outils : GA4, Matomo, Piano Analytics, AT Internet",
+        "Critères de choix selon la taille de structure, les contraintes RGPD et les objectifs métier",
+        "Souveraineté des données : enjeux et réponses"
+       ]
+      },
+      {
+       "titre": "GA4 : architecture et logique de mesure",
+       "points": [
+        "Modèle événementiel vs. sessions – configuration d’une propriété GA4",
+        "Événements, conversions, dimensions personnalisées"
+       ]
+      },
+      {
+       "titre": "GA4 : exploration et rapports avancés",
+       "points": [
+        "Rapports d’exploration : entonnoirs, cohortes, chemins",
+        "Segmentation d’audience – connexion à Looker Studio",
+        "Atelier pratique sur compte de démonstration Google"
+       ]
+      },
+      {
+       "titre": "Alternatives à GA4 : Matomo & Piano Analytics",
+       "points": [
+        "Installation et configuration Matomo (auto-hébergé vs. cloud)",
+        "Spécificités Piano Analytics – lecture comparative des interfaces"
+       ]
+      },
+      {
+       "titre": "KPIs et tableaux de bord orientés décision",
+       "points": [
+        "Hiérarchisation des indicateurs : vanity metrics vs. actionable metrics",
+        "Construction d’un tableau de bord Looker Studio – storytelling de la donnée pour un CODIR"
+       ]
+      },
+      {
+       "titre": "Analytics et IA générative : nouveaux enjeux",
+       "points": [
+        "Impact de la SGE sur le trafic organique – trafic dark social et non attribué",
+        "Émergence de l’AEO et du GEO – que mesurer quand le clic disparaît ?"
+       ]
+      },
+      {
+       "titre": "Atelier de synthèse : audit analytics d’une marque réelle",
+       "points": [
+        "En mode agence : audit de la stack analytics, identification des angles morts, recommandations",
+        "Restitution orale (10 min par groupe) + débriefing collectif"
+       ]
+      }
+     ],
+     "seances": [
+      {
+       "numero": 1,
+       "duree": "",
+       "titre": "L’écosystème analytics en 2026",
+       "points": [
+        "Panorama des outils : GA4, Matomo, Piano Analytics, AT Internet",
+        "Critères de choix selon la taille de structure, les contraintes RGPD et les objectifs métier",
+        "Souveraineté des données : enjeux et réponses"
+       ]
+      },
+      {
+       "numero": 2,
+       "duree": "",
+       "titre": "GA4 : architecture et logique de mesure",
+       "points": [
+        "Modèle événementiel vs. sessions – configuration d’une propriété GA4",
+        "Événements, conversions, dimensions personnalisées"
+       ]
+      },
+      {
+       "numero": 3,
+       "duree": "",
+       "titre": "GA4 : exploration et rapports avancés",
+       "points": [
+        "Rapports d’exploration : entonnoirs, cohortes, chemins",
+        "Segmentation d’audience – connexion à Looker Studio",
+        "Atelier pratique sur compte de démonstration Google"
+       ]
+      },
+      {
+       "numero": 4,
+       "duree": "",
+       "titre": "Alternatives à GA4 : Matomo & Piano Analytics",
+       "points": [
+        "Installation et configuration Matomo (auto-hébergé vs. cloud)",
+        "Spécificités Piano Analytics – lecture comparative des interfaces"
+       ]
+      },
+      {
+       "numero": 5,
+       "duree": "",
+       "titre": "KPIs et tableaux de bord orientés décision",
+       "points": [
+        "Hiérarchisation des indicateurs : vanity metrics vs. actionable metrics",
+        "Construction d’un tableau de bord Looker Studio – storytelling de la donnée pour un CODIR"
+       ]
+      },
+      {
+       "numero": 6,
+       "duree": "",
+       "titre": "Analytics et IA générative : nouveaux enjeux",
+       "points": [
+        "Impact de la SGE sur le trafic organique – trafic dark social et non attribué",
+        "Émergence de l’AEO et du GEO – que mesurer quand le clic disparaît ?"
+       ]
+      },
+      {
+       "numero": 7,
+       "duree": "",
+       "titre": "Atelier de synthèse : audit analytics d’une marque réelle",
+       "points": [
+        "En mode agence : audit de la stack analytics, identification des angles morts, recommandations",
+        "Restitution orale (10 min par groupe) + débriefing collectif"
+       ]
+      }
+     ],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    },
+    {
+     "titre": "Référencement SMA/SMO",
+     "bloc": "BC03 – Piloter le déploiement d’une stratégie marketing communication responsable",
+     "formation": "Mastère 2 – Manager des stratégies marketing et communication",
+     "rncp": "RNCP 38504 – Fiche France Compétences",
+     "activite": "",
+     "intervenant": "",
+     "volume": "",
+     "sequencage": "Intégré en Partie 3 du module KPIs analytics & data visualisation (3 séances sur 10)",
+     "objectif": "",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.18",
+      "C.19"
+     ],
+     "notions_cles": [
+      "SMA – Campagnes payantes à l’ère de l’IA",
+      "SMO – Visibilité organique sur les réseaux",
+      "SEO & IA générative",
+      "Mesure intégrée cross-canal"
+     ],
+     "programme": [
+      {
+       "titre": "SMA – Campagnes payantes à l’ère de l’IA",
+       "points": [
+        "Google Ads & Meta Ads : automatisation (Smart Bidding, Performance Max, Advantage+)",
+        "Lecture critique des résultats : quand faire confiance à l’algorithme, quand reprendre la main"
+       ]
+      },
+      {
+       "titre": "SMO – Visibilité organique sur les réseaux",
+       "points": [
+        "Algorithmes des plateformes sociales 2026 : logiques de distribution, signaux de pertinence",
+        "Stratégies de contenu orientées visibilité organique",
+        "Outils de mesure : reach, engagement, share of voice"
+       ]
+      },
+      {
+       "titre": "SEO & IA générative",
+       "points": [
+        "SGE (Search Generative Experience) : impact sur le trafic organique",
+        "AEO (Answer Engine Optimization) et GEO (Generative Engine Optimization)",
+        "Adapter sa stratégie de contenu pour rester visible dans les réponses générées"
+       ]
+      },
+      {
+       "titre": "Mesure intégrée cross-canal",
+       "points": [
+        "Attribution multi-touch : modèles et limites",
+        "Trafic dark social et données non attribuées – vision unifiée de la performance"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    },
+    {
+     "titre": "Spé Marque & Transfo : Gestion de campagne Digitale",
+     "bloc": "BC05 – Engager l’innovation et la transformation digitale de la communication de la marque",
+     "formation": "Mastère 2 – Manager des stratégies marketing et communication",
+     "rncp": "RNCP 38504 – Fiche France Compétences",
+     "activite": "",
+     "intervenant": "",
+     "volume": "7h",
+     "sequencage": "S2, en articulation avec les modules de méthodes agiles, automation, Analytics et hackathons sectoriels",
+     "objectif": "Maîtriser la conception, le pilotage et l’optimisation de campagnes digitales innovantes dans une logique de transformation de la marque Savoir intégrer les leviers technologiques et data-driven dans la stratégie de campagne (tracking, automation, IA, ciblage avancé) Être capable de coordonner les parties prenantes internes et externes pour assurer la performance et l’agilité de la campagne Préparer la production de livrables professionnels intégrés à l’épreuve certifiante du bloc optionnel BC05",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.20-II",
+      "C.22-II"
+     ],
+     "notions_cles": [
+      "Stratégie et pilotage de campagne digitale innovante",
+      "Coordination, optimisation et conduite du changement"
+     ],
+     "programme": [
+      {
+       "titre": "Stratégie et pilotage de campagne digitale innovante",
+       "points": [
+        "Définition des objectifs et KPIs dans une logique omnicanale et transformationnelle",
+        "Choix des leviers digitaux adaptés (display, social Ads, automation, influence, retargeting, etc.)",
+        "Intégration des innovations technologiques (IA, automatisation, data management, tracking avancé)",
+        "Planification, budgétisation et allocation des ressources",
+        "Étude de cas : benchmark de campagnes innovantes"
+       ]
+      },
+      {
+       "titre": "Coordination, optimisation et conduite du changement",
+       "points": [
+        "Organisation des équipes projet et gestion des parties prenantes (internes/externes)",
+        "Méthodes agiles appliquées à la gestion de campagne digitale",
+        "Suivi de la performance en temps réel, ajustements et reporting",
+        "Gestion des résistances internes, accompagnement au changement et implication des équipes",
+        "Préparation à l’épreuve certifiante : formalisation d’un plan de gestion de campagne digitale innovante"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Ateliers pratiques (construction de plan de campagne, paramétrage d’outils digitaux)",
+      "Études de cas réels ou simulés",
+      "Travaux de groupe, simulations et feedback personnalisé",
+      "Apports méthodologiques et outils professionnels"
+     ],
+     "evaluations": [
+      "Formative : Participation active, exercices pratiques, retours sur analyses intermédiaires",
+      "Sommative : Production d’un livrable professionnel (plan de gestion de campagne digitale innovante, rapport d’analyse ou note stratégique), évalué selon les critères du référentiel (pertinence de la stratégie, intégration des innovations, capacité à piloter la transformation et à accompagner le changement), intégré à l’épreuve certifiante du bloc BC05"
+     ]
+    },
+    {
+     "titre": "Spé Marque & Transfo : Méthodes agiles de gestion de projet (SCRUM, etc.)",
+     "bloc": "BC05 – Engager l’innovation et la transformation digitale de la communication de la marque",
+     "formation": "Mastère 2 – Manager des stratégies marketing et communication",
+     "rncp": "RNCP 38504 – Fiche France Compétences",
+     "activite": "",
+     "intervenant": "",
+     "volume": "10,5h",
+     "sequencage": "S2, en articulation avec les modules de gestion de campagne digitale, automation, hackathons sectoriels",
+     "objectif": "Comprendre les fondements, principes et bénéfices des méthodes agiles appliquées à la gestion de projet de communication et de transformation digitale Maîtriser les rôles, outils et rituels de la méthode SCRUM et savoir les adapter à des projets marketing/communication Savoir piloter un projet agile, organiser le travail en équipe, gérer les priorités et favoriser l’innovation Préparer la production de livrables professionnels intégrés à l’épreuve certifiante du bloc optionnel BC05",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.20-II",
+      "C.22-II"
+     ],
+     "notions_cles": [
+      "Fondamentaux et enjeux de l’agilité en gestion de projet",
+      "SCRUM : rôles, outils et rituels appliqués à la communication",
+      "Pilotage agile, management collaboratif et conduite du changement"
+     ],
+     "programme": [
+      {
+       "titre": "Fondamentaux et enjeux de l’agilité en gestion de projet",
+       "points": [
+        "Principes de l’agilité : transparence, inspection, adaptation",
+        "Panorama des méthodes agiles (SCRUM, Kanban, Scrumban, SAFe...) et choix selon le contexte projet",
+        "Bénéfices et limites de l’agilité pour la transformation digitale des marques"
+       ]
+      },
+      {
+       "titre": "SCRUM : rôles, outils et rituels appliqués à la communication",
+       "points": [
+        "Rôles clés : Product Owner, SCRUM Master, équipe projet (responsabilités, posture, animation)",
+        "Outils SCRUM : Product Backlog, Sprint, Sprint Planning, Daily Scrum, Sprint Review, Rétrospective",
+        "Gestion des priorités, itérations, feedbacks et suivi de l’avancement",
+        "Adaptation des artefacts SCRUM à un projet de communication ou d’innovation"
+       ]
+      },
+      {
+       "titre": "Pilotage agile, management collaboratif et conduite du changement",
+       "points": [
+        "Mise en place d’un management agile : autonomie, engagement, intelligence collective",
+        "Gestion des résistances, accompagnement des parties prenantes, communication interne",
+        "Cas pratiques : simulation d’un projet agile, résolution de problèmes, bilan d’itération",
+        "Préparation à l’épreuve certifiante : formalisation d’un plan de gestion de projet agile appliqué à la transformation digitale"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Ateliers pratiques (simulation de SCRUM, gestion d’un sprint, rétrospective)",
+      "Études de cas réels ou simulés",
+      "Travaux de groupe et feedback personnalisé",
+      "Apports méthodologiques, démonstrations d’outils agiles"
+     ],
+     "evaluations": [
+      "Formative : Participation active, exercices pratiques, retours sur simulations",
+      "Sommative : Production d’un livrable professionnel (plan de gestion de projet agile, note de synthèse sur l’agilité appliquée à un projet de transformation), évalué selon les critères du référentiel (pertinence de l’approche, adaptation au contexte, capacité à piloter l’innovation et à accompagner le changement), intégré à l’épreuve certifiante du bloc BC05"
+     ]
+    },
+    {
+     "titre": "Spé Marque & Transfo : Méthodologie IAGen LLM & Automatisation marketing",
+     "bloc": "BC05 – Engager l’innovation et la transformation digitale de la communication de la marque",
+     "formation": "Mastère 2 – Manager des stratégies marketing et communication",
+     "rncp": "RNCP 38504 – Fiche France Compétences",
+     "activite": "",
+     "intervenant": "",
+     "volume": "14h",
+     "sequencage": "– 4 séances de 3,5h",
+     "objectif": "",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.21"
+     ],
+     "notions_cles": [],
+     "programme": [
+      {
+       "titre": "Comprendre les LLM pour mieux les piloter",
+       "points": [
+        "Fonctionnement des LLM (tokens, température, contexte, hallucinations)",
+        "Panorama des modèles : ChatGPT (GPT-4o), Claude (Anthropic), Gemini, Mistral – critères de choix",
+        "Introduction au prompt engineering : anatomie d’un bon prompt (rôle, contexte, contraintes, format)",
+        "Atelier : reformuler 5 briefs réels en prompts opérationnels"
+       ]
+      },
+      {
+       "titre": "Prompt engineering avancé pour les métiers de la marque",
+       "points": [
+        "Techniques avancées : chain-of-thought, few-shot prompting, prompts systèmes",
+        "Cas d’usage métier : copies publicitaires, contenus multicanaux, briefs créatifs, synthèses d’études",
+        "Garder la voix de marque dans les sorties IA : techniques de calibrage stylistique",
+        "Atelier : production d’un kit de contenus complet pour une marque réelle"
+       ]
+      },
+      {
+       "titre": "Automatisation marketing : concevoir des workflows intelligents",
+       "points": [
+        "Introduction aux outils d’automatisation : Make (ex-Integromat), n8n, Zapier",
+        "Connexion LLM + CRM + outils de publication",
+        "Conception d’un scénario d’automatisation : de la collecte de signal à la production de contenu",
+        "Limites et risques : sur-automatisation, perte de contrôle éditorial, conformité RGPD"
+       ]
+      },
+      {
+       "titre": "Atelier de synthèse : construire un système IA pour une marque",
+       "points": [
+        "En mode agence : stack d’outils justifiée, bibliothèque de prompts calibrés, workflow d’automatisation",
+        "Restitution orale + débriefing critique sur les choix effectués"
+       ]
+      }
+     ],
+     "seances": [
+      {
+       "numero": 1,
+       "duree": "",
+       "titre": "Comprendre les LLM pour mieux les piloter",
+       "points": [
+        "Fonctionnement des LLM (tokens, température, contexte, hallucinations)",
+        "Panorama des modèles : ChatGPT (GPT-4o), Claude (Anthropic), Gemini, Mistral – critères de choix",
+        "Introduction au prompt engineering : anatomie d’un bon prompt (rôle, contexte, contraintes, format)",
+        "Atelier : reformuler 5 briefs réels en prompts opérationnels"
+       ]
+      },
+      {
+       "numero": 2,
+       "duree": "",
+       "titre": "Prompt engineering avancé pour les métiers de la marque",
+       "points": [
+        "Techniques avancées : chain-of-thought, few-shot prompting, prompts systèmes",
+        "Cas d’usage métier : copies publicitaires, contenus multicanaux, briefs créatifs, synthèses d’études",
+        "Garder la voix de marque dans les sorties IA : techniques de calibrage stylistique",
+        "Atelier : production d’un kit de contenus complet pour une marque réelle"
+       ]
+      },
+      {
+       "numero": 3,
+       "duree": "",
+       "titre": "Automatisation marketing : concevoir des workflows intelligents",
+       "points": [
+        "Introduction aux outils d’automatisation : Make (ex-Integromat), n8n, Zapier",
+        "Connexion LLM + CRM + outils de publication",
+        "Conception d’un scénario d’automatisation : de la collecte de signal à la production de contenu",
+        "Limites et risques : sur-automatisation, perte de contrôle éditorial, conformité RGPD"
+       ]
+      },
+      {
+       "numero": 4,
+       "duree": "",
+       "titre": "Atelier de synthèse : construire un système IA pour une marque",
+       "points": [
+        "En mode agence : stack d’outils justifiée, bibliothèque de prompts calibrés, workflow d’automatisation",
+        "Restitution orale + débriefing critique sur les choix effectués"
+       ]
+      }
+     ],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    },
+    {
+     "titre": "Spé Marque & Transfo : Droit des marques et de la communication digitale",
+     "bloc": "BC05 – Engager l’innovation et la transformation digitale de la communication de la marque",
+     "formation": "Mastère 2 – Manager des stratégies marketing et communication",
+     "rncp": "RNCP 38504 – Fiche France Compétences",
+     "activite": "",
+     "intervenant": "",
+     "volume": "7h",
+     "sequencage": "S2, en articulation avec les modules de gestion de campagne digitale, IAGen/LLM, hackathons sectoriels",
+     "objectif": "Maîtriser les principes fondamentaux du droit des marques appliqué à l’environnement digital et à l’innovation Savoir sécuriser la création, la protection et l’exploitation des actifs de marque dans un contexte digital et international Intégrer les contraintes juridiques et éthiques dans la conception de dispositifs digitaux innovants (contenus, campagnes, data, IA, influence, e-commerce, etc.) Préparer la production de livrables professionnels intégrant la dimension juridique et réglementaire, en cohérence avec le référentiel RNCP",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.21-II"
+     ],
+     "notions_cles": [
+      "Droit des marques appliqué à la transformation digitale",
+      "Cadre juridique de la communication digitale innovante"
+     ],
+     "programme": [
+      {
+       "titre": "Droit des marques appliqué à la transformation digitale",
+       "points": [
+        "Principes de protection de la marque (dépôt, gestion, défense) dans l’écosystème digital",
+        "Gestion des noms de domaine, e-réputation, cybersquatting, et enjeux liés à l’international",
+        "Propriété intellectuelle des contenus digitaux (textes, images, vidéos, IA générative)",
+        "Risques et stratégies de défense de la marque face à l’innovation digitale"
+       ]
+      },
+      {
+       "titre": "Cadre juridique de la communication digitale innovante",
+       "points": [
+        "Publicité digitale, influence, campagnes Social Media : obligations et responsabilités",
+        "Données personnelles, RGPD, cookies, data marketing, IA et automatisation",
+        "Contrats, mentions légales, CGU, gestion des droits et autorisations",
+        "Études de cas et analyse de situations réelles : veille, gestion de crise, gestion des litiges, conformité réglementaire",
+        "Préparation à l’épreuve certifiante : sécurisation juridique d’un projet digital innovant"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Apports méthodologiques et études de cas réels",
+      "Ateliers pratiques (audit de conformité, analyse de risques, rédaction de clauses)",
+      "Travaux de groupe et simulations",
+      "Feedback individualisé"
+     ],
+     "evaluations": [
+      "Formative : Participation active, exercices d’application, analyse de cas",
+      "Sommative : Production d’un livrable professionnel (audit de conformité ou note de synthèse juridique appliquée à un projet digital), évalué selon les critères du référentiel (sécurisation juridique, prise en compte des risques, capacité à accompagner l’innovation), intégré à l’épreuve certifiante du bloc BC05"
+     ]
+    },
+    {
+     "titre": "Spé Créa : Approfondissement Adobe After Effect",
+     "bloc": "BC06 – Développer la stratégie créative de la marque dans des supports et contenus originaux et innovants",
+     "formation": "Mastère 2 – Manager des stratégies marketing et communication",
+     "rncp": "RNCP 38504 – Fiche France Compétences",
+     "activite": "",
+     "intervenant": "",
+     "volume": "10,5h",
+     "sequencage": "S2, en articulation avec les modules de direction artistique, motion design, hackathons créatifs",
+     "objectif": "Maîtriser les fonctionnalités avancées d’Adobe After Effect pour la création de contenus animés, interactifs et innovants Savoir concevoir et réaliser des animations complexes adaptées aux besoins de la communication de marque Intégrer les principes de storytelling visuel, d’accessibilité et d’innovation dans la production de contenus motion design Préparer la production de livrables professionnels intégrés à l’épreuve certifiante du bloc BC06",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.22-III"
+     ],
+     "notions_cles": [
+      "Workflow avancé et méthodologie de projet sur After Effect",
+      "Techniques avancées d’animation et d’effets spéciaux",
+      "Finalisation, export, accessibilité et intégration dans une stratégie de marque"
+     ],
+     "programme": [
+      {
+       "titre": "Workflow avancé et méthodologie de projet sur After Effect",
+       "points": [
+        "Organisation du projet, gestion des assets et des compositions",
+        "Méthodologie de pré-production et planification des animations",
+        "Optimisation du workflow pour la production de contenus professionnels"
+       ]
+      },
+      {
+       "titre": "Techniques avancées d’animation et d’effets spéciaux",
+       "points": [
+        "Animation de typographies, morphing, tracking, effets de particules, expressions et automatisations",
+        "Intégration d’éléments 2D/3D, masques complexes, transitions créatives",
+        "Gestion de l’interactivité et adaptation multi-supports (social media, web, événementiel)"
+       ]
+      },
+      {
+       "titre": "Finalisation, export, accessibilité et intégration dans une stratégie de marque",
+       "points": [
+        "Optimisation des rendus, gestion des formats d’export selon les usages",
+        "Accessibilité des contenus animés (sous-titrage, contrastes, rythme)",
+        "Intégration dans un dispositif créatif global : cohérence avec la direction artistique, storytelling de marque, innovation",
+        "Préparation à l’épreuve certifiante : production d’un livrable motion design professionnel"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Ateliers pratiques sur After Effect (exercices guidés, création de projets réels ou simulés)",
+      "Démonstrations techniques et analyses de campagnes créatives",
+      "Travaux de groupe et feedback individualisé",
+      "Apports méthodologiques et veille sur les tendances motion design"
+     ],
+     "evaluations": [
+      "Formative : Participation active, exercices pratiques, retours sur projets intermédiaires",
+      "Sommative : Production d’un livrable motion design (animation avancée ou capsule vidéo pour une marque), évalué selon les critères du référentiel (qualité technique, créativité, pertinence stratégique, accessibilité, intégration dans la stratégie de marque), intégré à l’épreuve certifiante du bloc BC06"
+     ]
+    },
+    {
+     "titre": "Spé Créa : Méthodologies IAGen créative",
+     "bloc": "BC06 – Développer la stratégie créative de la marque dans des supports et des formats innovants",
+     "formation": "Mastère 2 – Manager des stratégies marketing et communication",
+     "rncp": "RNCP 38504 – Fiche France Compétences",
+     "activite": "",
+     "intervenant": "",
+     "volume": "14h",
+     "sequencage": "– 4 séances de 3,5h",
+     "objectif": "",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.21"
+     ],
+     "notions_cles": [],
+     "programme": [
+      {
+       "titre": "L’IA générative et le métier de DA : recomposition des rôles",
+       "points": [
+        "Panorama des outils image 2026 : Adobe Firefly (intégration Creative Cloud), Midjourney, DALL-E",
+        "Critères de choix : cohérence marque, droits, intégration workflow",
+        "Introduction au creative prompting : anatomie d’un prompt visuel (style, référence, composition, palette)",
+        "Atelier : 3 variations d’un même concept avec Firefly et Midjourney – analyse comparative"
+       ]
+      },
+      {
+       "titre": "Creative prompting avancé : tenir une direction artistique",
+       "points": [
+        "Techniques de prompting pour la cohérence de marque : style seeds, référence images, negative prompts",
+        "Calibrage stylistique : transposer une charte graphique en contraintes de prompt",
+        "Intégration Firefly dans Photoshop et Illustrator : génération in-situ, remplacement génératif",
+        "Atelier : moodboard génératif pour une marque réelle – 10 visuels cohérents"
+       ]
+      },
+      {
+       "titre": "IA générative comme outil d’exploration créative",
+       "points": [
+        "L’IA comme partenaire de brainstorming visuel : générer vite pour penser vite",
+        "Techniques d’exploration créative : variation de styles, mashups, ruptures volontaires",
+        "Limites et risques : homéogénéisation esthétique, biais culturels des modèles",
+        "Atelier : planche de 20 images générées – sélection et défense de 3 directions"
+       ]
+      },
+      {
+       "titre": "Atelier de synthèse : campagne visuelle pour une marque réelle",
+       "points": [
+        "En mode agence : concept + direction artistique + déclinaisons multicanales",
+        "Workflow intégré : Firefly + Photoshop + Illustrator",
+        "Restitution orale : présentation de la campagne avec défense des partis pris artistiques"
+       ]
+      }
+     ],
+     "seances": [
+      {
+       "numero": 1,
+       "duree": "",
+       "titre": "L’IA générative et le métier de DA : recomposition des rôles",
+       "points": [
+        "Panorama des outils image 2026 : Adobe Firefly (intégration Creative Cloud), Midjourney, DALL-E",
+        "Critères de choix : cohérence marque, droits, intégration workflow",
+        "Introduction au creative prompting : anatomie d’un prompt visuel (style, référence, composition, palette)",
+        "Atelier : 3 variations d’un même concept avec Firefly et Midjourney – analyse comparative"
+       ]
+      },
+      {
+       "numero": 2,
+       "duree": "",
+       "titre": "Creative prompting avancé : tenir une direction artistique",
+       "points": [
+        "Techniques de prompting pour la cohérence de marque : style seeds, référence images, negative prompts",
+        "Calibrage stylistique : transposer une charte graphique en contraintes de prompt",
+        "Intégration Firefly dans Photoshop et Illustrator : génération in-situ, remplacement génératif",
+        "Atelier : moodboard génératif pour une marque réelle – 10 visuels cohérents"
+       ]
+      },
+      {
+       "numero": 3,
+       "duree": "",
+       "titre": "IA générative comme outil d’exploration créative",
+       "points": [
+        "L’IA comme partenaire de brainstorming visuel : générer vite pour penser vite",
+        "Techniques d’exploration créative : variation de styles, mashups, ruptures volontaires",
+        "Limites et risques : homéogénéisation esthétique, biais culturels des modèles",
+        "Atelier : planche de 20 images générées – sélection et défense de 3 directions"
+       ]
+      },
+      {
+       "numero": 4,
+       "duree": "",
+       "titre": "Atelier de synthèse : campagne visuelle pour une marque réelle",
+       "points": [
+        "En mode agence : concept + direction artistique + déclinaisons multicanales",
+        "Workflow intégré : Firefly + Photoshop + Illustrator",
+        "Restitution orale : présentation de la campagne avec défense des partis pris artistiques"
+       ]
+      }
+     ],
+     "planning": [],
+     "parcours": [],
+     "methodes": [],
+     "evaluations": []
+    },
+    {
+     "titre": "Spé Créa : Direction Artistique & éco-design",
+     "bloc": "BC06 – Développer la stratégie créative de la marque dans des supports et contenus originaux et innovants",
+     "formation": "Mastère 2 – Manager des stratégies marketing et communication",
+     "rncp": "RNCP 38504 – Fiche France Compétences",
+     "activite": "",
+     "intervenant": "",
+     "volume": "14h",
+     "sequencage": "S2, en articulation avec les modules de motion design, IAGen créative, hackathons créatifs",
+     "objectif": "Maîtriser la direction artistique appliquée à la communication de marque, du concept à la réalisation. Savoir intégrer les principes et méthodologies de l’éco-design dans la conception de supports et dispositifs créatifs. Être capable de piloter des projets créatifs responsables, innovants et adaptés à l’expérience utilisateur. Préparer la production de livrables professionnels intégrés à l’épreuve certifiante du bloc BC06.",
+     "commentaire": "",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.20-III",
+      "C.21-III",
+      "C.22-III"
+     ],
+     "notions_cles": [
+      "Fondamentaux et méthodologies de la direction artistique",
+      "Éco-design et création responsable",
+      "Application créative, pilotage de projet et livrables"
+     ],
+     "programme": [
+      {
+       "titre": "Fondamentaux et méthodologies de la direction artistique",
+       "points": [
+        "Rôle et missions du directeur artistique dans la stratégie de marque",
+        "Définition du concept créatif, moodboard, storytelling visuel",
+        "Analyse des tendances graphiques et benchmarks sectoriels",
+        "Travail sur l’identité visuelle, la cohérence graphique et la narration de marque"
+       ]
+      },
+      {
+       "titre": "Éco-design et création responsable",
+       "points": [
+        "Principes et enjeux de l’éco-design appliqué à la communication visuelle",
+        "Méthodologies d’éco-conception : choix des matériaux, formats, supports, sobriété graphique et numérique",
+        "Accessibilité, inclusion, diversité et respect des normes environnementales",
+        "Études de cas, benchmarks et retours d’expérience sur des campagnes responsables"
+       ]
+      },
+      {
+       "titre": "Application créative, pilotage de projet et livrables",
+       "points": [
+        "Déclinaison des concepts sur différents supports (print, digital, événementiel, social media)",
+        "Pilotage de projet créatif responsable : gestion des parties prenantes, coordination avec les équipes, respect du budget et des délais",
+        "Formalisation des livrables : charte graphique, maquettes, prototypes, guidelines d’éco-design",
+        "Préparation à l’épreuve certifiante : production d’un livrable créatif intégrant direction artistique et éco-design"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Ateliers pratiques (direction artistique, éco-conception, création de moodboards)",
+      "Études de cas réels et benchmarks sectoriels",
+      "Travaux de groupe et feedback individualisé",
+      "Apports méthodologiques et veille sur les tendances graphiques et responsables"
+     ],
+     "evaluations": [
+      "Formative : Participation active, exercices pratiques, retours sur projets intermédiaires",
+      "Sommative : Production d’un livrable créatif (charte graphique, prototype ou campagne) intégrant une démarche d’éco-design, évalué selon les critères du référentiel (originalité, cohérence, responsabilité, accessibilité, pertinence stratégique), intégré à l’épreuve certifiante du bloc BC06"
+     ]
+    },
+    {
+     "titre": "Hackathon Websérie (Spé Marque & Transfo / Spé Créa)",
+     "bloc": "Spé Marque & Transfo : BC05 – Engager l’innovation et la transformation digitale de la communication de la marque\nSpé Créa : BC06 – Développer la stratégie créative de la marque dans des supports et contenus originaux et innovants",
+     "formation": "Mastère 2 – Manager des stratégies marketing et communication",
+     "rncp": "RNCP 38504 – Fiche France Compétences",
+     "activite": "",
+     "intervenant": "",
+     "volume": "35h",
+     "sequencage": "5 jours consécutifs, 2 x 3,5h par jour, 10 demi-journées) S2",
+     "objectif": "Concevoir et produire en équipe l’épisode pilote d’une websérie sur un thème commun, en mobilisant les expertises spécialisées de chaque parcours. Savoir collaborer en agence mixte (Marque & Transfo / Créa), en pilotant la gestion de projet, l’innovation, la direction artistique, la production et la post-production. Développer la capacité à scénariser, produire, monter et valoriser un contenu de marque innovant, en intégrant les enjeux de diffusion, d’expérience utilisateur et de performance digitale. Préparer la production d’un livrable professionnel intégré à l’épreuve certifiante de chaque spécialité.",
+     "commentaire": "Ce hackathon favorise la transversalité, la collaboration inter-spécialités et la professionnalisation autour d’un livrable commun, tout en valorisant les expertises spécifiques de chaque parcours.\nL’organisation en agences mixtes permet une montée en compétence sur la gestion de projet créatif et la production audiovisuelle collaborative.\nLe module prépare à l’épreuve certifiante collective, en lien direct avec les attendus des blocs BC05 et BC06.",
+     "competences_prose": "Spé Marque & Transfo (BC05)\nBrand storytelling appliqué\nScénarisation, IA Gen, storyboard\nMarketing digital, distribution, gestion de campagne\nProduction vidéo multiformat\nSpé Créa (BC06)\nDirection artistique appliquée à la websérie\nRéalisation avancée (Adobe Premiere)\nPsychologie des couleurs et expérimentation visuelle\nPost-production vidéo et motion design",
+     "competences_liees": [],
+     "notions_cles": [
+      "Brand storytelling appliqué à la websérie",
+      "Direction artistique : websérie",
+      "Méthodologie IA Gen : Scénarisation et storyboard",
+      "Adobe Premiere : Techniques de réalisation avancées",
+      "Marketing digital et distribution (canaux/multicast) – Gestion de campagne",
+      "Psychologie des couleurs : Expérimentation visuelle",
+      "Prod vidéo : captation multiformat (webdesign)",
+      "Post-Prod vidéo : montage et motion design multicast",
+      "TP – Production de la websérie en équipe",
+      "TP – Production de la websérie en équipe"
+     ],
+     "programme": [
+      {
+       "titre": "Brand storytelling appliqué à la websérie",
+       "points": [
+        "Définition du concept, valeurs de marque, cible, objectifs narratifs",
+        "Construction de l’univers, des personnages, du message clé"
+       ],
+       "repere": "Jour 1 matin",
+       "parcours": "Spé Marque & Transfo"
+      },
+      {
+       "titre": "Direction artistique : websérie",
+       "points": [
+        "Moodboard, identité visuelle, charte graphique",
+        "Cohérence esthétique avec l’univers de marque"
+       ],
+       "repere": "Jour 1 matin",
+       "parcours": "Spé Créa"
+      },
+      {
+       "titre": "Méthodologie IA Gen : Scénarisation et storyboard",
+       "points": [
+        "Introduction aux outils IA générative pour la scénarisation",
+        "Méthodologie de prompting, élaboration du storyboard avec IA"
+       ],
+       "repere": "Jour 1 après-midi",
+       "parcours": "Spé Marque & Transfo"
+      },
+      {
+       "titre": "Adobe Premiere : Techniques de réalisation avancées",
+       "points": [
+        "Prise en main avancée, préparation des rushs, workflow de montage"
+       ],
+       "repere": "Jour 1 après-midi",
+       "parcours": "Spé Créa"
+      },
+      {
+       "titre": "Marketing digital et distribution (canaux/multicast) – Gestion de campagne",
+       "points": [
+        "Définition des canaux de diffusion, stratégie de lancement",
+        "Gestion de campagne digitale, KPIs, multicast"
+       ],
+       "repere": "Jour 2 matin",
+       "parcours": "Spé Marque & Transfo"
+      },
+      {
+       "titre": "Psychologie des couleurs : Expérimentation visuelle",
+       "points": [
+        "Choix des palettes, impact émotionnel, expérimentation sur l’image"
+       ],
+       "repere": "Jour 2 matin",
+       "parcours": "Spé Créa"
+      },
+      {
+       "titre": "Prod vidéo : captation multiformat (webdesign)",
+       "points": [
+        "Organisation du tournage, gestion des formats et supports (web, réseaux, mobile)",
+        "Captation, gestion des équipes, adaptation multi-supports"
+       ],
+       "repere": "Jour 2 après-midi & Jour 3 matin",
+       "parcours": "Spé Marque & Transfo"
+      },
+      {
+       "titre": "Post-Prod vidéo : montage et motion design multicast",
+       "points": [
+        "Techniques de montage avancées, intégration motion design, habillage graphique",
+        "Finalisation des effets, titrages, transitions, sound design"
+       ],
+       "repere": "Jour 2 après-midi & Jour 3 matin",
+       "parcours": "Spé Créa"
+      },
+      {
+       "titre": "TP – Production de la websérie en équipe",
+       "points": [
+        "Pré-production : finalisation du scénario, découpage technique, organisation des équipes",
+        "Production collaborative : tournage, captation, gestion de projet, collaboration en agence mixte",
+        "Post-production collaborative : montage, sélection des rushs, intégration des éléments graphiques, habillage, sound design",
+        "Finalisation du pilote, validation du livrable, préparation du pitch",
+        "Soutenance et restitution devant jury, feedback collectif"
+       ],
+       "repere": "Jour 3 après-midi, Jour 4 & Jour 5",
+       "parcours": "Spé Marque & Transfo"
+      },
+      {
+       "titre": "TP – Production de la websérie en équipe",
+       "points": [
+        "Pré-production créative : storyboard, préparation décors, accessoires, costumes",
+        "Production : réalisation, direction artistique sur le tournage, supervision DA, gestion lumière, cadrage, direction des comédiens",
+        "Montage collaboratif : montage initial, intégration des éléments graphiques et visuels, motion design, titrages, transitions, sound design",
+        "Finalisation créative : export, vérification de la cohérence DA, accessibilité",
+        "Soutenance et restitution devant jury, feedback collectif"
+       ],
+       "repere": "Jour 3 après-midi, Jour 4 & Jour 5",
+       "parcours": "Spé Créa"
+      }
+     ],
+     "seances": [],
+     "planning": [
+      {
+       "repere": "Jour 1 matin",
+       "contenus": [
+        {
+         "titre": "Brand storytelling appliqué à la websérie",
+         "points": [
+          "Définition du concept, valeurs de marque, cible, objectifs narratifs",
+          "Construction de l’univers, des personnages, du message clé"
+         ],
+         "parcours": "Spé Marque & Transfo"
+        },
+        {
+         "titre": "Direction artistique : websérie",
+         "points": [
+          "Moodboard, identité visuelle, charte graphique",
+          "Cohérence esthétique avec l’univers de marque"
+         ],
+         "parcours": "Spé Créa"
+        }
+       ]
+      },
+      {
+       "repere": "Jour 1 après-midi",
+       "contenus": [
+        {
+         "titre": "Méthodologie IA Gen : Scénarisation et storyboard",
+         "points": [
+          "Introduction aux outils IA générative pour la scénarisation",
+          "Méthodologie de prompting, élaboration du storyboard avec IA"
+         ],
+         "parcours": "Spé Marque & Transfo"
+        },
+        {
+         "titre": "Adobe Premiere : Techniques de réalisation avancées",
+         "points": [
+          "Prise en main avancée, préparation des rushs, workflow de montage"
+         ],
+         "parcours": "Spé Créa"
+        }
+       ]
+      },
+      {
+       "repere": "Jour 2 matin",
+       "contenus": [
+        {
+         "titre": "Marketing digital et distribution (canaux/multicast) – Gestion de campagne",
+         "points": [
+          "Définition des canaux de diffusion, stratégie de lancement",
+          "Gestion de campagne digitale, KPIs, multicast"
+         ],
+         "parcours": "Spé Marque & Transfo"
+        },
+        {
+         "titre": "Psychologie des couleurs : Expérimentation visuelle",
+         "points": [
+          "Choix des palettes, impact émotionnel, expérimentation sur l’image"
+         ],
+         "parcours": "Spé Créa"
+        }
+       ]
+      },
+      {
+       "repere": "Jour 2 après-midi & Jour 3 matin",
+       "contenus": [
+        {
+         "titre": "Prod vidéo : captation multiformat (webdesign)",
+         "points": [
+          "Organisation du tournage, gestion des formats et supports (web, réseaux, mobile)",
+          "Captation, gestion des équipes, adaptation multi-supports"
+         ],
+         "parcours": "Spé Marque & Transfo"
+        },
+        {
+         "titre": "Post-Prod vidéo : montage et motion design multicast",
+         "points": [
+          "Techniques de montage avancées, intégration motion design, habillage graphique",
+          "Finalisation des effets, titrages, transitions, sound design"
+         ],
+         "parcours": "Spé Créa"
+        }
+       ]
+      },
+      {
+       "repere": "Jour 3 après-midi, Jour 4 & Jour 5",
+       "contenus": [
+        {
+         "titre": "TP – Production de la websérie en équipe",
+         "points": [
+          "Pré-production : finalisation du scénario, découpage technique, organisation des équipes",
+          "Production collaborative : tournage, captation, gestion de projet, collaboration en agence mixte",
+          "Post-production collaborative : montage, sélection des rushs, intégration des éléments graphiques, habillage, sound design",
+          "Finalisation du pilote, validation du livrable, préparation du pitch",
+          "Soutenance et restitution devant jury, feedback collectif"
+         ],
+         "parcours": "Spé Marque & Transfo"
+        },
+        {
+         "titre": "TP – Production de la websérie en équipe",
+         "points": [
+          "Pré-production créative : storyboard, préparation décors, accessoires, costumes",
+          "Production : réalisation, direction artistique sur le tournage, supervision DA, gestion lumière, cadrage, direction des comédiens",
+          "Montage collaboratif : montage initial, intégration des éléments graphiques et visuels, motion design, titrages, transitions, sound design",
+          "Finalisation créative : export, vérification de la cohérence DA, accessibilité",
+          "Soutenance et restitution devant jury, feedback collectif"
+         ],
+         "parcours": "Spé Créa"
+        }
+       ]
+      }
+     ],
+     "parcours": [
+      "Spé Marque & Transfo",
+      "Spé Créa"
+     ],
+     "methodes": [
+      "Ateliers pratiques spécialisés",
+      "Mise en situation réelle (agence mixte)",
+      "Workshops collaboratifs",
+      "Coaching par des experts de chaque domaine",
+      "Feedbacks intermédiaires et finaux"
+     ],
+     "evaluations": [
+      "Formative : Participation active, implication dans les ateliers, feedbacks intermédiaires",
+      "Sommative : Évaluation collective et individuelle sur la qualité de l’épisode pilote (scénario, DA, réalisation, innovation, pertinence stratégique, performance digitale), lors de la présentation finale devant jury"
+     ]
+    },
+    {
+     "titre": "Hackathon Podcast (Spé Marque & Transfo / Spé Créa)",
+     "bloc": "Spé Marque & Transfo : BC05 – Engager l’innovation et la transformation digitale de la communication de la marque\nSpé Créa : BC06 – Développer la stratégie créative de la marque dans des supports et contenus originaux et innovants",
+     "formation": "Mastère 2 – Manager des stratégies marketing et communication",
+     "rncp": "RNCP 38504 – Fiche France Compétences",
+     "activite": "",
+     "intervenant": "",
+     "volume": "35h",
+     "sequencage": "5 jours consécutifs, 2 x 3,5h par jour, 10 demi-journées) S2",
+     "objectif": "Concevoir, réaliser et promouvoir un podcast de marque en équipe, sur un thème commun, en mobilisant les expertises spécialisées de chaque parcours. Savoir collaborer en agence mixte (Marque & Transfo / Créa), en pilotant la gestion de projet, la direction artistique, la création sonore, la production et la post-production. Développer la capacité à innover dans la narration audio, à produire et à valoriser un contenu de marque original et performant. Préparer la production d’un livrable professionnel intégré à l’épreuve certifiante de chaque spécialité.",
+     "commentaire": "Ce hackathon favorise la transversalité, la collaboration inter-spécialités et la professionnalisation autour d’un livrable commun, tout en valorisant les expertises spécifiques de chaque parcours.\nL’organisation en agences mixtes permet une montée en compétence sur la gestion de projet créatif et la production audio collaborative.\nLe module prépare à l’épreuve certifiante, en lien direct avec les attendus des blocs BC05 et BC06.",
+     "competences_prose": "Spé Marque & Transfo (BC05)\nConception de contenus audio adaptés à la stratégie de marque\nMaîtrise des techniques d’enregistrement, de montage, de distribution et de promotion\nAnalyse de la performance (audience, ROI, Analytics, référencement)\nSpé Créa (BC06)\nDirection artistique et identité sonore\nCréativité et narration innovante\nMaîtrise de la création audio (sons, voix) et production collaborative",
+     "competences_liees": [],
+     "notions_cles": [
+      "Conception du contenu audio",
+      "Direction artistique : Identité sonore",
+      "Conception du contenu audio (suite)",
+      "Direction artistique : Identité sonore (suite)",
+      "Techniques d’enregistrement et de montage",
+      "Créativité et pensée innovante : Narration innovante",
+      "Distribution et promotion (gestion de campagne)",
+      "Créativité et pensée innovante : Narration innovante (suite)",
+      "Mesures d’audience et ROI (référencements et analytics)",
+      "Créativité audio : sons, voix",
+      "TP – Production du Podcast en équipe",
+      "TP – Production du Podcast en équipe"
+     ],
+     "programme": [
+      {
+       "titre": "Conception du contenu audio",
+       "points": [
+        "Définition du concept, cible, objectifs, ligne éditoriale",
+        "Construction du format, storytelling, structuration des épisodes"
+       ],
+       "repere": "Jour 1 matin",
+       "parcours": "Spé Marque & Transfo"
+      },
+      {
+       "titre": "Direction artistique : Identité sonore",
+       "points": [
+        "Moodboard sonore, choix des univers sonores",
+        "Cohérence esthétique et identité de marque"
+       ],
+       "repere": "Jour 1 matin",
+       "parcours": "Spé Créa"
+      },
+      {
+       "titre": "Conception du contenu audio (suite)",
+       "points": [
+        "Travail de script, préparation des interviews, choix des intervenants"
+       ],
+       "repere": "Jour 1 après-midi",
+       "parcours": "Spé Marque & Transfo"
+      },
+      {
+       "titre": "Direction artistique : Identité sonore (suite)",
+       "points": [
+        "Création de l’identité sonore, choix des musiques, jingles, habillage"
+       ],
+       "repere": "Jour 1 après-midi",
+       "parcours": "Spé Créa"
+      },
+      {
+       "titre": "Techniques d’enregistrement et de montage",
+       "points": [
+        "Initiation à la prise de son, matériel, environnement",
+        "Méthodologie d’enregistrement, gestion des voix, premiers montages"
+       ],
+       "repere": "Jour 2 matin",
+       "parcours": "Spé Marque & Transfo"
+      },
+      {
+       "titre": "Créativité et pensée innovante : Narration innovante",
+       "points": [
+        "Exploration de formats narratifs, expérimentation sur la structure, l’émotion et le rythme"
+       ],
+       "repere": "Jour 2 matin",
+       "parcours": "Spé Créa"
+      },
+      {
+       "titre": "Distribution et promotion (gestion de campagne)",
+       "points": [
+        "Choix des plateformes, stratégie de diffusion, plan de promotion, KPIs"
+       ],
+       "repere": "Jour 2 après-midi",
+       "parcours": "Spé Marque & Transfo"
+      },
+      {
+       "titre": "Créativité et pensée innovante : Narration innovante (suite)",
+       "points": [
+        "Développement d’une signature créative, intégration de l’innovation dans la narration"
+       ],
+       "repere": "Jour 2 après-midi",
+       "parcours": "Spé Créa"
+      },
+      {
+       "titre": "Mesures d’audience et ROI (référencements et analytics)",
+       "points": [
+        "Outils d’analyse, suivi des écoutes, optimisation du référencement, calcul du ROI"
+       ],
+       "repere": "Jour 3 matin",
+       "parcours": "Spé Marque & Transfo"
+      },
+      {
+       "titre": "Créativité audio : sons, voix",
+       "points": [
+        "Techniques de création et d’enregistrement de sons, travail sur les voix, expérimentation sonore"
+       ],
+       "repere": "Jour 3 matin",
+       "parcours": "Spé Créa"
+      },
+      {
+       "titre": "TP – Production du Podcast en équipe",
+       "points": [
+        "Pré-production collaborative : finalisation du script, organisation des rôles, préparation logistique",
+        "Enregistrement, montage, mixage, habillage sonore en agence mixte",
+        "Post-production, validation du livrable, préparation du pitch",
+        "- Soutenance et restitution devant jury, feedback collectif"
+       ],
+       "repere": "Jour 3 après-midi, Jours 4 & 5",
+       "parcours": "Spé Marque & Transfo"
+      },
+      {
+       "titre": "TP – Production du Podcast en équipe",
+       "points": [
+        "Pré-production créative : storyboard sonore, préparation des éléments audio, casting voix",
+        "Production collaborative : enregistrement, direction artistique, création sonore, montage, mixage",
+        "Finalisation créative, export, vérification de la cohérence DA, accessibilité",
+        "- Soutenance et restitution devant jury, feedback collectif"
+       ],
+       "repere": "Jour 3 après-midi, Jours 4 & 5",
+       "parcours": "Spé Créa"
+      }
+     ],
+     "seances": [],
+     "planning": [
+      {
+       "repere": "Jour 1 matin",
+       "contenus": [
+        {
+         "titre": "Conception du contenu audio",
+         "points": [
+          "Définition du concept, cible, objectifs, ligne éditoriale",
+          "Construction du format, storytelling, structuration des épisodes"
+         ],
+         "parcours": "Spé Marque & Transfo"
+        },
+        {
+         "titre": "Direction artistique : Identité sonore",
+         "points": [
+          "Moodboard sonore, choix des univers sonores",
+          "Cohérence esthétique et identité de marque"
+         ],
+         "parcours": "Spé Créa"
+        }
+       ]
+      },
+      {
+       "repere": "Jour 1 après-midi",
+       "contenus": [
+        {
+         "titre": "Conception du contenu audio (suite)",
+         "points": [
+          "Travail de script, préparation des interviews, choix des intervenants"
+         ],
+         "parcours": "Spé Marque & Transfo"
+        },
+        {
+         "titre": "Direction artistique : Identité sonore (suite)",
+         "points": [
+          "Création de l’identité sonore, choix des musiques, jingles, habillage"
+         ],
+         "parcours": "Spé Créa"
+        }
+       ]
+      },
+      {
+       "repere": "Jour 2 matin",
+       "contenus": [
+        {
+         "titre": "Techniques d’enregistrement et de montage",
+         "points": [
+          "Initiation à la prise de son, matériel, environnement",
+          "Méthodologie d’enregistrement, gestion des voix, premiers montages"
+         ],
+         "parcours": "Spé Marque & Transfo"
+        },
+        {
+         "titre": "Créativité et pensée innovante : Narration innovante",
+         "points": [
+          "Exploration de formats narratifs, expérimentation sur la structure, l’émotion et le rythme"
+         ],
+         "parcours": "Spé Créa"
+        }
+       ]
+      },
+      {
+       "repere": "Jour 2 après-midi",
+       "contenus": [
+        {
+         "titre": "Distribution et promotion (gestion de campagne)",
+         "points": [
+          "Choix des plateformes, stratégie de diffusion, plan de promotion, KPIs"
+         ],
+         "parcours": "Spé Marque & Transfo"
+        },
+        {
+         "titre": "Créativité et pensée innovante : Narration innovante (suite)",
+         "points": [
+          "Développement d’une signature créative, intégration de l’innovation dans la narration"
+         ],
+         "parcours": "Spé Créa"
+        }
+       ]
+      },
+      {
+       "repere": "Jour 3 matin",
+       "contenus": [
+        {
+         "titre": "Mesures d’audience et ROI (référencements et analytics)",
+         "points": [
+          "Outils d’analyse, suivi des écoutes, optimisation du référencement, calcul du ROI"
+         ],
+         "parcours": "Spé Marque & Transfo"
+        },
+        {
+         "titre": "Créativité audio : sons, voix",
+         "points": [
+          "Techniques de création et d’enregistrement de sons, travail sur les voix, expérimentation sonore"
+         ],
+         "parcours": "Spé Créa"
+        }
+       ]
+      },
+      {
+       "repere": "Jour 3 après-midi, Jours 4 & 5",
+       "contenus": [
+        {
+         "titre": "TP – Production du Podcast en équipe",
+         "points": [
+          "Pré-production collaborative : finalisation du script, organisation des rôles, préparation logistique",
+          "Enregistrement, montage, mixage, habillage sonore en agence mixte",
+          "Post-production, validation du livrable, préparation du pitch",
+          "- Soutenance et restitution devant jury, feedback collectif"
+         ],
+         "parcours": "Spé Marque & Transfo"
+        },
+        {
+         "titre": "TP – Production du Podcast en équipe",
+         "points": [
+          "Pré-production créative : storyboard sonore, préparation des éléments audio, casting voix",
+          "Production collaborative : enregistrement, direction artistique, création sonore, montage, mixage",
+          "Finalisation créative, export, vérification de la cohérence DA, accessibilité",
+          "- Soutenance et restitution devant jury, feedback collectif"
+         ],
+         "parcours": "Spé Créa"
+        }
+       ]
+      }
+     ],
+     "parcours": [
+      "Spé Marque & Transfo",
+      "Spé Créa"
+     ],
+     "methodes": [
+      "Ateliers pratiques spécialisés ; mise en situation réelle (agence mixte) ; workshops collaboratifs ; coaching par des experts de chaque domaine ; feedbacks intermédiaires et finaux"
+     ],
+     "evaluations": [
+      "Formative : Participation active, implication dans les ateliers, feedbacks intermédiaires",
+      "Sommative : Évaluation collective et individuelle sur la qualité du podcast (concept, narration, DA, réalisation, innovation, pertinence stratégique, performance digitale), lors de la présentation finale devant jury"
+     ]
+    },
+    {
+     "titre": "Hackathon Media Tactique (Spé Marque & Transfo / Spé Créa)",
+     "bloc": "Spé Marque & Transfo : BC05 – Engager l’innovation et la transformation digitale de la communication de la marque\nSpé Créa : BC06 – Développer la stratégie créative de la marque dans des supports et contenus originaux et innovants",
+     "formation": "Mastère 2 – Manager des stratégies marketing et communication",
+     "rncp": "RNCP 38504 – Fiche France Compétences",
+     "activite": "",
+     "intervenant": "",
+     "volume": "35h",
+     "sequencage": "5 jours consécutifs, 2 x 3,5h par jour, 10 demi-journées",
+     "objectif": "Concevoir, prototyper et promouvoir un jeu média innovant en équipe, sur un thème commun, en mobilisant les expertises spécialisées de chaque parcours. Savoir collaborer en agence mixte, piloter la gestion de projet, la direction artistique, l’innovation technologique et la production créative. Développer la capacité à intégrer les enjeux d’expérience utilisateur, d’innovation média, de design et de performance digitale. Préparer la production d’un livrable professionnel intégré à l’épreuve certifiante de chaque spécialité.",
+     "commentaire": "Ce hackathon favorise la transversalité, la collaboration inter-spécialités et la professionnalisation autour d’un livrable commun, tout en valorisant les expertises spécifiques de chaque parcours.\nL’organisation en agences mixtes permet une montée en compétence sur la gestion de projet créatif et la production collaborative.\nLe module prépare à l’épreuve certifiante collective, en lien direct avec les attendus des blocs BC05 et BC06.",
+     "competences_prose": "Spé Marque & Transfo (BC05)\nConception stratégique d’un jeu média tactique, hybridation des médias, expérience utilisateur et innovation technologique, lancement et promotion, gestion de projet et pilotage d’équipe.\nSpé Créa (BC06)\nConception créative du jeu, design graphique et visuel, intégration des tendances artistiques, innovation par l’IA, production collaborative et restitution créative.",
+     "competences_liees": [],
+     "notions_cles": [
+      "Conception stratégique du jeu (media tactique) - Histoire des ID et des médias",
+      "Conception créative du jeu",
+      "Conception stratégique du jeu (suite)",
+      "Conception créative du jeu (suite)",
+      "Expérience utilisateur hybride (NoCode, IA…)",
+      "Histoire de l’art et tendances visuelles : Design graphique et visuel",
+      "Expérience utilisateur hybride (suite)",
+      "Histoire de l’art et tendances visuelles (suite)",
+      "Lancement et promotion (Design responsive…)",
+      "IAGen Créative : Mécaniques de jeu innovantes",
+      "TP – Production du jeu en équipe",
+      "TP – Production du jeu en équipe"
+     ],
+     "programme": [
+      {
+       "titre": "Conception stratégique du jeu (media tactique) - Histoire des ID et des médias",
+       "points": [
+        "Définition du concept, analyse des médias, storytelling interactif, identification des leviers tactiques"
+       ],
+       "repere": "Jour 1 matin",
+       "parcours": "Spé Marque & Transfo"
+      },
+      {
+       "titre": "Conception créative du jeu",
+       "points": [
+        "Brief créatif, brainstorming, univers graphique, moodboard, choix des mécaniques de jeu"
+       ],
+       "repere": "Jour 1 matin",
+       "parcours": "Spé Créa"
+      },
+      {
+       "titre": "Conception stratégique du jeu (suite)",
+       "points": [
+        "Scénarisation avancée, hybridation médias, validation du gameplay, cadrage du projet"
+       ],
+       "repere": "Jour 1 après-midi",
+       "parcours": "Spé Marque & Transfo"
+      },
+      {
+       "titre": "Conception créative du jeu (suite)",
+       "points": [
+        "Développement du concept, prototypage rapide, validation créative"
+       ],
+       "repere": "Jour 1 après-midi",
+       "parcours": "Spé Créa"
+      },
+      {
+       "titre": "Expérience utilisateur hybride (NoCode, IA…)",
+       "points": [
+        "Initiation aux outils NoCode, intégration IA, conception d’une expérience utilisateur innovante, prototypage fonctionnel"
+       ],
+       "repere": "Jour 2 matin",
+       "parcours": "Spé Marque & Transfo"
+      },
+      {
+       "titre": "Histoire de l’art et tendances visuelles : Design graphique et visuel",
+       "points": [
+        "Analyse des tendances, création des éléments graphiques, direction artistique, adaptation multi-supports"
+       ],
+       "repere": "Jour 2 matin",
+       "parcours": "Spé Créa"
+      },
+      {
+       "titre": "Expérience utilisateur hybride (suite)",
+       "points": [
+        "Finalisation du prototype, tests utilisateurs, itérations, documentation UX"
+       ],
+       "repere": "Jour 2 après-midi",
+       "parcours": "Spé Marque & Transfo"
+      },
+      {
+       "titre": "Histoire de l’art et tendances visuelles (suite)",
+       "points": [
+        "Finalisation des assets graphiques, déclinaisons multi-supports, documentation DA"
+       ],
+       "repere": "Jour 2 après-midi",
+       "parcours": "Spé Créa"
+      },
+      {
+       "titre": "Lancement et promotion (Design responsive…)",
+       "points": [
+        "Stratégie de lancement, design responsive, plan de communication, KPIs, préparation à la diffusion"
+       ],
+       "repere": "Jour 3 matin",
+       "parcours": "Spé Marque & Transfo"
+      },
+      {
+       "titre": "IAGen Créative : Mécaniques de jeu innovantes",
+       "points": [
+        "Utilisation de l’IA pour créer des mécaniques de jeu originales, expérimentation et intégration dans le projet"
+       ],
+       "repere": "Jour 3 matin",
+       "parcours": "Spé Créa"
+      },
+      {
+       "titre": "TP – Production du jeu en équipe",
+       "points": [
+        "Préproduction collaborative, organisation des rôles, prototypage, test utilisateur, itérations, finalisation, préparation du pitch, restitution devant jury"
+       ],
+       "repere": "Jour 3 après-midi, jours 4 & 5",
+       "parcours": "Spé Marque & Transfo"
+      },
+      {
+       "titre": "TP – Production du jeu en équipe",
+       "points": [
+        "Production créative, intégration des éléments graphiques et sonores, tests, itérations, finalisation, restitution devant jury"
+       ],
+       "repere": "Jour 3 après-midi, jours 4 & 5",
+       "parcours": "Spé Créa"
+      }
+     ],
+     "seances": [],
+     "planning": [
+      {
+       "repere": "Jour 1 matin",
+       "contenus": [
+        {
+         "titre": "Conception stratégique du jeu (media tactique) - Histoire des ID et des médias",
+         "points": [
+          "Définition du concept, analyse des médias, storytelling interactif, identification des leviers tactiques"
+         ],
+         "parcours": "Spé Marque & Transfo"
+        },
+        {
+         "titre": "Conception créative du jeu",
+         "points": [
+          "Brief créatif, brainstorming, univers graphique, moodboard, choix des mécaniques de jeu"
+         ],
+         "parcours": "Spé Créa"
+        }
+       ]
+      },
+      {
+       "repere": "Jour 1 après-midi",
+       "contenus": [
+        {
+         "titre": "Conception stratégique du jeu (suite)",
+         "points": [
+          "Scénarisation avancée, hybridation médias, validation du gameplay, cadrage du projet"
+         ],
+         "parcours": "Spé Marque & Transfo"
+        },
+        {
+         "titre": "Conception créative du jeu (suite)",
+         "points": [
+          "Développement du concept, prototypage rapide, validation créative"
+         ],
+         "parcours": "Spé Créa"
+        }
+       ]
+      },
+      {
+       "repere": "Jour 2 matin",
+       "contenus": [
+        {
+         "titre": "Expérience utilisateur hybride (NoCode, IA…)",
+         "points": [
+          "Initiation aux outils NoCode, intégration IA, conception d’une expérience utilisateur innovante, prototypage fonctionnel"
+         ],
+         "parcours": "Spé Marque & Transfo"
+        },
+        {
+         "titre": "Histoire de l’art et tendances visuelles : Design graphique et visuel",
+         "points": [
+          "Analyse des tendances, création des éléments graphiques, direction artistique, adaptation multi-supports"
+         ],
+         "parcours": "Spé Créa"
+        }
+       ]
+      },
+      {
+       "repere": "Jour 2 après-midi",
+       "contenus": [
+        {
+         "titre": "Expérience utilisateur hybride (suite)",
+         "points": [
+          "Finalisation du prototype, tests utilisateurs, itérations, documentation UX"
+         ],
+         "parcours": "Spé Marque & Transfo"
+        },
+        {
+         "titre": "Histoire de l’art et tendances visuelles (suite)",
+         "points": [
+          "Finalisation des assets graphiques, déclinaisons multi-supports, documentation DA"
+         ],
+         "parcours": "Spé Créa"
+        }
+       ]
+      },
+      {
+       "repere": "Jour 3 matin",
+       "contenus": [
+        {
+         "titre": "Lancement et promotion (Design responsive…)",
+         "points": [
+          "Stratégie de lancement, design responsive, plan de communication, KPIs, préparation à la diffusion"
+         ],
+         "parcours": "Spé Marque & Transfo"
+        },
+        {
+         "titre": "IAGen Créative : Mécaniques de jeu innovantes",
+         "points": [
+          "Utilisation de l’IA pour créer des mécaniques de jeu originales, expérimentation et intégration dans le projet"
+         ],
+         "parcours": "Spé Créa"
+        }
+       ]
+      },
+      {
+       "repere": "Jour 3 après-midi, jours 4 & 5",
+       "contenus": [
+        {
+         "titre": "TP – Production du jeu en équipe",
+         "points": [
+          "Préproduction collaborative, organisation des rôles, prototypage, test utilisateur, itérations, finalisation, préparation du pitch, restitution devant jury"
+         ],
+         "parcours": "Spé Marque & Transfo"
+        },
+        {
+         "titre": "TP – Production du jeu en équipe",
+         "points": [
+          "Production créative, intégration des éléments graphiques et sonores, tests, itérations, finalisation, restitution devant jury"
+         ],
+         "parcours": "Spé Créa"
+        }
+       ]
+      }
+     ],
+     "parcours": [
+      "Spé Marque & Transfo",
+      "Spé Créa"
+     ],
+     "methodes": [
+      "Ateliers pratiques spécialisés ; mise en situation réelle (agence mixte) ; workshops collaboratifs ; coaching par des experts de chaque domaine ; feedbacks intermédiaires et finaux"
+     ],
+     "evaluations": [
+      "Formative : Participation active, implication dans les ateliers, feedbacks intermédiaires",
+      "Sommative : Évaluation collective et individuelle sur la qualité du jeu média (concept, gameplay, DA, innovation, pertinence stratégique, expérience utilisateur, performance digitale), lors de la présentation finale devant jury"
+     ]
+    },
+    {
+     "titre": "Accompagnement PPI (Spé Marque & Transfo) / Accompagnement PPC (Spé Créa)",
+     "bloc": "BC05 – Engager l’innovation et la transformation digitale de la communication de la marque (PPI)\nBC06 – Développer la stratégie créative de la marque dans des supports et contenus originaux et innovants (PPC)",
+     "formation": "Mastère 2 – Manager des stratégies marketing et communication (2025-2026)",
+     "rncp": "RNCP 38504 – Fiche France Compétences",
+     "activite": "",
+     "intervenant": "",
+     "volume": "28h",
+     "sequencage": "S2, réparties sur l’année, accompagnement continu jusqu’à la soutenance de certification",
+     "objectif": "Structurer, formaliser et piloter un projet professionnel individuel certifiant, en lien direct avec la spécialité choisie. Maîtriser la démarche de recherche, d’innovation ou de création, l’analyse stratégique, la gestion de projet et la formalisation de livrables professionnels. Préparer la soutenance orale et la défense argumentée du projet devant le jury de certification. Développer la réflexivité, la capacité à argumenter, à justifier ses choix et à intégrer les enjeux RSE, éthiques et d’innovation.",
+     "commentaire": "Ce module est le cœur de la spécialisation et du parcours certifiant en M2.\nIl s’appuie sur l’ensemble des acquis du cursus et mobilise toutes les compétences du bloc optionnel choisi.\nL’accompagnement est individualisé, avec une montée en exigence sur la formalisation, la prise de recul, la créativité/l’innovation et la professionnalisation.\nLe module prépare directement à l’épreuve certifiante finale (PPI pour Marque & Transfo, PPC pour Créa), condition indispensable à l’obtention du titre RNCP 38504.\nLe contenu et le suivi sont adaptés à la diversité des projets et des profils, tout en garantissant l’alignement avec les standards du certificateur.",
+     "competences_prose": "",
+     "competences_liees": [
+      "C.20-II",
+      "C.21-II",
+      "C.22-II",
+      "C.20-III",
+      "C.21-III",
+      "C.22-III"
+     ],
+     "notions_cles": [
+      "Cadrage, méthodologie et planification du projet individuel",
+      "Accompagnement à la réalisation, à l’innovation et à la création",
+      "Préparation à la soutenance, argumentation et valorisation du projet"
+     ],
+     "programme": [
+      {
+       "titre": "Cadrage, méthodologie et planification du projet individuel",
+       "points": [
+        "Définition du sujet, problématique, objectifs et livrables attendus (PPI ou PPC)",
+        "Choix de la méthodologie (veille, benchmark, design Thinking, démarche créative, etc.)",
+        "Planification du projet : jalons, rétroplanning, gestion des ressources, anticipation des risques",
+        "Validation du cadrage avec le référent pédagogique"
+       ]
+      },
+      {
+       "titre": "Accompagnement à la réalisation, à l’innovation et à la création",
+       "points": [
+        "Suivi individualisé de l’avancement (points d’étape, ateliers de co-développement)",
+        "Apports méthodologiques ciblés selon les besoins (veille prospective, créativité, prototypage, business model, storytelling, etc.)",
+        "Intégration des enjeux RSE, éthiques, réglementaires et de transformation digitale",
+        "Préparation des livrables intermédiaires (dossier, supports visuels, maquettes, prototypes, etc.)",
+        "Feedbacks personnalisés et ajustements méthodologiques"
+       ]
+      },
+      {
+       "titre": "Préparation à la soutenance, argumentation et valorisation du projet",
+       "points": [
+        "Structuration du dossier final et des supports de présentation",
+        "Techniques d’argumentation, de prise de parole et de gestion des questions du jury",
+        "Simulations de soutenance, entraînement à la défense orale",
+        "Valorisation professionnelle du projet (portfolio, publication, networking, etc.)",
+        "Finalisation des livrables et dépôt pour la certification"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Ateliers méthodologiques et coaching individuel/collectif",
+      "Points d’étape réguliers (revues de projet, feedbacks personnalisés)",
+      "Séances de co-développement et de partage entre pairs",
+      "Simulations de soutenance et entraînement à l’oral",
+      "Suivi personnalisé par un référent expert de la spécialité"
+     ],
+     "evaluations": [
+      "Formative : Participation active, points d’étape, feedbacks intermédiaires, livrables intermédiaires",
+      "Sommative : Épreuve certifiante individuelle : dossier écrit (PPI ou PPC) et soutenance orale devant jury (évaluation sur la pertinence stratégique/créative, la qualité de l’analyse, la capacité d’innovation/création, l’intégration des enjeux RSE, la clarté de la présentation et la maîtrise de l’argumentation)"
+     ]
+    },
+    {
+     "titre": "Business Game création d’entreprise",
+     "bloc": "Transversal – Insertion professionnelle et professionnalisation (module d’appui à la professionnalisation du M2)",
+     "formation": "Mastère 2 – Manager des stratégies marketing et communication",
+     "rncp": "RNCP 38504 – Fiche France Compétences",
+     "activite": "",
+     "intervenant": "",
+     "volume": "14h",
+     "sequencage": "S2, séquencé en ateliers et temps forts de Business Game, sur 2 à 3 semaines",
+     "objectif": "Comprendre les étapes clés de la création d’entreprise et les spécificités du secteur communication/marketing Savoir élaborer un business model, un business plan, et définir une stratégie de lancement, maitriser les aspects financiers autant que budgétaires à court ou moyen terme Appliquer les compétences de management, gestion de projet, stratégie, gestion des risques et communication dans un contexte entrepreneurial Savoir défendre son projet devant un jury (pitch, argumentation, gestion des objections)",
+     "commentaire": "Ce module vise l’acquisition d’une posture entrepreneuriale, la consolidation des compétences transversales et la préparation à l’insertion professionnelle.\nIl permet de mobiliser l’ensemble des acquis du cursus dans une situation réaliste et challengeante.\nLe Business Game intègre des dimensions de gestion de crise et de gestion des risques, en cohérence avec les attendus professionnels actuels.\nLe module est obligatoire pour tous les étudiants du M2, quelle que soit la spécialité.",
+     "competences_prose": "Mobiliser les compétences transversales de pilotage de projet, de gestion d’équipe, de stratégie marketing/communication, de gestion des risques et de la performance dans un contexte entrepreneurial.\nSavoir concevoir, structurer et défendre un projet de création d’entreprise ou d’activité innovante.\nDévelopper l’esprit d’initiative, la prise de décision, la gestion du risque et l’agilité dans un contexte de simulation professionnelle.",
+     "competences_liees": [],
+     "notions_cles": [
+      "Fondamentaux de la création d’entreprise et de l’entrepreneuriat",
+      "Élaboration du projet et construction du business plan",
+      "Business Game : simulation et gestion de projet entrepreneurial"
+     ],
+     "programme": [
+      {
+       "titre": "Fondamentaux de la création d’entreprise et de l’entrepreneuriat",
+       "points": [
+        "Panorama des étapes de création d’entreprise (idéation, étude de marché, business model, choix du statut, financement)",
+        "Spécificités des projets dans la communication, le marketing, le digital ou la création de contenu",
+        "Introduction à l’innovation, à la gestion des risques et à la RSE dans l’entrepreneuriat"
+       ]
+      },
+      {
+       "titre": "Élaboration du projet et construction du business plan",
+       "points": [
+        "Définition de la proposition de valeur, étude de marché, segmentation et ciblage",
+        "Construction du business model (canvas), plan marketing/communication, prévisionnel financier",
+        "Formalisation du projet (dossier, supports visuels, pitch deck)"
+       ]
+      },
+      {
+       "titre": "Business Game : simulation et gestion de projet entrepreneurial",
+       "points": [
+        "Mise en situation : constitution d’équipes, répartition des rôles, gestion du temps et des ressources",
+        "Scénarios de développement, gestion des aléas, gestion de crise, adaptation stratégique",
+        "Présentation finale devant un jury (pitch, soutenance, gestion des questions et des objections)",
+        "Débriefing, analyse des performances, retour d’expérience et axes de progrès"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Ateliers interactifs et apports méthodologiques",
+      "Mise en situation professionnelle reconstituée (Business Game)",
+      "Travaux de groupe, coaching et feedback personnalisé",
+      "Simulations de pitch et soutenance devant jury professionnel"
+     ],
+     "evaluations": [
+      "Formative : Participation active, implication dans les ateliers, feedbacks intermédiaires",
+      "Sommative : Évaluation collective et individuelle sur la qualité du projet (business plan, pertinence de la stratégie, gestion des risques, capacité à défendre le projet à l’oral), lors de la présentation finale devant jury"
+     ]
+    },
+    {
+     "titre": "Compétition",
+     "bloc": "Compétences transversales – Valorisation professionnelle / Communication stratégique",
+     "formation": "Mastère 2 – Manager des stratégies marketing et communication",
+     "rncp": "RNCP 38504 – Fiche France Compétences",
+     "activite": "Définir et valoriser son identité professionnelle : positionnement, storytelling, supports, présence numérique, argumentation",
+     "intervenant": "",
+     "volume": "35h (compétition régionale) + 42h (compétition nationale) - (dont 1 semaine de compétition régionale + 1 séance de cadrage + 1 séance de débrief)",
+     "sequencage": "S1+S2",
+     "objectif": "Traduire un brief client en recommandation stratégique de communication. Analyser une situation annonceur en mobilisant les outils d’analyse appris en B3 (études, veille, benchmarks, personae…). Construire un concept de communication et décliner une campagne multi-leviers adaptée au budget, à la cible et aux objectifs. Formaliser une présentation cohérente, impactante, visuellement professionnelle. Collaborer au sein d’une équipe projet en s’organisant efficacement et en répartissant les rôles. Argumenter ses choix et défendre une recommandation devant un jury composé de professionnels.",
+     "commentaire": "",
+     "competences_prose": "Décrypter un brief annonceur et identifier les enjeux stratégiques de communication.\nAnalyser une problématique de communication complexe et formuler des axes de réponse.\nÉlaborer une recommandation stratégique argumentée à partir d'une analyse de contexte.\nConcevoir une campagne de communication intégrée, cohérente et réaliste.\nMobiliser des compétences transversales : créativité, gestion de projet, intelligence collective, prise de parole, storytelling.\nS’entraîner à répondre à une situation professionnelle réelle dans le respect d’un délai contraint.\nSoutenir un projet de communication devant un jury professionnel.",
+     "competences_liees": [],
+     "notions_cles": [
+      "Phase 1 – Cadrage (3h30)",
+      "Phase 2 – Semaine de Compétition (5 jours)",
+      "Phase 3 – Finale & Jury (1 jour)",
+      "Phase 4 – Débrief pédagogique",
+      "Phase 5 : TP d’évaluation"
+     ],
+     "programme": [
+      {
+       "titre": "Phase 1 – Cadrage (3h30)",
+       "points": [
+        "Présentation du format « Compétition » au Cesacom : enjeux, modalités, exemples d’annonceurs.",
+        "Décryptage des attendus de l’épreuve certifiante : livrables, soutenance, critères de notation.",
+        "Constitution des agences (groupes) et travail sur l’identité d’agence.",
+        "Rappel méthodologique : analyse de brief, élaboration de concept, storytelling de campagne."
+       ]
+      },
+      {
+       "titre": "Phase 2 – Semaine de Compétition (5 jours)",
+       "points": [
+        "Jour 1 : Réception du brief annonceur, Q&A, reformulation, cadrage stratégique.",
+        "Jour 2-4 : Travail d’agence en autonomie : analyse, benchmark, stratégie, création, plan de com.",
+        "Travail tutoré : accompagnement méthodo, feedback intermédiaires, validation du concept.",
+        "Jour 5 : Soutenances intermédiaires (poules), sélection pour la finale."
+       ]
+      },
+      {
+       "titre": "Phase 3 – Finale & Jury (1 jour)",
+       "points": [
+        "Soutenance des agences finalistes devant le client.",
+        "Délibération."
+       ]
+      },
+      {
+       "titre": "Phase 4 – Débrief pédagogique",
+       "points": [
+        "Analyse collective des productions (forces, faiblesses, points d’amélioration).",
+        "Feedback croisé inter-agences.",
+        "Valorisation des acquis dans le parcours Cesacom / Portfolio personnel."
+       ]
+      },
+      {
+       "titre": "Phase 5 : TP d’évaluation",
+       "points": []
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Mise en situation réelle (brief réel, client réel, jury pro).",
+      "Travail en équipe projet (agence simulée).",
+      "Coaching stratégique et créatif.",
+      "Ateliers flash (benchmark, concept, storytelling, maquettes…).",
+      "Soutenances simulées puis réelles."
+     ],
+     "evaluations": [
+      "Formative : Coaching et feedbacks en cours de semaine, auto-évaluation post-compétition.",
+      "Sommative : Recommandation stratégique (cohérence, pertinence, faisabilité), qualité de la campagne proposée (concept, déclinaisons, storytelling).",
+      "Pertinence du plan d’action (objectifs, cibles, budget, canaux), impact et clarté de la présentation orale.",
+      "Posture professionnelle et capacité à défendre ses choix."
+     ]
+    }
+   ]
+  }
+ ]
+}

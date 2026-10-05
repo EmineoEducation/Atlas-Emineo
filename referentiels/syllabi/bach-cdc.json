@@ -1,0 +1,2241 @@
+{
+ "genere_le": "2026-10-05",
+ "outil": "extraire-syllabus",
+ "sources": [
+  {
+   "fichier": "Prog-B3_2025_-_RNCP39741.docx",
+   "modules": [
+    {
+     "titre": "Méthodologies de la veille",
+     "bloc": "Bloc 1 : Mener une veille stratégique créative et tendancielle",
+     "formation": "B3 – Bachelor Chargé de Communication",
+     "rncp": "39741 (Fiche RNCP)",
+     "activite": "Définir un process de veille stratégique ; Analyser les tendances ; Présenter une synthèse de veille",
+     "intervenant": "",
+     "volume": "21h (calendaire et FFP)",
+     "sequencage": "S1 – 6 séances de 3h30",
+     "objectif": "Permettre à l’étudiant de concevoir et gérer un dispositif de veille professionnel, d’intégrer l’IA et l’automatisation, d’analyser et restituer les tendances de manière claire et créative, et d’alimenter la réflexion stratégique de l’organisation.",
+     "commentaire": "",
+     "competences_prose": "Structurer et piloter une veille stratégique, créative et tendancielle ; maîtriser les outils avancés (veille automatisée, IA, social listening) ; identifier, hiérarchiser et interpréter tendances, innovations, risques et opportunités ; restituer la veille sous forme de livrables opérationnels et visuels ; exploiter la veille pour la recommandation stratégique.",
+     "competences_liees": [],
+     "notions_cles": [
+      "Rappels fondamentaux et enjeux de la veille",
+      "Structuration du process de veille",
+      "Collecte, qualification et analyse avancée",
+      "Identification et hiérarchisation des tendances",
+      "Restitution créative et opérationnelle de la veille",
+      "Exploitation stratégique et évaluation"
+     ],
+     "programme": [
+      {
+       "titre": "Rappels fondamentaux et enjeux de la veille",
+       "points": [
+        "Rappels méthodologiques pour harmoniser le niveau (veille active/passive, sources, périmètre, enjeux stratégiques et créatifs)",
+        "Panorama des outils (agrégateurs, IA, social listening, alertes, panels, interviews, analyse documentaire)"
+       ]
+      },
+      {
+       "titre": "Structuration du process de veille",
+       "points": [
+        "Définition du périmètre, sélection des sources, construction d’un plan de veille",
+        "Automatisation (RSS, IA, scraping), organisation collaborative, gestion des flux d’information"
+       ]
+      },
+      {
+       "titre": "Collecte, qualification et analyse avancée",
+       "points": [
+        "Techniques de sourcing, validation, croisement des données",
+        "Exploitation des outils d’IA pour la collecte/tri/analyse, benchmark concurrentiel, analyse quantitative et qualitative"
+       ]
+      },
+      {
+       "titre": "Identification et hiérarchisation des tendances",
+       "points": [
+        "Détection des signaux faibles, analyse prospective, mapping des tendances, qualification des opportunités/risques pour la marque",
+        "Mise en perspective avec le positionnement et les enjeux stratégiques"
+       ]
+      },
+      {
+       "titre": "Restitution créative et opérationnelle de la veille",
+       "points": [
+        "Construction de livrables : synthèse, infographie, planche de tendances, dashboard, carnet de veille",
+        "Storytelling visuel, adaptation au public cible (direction, équipe créa, client)"
+       ]
+      },
+      {
+       "titre": "Exploitation stratégique et évaluation",
+       "points": [
+        "Exploitation de la veille pour la recommandation stratégique, intégration dans un plan de communication",
+        "Évaluation de la pertinence et de l’impact, retour d’expérience, bonnes pratiques, atelier de restitution orale"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Ateliers pratiques (construction d’un dispositif de veille, production de livrables, utilisation d’outils professionnels)",
+      "Classe inversée (analyse de benchmarks, veille collaborative)",
+      "Défis créatifs : « 1 sujet, 3 formats », « cartographier une tendance », « veille augmentée par l’IA »"
+     ],
+     "evaluations": [
+      "Formative : exercices d’application à chaque séance (structuration, sourcing, restitution), participation aux ateliers",
+      "Sommative : livrable individuel (synthèse de veille stratégique, créative et tendancielle sur un périmètre défini, écrit + visuel), présentation orale (restitution, argumentation, capacité à répondre aux questions et à anticiper les besoins du commanditaire), évaluation sur la clarté du process, la pertinence des sources, l’intégration de l’IA, la qualité de l’analyse, la créativité et l’exploitation stratégique"
+     ]
+    },
+    {
+     "titre": "Communication durable et soutenable",
+     "bloc": "Bloc 1 : Mener une veille stratégique créative et tendancielle (+ Bloc 2 : Définir une stratégie et un plan de communication + Bloc 3 : Piloter le déploiement responsable de la stratégie)",
+     "formation": "B3 – Bachelor Chargé de Communication",
+     "rncp": "39741 (Fiche RNCP)",
+     "activite": "Élaboration de la recommandation stratégique ; Traduction du plan de communication en brief créatif ; Intégrer les critères RSE dans la production",
+     "intervenant": "",
+     "volume": "14h (calendaire et FFP)",
+     "sequencage": "S1 – 4 séances de 3h30",
+     "objectif": "Permettre à l’étudiant de maîtriser les enjeux, outils et pratiques de la communication responsable, de questionner les stratégies traditionnelles, de proposer des alternatives crédibles et de piloter des dispositifs cohérents avec les engagements RSE d’une organisation.",
+     "commentaire": "",
+     "competences_prose": "Intégrer la responsabilité sociale, environnementale et éthique dans la stratégie et la mise en œuvre de la communication ; analyser de manière critique les pratiques du secteur ; concevoir des dispositifs alignés avec les valeurs de durabilité et de transparence.",
+     "competences_liees": [],
+     "notions_cles": [
+      "Enjeux et cadre de la communication durable",
+      "Éco-conception et sobriété dans la communication",
+      "Communication inclusive, diversité et accessibilité",
+      "Pilotage et valorisation d’une stratégie responsable"
+     ],
+     "programme": [
+      {
+       "titre": "Enjeux et cadre de la communication durable",
+       "points": [
+        "Définition : communication durable, soutenable, RSE, greenwashing, impact washing",
+        "Cadre réglementaire et référentiels (loi Climat, Green Claims Directive, RGPD, normes ISO, labels, chartes déontologiques)",
+        "Analyse critique des pratiques du secteur, identification des risques et opportunités pour les marques"
+       ]
+      },
+      {
+       "titre": "Éco-conception et sobriété dans la communication",
+       "points": [
+        "Principes d’éco-conception : choix des supports, formats, sobriété numérique, cycle de vie des campagnes",
+        "Outils et méthodes : bilan carbone, ACV, labels (FSC, PEFC, Ecofolio), outils d’évaluation d’impact",
+        "Atelier : audit environnemental d’un dispositif de communication, identification des axes d’amélioration"
+       ]
+      },
+      {
+       "titre": "Communication inclusive, diversité et accessibilité",
+       "points": [
+        "Lutte contre les stéréotypes, représentation de la diversité, accessibilité (RGAA, FALC, design universel)",
+        "Exemples de campagnes inclusives et responsables",
+        "Atelier : adaptation d’un message ou d’un support pour l’inclusion et l’accessibilité"
+       ]
+      },
+      {
+       "titre": "Pilotage et valorisation d’une stratégie responsable",
+       "points": [
+        "Intégration des critères RSE dans le brief, le plan de communication et la production",
+        "Mesure et valorisation des impacts (reporting, indicateurs, communication de la preuve)",
+        "Atelier : conception d’une recommandation stratégique responsable pour un cas réel ou simulé, restitution orale et feedback collectif"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Classe inversée : analyse de campagnes responsables et controversées, veille sur les innovations durables",
+      "Ateliers d’audit, d’éco-conception, d’adaptation de supports",
+      "Utilisation d’outils d’IA pour l’évaluation d’impact ou la génération d’alternatives responsables",
+      "Débats mouvants sur les dilemmes éthiques, jeux de rôle (agence/annonceur/ONG)"
+     ],
+     "evaluations": [
+      "Formative : exercices d’audit ou d’adaptation de supports, analyse critique de campagnes",
+      "Sommative : rendu d’un dossier ou d’une présentation de stratégie responsable (diagnostic, recommandations, justification des choix, analyse des impacts et axes d’amélioration), soutenance orale argumentée"
+     ]
+    },
+    {
+     "titre": "Connaissance et comportement du consommateur",
+     "bloc": "Bloc 1 : Mener une veille stratégique créative et tendancielle (+Bloc 2 : Définir une stratégie et un plan de communication)",
+     "formation": "B3 – Bachelor Chargé de Communication",
+     "rncp": "39741 (Fiche RNCP)",
+     "activite": "Analyser l’évolution des insights consommateurs ; Diagnostic de la situation et analyse de la demande client",
+     "intervenant": "",
+     "volume": "21h (calendaire et FFP)",
+     "sequencage": "S1 – 6 séances de 3h30",
+     "objectif": "Permettre à l’étudiant d’analyser et segmenter les consommateurs à partir de données et d’observations, de décrypter les leviers psychologiques, sociaux, culturels et situationnels de l’acte d’achat, et de formuler des insights stratégiques exploitables pour la communication et le marketing.",
+     "commentaire": "",
+     "competences_prose": "Approfondir la compréhension fine des motivations, résistances et processus décisionnels des publics ; maîtriser les outils d’analyse comportementale et les leviers émotionnels ; anticiper les réactions et besoins pour affiner les messages et recommandations stratégiques.",
+     "competences_liees": [],
+     "notions_cles": [
+      "Introduction et enjeux de la connaissance consommateur",
+      "Facteurs individuels et processus décisionnels",
+      "Facteurs environnementaux, sociaux et culturels",
+      "Facteurs situationnels et contextuels",
+      "Outils d’analyse et formulation d’insights",
+      "Applications stratégiques et atelier pratique"
+     ],
+     "programme": [
+      {
+       "titre": "Introduction et enjeux de la connaissance consommateur",
+       "points": [
+        "Rappels méthodologiques pour harmoniser le niveau (bases du comportement, enjeux stratégiques)",
+        "Apport des sciences humaines : psychologie, sociologie, anthropologie, économie, Consumer Culture Theory",
+        "Positionnement du consommateur dans la stratégie de marque et de communication"
+       ]
+      },
+      {
+       "titre": "Facteurs individuels et processus décisionnels",
+       "points": [
+        "Motivation, besoins, apprentissage, expérience, personnalité, implication, attitudes, mémorisation",
+        "Parcours client, étapes du processus de décision, modèles comportementaux (Howard & Sheth, Nicosia…)",
+        "Leviers émotionnels et cognitifs, rôle de l’identité et du « self »"
+       ]
+      },
+      {
+       "titre": "Facteurs environnementaux, sociaux et culturels",
+       "points": [
+        "Influence de la famille, des groupes, de la culture, des sous-cultures et tribus, religion, genre, classe sociale",
+        "Résistances, contre-pouvoirs, tendances de consommation engagée ou alternative",
+        "Analyse des phénomènes de consommation collective et des communautés"
+       ]
+      },
+      {
+       "titre": "Facteurs situationnels et contextuels",
+       "points": [
+        "Environnement physique, ambiance, contexte d’achat, digitalisation des parcours, omnicanalité",
+        "Impact de la data, des plateformes et des innovations sur les comportements",
+        "Étude de cas : analyse d’un parcours consommateur multicanal"
+       ]
+      },
+      {
+       "titre": "Outils d’analyse et formulation d’insights",
+       "points": [
+        "Études qualitatives : entretiens, focus group, observation, carte d’empathie",
+        "Études quantitatives : sondages, panels, datamining, segmentation, clustering",
+        "Construction de typologies de cibles avancés, cartographie des parcours clients, formulation d’insights activables"
+       ]
+      },
+      {
+       "titre": "Applications stratégiques et atelier pratique",
+       "points": [
+        "Intégration des analyses dans la recommandation stratégique (ciblage, message, canaux)",
+        "Atelier : restitution d’une analyse consommateur et formulation de recommandations pour un cas réel ou simulé",
+        "Débat : éthique, protection des données, enjeux RSE et inclusion dans l’analyse consommateur"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Classe inversée (lectures, vidéos, études de cas, podcasts sur les tendances de consommation)",
+      "Ateliers pratiques sur la construction de typologies de cibles, la segmentation, la formulation d’insights",
+      "Utilisation d’outils de datamining et d’IA pour l’analyse de données consommateurs",
+      "Invité professionnel pour débat ou retour d’expérience"
+     ],
+     "evaluations": [
+      "Formative : quiz sur les concepts et méthodes, mini-exercices de segmentation ou de création de typologies de cibles, analyse de bases de données",
+      "Sommative : rendu d’un dossier d’analyse consommateur (étude de cas, segmentation, formulation d’insights, recommandations stratégiques), présentation orale ou écrite, évaluation sur la pertinence de l’analyse, la qualité des insights et la capacité à activer les résultats"
+     ]
+    },
+    {
+     "titre": "Stratégie et positionnement de la marque",
+     "bloc": "Bloc 2 : Définir une stratégie et un plan de communication",
+     "formation": "B3 – Bachelor Chargé de Communication",
+     "rncp": "39741 (Fiche RNCP)",
+     "activite": "Élaboration de la recommandation stratégique ; Diagnostic de la situation ; Problématiser la demande client",
+     "intervenant": "",
+     "volume": "17,5h (calendaire et FFP)",
+     "sequencage": "S1 – 5 séances de 3h30",
+     "objectif": "Permettre à l’étudiant de maîtriser les outils et méthodes d’analyse stratégique de marque, de formaliser une plateforme de marque, d’identifier les leviers de différenciation et de concevoir une stratégie de positionnement solide et activable, en intégrant les enjeux sociétaux, RSE et d’innovation.",
+     "commentaire": "",
+     "competences_prose": "Accompagner la définition d’un positionnement clair, différenciant et cohérent ; construire une plateforme de marque intégrant valeurs, promesse, tonalité ; aligner les actions de communication avec l’identité et les ambitions de la marque ; analyser l’environnement concurrentiel et formuler des recommandations stratégiques.",
+     "competences_liees": [],
+     "notions_cles": [
+      "Introduction : enjeux et fondamentaux du positionnement de marque",
+      "Diagnostic stratégique et analyse de l’environnement",
+      "Construction de la plateforme de marque",
+      "Définition et choix du positionnement stratégique",
+      "Déclinaison opérationnelle et plan d’action"
+     ],
+     "programme": [
+      {
+       "titre": "Introduction : enjeux et fondamentaux du positionnement de marque",
+       "points": [
+        "Rappels méthodologiques pour harmoniser le niveau (définitions : positionnement, plateforme de marque, proposition de valeur, vision, mission, promesse, tonalité)",
+        "Analyse de cas emblématiques, panorama des tendances sectorielles"
+       ]
+      },
+      {
+       "titre": "Diagnostic stratégique et analyse de l’environnement",
+       "points": [
+        "Audit interne : histoire, valeurs, culture, identité, perception, image voulue/perçue",
+        "Audit externe : analyse concurrentielle, cartographie des acteurs, benchmark, identification des tendances et insights consommateurs",
+        "Outils : mapping concurrentiel, matrice perceptuelle"
+       ]
+      },
+      {
+       "titre": "Construction de la plateforme de marque",
+       "points": [
+        "Définition des éléments clés : vision, mission, valeurs, promesse, raison d’être, engagements RSE",
+        "Élaboration de la proposition de valeur et des avantages concurrentiels",
+        "Formalisation de la plateforme de marque (document structuré, storytelling, tonalité)"
+       ]
+      },
+      {
+       "titre": "Définition et choix du positionnement stratégique",
+       "points": [
+        "Détermination des axes de différenciation et de la singularité de la marque",
+        "Segmentation des cibles, typologies de cibles, analyse des attentes et aspirations",
+        "Alignement du positionnement avec les enjeux sociétaux, environnementaux et d’innovation",
+        "Atelier : simulation de repositionnement ou de création de marque"
+       ]
+      },
+      {
+       "titre": "Déclinaison opérationnelle et plan d’action",
+       "points": [
+        "Traduction du positionnement dans la stratégie de communication (objectifs, axes, messages, canaux)",
+        "Cohérence entre plateforme de marque, plan de communication et plan d’action marketing",
+        "Atelier : restitution d’une stratégie opérationnelle et argumentation des choix devant un jury ou en simulation client"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Classe inversée (analyse de plateformes de marque, benchmark sectoriel)",
+      "Ateliers pratiques sur la construction de plateformes de marque, mapping concurrentiel, persona",
+      "Utilisation d’outils d’IA pour la veille, la génération de propositions de valeur ou la simulation de positionnement",
+      "Simulations de présentation devant un jury professionnel ou un client fictif"
+     ],
+     "evaluations": [
+      "Formative : exercices d’audit ou de mapping, production de persona, analyse de plateformes existantes",
+      "Sommative : rendu d’une sratégie complète (diagnostic, analyse concurrentielle, proposition de valeur, positionnement, déclinaison opérationnelle), présentation orale ou écrite, évaluation sur la clarté, la cohérence, la différenciation, la prise en compte des enjeux RSE et la capacité à argumenter les choix"
+     ]
+    },
+    {
+     "titre": "Marketing (plan marketing stratégique & plan de communication)",
+     "bloc": "Bloc 2 : Définir une stratégie et un plan de communication",
+     "formation": "B3 – Bachelor Chargé de Communication",
+     "rncp": "39741 (Fiche RNCP)",
+     "activite": "Élaboration de la recommandation stratégique ; Planification des actions recommandées",
+     "intervenant": "",
+     "volume": "21h (calendaire et FFP)",
+     "sequencage": "S1 – 6 séances de 3h30",
+     "objectif": "Permettre à l’étudiant de relier analyse de marché, stratégie de marque et plan d’action opérationnel, d’élaborer des plans marketing et de communication cohérents, argumentés et activables, et de piloter leur mise en œuvre dans une logique omnicanale et responsable.",
+     "commentaire": "",
+     "competences_prose": "Maîtriser la construction d’un plan marketing articulé à un plan de communication : diagnostic, segmentation, objectifs, axes stratégiques, planification, budget, choix des canaux, indicateurs de performance. Savoir justifier et présenter ses choix à l’écrit comme à l’oral.",
+     "competences_liees": [],
+     "notions_cles": [
+      "Introduction et rappels méthodologiques",
+      "Diagnostic et analyse de marché",
+      "Définition de la stratégie marketing et des axes de communication",
+      "Construction du plan marketing et du plan de communication",
+      "Budget, indicateurs de performance et pilotage",
+      "Présentation, argumentation et restitution"
+     ],
+     "programme": [
+      {
+       "titre": "Introduction et rappels méthodologiques",
+       "points": [
+        "Rappels sur la démarche marketing stratégique (diagnostic, segmentation, ciblage, positionnement)",
+        "Différences et articulation entre plan marketing et plan de communication",
+        "Panorama des outils et méthodes (SWOT, PESTEL, matrice BCG, mapping, cibles, etc.)",
+        "Harmonisation des acquis pour les nouveaux entrants"
+       ]
+      },
+      {
+       "titre": "Diagnostic et analyse de marché",
+       "points": [
+        "Analyse de l’environnement (macro/micro), tendances, concurrence, insights consommateurs",
+        "Identification des opportunités, menaces, forces et faiblesses",
+        "Définition et hiérarchisation des cibles, formulation des objectifs SMART",
+        "Atelier : diagnostic sur un cas réel ou simulé"
+       ]
+      },
+      {
+       "titre": "Définition de la stratégie marketing et des axes de communication",
+       "points": [
+        "Détermination des axes stratégiques, proposition de valeur, promesse",
+        "Choix des cibles prioritaires, segmentation avancée, personnalisation",
+        "Alignement avec la plateforme de marque, les engagements RSE, la différenciation",
+        "Atelier : construction d’une recommandation stratégique"
+       ]
+      },
+      {
+       "titre": "Construction du plan marketing et du plan de communication",
+       "points": [
+        "Déclinaison du mix marketing (produit, prix, distribution, communication)",
+        "Choix des canaux, logique omnicanale, arbitrage des moyens",
+        "Planification des actions, rétroplanning, allocation des ressources",
+        "Atelier : élaboration d’un plan marketing et d’un plan de communication intégrés"
+       ]
+      },
+      {
+       "titre": "Budget, indicateurs de performance et pilotage",
+       "points": [
+        "Construction du budget prévisionnel, estimation des coûts, ROI",
+        "Détermination des KPI, mise en place de tableaux de bord, reporting",
+        "Anticipation des risques, plan d’ajustement et d’amélioration continue",
+        "Atelier : simulation de pilotage et d’ajustement d’un plan"
+       ]
+      },
+      {
+       "titre": "Présentation, argumentation et restitution",
+       "points": [
+        "Structuration d’un dossier écrit et d’une présentation orale professionnelle",
+        "Techniques de conviction, storytelling, gestion des objections",
+        "Mise en situation : soutenance d’un plan marketing et communication devant un jury ou un client fictif",
+        "Feedback collectif et individuel"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Classe inversée : analyse de plans réels, veille sur les tendances marketing",
+      "Ateliers pratiques sur des cas réels ou simulés (diagnostic, planification, budget)",
+      "Utilisation d’outils collaboratifs (Trello, Notion, Google Sheets, IA pour la veille ou la rédaction)",
+      "Simulations de présentation devant un jury professionnel"
+     ],
+     "evaluations": [
+      "Formative : exercices de diagnostic, segmentation, choix des axes, construction de budget",
+      "Sommative : rendu d’un plan marketing et communication complet (diagnostic, stratégie, planification, budget, KPI), présentation orale ou écrite, évaluation sur la cohérence, la pertinence des choix, la capacité à argumenter et à ajuster le plan"
+     ]
+    },
+    {
+     "titre": "Stratégies des marques : identité visuelle, storytelling et réputation",
+     "bloc": "Bloc 2 : Définir une stratégie et un plan de communication",
+     "formation": "B3 – Bachelor Chargé de Communication",
+     "rncp": "39741 (Fiche RNCP)",
+     "activite": "Élaboration de la recommandation stratégique ; Traduction du plan en brief créatif",
+     "intervenant": "",
+     "volume": "17,5h calendaire et 14h FFP",
+     "sequencage": "S1 – 5 séances de 3h30",
+     "objectif": "Permettre à l’étudiant de maîtriser la construction d’une identité visuelle forte, la mise en récit de la marque (storytelling) et la gestion proactive de la réputation (e-réputation, crise, influence), pour élaborer une stratégie de marque différenciante et durable.",
+     "commentaire": "",
+     "competences_prose": "Analyser, concevoir et piloter l’identité visuelle d’une marque ; élaborer un storytelling cohérent et engageant ; développer et protéger la réputation de marque dans un contexte omnicanal et en intégrant la dimension RSE.",
+     "competences_liees": [],
+     "notions_cles": [
+      "Fondamentaux de l’identité visuelle de marque",
+      "Storytelling de marque et narration stratégique",
+      "Déploiement de l’identité et du récit sur les supports",
+      "Gestion de la réputation et stratégie d’influence",
+      "Évaluation, pilotage et innovation"
+     ],
+     "programme": [
+      {
+       "titre": "Fondamentaux de l’identité visuelle de marque",
+       "points": [
+        "Définition et enjeux de l’identité visuelle : logo, charte graphique, codes couleurs, typographies, univers visuel",
+        "Analyse de chartes graphiques, moodboards, cas emblématiques",
+        "Cohérence entre identité visuelle, positionnement et valeurs de marque"
+       ]
+      },
+      {
+       "titre": "Storytelling de marque et narration stratégique",
+       "points": [
+        "Rôle du storytelling dans la stratégie de marque : structuration du récit, valeurs, engagement, différenciation",
+        "Techniques narratives : archétypes, héros, structure en actes, tonalité, adaptation aux supports",
+        "Création d’un récit de marque authentique et impactant, intégration dans les campagnes et dispositifs digitaux"
+       ]
+      },
+      {
+       "titre": "Déploiement de l’identité et du récit sur les supports",
+       "points": [
+        "Déclinaison de l’identité visuelle et du storytelling sur les différents canaux (print, web, réseaux sociaux, événementiel, packaging)",
+        "Adaptation des messages selon les cibles et les contextes",
+        "Atelier pratique : création ou refonte d’une identité visuelle et rédaction d’un récit de marque"
+       ]
+      },
+      {
+       "titre": "Gestion de la réputation et stratégie d’influence",
+       "points": [
+        "Enjeux de la réputation : veille, e-réputation, gestion de crise, mobilisation des parties prenantes",
+        "Stratégies d’influence : relations presse, leaders d’opinion, ambassadeurs, réseaux sociaux",
+        "Outils de suivi, analyse des signaux faibles, plan de gestion de crise"
+       ]
+      },
+      {
+       "titre": "Évaluation, pilotage et innovation",
+       "points": [
+        "Indicateurs de performance de l’identité et de la réputation (notoriété, engagement, sentiment, earned media)",
+        "Innovations : identité visuelle dynamique, brand content, formats immersifs, IA générative",
+        "Atelier : restitution d’une recommandation stratégique intégrée (identité, storytelling, réputation)"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Ateliers pratiques de création d’identité visuelle, rédaction de récits, gestion de crise",
+      "Utilisation d’outils d’IA pour générer des variantes graphiques ou des scripts narratifs",
+      "Simulations : gestion d’une crise de réputation, pitch d’une nouvelle identité"
+     ],
+     "evaluations": [
+      "Formative : exercices d’analyse de chartes ou de récits, atelier de gestion de crise",
+      "Sommative : rendu d’une recommandation stratégique intégrée (identité visuelle, storytelling, plan de gestion de la réputation), présentation orale ou écrite, évaluation sur la cohérence, la créativité, la pertinence des choix et la capacité à argumenter"
+     ]
+    },
+    {
+     "titre": "SEO/SEA",
+     "bloc": "Bloc 2 : Définir une stratégie et un plan de communication",
+     "formation": "B3 – Bachelor Chargé de Communication",
+     "rncp": "39741 (Fiche RNCP)",
+     "activite": "Élaboration de la recommandation stratégique ; Produire des contenus web accessibles et performants",
+     "intervenant": "",
+     "volume": "10,5h (calendaire et FFP)",
+     "sequencage": "S2 – 3 séances de 3h30",
+     "objectif": "Permettre à l’étudiant de concevoir et piloter une stratégie de visibilité digitale complète, d’optimiser la présence d’une marque sur les moteurs de recherche, de croiser les données SEO/SEA pour maximiser le ROI, et d’intégrer les dernières innovations du secteur (IA, reporting unifié, SEO multimodal, ciblage avancé).",
+     "commentaire": "",
+     "competences_prose": "Maîtriser les stratégies avancées de référencement naturel (SEO) et payant (SEA) : optimisation technique et éditoriale, gestion de campagnes Ads, analyse de la performance, intégration des outils IA et data. Savoir élaborer une mini-stratégie SEO/SEA intégrée et l’argumenter.",
+     "competences_liees": [],
+     "notions_cles": [
+      "SEO avancé : stratégie, IA et multimodalité",
+      "SEA : campagnes intelligentes et optimisation dynamique",
+      "Synergie SEO/SEA et pilotage de la visibilité"
+     ],
+     "programme": [
+      {
+       "titre": "SEO avancé : stratégie, IA et multimodalité",
+       "points": [
+        "Rappels ciblés pour harmoniser le niveau (fonctionnement moteurs, mots-clés, structure site)",
+        "Optimisation on-site avancée : sémantique, maillage interne, vitesse, accessibilité, balisage, SEO technique",
+        "SEO multimodal : optimisation pour la recherche vocale, visuelle, vidéo",
+        "Utilisation de l’IA pour l’analyse de contenu, la détection de tendances, la génération de recommandations",
+        "Indexation prédictive, planification éditoriale basée sur la data"
+       ]
+      },
+      {
+       "titre": "SEA : campagnes intelligentes et optimisation dynamique",
+       "points": [
+        "Rappels sur le fonctionnement des plateformes Ads (Google Ads, Bing, etc.)",
+        "Ciblage comportemental avancé (fin des cookies tiers, data first-party)",
+        "Choix des mots-clés stratégiques (longue traîne, BOFU), exclusions, structuration des campagnes",
+        "Optimisation automatique des enchères, A/B testing, personnalisation dynamique des annonces",
+        "Reporting en temps réel, ajustement des campagnes via IA, analyse du ROI"
+       ]
+      },
+      {
+       "titre": "Synergie SEO/SEA et pilotage de la visibilité",
+       "points": [
+        "Croisement des données SEO/SEA : tableau de bord unifié, partage des insights, alignement des objectifs",
+        "Stratégie de complémentarité : arbitrage entre organique et payant selon les contextes et les objectifs",
+        "Mesure de la performance globale : indicateurs clés, visualisation des résultats, recommandations d’optimisation",
+        "Atelier pratique : élaboration d’une mini-stratégie SEO/SEA intégrée pour un cas réel ou simulé, restitution orale et feedback collectif"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Classe inversée : analyse de stratégies SEO/SEA récentes, veille sur les innovations IA et reporting",
+      "Ateliers pratiques sur l’optimisation de sites, la configuration de campagnes Ads, la création de dashboards unifiés",
+      "Utilisation d’outils d’IA pour la recherche de mots-clés, la génération de contenus, l’analyse de performance"
+     ],
+     "evaluations": [
+      "Formative : exercices d’optimisation SEO/SEA, analyse de cas, création de campagnes",
+      "Sommative : rendu d’une stratégie SEO/SEA intégrée (audit, recommandations, plan d’actions, reporting), présentation orale ou dossier écrit, évaluation sur la cohérence, la pertinence des choix, la capacité à croiser les données et à intégrer les innovations"
+     ]
+    },
+    {
+     "titre": "SMA/SMO (Social Media Advertising / Social Media Optimization)",
+     "bloc": "Bloc 2 : Définir une stratégie et un plan de communication",
+     "formation": "B3 – Bachelor Chargé de Communication",
+     "rncp": "39741 (Fiche RNCP)",
+     "activite": "Élaboration de la recommandation stratégique ; Produire des contenus digitaux performants",
+     "intervenant": "",
+     "volume": "10,5h (calendaire et FFP)",
+     "sequencage": "S2 – 3 séances de 3h30",
+     "objectif": "Permettre à l’étudiant de piloter des actions digitales performantes : choix des plateformes, création d’audiences, paramétrage de campagnes, optimisation des contenus organiques, suivi et analyse des performances, ajustement stratégique en temps réel.",
+     "commentaire": "",
+     "competences_prose": "Concevoir, déployer et optimiser des campagnes sponsorisées sur les réseaux sociaux (SMA) ; piloter la présence organique (SMO) ; maîtriser le ciblage, la rédaction d’annonces, l’A/B testing, le suivi des KPI et l’optimisation continue pour servir la stratégie de marque.",
+     "competences_liees": [],
+     "notions_cles": [
+      "Stratégie SMA : campagnes sponsorisées sur les réseaux sociaux",
+      "Stratégie SMO : optimisation de la présence organique",
+      "Suivi, analyse et optimisation des campagnes"
+     ],
+     "programme": [
+      {
+       "titre": "Stratégie SMA : campagnes sponsorisées sur les réseaux sociaux",
+       "points": [
+        "Définition des objectifs (notoriété, trafic, conversion, engagement), choix des plateformes (Meta, LinkedIn, TikTok, X, Snapchat, Pinterest…)",
+        "Création d’audiences : ciblage démographique, comportemental, lookalike, retargeting",
+        "Rédaction et design des annonces, personnalisation des messages, adaptation aux formats et contextes",
+        "Paramétrage des campagnes, budgétisation, calendrier de diffusion",
+        "A/B testing, optimisation continue, gestion du timing et des moments clés"
+       ]
+      },
+      {
+       "titre": "Stratégie SMO : optimisation de la présence organique",
+       "points": [
+        "Audit de la présence existante, analyse des forces et faiblesses, benchmark des concurrents[2]",
+        "Définition et planification de la ligne éditoriale, calendrier de publication",
+        "Optimisation des contenus : formats, storytelling, hashtags, engagement communautaire",
+        "Animation, modération, gestion des interactions et de l’e-réputation",
+        "Synergie SMA/SMO : articulation des leviers organiques et sponsorisés pour maximiser la performance"
+       ]
+      },
+      {
+       "titre": "Suivi, analyse et optimisation des campagnes",
+       "points": [
+        "Mise en place des indicateurs de performance (KPI) : CTR, CPC, taux de conversion, coût par lead, engagement, reach, ROAS",
+        "Utilisation des outils d’analyse natifs et tiers, tracking des conversions (client-side/server-side)",
+        "Analyse des résultats, reporting, identification des axes d’amélioration",
+        "Ajustement des campagnes en temps réel, adaptation aux évolutions d’algorithmes et aux tendances",
+        "Atelier pratique : simulation de campagne SMA (paramétrage, suivi, optimisation), restitution orale et feedback collectif"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Ateliers pratiques sur la création d’audiences, la rédaction d’annonces, l’optimisation de contenus organiques",
+      "Utilisation d’outils d’IA pour la génération de visuels, la segmentation, l’analyse de performance"
+     ],
+     "evaluations": [
+      "Formative : exercices de ciblage, rédaction d’annonces, optimisation de posts",
+      "Sommative : rendu d’une mini-campagne SMA/SMO (stratégie, paramétrage, reporting), présentation orale ou dossier écrit, évaluation sur la cohérence, la pertinence des choix, la capacité à optimiser et à argumenter les résultats"
+     ]
+    },
+    {
+     "titre": "Management d’équipe & Gestion de projets (méthodologies)",
+     "bloc": "Bloc 3 : Piloter l’équipe projet et le déploiement des actions de communication",
+     "formation": "B3 – Bachelor Chargé de Communication",
+     "rncp": "39741 (Fiche RNCP)",
+     "activite": "Piloter les collaborations professionnelles ; Mobiliser les parties prenantes ; Organiser la mise en œuvre des actions",
+     "intervenant": "",
+     "volume": "28h (calendaire et FFP)",
+     "sequencage": "S1 + S2 – 8 séances de 3h30",
+     "objectif": "Permettre à l’étudiant de structurer, piloter et évaluer un projet de communication en équipe, d’adopter une posture de leader collaboratif et d’appliquer les méthodes et outils adaptés à la gestion de projets créatifs et transversaux.",
+     "commentaire": "",
+     "competences_prose": "Maîtriser la conduite de projets complexes : planification, organisation, animation et pilotage d’équipe ; gestion des ressources, des risques, des conflits et du changement ; utilisation des outils collaboratifs et méthodes agiles ; communication et reporting auprès des parties prenantes.",
+     "competences_liees": [],
+     "notions_cles": [
+      "Fondamentaux de la gestion de projet",
+      "Management d’équipe projet",
+      "Gestion des ressources, des risques et des conflits",
+      "Pilotage du projet et reporting",
+      "Méthodes agiles et innovation managériale",
+      "Gestion du changement et accompagnement des équipes",
+      "Gestion des parties prenantes et des prestataires",
+      "Atelier de synthèse et étude de cas"
+     ],
+     "programme": [
+      {
+       "titre": "Fondamentaux de la gestion de projet",
+       "points": [
+        "Cycle de vie du projet (cadrage, planification, exécution, contrôle, clôture)",
+        "Définition des objectifs, livrables, jalons, rétroplanning, budget",
+        "Introduction aux outils numériques (Gantt, Trello, Notion, Monday, etc.)"
+       ]
+      },
+      {
+       "titre": "Management d’équipe projet",
+       "points": [
+        "Constitution et animation d’équipe, rôles et responsabilités, leadership collaboratif",
+        "Motivation, délégation, gestion des talents, inclusion et diversité",
+        "Organisation et animation de réunions efficaces, gestion des feedbacks"
+       ]
+      },
+      {
+       "titre": "Gestion des ressources, des risques et des conflits",
+       "points": [
+        "Répartition des tâches, estimation des charges, suivi du temps et du budget",
+        "Cartographie et anticipation des risques, plan d’actions correctives",
+        "Prévention et gestion des conflits, résolution des tensions, communication assertive"
+       ]
+      },
+      {
+       "titre": "Pilotage du projet et reporting",
+       "points": [
+        "Suivi de l’avancement, indicateurs de performance, tableaux de bord",
+        "Reporting auprès du commanditaire, gestion des livrables et des échéances",
+        "Capitalisation des bonnes pratiques, bilan de projet"
+       ]
+      },
+      {
+       "titre": "Méthodes agiles et innovation managériale",
+       "points": [
+        "Introduction aux méthodes agiles (SCRUM, Kanban, Design Thinking)",
+        "Adaptation des méthodes agiles à la communication et au management créatif",
+        "Atelier pratique : simulation d’un sprint agile ou d’un atelier d’idéation"
+       ]
+      },
+      {
+       "titre": "Gestion du changement et accompagnement des équipes",
+       "points": [
+        "Conduite du changement, accompagnement des transitions, gestion de l’incertitude",
+        "Communication interne, implication des parties prenantes, intelligence collective"
+       ]
+      },
+      {
+       "titre": "Gestion des parties prenantes et des prestataires",
+       "points": [
+        "Cartographie des parties prenantes, animation de l’écosystème projet",
+        "Sélection et pilotage des prestataires/fournisseurs, négociation, contractualisation",
+        "Intégration des critères RSE et éthiques dans la gestion de projet"
+       ]
+      },
+      {
+       "titre": "Atelier de synthèse et étude de cas",
+       "points": [
+        "Mise en situation sur un projet complet (de la constitution d’équipe à la clôture)",
+        "Simulation de gestion de crise, restitution orale et feedback collectif"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Ateliers pratiques sur des cas réels ou simulés, jeux de rôle (chef de projet, équipe, client, prestataire)",
+      "Utilisation d’outils collaboratifs numériques (Trello, Notion, Gantt, etc.)",
+      "Classe inversée : analyse de projets, lectures, vidéos, retours d’expérience",
+      "Simulation de réunions, de négociation et de reporting"
+     ],
+     "evaluations": [
+      "Formative : outils de gestion de projet, exercices de planification, simulation de réunions, restitution intermédiaire d’un projet en cours",
+      "Sommative : rendu d’un dossier de gestion de projet (planification, organisation, suivi, gestion des ressources, pilotage de l’équipe), présentation orale ou écrite d’un projet mené en équipe, évaluation sur la cohérence, la rigueur de la démarche, la gestion des ressources, la communication et la capacité à anticiper et résoudre les difficultés"
+     ]
+    },
+    {
+     "titre": "Éloquence & art oratoire",
+     "bloc": "Bloc 3 : Piloter l’équipe projet et le déploiement des actions de communication",
+     "formation": "B3 – Bachelor Chargé de Communication",
+     "rncp": "39741 (France Compétences)",
+     "activite": "Présenter la recommandation, en utilisant des techniques de communication et de négociation, afin de convaincre le client que le dispositif choisi lui permettra d’atteindre ses objectifs",
+     "intervenant": "",
+     "volume": "14h (calendaire et FFP)",
+     "sequencage": "S2 – 4 séances de 3h30",
+     "objectif": "Permettre à l’étudiant d’affiner sa prise de parole, de renforcer la force de conviction et l’adaptabilité de son expression orale, de maîtriser les techniques rhétoriques et de gérer la dimension émotionnelle et relationnelle de l’art oratoire.",
+     "commentaire": "",
+     "competences_prose": "Maîtriser l’impact de la parole dans des contextes professionnels à fort enjeu : posture, rythme, émotion, persuasion, rhétorique. Être capable de structurer et délivrer des discours longs, argumentés, inspirants ou critiques, adaptés à des situations variées (soutenance, pitch, débat, négociation).",
+     "competences_liees": [],
+     "notions_cles": [
+      "Fondamentaux de l’éloquence et de l’art oratoire",
+      "Structuration et adaptation du discours",
+      "Techniques avancées de persuasion et de rhétorique",
+      "Mise en situation professionnelle et feedback"
+     ],
+     "programme": [
+      {
+       "titre": "Fondamentaux de l’éloquence et de l’art oratoire",
+       "points": [
+        "Rappels : différence entre éloquence, art oratoire, rhétorique, improvisation et discours rédigé",
+        "Les qualités essentielles de l’orateur : clarté, sincérité, force de conviction, écoute de l’auditoire",
+        "Posture, gestion du trac, préparation mentale et physique (respiration, relaxation, ancrage)",
+        "Exercices de diction, articulation, gestion du souffle"
+       ]
+      },
+      {
+       "titre": "Structuration et adaptation du discours",
+       "points": [
+        "Construire un plan efficace (exorde, narration, argumentation, péroraison)",
+        "Savoir adapter son discours à la situation, au temps imparti, à l’auditoire (client, jury, équipe, public large)",
+        "Utilisation des techniques de storytelling, figures de style, formules marquantes",
+        "Pratique de l’improvisation contrôlée et gestion des imprévus"
+       ]
+      },
+      {
+       "titre": "Techniques avancées de persuasion et de rhétorique",
+       "points": [
+        "Maîtrise des outils rhétoriques : anaphore, analogie, humour, question rhétorique, reformulation",
+        "Gestion des émotions : transmettre, susciter, canaliser l’énergie",
+        "Travail sur la voix, le regard, les gestes, la posture, la gestion de l’espace, l’utilisation du silence",
+        "Simulation de situations : débat contradictoire, pitch, défense d’un projet, prise de parole en crise"
+       ]
+      },
+      {
+       "titre": "Mise en situation professionnelle et feedback",
+       "points": [
+        "Entraînement à la soutenance longue, au pitch minute, à la négociation, à la prise de parole en public",
+        "Analyse vidéo, feedback collectif et individuel, axes de progression",
+        "Gestion de la critique, de l’objection, de la contradiction",
+        "Atelier final : prise de parole sur un sujet complexe ou polémique, restitution devant un jury ou un public élargi"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Exercices pratiques : improvisation, débat, pitch, storytelling, prise de parole longue",
+      "Analyse vidéo, auto-évaluation, feedback croisé",
+      "Simulations de situations professionnelles (soutenance, réunion, négociation, gestion de crise, brief et recommandation)",
+      "Utilisation d’outils numériques pour l’entraînement (enregistrement, IA pour l’analyse de la voix ou du discours)"
+     ],
+     "evaluations": [
+      "Formative : exercices d’entraînement à chaque séance (discours, improvisation, débat), quiz sur les techniques rhétoriques, feedbacks croisés",
+      "Sommative : prestation orale longue (présentations de la recommandations lors de la compétitions, débat, pitch argumenté), évaluation sur la structure, l’impact, la gestion du temps, la capacité à convaincre et à gérer l’interaction avec le public"
+     ]
+    },
+    {
+     "titre": "Éloquence & art oratoire",
+     "bloc": "Bloc 3 : Piloter l’équipe projet et le déploiement des actions de communication",
+     "formation": "B3 – Bachelor Chargé de Communication",
+     "rncp": "39741 (France Compétences)",
+     "activite": "Présenter la recommandation, en utilisant des techniques de communication et de négociation, afin de convaincre le client que le dispositif choisi lui permettra d’atteindre ses objectifs",
+     "intervenant": "",
+     "volume": "14h",
+     "sequencage": "S1-S2 (4 séances de 3h30 réparties en octobre-novembre)",
+     "objectif": "Définir une posture d’agence originale qui traduit leur vision de la communication. Concevoir tous les éléments constitutifs d’une identité professionnelle (nom, baseline, univers graphique, ton rédactionnel, vidéo). Formaliser un projet événementiel de lancement qui incarne les valeurs de l’agence. Présenter de manière convaincante leur agence lors d’un pitch structuré et visuel. Se positionner de manière crédible face à des jurés et des annonceurs dans le cadre des compétitions.",
+     "commentaire": "",
+     "competences_prose": "Imaginer une identité d’agence cohérente, différenciante et professionnelle.\nStructurer un univers de marque (nom, logo, charte, ton, manifesto) et en assumer les partis pris.\nProduire des éléments de communication visuelle et audiovisuelle : logo, vidéo de présentation, supports projetés.\nDévelopper une narration d’agence claire et engageante à travers un storytelling soigné.\nPréparer et réaliser une soutenance professionnelle avec projection.\nCoopérer en équipe projet et répartir les responsabilités en fonction des talents de chacun.e.",
+     "competences_liees": [],
+     "notions_cles": [],
+     "programme": [
+      {
+       "titre": "Cadrage et benchmark (3h30)",
+       "points": [
+        "Présentation du module, articulation avec la compétition.",
+        "Exemples d’agences étudiantes inspirantes, décryptage critique.",
+        "Atelier d’émergence : vision de la communication, positionnement de l’agence.",
+        "Choix du nom, de la baseline, premiers axes créatifs."
+       ]
+      },
+      {
+       "titre": "Identité visuelle et ton de voix (3h30)",
+       "points": [
+        "Construction du logo et des premiers éléments graphiques (couleurs, typographies, pictogrammes…).",
+        "Rédaction du manifesto, élaboration du ton rédactionnel (charte d’expression).",
+        "Début du scénario de la vidéo de présentation."
+       ]
+      },
+      {
+       "titre": "Projet événementiel et storytelling (3h30)",
+       "points": [
+        "Définition d’un événement fictif pour le lancement de l’agence.",
+        "Élaboration du concept, des cibles, des contenus et des canaux d’activation.",
+        "Rédaction du déroulé événementiel, intégration dans la narration globale.",
+        "Tournage ou finalisation du storyboard de la vidéo de présentation."
+       ]
+      },
+      {
+       "titre": "Soutenance blanche et feedback (3h30)",
+       "points": [
+        "Répétition du pitch, coaching à la prise de parole.",
+        "Projection des vidéos, vérification technique.",
+        "Feedback entre agences, ajustements de dernière minute.",
+        "Finalisation des supports projetés."
+       ]
+      }
+     ],
+     "seances": [
+      {
+       "numero": 1,
+       "duree": "",
+       "titre": "Cadrage et benchmark (3h30)",
+       "points": [
+        "Présentation du module, articulation avec la compétition.",
+        "Exemples d’agences étudiantes inspirantes, décryptage critique.",
+        "Atelier d’émergence : vision de la communication, positionnement de l’agence.",
+        "Choix du nom, de la baseline, premiers axes créatifs."
+       ]
+      },
+      {
+       "numero": 2,
+       "duree": "",
+       "titre": "Identité visuelle et ton de voix (3h30)",
+       "points": [
+        "Construction du logo et des premiers éléments graphiques (couleurs, typographies, pictogrammes…).",
+        "Rédaction du manifesto, élaboration du ton rédactionnel (charte d’expression).",
+        "Début du scénario de la vidéo de présentation."
+       ]
+      },
+      {
+       "numero": 3,
+       "duree": "",
+       "titre": "Projet événementiel et storytelling (3h30)",
+       "points": [
+        "Définition d’un événement fictif pour le lancement de l’agence.",
+        "Élaboration du concept, des cibles, des contenus et des canaux d’activation.",
+        "Rédaction du déroulé événementiel, intégration dans la narration globale.",
+        "Tournage ou finalisation du storyboard de la vidéo de présentation."
+       ]
+      },
+      {
+       "numero": 4,
+       "duree": "",
+       "titre": "Soutenance blanche et feedback (3h30)",
+       "points": [
+        "Répétition du pitch, coaching à la prise de parole.",
+        "Projection des vidéos, vérification technique.",
+        "Feedback entre agences, ajustements de dernière minute.",
+        "Finalisation des supports projetés."
+       ]
+      }
+     ],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Ateliers créatifs (naming, storytelling, design graphique).",
+      "Analyse collective de cas réels et d’archives Cesacom.",
+      "Coaching individualisé des agences.",
+      "Travaux en autonomie encadrée entre les séances.",
+      "Soutenance blanche avec retour à chaud"
+     ],
+     "evaluations": [
+      "Formative : Remise de livrables intermédiaires (logo, manifesto, charte), feedbacks personnalisés en séance, points d’étape sur l’avancée.",
+      "Sommative : Pitch oral collectif (10 min max) + projection vidéo (1 min 30 à 2 min), présentation du projet événementiel en appui visuel.",
+      "Critères d’évaluation : cohérence, créativité, professionnalisme, storytelling, posture."
+     ]
+    },
+    {
+     "titre": "PAO / Adobe",
+     "bloc": "Bloc 4 : Réaliser des contenus de communication",
+     "formation": "B3 – Bachelor Chargé de Communication",
+     "rncp": "39741 (France Compétences)",
+     "activite": "Produire des messages visuels accessibles via PAO ou montage vidéo ; Concevoir des supports multiformats dans une logique d’accessibilité et d’innovation",
+     "intervenant": "",
+     "volume": "17,5h (calendaire et FFP)",
+     "sequencage": "S1/S2 – 5 séances de 3h30",
+     "objectif": "Permettre à l’étudiant de produire des livrables créatifs et techniquement irréprochables, adaptés à différents supports (print, digital, social media), de piloter une production graphique de A à Z, d’intégrer l’IA et les dernières innovations Adobe, et de justifier ses choix devant un client ou un jury.",
+     "commentaire": "",
+     "competences_prose": "Maîtriser la suite Adobe (Photoshop, Illustrator, InDesign) à un niveau avancé pour concevoir, décliner et produire des supports de communication professionnels, multi-formats, accessibles et innovants. Savoir répondre à des briefs complexes, gérer des contraintes techniques, d’accessibilité, de délais et de RSE.",
+     "competences_liees": [],
+     "notions_cles": [
+      "Cahier des charges, workflow professionnel et innovation",
+      "Création graphique avancée sur Photoshop",
+      "Création vectorielle et identité visuelle sur Illustrator",
+      "Mise en page professionnelle et édition sur InDesign",
+      "Projet fil rouge et restitution professionnelle"
+     ],
+     "programme": [
+      {
+       "titre": "Cahier des charges, workflow professionnel et innovation",
+       "points": [
+        "Analyse de briefs complexes, formalisation des besoins, organisation du workflow (gestion des versions, collaboration)",
+        "Prise en compte des contraintes d’accessibilité, d’éco-conception et de RSE dans la production graphique",
+        "Intégration des nouveautés Adobe (IA générative, automatisation, scripts, actions)"
+       ]
+      },
+      {
+       "titre": "Création graphique avancée sur Photoshop",
+       "points": [
+        "Retouche et montage complexes, gestion des calques dynamiques, photomontage créatif",
+        "Automatisation (actions, scripts), adaptation multi-supports, optimisation pour le print et le web",
+        "Utilisation des outils IA (remplissage génératif, génération d’assets, adaptation rapide)"
+       ]
+      },
+      {
+       "titre": "Création vectorielle et identité visuelle sur Illustrator",
+       "points": [
+        "Création de logotypes, pictogrammes, chartes graphiques avancées",
+        "Gestion de la typographie, déclinaison multi-formats, adaptation responsive",
+        "Techniques de design inclusif et accessibilité visuelle"
+       ]
+      },
+      {
+       "titre": "Mise en page professionnelle et édition sur InDesign",
+       "points": [
+        "Conception de supports éditoriaux complexes (brochures, magazines, rapports, ebooks)",
+        "Gestion des gabarits, styles, interactivité, exportation pour le print et le digital",
+        "Accessibilité des documents (balises, lecture écran, FALC)"
+       ]
+      },
+      {
+       "titre": "Projet fil rouge et restitution professionnelle",
+       "points": [
+        "Réalisation d’un projet complet (campagne visuelle, identité de marque, dossier de presse, etc.) répondant à un brief réel ou simulé",
+        "Présentation orale ou écrite, justification des choix créatifs, techniques et RSE, feedback collectif"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Ateliers pratiques sur des briefs réels ou simulés, analyse critique de campagnes",
+      "Utilisation des dernières fonctionnalités Adobe (IA générative, automatisation, collaboration cloud)",
+      "Classe inversée : tutoriels avancés, analyse de portfolios professionnels"
+     ],
+     "evaluations": [
+      "Formative : exercices d’application à chaque séance (création, retouche, mise en page, automatisation), feedback collectif",
+      "Sommative : rendu d’un projet graphique complet (multi-supports, accessibilité, justification RSE), compilation dans un book, présentation orale ou écrite, évaluation sur la qualité technique, la créativité, la gestion des contraintes et la capacité à argumenter"
+     ]
+    },
+    {
+     "titre": "Vidéo / Photo",
+     "bloc": "Bloc 4 : Réaliser des contenus de communication",
+     "formation": "B3 – Bachelor Chargé de Communication",
+     "rncp": "39741 (France Compétences)",
+     "activite": "Produire des messages visuels et audiovisuels accessibles via PAO ou montage vidéo",
+     "intervenant": "",
+     "volume": "14h (calendaire et FFP)",
+     "sequencage": "S1/S2 – 4 séances de 3h30",
+     "objectif": "Permettre à l’étudiant de produire un contenu audiovisuel ou photographique de niveau professionnel, de l’idéation à la diffusion, en intégrant narration, direction artistique, contraintes techniques, innovations et exigences de la marque ou du client.",
+     "commentaire": "",
+     "competences_prose": "Concevoir, réaliser et piloter un projet audiovisuel ou photographique complet : storytelling, direction artistique, maîtrise technique, gestion de projet et diffusion sur les canaux adaptés. Savoir répondre à un brief exigeant, intégrer les innovations technologiques (IA, nouveaux formats) et produire des contenus professionnels multi-supports.",
+     "competences_liees": [],
+     "notions_cles": [
+      "Gestion de projet audiovisuel et photographique",
+      "Direction artistique, storytelling et scénarisation",
+      "Production et maîtrise technique avancée",
+      "Post-production, diffusion et restitution professionnelle"
+     ],
+     "programme": [
+      {
+       "titre": "Gestion de projet audiovisuel et photographique",
+       "points": [
+        "Lecture et analyse de brief, définition des objectifs, organisation du projet (rétroplanning, budget, équipe)",
+        "Choix des formats adaptés (film court, capsule Social Media, série photo, reportage, teaser, etc.)",
+        "Prise en compte des contraintes de diffusion, d’accessibilité, de RSE et d’innovation"
+       ]
+      },
+      {
+       "titre": "Direction artistique, storytelling et scénarisation",
+       "points": [
+        "Construction d’un univers visuel cohérent, moodboard, direction de la lumière et du cadre",
+        "Scénarisation : écriture, découpage, storyboard, narration visuelle et sonore",
+        "Travail sur l’émotion, l’impact, l’adaptation au public cible et à la stratégie de marque"
+       ]
+      },
+      {
+       "titre": "Production et maîtrise technique avancée",
+       "points": [
+        "Prise de vue avancée : réglages, lumière, son, gestion du matériel (caméras, optiques, micros, lumières, fonds verts)",
+        "Tournage multi-cam, prise de vue en conditions complexes, direction d’acteurs ou de modèles",
+        "Intégration d’éléments innovants : IA générative (visuel, audio, montage), motion design, formats immersifs (360°, live, streaming)"
+       ]
+      },
+      {
+       "titre": "Post-production, diffusion et restitution professionnelle",
+       "points": [
+        "Montage vidéo (Premiere, After Effects…), retouche photo avancée (Photoshop, Lightroom), habillage graphique, Sound design",
+        "Optimisation des contenus pour les différents supports (web, réseaux sociaux, événementiel, print)",
+        "Restitution : présentation du projet, justification des choix artistiques et techniques, analyse critique et feedback collectif"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Ateliers pratiques sur des briefs réels ou simulés, travail en équipe projet",
+      "Utilisation des outils professionnels et des innovations (IA générative, motion design, formats immersifs)",
+      "Classe inversée : analyse de campagnes, veille sur les tendances audiovisuelles et photo"
+     ],
+     "evaluations": [
+      "Formative : exercices de scénarisation, prise de vue, montage, retouche, analyse de briefs, participation aux ateliers",
+      "Sommative : rendu d’un projet audiovisuel ou photographique complet (film, série photo, capsule, etc.) répondant à un brief professionnel, évaluation sur la qualité technique, la créativité, la gestion de projet, la pertinence stratégique et la capacité à argumenter les choix lors d’une présentation orale ou écrite"
+     ]
+    },
+    {
+     "titre": "Wordpress",
+     "bloc": "Bloc 4 : Réaliser des contenus de communication",
+     "formation": "B3 – Bachelor Chargé de Communication",
+     "rncp": "39741 (France Compétences)",
+     "activite": "Produire des contenus rédactionnels web accessibles et responsive ; Concevoir des supports multiformats dans une logique d’accessibilité et d’innovation",
+     "intervenant": "",
+     "volume": "14h (calendaire et FFP)",
+     "sequencage": "S1/S2 – 4 séances de 3h30",
+     "objectif": "Permettre à l’étudiant de concevoir, réaliser et administrer un site WordPress sur-mesure, en intégrant les enjeux d’ergonomie, de référencement, d’accessibilité, de performance et de conformité réglementaire, et de répondre à un brief professionnel exigeant.",
+     "commentaire": "",
+     "competences_prose": "Maîtriser la création, la personnalisation avancée et la gestion d’un site WordPress professionnel : installation, choix et adaptation de thèmes, intégration de plugins, optimisation SEO, accessibilité, sécurité, responsive design, gestion de contenus dynamiques et publication multicanale.",
+     "competences_liees": [],
+     "notions_cles": [
+      "Installation avancée, configuration et sécurité",
+      "Choix, personnalisation et accessibilité des thèmes",
+      "Plugins, contenus dynamiques et optimisation SEO",
+      "Projet fil rouge, publication et restitution professionnelle"
+     ],
+     "programme": [
+      {
+       "titre": "Installation avancée, configuration et sécurité",
+       "points": [
+        "Installation sur serveur distant ou local, gestion de l’hébergement, migration de site",
+        "Paramétrage avancé des réglages WordPress (général, médias, permaliens, confidentialité, RGPD)",
+        "Sécurisation (plugins, gestion des utilisateurs, sauvegardes, mises à jour)",
+        "Bonnes pratiques pour réduire l’impact environnemental du site (optimisation des ressources, sobriété numérique)"
+       ]
+      },
+      {
+       "titre": "Choix, personnalisation et accessibilité des thèmes",
+       "points": [
+        "Sélection de thèmes professionnels et adaptatifs (responsive, accessibility ready)",
+        "Différence entre thème et page builder, critères de choix (performance, accessibilité RGAA, SEO)",
+        "Personnalisation via customizer, widgets, menus, CSS additionnel",
+        "Application des critères d’accessibilité (contrastes, navigation clavier, textes alternatifs)"
+       ]
+      },
+      {
+       "titre": "Plugins, contenus dynamiques et optimisation SEO",
+       "points": [
+        "Installation, configuration et gestion avancée des plugins (SEO, sécurité, performance, RGPD, formulaires, e-commerce)",
+        "Création et gestion de contenus dynamiques (articles, pages, catégories, taxonomies personnalisées)",
+        "Optimisation SEO (structure, balises, sitemap, plugins dédiés), gestion des redirections, optimisation du temps de chargement",
+        "Prise en compte des enjeux d’accessibilité et d’éco-conception dans le choix des plugins"
+       ]
+      },
+      {
+       "titre": "Projet fil rouge, publication et restitution professionnelle",
+       "points": [
+        "Réalisation d’un site complet répondant à un brief réel ou simulé (portfolio, site événementiel, landing page, blog, site e-commerce)",
+        "Intégration de contenus multimédias, gestion des utilisateurs, publication multicanale",
+        "Tests d’accessibilité, performance, sécurité, responsive design",
+        "Présentation orale ou écrite du projet, justification des choix techniques, graphiques et stratégiques, feedback collectif"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Ateliers pratiques sur des briefs réels ou simulés, travail en équipe projet",
+      "Utilisation d’outils d’IA pour la génération de contenus, l’optimisation SEO ou la vérification de l’accessibilité",
+      "Classe inversée : tutoriels avancés, analyse de sites inspirants, veille sur les tendances WordPress"
+     ],
+     "evaluations": [
+      "Formative : exercices d’intégration et de personnalisation, projets de configuration avancée, analyse critique de sites existants",
+      "Sommative : rendu d’un site WordPress complet et personnalisé (portfolio, landing page, blog, etc.) intégrant optimisation SEO, accessibilité, sécurité et responsive design, évaluation sur la qualité technique, la pertinence stratégique et la capacité à répondre à un brief, présentation orale ou écrite du projet"
+     ]
+    },
+    {
+     "titre": "IA Génératives : Méthodologie de prompting",
+     "bloc": "Bloc 4 : Réaliser des contenus de communication (+Bloc 2 : Définir une stratégie et un plan de communication)",
+     "formation": "B3 – Bachelor Chargé de Communication",
+     "rncp": "39741 (France Compétences)",
+     "activite": "Produire des contenus innovants avec des outils numériques",
+     "intervenant": "",
+     "volume": "14h (calendaire et FFP)",
+     "sequencage": "S1/S2 – 4 séances de 3h30",
+     "objectif": "Permettre à l’étudiant de structurer et rédiger des prompts performants pour différents usages (création, synthèse, analyse, automatisation), d’optimiser la collaboration homme-IA, d’anticiper les limites et enjeux éthiques, et d’intégrer le prompting dans la production de contenus et la gestion de projets.",
+     "commentaire": "",
+     "competences_prose": "Maîtriser l’art du prompting pour exploiter de façon stratégique et créative les IA génératives (texte, image, audio, vidéo) ; concevoir des prompts efficaces, complexes et adaptés à divers outils IA ; intégrer ces compétences dans des workflows professionnels et créatifs.",
+     "competences_liees": [],
+     "notions_cles": [
+      "Introduction à l’IA générative et au prompting",
+      "Techniques fondamentales et avancées de prompting",
+      "Applications professionnelles et intégration dans les workflows",
+      "Limites, impacts et éthique du prompting"
+     ],
+     "programme": [
+      {
+       "titre": "Introduction à l’IA générative et au prompting",
+       "points": [
+        "Fondements de l’IA générative, LLM, deep learning, panorama des outils (ChatGPT, Gemini, Copilot, DALL-E, Midjourney, etc.)",
+        "Rappels sur la logique du prompt, tokens, coûts, enjeux de la formulation",
+        "Premiers exercices de prompts simples et analyse des résultats obtenus"
+       ]
+      },
+      {
+       "titre": "Techniques fondamentales et avancées de prompting",
+       "points": [
+        "Méthodes de structuration de prompts (directifs, itératifs, contextuels, multi-étapes, multimodaux)",
+        "Techniques avancées : Chain of Thought (CoT), ReAct, instruction tuning, context priming, RAG (Retrieval-Augmented Generation)",
+        "Création de prompts pour des tâches complexes (synthèse, analyse, génération créative, automatisation)",
+        "Ateliers pratiques sur la rédaction et l’optimisation de prompts pour différents outils et formats"
+       ]
+      },
+      {
+       "titre": "Applications professionnelles et intégration dans les workflows",
+       "points": [
+        "Cas d’usage métier : rédaction, brainstorming, veille, analyse, création visuelle, automatisation via API ou outils NoCode",
+        "Création d’agents ou d’assistants de prompting (ex : GPT personnalisés, agents Mistral, assistants Notion AI)",
+        "Automatisation de tâches IA dans des processus métiers (Make, Zapier, etc.)",
+        "Exercice de groupe : application du prompting à un cas de gestion de projet ou de création de contenu"
+       ]
+      },
+      {
+       "titre": "Limites, impacts et éthique du prompting",
+       "points": [
+        "Limites des LLM : hallucinations, biais, sécurité, RGPD, risques de hacking",
+        "Enjeux éthiques, juridiques, environnementaux et humains liés à l’usage intensif des IA génératives",
+        "Bonnes pratiques pour la réduction des biais et la sécurisation des prompts",
+        "Atelier : analyse critique d’un cas d’usage, débat sur les impacts et la responsabilité du communicant"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Ateliers pratiques et études de cas réels (prompting pour la création, la synthèse, la veille, l’analyse)",
+      "Utilisation d’outils variés (ChatGPT, Gemini, Copilot, DALL-E, Midjourney, Mistral, Notion AI, Make)",
+      "Simulations de création d’agents ou d’assistants de prompting"
+     ],
+     "evaluations": [
+      "Formative : exercices de rédaction et d’optimisation de prompts à chaque séance, analyse critique de résultats IA",
+      "Sommative : rendu d’un dossier ou d’un projet intégrant des prompts complexes pour différents usages (texte, image, automatisation), création d’un assistant ou d’un workflow IA, présentation orale ou écrite, évaluation sur l’efficacité, la créativité, la pertinence, l’éthique et la capacité à argumenter les choix"
+     ]
+    },
+    {
+     "titre": "Sémiologie de la communication et des couleurs",
+     "bloc": "Bloc 4 : Réaliser des contenus de communication",
+     "formation": "B3 – Bachelor Chargé de Communication",
+     "rncp": "39741 (France Compétences)",
+     "activite": "Produire des messages visuels accessibles via PAO ou montage vidéo ; Concevoir des supports multiformats dans une logique d’accessibilité et d’innovation",
+     "intervenant": "",
+     "volume": "10,5h (calendaire et FFP)",
+     "sequencage": "S2 – 3 séances de 3h30",
+     "objectif": "Permettre à l’étudiant de décrypter et d’utiliser les signes, symboles et couleurs dans la communication visuelle, d’optimiser l’impact des messages, de prendre en compte les dimensions culturelles, émotionnelles et sociales, et de justifier ses choix créatifs dans des contextes professionnels variés.",
+     "commentaire": "",
+     "competences_prose": "Analyser et maîtriser les codes chromatiques et symboliques dans les stratégies visuelles ; croiser approche sémiotique et théorie de la couleur pour renforcer la précision et la pertinence du langage visuel ; appliquer ces analyses à des projets concrets de communication.",
+     "competences_liees": [],
+     "notions_cles": [
+      "Fondamentaux de la sémiologie appliquée à la communication",
+      "Sémiologie et psychologie de la couleur",
+      "Analyse sémiotique et chromatique de projets concrets"
+     ],
+     "programme": [
+      {
+       "titre": "Fondamentaux de la sémiologie appliquée à la communication",
+       "points": [
+        "Théories sémiotiques : Saussure, Peirce, Barthes, Eco, sémiotique et sémiologie",
+        "Analyse structurale du signe : signifiant, signifié, référent, codes et conventions",
+        "Sémiologie de l’image : lecture des images fixes et animées, polysémie, connotation, dénotation",
+        "Application à la communication : étude de cas publicitaires, branding, médias sociaux"
+       ]
+      },
+      {
+       "titre": "Sémiologie et psychologie de la couleur",
+       "points": [
+        "Paramètres de la couleur : teinte, saturation, luminance, contraste, brillance",
+        "Significations archétypales et culturelles des couleurs : variations selon les contextes, les publics, les usages (ex : deuil noir/blanc, bleu corporate, rouge passion, vert éco…)",
+        "Effets psychologiques, physiologiques et émotionnels de la couleur dans la perception et la mémorisation",
+        "Dimension sociologique de la couleur : genre, classe sociale, codes sectoriels"
+       ]
+      },
+      {
+       "titre": "Analyse sémiotique et chromatique de projets concrets",
+       "points": [
+        "Méthodologie d’analyse sémiotique et chromatique d’une campagne ou d’une identité visuelle",
+        "Mise en pratique : analyse collective de campagnes, création ou adaptation d’un code couleur pour un projet",
+        "Justification des choix visuels, prise en compte des enjeux d’accessibilité, d’inclusion et d’interculturalité",
+        "Atelier : production d’un livrable (affiche, identité visuelle, moodboard, planche d’analyse) intégrant une argumentation sémiotique et chromatique"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Ateliers pratiques d’analyse de campagnes et de branding",
+      "Études de cas réels, analyse comparative interculturelle",
+      "Exercices de création de moodboards, de palettes chromatiques, d’argumentation sémiotique"
+     ],
+     "evaluations": [
+      "Formative : exercices d’analyse sémiotique et chromatique à chaque séance, présentations orales ou écrites",
+      "Sommative : rendu d’un livrable appliqué (analyse sémiotique et chromatique d’un projet réel ou fictif, création d’une identité visuelle ou d’une affiche argumentée), présentation orale ou écrite, évaluation sur la rigueur de l’analyse, la pertinence des choix et la capacité à justifier les décisions créatives"
+     ]
+    },
+    {
+     "titre": "Écriture créative et storytelling",
+     "bloc": "Bloc 4 : Réaliser des contenus de communication (+Bloc 2 : Définir une stratégie et un plan de communication)",
+     "formation": "B3 – Bachelor Chargé de Communication",
+     "rncp": "39741 (France Compétences)",
+     "activite": "Produire des contenus rédactionnels accessibles, créatifs et adaptés au contexte",
+     "intervenant": "",
+     "volume": "14h (calendaire et FFP)",
+     "sequencage": "S1/S2 – 4 séances de 3h30",
+     "objectif": "Permettre à l’étudiant de concevoir et rédiger des contenus narratifs créatifs, stratégiques et adaptés aux enjeux de la marque ou du client ; de structurer des histoires engageantes, d’incarner une voix de marque, et de maîtriser les codes de la narration sur différents formats (print, digital, vidéo, social media, fiction, brand content).",
+     "commentaire": "",
+     "competences_prose": "Atteindre un niveau expert dans la construction de récits impactants et différenciants ; maîtriser les techniques de storytelling appliquées à la communication, à la marque et aux formats digitaux ; savoir relier stratégie, émotion et créativité pour produire des textes puissants, incarnés, porteurs de sens et adaptés à divers supports.",
+     "competences_liees": [],
+     "notions_cles": [
+      "Fondamentaux du storytelling et de l’écriture créative",
+      "Construction de concepts narratifs et univers de marque",
+      "Techniques avancées et formats innovants",
+      "Restitution, critique et valorisation professionnelle"
+     ],
+     "programme": [
+      {
+       "titre": "Fondamentaux du storytelling et de l’écriture créative",
+       "points": [
+        "Rappels sur la narratologie, les schémas narratifs, les archétypes, la structure du récit (exorde, tension, résolution)",
+        "Différences entre écriture créative, brand content, copywriting, scénarisation",
+        "Exercices de créativité : jeux d’écriture, contraintes, brainstorming narratif",
+        "Analyse de récits impactants (publicité, fiction, réseaux sociaux, podcasts)"
+       ]
+      },
+      {
+       "titre": "Construction de concepts narratifs et univers de marque",
+       "points": [
+        "Création de personnages, voix, ton, point de vue, style",
+        "Développement d’univers narratifs cohérents (storyworld, bible de marque)",
+        "Adaptation du storytelling à la stratégie de marque, au public cible et aux canaux de diffusion",
+        "Atelier : élaboration d’un concept narratif pour une marque ou une campagne"
+       ]
+      },
+      {
+       "titre": "Techniques avancées et formats innovants",
+       "points": [
+        "Storytelling transmédia, narration interactive, formats courts et longs (posts, scripts vidéo, podcasts, newsletters, fictions, threads, carrousels, IA générative)",
+        "Techniques de suspense, d’émotion, de persuasion, d’humour, de rupture",
+        "Réécriture, édition, optimisation pour le SEO et les réseaux sociaux",
+        "Atelier : production de textes créatifs adaptés à différents formats et contextes"
+       ]
+      },
+      {
+       "titre": "Restitution, critique et valorisation professionnelle",
+       "points": [
+        "Présentation orale ou écrite des productions, argumentation des choix narratifs",
+        "Analyse critique : feedback croisé, auto-évaluation, amélioration du texte",
+        "Compilation des productions dans un portfolio ou book professionnel",
+        "Atelier : adaptation d’un récit à un brief réel ou simulé, restitution devant un jury ou un client fictif"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Ateliers d’écriture créative (individuel et collectif), jeux narratifs, contraintes formelles",
+      "Analyse de campagnes et de récits de marque, benchmark de formats innovants",
+      "Utilisation d’outils d’IA pour la stimulation créative, la réécriture, la génération de concepts"
+     ],
+     "evaluations": [
+      "Formative : exercices d’écriture à chaque séance, quiz sur les techniques narratives, feedback collectif et individuel",
+      "Sommative : rendu d’un dossier ou d’un portfolio de textes créatifs (formats variés, adaptation à un brief, justification des choix), présentation orale ou écrite, évaluation sur la puissance narrative, l’originalité, la cohérence stratégique et la capacité à argumenter"
+     ]
+    },
+    {
+     "titre": "Semaines intensives",
+     "bloc": "Bloc 4 : Réaliser des contenus de communication (+Bloc 2 : Définir une stratégie et un plan de communication)",
+     "formation": "B3 – Bachelor Chargé de Communication",
+     "rncp": "39741 (France Compétences)",
+     "activite": "Produire des contenus rédactionnels accessibles, créatifs et adaptés au média digital",
+     "intervenant": "",
+     "volume": "35h de semaine intensive X 2",
+     "sequencage": "S1/S2",
+     "objectif": "Cartographier les leviers digitaux au service d’un objectif de marque. Définir des cibles, objectifs et indicateurs clés pour une stratégie digitale. Proposer une stratégie éditoriale simple et ciblée. Produire des contenus adaptés à différents formats sociaux. Identifier les bases du community management (planning, modération, interactions).",
+     "commentaire": "",
+     "competences_prose": "Comprendre les enjeux de l’écosystème digital et ses leviers stratégiques.\nIdentifier les canaux et outils adaptés aux objectifs de communication d’une marque.\nÉlaborer une stratégie de contenus pour les réseaux sociaux.\nConcevoir une ligne éditoriale cohérente.\nGérer une communauté et créer des contenus engageants.",
+     "competences_liees": [],
+     "notions_cles": [
+      "Jour 1-2 :Stratégie Digitale",
+      "Jour 3-4 :Community Management & Ligne éditoriale",
+      "Jour 5 : TP d’évaluation"
+     ],
+     "programme": [
+      {
+       "titre": "Jour 1-2 :Stratégie Digitale",
+       "points": [
+        "Analyse de l’écosystème digital d’une marque",
+        "Définition des objectifs et KPIs",
+        "Choix des leviers : SEO, social, paid, influence",
+        "Introduction aux outils de planification digitale"
+       ]
+      },
+      {
+       "titre": "Jour 3-4 :Community Management & Ligne éditoriale",
+       "points": [
+        "Définir une ligne éditoriale (ton, rythme, formats)",
+        "Construction d’un planning éditorial",
+        "Création de contenus engageants (posts, stories, formats courts)",
+        "Initiation à la modération et à la relation client sur les réseaux"
+       ]
+      },
+      {
+       "titre": "Jour 5 : TP d’évaluation",
+       "points": []
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Ateliers d’écriture créative (individuel et collectif), jeux narratifs, contraintes formelles",
+      "Analyse de campagnes et de récits de marque, benchmark de formats innovants",
+      "Utilisation d’outils d’IA pour la stimulation créative, la réécriture, la génération de concepts"
+     ],
+     "evaluations": [
+      "Formative : Restitution en groupe d’une mini-stratégie digitale avec contenus produits",
+      "Sommative : Présentation orale ou infographie/visuel synthétique"
+     ]
+    },
+    {
+     "titre": "Semaines intensives",
+     "bloc": "Bloc 4 : Réaliser des contenus de communication (+Bloc 2 : Définir une stratégie et un plan de communication)",
+     "formation": "B3 – Bachelor Chargé de Communication",
+     "rncp": "39741 (France Compétences)",
+     "activite": "Produire des contenus rédactionnels accessibles, créatifs et adaptés au contexte",
+     "intervenant": "",
+     "volume": "35h de semaine intensive X 2",
+     "sequencage": "S1/S2",
+     "objectif": "Analyser un univers de marque et proposer une direction artistique. Créer un logo, une palette graphique et des supports cohérents. Mettre en scène une expérience visuelle ou un storytelling visuel. Argumenter des choix créatifs en lien avec une problématique de communication.",
+     "commentaire": "",
+     "competences_prose": "Comprendre les principes fondamentaux de l’identité visuelle.\nDévelopper un univers graphique cohérent et différenciant.\nMaîtriser la chaîne de création graphique de base.\nImaginer un dispositif créatif ou une scénographie de communication.\nTraduire un concept de communication en image.",
+     "competences_liees": [],
+     "notions_cles": [
+      "Jour 1-2 :Identité Visuelle & Univers de Marque",
+      "Jour 3-4 :Scénographie et storytelling visuel",
+      "Jour 5 : TP d’évaluation"
+     ],
+     "programme": [
+      {
+       "titre": "Jour 1-2 :Identité Visuelle & Univers de Marque",
+       "points": [
+        "Analyse de tendances graphiques",
+        "Création d’un logo et d’une charte simple",
+        "Élaboration d’un moodboard et d’un territoire graphique",
+        "Outils : Canva / Figma / Adobe Express (selon équipement)"
+       ]
+      },
+      {
+       "titre": "Jour 3-4 :Scénographie et storytelling visuel",
+       "points": [
+        "Introduction à la scénographie événementielle ou immersive",
+        "Création de supports visuels narratifs (affiche, teaser, PLV)",
+        "Intégration du motion ou de l’interaction simple (si possible)",
+        "Simulation d’un rendu créatif dans un parcours usager"
+       ]
+      },
+      {
+       "titre": "Jour 5 : TP d’évaluation",
+       "points": []
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Ateliers d’écriture créative (individuel et collectif), jeux narratifs, contraintes formelles",
+      "Analyse de campagnes et de récits de marque, benchmark de formats innovants",
+      "Utilisation d’outils d’IA pour la stimulation créative, la réécriture, la génération de concepts"
+     ],
+     "evaluations": [
+      "Formative : Restitution en groupe d’une mini-stratégie digitale avec contenus produits",
+      "Sommative : Présentation orale ou infographie/visuel synthétique"
+     ]
+    },
+    {
+     "titre": "Semaines intensives",
+     "bloc": "Bloc 4 : Réaliser des contenus de communication (+Bloc 2 : Définir une stratégie et un plan de communication)",
+     "formation": "B3 – Bachelor Chargé de Communication",
+     "rncp": "39741 (France Compétences)",
+     "activite": "Produire des événements en lien avec les compétences qui seront exploitées dans un contexte professionnel",
+     "intervenant": "",
+     "volume": "35h de semaine intensive X 2",
+     "sequencage": "S1/S2",
+     "objectif": "Identifier les objectifs, cibles et formats d’un événement pertinent. Construire un déroulé d’événement réaliste et engageant. Proposer des dispositifs d’activation ou d’interaction innovants. Intégrer les dimensions RSE, accessibilité, storytelling dans une proposition.",
+     "commentaire": "",
+     "competences_prose": "Comprendre les enjeux d’un dispositif événementiel dans une stratégie de marque.\nConcevoir une programmation événementielle ciblée.\nÉlaborer un plan d’action événementiel incluant budget, lieu, logistique.\nRéfléchir à l’expérience visiteur et à l’engagement du public.",
+     "competences_liees": [],
+     "notions_cles": [
+      "Jour 1-2 :Planification Stratégique",
+      "Jour 3-4 :Expérience visiteur et engagement",
+      "Jour 5 : TP d’évaluation"
+     ],
+     "programme": [
+      {
+       "titre": "Jour 1-2 :Planification Stratégique",
+       "points": [
+        "Typologie des événements et objectifs associés",
+        "Définition du concept, cible, format, lieu, budget",
+        "Rétroplanning et repérage de partenaires/prestataires",
+        "Simulation de budget simplifié"
+       ]
+      },
+      {
+       "titre": "Jour 3-4 :Expérience visiteur et engagement",
+       "points": [
+        "Parcours participant : étapes, émotions, interactions",
+        "Création de dispositifs d’animation (digitaux ou physiques)",
+        "Introduction à la scénographie événementielle",
+        "Méthodologie de pitch événementiel"
+       ]
+      },
+      {
+       "titre": "Jour 5 : TP d’évaluation",
+       "points": []
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Ateliers d’écriture créative (individuel et collectif), jeux narratifs, contraintes formelles",
+      "Analyse de campagnes et de récits de marque, benchmark de formats innovants",
+      "Utilisation d’outils d’IA pour la stimulation créative, la réécriture, la génération de concepts"
+     ],
+     "evaluations": [
+      "Formative : Restitution en groupe d’une mini-stratégie digitale avec contenus produits",
+      "Sommative : Présentation orale ou infographie/visuel synthétique"
+     ]
+    },
+    {
+     "titre": "Budget et négociation",
+     "bloc": "Bloc 5 : Évaluer la performance du projet de communication (+Bloc 3 : Piloter l’équipe projet et le déploiement des actions)",
+     "formation": "B3 – Bachelor Chargé de Communication",
+     "rncp": "39741 (France Compétences)",
+     "activite": "Estimer et suivre les coûts tout au long du cycle de vie du projet de communication ; Exploiter la donnée pour piloter la performance ; Sélectionner les prestataires dans une logique d’achat responsable",
+     "intervenant": "",
+     "volume": "17,5h (calendaire et FFP)",
+     "sequencage": "S1/S2 – 5 séances de 3h30",
+     "objectif": "Permettre à l’étudiant de piloter la dimension financière d’un projet de communication (devis, marges, suivi, reporting), de négocier efficacement dans des contextes variés (clients, fournisseurs, partenaires), d’intégrer les critères RSE et de défendre ses arbitrages devant un commanditaire ou un jury.",
+     "commentaire": "",
+     "competences_prose": "Maîtriser la construction, le suivi et l’optimisation d’un budget de communication ; négocier avec des clients, prestataires et partenaires ; défendre ses choix budgétaires et contractuels dans une logique responsable, durable et conforme aux objectifs stratégiques.",
+     "competences_liees": [],
+     "notions_cles": [
+      "Fondamentaux de la gestion budgétaire en communication",
+      "Analyse financière et optimisation des coûts",
+      "Techniques et stratégies de négociation",
+      "Gestion de la relation client, prestataire et partenaire",
+      "Atelier pratique et restitution professionnelle"
+     ],
+     "programme": [
+      {
+       "titre": "Fondamentaux de la gestion budgétaire en communication",
+       "points": [
+        "Construction d’un budget prévisionnel : estimation des coûts, identification des postes (créa, prod, média, prestataires, imprévus)",
+        "Outils de suivi budgétaire : tableaux de bord, reporting, suivi des écarts, gestion des aléas",
+        "Prise en compte des critères RSE et d’éco-responsabilité dans les arbitrages budgétaires"
+       ]
+      },
+      {
+       "titre": "Analyse financière et optimisation des coûts",
+       "points": [
+        "Lecture et analyse de devis, factures, contrats",
+        "Calcul de marges, ROI, rentabilité des actions, arbitrages entre solutions",
+        "Techniques d’optimisation : négociation des tarifs, mutualisation, choix des prestataires, analyse du coût global (TCO)"
+       ]
+      },
+      {
+       "titre": "Techniques et stratégies de négociation",
+       "points": [
+        "Préparation de la négociation : objectifs, marges de manœuvre, identification des enjeux et leviers",
+        "Conduite de la négociation : techniques d’argumentation, gestion des objections, closing, contractualisation",
+        "Négociation responsable : intégration des critères éthiques, sociaux, environnementaux, gestion des relations durables"
+       ]
+      },
+      {
+       "titre": "Gestion de la relation client, prestataire et partenaire",
+       "points": [
+        "Posture professionnelle, écoute active, gestion des conflits et des situations tendues",
+        "Suivi de la relation après négociation : reporting, évaluation, fidélisation",
+        "Atelier : simulation de négociation avec différents profils (client, fournisseur, partenaire institutionnel)"
+       ]
+      },
+      {
+       "titre": "Atelier pratique et restitution professionnelle",
+       "points": [
+        "Élaboration d’un budget complet pour un projet de communication réel ou simulé",
+        "Simulation de négociation commerciale ou d’appel d’offres",
+        "Présentation orale ou écrite des arbitrages budgétaires et des résultats de la négociation, feedback collectif"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Ateliers pratiques sur la construction et le suivi de budgets réels ou simulés",
+      "Simulations de négociation (jeu de rôle, cas pratiques, appels d’offres)",
+      "Utilisation d’outils numériques (tableaux de bord, CRM, outils de gestion budgétaire)"
+     ],
+     "evaluations": [
+      "Formative : exercices d’analyse de devis, simulation de négociation, analyse de cas",
+      "Sommative : rendu d’un dossier budgétaire complet (construction, suivi, arbitrages, reporting), simulation de négociation (jeu de rôle ou dossier écrit), évaluation sur la rigueur, la pertinence des choix, la capacité à argumenter et à intégrer les critères RSE"
+     ]
+    },
+    {
+     "titre": "Indicateurs de Performance (KPI’s)",
+     "bloc": "Bloc 5 : Évaluer la performance du projet de communication",
+     "formation": "B3 – Bachelor Chargé de Communication",
+     "rncp": "39741 (France Compétences)",
+     "activite": "Collecter la data marketing via des indicateurs de performance / metrics ; Exploiter la donnée via des tableaux de bord pour piloter la performance ; Corriger les écarts et améliorer les actions",
+     "intervenant": "",
+     "volume": "14h (calendaire et FFP)",
+     "sequencage": "S1/S2 – 4 séances de 3h30",
+     "objectif": "Permettre à l’étudiant de relier objectifs, actions et résultats à travers des KPI adaptés, de collecter et d’analyser des données quantitatives et qualitatives, d’argumenter des recommandations d’optimisation et d’industrialiser les bonnes pratiques dans une logique d’amélioration continue.",
+     "commentaire": "",
+     "competences_prose": "Définir, sélectionner et exploiter des indicateurs de performance pertinents pour mesurer l’efficacité des actions de communication ; construire, interpréter et exploiter des tableaux de bord pour piloter et ajuster la stratégie ; analyser les résultats et proposer des axes d’amélioration continue.",
+     "competences_liees": [],
+     "notions_cles": [
+      "Définition des KPI et choix des indicateurs",
+      "Collecte, organisation et visualisation des données",
+      "Analyse, interprétation et exploitation des KPI",
+      "Atelier pratique et restitution professionnelle"
+     ],
+     "programme": [
+      {
+       "titre": "Définition des KPI et choix des indicateurs",
+       "points": [
+        "Rappel des fondamentaux : qu’est-ce qu’un KPI, typologies (quantitatifs, qualitatifs, avancés, retardés)",
+        "Méthode SMART, articulation objectifs/KPI, adaptation aux différents canaux (web, social, print, événementiel)",
+        "Sélection des indicateurs selon les objectifs stratégiques (notoriété, engagement, conversion, fidélisation, ROI, RSE)",
+        "Respect du RGPD et bonnes pratiques de collecte et de stockage des données"
+       ]
+      },
+      {
+       "titre": "Collecte, organisation et visualisation des données",
+       "points": [
+        "Sources de données : analytics web, réseaux sociaux, CRM, enquêtes, outils de reporting",
+        "Construction de tableaux de bord (Excel, Google Data Studio, outils natifs, data visualisation)",
+        "Visualisation des données : graphiques, infographies, dashboards interactifs",
+        "Respect des standards professionnels et accessibilité des livrables"
+       ]
+      },
+      {
+       "titre": "Analyse, interprétation et exploitation des KPI",
+       "points": [
+        "Lecture et interprétation des résultats (écarts, tendances, corrélations, anomalies)",
+        "Identification des leviers d’optimisation, formulation de recommandations, analyse du ROI",
+        "Limites et biais des indicateurs, articulation avec l’analyse qualitative",
+        "Mise en place d’une démarche d’amélioration continue (actions correctives, consolidation des bonnes pratiques)"
+       ]
+      },
+      {
+       "titre": "Atelier pratique et restitution professionnelle",
+       "points": [
+        "Application à un cas réel ou simulé : définition d’objectifs, choix de KPI, construction d’un tableau de bord, analyse des résultats",
+        "Présentation orale ou écrite, argumentation des choix, feedback collectif",
+        "Capitalisation des bonnes pratiques et modélisation pour l’industrialisation des process"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Ateliers pratiques sur la construction de tableaux de bord, l’analyse de jeux de données, la simulation de reporting",
+      "Utilisation d’outils d’IA pour l’automatisation de la collecte ou la génération de rapports",
+      "Classe inversée : analyse de Dashboards réels, tutoriels sur la data visualisation"
+     ],
+     "evaluations": [
+      "Formative : exercices de sélection et d’analyse d’indicateurs, construction de tableaux de bord",
+      "Sommative : rendu d’un tableau de bord commenté (choix des KPI, collecte, analyse, recommandations d’optimisation), présentation orale ou écrite, évaluation sur la pertinence des indicateurs, la qualité de l’analyse et la capacité à proposer des axes d’amélioration"
+     ]
+    },
+    {
+     "titre": "RAN Fondamentaux du marketing et de la communication",
+     "bloc": "Bloc 1 : Mener une veille stratégique créative et tendancielle / Bloc 2 : Définir une stratégie et un plan de communication",
+     "formation": "B3 – Bachelor Chargé de Communication",
+     "rncp": "39741 (France Compétences)",
+     "activite": "Définir un process de veille ; Diagnostic de la situation ; Élaboration de la recommandation stratégique",
+     "intervenant": "",
+     "volume": "7h (calendaire et FFP)",
+     "sequencage": "S1 – 2 séances de 3h30 (semaine de rentrée)",
+     "objectif": "Permettre à chaque étudiant d’atteindre un socle commun de connaissances et de méthodes, de s’intégrer dans la dynamique de la promo, de collaborer sur des études de cas et de préparer la suite du cursus B3 en évitant les lacunes ou redondances.",
+     "commentaire": "",
+     "competences_prose": "Acquérir ou réactiver les bases du marketing et de la communication : segmentation, ciblage, positionnement, mix marketing, plan de com, analyse du consommateur, élaboration d’un message et choix des canaux. Savoir mobiliser ces notions pour comprendre un brief, analyser une situation et collaborer sur un projet.",
+     "competences_liees": [],
+     "notions_cles": [
+      "Introduction et auto-évaluation des acquis",
+      "Panorama des fondamentaux du marketing",
+      "Fondamentaux de la communication",
+      "Comportement du consommateur et persona",
+      "Synthèse, mutualisation et conseils méthodologiques"
+     ],
+     "programme": [
+      {
+       "titre": "Introduction et auto-évaluation des acquis",
+       "points": [
+        "Quiz diagnostic pour situer son niveau (nouveaux entrants vs anciens)",
+        "Constitution de binômes ou groupes mixtes (niveaux différents) pour favoriser l’entraide et la transmission",
+        "Présentation des objectifs du module et de la pédagogie collaborative"
+       ]
+      },
+      {
+       "titre": "Panorama des fondamentaux du marketing",
+       "points": [
+        "Définitions clés : marketing, communication, marché, besoin, offre, cible",
+        "Segmentation, ciblage, positionnement (STP), mix marketing (4P/7P), analyse SWOT",
+        "Études de cas : identification des cibles, analyse d’une offre, positionnement d’une marque",
+        "Activité collaborative : anciens expliquent un concept à un nouveau, restitution croisée"
+       ]
+      },
+      {
+       "titre": "Fondamentaux de la communication",
+       "points": [
+        "Processus de communication, objectifs, message, canaux, plan de communication",
+        "Introduction à la veille, à l’analyse du brief, à la problématisation",
+        "Exercice pratique : lecture et décryptage d’un brief, identification des enjeux, formulation d’un objectif de com",
+        "Travail en groupes mixtes, restitution collective"
+       ]
+      },
+      {
+       "titre": "Comportement du consommateur et persona",
+       "points": [
+        "Bases de la compréhension du consommateur : leviers psychologiques, parcours d’achat, persona",
+        "Atelier : création rapide d’un persona à partir d’un cas fictif, feedback croisé"
+       ]
+      },
+      {
+       "titre": "Synthèse, mutualisation et conseils méthodologiques",
+       "points": [
+        "Mise en commun des réponses au quiz initial, clarification des points de blocage",
+        "Conseils pour la suite de l’année, ressources pour aller plus loin, constitution de binômes de tutorat pour la suite",
+        "Évaluation formative (quiz final, mini-cas, feedback collectif)"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Co-animation ou tutorat croisé : anciens étudiants accompagnent les nouveaux sur des notions-clés",
+      "Ateliers collaboratifs et jeux de rôle pour favoriser l’entraide et l’explicitation des concepts",
+      "Quiz interactifs, études de cas en binômes mixtes, restitution orale collective",
+      "Utilisation d’outils numériques (pad collaboratif, quiz en ligne, mur d’idées)",
+      "Feedback croisé et peer learning systématique"
+     ],
+     "evaluations": [
+      "Formative : quiz d’auto-évaluation initial et final, exercices pratiques en groupes mixtes, restitution orale des concepts, feedback collectif",
+      "Sommative : mini-étude de cas à traiter en binôme mixte, évaluation sur la compréhension des fondamentaux et la capacité à collaborer et à expliquer un concept à un pair"
+     ]
+    },
+    {
+     "titre": "RAN Wordpress",
+     "bloc": "Bloc 4 : Réaliser des contenus de communication",
+     "formation": "B3 – Bachelor Chargé de Communication",
+     "rncp": "39741 (France Compétences)",
+     "activite": "Produire des contenus rédactionnels web accessibles et responsive ; Concevoir des supports multiformats dans une logique d’accessibilité et d’innovation",
+     "intervenant": "",
+     "volume": "7h (calendaire et FFP)",
+     "sequencage": "S1 – 2 séances de 3h30 (semaine de rentrée)",
+     "objectif": "Permettre à chaque étudiant d’atteindre un socle commun de compétences techniques sur Wordpress, de s’intégrer dans la dynamique de la promo, de collaborer sur des mini-projets et de préparer la suite du cursus B3 en évitant les lacunes ou redondances.",
+     "commentaire": "",
+     "competences_prose": "Acquérir ou réactiver les bases de la création de site web avec Wordpress : installation, configuration, gestion de contenus, personnalisation simple, gestion des menus et widgets, publication d’articles et de pages, respect des principes d’accessibilité et de responsive design.",
+     "competences_liees": [],
+     "notions_cles": [
+      "Introduction, diagnostic et constitution des groupes",
+      "Installation et configuration de base",
+      "Gestion des contenus et arborescence",
+      "Personnalisation simple et accessibilité",
+      "Synthèse, mutualisation et conseils méthodologiques"
+     ],
+     "programme": [
+      {
+       "titre": "Introduction, diagnostic et constitution des groupes",
+       "points": [
+        "Quiz diagnostic pour situer son niveau (débutant/initié)",
+        "Constitution de binômes ou groupes mixtes (niveaux différents) pour favoriser l’entraide",
+        "Présentation des objectifs du module et de la pédagogie collaborative"
+       ]
+      },
+      {
+       "titre": "Installation et configuration de base",
+       "points": [
+        "Installation de Wordpress sur serveur local ou distant, découverte de l’interface d’administration",
+        "Réglages essentiels (généraux, permaliens, utilisateurs)",
+        "Sécurité de base et sauvegardes",
+        "Démonstration par les étudiants les plus avancés, tutorat croisé"
+       ]
+      },
+      {
+       "titre": "Gestion des contenus et arborescence",
+       "points": [
+        "Création et gestion de pages, articles, catégories, menus, widgets",
+        "Ajout de médias (images, vidéos), gestion de la bibliothèque",
+        "Publication, modification, mise en brouillon, gestion des commentaires",
+        "Exercices pratiques en binômes mixtes (un confirmé accompagne un débutant)"
+       ]
+      },
+      {
+       "titre": "Personnalisation simple et accessibilité",
+       "points": [
+        "Choix et activation d’un thème, personnalisation via le customizer",
+        "Gestion des menus, widgets, couleurs, typographies",
+        "Introduction aux principes d’accessibilité et de responsive design",
+        "Application à un mini-projet collectif (ex : mini-site vitrine ou blog d’équipe)"
+       ]
+      },
+      {
+       "titre": "Synthèse, mutualisation et conseils méthodologiques",
+       "points": [
+        "Mutualisation des productions et des difficultés rencontrées",
+        "Conseils pour aller plus loin (plugins essentiels, sécurité, RGPD, optimisation)",
+        "Constitution de binômes de tutorat pour la suite, ressources complémentaires",
+        "Évaluation formative (quiz final, mini-site à présenter, feedback collectif)"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Co-animation ou tutorat croisé : étudiants avancés accompagnent les débutants sur chaque étape clé",
+      "Ateliers collaboratifs et mini-projets en binômes mixtes",
+      "Démonstrations pratiques suivies d’applications immédiates (« je fais, tu refais »)",
+      "Quiz interactifs, défis techniques, restitution orale collective",
+      "Utilisation d’outils numériques pour le partage de ressources et de supports pas-à-pas"
+     ],
+     "evaluations": [
+      "Formative : quiz d’auto-évaluation initial et final, exercices pratiques en binômes mixtes, restitution orale des étapes clés, feedback collectif",
+      "Sommative : mini-site Wordpress à réaliser en binôme mixte (installation, gestion de contenus, personnalisation simple), évaluation sur l’acquisition des fondamentaux et la capacité à collaborer et à expliquer un concept à un pair"
+     ]
+    },
+    {
+     "titre": "RAN Photo/Video",
+     "bloc": "Bloc 4 : Réaliser des contenus de communication",
+     "formation": "B3 – Bachelor Chargé de Communication",
+     "rncp": "39741 (France Compétences)",
+     "activite": "Produire des messages visuels et audiovisuels accessibles via PAO ou montage vidéo",
+     "intervenant": "",
+     "volume": "7h (calendaire et FFP)",
+     "sequencage": "S1 – 2 séances de 3h30 (semaine de rentrée)",
+     "objectif": "Permettre à chaque étudiant d’atteindre un socle commun de compétences techniques en prise de vue photo et vidéo, de collaborer sur des mini-projets, de s’intégrer dans la dynamique de la promo et de préparer la suite du cursus B3 sans lacunes ni redondances.",
+     "commentaire": "",
+     "competences_prose": "Acquérir ou réactiver les bases de la prise de vue photo et vidéo : cadrage, exposition, composition, prise de son, lumière, gestion des formats, organisation du tournage, respect des principes d’accessibilité et adaptation aux canaux numériques.",
+     "competences_liees": [],
+     "notions_cles": [
+      "Introduction, diagnostic et constitution des groupes",
+      "Bases de la prise de vue photo",
+      "Bases de la prise de vue vidéo",
+      "Organisation du tournage et gestion des rushs",
+      "Synthèse, mutualisation et conseils méthodologiques"
+     ],
+     "programme": [
+      {
+       "titre": "Introduction, diagnostic et constitution des groupes",
+       "points": [
+        "Quiz diagnostic pour situer son niveau (débutant/initié)",
+        "Constitution de binômes ou groupes mixtes (niveaux différents) pour favoriser l’entraide",
+        "Présentation des objectifs du module et de la pédagogie collaborative"
+       ]
+      },
+      {
+       "titre": "Bases de la prise de vue photo",
+       "points": [
+        "Cadrage, composition, gestion de la lumière naturelle et artificielle",
+        "Réglages essentiels (ouverture, vitesse, ISO), focus, profondeur de champ",
+        "Prise de vue sur smartphone ou appareil, gestion des fichiers",
+        "Exercices pratiques en binômes mixtes (un confirmé accompagne un débutant)"
+       ]
+      },
+      {
+       "titre": "Bases de la prise de vue vidéo",
+       "points": [
+        "Cadrage, mouvements de caméra, gestion du son, lumière, plans de base",
+        "Préparation d’un mini-storyboard, tournage d’une séquence courte",
+        "Utilisation de smartphone ou caméra, gestion des rushs",
+        "Exercices pratiques en binômes mixtes"
+       ]
+      },
+      {
+       "titre": "Organisation du tournage et gestion des rushs",
+       "points": [
+        "Planification d’un mini-tournage (répartition des rôles, gestion du temps, choix des lieux)",
+        "Bonnes pratiques pour la sauvegarde et l’organisation des fichiers (rushs, photos)",
+        "Préparation des fichiers pour la post-production (nomenclature, tri, export)"
+       ]
+      },
+      {
+       "titre": "Synthèse, mutualisation et conseils méthodologiques",
+       "points": [
+        "Mutualisation des productions et analyse des difficultés rencontrées",
+        "Conseils pour aller plus loin (matériel, inspiration, ressources en ligne)",
+        "Constitution de binômes de tutorat pour la suite, ressources complémentaires",
+        "Évaluation formative (quiz final, mini-projet à présenter, feedback collectif)"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Co-animation ou tutorat croisé : étudiants avancés accompagnent les débutants sur chaque étape clé",
+      "Ateliers collaboratifs et mini-projets en binômes mixtes",
+      "Démonstrations pratiques suivies d’applications immédiates (« je fais, tu refais »)",
+      "Quiz interactifs, défis techniques, restitution orale collective",
+      "Utilisation d’outils numériques pour le partage de ressources et de supports pas-à-pas"
+     ],
+     "evaluations": [
+      "Formative : quiz d’auto-évaluation initial et final, exercices pratiques en binômes mixtes, restitution orale des étapes clés, feedback collectif",
+      "Sommative : mini-projet photo/vidéo à réaliser en binôme mixte (prise de vue, organisation du tournage, gestion des rushs), évaluation sur l’acquisition des fondamentaux et la capacité à collaborer et à expliquer un concept à un pair"
+     ]
+    },
+    {
+     "titre": "RAN PAO",
+     "bloc": "Bloc 4 : Réaliser des contenus de communication",
+     "formation": "B3 – Bachelor Chargé de Communication",
+     "rncp": "39741 (France Compétences)",
+     "activite": "Produire des messages visuels accessibles via PAO ou montage vidéo",
+     "intervenant": "",
+     "volume": "7h (calendaire et FFP)",
+     "sequencage": "S1 – 2 séances de 3h30 (semaine de rentrée)",
+     "objectif": "Permettre à chaque étudiant d’atteindre un socle commun de compétences techniques en PAO, de collaborer sur des mini-projets, de s’intégrer dans la dynamique de la promo et de préparer la suite du cursus B3 sans lacunes ni redondances.",
+     "commentaire": "",
+     "competences_prose": "Acquérir ou réactiver les bases de la création graphique : prise en main des logiciels Adobe (Photoshop, Illustrator, InDesign), gestion des calques, outils de sélection, typographie, couleurs, composition, retouche et montage simples, préparation des fichiers pour l’impression ou le web.",
+     "competences_liees": [],
+     "notions_cles": [
+      "Introduction, diagnostic et constitution des groupes",
+      "Prise en main des logiciels PAO (Photoshop, Illustrator, InDesign)",
+      "Techniques de composition graphique et typographie",
+      "Retouche et montage photo de base",
+      "Synthèse, mutualisation et conseils méthodologiques"
+     ],
+     "programme": [
+      {
+       "titre": "Introduction, diagnostic et constitution des groupes",
+       "points": [
+        "Quiz diagnostic pour situer son niveau (débutant/initié)",
+        "Constitution de binômes ou groupes mixtes (niveaux différents) pour favoriser l’entraide",
+        "Présentation des objectifs du module et de la pédagogie collaborative"
+       ]
+      },
+      {
+       "titre": "Prise en main des logiciels PAO (Photoshop, Illustrator, InDesign)",
+       "points": [
+        "Découverte de l’interface, gestion des espaces de travail",
+        "Outils de base : sélection, déplacement, formes, texte, couleurs",
+        "Gestion des calques, enregistrement et exportation de fichiers",
+        "Démonstration par les étudiants avancés, tutorat croisé"
+       ]
+      },
+      {
+       "titre": "Techniques de composition graphique et typographie",
+       "points": [
+        "Principes de composition : grille, alignement, équilibre, hiérarchie visuelle",
+        "Initiation à la typographie : familles de polices, lisibilité, cohérence graphique",
+        "Application à la création d’un visuel simple (affiche, post, flyer) en binômes mixtes"
+       ]
+      },
+      {
+       "titre": "Retouche et montage photo de base",
+       "points": [
+        "Recadrage, correction de l’exposition, ajustement des couleurs, détourage simple",
+        "Assemblage d’images, intégration de texte et d’éléments graphiques",
+        "Préparation des fichiers pour le web ou l’impression"
+       ]
+      },
+      {
+       "titre": "Synthèse, mutualisation et conseils méthodologiques",
+       "points": [
+        "Mutualisation des productions et analyse des difficultés rencontrées",
+        "Conseils pour aller plus loin (tutoriels, ressources en ligne, bonnes pratiques)",
+        "Constitution de binômes de tutorat pour la suite, ressources complémentaires",
+        "Évaluation formative (quiz final, mini-projet à présenter, feedback collectif)"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Co-animation ou tutorat croisé : étudiants avancés accompagnent les débutants sur chaque étape clé",
+      "Ateliers collaboratifs et mini-projets en binômes mixtes",
+      "Démonstrations pratiques suivies d’applications immédiates (« je fais, tu refais »)",
+      "Quiz interactifs, défis techniques, restitution orale collective",
+      "Utilisation d’outils numériques pour le partage de ressources et de supports pas-à-pas"
+     ],
+     "evaluations": [
+      "Formative : quiz d’auto-évaluation initial et final, exercices pratiques en binômes mixtes, restitution orale des étapes clés, feedback collectif",
+      "Sommative : mini-projet graphique à réaliser en binôme mixte (création d’un visuel simple, retouche, composition), évaluation sur l’acquisition des fondamentaux et la capacité à collaborer et à expliquer un concept à un pair"
+     ]
+    },
+    {
+     "titre": "Anglais",
+     "bloc": "Compétences transversales – Communication professionnelle internationale",
+     "formation": "B3 – Bachelor Chargé de Communication",
+     "rncp": "39741 (France Compétences)",
+     "activite": "S’exprimer avec aisance et précision en anglais dans des situations professionnelles : réunion, présentation, négociation, rédaction de documents, interactions interculturelles.",
+     "intervenant": "",
+     "volume": "21h (calendaire et FFP)",
+     "sequencage": "S1/S2 – 6 séances de 3h30",
+     "objectif": "Permettre à l’étudiant d’interagir de manière fluide, précise et stratégique en anglais, de convaincre et de défendre une recommandation, de s’adapter à des contextes internationaux et d’enrichir sa posture professionnelle dans la communication globale.",
+     "commentaire": "",
+     "competences_prose": "Maîtriser l’anglais professionnel à l’oral et à l’écrit dans des contextes de communication, de réunion, de négociation, de présentation et de rédaction de documents. Savoir adapter son discours à différents interlocuteurs, défendre un point de vue, convaincre et interagir dans un environnement multiculturel.",
+     "competences_liees": [],
+     "notions_cles": [
+      "Anglais professionnel et vocabulaire métier",
+      "Techniques de présentation et de prise de parole",
+      "Rédaction professionnelle en anglais",
+      "Réunions, négociation et gestion de projet en anglais",
+      "Communication interculturelle et adaptation",
+      "Soutenance, argumentation et feedback"
+     ],
+     "programme": [
+      {
+       "titre": "Anglais professionnel et vocabulaire métier",
+       "points": [
+        "Acquisition et révision du vocabulaire spécifique à la communication, au marketing, aux médias et au digital",
+        "Exercices de compréhension et d’expression orales et écrites sur des situations professionnelles courantes (emails, briefs, réunions, appels, échanges interculturels)",
+        "Jeux de rôle et simulations de situations réelles"
+       ]
+      },
+      {
+       "titre": "Techniques de présentation et de prise de parole",
+       "points": [
+        "Structuration d’un discours, pitch, présentation de projet ou de recommandation en anglais",
+        "Gestion du stress, travail sur la prononciation, l’intonation et la posture",
+        "Exercices de storytelling, d’argumentation et de persuasion adaptés à des contextes professionnels"
+       ]
+      },
+      {
+       "titre": "Rédaction professionnelle en anglais",
+       "points": [
+        "Rédaction d’emails, de comptes-rendus, de synthèses, de communiqués de presse, de posts social media et de présentations PowerPoint",
+        "Correction des erreurs fréquentes, optimisation de la clarté et de la concision",
+        "Atelier pratique sur la production de documents professionnels"
+       ]
+      },
+      {
+       "titre": "Réunions, négociation et gestion de projet en anglais",
+       "points": [
+        "Animation et participation active à des réunions, prise de parole, gestion des objections, négociation de briefs ou de budgets",
+        "Simulation de situations de gestion de projet internationales, gestion de conflits, résolution de problèmes",
+        "Travail en binômes ou en petits groupes pour favoriser l’interaction et la collaboration"
+       ]
+      },
+      {
+       "titre": "Communication interculturelle et adaptation",
+       "points": [
+        "Sensibilisation aux différences culturelles, aux codes et aux usages dans un environnement international",
+        "Analyse de cas et décryptage d’incidents interculturels",
+        "Exercices d’adaptation du discours et de la posture selon les interlocuteurs et les contextes"
+       ]
+      },
+      {
+       "titre": "Soutenance, argumentation et feedback",
+       "points": [
+        "Entraînement à la soutenance de projet ou à la présentation d’une recommandation devant un jury ou un client anglophone",
+        "Feedback collectif et individuel, axes de progression personnalisés",
+        "Évaluation finale sur la capacité à convaincre, à argumenter et à interagir dans un contexte exigeant"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Simulations de situations professionnelles réelles (réunions, négociations, présentations, entretiens)",
+      "Jeux de rôle, débats, ateliers de storytelling",
+      "Travail en binômes ou groupes mixtes pour favoriser l’entraide et l’interaction",
+      "Utilisation de ressources authentiques (vidéos, articles, podcasts, briefs réels)",
+      "Feedback personnalisé, peer review, auto-évaluation"
+     ],
+     "evaluations": [
+      "Formative : quiz de vocabulaire, exercices de compréhension et d’expression, simulations de situations, feedback continu",
+      "Sommative : présentation orale ou soutenance en anglais, rédaction d’un document professionnel, évaluation sur la fluidité, la précision, la capacité à convaincre et à s’adapter à différents contextes"
+     ]
+    },
+    {
+     "titre": "Expression écrite et orale",
+     "bloc": "Compétences transversales – Expression professionnelle (Bloc 3 et Bloc 4)",
+     "formation": "B3 – Bachelor Chargé de Communication",
+     "rncp": "39741 (France Compétences)",
+     "activite": "Structurer, rédiger, synthétiser, argumenter et présenter à l’oral et à l’écrit dans des contextes professionnels variés",
+     "intervenant": "",
+     "volume": "14h (calendaire et FFP)",
+     "sequencage": "S1/S2 – 4 séances de 3h30",
+     "objectif": "Permettre à l’étudiant de renforcer la qualité de ses productions écrites et orales, de gagner en justesse, en clarté et en singularité, d’adapter son expression à des contextes variés (soutenance, synthèse, pitch, débat, note stratégique, dossier, entretien), et de répondre aux exigences professionnelles du secteur.",
+     "commentaire": "",
+     "competences_prose": "Maîtriser la structuration, la rédaction et la mise en forme de documents professionnels ; synthétiser et argumenter à l’écrit et à l’oral ; adapter son expression aux attendus du public cible ; défendre un point de vue, convaincre et restituer des analyses complexes de façon claire et impactante.",
+     "competences_liees": [],
+     "notions_cles": [
+      "Structuration et argumentation de l’écrit professionnel",
+      "Expression orale professionnelle et prise de parole",
+      "Adaptation de l’expression au public et au contexte",
+      "Valorisation de la singularité et restitution professionnelle"
+     ],
+     "programme": [
+      {
+       "titre": "Structuration et argumentation de l’écrit professionnel",
+       "points": [
+        "Techniques de structuration : plan, introduction, développement, conclusion, transitions",
+        "Rédaction de synthèses, notes d’analyse, dossiers, comptes-rendus, mails professionnels",
+        "Techniques d’argumentation et de persuasion à l’écrit (démonstration, exemples, réfutation, storytelling)",
+        "Exercices de synthèse, de résumé, de prise de notes et de mise en forme professionnelle"
+       ]
+      },
+      {
+       "titre": "Expression orale professionnelle et prise de parole",
+       "points": [
+        "Structuration d’un discours oral, gestion du temps et de l’attention",
+        "Prise de parole individuelle et en groupe, animation de réunion, exposé, entretien",
+        "Techniques de conviction, gestion du stress, adaptation à l’auditoire, gestion des objections",
+        "Exercices de pitch, de débat, de présentation de projet, de restitution orale d’une analyse"
+       ]
+      },
+      {
+       "titre": "Adaptation de l’expression au public et au contexte",
+       "points": [
+        "Identification des attentes du public cible, adaptation du registre, du ton, du niveau de langue",
+        "Communication inclusive, accessibilité des messages, clarté et efficacité",
+        "Application à des situations variées : soutenance, entretien, débat contradictoire, présentation à un client ou un jury",
+        "Atelier pratique : simulation de présentation ou de débat sur un dossier complexe"
+       ]
+      },
+      {
+       "titre": "Valorisation de la singularité et restitution professionnelle",
+       "points": [
+        "Travail sur la voix, le style, la posture, la signature rédactionnelle",
+        "Développement de la créativité dans l’expression, personnalisation des productions",
+        "Compilation des productions dans un portfolio ou book professionnel",
+        "Atelier : restitution d’une synthèse écrite et orale sur un cas réel ou simulé, feedback collectif et individuel"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Ateliers d’écriture et d’expression orale, jeux de rôle, débats, simulations de situations réelles",
+      "Travail en binômes ou groupes mixtes pour favoriser l’entraide et la confrontation des points de vue",
+      "Analyse de dossiers complexes, exercices de synthèse et d’argumentation",
+      "Utilisation d’outils numériques (enregistrements, corrections collaboratives, feedback vidéo)",
+      "Peer review, feedback croisé, auto-évaluation et coaching personnalisé"
+     ],
+     "evaluations": [
+      "Formative : exercices de synthèse, d’argumentation, de prise de parole, quiz sur les techniques, feedback continu",
+      "Sommative : rendu d’un dossier écrit (synthèse, note, argumentation) et prestation orale (pitch, débat, présentation), évaluation sur la clarté, la rigueur, l’impact, la capacité d’adaptation et la singularité de l’expression"
+     ]
+    },
+    {
+     "titre": "Personal Branding",
+     "bloc": "Compétences transversales – Valorisation professionnelle / Communication stratégique",
+     "formation": "B3 – Bachelor Chargé de Communication",
+     "rncp": "39741 (France Compétences)",
+     "activite": "Définir et valoriser son identité professionnelle : positionnement, storytelling, supports, présence numérique, argumentation",
+     "intervenant": "",
+     "volume": "7h (calendaire et FFP)",
+     "sequencage": "S1/S2 – 2 séances de 3h30",
+     "objectif": "Permettre à l’étudiant d’optimiser sa visibilité et sa crédibilité sur le marché du travail, d’affirmer sa singularité, de structurer son discours et de rendre ses compétences lisibles et attractives pour les recruteurs ou partenaires.",
+     "commentaire": "",
+     "competences_prose": "Finaliser une stratégie d’identité professionnelle cohérente et authentique ; savoir raconter son parcours, valoriser ses compétences, construire et argumenter sa singularité ; maîtriser la création de supports (portfolio, vidéo, réseaux) et développer une présence numérique efficace et crédible.",
+     "competences_liees": [],
+     "notions_cles": [
+      "Définir son identité professionnelle et son positionnement",
+      "Storytelling et prise de parole de soi",
+      "Création et optimisation des supports de personal branding",
+      "Développer sa présence numérique et son réseau",
+      "Synthèse, restitution et feedback"
+     ],
+     "programme": [
+      {
+       "titre": "Définir son identité professionnelle et son positionnement",
+       "points": [
+        "Auto-diagnostic des compétences, valeurs, aspirations, personnalité professionnelle",
+        "Identification des éléments différenciants (hard skills, soft skills, expériences, passions)",
+        "Construction d’un pitch personnel et d’un storytelling authentique",
+        "Travail en binômes pour feedback et enrichissement croisé"
+       ]
+      },
+      {
+       "titre": "Storytelling et prise de parole de soi",
+       "points": [
+        "Techniques de storytelling appliquées au parcours professionnel",
+        "Exercices de prise de parole (pitch vidéo, présentation face caméra, elevator pitch)",
+        "Travail sur la posture, la voix, la gestion du stress et l’impact émotionnel",
+        "Analyse de vidéos de présentation et feedback collectif"
+       ]
+      },
+      {
+       "titre": "Création et optimisation des supports de personal branding",
+       "points": [
+        "Portfolio, book, CV créatif, profil LinkedIn, site personnel",
+        "Cohérence graphique et éditoriale, choix des contenus à valoriser",
+        "Utilisation des outils numériques, IA générative pour la création ou l’optimisation des supports",
+        "Atelier pratique : mise à jour ou création d’un support clé (portfolio, profil LinkedIn, vidéo de présentation)"
+       ]
+      },
+      {
+       "titre": "Développer sa présence numérique et son réseau",
+       "points": [
+        "Stratégie de visibilité sur les réseaux professionnels (LinkedIn, Instagram, etc.)",
+        "Bonnes pratiques de publication, veille, interaction, développement du réseau",
+        "Gestion de l’e-réputation, veille sur son image",
+        "Plan d’action personnalisé pour la suite du cursus et l’insertion professionnelle"
+       ]
+      },
+      {
+       "titre": "Synthèse, restitution et feedback",
+       "points": [
+        "Présentation orale ou vidéo du pitch ou du support réalisé",
+        "Feedback croisé, axes d’amélioration, conseils personnalisés",
+        "Mutualisation des bonnes pratiques et ressources complémentaires"
+       ]
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Ateliers collaboratifs et peer review (binômes ou groupes mixtes)",
+      "Exercices pratiques de pitch vidéo, storytelling, création de supports",
+      "Utilisation d’outils numériques et d’IA pour la création et l’optimisation",
+      "Défis créatifs : « 1 pitch, 2 formats », « portfolio express », « analyse de profils inspirants »",
+      "Feedback collectif et coaching individualisé"
+     ],
+     "evaluations": [
+      "Formative : quiz d’auto-évaluation, exercices de pitch, analyse de profils, feedback croisé",
+      "Sommative : rendu d’un support de personal branding finalisé (portfolio, vidéo, profil LinkedIn, etc.), présentation orale ou vidéo, évaluation sur la cohérence, l’authenticité, l’impact, la capacité à argumenter ses choix et à se démarquer"
+     ]
+    },
+    {
+     "titre": "Compétition",
+     "bloc": "Compétences transversales – Valorisation professionnelle / Communication stratégique",
+     "formation": "B3 – Bachelor Chargé de Communication",
+     "rncp": "39741 (France Compétences)",
+     "activite": "Définir et valoriser son identité professionnelle : positionnement, storytelling, supports, présence numérique, argumentation",
+     "intervenant": "",
+     "volume": "35h (compétition régionale) + 42h (compétition nationale) - (dont 1 semaine de compétition régionale + 1 séance de cadrage + 1 séance de débrief)",
+     "sequencage": "S1+S2",
+     "objectif": "Traduire un brief client en recommandation stratégique de communication. Analyser une situation annonceur en mobilisant les outils d’analyse appris en B3 (études, veille, benchmarks, personae…). Construire un concept de communication et décliner une campagne multi-leviers adaptée au budget, à la cible et aux objectifs. Formaliser une présentation cohérente, impactante, visuellement professionnelle. Collaborer au sein d’une équipe projet en s’organisant efficacement et en répartissant les rôles. Argumenter ses choix et défendre une recommandation devant un jury composé de professionnels.",
+     "commentaire": "",
+     "competences_prose": "Décrypter un brief annonceur et identifier les enjeux stratégiques de communication.\nAnalyser une problématique de communication complexe et formuler des axes de réponse.\nÉlaborer une recommandation stratégique argumentée à partir d'une analyse de contexte.\nConcevoir une campagne de communication intégrée, cohérente et réaliste.\nMobiliser des compétences transversales : créativité, gestion de projet, intelligence collective, prise de parole, storytelling.\nS’entraîner à répondre à une situation professionnelle réelle dans le respect d’un délai contraint.\nSoutenir un projet de communication devant un jury professionnel.",
+     "competences_liees": [],
+     "notions_cles": [
+      "Phase 1 – Cadrage (3h30)",
+      "Phase 2 – Semaine de Compétition (5 jours)",
+      "Phase 3 – Finale & Jury (1 jour)",
+      "Phase 4 – Débrief pédagogique",
+      "Phase 5 : TP d’évaluation"
+     ],
+     "programme": [
+      {
+       "titre": "Phase 1 – Cadrage (3h30)",
+       "points": [
+        "Présentation du format « Compétition » au Cesacom : enjeux, modalités, exemples d’annonceurs.",
+        "Décryptage des attendus de l’épreuve certifiante : livrables, soutenance, critères de notation.",
+        "Constitution des agences (groupes) et travail sur l’identité d’agence.",
+        "Rappel méthodologique : analyse de brief, élaboration de concept, storytelling de campagne."
+       ]
+      },
+      {
+       "titre": "Phase 2 – Semaine de Compétition (5 jours)",
+       "points": [
+        "Jour 1 : Réception du brief annonceur, Q&A, reformulation, cadrage stratégique.",
+        "Jour 2-4 : Travail d’agence en autonomie : analyse, benchmark, stratégie, création, plan de com.",
+        "Travail tutoré : accompagnement méthodo, feedback intermédiaires, validation du concept.",
+        "Jour 5 : Soutenances intermédiaires (poules), sélection pour la finale."
+       ]
+      },
+      {
+       "titre": "Phase 3 – Finale & Jury (1 jour)",
+       "points": [
+        "Soutenance des agences finalistes devant le client.",
+        "Délibération."
+       ]
+      },
+      {
+       "titre": "Phase 4 – Débrief pédagogique",
+       "points": [
+        "Analyse collective des productions (forces, faiblesses, points d’amélioration).",
+        "Feedback croisé inter-agences.",
+        "Valorisation des acquis dans le parcours Cesacom / Portfolio personnel."
+       ]
+      },
+      {
+       "titre": "Phase 5 : TP d’évaluation",
+       "points": []
+      }
+     ],
+     "seances": [],
+     "planning": [],
+     "parcours": [],
+     "methodes": [
+      "Mise en situation réelle (brief réel, client réel, jury pro).",
+      "Travail en équipe projet (agence simulée).",
+      "Coaching stratégique et créatif.",
+      "Ateliers flash (benchmark, concept, storytelling, maquettes…).",
+      "Soutenances simulées puis réelles."
+     ],
+     "evaluations": [
+      "Formative : Coaching et feedbacks en cours de semaine, auto-évaluation post-compétition.",
+      "Sommative : Recommandation stratégique (cohérence, pertinence, faisabilité), qualité de la campagne proposée (concept, déclinaisons, storytelling).",
+      "Pertinence du plan d’action (objectifs, cibles, budget, canaux), impact et clarté de la présentation orale.",
+      "Posture professionnelle et capacité à défendre ses choix."
+     ]
+    }
+   ]
+  }
+ ]
+}

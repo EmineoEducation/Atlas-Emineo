@@ -1,0 +1,752 @@
+{
+ "outil": "alignement-syllabi",
+ "version": 2,
+ "genere_le": "2026-10-05",
+ "titres": [
+  {
+   "cle": "m1-msmc",
+   "liens": [
+    {
+     "syllabus": "TD : Méthodologie Dossier de veille",
+     "bloc": "B01",
+     "module_pf": "TD : Méthodologie Dossier de veille",
+     "origine": "identique"
+    },
+    {
+     "syllabus": "Méthodologie Pack Marque",
+     "bloc": "B01",
+     "module_pf": "Méthodologie Pack Marque",
+     "origine": "identique"
+    },
+    {
+     "syllabus": "Études marketing stratégique et communication omnicanale",
+     "bloc": "B01",
+     "module_pf": "Etudes marketing stratégique et communication omnicanale",
+     "origine": "identique"
+    },
+    {
+     "syllabus": "Insights et Analyse consommateurs",
+     "bloc": "B01",
+     "module_pf": "Insights et Analyse consommateurs",
+     "origine": "identique"
+    },
+    {
+     "syllabus": "Analyse de la stratégie de positionnement de la marque",
+     "bloc": "B01",
+     "module_pf": "Analyse de la stratégie de positionnement de la marque",
+     "origine": "identique"
+    },
+    {
+     "syllabus": "Élaboration de la stratégie de marque (plateforme de marque)",
+     "bloc": "B02",
+     "module_pf": "Elaboration de la stratégie de marque (plateforme de marque)",
+     "origine": "identique"
+    },
+    {
+     "syllabus": "Brand content : Éditorialisation et narration de marque",
+     "bloc": "B02",
+     "module_pf": "Brand content : Editorialisation et narration de marque",
+     "origine": "identique"
+    },
+    {
+     "syllabus": "Fondamentaux de la RSE/ESS",
+     "bloc": "B02",
+     "module_pf": "Fondamentaux de la RSE/ ESS",
+     "origine": "identique"
+    },
+    {
+     "syllabus": "Référencements (SEO, SEA, SMO, SMA)",
+     "bloc": "B02",
+     "module_pf": "Référencements (SEO, SEA, SMO, SMA)",
+     "origine": "identique"
+    },
+    {
+     "syllabus": "Photographie : techniques de prise de vue",
+     "bloc": "B02",
+     "module_pf": "Photographie : techniques de prise de vue",
+     "origine": "identique"
+    },
+    {
+     "syllabus": "Fabrication : de l’idée à la réalisation",
+     "bloc": "B02",
+     "module_pf": "Fabrication : de l'idée à la réalisation",
+     "origine": "identique"
+    },
+    {
+     "syllabus": "Wordpress",
+     "bloc": "B02",
+     "module_pf": "Wordpress",
+     "origine": "identique"
+    },
+    {
+     "syllabus": "Budget Pilotage financier & négociation",
+     "bloc": "B02",
+     "module_pf": "Budget Pilotage financier & négociation",
+     "origine": "identique"
+    },
+    {
+     "syllabus": "Spé Marque & transfo : Supports de communication innovants",
+     "bloc": "B05",
+     "module_pf": "Spé Marque & transfo : Supports de communication innovants",
+     "origine": "identique"
+    },
+    {
+     "syllabus": "Spé Marque & transfo : Référencement – Google Analytics (approfondissement)",
+     "bloc": "B05",
+     "module_pf": "Spé Marque & transfo : Référencement : Google Analytics (approfondissement)",
+     "origine": "identique"
+    },
+    {
+     "syllabus": "Spé Marque & transfo : Design Thinking",
+     "bloc": "B05",
+     "module_pf": "Spé Marque & transfo : Design thinking",
+     "origine": "identique"
+    },
+    {
+     "syllabus": "Spé Marque & transfo : Webdesign et Design responsive",
+     "bloc": "B05",
+     "module_pf": "Spé Marque & transfo : Webdesign et Design responsive",
+     "origine": "identique"
+    },
+    {
+     "syllabus": "Spé Marque & transfo : UX/UI",
+     "bloc": "B05",
+     "module_pf": "Spé Marque & transfo : UX/UI",
+     "origine": "identique"
+    },
+    {
+     "syllabus": "Spé Marque & transfo : Wordpress perfectionnement & NoCode",
+     "bloc": "B05",
+     "module_pf": "Spé Marque & transfo : Wordpress perfectionnement & NoCode",
+     "origine": "identique"
+    },
+    {
+     "syllabus": "Spé Strat Créa : Direction artistique",
+     "bloc": "B06",
+     "module_pf": "Spé Strat Créa : Direction artistique",
+     "origine": "identique"
+    },
+    {
+     "syllabus": "Spé Strat Créa : Créativité et pensée innovante",
+     "bloc": "B06",
+     "module_pf": "Spé Strat Créa : Créativité et pensée innovante",
+     "origine": "identique"
+    },
+    {
+     "syllabus": "Spé Strat Créa : Éthique professionnelle (propriété artistique, intellectuelle, …)",
+     "bloc": "B06",
+     "module_pf": "Spé Strat Créa : Éthique professionnelle (propriété artistique, intellectuelle,…)",
+     "origine": "identique"
+    },
+    {
+     "syllabus": "Spé Strat Créa : Fabrication – RSE et communication visuelle responsable",
+     "bloc": "B06",
+     "module_pf": "Spé Strat Créa : Fabrication : RSE et communication visuelle responsable",
+     "origine": "identique"
+    },
+    {
+     "syllabus": "Spé Strat Créa : PAO/Adobe : Logotype & typo",
+     "bloc": "B06",
+     "module_pf": "Spé Strat Créa : PAO/Adobe : Logotype & typo",
+     "origine": "identique"
+    },
+    {
+     "syllabus": "Spé Strat Créa : Adobe Première",
+     "bloc": "B06",
+     "module_pf": "Spé Strat Créa : Adobe Première",
+     "origine": "identique"
+    },
+    {
+     "syllabus": "Spé Strat Créa : Adobe – Montage Photo",
+     "bloc": "B06",
+     "module_pf": "Spé Strat Créa : Adobe : Montage Photo",
+     "origine": "identique"
+    },
+    {
+     "syllabus": "Anglais professionnel de la communication",
+     "bloc": "HB",
+     "module_pf": "Anglais professionnel de la communication",
+     "origine": "identique"
+    },
+    {
+     "syllabus": "Séminaire d’intégration et de remise à niveau PAO",
+     "bloc": "HB",
+     "module_pf": "Séminaire d'intégration et de remise à niveau PAO",
+     "origine": "identique"
+    },
+    {
+     "syllabus": "Séminaire d’intégration et de remise à niveau Vidéo",
+     "bloc": "HB",
+     "module_pf": "Séminaire d'intégration et de remise à niveau Vidéo",
+     "origine": "identique"
+    },
+    {
+     "syllabus": "Séminaire d’intégration et de remise à niveau Photo",
+     "bloc": "HB",
+     "module_pf": "Séminaire d'intégration et de remise à niveau Photo",
+     "origine": "identique"
+    },
+    {
+     "syllabus": "Veille dynamique (panel, méthodes d’interview) et imaginaires de la consommation",
+     "bloc": "B01",
+     "module_pf": "Veille dynamique (panel, méthodes d'interview) et Imaginaires de la conso",
+     "origine": "valide"
+    },
+    {
+     "syllabus": "Adobe – outils créatifs numériques au service de la stratégie",
+     "bloc": "B02",
+     "module_pf": "Adobe - outils créatifs numériques au service de la strat",
+     "origine": "valide"
+    },
+    {
+     "syllabus": "Spé Marque & transfo : Benchmarking (analyse des stratégies concurrentielles)",
+     "bloc": "B05",
+     "module_pf": "Spé Marque & transfo : Benchmarking (analyse des strat concurrentielles)",
+     "origine": "valide"
+    },
+    {
+     "syllabus": "Spé Strat Créa : Histoire de l’art et tendances contemporaines",
+     "bloc": "B06",
+     "module_pf": "Spé Srat Créa : Histoire de l'art et tendances contemporaines",
+     "origine": "valide"
+    },
+    {
+     "syllabus": "TD : Accompagnement veille (dossier de veille)",
+     "bloc": "B01",
+     "module_pf": "TD : Méthodologie Dossier de veille",
+     "origine": "valide"
+    },
+    {
+     "syllabus": "Éloquence et préparation à l’épreuve de certification orale (Pack Marque)",
+     "bloc": "B01",
+     "module_pf": "Eloquence et préparation à l'épreuve de certification orale",
+     "origine": "valide"
+    },
+    {
+     "syllabus": "TD : Accompagnement Mégaka – Élaborer une stratégie marketing communication",
+     "bloc": "B02",
+     "module_pf": "TD : Accompagnement Mégaka",
+     "origine": "valide"
+    },
+    {
+     "syllabus": "Spé Strat Créa : Outils créatifs et workflow collaboratif",
+     "bloc": "B06",
+     "module_pf": "Spé Strat Créa : Outils créatifs et worflow collaboratif (Figma, Notion...)",
+     "origine": "valide"
+    },
+    {
+     "syllabus": "Compétition",
+     "bloc": "HB",
+     "module_pf": "Méthodologie Compétition",
+     "origine": "valide"
+    },
+    {
+     "syllabus": "TD : Finalisation et soutenance du dossier de veille (BC1 A.1)",
+     "bloc": "B01",
+     "module_pf": "TD : Méthodologie Dossier de veille",
+     "origine": "valide"
+    },
+    {
+     "syllabus": "Personal Branding publication de contenu : expertise métier",
+     "bloc": "HB",
+     "module_pf": "BT : Ateliers / Worshop/ séminaire",
+     "origine": "corrige"
+    }
+   ],
+   "ecartes": [],
+   "fusions": [
+    {
+     "bloc": "B01",
+     "module_pf": "TD : Méthodologie Dossier de veille",
+     "syllabi": [
+      "TD : Méthodologie Dossier de veille",
+      "TD : Accompagnement veille (dossier de veille)",
+      "TD : Finalisation et soutenance du dossier de veille (BC1 A.1)"
+     ]
+    }
+   ],
+   "resume": {
+    "modules_plan": 43,
+    "modules_alimentes": 39,
+    "liens": 41,
+    "syllabi_ecartes": 0,
+    "modules_sans_syllabus": 4
+   },
+   "modules_sans_syllabus": [
+    {
+     "bloc": "B01",
+     "titre": "Stratégie d'impact positif"
+    },
+    {
+     "bloc": "B02",
+     "titre": "Plan Marketing et de communication, et Mediaplanning"
+    },
+    {
+     "bloc": "HB",
+     "titre": "Accueil en formation / intégration"
+    },
+    {
+     "bloc": "HB",
+     "titre": "Compétition M1 (7 au 11 JUIN)"
+    }
+   ]
+  },
+  {
+   "cle": "m2-msmc",
+   "liens": [
+    {
+     "syllabus": "Rédaction de Brief / Elevator Pitch / Rhétorique",
+     "bloc": "B03",
+     "module_pf": "Rédaction de Brief / Elevator Pitch / Rhétorique",
+     "origine": "identique"
+    },
+    {
+     "syllabus": "Droit appliqué aux stratégies de communication",
+     "bloc": "B03",
+     "module_pf": "Droit appliqué aux stratégies de communication",
+     "origine": "identique"
+    },
+    {
+     "syllabus": "Planification Stratégique",
+     "bloc": "B03",
+     "module_pf": "Planification Stratégique",
+     "origine": "identique"
+    },
+    {
+     "syllabus": "Communication responsable & durable",
+     "bloc": "B03",
+     "module_pf": "Communication responsable & durable",
+     "origine": "identique"
+    },
+    {
+     "syllabus": "Communication de crise",
+     "bloc": "B03",
+     "module_pf": "Communication de crise",
+     "origine": "identique"
+    },
+    {
+     "syllabus": "Management d’équipe & conduite du changement",
+     "bloc": "B03",
+     "module_pf": "Management d'équipe & conduite du changement",
+     "origine": "identique"
+    },
+    {
+     "syllabus": "Management interculturel",
+     "bloc": "B03",
+     "module_pf": "Management interculturel",
+     "origine": "identique"
+    },
+    {
+     "syllabus": "Management intergénérationnel et gestion des situations difficiles",
+     "bloc": "B03",
+     "module_pf": "Management intergénérationnel et gestion des situations difficiles",
+     "origine": "identique"
+    },
+    {
+     "syllabus": "Spé Marque & Transfo : Gestion de campagne Digitale",
+     "bloc": "B05",
+     "module_pf": "Spé Marque & Transfo : Gestion de campagne Digitale",
+     "origine": "identique"
+    },
+    {
+     "syllabus": "Spé Marque & Transfo : Méthodologie IAGen LLM & Automatisation marketing",
+     "bloc": "B05",
+     "module_pf": "Spé Marque & Transfo : Méthodologie IAGen LLM & Automatisation marketing",
+     "origine": "identique"
+    },
+    {
+     "syllabus": "Spé Marque & Transfo : Droit des marques et de la communication digitale",
+     "bloc": "B05",
+     "module_pf": "Spé Marque & Transfo : Droit des marques et de la communication digitale",
+     "origine": "identique"
+    },
+    {
+     "syllabus": "Spé Créa : Approfondissement Adobe After Effect",
+     "bloc": "B06",
+     "module_pf": "Spé Créa : Approfondissement Adobe After Effect",
+     "origine": "identique"
+    },
+    {
+     "syllabus": "Spé Créa : Méthodologies IAGen créative",
+     "bloc": "B06",
+     "module_pf": "Spé Créa : Méthodologies IAGen créative",
+     "origine": "identique"
+    },
+    {
+     "syllabus": "Business Game création d’entreprise",
+     "bloc": "HB",
+     "module_pf": "Business Game création d'entreprise",
+     "origine": "identique"
+    },
+    {
+     "syllabus": "Audio-Vidéo : Pré-prod, motion, post-prod",
+     "bloc": "B03",
+     "module_pf": "Audio-Vidéo : De la Pré-prod à la Post-prod",
+     "origine": "valide"
+    },
+    {
+     "syllabus": "Négociation Commerciale & Relations fournisseurs",
+     "bloc": "B03",
+     "module_pf": "Négociation Commerciales & Relations fournisseurs",
+     "origine": "valide"
+    },
+    {
+     "syllabus": "Spé Marque & Transfo : Méthodes agiles de gestion de projet (SCRUM, etc.)",
+     "bloc": "B05",
+     "module_pf": "Spé Marque & Tranfo : Méthodes agiles de gestion de projet (SCRUM, etc.)",
+     "origine": "valide"
+    },
+    {
+     "syllabus": "Conception de projet (documents et livrables de cadrage projet)",
+     "bloc": "B03",
+     "module_pf": "Conception de projet",
+     "origine": "valide"
+    },
+    {
+     "syllabus": "Management de projet : gestion du risque et des coûts",
+     "bloc": "B03",
+     "module_pf": "Management de projet",
+     "origine": "valide"
+    },
+    {
+     "syllabus": "Indicateurs-clés de performance : définition et organisation de la collecte, Analytics et data visualisation",
+     "bloc": "B03",
+     "module_pf": "Indicateurs-clés de performance : définition et organisation de la collecte",
+     "origine": "valide"
+    },
+    {
+     "syllabus": "Référencement SMA/SMO",
+     "bloc": "B03",
+     "module_pf": "Indicateurs-clés de performance : analytics & Data visualisation (+Référencement SMA /SMO)",
+     "origine": "valide"
+    },
+    {
+     "syllabus": "Hackathon Websérie (Spé Marque & Transfo / Spé Créa)",
+     "bloc": "B05",
+     "module_pf": "Hackathon Websérie",
+     "origine": "corrige"
+    },
+    {
+     "syllabus": "Hackathon Websérie (Spé Marque & Transfo / Spé Créa)",
+     "bloc": "B06",
+     "module_pf": "Hackathon Websérie",
+     "origine": "corrige"
+    },
+    {
+     "syllabus": "Hackathon Podcast (Spé Marque & Transfo / Spé Créa)",
+     "bloc": "B05",
+     "module_pf": "Hackathon Podcast",
+     "origine": "corrige"
+    },
+    {
+     "syllabus": "Hackathon Podcast (Spé Marque & Transfo / Spé Créa)",
+     "bloc": "B06",
+     "module_pf": "Hackathon Podcast",
+     "origine": "corrige"
+    },
+    {
+     "syllabus": "Hackathon Media Tactique (Spé Marque & Transfo / Spé Créa)",
+     "bloc": "B05",
+     "module_pf": "Hackathon Media Tactique",
+     "origine": "corrige"
+    },
+    {
+     "syllabus": "Hackathon Media Tactique (Spé Marque & Transfo / Spé Créa)",
+     "bloc": "B06",
+     "module_pf": "Hackathon Media Tactique",
+     "origine": "corrige"
+    },
+    {
+     "syllabus": "Accompagnement PPI (Spé Marque & Transfo) / Accompagnement PPC (Spé Créa)",
+     "bloc": "B05",
+     "module_pf": "Spé Marque & Transfo : Accompagnement PPI",
+     "origine": "corrige"
+    },
+    {
+     "syllabus": "Accompagnement PPI (Spé Marque & Transfo) / Accompagnement PPC (Spé Créa)",
+     "bloc": "B06",
+     "module_pf": "Spé Créa : Accompagnement PPC",
+     "origine": "corrige"
+    },
+    {
+     "syllabus": "Google Analytics",
+     "bloc": "B03",
+     "module_pf": "Indicateurs-clés de performance : analytics & Data visualisation (+Référencement SMA /SMO)",
+     "origine": "corrige"
+    },
+    {
+     "syllabus": "Compétition",
+     "bloc": "HB",
+     "module_pf": "Compétition M2 (Training EC BLOC 5/6 PPI ou PPC) Décembre",
+     "origine": "corrige"
+    }
+   ],
+   "ecartes": [
+    {
+     "syllabus": "Spé Créa : Direction Artistique & éco-design",
+     "motif": "écarté à la revue"
+    }
+   ],
+   "fusions": [
+    {
+     "bloc": "B03",
+     "module_pf": "Indicateurs-clés de performance : analytics & Data visualisation (+Référencement SMA /SMO)",
+     "syllabi": [
+      "Référencement SMA/SMO",
+      "Google Analytics"
+     ]
+    }
+   ],
+   "resume": {
+    "modules_plan": 35,
+    "modules_alimentes": 30,
+    "liens": 31,
+    "syllabi_ecartes": 1,
+    "modules_sans_syllabus": 5
+   },
+   "modules_sans_syllabus": [
+    {
+     "bloc": "B03",
+     "titre": "Audio-Vidéo : Motion vidéo"
+    },
+    {
+     "bloc": "B03",
+     "titre": "Méthodologie Bloc 3 et Ateliers de production PiloPlan (séances à étaler dans le semestre 2)"
+    },
+    {
+     "bloc": "B06",
+     "titre": "Spé Créa : Psychologie des couleurs"
+    },
+    {
+     "bloc": "HB",
+     "titre": "Ateliers / Worshop / Séminaires campus A2"
+    },
+    {
+     "bloc": "HB",
+     "titre": "Personal Branding publication de contenu : expertise métier"
+    }
+   ]
+  },
+  {
+   "cle": "bach-cdc",
+   "liens": [
+    {
+     "syllabus": "Méthodologies de la veille",
+     "bloc": "B01",
+     "module_pf": "Méthodologies de la veille",
+     "origine": "identique"
+    },
+    {
+     "syllabus": "Communication durable et soutenable",
+     "bloc": "B01",
+     "module_pf": "Communication durable et soutenable",
+     "origine": "identique"
+    },
+    {
+     "syllabus": "Connaissance et comportement du consommateur",
+     "bloc": "B01",
+     "module_pf": "Connaissance et comportement du consommateur",
+     "origine": "identique"
+    },
+    {
+     "syllabus": "Stratégie et positionnement de la marque",
+     "bloc": "B02",
+     "module_pf": "Stratégie et positionnement de la marque",
+     "origine": "identique"
+    },
+    {
+     "syllabus": "Marketing (plan marketing stratégique & plan de communication)",
+     "bloc": "B02",
+     "module_pf": "Marketing (plan marketing stratégique & plan de communication)",
+     "origine": "identique"
+    },
+    {
+     "syllabus": "Stratégies des marques : identité visuelle, storytelling et réputation",
+     "bloc": "B02",
+     "module_pf": "Stratégies des marques : identité visuelle, storytelling et réputation",
+     "origine": "identique"
+    },
+    {
+     "syllabus": "SEO/SEA",
+     "bloc": "B02",
+     "module_pf": "SEO/SEA",
+     "origine": "identique"
+    },
+    {
+     "syllabus": "Management d’équipe & Gestion de projets (méthodologies)",
+     "bloc": "B03",
+     "module_pf": "Management d'équipe & Gestion de projets (méthodologies)",
+     "origine": "identique"
+    },
+    {
+     "syllabus": "Éloquence & art oratoire",
+     "bloc": "B03",
+     "module_pf": "Eloquence & Art oratoire",
+     "origine": "identique"
+    },
+    {
+     "syllabus": "Éloquence & art oratoire",
+     "bloc": "B03",
+     "module_pf": "Eloquence & Art oratoire",
+     "origine": "identique"
+    },
+    {
+     "syllabus": "PAO / Adobe",
+     "bloc": "B04",
+     "module_pf": "PAO/Adobe",
+     "origine": "identique"
+    },
+    {
+     "syllabus": "Vidéo / Photo",
+     "bloc": "B04",
+     "module_pf": "Vidéo/Photo",
+     "origine": "identique"
+    },
+    {
+     "syllabus": "Wordpress",
+     "bloc": "B04",
+     "module_pf": "Wordpress",
+     "origine": "identique"
+    },
+    {
+     "syllabus": "IA Génératives : Méthodologie de prompting",
+     "bloc": "B04",
+     "module_pf": "IA Generatives : Méthodologie de prompting",
+     "origine": "identique"
+    },
+    {
+     "syllabus": "Sémiologie de la communication et des couleurs",
+     "bloc": "B04",
+     "module_pf": "Sémiologie de la communication et des couleurs",
+     "origine": "identique"
+    },
+    {
+     "syllabus": "Écriture créative et storytelling",
+     "bloc": "B04",
+     "module_pf": "Ecriture créative et storytelling",
+     "origine": "identique"
+    },
+    {
+     "syllabus": "Budget et négociation",
+     "bloc": "B05",
+     "module_pf": "Budget et négociation",
+     "origine": "identique"
+    },
+    {
+     "syllabus": "Indicateurs de Performance (KPI’s)",
+     "bloc": "B05",
+     "module_pf": "Indicateurs de Performance (Kpi's)",
+     "origine": "identique"
+    },
+    {
+     "syllabus": "Anglais",
+     "bloc": "HB",
+     "module_pf": "Anglais",
+     "origine": "identique"
+    },
+    {
+     "syllabus": "Expression écrite et orale",
+     "bloc": "HB",
+     "module_pf": "Expression Ecrite et Orale",
+     "origine": "identique"
+    },
+    {
+     "syllabus": "Personal Branding",
+     "bloc": "HB",
+     "module_pf": "Personal Branding",
+     "origine": "identique"
+    },
+    {
+     "syllabus": "SMA/SMO (Social Media Advertising / Social Media Optimization)",
+     "bloc": "B02",
+     "module_pf": "SMA/SMO",
+     "origine": "valide"
+    },
+    {
+     "syllabus": "Semaines intensives",
+     "bloc": "B04",
+     "module_pf": "Semaines intensives d'option (Transverse Blocs 1 à 5)",
+     "origine": "valide"
+    },
+    {
+     "syllabus": "Semaines intensives",
+     "bloc": "B04",
+     "module_pf": "Semaines intensives d'option (Transverse Blocs 1 à 5)",
+     "origine": "valide"
+    },
+    {
+     "syllabus": "Semaines intensives",
+     "bloc": "B04",
+     "module_pf": "Semaines intensives d'option (Transverse Blocs 1 à 5)",
+     "origine": "valide"
+    },
+    {
+     "syllabus": "Compétition",
+     "bloc": "HB",
+     "module_pf": "Méthodologie compétition",
+     "origine": "corrige"
+    },
+    {
+     "syllabus": "Compétition",
+     "bloc": "B02",
+     "module_pf": "Compet' Nat'",
+     "origine": "corrige"
+    }
+   ],
+   "ecartes": [
+    {
+     "syllabus": "RAN Fondamentaux du marketing et de la communication",
+     "motif": "écarté à la revue"
+    },
+    {
+     "syllabus": "RAN Wordpress",
+     "motif": "écarté à la revue"
+    },
+    {
+     "syllabus": "RAN Photo/Video",
+     "motif": "écarté à la revue"
+    },
+    {
+     "syllabus": "RAN PAO",
+     "motif": "écarté à la revue"
+    }
+   ],
+   "fusions": [
+    {
+     "bloc": "B03",
+     "module_pf": "Eloquence & Art oratoire",
+     "syllabi": [
+      "Éloquence & art oratoire",
+      "Éloquence & art oratoire"
+     ]
+    },
+    {
+     "bloc": "B04",
+     "module_pf": "Semaines intensives d'option (Transverse Blocs 1 à 5)",
+     "syllabi": [
+      "Semaines intensives",
+      "Semaines intensives",
+      "Semaines intensives"
+     ]
+    }
+   ],
+   "resume": {
+    "modules_plan": 26,
+    "modules_alimentes": 24,
+    "liens": 27,
+    "syllabi_ecartes": 4,
+    "modules_sans_syllabus": 2
+   },
+   "modules_sans_syllabus": [
+    {
+     "bloc": "B03",
+     "titre": "Relation presse"
+    },
+    {
+     "bloc": "B03",
+     "titre": "Identité d'agence"
+    }
+   ]
+  }
+ ]
+}
