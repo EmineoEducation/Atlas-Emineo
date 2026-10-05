@@ -122,7 +122,12 @@ const txt = c => String(c == null ? '' : c).replace(/\s+/g, ' ').trim()
 const nombre = c => { const n = parseFloat(String(txt(c)).replace(',', '.')); return isFinite(n) ? n : null }
 
 /* ── Repères de structure ─────────────────────────────────────────────────── */
-const RE_BLOC_MDEC = /^BC\s*(\d+)\s*[-–—]\s*(.+)$/i
+// Le plan écrit tantôt « BC 4 - Superviser… », tantôt « BC – 4 Superviser… » :
+// le tiret passe devant le numéro sur un seul en-tête, et cela suffisait à
+// faire tomber ses cinq modules dans le bloc précédent.
+// Le tiret reste obligatoire : sans lui, « BC1 ETUDE DE CAS … » est une ligne
+// d'épreuve, pas un en-tête de bloc.
+const RE_BLOC_MDEC = /^BC\s*(?:(\d+)\s*[-–—]|[-–—]\s*(\d+))\s*(.+)$/i
 const RE_BLOC_MRH = /^BC\s*0?(\d+)\s+(.+)$/i
 const RE_ACTIVITE_MDEC = /^(\d+)\s*\.\s*(.+)$/
 const RE_ACTIVITE_MRH = /^A\s*(\d+)\s+(.+)$/i
@@ -160,21 +165,25 @@ function lireMDEC(grille) {
     let m
     if (a && (m = a.match(RE_ANNEE))) { annee = m[1]; module = null; continue }
     if (a && (m = a.match(RE_BLOC_MDEC))) {
+      const numero = m[1] || m[2], intitule = m[3]
       // Le plan MDEC découpe un même bloc en « PARTIE M1 » et « PARTIE M2 »,
       // et ouvre des sections de tutorat sous un numéro déjà employé. Le bloc
       // du référentiel reste le bloc de compétences : on rejoint les parties
       // plutôt que de fabriquer des doublons d'identifiant.
-      const id = 'B' + String(m[1]).padStart(2, '0')
-      const titre = m[2].replace(/\s*\(PARTIE\s+M\d\)\s*$/i, '').trim()
+      const id = 'B' + String(numero).padStart(2, '0')
+      const titre = intitule.replace(/\s*\(PARTIE\s+M\d\)\s*$/i, '').trim()
       const existant = blocs.find(b => b.id === id)
       if (existant) {
         bloc = existant
-        if (vol != null) bloc.volume_annonce = (bloc.volume_annonce || 0) + vol
+        // Le volume annoncé l'est par partie, donc par année : le cumuler
+        // reviendrait à comparer un total de cycle aux modules d'une seule
+        // année, et le contrôle sonnerait toujours faux.
+        if (vol != null) bloc.volumes_annee[annee] = (bloc.volumes_annee[annee] || 0) + vol
         if (titre && !/^TUTORAT/i.test(titre) && titre.length > bloc.titre.length) bloc.titre = titre
       } else {
         bloc = { id, titre, nature: 'obligatoire',
                  competences: [], modules: [], epreuves: [], competences_mentionnees: [],
-                 competences_race: [], bloc_race: '', volume_annonce: vol }
+                 competences_race: [], bloc_race: '', volumes_annee: vol != null ? { [annee]: vol } : {} }
         blocs.push(bloc)
       }
       activite = ''; module = null; continue
@@ -319,7 +328,9 @@ function parAnnee(blocs, annee) {
     .map(b => {
       const codes = []
       for (const m of b.modules) for (const c of m.competences_liees) if (!codes.includes(c)) codes.push(c)
-      return { ...b, competences: codes,
+      const { volumes_annee, ...reste } = b
+      return { ...reste, competences: codes,
+               volume_annonce: volumes_annee ? (volumes_annee[annee] != null ? volumes_annee[annee] : null) : (b.volume_annonce != null ? b.volume_annonce : null),
                competences_mentionnees: b.competences_mentionnees.filter(c => codes.includes(c.id)) }
     })
 }
