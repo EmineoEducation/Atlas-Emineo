@@ -801,25 +801,25 @@ function ImportCesar({onFini}){
   }
 
   async function poserGroupes(){
-    if(!groupes)return
+    if(!groupes||!table)return
     setOccupe('groupes');setErreur('')
     try{
-      const liste=groupesDepuisCesar(groupes)
-      await api.cesarPoserGroupes(liste)
-      // Rattachement automatique quand le libellé CESAR désigne une promotion
-      // qu'Atlas connaît. Les autres restent en attente, sans invention.
-      let rattaches=0
-      for(const g of liste){
-        const t=titreCourtPour(g.code_cesar)
-        if(!t)continue
-        if(!formations.some(f=>(f.titre||'').includes(t)||(f.formation?.titre_court||'')===t))continue
-        try{await api.cesarRattacher(g.code_cesar,t);rattaches++}catch(_){}
-      }
+      // Le rattachement se fait au dépôt, pas après : l'endpoint accepte un
+      // titre court avec chaque groupe et le résout lui-même. Une première
+      // version enchaînait un second appel par groupe, protégé par un test
+      // comparant le titre court à un champ absent de /api/formations — le
+      // test échouait toujours, aucun groupe n'était rattaché, et les 145
+      // séances étaient rejetées pour « groupe non rattaché à un titre ».
+      const liste=groupesDepuisCesar(groupes).map(g=>({...g,titre_court:titreCourtPour(g.code_cesar)}))
+      const r=await api.cesarPoserGroupes(liste)
+      const vises=liste.filter(g=>g.titre_court).length
+      const rattaches=r&&typeof r.rattaches==='number'?r.rattaches:vises
       setBilan({titre:'Groupes planning',lignes:[
         ['Groupes déposés',liste.length],
-        ['Rattachés depuis la table',rattaches],
-        ['Hors périmètre ou à rattacher',liste.length-rattaches],
-      ]})
+        ['Visés par la table',vises],
+        ['Rattachés par le serveur',rattaches],
+        ['Hors périmètre',liste.length-vises],
+      ],rejets:(r&&r.rejets||[]).slice(0,6).map(x=>({ligne:x.code_cesar||'—',motif:x.motif}))})
       rafraichir()
     }catch(e){setErreur(e.message)}
     setOccupe('')
