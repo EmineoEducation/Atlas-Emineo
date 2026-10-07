@@ -226,6 +226,7 @@ export const api = {
   cesarEtat:       ()                => apiFetch('/api/cesar-sync?action=etat'),
   cesarGroupes:    ()                => apiFetch('/api/cesar-sync?action=groupes'),
   cesarMatieres:   (q = '')          => apiFetch('/api/cesar-sync?action=matieres' + q),
+  cesarCouverture: (formationId)     => apiFetch('/api/cesar-sync?action=couverture&formation_id=' + formationId),
   cesarPoserGroupes: (groupes)       => apiFetch('/api/cesar-sync?action=groupes', { method: 'POST', body: { groupes } }),
   cesarRattacher:  (code, titre)     => apiFetch('/api/cesar-sync?action=rattacher', { method: 'POST', body: { code_cesar: code, titre_court: titre } }),
   cesarArbitrer:   (formation_id, libelle_cesar, module_ref) =>

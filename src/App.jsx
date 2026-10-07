@@ -727,6 +727,176 @@ function CartographieTitre({formation}){
   )
 }
 
+/* ═══ COUVERTURE — L'ANNONCÉ CONFRONTÉ AU RÉALISÉ ═══════════════════════════
+   La raison d'être d'Atlas. Le plan de formation et les syllabi disent ce que
+   l'école s'engage à enseigner ; l'émargement dit ce qui a réellement eu lieu.
+   Tout ce qui s'affiche ici naît de la différence entre les deux, et rien
+   n'a été demandé à un intervenant.
+
+   Le compte rendu de séance, quand il existe, s'ajoute en complément. Il ne
+   conditionne aucune mesure : s'il disparaît, la couverture tient toujours. */
+function VueCouverture({formationId}){
+  const [d,setD]=useState(null)
+  const [erreur,setErreur]=useState('')
+  const [onglet,setOnglet]=useState('couverture')
+  const [ouvert,setOuvert]=useState({})
+
+  useEffect(()=>{
+    if(!formationId){setD(null);return}
+    setD(null);setErreur('')
+    api.cesarCouverture(formationId).then(setD).catch(e=>setErreur(e.message))
+  },[formationId])
+
+  if(!formationId)return <Empty icon="📐" titre="Choisissez une promotion" msg="La couverture se calcule promotion par promotion."/>
+  if(erreur)return <div style={{padding:'0.8rem 1rem',background:P.amberbg,border:`1px solid ${P.amber}`,borderRadius:10,fontSize:12.5,color:'#7A4A00'}}>{erreur}</div>
+  if(!d)return <div style={{textAlign:'center',padding:'2rem'}}><Spinner/></div>
+
+  const R=d.resume
+  const tous=[...d.blocs.flatMap(b=>b.modules.map(m=>({...m,bloc:b.id}))),...(d.modules_hors_bloc||[]).map(m=>({...m,bloc:'HB'}))]
+  if(!R.heures_programmees&&!R.modules_programmes)
+    return <Empty icon="📐" titre="Aucune séance importée" msg="Importez l’émargement de cette promotion dans l’onglet Émargement, puis arbitrez les matières."/>
+
+  const pct=R.heures_programmees?Math.round(100*R.heures_faites/R.heures_programmees):0
+  const etat=m=>!m.programme?{c:'jamais',l:'jamais programmé',col:P.saumon}
+    :!m.seances_faites?{c:'avenir',l:'à venir',col:P.border}
+    :m.seances_faites>=m.seances_programmees?{c:'termine',l:'terminé',col:P.menthe}
+    :{c:'encours',l:'en cours',col:P.petrole}
+
+  const carte=m=>{
+    const e=etat(m)
+    const p=m.heures_programmees?Math.round(100*m.heures_faites/m.heures_programmees):0
+    const ecart=m.volume_annonce!=null&&m.heures_programmees?Math.round((m.heures_programmees-m.volume_annonce)*10)/10:null
+    const cle=m.bloc+'|'+m.titre
+    return(
+      <div key={cle} style={{...card({marginBottom:'0.5rem',background:e.c==='jamais'?'rgba(232,155,119,0.07)':'#fff'}),borderLeft:`3px solid ${e.col}`}}>
+        <div onClick={()=>setOuvert(o=>({...o,[cle]:!o[cle]}))} style={{display:'flex',gap:12,alignItems:'flex-start',flexWrap:'wrap',cursor:'pointer'}}>
+          <div style={{flex:1,minWidth:230}}>
+            <div style={{fontSize:13.5,fontWeight:600,color:P.abysse}}>{m.titre}</div>
+            <div style={{fontSize:11.5,color:P.textm,marginTop:2}}>
+              {m.volume_annonce!=null?m.volume_annonce+' h au plan':'volume non précisé'}
+              {m.programme?' · '+m.heures_programmees+' h programmées':''}
+              {ecart?' · écart '+(ecart>0?'+':'')+ecart+' h':''}
+              {m.intervenants.length?' · '+m.intervenants.join(', '):''}
+            </div>
+          </div>
+          {m.programme&&<span style={{fontSize:13,fontWeight:600,color:P.abysse,whiteSpace:'nowrap'}}>{m.heures_faites} / {m.heures_programmees} h</span>}
+          <Tag label={e.l} small color={e.c==='jamais'?'amber':e.c==='termine'?'teal':'blue'}/>
+        </div>
+        {m.programme&&<div style={{height:5,borderRadius:99,background:P.border,overflow:'hidden',marginTop:9}}>
+          <div style={{width:p+'%',height:'100%',background:P.menthe}}/></div>}
+        {ouvert[cle]&&(
+          <div style={{marginTop:'0.7rem',paddingTop:'0.7rem',borderTop:`1px solid ${P.border}`}}>
+            <div style={{fontSize:10,fontWeight:700,letterSpacing:'.08em',textTransform:'uppercase',color:P.textm,marginBottom:'0.35rem'}}>
+              Annoncé — {m.notions.length} notions
+            </div>
+            <div style={{display:'flex',flexWrap:'wrap',gap:4,marginBottom:'0.6rem'}}>
+              {m.notions.length?m.notions.map(n=><span key={n} style={{fontSize:11.5,padding:'3px 9px',borderRadius:99,background:P.surface2,border:`1px solid ${P.border}`}}>{n}</span>)
+                :<span style={{fontSize:12,color:P.textm}}>aucune notion au syllabus</span>}
+            </div>
+            {m.comptes_rendus.length>0&&(
+              <>
+                <div style={{fontSize:10,fontWeight:700,letterSpacing:'.08em',textTransform:'uppercase',color:P.textm,marginBottom:'0.35rem'}}>
+                  Comptes rendus — {m.comptes_rendus.length}
+                </div>
+                {m.comptes_rendus.map((c,i)=>(
+                  <div key={i} style={{background:P.surface2,borderRadius:9,padding:'8px 11px',marginBottom:5,fontSize:12.5,lineHeight:1.55}}>
+                    <div style={{fontSize:11,color:P.textm,marginBottom:3}}>{c.date} · {c.intervenant}</div>
+                    <div style={{whiteSpace:'pre-wrap'}}>{c.texte}</div>
+                  </div>
+                ))}
+              </>
+            )}
+          </div>
+        )}
+      </div>
+    )
+  }
+
+  return(
+    <div className="fi">
+      <h2 style={{fontFamily:'Georgia,serif',fontWeight:400,color:P.abysse,marginTop:0,fontSize:22,marginBottom:'0.3rem'}}>
+        Couverture — {d.formation.titre_court||d.formation.titre}
+      </h2>
+      <p style={{fontSize:12.5,color:P.textm,marginBottom:'1rem',lineHeight:1.7,maxWidth:'72ch'}}>
+        Arrêté au {d.arrete_au}. Le plan de formation et les syllabi d’un côté, l’émargement de l’autre.
+        Aucune saisie n’a été demandée aux intervenants.
+      </p>
+
+      <div style={{display:'flex',gap:'0.5rem',flexWrap:'wrap',marginBottom:'1.25rem'}}>
+        {[[R.heures_faites+' h','sur '+R.heures_programmees+' h programmées',false],
+          [R.modules_demarres+' / '+R.modules_programmes,'modules démarrés',false],
+          [R.modules_termines,'modules terminés',false],
+          [R.intervenants,'intervenants',false],
+          [R.jamais_programmes,'jamais programmés',R.jamais_programmes>0],
+          [d.croisements.length,'familles à plusieurs intervenants',d.croisements.length>0]].map(([v,l,al])=>(
+          <div key={l} style={{background:al?'rgba(232,155,119,0.1)':P.surface,border:`1px solid ${al?P.saumon:P.border}`,
+            borderLeft:al?`3px solid ${P.saumon}`:`1px solid ${P.border}`,borderRadius:12,padding:'10px 15px',minWidth:126}}>
+            <div style={{fontSize:21,fontWeight:600,color:al?'#A85B34':P.abysse,lineHeight:1.15}}>{v}</div>
+            <div style={{fontSize:11.5,color:P.textm}}>{l}</div>
+          </div>
+        ))}
+      </div>
+
+      <div style={{display:'flex',gap:'0.4rem',flexWrap:'wrap',marginBottom:'1.25rem'}}>
+        {[['couverture','Couverture'],['jamais','Jamais programmés ('+R.jamais_programmes+')'],
+          ['croisements','Croisements ('+d.croisements.length+')']].map(([id,l])=>(
+          <button key={id} onClick={()=>setOnglet(id)} className="tab-btn"
+            style={{background:onglet===id?P.petrole:P.surface,color:onglet===id?P.menthe:P.textm,
+              border:`1px solid ${onglet===id?P.petrole:P.border}`,borderRadius:9,padding:'7px 14px',fontSize:13,fontWeight:500}}>{l}</button>
+        ))}
+      </div>
+
+      {onglet==='couverture'&&d.blocs.map(b=>(
+        <div key={b.id}>
+          <div style={{display:'flex',alignItems:'baseline',gap:9,margin:'1.1rem 0 0.5rem'}}>
+            <Tag label={b.id} small/><span style={{fontSize:14.5,fontWeight:600,color:P.abysse}}>{b.titre}</span>
+          </div>
+          {b.modules.map(m=>carte({...m,bloc:b.id}))}
+        </div>
+      ))}
+      {onglet==='couverture'&&(d.modules_hors_bloc||[]).length>0&&(
+        <div>
+          <div style={{display:'flex',alignItems:'baseline',gap:9,margin:'1.1rem 0 0.5rem'}}>
+            <Tag label="HB" small/><span style={{fontSize:14.5,fontWeight:600,color:P.abysse}}>Hors bloc</span>
+          </div>
+          {d.modules_hors_bloc.map(m=>carte({...m,bloc:'HB'}))}
+        </div>
+      )}
+
+      {onglet==='jamais'&&(
+        <>
+          <p style={{fontSize:12.5,color:P.textm,marginBottom:'0.9rem',lineHeight:1.7,maxWidth:'72ch'}}>
+            Ces modules figurent au plan et n’apparaissent dans aucun créneau de l’année. Sans décision, ils ne
+            seront jamais enseignés. Une partie peut relever d’un parcours au choix que ce groupe ne suit pas :
+            à vérifier module par module.
+          </p>
+          {tous.filter(m=>!m.programme).map(carte)}
+          {!R.jamais_programmes&&<div style={{...card()}}>Tous les modules du plan sont programmés.</div>}
+        </>
+      )}
+
+      {onglet==='croisements'&&(
+        <>
+          <p style={{fontSize:12.5,color:P.textm,marginBottom:'0.9rem',lineHeight:1.7,maxWidth:'72ch'}}>
+            Une même famille de notions enseignée par des intervenants différents. Ce n’est pas une faute :
+            c’est soit un approfondissement voulu, soit deux fois le même cours. Atlas pose la question avec
+            les éléments, il ne tranche pas.
+          </p>
+          {d.croisements.map(x=>(
+            <div key={x.famille} style={{...card({marginBottom:'0.5rem'}),borderLeft:`3px solid ${P.saumon}`}}>
+              <div style={{fontSize:14,fontWeight:600,color:P.abysse,marginBottom:3}}>{x.famille}</div>
+              <div style={{fontSize:12.5,color:P.abysse}}>{x.intervenants.length} intervenants : <strong>{x.intervenants.join(' · ')}</strong></div>
+              <div style={{fontSize:12,color:P.textm,marginTop:3}}>{x.modules.join(' · ')}</div>
+              <div style={{fontSize:11.5,color:P.textm,marginTop:2}}>du {x.debut} au {x.fin}</div>
+            </div>
+          ))}
+          {!d.croisements.length&&<div style={{...card()}}>Aucune famille n’est portée par plusieurs intervenants.</div>}
+        </>
+      )}
+    </div>
+  )
+}
+
 /* ── Proposition de rattachement d'un intitulé CESAR à un module du plan ─────
    Mêmes règles que le lecteur hors ligne, qui a rattaché 108 séances sur 108
    du groupe Créa sans exception. Par ordre de sûreté décroissante :
@@ -798,6 +968,7 @@ function ArbitrageMatieres(){
   const [occupe,setOccupe]=useState('')
   const [erreur,setErreur]=useState('')
   const [fait,setFait]=useState(0)
+  const [diag,setDiag]=useState(null)
 
   useEffect(()=>{charger()},[])
   function charger(){
@@ -806,11 +977,24 @@ function ArbitrageMatieres(){
       .then(([m,f])=>{
         const fs=f.formations||[]
         setFormations(fs)
+        // Diagnostic conservé : quand rien ne se rattache, il faut pouvoir dire
+        // si c'est la formation qui manque ou les modules qui sont vides,
+        // plutôt que de relire le code à l'aveugle.
+        setDiag({
+          formations:fs.length,
+          ids_formations:fs.map(y=>y._id).join(', '),
+          ids_matieres:[...new Set((m.matieres||[]).map(x=>x.formation_id))].join(', '),
+        })
         const liste=(m.matieres||[]).map(x=>{
           // /api/formations préfixe les champs de la ligne pour les distinguer
           // du contenu du référentiel : l'identifiant est _id, pas id. Chercher
           // id laissait la liste des modules vide et tous les boutons inertes.
-          const fo=fs.find(y=>Number(y._id)===Number(x.formation_id))
+          let fo=fs.find(y=>Number(y._id)===Number(x.formation_id))
+          // Repli : certaines réponses ne portent pas l'identifiant attendu.
+          // Plutôt que de laisser l'écran muet, on propose alors les modules de
+          // toutes les promotions — le choix reste humain, et l'origine du
+          // repli est visible dans le diagnostic ci-dessus.
+          if(!fo&&fs.length===1)fo=fs[0]
           const mods=fo?[...(fo.blocs||[]).flatMap(b=>(b.modules||[]).map(mm=>({...mm,bloc:b.id}))),
                          ...((fo.modules_hors_bloc||[]).map(mm=>({...mm,bloc:'HB'})))]:[]
           const p=proposerModule(x.libelle_cesar,mods)
@@ -854,6 +1038,15 @@ function ArbitrageMatieres(){
       </p>
 
       {erreur&&<div style={{padding:'0.7rem 1rem',background:P.amberbg,border:`1px solid ${P.amber}`,borderRadius:10,fontSize:12.5,color:'#7A4A00',marginBottom:'1rem'}}>{erreur}</div>}
+
+      {diag&&matieres.some(m=>!m.modules.length)&&(
+        <div style={{padding:'0.7rem 1rem',background:P.surface2,border:`1px solid ${P.border}`,borderRadius:10,
+          fontSize:12,color:P.textm,marginBottom:'0.75rem',fontFamily:'ui-monospace,Menlo,monospace',lineHeight:1.7}}>
+          formations chargées : {diag.formations} · identifiants : {diag.ids_formations||'aucun'}<br/>
+          formation_id des matières : {diag.ids_matieres||'aucun'}<br/>
+          modules trouvés : {matieres.filter(m=>m.modules.length).length} / {matieres.length}
+        </div>
+      )}
 
       {matieres.some(m=>!m.modules.length)&&(
         <div style={{padding:'0.7rem 1rem',background:P.amberbg,border:`1px solid ${P.amber}`,borderRadius:10,
@@ -1199,7 +1392,7 @@ function VueDir({user,onLogout}){
   return(
     <div style={{minHeight:'100vh',background:P.givre}}>
       <Topbar user={user} formationTitre="Direction des programmes" onLogout={onLogout} onglet={onglet} setOnglet={setOnglet}
-        onglets={[{id:'formations',label:'Formations'},{id:'cesar',label:'Émargement'},{id:'matieres',label:'Matières'},{id:'cartographie',label:'Cartographie'},{id:'digest',label:'Digest'},{id:'alertes',label:`Alertes (${totalAlertes})`},{id:'groupes',label:'Groupes'},{id:'comptes',label:'Comptes'}]}/>
+        onglets={[{id:'formations',label:'Formations'},{id:'cesar',label:'Émargement'},{id:'matieres',label:'Matières'},{id:'couverture',label:'Couverture'},{id:'cartographie',label:'Cartographie'},{id:'digest',label:'Digest'},{id:'alertes',label:`Alertes (${totalAlertes})`},{id:'groupes',label:'Groupes'},{id:'comptes',label:'Comptes'}]}/>
       <div style={{maxWidth:960,margin:'0 auto',padding:'2rem 1.5rem'}}>
 
         <button onClick={()=>setAtelierOpen(true)}
@@ -1214,6 +1407,7 @@ function VueDir({user,onLogout}){
 
         {onglet==='cesar'&&<ImportCesar/>}
         {onglet==='matieres'&&<ArbitrageMatieres/>}
+        {onglet==='couverture'&&<VueCouverture formationId={(fCarto||formations[0])?._id}/>}
         {onglet==='formations'&&(
           <div className="fi">
             <div style={{marginBottom:'1.25rem'}}>
