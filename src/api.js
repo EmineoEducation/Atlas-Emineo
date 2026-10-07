@@ -143,6 +143,78 @@ export function rapprocherModules(modulesPF, modulesSyllabus) {
 }
 
 // ─── Objet api — toutes les méthodes consommées par App.jsx ───────────────────
+/* ── Export canonique CESAR ──────────────────────────────────────────────────
+   La DSI exporte deux fichiers tels que CESAR les produit : la liste des
+   groupes planning, et les séances d'un groupe avec leur compte rendu. Ni l'un
+   ni l'autre n'a la forme attendue par /api/cesar-sync. La conversion se fait
+   ici, côté navigateur, pour trois raisons : elle est purement mécanique, elle
+   se relit en entier d'un coup d'œil, et elle n'ajoute rien au serveur que la
+   DSI est en train de reprendre.
+
+   Le compte rendu de CESAR n'est pas du texte mais un document EditorJS, une
+   liste de blocs typés. Lu brut, il mettrait du JSON dans le digest. */
+const BLOCS_TEXTE = new Set(['paragraph', 'header', 'quote', 'code'])
+
+export function texteCompteRendu(cr) {
+  if (!cr) return ''
+  if (typeof cr === 'string') return nettoyerHtml(cr)
+  const morceaux = []
+  for (const bloc of cr.blocks || []) {
+    const d = bloc.data || {}
+    if (Array.isArray(d.items)) {
+      for (const it of d.items) {
+        const t = nettoyerHtml(typeof it === 'string' ? it : (it.content || it.text || ''))
+        if (t) morceaux.push('- ' + t)
+      }
+      continue
+    }
+    if (!BLOCS_TEXTE.has(bloc.type)) continue   // images, pièces jointes : ignorées
+    const t = nettoyerHtml(d.text || d.caption || d.code || '')
+    if (t) morceaux.push(t)
+  }
+  return morceaux.join('\n')
+}
+
+function nettoyerHtml(html) {
+  return String(html || '')
+    .replace(/<br\s*\/?>/gi, '\n').replace(/<\/(p|div|li)>/gi, '\n')
+    .replace(/<[^>]+>/g, '')
+    .replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;/g, "'")
+    .replace(/[ \t]+/g, ' ').trim()
+}
+
+// Une séance de l'export canonique vers la forme attendue par cesar-sync.
+export function seanceDepuisCesar(l) {
+  const debut = String(l.lesson_start_date || '')
+  const fin = String(l.lesson_end_date || '')
+  const noms = String(l.teachers || '').split(/\s*[;,/]\s*/).filter(Boolean)
+  return {
+    ref_cesar: l.lesson_id || l.id || '',
+    code_groupe_cesar: l.planning_group_id || l.planning_group || '',
+    groupe_planning: l.planning_group || '',
+    date: debut.slice(0, 10),
+    heure_debut: debut.slice(11, 16),
+    heure_fin: fin.slice(11, 16),
+    matiere: l.school_subject || '',
+    intervenant_nom: noms.join(', '),
+    intervenant_email: l.teacher_email || l.teachers_email || '',
+    compte_rendu: texteCompteRendu(l.lesson_report),
+  }
+}
+
+// Les groupes planning : un enregistrement par groupe, ses sous-groupes réunis.
+export function groupesDepuisCesar(liste) {
+  const par = new Map()
+  for (const g of liste || []) {
+    const code = g.planning_group
+    if (!code) continue
+    if (!par.has(code)) par.set(code, { code_cesar: code, libelle: code, groupe_formation: g.training || '', sous_groupes: [] })
+    if (g.is_sub_planning_group && g.sub_planning_group) par.get(code).sous_groupes.push(g.sub_planning_group)
+  }
+  return [...par.values()]
+}
+
 export const api = {
   login:           (email, password) => apiFetch('/api/auth/login',  { method: 'POST',   body: { email, password } }),
   logout:          ()                => apiFetch('/api/auth/logout', { method: 'POST' }),
@@ -151,6 +223,15 @@ export const api = {
   createUser:      (form)            => apiFetch('/api/users',       { method: 'POST',   body: form }),
   deleteUser:      (id)              => apiFetch('/api/users',       { method: 'DELETE', body: { id } }),
   getFormations:   ()                => apiFetch('/api/formations'),
+  cesarEtat:       ()                => apiFetch('/api/cesar-sync?action=etat'),
+  cesarGroupes:    ()                => apiFetch('/api/cesar-sync?action=groupes'),
+  cesarMatieres:   (q = '')          => apiFetch('/api/cesar-sync?action=matieres' + q),
+  cesarPoserGroupes: (groupes)       => apiFetch('/api/cesar-sync?action=groupes', { method: 'POST', body: { groupes } }),
+  cesarRattacher:  (code, titre)     => apiFetch('/api/cesar-sync?action=rattacher', { method: 'POST', body: { code_cesar: code, titre_court: titre } }),
+  cesarArbitrer:   (formation_id, libelle_cesar, module_ref) =>
+                                        apiFetch('/api/cesar-sync?action=matiere', { method: 'POST', body: { formation_id, libelle_cesar, module_ref } }),
+  cesarImporter:   (flux, seances, dry) =>
+                                        apiFetch('/api/cesar-sync?action=' + flux + (dry ? '&dry=1' : ''), { method: 'POST', body: { seances } }),
   createFormation: (campus, data)    => apiFetch('/api/formations',  { method: 'POST',   body: { campus, data } }),
   // Alimente une promotion existante depuis une ingestion PF / syllabi / RACE.
   // Preserve l'identite de la promotion, ne remplace que le contenu pedagogique.
