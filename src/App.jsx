@@ -735,11 +735,29 @@ function CartographieTitre({formation}){
 
    Le compte rendu de séance, quand il existe, s'ajoute en complément. Il ne
    conditionne aucune mesure : s'il disparaît, la couverture tient toujours. */
-function VueCouverture({formationId}){
+function VueCouverture({formations=[],formationId:initial}){
   const [d,setD]=useState(null)
   const [erreur,setErreur]=useState('')
   const [onglet,setOnglet]=useState('couverture')
   const [ouvert,setOuvert]=useState({})
+  const [formationId,setFormationId]=useState(initial||null)
+  // Quelles promotions ont réellement des séances ? Sans cette information,
+  // l'écran s'ouvrait sur la première de la liste — souvent vide — et
+  // annonçait « aucune séance importée » alors que l'import avait réussi
+  // ailleurs. On interroge l'état de l'émargement pour ouvrir sur une
+  // promotion qui a de quoi s'afficher.
+  const [avecSeances,setAvecSeances]=useState(null)
+
+  useEffect(()=>{
+    api.cesarEtat().then(e=>{
+      const titres=new Set((e.groupes_planning||[]).filter(g=>g.seances_prevues>0&&g.titre).map(g=>g.titre))
+      setAvecSeances(titres)
+      if(!initial||!formations.some(f=>f._id===initial&&titres.has(f._titre_court))){
+        const f=formations.find(x=>titres.has(x._titre_court))
+        if(f)setFormationId(f._id)
+      }
+    }).catch(()=>setAvecSeances(new Set()))
+  },[formations.length])
 
   useEffect(()=>{
     if(!formationId){setD(null);return}
@@ -747,14 +765,32 @@ function VueCouverture({formationId}){
     api.cesarCouverture(formationId).then(setD).catch(e=>setErreur(e.message))
   },[formationId])
 
-  if(!formationId)return <Empty icon="📐" titre="Choisissez une promotion" msg="La couverture se calcule promotion par promotion."/>
-  if(erreur)return <div style={{padding:'0.8rem 1rem',background:P.amberbg,border:`1px solid ${P.amber}`,borderRadius:10,fontSize:12.5,color:'#7A4A00'}}>{erreur}</div>
-  if(!d)return <div style={{textAlign:'center',padding:'2rem'}}><Spinner/></div>
+  const selecteur=formations.length>1?(
+    <div style={{display:'flex',gap:'0.35rem',flexWrap:'wrap',marginBottom:'1.1rem'}}>
+      {formations.map(f=>{
+        const on=f._id===formationId
+        const garni=avecSeances?avecSeances.has(f._titre_court):true
+        return(
+          <button key={f._id} onClick={()=>setFormationId(f._id)}
+            style={{padding:'6px 13px',borderRadius:9,fontSize:12.5,fontWeight:on?600:500,
+              background:on?P.petrole:P.surface,color:on?P.menthe:(garni?P.textm:P.border),
+              border:`1px solid ${on?P.petrole:P.border}`,opacity:garni?1:0.55}}>
+            {f._titre_court||f.formation?.titre||'—'}{garni?'':' ·'}
+          </button>
+        )
+      })}
+    </div>
+  ):null
+
+  if(!formationId)return <div className="fi">{selecteur}<Empty icon="📐" titre="Choisissez une promotion" msg="La couverture se calcule promotion par promotion."/></div>
+  if(erreur)return <div className="fi">{selecteur}<div style={{padding:'0.8rem 1rem',background:P.amberbg,border:`1px solid ${P.amber}`,borderRadius:10,fontSize:12.5,color:'#7A4A00'}}>{erreur}</div></div>
+  if(!d)return <div className="fi">{selecteur}<div style={{textAlign:'center',padding:'2rem'}}><Spinner/></div></div>
 
   const R=d.resume
   const tous=[...d.blocs.flatMap(b=>b.modules.map(m=>({...m,bloc:b.id}))),...(d.modules_hors_bloc||[]).map(m=>({...m,bloc:'HB'}))]
   if(!R.heures_programmees&&!R.modules_programmes)
-    return <Empty icon="📐" titre="Aucune séance importée" msg="Importez l’émargement de cette promotion dans l’onglet Émargement, puis arbitrez les matières."/>
+    return <div className="fi">{selecteur}<Empty icon="📐" titre="Aucune séance importée pour cette promotion"
+      msg="Les promotions grisées ci-dessus n’ont pas encore d’émargement. Importez-le dans l’onglet Émargement, puis arbitrez les matières."/></div>
 
   const pct=R.heures_programmees?Math.round(100*R.heures_faites/R.heures_programmees):0
   const etat=m=>!m.programme?{c:'jamais',l:'jamais programmé',col:P.saumon}
@@ -814,6 +850,7 @@ function VueCouverture({formationId}){
 
   return(
     <div className="fi">
+      {selecteur}
       <h2 style={{fontFamily:'Georgia,serif',fontWeight:400,color:P.abysse,marginTop:0,fontSize:22,marginBottom:'0.3rem'}}>
         Couverture — {d.formation.titre_court||d.formation.titre}
       </h2>
@@ -1407,7 +1444,7 @@ function VueDir({user,onLogout}){
 
         {onglet==='cesar'&&<ImportCesar/>}
         {onglet==='matieres'&&<ArbitrageMatieres/>}
-        {onglet==='couverture'&&<VueCouverture formationId={(fCarto||formations[0])?._id}/>}
+        {onglet==='couverture'&&<VueCouverture formations={formations} formationId={fCarto?._id}/>}
         {onglet==='formations'&&(
           <div className="fi">
             <div style={{marginBottom:'1.25rem'}}>
