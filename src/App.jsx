@@ -752,6 +752,8 @@ function CartographieTitre({formation}){
    l'endpoint et les tables sont les mêmes dans les deux cas. */
 function ImportCesar({onFini}){
   const [groupes,setGroupes]=useState(null)        // contenu de planning_groups
+  const [table,setTable]=useState(null)            // table de rattachement
+  const [nomT,setNomT]=useState('')
   const [seances,setSeances]=useState(null)        // contenu de l'export de séances
   const [nomG,setNomG]=useState(''); const [nomS,setNomS]=useState('')
   const [etat,setEtat]=useState(null)
@@ -771,6 +773,10 @@ function ImportCesar({onFini}){
     fr.onload=()=>{
       try{
         const d=JSON.parse(fr.result)
+        if(quoi==='table'){
+          if(!d||!Array.isArray(d.groupes))throw new Error('table de rattachement attendue')
+          setTable(d);setNomT(fichier.name);setErreur('');setBilan(null);return
+        }
         if(!Array.isArray(d))throw new Error('le fichier doit contenir une liste')
         if(quoi==='groupes'){setGroupes(d);setNomG(fichier.name)}
         else{setSeances(d);setNomS(fichier.name)}
@@ -780,20 +786,18 @@ function ImportCesar({onFini}){
     fr.readAsText(fichier)
   }
 
-  // Le rattachement d'un groupe à une promotion se fait sur le libellé de
-  // formation que porte CESAR. Quand il ne correspond à rien, le groupe reste
-  // « à rattacher » et ses séances seront rejetées — visiblement.
-  function titreCourtPour(libelleCesar){
-    const n=t=>String(t||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,' ').trim()
-    const l=n(libelleCesar)
-    const annee=/mastere\s*2|master\s*2|\bm2\b/.test(l)?'M2':/mastere\s*1|master\s*1|\bm1\b/.test(l)?'M1':''
-    let famille=''
-    if(/marketing|communication/.test(l)&&/strategie/.test(l))famille='MSMC'
-    else if(/developpement commercial/.test(l))famille='MDEC'
-    else if(/ressources humaines/.test(l))famille='MRH'
-    else if(/bachelor/.test(l)&&/communication/.test(l))return 'Bach CDC'
-    if(!famille||!annee)return ''
-    return annee+' '+famille
+  // Le rattachement d'un groupe à une promotion ne se devine pas : il se lit
+  // dans referentiels/groupes-planning-<campus>.json, table produite par
+  // l'outil de rattachement et relue à la main. Une première version de cet
+  // écran reconnaissait le libellé CESAR par motifs — « mastere 2 » et
+  // « ressources humaines » donnant M2 MRH. Ça marchait sur les onze groupes
+  // du Mans et aurait échoué au premier libellé tordu, sans rien signaler.
+  // Un groupe absent de la table reste à rattacher : c'est un fait à constater,
+  // pas un trou à combler par un motif.
+  function titreCourtPour(codeCesar){
+    if(!table)return ''
+    const g=(table.groupes||[]).find(x=>x.code_cesar===codeCesar)
+    return g&&g.statut==='rattache'?g.titre_court:''
   }
 
   async function poserGroupes(){
@@ -806,15 +810,15 @@ function ImportCesar({onFini}){
       // qu'Atlas connaît. Les autres restent en attente, sans invention.
       let rattaches=0
       for(const g of liste){
-        const t=titreCourtPour(g.groupe_formation)
+        const t=titreCourtPour(g.code_cesar)
         if(!t)continue
-        if(!formations.some(f=>(f.formation?.titre_court||f._cycle||'')===t||(f.titre||'').includes(t)))continue
+        if(!formations.some(f=>(f.titre||'').includes(t)||(f.formation?.titre_court||'')===t))continue
         try{await api.cesarRattacher(g.code_cesar,t);rattaches++}catch(_){}
       }
       setBilan({titre:'Groupes planning',lignes:[
         ['Groupes déposés',liste.length],
-        ['Rattachés automatiquement',rattaches],
-        ['Restant à rattacher',liste.length-rattaches],
+        ['Rattachés depuis la table',rattaches],
+        ['Hors périmètre ou à rattacher',liste.length-rattaches],
       ]})
       rafraichir()
     }catch(e){setErreur(e.message)}
@@ -882,17 +886,18 @@ function ImportCesar({onFini}){
       )}
 
       <div style={{fontSize:11,fontWeight:700,letterSpacing:'.08em',textTransform:'uppercase',color:P.textm,marginBottom:'0.5rem'}}>
-        1 · Les deux fichiers de la DSI
+        1 · Les deux fichiers de la DSI, et la table de rattachement
       </div>
       <div style={{display:'flex',gap:'0.6rem',flexWrap:'wrap',marginBottom:'0.9rem'}}>
         {zone('f-groupes','Groupes planning (.json)',nomG,'groupes')}
         {zone('f-seances','Séances du groupe (.json)',nomS,'seances')}
+        {zone('f-table','Table de rattachement (.json)',nomT,'table')}
       </div>
 
       <div style={{display:'flex',gap:'0.5rem',flexWrap:'wrap',marginBottom:'1.5rem'}}>
-        <button onClick={poserGroupes} disabled={!groupes||!!occupe}
+        <button onClick={poserGroupes} disabled={!groupes||!table||!!occupe}
           style={{background:groupes?P.surface:P.surface2,border:`1px solid ${P.border}`,borderRadius:9,
-            padding:'8px 16px',fontSize:13,fontWeight:500,opacity:groupes&&!occupe?1:0.5,cursor:groupes?'pointer':'not-allowed'}}>
+            padding:'8px 16px',fontSize:13,fontWeight:500,opacity:groupes&&table&&!occupe?1:0.5,cursor:groupes&&table?'pointer':'not-allowed'}}>
           {occupe==='groupes'?'Dépôt en cours…':'Déposer et rattacher les groupes'}
         </button>
         <button onClick={()=>importer(true)} disabled={!seances||!!occupe}
