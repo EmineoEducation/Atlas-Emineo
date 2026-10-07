@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
-import { api, apiFetch, setToken, clearToken, getToken, apparierIntervenants } from './api.js'
+import { api, apiFetch, setToken, clearToken, getToken, apparierIntervenants,
+         seanceDepuisCesar, groupesDepuisCesar } from './api.js'
 
 const P = {
   abysse:'#0B2B2D',petrole:'#134547',menthe:'#5DE298',givre:'#E3FFF0',eau:'#9DF0C4',saumon:'#E89B77',
@@ -726,6 +727,214 @@ function CartographieTitre({formation}){
   )
 }
 
+/* ═══ IMPORT DE L'ÉMARGEMENT CESAR ══════════════════════════════════════════
+   Le réalisé factuel — qui a enseigné quoi, quand, combien d'heures — est la
+   seule source qui ne demande rien à personne. Elle arrive aujourd'hui en deux
+   fichiers produits par la DSI : la liste des groupes planning, et les séances
+   d'un groupe avec leur compte rendu.
+
+   Trois temps, dans cet ordre, parce qu'aucun ne vaut sans le précédent :
+
+     1. les groupes planning entrent en base et sont rattachés à une promotion.
+        Une séance dont le groupe n'est pas rattaché est rejetée — c'est voulu :
+        mieux vaut un rejet lisible qu'un rattachement deviné.
+     2. un essai à blanc montre exactement ce qui serait écrit, sans rien
+        écrire. À faire systématiquement sur un export qu'on voit pour la
+        première fois.
+     3. l'écriture, idempotente : rejouer le même export met à jour, ne
+        duplique pas.
+
+   Le prévisionnel reçoit toutes les séances de l'année, y compris celles qui
+   n'ont pas encore eu lieu — c'est lui qui permettra d'alerter un intervenant
+   avant sa séance. Le réalisé ne reçoit que les séances déjà tenues.
+
+   Ce flux restera manuel tant que la DSI n'expose pas son API de lecture ;
+   l'endpoint et les tables sont les mêmes dans les deux cas. */
+function ImportCesar({onFini}){
+  const [groupes,setGroupes]=useState(null)        // contenu de planning_groups
+  const [seances,setSeances]=useState(null)        // contenu de l'export de séances
+  const [nomG,setNomG]=useState(''); const [nomS,setNomS]=useState('')
+  const [etat,setEtat]=useState(null)
+  const [bilan,setBilan]=useState(null)
+  const [occupe,setOccupe]=useState('')
+  const [erreur,setErreur]=useState('')
+  const [formations,setFormations]=useState([])
+
+  useEffect(()=>{
+    api.getFormations().then(d=>setFormations(d.formations||[])).catch(()=>{})
+    rafraichir()
+  },[])
+  function rafraichir(){ api.cesarEtat().then(setEtat).catch(()=>setEtat(null)) }
+
+  function lire(fichier,quoi){
+    const fr=new FileReader()
+    fr.onload=()=>{
+      try{
+        const d=JSON.parse(fr.result)
+        if(!Array.isArray(d))throw new Error('le fichier doit contenir une liste')
+        if(quoi==='groupes'){setGroupes(d);setNomG(fichier.name)}
+        else{setSeances(d);setNomS(fichier.name)}
+        setErreur('');setBilan(null)
+      }catch(e){setErreur(fichier.name+' : '+e.message)}
+    }
+    fr.readAsText(fichier)
+  }
+
+  // Le rattachement d'un groupe à une promotion se fait sur le libellé de
+  // formation que porte CESAR. Quand il ne correspond à rien, le groupe reste
+  // « à rattacher » et ses séances seront rejetées — visiblement.
+  function titreCourtPour(libelleCesar){
+    const n=t=>String(t||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,' ').trim()
+    const l=n(libelleCesar)
+    const annee=/mastere\s*2|master\s*2|\bm2\b/.test(l)?'M2':/mastere\s*1|master\s*1|\bm1\b/.test(l)?'M1':''
+    let famille=''
+    if(/marketing|communication/.test(l)&&/strategie/.test(l))famille='MSMC'
+    else if(/developpement commercial/.test(l))famille='MDEC'
+    else if(/ressources humaines/.test(l))famille='MRH'
+    else if(/bachelor/.test(l)&&/communication/.test(l))return 'Bach CDC'
+    if(!famille||!annee)return ''
+    return annee+' '+famille
+  }
+
+  async function poserGroupes(){
+    if(!groupes)return
+    setOccupe('groupes');setErreur('')
+    try{
+      const liste=groupesDepuisCesar(groupes)
+      await api.cesarPoserGroupes(liste)
+      // Rattachement automatique quand le libellé CESAR désigne une promotion
+      // qu'Atlas connaît. Les autres restent en attente, sans invention.
+      let rattaches=0
+      for(const g of liste){
+        const t=titreCourtPour(g.groupe_formation)
+        if(!t)continue
+        if(!formations.some(f=>(f.formation?.titre_court||f._cycle||'')===t||(f.titre||'').includes(t)))continue
+        try{await api.cesarRattacher(g.code_cesar,t);rattaches++}catch(_){}
+      }
+      setBilan({titre:'Groupes planning',lignes:[
+        ['Groupes déposés',liste.length],
+        ['Rattachés automatiquement',rattaches],
+        ['Restant à rattacher',liste.length-rattaches],
+      ]})
+      rafraichir()
+    }catch(e){setErreur(e.message)}
+    setOccupe('')
+  }
+
+  async function importer(dry){
+    if(!seances)return
+    setOccupe(dry?'essai':'ecriture');setErreur('')
+    try{
+      const aujourdhui=new Date().toISOString().slice(0,10)
+      const toutes=seances.map(seanceDepuisCesar).filter(s=>s.date)
+      const passees=toutes.filter(s=>s.date<=aujourdhui)
+      const prev=await api.cesarImporter('previsionnel',toutes,dry)
+      const real=await api.cesarImporter('realise',passees,dry)
+      const b=x=>x&&x.bilan?x.bilan:x||{}
+      const p=b(prev),r=b(real)
+      setBilan({titre:dry?'Essai à blanc — rien n’a été écrit':'Import effectué',lignes:[
+        ['Séances de l’année',toutes.length],
+        ['Dont déjà tenues',passees.length],
+        ['Prévisionnel — créées',p.creees||0],
+        ['Prévisionnel — mises à jour',p.mises_a_jour||0],
+        ['Prévisionnel — rejetées',p.rejetees||0],
+        ['Réalisé — créées',r.creees||0],
+        ['Réalisé — avec compte rendu',r.avec_compte_rendu||0],
+        ['Intitulés de matière nouveaux',(p.nouveaux_intitules||[]).length],
+        ['Groupes inconnus',(p.groupes_inconnus||[]).join(', ')||'aucun'],
+      ],rejets:(p.rejets||[]).slice(0,6)})
+      if(!dry){rafraichir();onFini&&onFini()}
+    }catch(e){setErreur(e.message)}
+    setOccupe('')
+  }
+
+  const zone=(id,label,nom,quoi)=>(
+    <div onClick={()=>document.getElementById(id).click()}
+      style={{flex:1,minWidth:230,border:`2px dashed ${nom?P.borderm:P.border}`,borderRadius:12,padding:'1.1rem',
+        textAlign:'center',cursor:'pointer',background:nom?'rgba(93,226,152,0.06)':'transparent'}}>
+      <input id={id} type="file" accept=".json" style={{display:'none'}}
+        onChange={e=>e.target.files[0]&&lire(e.target.files[0],quoi)}/>
+      <div style={{fontSize:12.5,fontWeight:600,color:P.abysse}}>{label}</div>
+      <div style={{fontSize:11.5,color:nom?P.petrole:P.textm,marginTop:3}}>{nom||'Aucun fichier'}</div>
+    </div>
+  )
+
+  return(
+    <div className="fi">
+      <h2 style={{fontFamily:'Georgia,serif',fontWeight:400,color:P.abysse,marginTop:0,fontSize:22,marginBottom:'0.5rem'}}>Émargement CESAR</h2>
+      <p style={{fontSize:13,color:P.textm,marginBottom:'1.25rem',lineHeight:1.7,maxWidth:'70ch'}}>
+        Le réalisé factuel : quelles séances ont eu lieu, quand, avec quel intervenant, pour combien d’heures.
+        Croisé au plan de formation, c’est ce qui donne la couverture réelle d’une promotion — sans rien demander
+        aux intervenants.
+      </p>
+
+      {etat&&(
+        <div style={{display:'flex',gap:'0.5rem',flexWrap:'wrap',marginBottom:'1.25rem'}}>
+          {[['Groupes en base',etat.groupes?.total??'—'],['Rattachés',etat.groupes?.rattaches??'—'],
+            ['Séances prévues',etat.seances?.prevues??'—'],['Séances réalisées',etat.seances?.realisees??'—'],
+            ['Matières à arbitrer',etat.matieres?.a_arbitrer??'—']].map(([l,v])=>(
+            <div key={l} style={{background:P.surface,border:`1px solid ${P.border}`,borderRadius:10,padding:'8px 14px',minWidth:120}}>
+              <div style={{fontSize:19,fontWeight:600,color:P.abysse,lineHeight:1.2}}>{v}</div>
+              <div style={{fontSize:11,color:P.textm}}>{l}</div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      <div style={{fontSize:11,fontWeight:700,letterSpacing:'.08em',textTransform:'uppercase',color:P.textm,marginBottom:'0.5rem'}}>
+        1 · Les deux fichiers de la DSI
+      </div>
+      <div style={{display:'flex',gap:'0.6rem',flexWrap:'wrap',marginBottom:'0.9rem'}}>
+        {zone('f-groupes','Groupes planning (.json)',nomG,'groupes')}
+        {zone('f-seances','Séances du groupe (.json)',nomS,'seances')}
+      </div>
+
+      <div style={{display:'flex',gap:'0.5rem',flexWrap:'wrap',marginBottom:'1.5rem'}}>
+        <button onClick={poserGroupes} disabled={!groupes||!!occupe}
+          style={{background:groupes?P.surface:P.surface2,border:`1px solid ${P.border}`,borderRadius:9,
+            padding:'8px 16px',fontSize:13,fontWeight:500,opacity:groupes&&!occupe?1:0.5,cursor:groupes?'pointer':'not-allowed'}}>
+          {occupe==='groupes'?'Dépôt en cours…':'Déposer et rattacher les groupes'}
+        </button>
+        <button onClick={()=>importer(true)} disabled={!seances||!!occupe}
+          style={{background:P.surface,border:`1px solid ${P.border}`,borderRadius:9,padding:'8px 16px',
+            fontSize:13,fontWeight:500,opacity:seances&&!occupe?1:0.5,cursor:seances?'pointer':'not-allowed'}}>
+          {occupe==='essai'?'Essai en cours…':'Essai à blanc'}
+        </button>
+        <button onClick={()=>importer(false)} disabled={!seances||!!occupe}
+          style={{background:P.petrole,color:P.menthe,border:'none',borderRadius:9,padding:'8px 18px',
+            fontSize:13,fontWeight:600,opacity:seances&&!occupe?1:0.5,cursor:seances?'pointer':'not-allowed'}}>
+          {occupe==='ecriture'?'Import en cours…':'Importer'}
+        </button>
+      </div>
+
+      {erreur&&(
+        <div style={{padding:'0.7rem 1rem',background:P.amberbg,border:`1px solid ${P.amber}`,borderRadius:10,
+          fontSize:12.5,color:'#7A4A00',marginBottom:'1rem'}}>{erreur}</div>
+      )}
+
+      {bilan&&(
+        <div style={card()}>
+          <div style={{fontSize:14,fontWeight:600,color:P.abysse,marginBottom:'0.6rem'}}>{bilan.titre}</div>
+          {bilan.lignes.map(([l,v])=>(
+            <div key={l} style={{display:'flex',justifyContent:'space-between',padding:'4px 0',borderBottom:`1px solid ${P.border}`}}>
+              <span style={{fontSize:12.5,color:P.textm}}>{l}</span>
+              <span style={{fontSize:12.5,fontWeight:600,color:P.abysse}}>{String(v)}</span>
+            </div>
+          ))}
+          {(bilan.rejets||[]).length>0&&(
+            <div style={{marginTop:'0.75rem'}}>
+              <div style={{fontSize:10,fontWeight:700,letterSpacing:'.08em',textTransform:'uppercase',color:P.textm,marginBottom:'0.3rem'}}>Premiers rejets</div>
+              {bilan.rejets.map((r,i)=>(
+                <div key={i} style={{fontSize:11.5,color:'#7A4A00'}}>ligne {r.ligne} — {r.motif}</div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  )
+}
+
 /* ═══ VUE DIRECTION DES PROGRAMMES ════════════════════════════════════════ */
 function VueDir({user,onLogout}){
   const [atelierOpen,setAtelierOpen]=useState(false)
@@ -793,7 +1002,7 @@ function VueDir({user,onLogout}){
   return(
     <div style={{minHeight:'100vh',background:P.givre}}>
       <Topbar user={user} formationTitre="Direction des programmes" onLogout={onLogout} onglet={onglet} setOnglet={setOnglet}
-        onglets={[{id:'formations',label:'Formations'},{id:'cartographie',label:'Cartographie'},{id:'digest',label:'Digest'},{id:'alertes',label:`Alertes (${totalAlertes})`},{id:'groupes',label:'Groupes'},{id:'comptes',label:'Comptes'}]}/>
+        onglets={[{id:'formations',label:'Formations'},{id:'cesar',label:'Émargement'},{id:'cartographie',label:'Cartographie'},{id:'digest',label:'Digest'},{id:'alertes',label:`Alertes (${totalAlertes})`},{id:'groupes',label:'Groupes'},{id:'comptes',label:'Comptes'}]}/>
       <div style={{maxWidth:960,margin:'0 auto',padding:'2rem 1.5rem'}}>
 
         <button onClick={()=>setAtelierOpen(true)}
@@ -806,6 +1015,7 @@ function VueDir({user,onLogout}){
           <span style={{fontSize:16,color:P.menthe,flexShrink:0}}>→</span>
         </button>
 
+        {onglet==='cesar'&&<ImportCesar/>}
         {onglet==='formations'&&(
           <div className="fi">
             <div style={{marginBottom:'1.25rem'}}>
