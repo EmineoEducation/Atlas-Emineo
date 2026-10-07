@@ -727,6 +727,184 @@ function CartographieTitre({formation}){
   )
 }
 
+/* ── Proposition de rattachement d'un intitulé CESAR à un module du plan ─────
+   Mêmes règles que le lecteur hors ligne, qui a rattaché 108 séances sur 108
+   du groupe Créa sans exception. Par ordre de sûreté décroissante :
+
+     1. le code de compétence en tête de l'intitulé — « C7 Audio-Vidéo » et
+        le module C7 du plan. C'est la clé la plus fiable, déjà saisie par la
+        scolarité, et elle ne dépend d'aucune orthographe.
+     2. le libellé exact, une fois retirés les préfixes de parcours
+        (« Spé Créa : ») et les numérotations.
+     3. le mot qui suit « hackathon » : CESAR nomme ces séances par leur
+        contenu quand le plan nomme le module.
+     4. le recouvrement de mots signifiants, et seulement au-delà de 60 %.
+
+   Aucune de ces règles n'écrit quoi que ce soit : elles proposent. La
+   correspondance ne devient effective qu'au clic. */
+const VIDES_ARB = new Set(['de','du','des','la','le','les','et','en','pour','au','aux','d','l','un','une','a','sur'])
+const cleLib = t => String(t || '')
+  .replace(/^\s*(?:Sp[ée]\s+[^:]*:|Hackathon\b)\s*/i, '')
+  .replace(/^\s*C\s?\d{1,3}[a-z]?\s*[-–—:.]?\s*/i, '')
+  .replace(/^\s*Module\s*\d+\s*[:.\-–—]\s*/i, '')
+  .toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+  .replace(/[^a-z0-9]+/g, ' ').trim()
+const motsArb = t => cleLib(t).split(' ').filter(w => w.length > 2 && !VIDES_ARB.has(w))
+
+function proposerModule(libelleCesar, modules){
+  const code=(String(libelleCesar).match(/^\s*C\s?(\d{1,3})/i)||[])[1]
+  if(code){
+    const m=modules.find(x=>(String(x.titre).match(/^\s*C\s?(\d{1,3})/i)||[])[1]===code)
+    if(m)return{module:m,motif:'code C'+code,sur:true}
+  }
+  const k=cleLib(libelleCesar)
+  const exact=modules.find(x=>cleLib(x.titre)===k)
+  if(exact)return{module:exact,motif:'intitulé identique',sur:true}
+
+  const h=String(libelleCesar).match(/hackathon\s+([a-zéèêàâîïôûüç]+)/i)
+  if(h){
+    const mot=h[1].toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').slice(0,5)
+    const m=modules.find(x=>{
+      const t=x.titre.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+      return /hackathon/.test(t)&&t.includes(mot)
+    })
+    if(m)return{module:m,motif:'hackathon '+h[1],sur:true}
+  }
+  const A=new Set(motsArb(libelleCesar))
+  let best=null,score=0
+  for(const m of modules){
+    const B=new Set(motsArb(m.titre))
+    if(!A.size||!B.size)continue
+    let c=0; for(const w of A) if(B.has(w)) c++
+    const v=(2*c)/(A.size+B.size)
+    if(v>score){score=v;best=m}
+  }
+  if(score>=0.6)return{module:best,motif:'intitulé proche ('+Math.round(score*100)+' %)',sur:false}
+  return{module:null,motif:'aucune correspondance',sur:false}
+}
+
+/* ═══ ARBITRAGE DES INTITULÉS DE MATIÈRE ════════════════════════════════════
+   CESAR nomme ses matières comme la scolarité les a saisies ; le plan de
+   formation les nomme comme le certificateur les attend. Tant que les deux ne
+   sont pas reliés, Atlas sait qu'une séance a eu lieu sans savoir de quel
+   module il s'agit — et la comparaison annoncé/réalisé reste vide.
+
+   C'est la seule porte par laquelle une correspondance devient effective, et
+   elle est volontairement humaine. */
+function ArbitrageMatieres(){
+  const [matieres,setMatieres]=useState(null)
+  const [formations,setFormations]=useState([])
+  const [choix,setChoix]=useState({})      // id de matière -> titre de module
+  const [occupe,setOccupe]=useState('')
+  const [erreur,setErreur]=useState('')
+  const [fait,setFait]=useState(0)
+
+  useEffect(()=>{charger()},[])
+  function charger(){
+    setErreur('')
+    Promise.all([api.cesarMatieres('&a_arbitrer=1'),api.getFormations()])
+      .then(([m,f])=>{
+        const fs=f.formations||[]
+        setFormations(fs)
+        const liste=(m.matieres||[]).map(x=>{
+          const fo=fs.find(y=>Number(y.id)===Number(x.formation_id))
+          const mods=fo?[...(fo.blocs||[]).flatMap(b=>(b.modules||[]).map(mm=>({...mm,bloc:b.id}))),
+                         ...((fo.modules_hors_bloc||[]).map(mm=>({...mm,bloc:'HB'})))]:[]
+          const p=proposerModule(x.libelle_cesar,mods)
+          return {...x,modules:mods,titre_formation:fo?.formation?.titre||'',proposition:p}
+        })
+        setMatieres(liste)
+        setChoix(Object.fromEntries(liste.filter(x=>x.proposition.module).map(x=>[x.id,x.proposition.module.titre])))
+      })
+      .catch(e=>setErreur(e.message))
+  }
+
+  async function valider(liste){
+    setOccupe('envoi');setErreur('')
+    let n=0
+    try{
+      for(const m of liste){
+        const t=choix[m.id]
+        if(!t)continue
+        await api.cesarArbitrer(m.formation_id,m.libelle_cesar,t)
+        n++
+      }
+      setFait(f=>f+n)
+      charger()
+    }catch(e){setErreur(e.message)}
+    setOccupe('')
+  }
+
+  if(matieres===null)return <div style={{textAlign:'center',padding:'2rem'}}><Spinner/></div>
+
+  const sures=matieres.filter(m=>m.proposition.sur&&choix[m.id])
+  const douteuses=matieres.filter(m=>!m.proposition.sur)
+
+  return(
+    <div className="fi">
+      <h2 style={{fontFamily:'Georgia,serif',fontWeight:400,color:P.abysse,marginTop:0,fontSize:22,marginBottom:'0.5rem'}}>Arbitrage des matières</h2>
+      <p style={{fontSize:13,color:P.textm,marginBottom:'1.25rem',lineHeight:1.7,maxWidth:'72ch'}}>
+        CESAR nomme ses matières comme la scolarité les a saisies, le plan de formation comme le certificateur
+        les attend. Tant que les deux ne sont pas reliés, une séance émargée reste orpheline et la couverture
+        ne se calcule pas. Les propositions ci-dessous viennent du code de compétence quand il existe,
+        de l’intitulé sinon — rien ne s’applique sans votre clic.
+      </p>
+
+      {erreur&&<div style={{padding:'0.7rem 1rem',background:P.amberbg,border:`1px solid ${P.amber}`,borderRadius:10,fontSize:12.5,color:'#7A4A00',marginBottom:'1rem'}}>{erreur}</div>}
+
+      {matieres.length===0&&(
+        <div style={card()}>
+          <div style={{fontSize:14,fontWeight:600,color:P.abysse}}>Aucune matière en attente</div>
+          <p style={{fontSize:12.5,color:P.textm,margin:'0.3rem 0 0'}}>
+            {fait>0?fait+' intitulés arbitrés. ':''}Toutes les matières importées sont rattachées à un module du plan.
+          </p>
+        </div>
+      )}
+
+      {sures.length>0&&(
+        <div style={{display:'flex',alignItems:'center',gap:'0.75rem',flexWrap:'wrap',marginBottom:'1rem'}}>
+          <button onClick={()=>valider(sures)} disabled={!!occupe}
+            style={{background:P.petrole,color:P.menthe,border:'none',borderRadius:9,padding:'9px 18px',
+              fontSize:13,fontWeight:600,opacity:occupe?0.6:1}}>
+            {occupe?'Envoi…':'Valider les '+sures.length+' correspondances sûres'}
+          </button>
+          <span style={{fontSize:12.5,color:P.textm}}>
+            {douteuses.length>0?douteuses.length+' demandent votre lecture':'toutes les propositions sont sûres'}
+          </span>
+        </div>
+      )}
+
+      {matieres.map(m=>{
+        const p=m.proposition
+        return(
+          <div key={m.id} style={{...card(),borderLeft:`3px solid ${p.sur?P.menthe:P.saumon}`}}>
+            <div style={{display:'flex',gap:12,alignItems:'flex-start',flexWrap:'wrap'}}>
+              <div style={{flex:1,minWidth:250}}>
+                <div style={{fontSize:13.5,fontWeight:600,color:P.abysse}}>{m.libelle_cesar}</div>
+                <div style={{fontSize:11.5,color:P.textm,marginTop:2}}>
+                  {m.occurrences} séance{m.occurrences>1?'s':''} · {m.titre_formation} · {p.motif}
+                </div>
+              </div>
+              <button onClick={()=>valider([m])} disabled={!choix[m.id]||!!occupe}
+                style={{background:choix[m.id]?P.surface:P.surface2,border:`1px solid ${P.border}`,borderRadius:8,
+                  padding:'6px 14px',fontSize:12.5,fontWeight:500,opacity:choix[m.id]&&!occupe?1:0.45,
+                  cursor:choix[m.id]?'pointer':'not-allowed'}}>Valider</button>
+            </div>
+            <select value={choix[m.id]||''} onChange={e=>setChoix(c=>({...c,[m.id]:e.target.value}))}
+              style={{width:'100%',marginTop:'0.6rem',padding:'8px 11px',borderRadius:9,
+                border:`1px solid ${P.border}`,background:P.surface2,fontSize:13,color:P.abysse}}>
+              <option value="">— aucun module, laisser en attente —</option>
+              {m.modules.map(x=>(
+                <option key={x.bloc+'|'+x.titre} value={x.titre}>{x.bloc} — {x.titre}</option>
+              ))}
+            </select>
+          </div>
+        )
+      })}
+    </div>
+  )
+}
+
 /* ═══ IMPORT DE L'ÉMARGEMENT CESAR ══════════════════════════════════════════
    Le réalisé factuel — qui a enseigné quoi, quand, combien d'heures — est la
    seule source qui ne demande rien à personne. Elle arrive aujourd'hui en deux
@@ -874,9 +1052,12 @@ function ImportCesar({onFini}){
 
       {etat&&(
         <div style={{display:'flex',gap:'0.5rem',flexWrap:'wrap',marginBottom:'1.25rem'}}>
-          {[['Groupes en base',etat.groupes?.total??'—'],['Rattachés',etat.groupes?.rattaches??'—'],
-            ['Séances prévues',etat.seances?.prevues??'—'],['Séances réalisées',etat.seances?.realisees??'—'],
-            ['Matières à arbitrer',etat.matieres?.a_arbitrer??'—']].map(([l,v])=>(
+          {[['Groupes en base',(etat.groupes_planning||[]).length],
+            ['Rattachés',(etat.groupes_planning||[]).filter(g=>g.statut==='rattache').length],
+            ['Séances prévues',(etat.groupes_planning||[]).reduce((n,g)=>n+(g.seances_prevues||0),0)],
+            ['Séances réalisées',etat.realise?.seances_importees??0],
+            ['Comptes rendus',etat.realise?.avec_compte_rendu??0],
+            ['Matières à arbitrer',etat.matieres?.a_arbitrer??0]].map(([l,v])=>(
             <div key={l} style={{background:P.surface,border:`1px solid ${P.border}`,borderRadius:10,padding:'8px 14px',minWidth:120}}>
               <div style={{fontSize:19,fontWeight:600,color:P.abysse,lineHeight:1.2}}>{v}</div>
               <div style={{fontSize:11,color:P.textm}}>{l}</div>
@@ -1007,7 +1188,7 @@ function VueDir({user,onLogout}){
   return(
     <div style={{minHeight:'100vh',background:P.givre}}>
       <Topbar user={user} formationTitre="Direction des programmes" onLogout={onLogout} onglet={onglet} setOnglet={setOnglet}
-        onglets={[{id:'formations',label:'Formations'},{id:'cesar',label:'Émargement'},{id:'cartographie',label:'Cartographie'},{id:'digest',label:'Digest'},{id:'alertes',label:`Alertes (${totalAlertes})`},{id:'groupes',label:'Groupes'},{id:'comptes',label:'Comptes'}]}/>
+        onglets={[{id:'formations',label:'Formations'},{id:'cesar',label:'Émargement'},{id:'matieres',label:'Matières'},{id:'cartographie',label:'Cartographie'},{id:'digest',label:'Digest'},{id:'alertes',label:`Alertes (${totalAlertes})`},{id:'groupes',label:'Groupes'},{id:'comptes',label:'Comptes'}]}/>
       <div style={{maxWidth:960,margin:'0 auto',padding:'2rem 1.5rem'}}>
 
         <button onClick={()=>setAtelierOpen(true)}
@@ -1021,6 +1202,7 @@ function VueDir({user,onLogout}){
         </button>
 
         {onglet==='cesar'&&<ImportCesar/>}
+        {onglet==='matieres'&&<ArbitrageMatieres/>}
         {onglet==='formations'&&(
           <div className="fi">
             <div style={{marginBottom:'1.25rem'}}>
