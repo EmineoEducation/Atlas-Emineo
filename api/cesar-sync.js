@@ -651,20 +651,31 @@ async function actionArbitrerMatiere(db, annee, body, user) {
   // normaliser les accents, et un LIKE sur le libelle brut rattraperait des
   // lignes qui ne correspondent pas. On ne touche que les lignes dont la cle
   // normalisee est exactement celle qui vient d'etre arbitree.
-  let rattrapees = 0;
+  //
+  // Les DEUX tables sont concernees, et non la seule declaration. Le
+  // previsionnel porte l'annee entiere — c'est lui qui dit ce qui est
+  // programme, donc lui qui fonde la couverture ; le realise ne porte que ce
+  // qui a deja eu lieu. Ne rattraper que le second laissait 145 seances
+  // orphelines sur 169 et affichait une couverture nulle apres un import
+  // pourtant reussi.
+  const rattrape = { previsionnel: 0, realise: 0 };
   if (moduleRef) {
-    const candidates = await db.execute({
-      sql: `SELECT id, libelle_cesar FROM declaration
-            WHERE formation_id = ? AND annee_scolaire = ? AND module_ref = ''`,
-      args: [fid, annee],
-    });
-    for (const row of candidates.rows) {
-      if (normaliserCle(row.libelle_cesar) !== cle) continue;
-      await db.execute({ sql: 'UPDATE declaration SET module_ref = ? WHERE id = ?', args: [moduleRef, row.id] });
-      rattrapees++;
+    for (const [table, champ] of [['previsionnel_seance', 'previsionnel'], ['declaration', 'realise']]) {
+      const candidates = await db.execute({
+        sql: `SELECT id, libelle_cesar FROM ${table}
+              WHERE formation_id = ? AND annee_scolaire = ? AND module_ref = ''`,
+        args: [fid, annee],
+      });
+      for (const row of candidates.rows) {
+        if (normaliserCle(row.libelle_cesar) !== cle) continue;
+        await db.execute({ sql: `UPDATE ${table} SET module_ref = ? WHERE id = ?`, args: [moduleRef, row.id] });
+        rattrape[champ]++;
+      }
     }
   }
-  return { ok: true, libelle_cesar: libelle, module_ref: moduleRef, seances_rattrapees: rattrapees };
+  const rattrapees = rattrape.previsionnel + rattrape.realise;
+  return { ok: true, libelle_cesar: libelle, module_ref: moduleRef,
+           seances_rattrapees: rattrapees, detail: rattrape };
 }
 
 // ── Import des seances ──────────────────────────────────────────────────────
