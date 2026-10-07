@@ -2,7 +2,7 @@
 // api/fr.js — Poste de travail Formateur Référent
 // ------------------------------------------------------------
 // GET  ?formation_id=&periode=&annee_scolaire=
-//      -> prevu / realise / ecarts (3 etats) / digest de la periode
+//      -> journal (4 etats) / competences / distorsions / redites / digest
 // GET  ?action=cron-digest
 //      -> declenche par Vercel Cron (1er lundi du mois, cf vercel.json).
 //         Auth: header Authorization: Bearer <CRON_SECRET> (auto Vercel).
@@ -88,6 +88,22 @@ function normCode(c) {
 }
 
 // ── Calcul deterministe (jamais par Claude) ────────────────────────────────
+//
+// Refonte du 07/10/2026. Toute cette couche comparait auparavant deux champs
+// du modele declaratif abandonne : previsionnel_seance.concepts (ce que
+// l'intervenant annoncait) et declaration.couvert (ce qu'il declarait avoir
+// traite). Le pont CESAR n'alimente ni l'un ni l'autre — un export de
+// planning donne une date, une matiere, un intervenant, un groupe, une duree
+// et un compte rendu, rien de plus. Les deux tableaux arrivaient vides, donc
+// egaux, donc toute seance emargee s'affichait "Conforme au previsionnel" :
+// le faux negatif corrige le 25/08 revenait par une autre porte. Et toute
+// seance encore a venir, faute de declaration appariee, passait en alerte.
+//
+// L'unite de jugement change. L'emargement ne sait pas dire si le contenu
+// annonce a ete traite — seul le compte rendu le pourrait, et il est en prose
+// libre. Il sait dire qu'une seance a eu lieu, quand, par qui, sur quel
+// module, donc sur quelles competences. Le verdict se forme desormais au
+// niveau du module et de la competence, dans la duree.
 
 // % de couverture par bloc RNCP, a partir de TOUTES les declarations connues
 // a date (cumulatif depuis le debut de l'annee, pas seulement la periode).
@@ -121,66 +137,250 @@ function calculerQuiAEnseigne(declarationsPeriode, previsionnelParId) {
   });
 }
 
-// Detection simple de coordination : meme competence couverte par au moins
-// 2 intervenants distincts sur la periode -> signal factuel, jamais nominatif
-// negatif.
-function detecterCoordination(declarationsPeriode) {
-  const parCompetence = {};
-  declarationsPeriode.forEach(d => {
-    (d.competences || []).forEach(c => {
-      const k = normCode(c);
-      if (!parCompetence[k]) parCompetence[k] = { competence: c, intervenants: new Set() };
-      parCompetence[k].intervenants.add(d.intervenant_nom || '—');
+// ── 1. Journal des seances ─────────────────────────────────────────────────
+//
+// Quatre etats, tous factuels. Aucun ne porte de jugement sur le contenu :
+//   tenue_cr   seance emargee, compte rendu present
+//   tenue      seance emargee, sans compte rendu
+//   a_venir    seance programmee, date encore devant nous
+//   manquante  seance programmee, date passee, aucun emargement
+//
+// Seul `manquante` est un signal. C'est le seul que l'emargement produise
+// honnetement au grain de la seance : soit le cours n'a pas eu lieu, soit il
+// n'a pas ete emarge, et dans les deux cas quelqu'un doit le savoir.
+//
+// Le journal part de l'UNION du programme et du realise, pas du seul
+// previsionnel. Une seance emargee sans correspondance au plan — frequente
+// tant que l'arbitrage des matieres n'est pas complet — etait auparavant
+// purement invisible. Elle apparait desormais, marquee hors previsionnel.
+function calculerJournal(prevRows, declRows, arreteAu) {
+  const limite = new Date(arreteAu).getTime();
+  const jour = v => String(v || '').slice(0, 10);
+
+  const declParPrevId = {};
+  declRows.forEach(d => { if (d.previsionnel_id != null) declParPrevId[d.previsionnel_id] = d; });
+
+  // Appariement de repli. L'apparieur de cesar-sync ne relie pas toujours une
+  // seance emargee a son creneau du previsionnel — un intitule de matiere
+  // arbitre tardivement, un identifiant CESAR absent. Sans ce repli, la MEME
+  // seance apparaissait deux fois dans le journal : "manquante" du cote du
+  // plan, "tenue hors previsionnel" du cote de l'emargement. On rapproche
+  // donc, a defaut d'identifiant, sur le couple module + jour.
+  const repliDisponibles = declRows.filter(d => d.previsionnel_id == null || declParPrevId[d.previsionnel_id] !== d);
+  const repliParCle = {};
+  repliDisponibles.forEach(d => {
+    const k = `${d.module_ref || ''}|${jour(d.date_seance)}`;
+    (repliParCle[k] = repliParCle[k] || []).push(d);
+  });
+  const repliUtilises = new Set();
+
+  const journal = prevRows.map(p => {
+    let d = declParPrevId[p.id];
+    if (!d) {
+      const file = repliParCle[`${p.module_ref || ''}|${jour(p.date_prevue)}`] || [];
+      d = file.find(x => !repliUtilises.has(x)) || null;
+      if (d) repliUtilises.add(d);
+    }
+    const base = {
+      previsionnel_id: p.id, declaration_id: d ? d.id : null,
+      module_ref: p.module_ref || '', libelle_cesar: p.libelle_cesar || '',
+      intervenant_nom: (d && d.intervenant_nom) || p.intervenant_nom || '—',
+      numero: p.numero, titre: p.titre || p.libelle_cesar || 'Séance',
+      date_prevue: p.date_prevue, date_seance: d ? d.date_seance : null,
+      duree_minutes: (d && d.duree_minutes) || p.duree_minutes || 0,
+      hors_previsionnel: false,
+    };
+    if (d) {
+      const cr = String(d.compte_rendu || '').trim();
+      return { ...base, etat: cr ? 'tenue_cr' : 'tenue', compte_rendu: cr,
+        detail: cr ? 'Séance tenue, compte rendu saisi.' : 'Séance tenue, aucun compte rendu saisi.' };
+    }
+    const passee = p.date_prevue && new Date(p.date_prevue).getTime() < limite;
+    return passee
+      ? { ...base, etat: 'manquante', compte_rendu: '',
+          detail: 'Séance programmée à une date passée, sans émargement.' }
+      : { ...base, etat: 'a_venir', compte_rendu: '', detail: 'Séance programmée, à venir.' };
+  });
+
+  declRows.forEach(d => {
+    if (d.previsionnel_id != null && declParPrevId[d.previsionnel_id] === d) return;
+    if (repliUtilises.has(d)) return;
+    const cr = String(d.compte_rendu || '').trim();
+    journal.push({
+      previsionnel_id: null, declaration_id: d.id,
+      module_ref: d.module_ref || '', libelle_cesar: d.libelle_cesar || '',
+      intervenant_nom: d.intervenant_nom || '—', numero: d.seance_numero,
+      titre: d.libelle_cesar || d.module_ref || 'Séance', date_prevue: null,
+      date_seance: d.date_seance, duree_minutes: d.duree_minutes || 0,
+      hors_previsionnel: true, etat: cr ? 'tenue_cr' : 'tenue', compte_rendu: cr,
+      detail: 'Séance émargée sans correspondance au prévisionnel.',
     });
   });
-  return Object.values(parCompetence)
-    .filter(v => v.intervenants.size > 1)
-    .map(v => ({
-      titre: `${v.competence} — coordination`,
-      detail: `Couverte par ${Array.from(v.intervenants).join(', ')} sur la période.`,
-    }));
+
+  return journal.sort((a, b) =>
+    String(a.date_seance || a.date_prevue || '').localeCompare(String(b.date_seance || b.date_prevue || '')));
 }
 
-// Delta 4 etats entre previsionnel et declaration (cf slide "comparateur").
-// Heuristique volontairement simple en V1, documentee comme telle :
-//  - pas de declaration correspondante        -> ALERTE      (rien n'est remonte)
-//  - concepts couverts > concepts annonces    -> ECART+      (contenu supplementaire)
-//  - concepts couverts < concepts annonces    -> ECART-      (contenu non traite)
-//  - egalite                                  -> NOMINAL
+// ── 2. Verdict par competence ──────────────────────────────────────────────
 //
-// L'etat ECART- a ete ajoute le 25/08/2026 (audit Le Mans, bug B04) : avant
-// cette correction, une seance ou RIEN n'avait ete couvert (couvert = 0,
-// attendu = 6) tombait dans le "sinon" et s'affichait "Conforme au
-// previsionnel". C'etait le faux negatif le plus grave de l'outil : l'Atlas
-// rassurait le Formateur Referent precisement la ou il devait l'alerter.
-function calculerDelta(prevRows, declParPrevId) {
-  return prevRows.map(p => {
-    const d = declParPrevId[p.id];
-    if (!d) {
-      return { previsionnel_id: p.id, module_ref: p.module_ref, intervenant_nom: p.intervenant_nom,
-        numero: p.numero, titre: p.titre, date_prevue: p.date_prevue, etat: 'alerte',
-        detail: 'Aucune declaration recue pour cette seance.' };
-    }
-    const attendu = (p.concepts || []).length;
-    const couvert = (d.couvert || []).length;
+// Cumule depuis le debut de l'annee scolaire, arrete a la fin du mois
+// affiche : une competence couverte en octobre ne doit pas redevenir
+// "non couverte" quand on ouvre novembre.
+//
+//   couverte    au moins une seance tenue sur un module qui la porte
+//   programmee  aucune seance tenue, mais au moins une au calendrier
+//   absente     ni tenue, ni programmee
+//
+// `absente` est l'heritiere de l'ancien ecart −. C'est le seul signal qui ne
+// se lit nulle part ailleurs dans le systeme d'information, et le seul qui
+// engage la certification.
+function calculerCompetences(blocs, prevCumul, declCumul) {
+  const couverts = new Set();
+  declCumul.forEach(d => (d.competences || []).forEach(c => couverts.add(normCode(c))));
+  const programmes = new Set();
+  prevCumul.forEach(p => (p.competences || []).forEach(c => programmes.add(normCode(c))));
 
-    let etat = 'nominal';
-    let detail = 'Conforme au previsionnel.';
-
-    if (couvert > attendu) {
-      etat = 'ecart_plus';
-      detail = `${couvert} concept(s) couvert(s) pour ${attendu} annonce(s) — contenu supplementaire.`;
-    } else if (couvert < attendu) {
-      etat = 'ecart_moins';
-      detail = couvert === 0
-        ? `Aucun concept declare couvert alors que ${attendu} etai(en)t annonce(s).`
-        : `${couvert} concept(s) couvert(s) pour ${attendu} annonce(s) — contenu non traite.`;
-    }
-
-    return { previsionnel_id: p.id, module_ref: p.module_ref, intervenant_nom: p.intervenant_nom,
-      numero: p.numero, titre: p.titre, date_prevue: p.date_prevue, etat, detail,
-      concepts_attendus: attendu, concepts_couverts: couvert };
+  const out = [];
+  (blocs || []).forEach(b => {
+    (b.competences || []).forEach(c => {
+      const k = normCode(c.id);
+      const etat = couverts.has(k) ? 'couverte' : (programmes.has(k) ? 'programmee' : 'absente');
+      out.push({ bloc_id: b.id, bloc_titre: b.titre, nature: b.nature || 'obligatoire',
+        code: c.id, libelle: c.libelle || '', etat });
+    });
   });
+  return out;
+}
+
+// ── 3. Distorsion au grain du module ───────────────────────────────────────
+//
+// Le plan de formation annonce un volume horaire par module. CESAR dit ce qui
+// est au calendrier et ce qui a ete tenu. La comparaison des deux est la
+// seule mesure d'ecart que l'emargement autorise — et c'est celle que le
+// modele declaratif ne faisait pas.
+//
+//   jamais_programme  aucun creneau de l'annee ne porte ce module
+//   sous_volume       le calendrier promet moins que le plan de formation
+//   sur_volume        le calendrier promet sensiblement plus
+//
+// Seuil a 10 % : en deca, l'ecart releve de l'arrondi de decoupage horaire.
+const SEUIL_DISTORSION = 0.10;
+
+function calculerDistorsions(blocs, horsBloc, prevCumul, declCumul) {
+  const par = {};
+  const vide = () => ({ prog_seances: 0, prog_minutes: 0, faites: 0, minutes_faites: 0, intervenants: new Set() });
+  prevCumul.forEach(p => {
+    const k = String(p.module_ref || ''); if (!k) return;
+    const e = (par[k] = par[k] || vide());
+    e.prog_seances++; e.prog_minutes += Number(p.duree_minutes || 0);
+    if (p.intervenant_nom) e.intervenants.add(String(p.intervenant_nom));
+  });
+  declCumul.forEach(d => {
+    const k = String(d.module_ref || ''); if (!k) return;
+    const e = (par[k] = par[k] || vide());
+    e.faites++; e.minutes_faites += Number(d.duree_minutes || 0);
+    if (d.intervenant_nom) e.intervenants.add(String(d.intervenant_nom));
+  });
+
+  const modules = (blocs || []).flatMap(b => (b.modules || []).map(m => ({ ...m, bloc_id: b.id, bloc_titre: b.titre, nature: b.nature || 'obligatoire' })))
+    .concat((horsBloc || []).map(m => ({ ...m, bloc_id: 'HB', bloc_titre: 'Hors bloc', nature: 'hors_bloc' })));
+
+  const out = [];
+  modules.forEach(m => {
+    const e = par[m.titre] || vide();
+    const annonce = m.volume == null ? null : Number(m.volume);
+    const hProg = Math.round((e.prog_minutes / 60) * 10) / 10;
+    const hFaites = Math.round((e.minutes_faites / 60) * 10) / 10;
+    let etat = 'conforme';
+    let detail = '';
+    if (!e.prog_seances) {
+      etat = 'jamais_programme';
+      detail = annonce
+        ? `${annonce} h au plan de formation, aucun créneau à l'année.`
+        : "Aucun créneau à l'année.";
+    } else if (annonce) {
+      const delta = (hProg - annonce) / annonce;
+      if (delta < -SEUIL_DISTORSION) {
+        etat = 'sous_volume';
+        detail = `${hProg} h programmées pour ${annonce} h annoncées.`;
+      } else if (delta > SEUIL_DISTORSION) {
+        etat = 'sur_volume';
+        detail = `${hProg} h programmées pour ${annonce} h annoncées.`;
+      }
+    }
+    if (etat === 'conforme') return;
+    out.push({ module: m.titre, bloc_id: m.bloc_id, bloc_titre: m.bloc_titre, nature: m.nature,
+      competences: m.competences_liees || [], volume_annonce: annonce,
+      heures_programmees: hProg, heures_faites: hFaites,
+      seances_programmees: e.prog_seances, seances_faites: e.faites,
+      intervenants: Array.from(e.intervenants).sort(), etat, detail });
+  });
+
+  const ordre = { jamais_programme: 0, sous_volume: 1, sur_volume: 2 };
+  return out.sort((a, b) => (ordre[a.etat] - ordre[b.etat]) || a.module.localeCompare(b.module));
+}
+
+// ── 4. Redites ─────────────────────────────────────────────────────────────
+//
+// Remplace detecterCoordination(), qui comparait les `competences` des
+// declarations. Depuis le pont CESAR ce champ porte TOUTES les competences du
+// module : deux modules partageant C7 auraient declenche un signal chaque
+// mois, en permanence. Le capteur utile est plus fin — la famille de notions,
+// regroupee hors ligne et versionnee dans referentiels/notions/, lue par
+// api/_lib/referentiels.js et portee par chaque module.
+//
+// Une redite, c'est une meme famille traitee dans le meme mois, dans deux
+// modules differents, par deux intervenants differents. L'emargement le sait
+// desormais : il nomme qui etait devant les etudiants, et quand.
+//
+// La forme de sortie — { titre, detail } — est inchangee a dessein : elle
+// alimente le champ `coordination` du digest, dont l'ecran et le mail sont
+// verrouilles.
+function detecterRedites(blocs, horsBloc, declarationsPeriode) {
+  const famillesParModule = {};
+  (blocs || []).forEach(b => (b.modules || []).forEach(m => { famillesParModule[m.titre] = m.familles || []; }));
+  (horsBloc || []).forEach(m => { famillesParModule[m.titre] = m.familles || []; });
+
+  const par = {};
+  declarationsPeriode.forEach(d => {
+    const mod = String(d.module_ref || ''); if (!mod) return;
+    (famillesParModule[mod] || []).forEach(f => {
+      const e = (par[f] = par[f] || { famille: f, modules: new Set(), intervenants: new Set(), dates: [] });
+      e.modules.add(mod);
+      if (d.intervenant_nom) e.intervenants.add(String(d.intervenant_nom));
+      if (d.date_seance) e.dates.push(String(d.date_seance).slice(0, 10));
+    });
+  });
+
+  return Object.values(par)
+    .filter(e => e.modules.size > 1 && e.intervenants.size > 1)
+    .map(e => {
+      const dates = e.dates.sort();
+      return {
+        titre: `${e.famille} — reprise par ${e.intervenants.size} intervenants`,
+        detail: `Traitée ce mois-ci dans ${Array.from(e.modules).join(' et ')}, par ${Array.from(e.intervenants).join(', ')}`
+          + (dates.length ? ` (du ${dates[0]} au ${dates[dates.length - 1]}).` : '.'),
+        famille: e.famille,
+        modules: Array.from(e.modules).sort(),
+        intervenants: Array.from(e.intervenants).sort(),
+      };
+    })
+    .sort((a, b) => b.intervenants.length - a.intervenants.length);
+}
+
+// ── Compatibilite ascendante ───────────────────────────────────────────────
+// src/App.jsx lit encore `ecarts` dans l'ancienne forme. Tant que le Bloc 2
+// n'est pas commite, on la fabrique depuis le journal : seul l'etat
+// `manquante` y devient une alerte, ce qui suffit a faire disparaitre les
+// deux faux signaux symetriques decrits en tete de section.
+function ecartsRetrocompatibles(journal) {
+  return journal.filter(j => !j.hors_previsionnel).map(j => ({
+    previsionnel_id: j.previsionnel_id, module_ref: j.module_ref,
+    intervenant_nom: j.intervenant_nom, numero: j.numero, titre: j.titre,
+    date_prevue: j.date_prevue,
+    etat: j.etat === 'manquante' ? 'alerte' : 'nominal',
+    detail: j.detail,
+  }));
 }
 
 // Destinataires du digest : intervenants inscrits sur ce titre.
@@ -253,7 +453,7 @@ async function genererContenuDigest(db, apiKey, formationId, campus, anneeScolai
     db.execute({ sql: `SELECT id, module_ref, titre, intervenant_nom, numero, date_prevue, modalite, concepts
                         FROM previsionnel_seance WHERE formation_id=? AND annee_scolaire=? AND date_prevue>=? AND date_prevue<=?`,
       args: [formationId, anneeScolaire, debut, fin] }),
-    db.execute({ sql: `SELECT id, previsionnel_id, module_ref, intervenant_nom, couvert, competences
+    db.execute({ sql: `SELECT id, previsionnel_id, module_ref, intervenant_nom, date_seance, competences
                         FROM declaration WHERE formation_id=? AND annee_scolaire=? AND date_seance>=? AND date_seance<=?`,
       args: [formationId, anneeScolaire, debut, fin] }),
     db.execute({ sql: `SELECT competences FROM declaration WHERE formation_id=? AND annee_scolaire=?`,
@@ -264,14 +464,16 @@ async function genererContenuDigest(db, apiKey, formationId, campus, anneeScolai
       args: [formationId, anneeScolaire, debutSuivant, finSuivant] }),
   ]);
 
-  const declarationsPeriode = declPeriode.rows.map(r => ({ ...r, couvert: parseJSON(r.couvert, []), competences: parseJSON(r.competences, []) }));
+  const declarationsPeriode = declPeriode.rows.map(r => ({ ...r, competences: parseJSON(r.competences, []) }));
   const declarationsCumul = declCumul.rows.map(r => ({ competences: parseJSON(r.competences, []) }));
   const previsionnelParId = {};
   prevPeriode.rows.forEach(p => { previsionnelParId[p.id] = { ...p, concepts: parseJSON(p.concepts, []) }; });
 
   const avancementBlocs = calculerAvancementBlocs(blocs, declarationsCumul);
   const quiAEnseigne = calculerQuiAEnseigne(declarationsPeriode, previsionnelParId);
-  const coordination = detecterCoordination(declarationsPeriode);
+  // Le point de coordination du digest n'est plus un doublon de competence
+  // mais une redite de famille de notions (cf. detecterRedites).
+  const coordination = detecterRedites(blocs, formationData.modules_hors_bloc || [], declarationsPeriode);
   const sequencesAVenir = prevSuivant.rows.map(p => ({
     date: p.date_prevue, module: p.titre || p.module_ref, intervenant: p.intervenant_nom,
     competences: parseJSON(p.concepts, []),
@@ -665,7 +867,8 @@ module.exports = async function handler(req, res) {
 
       const prevu = await db.execute({
         sql: `SELECT id, module_ref, campus, intervenant_id, intervenant_nom,
-                     numero, titre, date_prevue, modalite, contenu, concepts, competences
+                     numero, titre, date_prevue, modalite, contenu, concepts, competences,
+                     duree_minutes, libelle_cesar
               FROM previsionnel_seance
               WHERE formation_id = ? AND annee_scolaire = ?
                 AND date_prevue >= ? AND date_prevue <= ?${scopeSql}
@@ -676,7 +879,8 @@ module.exports = async function handler(req, res) {
       const realise = await db.execute({
         sql: `SELECT id, module_ref, previsionnel_id, campus, intervenant_id, intervenant_nom,
                      seance_numero, date_seance, source, couvert, competences,
-                     compte_rendu, statut_cr, ecart, signal, declared_at
+                     compte_rendu, statut_cr, ecart, signal, declared_at,
+                     duree_minutes, libelle_cesar
               FROM declaration
               WHERE formation_id = ? AND annee_scolaire = ?
                 AND date_seance >= ? AND date_seance <= ?${scopeSql}
@@ -686,22 +890,38 @@ module.exports = async function handler(req, res) {
 
       const prevRows = prevu.rows.map(r => ({ ...r, concepts: parseJSON(r.concepts, []), competences: parseJSON(r.competences, []) }));
       const declRows = realise.rows.map(r => ({ ...r, couvert: parseJSON(r.couvert, []), competences: parseJSON(r.competences, []) }));
-      const declParPrevId = {};
-      declRows.forEach(d => { if (d.previsionnel_id != null) declParPrevId[d.previsionnel_id] = d; });
-      const ecarts = calculerDelta(prevRows, declParPrevId);
+      // Journal des séances de la période : union du programmé et de l'émargé.
+      const journal = calculerJournal(prevRows, declRows, new Date().toISOString());
+      const ecarts = ecartsRetrocompatibles(journal);
 
-      // Avancement cumulé par bloc (cartographie RP/FR) — depuis le début de
-      // l'année scolaire, pas seulement la période affichée.
-      const [formationRow, declCumul] = await Promise.all([
+      // Cumul depuis le début de l'année scolaire, arrêté à la FIN du mois
+      // affiché : une compétence couverte en octobre ne doit pas redevenir
+      // « non couverte » quand on ouvre novembre.
+      const [formationRow, declCumulRows, prevCumulRows] = await Promise.all([
         db.execute({ sql: 'SELECT data_json FROM formations WHERE id = ?', args: [formation_id] }),
         db.execute({
-          sql: `SELECT competences FROM declaration WHERE formation_id = ? AND annee_scolaire = ?${scopeSql}`,
+          sql: `SELECT module_ref, intervenant_nom, date_seance, duree_minutes, competences
+                FROM declaration
+                WHERE formation_id = ? AND annee_scolaire = ? AND date_seance <= ?${scopeSql}`,
+          args: [formation_id, annee, fin, ...scopeArgs],
+        }),
+        db.execute({
+          sql: `SELECT module_ref, intervenant_nom, date_prevue, duree_minutes, competences
+                FROM previsionnel_seance
+                WHERE formation_id = ? AND annee_scolaire = ?${scopeSql}`,
           args: [formation_id, annee, ...scopeArgs],
         }),
       ]);
-      const blocs = parseJSON(formationRow.rows[0]?.data_json, {}).blocs || [];
-      const declarationsCumul = declCumul.rows.map(r => ({ competences: parseJSON(r.competences, []) }));
+      const formationData = parseJSON(formationRow.rows[0]?.data_json, {});
+      const blocs = formationData.blocs || [];
+      const horsBloc = formationData.modules_hors_bloc || [];
+      const declarationsCumul = declCumulRows.rows.map(r => ({ ...r, competences: parseJSON(r.competences, []) }));
+      const previsionnelCumul = prevCumulRows.rows.map(r => ({ ...r, competences: parseJSON(r.competences, []) }));
+
       const avancementBlocs = calculerAvancementBlocs(blocs, declarationsCumul);
+      const competences = calculerCompetences(blocs, previsionnelCumul, declarationsCumul);
+      const distorsions = calculerDistorsions(blocs, horsBloc, previsionnelCumul, declarationsCumul);
+      const redites = detecterRedites(blocs, horsBloc, declRows);
 
       // Pour l'arborescence intervenant : quelles compétences (parmi les
       // siennes) ont déjà été déclarées couvertes, tous mois confondus.
@@ -727,6 +947,10 @@ module.exports = async function handler(req, res) {
         periode: { debut, fin, label: labelMois(debut) },
         seances_prevues: prevRows,
         seances_realisees: declRows,
+        journal,
+        competences,
+        distorsions,
+        redites,
         ecarts,
         avancement_blocs: avancementBlocs,
         mes_competences_couvertes: mesCompetencesCouvertes,
