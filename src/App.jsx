@@ -807,11 +807,14 @@ function ArbitrageMatieres(){
         const fs=f.formations||[]
         setFormations(fs)
         const liste=(m.matieres||[]).map(x=>{
-          const fo=fs.find(y=>Number(y.id)===Number(x.formation_id))
+          // /api/formations préfixe les champs de la ligne pour les distinguer
+          // du contenu du référentiel : l'identifiant est _id, pas id. Chercher
+          // id laissait la liste des modules vide et tous les boutons inertes.
+          const fo=fs.find(y=>Number(y._id)===Number(x.formation_id))
           const mods=fo?[...(fo.blocs||[]).flatMap(b=>(b.modules||[]).map(mm=>({...mm,bloc:b.id}))),
                          ...((fo.modules_hors_bloc||[]).map(mm=>({...mm,bloc:'HB'})))]:[]
           const p=proposerModule(x.libelle_cesar,mods)
-          return {...x,modules:mods,titre_formation:fo?.formation?.titre||'',proposition:p}
+          return {...x,modules:mods,titre_formation:fo?._titre_court||fo?.formation?.titre||'',proposition:p}
         })
         setMatieres(liste)
         setChoix(Object.fromEntries(liste.filter(x=>x.proposition.module).map(x=>[x.id,x.proposition.module.titre])))
@@ -851,6 +854,14 @@ function ArbitrageMatieres(){
       </p>
 
       {erreur&&<div style={{padding:'0.7rem 1rem',background:P.amberbg,border:`1px solid ${P.amber}`,borderRadius:10,fontSize:12.5,color:'#7A4A00',marginBottom:'1rem'}}>{erreur}</div>}
+
+      {matieres.some(m=>!m.modules.length)&&(
+        <div style={{padding:'0.7rem 1rem',background:P.amberbg,border:`1px solid ${P.amber}`,borderRadius:10,
+          fontSize:12.5,color:'#7A4A00',marginBottom:'1rem',lineHeight:1.6}}>
+          {matieres.filter(m=>!m.modules.length).length} intitulés n’ont aucun module à proposer : leur promotion
+          n’a pas été retrouvée. Vérifiez que le groupe planning est bien rattaché dans l’onglet Émargement.
+        </div>
+      )}
 
       {matieres.length===0&&(
         <div style={card()}>
