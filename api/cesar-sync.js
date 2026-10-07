@@ -660,6 +660,7 @@ async function actionArbitrerMatiere(db, annee, body, user) {
   // pourtant reussi.
   const rattrape = { previsionnel: 0, realise: 0 };
   if (moduleRef) {
+    const competences = await new CompetencesParModule(db).pour(fid, moduleRef);
     for (const [table, champ] of [['previsionnel_seance', 'previsionnel'], ['declaration', 'realise']]) {
       const candidates = await db.execute({
         sql: `SELECT id, libelle_cesar FROM ${table}
@@ -668,7 +669,10 @@ async function actionArbitrerMatiere(db, annee, body, user) {
       });
       for (const row of candidates.rows) {
         if (normaliserCle(row.libelle_cesar) !== cle) continue;
-        await db.execute({ sql: `UPDATE ${table} SET module_ref = ? WHERE id = ?`, args: [moduleRef, row.id] });
+        await db.execute({
+          sql: `UPDATE ${table} SET module_ref = ?, competences = ? WHERE id = ?`,
+          args: [moduleRef, JSON.stringify(competences), row.id],
+        });
         rattrape[champ]++;
       }
     }
@@ -678,12 +682,42 @@ async function actionArbitrerMatiere(db, annee, body, user) {
            seances_rattrapees: rattrapees, detail: rattrape };
 }
 
+// ── Competences d'un module ────────────────────────────────────────────────
+//
+// Une seance emargee couvre les competences que le plan de formation rattache
+// a son module. L'information existe : elle est dans data_json, et l'arbitrage
+// des matieres nous dit a quel module appartient la seance.
+//
+// Elle n'etait pas ecrite. Le champ `competences` d'une declaration etait
+// alimente par l'ancien modele declaratif, ou l'intervenant cochait lui-meme.
+// Le declaratif a ete abandonne sans que ce champ soit rebranche, et
+// l'avancement par bloc de L'Atelier — qui se calcule dessus — affichait 0 %
+// sur une promotion dont 24 seances etaient pourtant en base.
+class CompetencesParModule {
+  constructor(db) { this.db = db; this.cache = {}; }
+  async pour(formationId, moduleRef) {
+    if (!moduleRef) return [];
+    if (!this.cache[formationId]) {
+      const r = await this.db.execute({ sql: 'SELECT data_json FROM formations WHERE id = ?', args: [formationId] });
+      let data = {};
+      try { data = JSON.parse(String(r.rows[0] && r.rows[0].data_json || '{}')); } catch (e) { data = {}; }
+      const table = {};
+      const poser = m => { if (m && m.titre) table[normaliserCle(m.titre)] = tableau(m.competences_liees); };
+      (data.blocs || []).forEach(b => (b.modules || []).forEach(poser));
+      (data.modules_hors_bloc || []).forEach(poser);
+      this.cache[formationId] = table;
+    }
+    return this.cache[formationId][normaliserCle(moduleRef)] || [];
+  }
+}
+
 // ── Import des seances ──────────────────────────────────────────────────────
 
 async function importerSeances(db, { annee, seances, flux, ecrire, perimetre }) {
   const groupes = await chargerGroupes(db, annee);
   const resolveur = new ResolveurMatieres(db, annee, ecrire);
   const apparieur = new ApparieurPrevisionnel(db, annee);
+  const competencesDuModule = new CompetencesParModule(db);
   const cacheIntervenants = {};
 
   const bilan = {
@@ -760,7 +794,9 @@ async function importerSeances(db, { annee, seances, flux, ecrire, perimetre }) 
         formationId, moduleRef, groupe.campus, intervenantId, nom || '—', numero,
         String(s.titre || libelleMatiere || `Séance ${numero}`), dateISO,
         s.modalite === 'D' ? 'D' : 'P', String(s.contenu || ''),
-        JSON.stringify(tableau(s.concepts)), JSON.stringify(tableau(s.competences)),
+        JSON.stringify(tableau(s.concepts)),
+        JSON.stringify(tableau(s.competences).length ? tableau(s.competences)
+          : await competencesDuModule.pour(formationId, moduleRef)),
         duree, codeGroupe, libelleMatiere, ref, annee,
       ];
       if (ex.rows.length) {
@@ -791,8 +827,10 @@ async function importerSeances(db, { annee, seances, flux, ecrire, perimetre }) 
     // ── flux realise ────────────────────────────────────────────────────────
     const compteRendu = String(s.compte_rendu || '').trim();
     if (compteRendu) bilan.avec_compte_rendu++;
-    // Le compte rendu arrive en prose libre. Il est stocke tel quel et attend
-    // son rattachement aux competences : competences reste vide a l'import.
+    // Le compte rendu arrive en prose libre et attend son rattachement fin aux
+    // competences — statut_cr reste 'a_mapper'. Les competences du module,
+    // elles, sont certaines des lors que la matiere est arbitree : c'est le
+    // plan de formation qui les porte, pas une declaration.
     const statutCR = compteRendu ? 'a_mapper' : 'sans_cr';
 
     // L'existant est lu AVANT l'appariement : un rejeu doit conserver le
@@ -814,7 +852,8 @@ async function importerSeances(db, { annee, seances, flux, ecrire, perimetre }) 
     const args = [
       formationId, moduleRef, prevId, groupe.campus, intervenantId, nom,
       Number.isInteger(s.numero) ? s.numero : null, dateISO, 'cesar',
-      JSON.stringify(tableau(s.couvert)), JSON.stringify([]),
+      JSON.stringify(tableau(s.couvert)),
+      JSON.stringify(await competencesDuModule.pour(formationId, moduleRef)),
       compteRendu, statutCR, duree, codeGroupe, libelleMatiere, ref, annee,
     ];
     if (ex.rows.length) {
