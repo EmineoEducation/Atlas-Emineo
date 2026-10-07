@@ -1006,6 +1006,7 @@ function ArbitrageMatieres(){
   const [erreur,setErreur]=useState('')
   const [fait,setFait]=useState(0)
   const [diag,setDiag]=useState(null)
+  const [dernier,setDernier]=useState(null)
 
   useEffect(()=>{charger()},[])
   function charger(){
@@ -1047,13 +1048,18 @@ function ArbitrageMatieres(){
     setOccupe('envoi');setErreur('')
     let n=0
     try{
+      let prev=0,real=0
       for(const m of liste){
         const t=choix[m.id]
         if(!t)continue
-        await api.cesarArbitrer(m.formation_id,m.libelle_cesar,t)
+        const r=await api.cesarArbitrer(m.formation_id,m.libelle_cesar,t)
+        if(r&&r.detail){prev+=r.detail.previsionnel||0;real+=r.detail.realise||0}
         n++
       }
       setFait(f=>f+n)
+      // Le rattrapage est la vraie mesure de l'arbitrage : valider sans
+      // rattacher aucune séance ne servirait à rien, et devait se voir.
+      setDernier({intitules:n,previsionnel:prev,realise:real})
       charger()
     }catch(e){setErreur(e.message)}
     setOccupe('')
@@ -1090,6 +1096,14 @@ function ArbitrageMatieres(){
           fontSize:12.5,color:'#7A4A00',marginBottom:'1rem',lineHeight:1.6}}>
           {matieres.filter(m=>!m.modules.length).length} intitulés n’ont aucun module à proposer : leur promotion
           n’a pas été retrouvée. Vérifiez que le groupe planning est bien rattaché dans l’onglet Émargement.
+        </div>
+      )}
+
+      {dernier&&(
+        <div style={{padding:'0.7rem 1rem',background:'rgba(93,226,152,0.12)',border:`1px solid ${P.borderm}`,
+          borderRadius:10,fontSize:12.5,color:P.abysse,marginBottom:'1rem',lineHeight:1.6}}>
+          {dernier.intitules} intitulés arbitrés — {dernier.previsionnel} séances du prévisionnel
+          et {dernier.realise} du réalisé rattachées à leur module.
         </div>
       )}
 
