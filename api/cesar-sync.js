@@ -36,6 +36,7 @@
 //   GET  ?action=etat[&annee_scolaire=]        tableau de bord de l'import
 //   GET  ?action=groupes[&annee_scolaire=]     groupes planning et rattachement
 //   GET  ?action=matieres[&formation_id=][&a_arbitrer=1]   file d'arbitrage
+//   GET  ?action=couverture&formation_id=      annonce confrontee au realise
 //   POST ?action=groupes        { groupes:[...] }
 //   POST ?action=rattacher      { code_cesar, titre_court | formation_id }
 //   POST ?action=matiere        { formation_id, libelle_cesar, module_ref }
@@ -491,6 +492,127 @@ async function actionListerMatieres(db, annee, formationId, seulementAArbitrer) 
   return { matieres: r.rows };
 }
 
+// Couverture d'une promotion : l'annonce du plan de formation confrontee au
+// realise de l'emargement, module par module.
+//
+// L'annonce vient de formations.data_json — blocs, modules, volume prevu,
+// notions du syllabus. Le realise vient de previsionnel_seance (ce qui est
+// programme dans CESAR, y compris a venir) et de declaration (ce qui a eu
+// lieu). Le rapprochement se fait sur module_ref, c'est-a-dire l'intitule du
+// module du plan, pose par l'arbitrage des matieres.
+//
+// Un module sans aucune seance programmee n'est pas une anomalie de lecture :
+// c'est un module annonce que ce groupe ne suivra jamais. C'est precisement ce
+// qu'aucun outil ne savait dire avant.
+async function actionCouverture(db, annee, formationId, aujourdhui) {
+  if (!formationId) return { error: 'formation_id requis.' };
+
+  const [fRow, prev, decl] = await Promise.all([
+    db.execute({ sql: 'SELECT id, titre, titre_court, data_json FROM formations WHERE id = ?', args: [formationId] }),
+    db.execute({
+      sql: `SELECT module_ref, libelle_cesar, date_prevue, duree_minutes, intervenant_nom, code_groupe_cesar
+            FROM previsionnel_seance WHERE formation_id = ? AND annee_scolaire = ?`,
+      args: [formationId, annee],
+    }),
+    db.execute({
+      sql: `SELECT module_ref, date_seance, duree_minutes, intervenant_nom, compte_rendu
+            FROM declaration WHERE formation_id = ? AND annee_scolaire = ?`,
+      args: [formationId, annee],
+    }),
+  ]);
+  if (!fRow.rows.length) return { error: 'formation inconnue.' };
+
+  let data = {};
+  try { data = JSON.parse(String(fRow.rows[0].data_json || '{}')); } catch (e) { data = {}; }
+
+  const vide = () => ({ seances: 0, minutes: 0, intervenants: new Set(), dates: [], comptes_rendus: [] });
+  const programme = {}, realise = {};
+  for (const r of prev.rows) {
+    const k = String(r.module_ref || '');
+    if (!k) continue;
+    const e = (programme[k] = programme[k] || vide());
+    e.seances++; e.minutes += Number(r.duree_minutes || 0);
+    if (r.intervenant_nom) e.intervenants.add(String(r.intervenant_nom));
+    if (r.date_prevue) e.dates.push(String(r.date_prevue).slice(0, 10));
+  }
+  for (const r of decl.rows) {
+    const k = String(r.module_ref || '');
+    if (!k) continue;
+    const e = (realise[k] = realise[k] || vide());
+    e.seances++; e.minutes += Number(r.duree_minutes || 0);
+    if (r.intervenant_nom) e.intervenants.add(String(r.intervenant_nom));
+    if (r.date_seance) e.dates.push(String(r.date_seance).slice(0, 10));
+    const cr = String(r.compte_rendu || '').trim();
+    if (cr) e.comptes_rendus.push({ date: String(r.date_seance || '').slice(0, 10), intervenant: String(r.intervenant_nom || ''), texte: cr });
+  }
+
+  const h = m => Math.round((m / 60) * 10) / 10;
+  const decrire = (titre) => {
+    const p = programme[titre], r = realise[titre];
+    return {
+      programme: !!p,
+      seances_programmees: p ? p.seances : 0,
+      seances_faites: r ? r.seances : 0,
+      heures_programmees: p ? h(p.minutes) : 0,
+      heures_faites: r ? h(r.minutes) : 0,
+      intervenants: p ? [...p.intervenants].sort() : [],
+      premiere: p && p.dates.length ? p.dates.slice().sort()[0] : '',
+      derniere: p && p.dates.length ? p.dates.slice().sort().slice(-1)[0] : '',
+      comptes_rendus: r ? r.comptes_rendus : [],
+    };
+  };
+
+  const blocs = (data.blocs || []).map(b => ({
+    id: b.id, titre: b.titre, nature: b.nature || 'obligatoire',
+    modules: (b.modules || []).map(m => ({
+      titre: m.titre, volume_annonce: m.volume == null ? null : m.volume,
+      notions: m.notions_cles || [], familles: m.familles || [],
+      competences: m.competences_liees || [], ...decrire(m.titre),
+    })),
+  }));
+  const horsBloc = (data.modules_hors_bloc || []).map(m => ({
+    titre: m.titre, volume_annonce: m.volume == null ? null : m.volume,
+    notions: m.notions_cles || [], familles: m.familles || [],
+    competences: m.competences_liees || [], ...decrire(m.titre),
+  }));
+
+  // Familles portees par plusieurs intervenants : le niveau 2, enfin
+  // calculable, parce que l'emargement nomme qui etait devant les etudiants.
+  const parFamille = {};
+  for (const m of blocs.flatMap(b => b.modules).concat(horsBloc)) {
+    for (const f of m.familles || []) {
+      const e = (parFamille[f] = parFamille[f] || { famille: f, intervenants: new Set(), modules: [], dates: [] });
+      m.intervenants.forEach(i => e.intervenants.add(i));
+      if (m.programme) e.modules.push(m.titre);
+      if (m.premiere) e.dates.push(m.premiere);
+      if (m.derniere) e.dates.push(m.derniere);
+    }
+  }
+  const croisements = Object.values(parFamille)
+    .filter(e => e.intervenants.size > 1 && e.modules.length > 1)
+    .map(e => ({ famille: e.famille, intervenants: [...e.intervenants].sort(), modules: e.modules,
+                 debut: e.dates.sort()[0] || '', fin: e.dates.slice(-1)[0] || '' }))
+    .sort((a, b) => b.intervenants.length - a.intervenants.length);
+
+  const tous = blocs.flatMap(b => b.modules).concat(horsBloc);
+  return {
+    formation: { id: Number(fRow.rows[0].id), titre: String(fRow.rows[0].titre || ''), titre_court: String(fRow.rows[0].titre_court || '') },
+    annee_scolaire: annee, arrete_au: aujourdhui,
+    resume: {
+      modules_plan: tous.length,
+      modules_programmes: tous.filter(m => m.programme).length,
+      modules_demarres: tous.filter(m => m.seances_faites > 0).length,
+      modules_termines: tous.filter(m => m.seances_faites > 0 && m.seances_faites >= m.seances_programmees).length,
+      jamais_programmes: tous.filter(m => !m.programme).length,
+      heures_programmees: Math.round(tous.reduce((n, m) => n + m.heures_programmees, 0) * 10) / 10,
+      heures_faites: Math.round(tous.reduce((n, m) => n + m.heures_faites, 0) * 10) / 10,
+      intervenants: new Set(tous.flatMap(m => m.intervenants)).size,
+      comptes_rendus: tous.reduce((n, m) => n + m.comptes_rendus.length, 0),
+    },
+    blocs, modules_hors_bloc: horsBloc, croisements,
+  };
+}
+
 // Arbitrage d'un intitule. C'est la seule porte par laquelle une correspondance
 // entre un libelle CESAR et un module du plan de formation devient effective.
 async function actionArbitrerMatiere(db, annee, body, user) {
@@ -751,6 +873,11 @@ module.exports = async function handler(req, res) {
       if (action === 'groupes') {
         return res.status(200).json(await actionListerGroupes(db, annee));
       }
+      if (action === 'couverture') {
+        const out = await actionCouverture(db, annee, Number(req.query.formation_id), new Date().toISOString().slice(0, 10));
+        return res.status(out.error ? 400 : 200).json(out);
+      }
+
       if (action === 'matieres') {
         const fid = Number(req.query.formation_id) || null;
         const seulement = req.query.a_arbitrer === '1' || req.query.a_arbitrer === 'true';
