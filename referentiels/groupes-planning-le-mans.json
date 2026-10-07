@@ -1,0 +1,377 @@
+{
+ "genere_le": "2026-10-07",
+ "outil": "rattachement-groupes",
+ "annee_scolaire": "2026-27",
+ "campus": "Le Mans",
+ "resume": {
+  "groupes": 38,
+  "rattaches": 11,
+  "hors_perimetre": 27,
+  "titres_sans_referentiel": [
+   "BACHELOR Développement Commercial",
+   "BACHELOR RGA - Gestion des entreprises Spécialité : Piloter le développement d’un centre de profit",
+   "BACHELOR Ressources Humaines",
+   "BTS Communication 1",
+   "BTS Communication 2",
+   "BTS Gestion de la PME 1",
+   "BTS Gestion de la PME 2",
+   "BTS Management Commercial Opérationnel 1",
+   "BTS Management Commercial Opérationnel 2",
+   "BTS Négociation et Digitalisation de la Relation Client 1",
+   "BTS Négociation et Digitalisation de la Relation Client 2",
+   "Cycle Préparatoire2 Chargé de communication"
+  ]
+ },
+ "groupes": [
+  {
+   "code_cesar": "CDC 3-27 A CESACOM LE MANS - planning",
+   "libelle_cesar_formation": "BACHELOR Communication",
+   "campus": "Le Mans",
+   "promotion": "bach-cdc",
+   "titre_court": "Bach CDC",
+   "statut": "rattache",
+   "sous_groupes": []
+  },
+  {
+   "code_cesar": "CDC 3-27 B CESACOM LE MANS - planning",
+   "libelle_cesar_formation": "BACHELOR Communication",
+   "campus": "Le Mans",
+   "promotion": "bach-cdc",
+   "titre_court": "Bach CDC",
+   "statut": "rattache",
+   "sous_groupes": []
+  },
+  {
+   "code_cesar": "CDC 3-27 OPTION CESACOM LE MANS",
+   "libelle_cesar_formation": "BACHELOR Communication",
+   "campus": "Le Mans",
+   "promotion": "bach-cdc",
+   "titre_court": "Bach CDC",
+   "statut": "rattache",
+   "sous_groupes": [
+    "CDC 3-27 CREA CESACOM LE MANS",
+    "CDC 3-27 DIGIT CESACOM LE MANS"
+   ]
+  },
+  {
+   "code_cesar": "MDEC 4-28 ISME LE MANS - planning",
+   "libelle_cesar_formation": "Mastère 1 Développement Commercial",
+   "campus": "Le Mans",
+   "promotion": "m1-mdec",
+   "titre_court": "M1 MDEC",
+   "statut": "rattache",
+   "sous_groupes": []
+  },
+  {
+   "code_cesar": "MRH 4-28 ISME LE MANS - planning",
+   "libelle_cesar_formation": "Mastère 1 Management des Ressources Humaines",
+   "campus": "Le Mans",
+   "promotion": "m1-mrh",
+   "titre_court": "M1 MRH",
+   "statut": "rattache",
+   "sous_groupes": []
+  },
+  {
+   "code_cesar": "MSMC 4-28 CESACOM LE MANS - planning",
+   "libelle_cesar_formation": "Mastère1 Stratégies Marketing et Communication",
+   "campus": "Le Mans",
+   "promotion": "m1-msmc",
+   "titre_court": "M1 MSMC",
+   "statut": "rattache",
+   "sous_groupes": []
+  },
+  {
+   "code_cesar": "MSMC 4-28 SPE CESACOM LE MANS",
+   "libelle_cesar_formation": "Mastère1 Stratégies Marketing et Communication",
+   "campus": "Le Mans",
+   "promotion": "m1-msmc",
+   "titre_court": "M1 MSMC",
+   "statut": "rattache",
+   "sous_groupes": [
+    "MSMC 4-28 CREA CESACOM LE MANS",
+    "MSMC 4-28 MARQUE CESACOM LE MANS"
+   ]
+  },
+  {
+   "code_cesar": "MDEC 5-27 ISME LE MANS - planning",
+   "libelle_cesar_formation": "Mastère 2 Développement Commercial",
+   "campus": "Le Mans",
+   "promotion": "m2-mdec",
+   "titre_court": "M2 MDEC",
+   "statut": "rattache",
+   "sous_groupes": []
+  },
+  {
+   "code_cesar": "MRH 5-27 ISME LE MANS - planning",
+   "libelle_cesar_formation": "Mastère 2 Management des Ressources Humaines",
+   "campus": "Le Mans",
+   "promotion": "m2-mrh",
+   "titre_court": "M2 MRH",
+   "statut": "rattache",
+   "sous_groupes": []
+  },
+  {
+   "code_cesar": "MSMC 5-27 CREA CESACOM LE MANS - planning",
+   "libelle_cesar_formation": "Mastère2 Stratégies Marketing et Communication",
+   "campus": "Le Mans",
+   "promotion": "m2-msmc",
+   "titre_court": "M2 MSMC",
+   "statut": "rattache",
+   "sous_groupes": []
+  },
+  {
+   "code_cesar": "MSMC 5-27 MARQUE CESACOM LE MANS - planning",
+   "libelle_cesar_formation": "Mastère2 Stratégies Marketing et Communication",
+   "campus": "Le Mans",
+   "promotion": "m2-msmc",
+   "titre_court": "M2 MSMC",
+   "statut": "rattache",
+   "sous_groupes": []
+  },
+  {
+   "code_cesar": "BTS COM 1-28 ALT ISME LE MANS - planning",
+   "libelle_cesar_formation": "BTS Communication 1",
+   "campus": "Le Mans",
+   "promotion": "",
+   "titre_court": "",
+   "statut": "hors_perimetre",
+   "sous_groupes": []
+  },
+  {
+   "code_cesar": "BTS COM 1-28 ALT+ INI ISME LE MANS",
+   "libelle_cesar_formation": "BTS Communication 1",
+   "campus": "Le Mans",
+   "promotion": "",
+   "titre_court": "",
+   "statut": "hors_perimetre",
+   "sous_groupes": []
+  },
+  {
+   "code_cesar": "BTS COM 1-28 INIT ISME LE MANS - planning",
+   "libelle_cesar_formation": "BTS Communication 1",
+   "campus": "Le Mans",
+   "promotion": "",
+   "titre_court": "",
+   "statut": "hors_perimetre",
+   "sous_groupes": []
+  },
+  {
+   "code_cesar": "BTS COM 2-27 A ALT ISME LE MANS - planning",
+   "libelle_cesar_formation": "BTS Communication 2",
+   "campus": "Le Mans",
+   "promotion": "",
+   "titre_court": "",
+   "statut": "hors_perimetre",
+   "sous_groupes": []
+  },
+  {
+   "code_cesar": "BTS COM 2-27 A ALT TYCIA ISME LE MANS",
+   "libelle_cesar_formation": "BTS Communication 2",
+   "campus": "Le Mans",
+   "promotion": "",
+   "titre_court": "",
+   "statut": "hors_perimetre",
+   "sous_groupes": [
+    "BTS COM 2-27 A TYCIA ISME LE MANS"
+   ]
+  },
+  {
+   "code_cesar": "BTS COM 2-27 A INI ISME LE MANS - planning",
+   "libelle_cesar_formation": "BTS Communication 2",
+   "campus": "Le Mans",
+   "promotion": "",
+   "titre_court": "",
+   "statut": "hors_perimetre",
+   "sous_groupes": []
+  },
+  {
+   "code_cesar": "BTS COM 2-27 B ALT ISME LE MANS - planning",
+   "libelle_cesar_formation": "BTS Communication 2",
+   "campus": "Le Mans",
+   "promotion": "",
+   "titre_court": "",
+   "statut": "hors_perimetre",
+   "sous_groupes": []
+  },
+  {
+   "code_cesar": "BTS COM 2-27 B INI ISME LE MANS - planning",
+   "libelle_cesar_formation": "BTS Communication 2",
+   "campus": "Le Mans",
+   "promotion": "",
+   "titre_court": "",
+   "statut": "hors_perimetre",
+   "sous_groupes": []
+  },
+  {
+   "code_cesar": "BTS COM 2-A 27 ALT+ INI ISME LE MANS",
+   "libelle_cesar_formation": "BTS Communication 2",
+   "campus": "Le Mans",
+   "promotion": "",
+   "titre_court": "",
+   "statut": "hors_perimetre",
+   "sous_groupes": []
+  },
+  {
+   "code_cesar": "BTS COM 2-B 27 ALT+ INI ISME LE MANS",
+   "libelle_cesar_formation": "BTS Communication 2",
+   "campus": "Le Mans",
+   "promotion": "",
+   "titre_court": "",
+   "statut": "hors_perimetre",
+   "sous_groupes": []
+  },
+  {
+   "code_cesar": "BTS GPME 1-28 ALT ISME LE MANS - planning",
+   "libelle_cesar_formation": "BTS Gestion de la PME 1",
+   "campus": "Le Mans",
+   "promotion": "",
+   "titre_court": "",
+   "statut": "hors_perimetre",
+   "sous_groupes": []
+  },
+  {
+   "code_cesar": "BTS GPME 1-28 ALT+ INI ISME LE MANS",
+   "libelle_cesar_formation": "BTS Gestion de la PME 1",
+   "campus": "Le Mans",
+   "promotion": "",
+   "titre_court": "",
+   "statut": "hors_perimetre",
+   "sous_groupes": []
+  },
+  {
+   "code_cesar": "BTS GPME 1-28 INIT ISME LE MANS - planning",
+   "libelle_cesar_formation": "BTS Gestion de la PME 1",
+   "campus": "Le Mans",
+   "promotion": "",
+   "titre_court": "",
+   "statut": "hors_perimetre",
+   "sous_groupes": []
+  },
+  {
+   "code_cesar": "BTS GPME 2-27 ISME LE MANS - planning",
+   "libelle_cesar_formation": "BTS Gestion de la PME 2",
+   "campus": "Le Mans",
+   "promotion": "",
+   "titre_court": "",
+   "statut": "hors_perimetre",
+   "sous_groupes": []
+  },
+  {
+   "code_cesar": "BTS MCO 1-28 ALT ISME LE MANS - planning",
+   "libelle_cesar_formation": "BTS Management Commercial Opérationnel 1",
+   "campus": "Le Mans",
+   "promotion": "",
+   "titre_court": "",
+   "statut": "hors_perimetre",
+   "sous_groupes": []
+  },
+  {
+   "code_cesar": "BTS MCO 1-28 ALT+ INI ISME LE MANS",
+   "libelle_cesar_formation": "BTS Management Commercial Opérationnel 1",
+   "campus": "Le Mans",
+   "promotion": "",
+   "titre_court": "",
+   "statut": "hors_perimetre",
+   "sous_groupes": []
+  },
+  {
+   "code_cesar": "BTS MCO 1-28 INIT ISME LE MANS - planning",
+   "libelle_cesar_formation": "BTS Management Commercial Opérationnel 1",
+   "campus": "Le Mans",
+   "promotion": "",
+   "titre_court": "",
+   "statut": "hors_perimetre",
+   "sous_groupes": []
+  },
+  {
+   "code_cesar": "BTS MCO 2-27 ISME LE MANS - planning",
+   "libelle_cesar_formation": "BTS Management Commercial Opérationnel 2",
+   "campus": "Le Mans",
+   "promotion": "",
+   "titre_court": "",
+   "statut": "hors_perimetre",
+   "sous_groupes": []
+  },
+  {
+   "code_cesar": "BTS NDRC 1-28 ALT ISME LE MANS - planning",
+   "libelle_cesar_formation": "BTS Négociation et Digitalisation de la Relation Client 1",
+   "campus": "Le Mans",
+   "promotion": "",
+   "titre_court": "",
+   "statut": "hors_perimetre",
+   "sous_groupes": []
+  },
+  {
+   "code_cesar": "BTS NDRC 1-28 ALT+ INI ISME LE MANS",
+   "libelle_cesar_formation": "BTS Négociation et Digitalisation de la Relation Client 1",
+   "campus": "Le Mans",
+   "promotion": "",
+   "titre_court": "",
+   "statut": "hors_perimetre",
+   "sous_groupes": []
+  },
+  {
+   "code_cesar": "BTS NDRC 1-28 INIT ISME LE MANS - planning",
+   "libelle_cesar_formation": "BTS Négociation et Digitalisation de la Relation Client 1",
+   "campus": "Le Mans",
+   "promotion": "",
+   "titre_court": "",
+   "statut": "hors_perimetre",
+   "sous_groupes": []
+  },
+  {
+   "code_cesar": "BTS NDRC 2-27 ISME LE MANS - planning",
+   "libelle_cesar_formation": "BTS Négociation et Digitalisation de la Relation Client 2",
+   "campus": "Le Mans",
+   "promotion": "",
+   "titre_court": "",
+   "statut": "hors_perimetre",
+   "sous_groupes": []
+  },
+  {
+   "code_cesar": "CDC 2-28 CESACOM LE MANS - planning",
+   "libelle_cesar_formation": "Cycle Préparatoire2 Chargé de communication",
+   "campus": "Le Mans",
+   "promotion": "",
+   "titre_court": "",
+   "statut": "hors_perimetre",
+   "sous_groupes": []
+  },
+  {
+   "code_cesar": "CDRH 3-27 ISME LE MANS - planning",
+   "libelle_cesar_formation": "BACHELOR Ressources Humaines",
+   "campus": "Le Mans",
+   "promotion": "",
+   "titre_court": "",
+   "statut": "hors_perimetre",
+   "sous_groupes": []
+  },
+  {
+   "code_cesar": "PREPA CDC 2-28 CESACOM LE MANS - planning",
+   "libelle_cesar_formation": "Cycle Préparatoire2 Chargé de communication",
+   "campus": "Le Mans",
+   "promotion": "",
+   "titre_court": "",
+   "statut": "hors_perimetre",
+   "sous_groupes": []
+  },
+  {
+   "code_cesar": "REDA 3-27 ISME LE MANS - planning",
+   "libelle_cesar_formation": "BACHELOR Développement Commercial",
+   "campus": "Le Mans",
+   "promotion": "",
+   "titre_court": "",
+   "statut": "hors_perimetre",
+   "sous_groupes": []
+  },
+  {
+   "code_cesar": "RGA 3-27 ISME LE MANS - planning",
+   "libelle_cesar_formation": "BACHELOR RGA - Gestion des entreprises Spécialité : Piloter le développement d’un centre de profit",
+   "campus": "Le Mans",
+   "promotion": "",
+   "titre_court": "",
+   "statut": "hors_perimetre",
+   "sous_groupes": []
+  }
+ ]
+}
