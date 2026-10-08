@@ -272,6 +272,21 @@ function signauxResonance(liste) {
 //   3. code d'activité                 C1    -> C1.1, C1.2 (Bachelor CDC)
 function codeNu(v) { return String(v == null ? '' : v).toUpperCase().replace(/[^A-Z0-9]/g, ''); }
 
+// Les codes d'un module et de ses sous-modules réunis. Le plan de formation
+// décrit certains enseignements en deux étages : une ligne conteneur qui porte
+// le volume — « Hackathon Websérie », 35 h — et des sous-lignes qui portent le
+// détail et, seules, les codes de compétence. Ne lire que l'étage supérieur
+// rendait muets les sept Hackathons du M2 MSMC, soit 245 heures, le plus gros
+// volume du titre, et la « Méthodologie Bloc 3 » qui, elle, n'a réellement
+// aucun code au plan.
+function codesAvecSousModules(m) {
+  const codes = [...(m.competences_liees || [])];
+  for (const sm of (m.sous_modules || [])) {
+    for (const c of (sm.competences_liees || [])) if (!codes.includes(c)) codes.push(c);
+  }
+  return codes;
+}
+
 function resoudreCodesModule(competences, codesBruts) {
   const out = new Set();
   for (const brut of codesBruts || []) {
@@ -330,7 +345,7 @@ function versFormatApplication(ref) {
       // Codes officiels, seuls comparables aux compétences du bloc. Le code
       // brut du plan de formation est conservé à côté : c'est lui qu'on relit
       // quand un rattachement surprend.
-      competences_liees: resoudreCodesModule(competences, m.competences_liees),
+      competences_liees: resoudreCodesModule(competences, codesAvecSousModules(m)),
       competences_liees_pf: m.competences_liees || [],
       competences_plage: !!m.competences_plage,
       ...contenuModule(cleTitre, b.id, m.titre),
@@ -365,7 +380,7 @@ function versFormatApplication(ref) {
     titre: m.titre,
     volume: m.volume,
     section: m.section || '',
-    competences_liees: resoudreCodesModule(toutesCompetences, m.competences_liees),
+    competences_liees: resoudreCodesModule(toutesCompetences, codesAvecSousModules(m)),
     competences_liees_pf: m.competences_liees || [],
     competences_plage: !!m.competences_plage,
     ...contenuModule(cleTitre, 'HB', m.titre),
