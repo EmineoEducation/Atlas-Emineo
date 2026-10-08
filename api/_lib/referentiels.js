@@ -287,6 +287,36 @@ function codesAvecSousModules(m) {
   return codes;
 }
 
+// Code déduit de l'intitulé du module, en dernier recours.
+//
+// Le plan de formation du MDEC numérote ses modules par la compétence qu'ils
+// servent, suivie d'un numéro d'ordre : C101, C102 et C103 « Maîtriser Excel »,
+// « Gestion budget » et « Analyse financière » servent tous les trois C.10. Le
+// code n'est écrit en colonne E que sur le premier de la série ; les suivants
+// la laissent vide. Quatorze modules et 245 heures restaient ainsi sans
+// compétence sur les deux années.
+//
+// La déduction est volontairement tenue en laisse : on ne l'applique qu'à un
+// module dépourvu de tout code, et le résultat doit exister au référentiel
+// officiel ET appartenir au bloc où le module se trouve. Faute de quoi on ne
+// déduit rien — un module sans compétence est un fait à constater, pas un vide
+// à remplir au jugé.
+function deduireCodesDuTitre(titre, candidats) {
+  const m = String(titre || '').match(/^\s*C\.?\s?(\d+)(?:\s*[-–]\s*(\d+))?/i);
+  if (!m) return [];
+  const connus = new Set(candidats.map(c => codeNu(c.id)));
+  // « C35-36 » cite deux compétences d'un coup.
+  const second = m[2] ? ['C' + m[2]] : [];
+  let n = m[1];
+  while (n.length) {
+    if (connus.has(codeNu('C' + n))) {
+      return ['C' + n, ...second.filter(x => connus.has(codeNu(x)))];
+    }
+    n = n.slice(0, -1);   // C102 -> C10 -> C1
+  }
+  return [];
+}
+
 function resoudreCodesModule(competences, codesBruts) {
   const out = new Set();
   for (const brut of codesBruts || []) {
@@ -319,6 +349,22 @@ function versFormatApplication(ref) {
   const fam = FAMILLES[cleTitre] || { parModule: new Map(), liste: [] };
   const parActivite = new Map((race ? race.activites : []).map(a => [a.id, a]));
 
+  // Compétences officielles rangées par bloc du RACE : le filet de sécurité de
+  // la déduction par intitulé, qui ne doit jamais sortir du bloc concerné.
+  const parBlocRace = new Map();
+  for (const a of (race ? race.activites : [])) {
+    for (const c of (a.competences || [])) {
+      const k = a.bloc || '';
+      if (!parBlocRace.has(k)) parBlocRace.set(k, []);
+      parBlocRace.get(k).push({ id: c.id, libelle: c.libelle, activite: a.code || a.id });
+    }
+  }
+  // Tous les référentiels ne déclarent pas leur correspondance de blocs : celle
+  // du MDEC est vide parce qu'il a été extrait par un autre outil. Quand les
+  // identifiants coïncident avec ceux du RACE — B01…B05 — ils font office de
+  // correspondance. Sinon on ne déduit rien.
+  const competencesBloc = b => parBlocRace.get(b.bloc_race || '') || parBlocRace.get(b.id) || [];
+
   const blocs = (ref.blocs || []).map(b => {
     // Les compétences officielles sont déjà résolues par l'outil d'extraction,
     // qui seul connaît le mode de numérotation du titre — activités pour le
@@ -345,7 +391,22 @@ function versFormatApplication(ref) {
       // Codes officiels, seuls comparables aux compétences du bloc. Le code
       // brut du plan de formation est conservé à côté : c'est lui qu'on relit
       // quand un rattachement surprend.
-      competences_liees: resoudreCodesModule(competences, codesAvecSousModules(m)),
+      competences_liees: (() => {
+        const bruts = codesAvecSousModules(m);
+        const resolus = resoudreCodesModule(competences, bruts);
+        if (resolus.length || bruts.length) return resolus;
+        // Déduction depuis l'intitulé, cadrée par le bloc officiel. Une
+        // compétence ainsi portée pour la première fois rejoint la liste du
+        // bloc : celle-ci se construit à partir de ce que les modules portent,
+        // et un module qui la porte seul ne doit pas s'en trouver exclu.
+        const deduits = resoudreCodesModule(competencesBloc(b), deduireCodesDuTitre(m.titre, competencesBloc(b)));
+        for (const id of deduits) {
+          if (competences.some(c => codeNu(c.id) === codeNu(id))) continue;
+          const officielle = competencesBloc(b).find(c => codeNu(c.id) === codeNu(id));
+          if (officielle) competences.push({ ...officielle, deduite: true });
+        }
+        return deduits;
+      })(),
       competences_liees_pf: m.competences_liees || [],
       competences_plage: !!m.competences_plage,
       ...contenuModule(cleTitre, b.id, m.titre),
