@@ -256,6 +256,39 @@ function signauxResonance(liste) {
     .sort((a, b) => (b.transversale - a.transversale) || (b.modules.length - a.modules.length))
 }
 
+// ── Résolution des codes portés par un module ───────────────────────────────
+//
+// Corrigé le 08/10/2026. Un bloc portait ses compétences dans la numérotation
+// officielle (C.20-II, C1.1) pendant que ses modules gardaient le code brut du
+// plan de formation (C20, C1). Les deux ne se rencontraient jamais : toutes les
+// compétences des deux options du MSMC — six sur vingt-huit — s'affichaient
+// « sans créneau » quoi qu'on enseigne, et les modules du Bachelor CDC
+// n'affichaient aucune compétence. Le défaut était invisible sur B01 à B03,
+// dont les codes ne portent pas de suffixe.
+//
+// Trois formes de correspondance, dans cet ordre :
+//   1. code identique                  C13   -> C.13
+//   2. code suffixé par sa spécialité  C20   -> C.20-II dans le bloc 4-II
+//   3. code d'activité                 C1    -> C1.1, C1.2 (Bachelor CDC)
+function codeNu(v) { return String(v == null ? '' : v).toUpperCase().replace(/[^A-Z0-9]/g, ''); }
+
+function resoudreCodesModule(competences, codesBruts) {
+  const out = new Set();
+  for (const brut of codesBruts || []) {
+    const n = codeNu(brut);
+    if (!n) continue;
+    for (const c of competences) {
+      const id = codeNu(c.id);
+      const act = codeNu(c.activite || '');
+      // Le suffixe de spécialisation est un chiffre romain en fin de code. Le
+      // test sur le reste évite qu'un C1 happe un C11 par simple préfixe.
+      const suffixe = id.startsWith(n) && /^I{1,3}$/.test(id.slice(n.length));
+      if (id === n || suffixe || (act && act === n)) out.add(c.id);
+    }
+  }
+  return [...out];
+}
+
 // Traduit un référentiel du dépôt vers la forme attendue par l'application.
 //
 // Deux conversions importantes :
@@ -294,7 +327,11 @@ function versFormatApplication(ref) {
       titre: m.titre,
       volume: m.volume,
       intervenant: '',
-      competences_liees: m.competences_liees || [],
+      // Codes officiels, seuls comparables aux compétences du bloc. Le code
+      // brut du plan de formation est conservé à côté : c'est lui qu'on relit
+      // quand un rattachement surprend.
+      competences_liees: resoudreCodesModule(competences, m.competences_liees),
+      competences_liees_pf: m.competences_liees || [],
       competences_plage: !!m.competences_plage,
       ...contenuModule(cleTitre, b.id, m.titre),
       familles: fam.parModule.get(m.titre) || [],
@@ -320,12 +357,16 @@ function versFormatApplication(ref) {
   // Modules sans épreuve rattachée : conservés à part, jamais promus en bloc.
   // Les afficher comme un sixième bloc laissait croire à une certification qui
   // n'existe pas, et gonflait la cartographie.
+  // Un module hors bloc n'appartient à aucun bloc : ses codes se résolvent
+  // contre l'ensemble des compétences du titre.
+  const toutesCompetences = blocs.flatMap(b => b.competences || []);
   const horsBloc = (ref.modules_hors_bloc || []).map((m, i) => ({
     id: 'HB-M' + (i + 1),
     titre: m.titre,
     volume: m.volume,
     section: m.section || '',
-    competences_liees: m.competences_liees || [],
+    competences_liees: resoudreCodesModule(toutesCompetences, m.competences_liees),
+    competences_liees_pf: m.competences_liees || [],
     competences_plage: !!m.competences_plage,
     ...contenuModule(cleTitre, 'HB', m.titre),
     familles: fam.parModule.get(m.titre) || [],
