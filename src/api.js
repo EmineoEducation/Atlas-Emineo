@@ -269,6 +269,14 @@ export const api = {
     if (annee)   q.set('annee_scolaire', annee)
     return apiFetch('/api/fr?' + q.toString())
   },
+  // Décision du FR sur un signal de L'Atelier. decision : 'classe' | 'digest'
+  // | 'annule'. Aucun envoi — le seul canal vers les intervenants est le
+  // digest mensuel.
+  arbitrerSignal: ({ formationId, type, cle, empreinte, decision, note, periode, annee }) =>
+    apiFetch('/api/fr?action=arbitrer', { method: 'POST', body: {
+      formation_id: formationId, type, cle, empreinte, decision,
+      note: note || '', periode: periode || null, annee_scolaire: annee || null,
+    } }),
   generateDigest: (formationId, campus, periode, annee) =>
     apiFetch('/api/fr?action=generate', {
       method: 'POST',
