@@ -2933,11 +2933,10 @@ function DigestPreview({digest,titre,campus,fr,onValiderEnvoyer,readOnly=false})
   const quiAEnseigne=c.qui_a_enseigne||[]
   const coordination=c.coordination||[]
   const sequencesAVenir=c.sequences_a_venir||[]
-  const kpis=c.kpis||{intervenants:0,seances:0,coordination:coordination.length}
+  const kpis=c.kpis||{intervenants:0,seances:0,heures:0,coordination:coordination.length}
   const periodeLabel=c.periode?.label||''
   const sectStyle={padding:'1.25rem 1.75rem',borderBottom:'1px solid rgba(255,255,255,0.06)',background:D.abysse}
   const labelStyle={fontSize:10,fontWeight:600,letterSpacing:'0.1em',textTransform:'uppercase',color:'rgba(255,255,255,0.28)',marginBottom:'0.75rem'}
-  const pill={display:'inline-block',padding:'1px 8px',borderRadius:20,fontSize:10,fontWeight:600,background:'rgba(93,226,152,0.12)',color:D.menthe,border:'1px solid rgba(93,226,152,0.22)',marginRight:3,marginTop:4}
   const item={display:'flex',alignItems:'flex-start',gap:'0.85rem',padding:'0.55rem 0',borderBottom:'1px solid rgba(255,255,255,0.04)'}
   const itTitle={fontSize:13,fontWeight:500,color:'#fff',lineHeight:1.4}
   const itSub={fontSize:11,color:'rgba(255,255,255,0.38)',marginTop:2,lineHeight:1.5}
@@ -2980,9 +2979,9 @@ function DigestPreview({digest,titre,campus,fr,onValiderEnvoyer,readOnly=false})
           <div style={{fontFamily:'Georgia,serif',fontSize:22,color:'#fff',fontWeight:400,lineHeight:1.25,marginBottom:'0.35rem'}}>{c.titre||'Ce que la promo a traversé'}</div>
           <div style={{fontSize:12,color:'rgba(255,255,255,0.35)'}}>Généré par Atlas · Validé avant envoi · Répondez à ce mail pour contacter {fr}</div>
           <div style={{display:'flex',gap:'1.5rem',marginTop:'1.25rem',paddingTop:'1.25rem',borderTop:'1px solid rgba(255,255,255,0.07)'}}>
-            <div><div style={{fontSize:22,fontWeight:700,color:D.menthe}}>{kpis.intervenants}</div><div style={{fontSize:11,color:'rgba(255,255,255,0.35)',marginTop:2}}>Intervenants actifs</div></div>
-            <div><div style={{fontSize:22,fontWeight:700,color:D.menthe}}>{kpis.seances}</div><div style={{fontSize:11,color:'rgba(255,255,255,0.35)',marginTop:2}}>Séances réalisées</div></div>
-            <div><div style={{fontSize:22,fontWeight:700,color:D.saumon}}>{kpis.coordination}</div><div style={{fontSize:11,color:'rgba(255,255,255,0.35)',marginTop:2}}>Points de coordination</div></div>
+            <div><div style={{fontSize:22,fontWeight:700,color:D.menthe}}>{kpis.intervenants}</div><div style={{fontSize:11,color:'rgba(255,255,255,0.35)',marginTop:2}}>Intervenants</div></div>
+            <div><div style={{fontSize:22,fontWeight:700,color:D.menthe}}>{kpis.seances}</div><div style={{fontSize:11,color:'rgba(255,255,255,0.35)',marginTop:2}}>Séances tenues</div></div>
+            <div><div style={{fontSize:22,fontWeight:700,color:D.menthe}}>{kpis.heures==null?'—':kpis.heures+' h'}</div><div style={{fontSize:11,color:'rgba(255,255,255,0.35)',marginTop:2}}>Heures de cours</div></div>
           </div>
         </div>
 
@@ -2991,7 +2990,7 @@ function DigestPreview({digest,titre,campus,fr,onValiderEnvoyer,readOnly=false})
           {avancementBlocs.length===0?<div style={itSub}>Aucun bloc de compétences sur ce titre.</div>:avancementBlocs.map(b=>(
             <div key={b.id} style={{marginBottom:'0.55rem'}}>
               <div style={{display:'flex',justifyContent:'space-between',fontSize:12,color:'rgba(255,255,255,0.75)',marginBottom:3}}>
-                <span>{b.id} — {b.titre}</span><span style={{color:D.menthe,fontWeight:600}}>{b.pct==null?'—':`${b.pct}%`}</span>
+                <span>{b.titre}</span><span style={{color:D.menthe,fontWeight:600}}>{b.pct==null?'—':`${b.pct}%`}</span>
               </div>
               <div style={{background:'rgba(255,255,255,0.08)',borderRadius:99,height:4,overflow:'hidden'}}>
                 <div style={{width:`${b.pct||0}%`,height:'100%',background:D.menthe,borderRadius:99}}/>
@@ -3005,9 +3004,10 @@ function DigestPreview({digest,titre,campus,fr,onValiderEnvoyer,readOnly=false})
           {quiAEnseigne.length===0?<div style={itSub}>Aucune séance réalisée cette période.</div>:quiAEnseigne.map((t,i)=>(
             <div key={i} style={item}>
               <div style={{width:7,height:7,borderRadius:'50%',background:D.menthe,flexShrink:0,marginTop:4}}/>
-              <div><div style={itTitle}>{t.module}</div>
-                <div style={itSub}>{t.intervenant}{t.modalite?` · ${t.modalite}`:''}</div>
-                <div>{(t.competences||[]).map(cp=><span key={cp} style={pill}>{cp}</span>)}</div>
+              <div>
+                {t.bloc&&<div style={{fontSize:10,letterSpacing:'0.08em',textTransform:'uppercase',color:'rgba(255,255,255,0.28)',marginBottom:2}}>{t.bloc}</div>}
+                <div style={itTitle}>{t.module}</div>
+                <div style={itSub}>{[t.intervenant,t.seances?`${t.seances} séance${t.seances>1?'s':''}`:'',t.heures?`${t.heures} h`:''].filter(Boolean).join(' · ')}</div>
               </div>
             </div>
           ))}
@@ -3037,7 +3037,8 @@ function DigestPreview({digest,titre,campus,fr,onValiderEnvoyer,readOnly=false})
             {sequencesAVenir.map((s,i)=>(
               <div key={i} style={item}>
                 <div style={{width:7,height:7,borderRadius:'50%',background:'rgba(93,226,152,0.3)',flexShrink:0,marginTop:4}}/>
-                <div><div style={itTitle}>{s.module}</div><div style={itSub}>{s.date?`${s.date} · `:''}{s.intervenant}</div><div>{(s.competences||[]).map(cp=><span key={cp} style={pill}>{cp}</span>)}</div></div>
+                <div><div style={itTitle}>{s.module}</div>
+                  <div style={itSub}>{[s.periode,s.intervenant,s.seances>1?`${s.seances} séances`:''].filter(Boolean).join(' · ')}</div></div>
               </div>
             ))}
           </div>
