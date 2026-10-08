@@ -1730,6 +1730,8 @@ const ETATS_COMP={
   couverte:{label:'Couverte',st:'ok'},
   programmee:{label:'Programmée',st:'idle'},
   absente:{label:'Sans créneau',st:'warn'},
+  // Option que ce groupe ne suit pas : aucun créneau, et c'est normal.
+  hors_parcours:{label:'Option non suivie',st:'idle'},
 }
 function compLabel(e){ return (ETATS_COMP[e]||{}).label||'—' }
 function compSt(e){ return (ETATS_COMP[e]||{}).st||'idle' }
@@ -2656,6 +2658,10 @@ function VueFR({user,onLogout,onRetour}){
   const jamaisProgrammes = distorsions.filter(d=>d.etat==='jamais_programme')
   const ecartsVolume = distorsions.filter(d=>d.etat!=='jamais_programme')
   const compAbsentes = competences.filter(c=>c.etat==='absente')
+  const compHorsParcours = competences.filter(c=>c.etat==='hors_parcours')
+  /* Les blocs d'option que ce groupe ne suit pas sortent du décompte, mais se
+     disent : un bloc muet sans explication ressemble à une panne. */
+  const blocsHorsParcours = [...new Set(compHorsParcours.map(c=>c.bloc_id))]
   /* Le compteur ne compte que ce qui reste à traiter : un signal classé ou
      déjà porté au digest a été vu, il ne doit plus réclamer d'attention. */
   const signauxOuverts = [...ecartsVolume,...redites].filter(s=>!s.arbitrage)
@@ -2696,13 +2702,14 @@ function VueFR({user,onLogout,onRetour}){
   const blocs = blocsRaw.map(b=>{
     const pct = avancementBlocs.find(a=>a.id===b.id)?.pct ?? 0
     const absentesBloc = compAbsentes.filter(c=>c.bloc_id===b.id).length
+    const horsParcours = blocsHorsParcours.includes(b.id)
     const distorsionsBloc = distorsions.filter(d=>d.bloc_id===b.id).length
     const quiSet = new Set(journal.filter(j=>blocDe(j.module_ref)===b.id).map(j=>j.intervenant_nom).filter(x=>x&&x!=='—'))
     /* En Temps 1 le signal est le trou du plan ; en Temps 2 l'écart de volume. */
     const anom = deploy ? distorsionsBloc : absentesBloc
     const st = anom>0?'warn':(deploy?(pct>0?'ok':'idle'):'idle')
     return {id:b.id, titre:b.titre, comp:(b.competences||[]).length, mods:(b.modules||[]).length,
-      pct, anom, st, absentes:absentesBloc, distorsions:distorsionsBloc,
+      pct, anom, st, absentes:absentesBloc, distorsions:distorsionsBloc, horsParcours,
       nature:b.nature==='option'?'option':'obligatoire', optGroupe:b.option_groupe||'',
       epreuves:b.epreuves||[],
       qui: quiSet.size?Array.from(quiSet).join(' · '):'Non affecté',
@@ -2765,9 +2772,13 @@ function VueFR({user,onLogout,onRetour}){
            {k:'Écarts de volume',v:b.distorsions===0?'aucun':b.distorsions+' module(s)',warn:b.distorsions>0},
            {k:'Intervenants',v:b.qui}]
         : [{k:'Compétences',v:b.comp+' au référentiel'},{k:'Modules prévus',v:String(b.mods)},
-           {k:'Non couvertes',v:b.absentes===0?'aucune':b.absentes+' compétence(s)',warn:b.absentes>0}]
+           b.horsParcours
+             ? {k:'Parcours',v:'option non suivie par ce groupe'}
+             : {k:'Non couvertes',v:b.absentes===0?'aucune':b.absentes+' compétence(s)',warn:b.absentes>0}]
       return {kind:'Bloc de compétences', st:b.st, titre:b.id+' — '+b.titre, desc:b.desc, lignes,
-        alerte: (!deploy&&b.absentes>0)
+        alerte: (!deploy&&b.horsParcours)
+          ? {titre:'Option non suivie', txt:"Les options intensives sont exclusives : ce groupe suit l'autre. L'absence de créneau est normale et ne compte pas comme un manque."}
+          : (!deploy&&b.absentes>0)
           ? {titre:b.absentes+' compétence(s) sans créneau', txt:"Aucune séance de l'année ne porte ces compétences. C'est un trou du plan, pas un retard."}
           : (deploy&&b.distorsions>0)
             ? {titre:b.distorsions+' module(s) en écart de volume', txt:'Le calendrier ne tient pas le volume annoncé au plan de formation.'}
@@ -2885,7 +2896,8 @@ function VueFR({user,onLogout,onRetour}){
   const footerRail = deploy
     ? `${nbSignaux} signal${nbSignaux>1?'aux':''} à arbitrer${nonEmargees.length?` · ${nonEmargees.length} séance${nonEmargees.length>1?'s':''} non émargée${nonEmargees.length>1?'s':''}`:''}`
     : (()=>{ const n=jamaisProgrammes.filter(d=>!d.arbitrage).length
-        return `${compAbsentes.length} compétence${compAbsentes.length>1?'s':''} sans créneau${n?` · ${n} module${n>1?'s':''} jamais programmé${n>1?'s':''}`:''}` })()
+        const opt=blocsHorsParcours.length?` · ${blocsHorsParcours.length} option non suivie`:''
+        return `${compAbsentes.length} compétence${compAbsentes.length>1?'s':''} sans créneau${n?` · ${n} module${n>1?'s':''} jamais programmé${n>1?'s':''}`:''}${opt}` })()
 
   /* Panneau sombre réutilisé par les deux temps : un titre, des entrées
      cliquables, un message quand il n'y a rien à montrer. */
@@ -3042,8 +3054,8 @@ function VueFR({user,onLogout,onRetour}){
                       <span style={{flex:1,textAlign:'left',fontSize:12.5,color:P.abysse}}>{b.titre}</span>
                       <span style={{fontSize:11,color:P.textm,width:104,textAlign:'left'}}>{b.comp} compétences</span>
                       <span style={{fontSize:11,color:P.textm,width:96,textAlign:'left'}}>{b.mods} modules</span>
-                      <span style={{fontSize:11,color:b.absentes?AT.warnText:P.petrole,flexShrink:0,width:92,textAlign:'right'}}>
-                        {b.absentes?b.absentes+' sans créneau':'couvert'}
+                      <span style={{fontSize:11,color:b.absentes?AT.warnText:(b.horsParcours?AT.idleText:P.petrole),flexShrink:0,width:118,textAlign:'right'}}>
+                        {b.absentes?b.absentes+' sans créneau':(b.horsParcours?'option non suivie':'couvert')}
                       </span>
                     </button>
                   ))}
