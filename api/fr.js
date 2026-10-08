@@ -76,6 +76,62 @@ function estPremierLundiDuMois(d) {
   return d.getUTCDay() === 1 && d.getUTCDate() <= 7;
 }
 
+// ── Mise en forme lisible (destinée aux intervenants) ──────────────────────
+//
+// Le digest affichait la donnee brute : des dates ISO completes
+// ("2026-11-02T09:00:00.000Z"), des intitules de matiere prefixes du code de
+// competence tel que la scolarite les saisit dans CESAR ("C11 Management
+// interculturel"), des pastilles portant toutes les competences du module, et
+// une ligne par seance — soit huit lignes pour deux modules repetes sur une
+// semaine de hackathon. Ces codes ne veulent rien dire pour un intervenant et
+// ne servent pas le propos du mail.
+const MOIS_FR = ['janvier','février','mars','avril','mai','juin','juillet',
+                 'août','septembre','octobre','novembre','décembre'];
+
+function dateCourte(iso) {
+  if (!iso) return '';
+  const d = new Date(iso);
+  if (isNaN(d.getTime())) return '';
+  return `${d.getUTCDate()} ${MOIS_FR[d.getUTCMonth()]}`;
+}
+
+// "du 2 au 5 novembre", "le 2 novembre" — une periode se lit mieux qu'une liste.
+function periodeCourte(isos) {
+  const tries = (isos || []).filter(Boolean).slice().sort();
+  if (!tries.length) return '';
+  const d1 = new Date(tries[0]), d2 = new Date(tries[tries.length - 1]);
+  if (isNaN(d1.getTime()) || isNaN(d2.getTime())) return '';
+  const a = dateCourte(tries[0]), b = dateCourte(tries[tries.length - 1]);
+  if (a === b) return `le ${a}`;
+  // Meme mois : "du 2 au 5 novembre" plutot que "du 2 novembre au 5 novembre".
+  if (d1.getUTCMonth() === d2.getUTCMonth() && d1.getUTCFullYear() === d2.getUTCFullYear()) {
+    return `du ${d1.getUTCDate()} au ${b}`;
+  }
+  return `du ${a} au ${b}`;
+}
+
+// Retire le code de competence que CESAR met en tete d'intitule : "C11 ",
+// "C.7 — ", "C7 : ". Le reste de l'intitule est conserve tel quel — c'est le
+// nom que les intervenants connaissent.
+function titreLisible(t) {
+  return String(t || '')
+    .replace(/^\s*C\.?\s?\d{1,3}\s*[-–—:.)]?\s+/i, '')
+    .trim() || String(t || '').trim();
+}
+
+function heures(minutes) {
+  return Math.round((Number(minutes || 0) / 60) * 10) / 10;
+}
+
+// Intitule de module -> libelle de son bloc, pour situer une seance sans
+// afficher un code "B03" qui ne parle qu'a la direction des programmes.
+function blocParModule(blocs, horsBloc) {
+  const idx = {};
+  (blocs || []).forEach(b => (b.modules || []).forEach(m => { idx[String(m.titre)] = b.titre; }));
+  (horsBloc || []).forEach(m => { idx[String(m.titre)] = 'Hors bloc'; });
+  return idx;
+}
+
 function parseJSON(val, fallback) {
   if (val == null) return fallback;
   try { return JSON.parse(val); } catch (_) { return fallback; }
@@ -122,19 +178,27 @@ function calculerAvancementBlocs(blocs, declarationsCumul) {
 
 // Tableau "qui a enseigne quoi" sur la periode — donnees factuelles, pas de
 // synthese Claude ici.
-function calculerQuiAEnseigne(declarationsPeriode, previsionnelParId) {
-  return declarationsPeriode.map(d => {
-    const prev = previsionnelParId[d.previsionnel_id] || null;
-    return {
-      // Le titre de seance est plus lisible que le code module (M12) dans le
-      // mail recu par les intervenants — le code ne sert qu'au rattachement
-      // au bloc cote cartographie.
-      module: (prev && prev.titre) || d.module_ref || 'Module',
-      intervenant: d.intervenant_nom || (prev && prev.intervenant_nom) || '—',
-      modalite: prev ? prev.modalite : '',
-      competences: d.competences || [],
-    };
+//
+// Regroupe par module et par intervenant : une ligne par seance produisait des
+// repetitions ("C1 Conception de projet / LARNAUDIE" deux fois dans la meme
+// semaine) sans rien apprendre de plus. Le volume horaire, lui, dit quelque
+// chose — il situe l'enseignement dans la progression du titre.
+function calculerQuiAEnseigne(declarationsPeriode, idxBlocs) {
+  const par = {};
+  declarationsPeriode.forEach(d => {
+    const mod = String(d.module_ref || '') || 'Module';
+    const who = d.intervenant_nom || '';
+    const k = `${mod}|${who}`;
+    if (!par[k]) par[k] = { module: titreLisible(mod), bloc: (idxBlocs || {})[mod] || '',
+                            intervenant: who, seances: 0, minutes: 0, dates: [] };
+    par[k].seances++;
+    par[k].minutes += Number(d.duree_minutes || 0);
+    if (d.date_seance) par[k].dates.push(String(d.date_seance));
   });
+  return Object.values(par)
+    .map(e => ({ module: e.module, bloc: e.bloc, intervenant: e.intervenant,
+                 seances: e.seances, heures: heures(e.minutes), periode: periodeCourte(e.dates) }))
+    .sort((a, b) => a.module.localeCompare(b.module));
 }
 
 // ── 1. Journal des seances ─────────────────────────────────────────────────
@@ -453,14 +517,14 @@ async function genererContenuDigest(db, apiKey, formationId, campus, anneeScolai
     db.execute({ sql: `SELECT id, module_ref, titre, intervenant_nom, numero, date_prevue, modalite, concepts
                         FROM previsionnel_seance WHERE formation_id=? AND annee_scolaire=? AND date_prevue>=? AND date_prevue<=?`,
       args: [formationId, anneeScolaire, debut, fin] }),
-    db.execute({ sql: `SELECT id, previsionnel_id, module_ref, intervenant_nom, date_seance, competences
+    db.execute({ sql: `SELECT id, previsionnel_id, module_ref, intervenant_nom, date_seance, duree_minutes, competences
                         FROM declaration WHERE formation_id=? AND annee_scolaire=? AND date_seance>=? AND date_seance<=?`,
       args: [formationId, anneeScolaire, debut, fin] }),
     db.execute({ sql: `SELECT competences FROM declaration WHERE formation_id=? AND annee_scolaire=?`,
       args: [formationId, anneeScolaire] }),
-    db.execute({ sql: `SELECT module_ref, titre, intervenant_nom, date_prevue, concepts
+    db.execute({ sql: `SELECT module_ref, titre, intervenant_nom, date_prevue, duree_minutes
                         FROM previsionnel_seance WHERE formation_id=? AND annee_scolaire=? AND date_prevue>=? AND date_prevue<=?
-                        ORDER BY date_prevue ASC LIMIT 8`,
+                        ORDER BY date_prevue ASC`,
       args: [formationId, anneeScolaire, debutSuivant, finSuivant] }),
   ]);
 
@@ -469,19 +533,37 @@ async function genererContenuDigest(db, apiKey, formationId, campus, anneeScolai
   const previsionnelParId = {};
   prevPeriode.rows.forEach(p => { previsionnelParId[p.id] = { ...p, concepts: parseJSON(p.concepts, []) }; });
 
+  const horsBloc = formationData.modules_hors_bloc || [];
+  const idxBlocs = blocParModule(blocs, horsBloc);
+
   const avancementBlocs = calculerAvancementBlocs(blocs, declarationsCumul);
-  const quiAEnseigne = calculerQuiAEnseigne(declarationsPeriode, previsionnelParId);
+  const quiAEnseigne = calculerQuiAEnseigne(declarationsPeriode, idxBlocs);
   // Le point de coordination du digest n'est plus un doublon de competence
   // mais une redite de famille de notions (cf. detecterRedites).
-  const coordination = detecterRedites(blocs, formationData.modules_hors_bloc || [], declarationsPeriode);
-  const sequencesAVenir = prevSuivant.rows.map(p => ({
-    date: p.date_prevue, module: p.titre || p.module_ref, intervenant: p.intervenant_nom,
-    competences: parseJSON(p.concepts, []),
-  }));
+  const coordination = detecterRedites(blocs, horsBloc, declarationsPeriode);
+
+  // Le mois prochain : une ligne par module, avec sa periode, et non une ligne
+  // par creneau. Une semaine de hackathon produisait dix lignes identiques.
+  const aVenir = {};
+  prevSuivant.rows.forEach(p => {
+    const mod = String(p.module_ref || p.titre || '') || 'Module';
+    const who = p.intervenant_nom && p.intervenant_nom !== '—' ? p.intervenant_nom : '';
+    const k = `${mod}|${who}`;
+    if (!aVenir[k]) aVenir[k] = { module: titreLisible(mod), bloc: idxBlocs[mod] || '',
+                                  intervenant: who, seances: 0, dates: [] };
+    aVenir[k].seances++;
+    if (p.date_prevue) aVenir[k].dates.push(String(p.date_prevue));
+  });
+  const sequencesAVenir = Object.values(aVenir)
+    .map(e => ({ module: e.module, bloc: e.bloc, intervenant: e.intervenant,
+                 seances: e.seances, periode: periodeCourte(e.dates), debut: e.dates.slice().sort()[0] || '' }))
+    .sort((a, b) => String(a.debut).localeCompare(String(b.debut)))
+    .slice(0, 10);
 
   const kpis = {
     intervenants: new Set(declarationsPeriode.map(d => d.intervenant_nom).filter(Boolean)).size,
     seances: declarationsPeriode.length,
+    heures: heures(declarationsPeriode.reduce((n, d) => n + Number(d.duree_minutes || 0), 0)),
     coordination: coordination.length,
   };
 
@@ -570,9 +652,6 @@ const C = {
 function renderDigestHTML(c, titreFormation, campus, frNom) {
   const kpis = c.kpis || { intervenants: 0, seances: 0, coordination: 0 };
 
-  const pill = (t) =>
-    `<span style="background:${C.ligne};color:${C.menthe};font-size:10px;font-weight:600;padding:2px 8px;border-radius:20px;margin:2px 4px 0 0;display:inline-block;font-family:Arial,Helvetica,sans-serif">${esc(t)}</span>`;
-
   const kpi = (val, lib, couleur) =>
     `<td width="33%" valign="top" style="padding:0 8px 0 0;font-family:Arial,Helvetica,sans-serif">
        <div style="font-size:26px;font-weight:700;color:${couleur};line-height:1">${esc(val)}</div>
@@ -595,18 +674,22 @@ function renderDigestHTML(c, titreFormation, campus, frNom) {
   const blocs = (c.avancement_blocs || []).map(b => `
     <tr><td style="padding:0 0 12px 0;font-family:Arial,Helvetica,sans-serif">
       <table width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
-        <td style="font-size:12px;color:${C.texte};padding-bottom:5px">${esc(b.id)} — ${esc(b.titre)}</td>
+        <td style="font-size:12px;color:${C.texte};padding-bottom:5px">${esc(b.titre)}</td>
         <td align="right" style="font-size:12px;font-weight:700;color:${C.menthe};padding-bottom:5px">${b.pct == null ? '—' : b.pct + '%'}</td>
       </tr></table>
       ${barre(b.pct)}
     </td></tr>`).join('');
 
-  const qui = (c.qui_a_enseigne || []).map(q => `
+  const qui = (c.qui_a_enseigne || []).map(q => {
+    const bas = [q.intervenant, q.seances ? `${q.seances} séance${q.seances > 1 ? 's' : ''}` : '',
+                 q.heures ? `${q.heures} h` : ''].filter(Boolean).join(' · ');
+    return `
     <tr><td style="padding:0 0 14px 0;font-family:Arial,Helvetica,sans-serif;border-bottom:1px solid ${C.ligne}">
+      ${q.bloc ? `<div style="font-size:10px;color:${C.label};text-transform:uppercase;letter-spacing:.08em;padding-bottom:3px">${esc(q.bloc)}</div>` : ''}
       <div style="font-size:13px;color:${C.texte};line-height:1.4;padding-bottom:3px">${esc(q.module)}</div>
-      <div style="font-size:11px;color:${C.texteAtt};padding-bottom:4px">${esc(q.intervenant)}${q.modalite ? ' · ' + esc(q.modalite) : ''}</div>
-      <div>${(q.competences || []).map(pill).join('')}</div>
-    </td></tr>`).join('');
+      <div style="font-size:11px;color:${C.texteAtt}">${esc(bas)}</div>
+    </td></tr>`;
+  }).join('');
 
   const coord = (c.coordination || []).map(co => `
     <tr><td style="padding:0 0 10px 0;font-family:Arial,Helvetica,sans-serif">
@@ -614,11 +697,15 @@ function renderDigestHTML(c, titreFormation, campus, frNom) {
       <div style="font-size:11px;color:${C.texteAtt};line-height:1.5">${esc(co.detail)}</div>
     </td></tr>`).join('');
 
-  const suite = (c.sequences_a_venir || []).map(s => `
+  const suite = (c.sequences_a_venir || []).map(s => {
+    const bas = [s.periode, s.intervenant,
+                 s.seances > 1 ? `${s.seances} séances` : ''].filter(Boolean).join(' · ');
+    return `
     <tr><td style="padding:0 0 10px 0;font-family:Arial,Helvetica,sans-serif">
       <div style="font-size:12.5px;color:${C.texte};line-height:1.4">${esc(s.module)}</div>
-      <div style="font-size:11px;color:${C.texteAtt}">${s.date ? esc(String(s.date).slice(0, 10)) + ' · ' : ''}${esc(s.intervenant)}</div>
-    </td></tr>`).join('');
+      <div style="font-size:11px;color:${C.texteAtt}">${esc(bas)}</div>
+    </td></tr>`;
+  }).join('');
 
   const section = (label, contenu) => `
     <tr><td bgcolor="${C.abysse}" style="padding:20px 26px;border-bottom:1px solid ${C.ligne}">
@@ -652,9 +739,9 @@ function renderDigestHTML(c, titreFormation, campus, frNom) {
     <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:20px;border-top:1px solid ${C.ligne}">
       <tr><td style="padding-top:18px">
         <table width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
-          ${kpi(kpis.intervenants, 'Intervenants actifs', C.menthe)}
-          ${kpi(kpis.seances, 'Séances réalisées', C.menthe)}
-          ${kpi(kpis.coordination, 'Points de coordination', C.saumon)}
+          ${kpi(kpis.intervenants, 'Intervenants', C.menthe)}
+          ${kpi(kpis.seances, 'Séances tenues', C.menthe)}
+          ${kpi((kpis.heures != null ? kpis.heures + ' h' : '—'), 'Heures de cours', C.menthe)}
         </tr></table>
       </td></tr>
     </table>
