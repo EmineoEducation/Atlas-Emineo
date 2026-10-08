@@ -307,13 +307,31 @@ function calculerCompetences(blocs, prevCumul, declCumul) {
   const programmes = new Set();
   prevCumul.forEach(p => (p.competences || []).forEach(c => programmes.add(normCode(c))));
 
+  // Les options intensives sont mutuellement exclusives : un etudiant en suit
+  // une seule. Le groupe planning importe porte donc les seances d'UNE option,
+  // et l'autre n'a aucun creneau — ce qui est normal, pas un trou du plan.
+  // Le 08/10/2026 le M2 MSMC du groupe CREA annoncait ainsi trois competences
+  // « sans creneau » sur le bloc Marque & Transformation, que ce groupe ne
+  // suit pas. Un bloc d'option entierement vide est donc hors parcours ; a
+  // l'interieur d'une option effectivement suivie, une competence sans creneau
+  // reste un vrai signal.
+  const modulesAvecSeance = new Set();
+  prevCumul.forEach(p => { if (p.module_ref) modulesAvecSeance.add(String(p.module_ref)); });
+  declCumul.forEach(d => { if (d.module_ref) modulesAvecSeance.add(String(d.module_ref)); });
+
   const out = [];
   (blocs || []).forEach(b => {
+    const option = (b.nature || 'obligatoire') === 'option';
+    const blocSuivi = (b.modules || []).some(m => modulesAvecSeance.has(String(m.titre)));
     (b.competences || []).forEach(c => {
       const k = normCode(c.id);
-      const etat = couverts.has(k) ? 'couverte' : (programmes.has(k) ? 'programmee' : 'absente');
+      let etat;
+      if (couverts.has(k)) etat = 'couverte';
+      else if (programmes.has(k)) etat = 'programmee';
+      else if (option && !blocSuivi) etat = 'hors_parcours';
+      else etat = 'absente';
       out.push({ bloc_id: b.id, bloc_titre: b.titre, nature: b.nature || 'obligatoire',
-        code: c.id, libelle: c.libelle || '', etat });
+        option_groupe: b.option_groupe || '', code: c.id, libelle: c.libelle || '', etat });
     });
   });
   return out;
