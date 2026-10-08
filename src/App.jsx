@@ -1652,22 +1652,62 @@ function atDot(st){
   const c = st==='ok'?AT.ok : st==='warn'?AT.warn : AT.idle
   return {width:7,height:7,borderRadius:'50%',flexShrink:0,background:c}
 }
-function moduleToBlocMap(blocs){
-  const m={}
-  ;(blocs||[]).forEach(b=>(b.modules||[]).forEach(mod=>{m[mod.id]=b.id}))
-  return m
+/* Rattachement d'une séance à son module. Le pont CESAR écrit dans
+   `module_ref` l'INTITULÉ du module du plan de formation — c'est ce que
+   l'arbitrage des matières envoie (module.titre). L'ancienne UI comparait ce
+   champ à l'identifiant interne ("B01-M1"), hérité du modèle déclaratif :
+   aucune séance émargée ne se rattachait donc à son bloc, le journal affichait
+   « — » et l'arborescence restait vide. On accepte les deux formes. */
+function cleModule(v){ return String(v==null?'':v).trim().toLowerCase() }
+function moduleIndex(blocs,horsBloc){
+  const idx={}
+  const poser=(e,m)=>{ idx[cleModule(m.titre)]=e; idx[cleModule(m.id)]=e }
+  ;(blocs||[]).forEach(b=>(b.modules||[]).forEach(m=>poser({bloc:b.id,blocTitre:b.titre,module:m},m)))
+  ;(horsBloc||[]).forEach(m=>poser({bloc:'HB',blocTitre:'Hors bloc',module:m},m))
+  return idx
+}
+function memeModule(ref,m){
+  const k=cleModule(ref)
+  return !!k&&(k===cleModule(m.titre)||k===cleModule(m.id))
 }
 function normCode(c){ return String(c||'').toUpperCase().replace(/[^A-Z0-9]/g,'') }
 
-/* Libellés des 4 états du comparateur prévu/réalisé (cf api/fr.js
-   calculerDelta). 'ecart_moins' a été ajouté le 25/08/2026 : une séance dont
-   le contenu annoncé n'a pas été couvert s'affichait auparavant « Conforme ». */
-function etatLabel(etat){
-  if(etat==='nominal')    return 'Conforme'
-  if(etat==='ecart_plus') return 'Écart +'
-  if(etat==='ecart_moins')return 'Écart −'
-  return 'Non déclarée'
+/* Les 4 états du journal des séances (cf api/fr.js calculerJournal), refondus
+   le 07/10/2026. Les anciens — Conforme / Écart + / Écart − / Non déclarée —
+   comparaient deux champs du modèle déclaratif que le pont CESAR n'alimente
+   pas : toute séance émargée s'affichait « Conforme » et toute séance à venir
+   passait en alerte. Ici, un seul état est un signal : `manquante`.
+   Les clés `nominal` et `alerte` restent reconnues le temps qu'un cache serveur
+   ou un digest déjà généré finisse de s'écouler. */
+const ETATS_SEANCE={
+  tenue_cr:{label:'Tenue · CR',st:'ok'},
+  tenue:{label:'Tenue',st:'ok'},
+  a_venir:{label:'À venir',st:'idle'},
+  manquante:{label:'Non émargée',st:'warn'},
+  nominal:{label:'Tenue',st:'ok'},
+  alerte:{label:'Non émargée',st:'warn'},
 }
+function etatLabel(etat){ return (ETATS_SEANCE[etat]||{}).label||'—' }
+function etatSt(etat){ return (ETATS_SEANCE[etat]||{}).st||'idle' }
+
+/* Verdict par compétence, cumulé depuis septembre et arrêté à la fin du mois
+   affiché. `absente` est l'écart qui engage la certification : il ne se lit
+   nulle part ailleurs dans le système d'information. */
+const ETATS_COMP={
+  couverte:{label:'Couverte',st:'ok'},
+  programmee:{label:'Programmée',st:'idle'},
+  absente:{label:'Sans créneau',st:'warn'},
+}
+function compLabel(e){ return (ETATS_COMP[e]||{}).label||'—' }
+function compSt(e){ return (ETATS_COMP[e]||{}).st||'idle' }
+
+/* Distorsion entre le volume du plan de formation et celui du calendrier. */
+const ETATS_DIST={
+  jamais_programme:'Jamais programmé',
+  sous_volume:'Sous-volume',
+  sur_volume:'Sur-volume',
+}
+function distLabel(e){ return ETATS_DIST[e]||'Écart' }
 function abregeMois(label){
   if(!label) return ''
   const [mois,annee]=label.split(' ')
@@ -2086,6 +2126,13 @@ function Inspecteur({insp}){
           </div>
         )}
 
+        {insp.texte&&(
+          <div style={{marginTop:16}}>
+            <div style={{fontSize:9.5,fontWeight:600,letterSpacing:'.13em',textTransform:'uppercase',color:AT.idleText,marginBottom:9}}>{insp.texteLabel||'Texte'}</div>
+            <div style={{fontSize:12,color:P.abysse,lineHeight:1.6,whiteSpace:'pre-wrap',background:P.givre,borderRadius:10,padding:'12px 14px',maxHeight:240,overflowY:'auto'}}>{insp.texte}</div>
+          </div>
+        )}
+
         {insp.alerte&&(
           <div style={{marginTop:18,background:AT.warnBg,border:'1px solid rgba(232,155,119,.45)',borderRadius:12,padding:14}}>
             <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:7}}>
@@ -2247,38 +2294,38 @@ function VueIntervenant({user,onLogout}){
   const titre=f?.formation?.titre||'Atlas des compétences'
   const campus=f?._campus||''
   const blocsRaw=f?.blocs||[]
-  const prevues=data?.seances_prevues||[]   // déjà scopées à moi côté serveur (role=intervenant)
-  const ecarts=data?.ecarts||[]
+  const journal=data?.journal||[]           // déjà scopé à moi côté serveur (role=intervenant)
+  const competences=data?.competences||[]
   const digest=data?.digest||null
   const norm = normCode
+  const compParCode={}; competences.forEach(c=>{compParCode[norm(c.code)]=c})
   const couvertes = new Set((data?.mes_competences_couvertes||[]).map(norm))
-  const modulesEnseignes = new Set(prevues.map(s=>s.module_ref))
   const deploy = temps==='deploiement'
 
   // Arborescence limitée à mes modules — déduits de mes séances prévisionnelles
   // de la période. Limite connue : un module sans séance ce mois-ci n'apparaît
   // pas ici (portée volontairement mensuelle, cf doc de session).
   const arbre = blocsRaw.map(b=>{
-    const mods=(b.modules||[]).filter(m=>modulesEnseignes.has(m.id))
+    const mods=(b.modules||[]).filter(m=>journal.some(j=>memeModule(j.module_ref,m)))
     if(!mods.length) return null
     return {
       id:b.id, titre:b.titre,
       meta: deploy ? mods.length+' module(s) · '+mods.reduce((n,m)=>n+(m.competences_liees||[]).length,0)+' compétence(s)' : mods.length+' module(s) prévu(s)',
       modules: mods.map(m=>{
-        const seancesM = prevues.filter(s=>s.module_ref===m.id)
-        const ecartsM = ecarts.filter(e=>modulesEnseignes.has(m.id)&&e.module_ref===m.id)
-        const anyWarn = ecartsM.some(e=>e.etat!=='nominal')
+        const seancesM = journal.filter(j=>memeModule(j.module_ref,m))
+        const manquantes = seancesM.filter(j=>j.etat==='manquante').length
+        const faites = seancesM.filter(j=>j.etat==='tenue'||j.etat==='tenue_cr').length
         const competences = (b.competences||[]).filter(c=>(m.competences_liees||[]).some(cl=>norm(cl)===norm(c.id))).map(c=>{
-          const ok = couvertes.has(norm(c.id))
-          return {code:c.id, label:c.libelle, statut: ok?'Couverte':'Non couverte', st: ok?'ok':'idle'}
+          const etat = (compParCode[norm(c.id)]||{}).etat || (couvertes.has(norm(c.id))?'couverte':'programmee')
+          return {code:c.id, label:c.libelle, statut: compLabel(etat), st: compSt(etat), etat}
         })
         return {
           id:m.id, titre:m.titre, meta: seancesM.length+' séance(s) ce mois-ci',
-          etat: anyWarn?'À arbitrer':(seancesM.length?'Conforme':'Planifié'), st: anyWarn?'warn':'ok',
+          etat: manquantes?'Séance non émargée':(faites?'En cours':'Planifié'),
+          st: manquantes?'warn':(faites?'ok':'idle'),
           competences,
-          seances: ecartsM.map(e=>({date:fmtCourt(e.date_prevue), titre:e.titre,
-            etat: etatLabel(e.etat),
-            st: e.etat==='nominal'?'ok':'warn', data:e})),
+          seances: seancesM.map(j=>({date:fmtCourt(j.date_seance||j.date_prevue), titre:j.titre,
+            etat: etatLabel(j.etat), st: etatSt(j.etat), data:j})),
         }
       }),
     }
@@ -2307,9 +2354,13 @@ function VueIntervenant({user,onLogout}){
     }
     if(sel.kind==='seance'){
       const s=sel.data
-      return {kind:'Séance', st:s.st||'ok', titre:(s.date||'')+' — '+(s.titre||''), desc:s.data?.detail||'',
-        lignes:[{k:'État',v:s.etat,warn:s.st==='warn'}],
-        alerte: s.st==='warn'?{titre:'Écart détecté',txt:s.data?.detail||''}:null, key:'seance'+sel.id}
+      return {kind:'Séance', st:s.st||'idle', titre:(s.date||'')+' — '+(s.titre||''), desc:s.data?.detail||'',
+        lignes:[{k:'État',v:s.etat,warn:s.st==='warn'},
+                {k:'Durée',v:s.data?.duree_minutes?Math.round(s.data.duree_minutes/60*10)/10+' h':'—'}],
+        texte:s.data?.compte_rendu||'', texteLabel:'Compte rendu de séance',
+        alerte: s.data?.etat==='manquante'
+          ? {titre:'Séance non émargée',txt:"Le créneau est passé et aucun émargement ne lui correspond."}
+          : null, key:'seance'+sel.id}
     }
     return {kind:'Mes modules', st:'ok', titre, desc:'Sélectionnez un module, une compétence ou une séance.', lignes:[], key:'root'}
   }
@@ -2321,16 +2372,17 @@ function VueIntervenant({user,onLogout}){
 
   const nbMod=arbre.reduce((n,b)=>n+b.modules.length,0)
   const nbComp=arbre.reduce((n,b)=>n+b.modules.reduce((m,mo)=>m+mo.competences.length,0),0)
-  const nbAlertesInt=ecarts.filter(e=>modulesEnseignes.has(e.module_ref)&&e.etat!=='nominal').length
+  const nbNonEmargeesInt=journal.filter(j=>j.etat==='manquante').length
+  const nbTenuesInt=journal.filter(j=>j.etat==='tenue'||j.etat==='tenue_cr').length
   const stats = temps==='digest'
     ? [{k:'statut',v:digest?.statut==='envoye'?'Envoyé':'En attente'}]
     : temps==='plan'
       ? [{k:'modules',v:String(nbMod)},{k:'compétences',v:String(nbComp)}]
-      : [{k:'séances',v:String(ecarts.length)},{k:'à traiter',v:String(nbAlertesInt),warn:nbAlertesInt>0}]
+      : [{k:'séances tenues',v:String(nbTenuesInt)},{k:'non émargées',v:String(nbNonEmargeesInt),warn:nbNonEmargeesInt>0}]
 
   const pageTitles={
     plan:['Mes modules, tels qu\u2019ils sont prévus',"Vos blocs, modules et compétences associées — l\u2019arborescence est dépliée sur la page, rien n\u2019est caché derrière un clic."],
-    deploiement:['Mes modules, séance après séance',"La même arborescence, augmentée du réel : statut de chaque compétence et de chaque séance déclarée."],
+    deploiement:['Mes modules, séance après séance',"La même arborescence, augmentée du réel : statut de chaque compétence et de chaque séance émargée."],
     digest:['Le digest que vous allez recevoir',"Écran verrouillé : UI de production, en lecture seule."],
   }
   const [pageTitle,pageSub]=pageTitles[temps]
@@ -2411,6 +2463,26 @@ function VueEtudiant({user,onLogout}){
 
 /* ═══ VUE FORMATEUR RÉFÉRENT — poste de travail (lecture seule V1) ═══════════ */
 /* ═══ VUE FORMATEUR RÉFÉRENT — poste de travail L'Atelier ════════════════════ */
+/* ═══ L'ATELIER — poste de travail du Formateur Référent ════════════════════
+   Recâblé le 07/10/2026 sur les signaux de l'émargement (Bloc 2).
+
+   L'écran comparait auparavant, séance par séance, ce que l'intervenant avait
+   annoncé à ce qu'il déclarait avoir traité. Le pont CESAR ne porte ni l'un ni
+   l'autre : un export de planning donne une date, une matière, un intervenant,
+   une durée et un compte rendu. L'unité de jugement a donc changé de grain.
+
+     Temps 1 — le plan. Ce que la maquette du titre promet, et ce qu'elle ne
+     couvre pas : compétences sans aucun créneau à l'année, modules du plan de
+     formation jamais programmés.
+
+     Temps 2 — le réel. Le journal des séances en quatre états factuels, et
+     les deux signaux qui appellent un arbitrage : la distorsion de volume
+     entre le plan et le calendrier, et la redite d'une même famille de
+     notions par deux intervenants dans le mois.
+
+   Les actions d'arbitrage ne sont pas encore persistées — c'est l'objet du
+   Bloc 3. L'écran est donc en lecture, sans bouton qui promettrait un envoi
+   qui n'aurait pas lieu. */
 function VueFR({user,onLogout,onRetour}){
   const [formations,setFormations]=useState([])
   const [formationId,setFormationId]=useState(null)
@@ -2422,7 +2494,6 @@ function VueFR({user,onLogout,onRetour}){
   const [temps,setTemps]=useState('plan')
   const [viewRole,setViewRole]=useState('fr')
   const [sel,setSel]=useState({kind:null,id:null})
-  const [toast,setToast]=useState(null)
   /* Mois consulté. Défaut : le mois en cours. Le FR doit pouvoir revenir sur le
      mois précédent (digest déjà parti, écarts arbitrés) sans attendre. */
   const [periode,setPeriode]=useState(()=>new Date().toISOString())
@@ -2451,18 +2522,29 @@ function VueFR({user,onLogout,onRetour}){
   const titre=f?.formation?.titre||'Atlas des compétences'
   const campus=f?._campus||''
   const blocsRaw=f?.blocs||[]
-  const prevues=data?.seances_prevues||[]
-  const ecarts=data?.ecarts||[]
+  const horsBlocRaw=f?.modules_hors_bloc||[]
   const digest=data?.digest||null
   const avancementBlocs=data?.avancement_blocs||[]
-  /* Toute séance non conforme est une anomalie à arbitrer : non déclarée,
-     écart + ou écart −. Avant le 25/08/2026 seul l'état 'alerte' était compté,
-     si bien que le rail annonçait « 2 anomalies » pendant que le panneau
-     « Anomalies à arbitrer » en listait 4. */
-  const nbAlertes=ecarts.filter(e=>e.etat!=='nominal').length
-  const nbNonDeclarees=ecarts.filter(e=>e.etat==='alerte').length
-  const modToBloc=moduleToBlocMap(blocsRaw)
+
+  /* Les quatre signaux renvoyés par api/fr.js depuis la refonte du Bloc 1. */
+  const journal=data?.journal||[]
+  const competences=data?.competences||[]
+  const distorsions=data?.distorsions||[]
+  const redites=data?.redites||[]
+
+  const idx=moduleIndex(blocsRaw,horsBlocRaw)
+  const blocDe=ref=>(idx[cleModule(ref)]||{}).bloc||'—'
   const deploy = temps==='deploiement'
+
+  /* Compteurs. Une séance encore à venir n'est pas une anomalie : c'était le
+     second faux signal de l'ancienne version, qui mettait en alerte tout ce
+     qui n'avait simplement pas encore eu lieu. */
+  const nonEmargees = journal.filter(j=>j.etat==='manquante')
+  const tenues = journal.filter(j=>j.etat==='tenue'||j.etat==='tenue_cr')
+  const jamaisProgrammes = distorsions.filter(d=>d.etat==='jamais_programme')
+  const ecartsVolume = distorsions.filter(d=>d.etat!=='jamais_programme')
+  const compAbsentes = competences.filter(c=>c.etat==='absente')
+  const nbSignaux = ecartsVolume.length + redites.length
 
   async function genererDigest(){
     setGenerating(true);setGenError('')
@@ -2496,28 +2578,30 @@ function VueFR({user,onLogout,onRetour}){
   }
 
   const blocs = blocsRaw.map(b=>{
-    const anomsBloc = ecarts.filter(e=>e.etat!=='nominal' && modToBloc[e.module_ref]===b.id)
-    const quiSet = new Set(prevues.filter(s=>modToBloc[s.module_ref]===b.id).map(s=>s.intervenant_nom).filter(Boolean))
     const pct = avancementBlocs.find(a=>a.id===b.id)?.pct ?? 0
-    const anom = anomsBloc.length
-    const st = anom>0?'warn':(pct>0?'ok':'idle')
-    return {id:b.id, titre:b.titre, comp:(b.competences||[]).length, mods:(b.modules||[]).length, pct, anom, st,
+    const absentesBloc = compAbsentes.filter(c=>c.bloc_id===b.id).length
+    const distorsionsBloc = distorsions.filter(d=>d.bloc_id===b.id).length
+    const quiSet = new Set(journal.filter(j=>blocDe(j.module_ref)===b.id).map(j=>j.intervenant_nom).filter(x=>x&&x!=='—'))
+    /* En Temps 1 le signal est le trou du plan ; en Temps 2 l'écart de volume. */
+    const anom = deploy ? distorsionsBloc : absentesBloc
+    const st = anom>0?'warn':(deploy?(pct>0?'ok':'idle'):'idle')
+    return {id:b.id, titre:b.titre, comp:(b.competences||[]).length, mods:(b.modules||[]).length,
+      pct, anom, st, absentes:absentesBloc, distorsions:distorsionsBloc,
       nature:b.nature==='option'?'option':'obligatoire', optGroupe:b.option_groupe||'',
       epreuves:b.epreuves||[],
       qui: quiSet.size?Array.from(quiSet).join(' · '):'Non affecté',
       desc:`${(b.competences||[]).length} compétence(s) au référentiel de ce bloc.`}
   })
 
-  const seancesJournal = ecarts.map(e=>({
-    ...e, st: e.etat==='nominal'?'ok':'warn',
-    etatLabel: etatLabel(e.etat),
-    blocId: modToBloc[e.module_ref]||'—',
+  const seancesJournal = journal.map(j=>({
+    ...j, st: etatSt(j.etat), etatLabel: etatLabel(j.etat), blocId: blocDe(j.module_ref),
+    dateAffichee: fmtCourt(j.date_seance||j.date_prevue),
   }))
-  const anomalies = seancesJournal.filter(s=>s.st==='warn')
 
   // Aperçu "vue intervenant" — arborescence tous modules confondus (FR n'a pas
   // de personne unique à prévisualiser, contrairement à un compte intervenant réel).
   const [openApercu,setOpenApercu]=useState({})
+  const compParCode={}; competences.forEach(c=>{compParCode[normCode(c.code)]=c})
   const arbreApercu = blocsRaw.map(b=>{
     const mods=b.modules||[]
     if(!mods.length) return null
@@ -2525,20 +2609,21 @@ function VueFR({user,onLogout,onRetour}){
       id:b.id, titre:b.titre,
       meta: deploy ? mods.length+' module(s) · '+(b.competences||[]).length+' compétence(s)' : mods.length+' module(s) prévu(s)',
       modules: mods.map(m=>{
-        const ecartsM = ecarts.filter(e=>e.module_ref===m.id)
-        const seancesM = prevues.filter(s=>s.module_ref===m.id)
-        const anyWarn = ecartsM.some(e=>e.etat!=='nominal')
-        const competences = (b.competences||[]).filter(c=>(m.competences_liees||[]).some(cl=>normCode(cl)===normCode(c.id))).map(c=>{
-          const couverte = ecartsM.some(e=>e.etat!=='alerte')
-          return {code:c.id, label:c.libelle, statut: couverte?'Couverte':'Non couverte', st: couverte?'ok':'idle'}
-        })
+        const seancesM = seancesJournal.filter(s=>cleModule(s.module_ref)===cleModule(m.titre)||cleModule(s.module_ref)===cleModule(m.id))
+        const manquantes = seancesM.filter(s=>s.etat==='manquante').length
+        const faites = seancesM.filter(s=>s.etat==='tenue'||s.etat==='tenue_cr').length
+        const comps = (b.competences||[])
+          .filter(c=>(m.competences_liees||[]).some(cl=>normCode(cl)===normCode(c.id)))
+          .map(c=>{
+            const etat=(compParCode[normCode(c.id)]||{}).etat||'programmee'
+            return {code:c.id, label:c.libelle, statut:compLabel(etat), st:compSt(etat), etat}
+          })
         return {
           id:m.id, titre:m.titre, meta: seancesM.length+' séance(s) ce mois-ci',
-          etat: anyWarn?'À arbitrer':(seancesM.length?'Conforme':'Planifié'), st: anyWarn?'warn':'ok',
-          competences,
-          seances: ecartsM.map(e=>({date:fmtCourt(e.date_prevue), titre:e.titre,
-            etat: etatLabel(e.etat),
-            st: e.etat==='nominal'?'ok':'warn', data:e})),
+          etat: manquantes?'Séance non émargée':(faites?'En cours':'Planifié'),
+          st: manquantes?'warn':(faites?'ok':'idle'),
+          competences: comps,
+          seances: seancesM.map(s=>({date:s.dateAffichee, titre:s.titre, etat:s.etatLabel, st:s.st, data:s})),
         }
       }),
     }
@@ -2552,30 +2637,68 @@ function VueFR({user,onLogout,onRetour}){
         desc:"Le digest part aux intervenants du titre une fois validé. La note de coordination est le seul champ libre.",
         lignes:[
           {k:'Statut',v:digest?.statut==='envoye'?'Envoyé':digest?'Prêt à valider':'Non généré', warn:digest?.statut!=='envoye'},
-          {k:'Anomalies citées',v:String(nbAlertes),warn:nbAlertes>0},
-          {k:'Séances non déclarées',v:String(nbNonDeclarees),warn:nbNonDeclarees>0},
+          {k:'Redites citées',v:String(redites.length),warn:redites.length>0},
+          {k:'Séances non émargées',v:String(nonEmargees.length),warn:nonEmargees.length>0},
         ], key:'digest'}
     }
     if(sel.kind==='bloc'){
       const b=blocs.find(x=>x.id===sel.id)
       if(!b) return {kind:'Bloc',st:'idle',titre:titre,desc:'Sélectionnez un bloc de la cartographie.',lignes:[],key:'none'}
       const lignes = deploy
-        ? [{k:'Compétences',v:b.comp+' au référentiel'},{k:'Couverture réelle',v:b.pct+' %',warn:b.st==='warn'},{k:'Anomalies',v:b.anom===0?'aucune':b.anom+' à arbitrer',warn:b.anom>0},{k:'Intervenants',v:b.qui}]
-        : [{k:'Compétences',v:b.comp+' au référentiel'},{k:'Modules prévus',v:String(b.mods)},{k:'Intervenants',v:b.qui}]
-      return {kind:'Bloc de compétences', st:deploy?b.st:'idle', titre:b.id+' — '+b.titre, desc:b.desc, lignes,
-        alerte: (b.anom>0&&deploy) ? {titre:b.anom+' anomalie(s)', txt:'Ouvrez le journal des séances pour arbitrer bloc par bloc.'} : null,
-        actions: (b.anom>0&&deploy) ? [{t:'Notifier les intervenants du bloc', primary:true, go:()=>setToast('Relance envoyée aux intervenants de '+b.id+'.')}] : [],
+        ? [{k:'Compétences',v:b.comp+' au référentiel'},{k:'Couverture réelle',v:b.pct+' %'},
+           {k:'Écarts de volume',v:b.distorsions===0?'aucun':b.distorsions+' module(s)',warn:b.distorsions>0},
+           {k:'Intervenants',v:b.qui}]
+        : [{k:'Compétences',v:b.comp+' au référentiel'},{k:'Modules prévus',v:String(b.mods)},
+           {k:'Non couvertes',v:b.absentes===0?'aucune':b.absentes+' compétence(s)',warn:b.absentes>0}]
+      return {kind:'Bloc de compétences', st:b.st, titre:b.id+' — '+b.titre, desc:b.desc, lignes,
+        alerte: (!deploy&&b.absentes>0)
+          ? {titre:b.absentes+' compétence(s) sans créneau', txt:"Aucune séance de l'année ne porte ces compétences. C'est un trou du plan, pas un retard."}
+          : (deploy&&b.distorsions>0)
+            ? {titre:b.distorsions+' module(s) en écart de volume', txt:'Le calendrier ne tient pas le volume annoncé au plan de formation.'}
+            : null,
         key:'bloc'+b.id+temps}
     }
     if(sel.kind==='seance'){
       const s=sel.data||{}
-      return {kind:'Séance', st:s.st||'ok', titre:(s.date_prevue?fmtCourt(s.date_prevue):'')+' — '+(s.titre||''), desc:s.detail||'',
-        lignes:[{k:'Bloc',v:s.blocId||'—'},{k:'Intervenant',v:s.intervenant_nom||'—'},{k:'État',v:s.etatLabel||'—',warn:s.st==='warn'}],
-        alerte: s.st==='warn' ? {titre:'Écart détecté', txt:s.detail||''} : null,
-        actions: s.st==='warn' ? [
-          {t:'Arbitrer et notifier', primary:true, go:()=>setToast('Arbitrage consigné, intervenants notifiés.')},
-          {t:'Reporter au digest', go:()=>setToast('Anomalie ajoutée au digest du mois.')},
-        ] : [], key:'seance'+sel.id}
+      return {kind:'Séance', st:s.st||'idle', titre:(s.dateAffichee||'')+' — '+(s.titre||''),
+        desc:s.detail||'',
+        lignes:[
+          {k:'Bloc',v:s.blocId||'—'},
+          {k:'Module',v:s.module_ref||'Non rattaché',warn:!s.module_ref},
+          {k:'Intervenant',v:s.intervenant_nom||'—'},
+          {k:'Durée',v:s.duree_minutes?Math.round(s.duree_minutes/60*10)/10+' h':'—'},
+          {k:'État',v:s.etatLabel||'—',warn:s.st==='warn'},
+        ],
+        alerte: s.etat==='manquante'
+          ? {titre:'Séance non émargée', txt:"Le créneau est passé et aucun émargement ne lui correspond : soit le cours n'a pas eu lieu, soit il n'a pas été saisi."}
+          : s.hors_previsionnel
+            ? {titre:'Hors prévisionnel', txt:"Séance émargée sans créneau correspondant au plan. Souvent un intitulé de matière arbitré après l'import."}
+            : null,
+        texte: s.compte_rendu||'', texteLabel:'Compte rendu de séance',
+        key:'seance'+(s.declaration_id||s.previsionnel_id)}
+    }
+    if(sel.kind==='distorsion'){
+      const d=sel.data||{}
+      return {kind:'Distorsion de volume', st:'warn', titre:d.module, desc:d.detail||'',
+        lignes:[
+          {k:'Bloc',v:(d.bloc_id||'—')+(d.bloc_titre?' — '+d.bloc_titre:'')},
+          {k:'Plan de formation',v:d.volume_annonce==null?'non chiffré':d.volume_annonce+' h'},
+          {k:'Au calendrier',v:d.heures_programmees+' h',warn:true},
+          {k:'Déjà tenu',v:d.heures_faites+' h'},
+          {k:'Intervenants',v:(d.intervenants||[]).join(' · ')||'Non affecté'},
+        ],
+        chipsLabel:'Compétences portées', chips:d.competences||[],
+        key:'dist'+d.module}
+    }
+    if(sel.kind==='redite'){
+      const r=sel.data||{}
+      return {kind:'Redite', st:'warn', titre:r.famille, desc:r.detail||'',
+        lignes:[
+          {k:'Modules',v:(r.modules||[]).join(' · ')},
+          {k:'Intervenants',v:(r.intervenants||[]).join(' · ')},
+        ],
+        alerte:{titre:'Point de coordination', txt:"Une même famille de notions traitée le même mois par deux intervenants. À confirmer avec eux : complémentarité voulue, ou répétition subie."},
+        key:'redite'+r.famille}
     }
     if(sel.kind==='module'){
       const m=sel.data
@@ -2584,14 +2707,23 @@ function VueFR({user,onLogout,onRetour}){
         chipsLabel:'Compétences associées', chips:m.competences.map(c=>c.code), key:'mod'+sel.id}
     }
     if(sel.kind==='comp'){
-      const c=sel.data
-      return {kind:'Compétence', st:deploy?c.st:'idle', titre:c.code+' — '+c.label,
-        desc:`Compétence du référentiel RNCP, rattachée au module « ${sel.mod||''} ».`,
-        lignes:[{k:'Module',v:sel.mod||'—'},{k:'Bloc',v:sel.bloc||'—'},{k:'Statut',v:deploy?c.statut:'Prévue',warn:c.st==='idle'&&deploy}], key:'comp'+sel.id}
+      const c=sel.data||{}
+      const etat=c.etat||((compParCode[normCode(c.code)]||{}).etat)||'programmee'
+      return {kind:'Compétence', st:compSt(etat), titre:(c.code||'')+' — '+(c.label||c.libelle||''),
+        desc:`Compétence du référentiel RNCP${sel.mod?`, rattachée au module « ${sel.mod} »`:''}.`,
+        lignes:[
+          {k:'Module',v:sel.mod||'—'},
+          {k:'Bloc',v:sel.bloc||c.bloc_id||'—'},
+          {k:'Statut',v:compLabel(etat),warn:etat==='absente'},
+        ],
+        alerte: etat==='absente'
+          ? {titre:'Ni couverte, ni programmée', txt:"Aucune séance tenue et aucun créneau à l'année ne porte cette compétence. C'est le seul écart qui ne se voit nulle part ailleurs."}
+          : null,
+        key:'comp'+(c.code||sel.id)}
     }
     return {kind:'Titre', st:'ok', titre, desc:'Sélectionnez un élément de la cartographie.', lignes:[], key:'root'}
   }
-  const insp = {...buildInsp(), toast}
+  const insp = buildInsp()
 
   if(loading&&!data) return <div style={{minHeight:'100vh',background:P.abysse,display:'flex',alignItems:'center',justifyContent:'center'}}><Spinner/></div>
   if(error) return <div style={{minHeight:'100vh',display:'flex',alignItems:'center',justifyContent:'center'}}><Empty icon="⚠" titre="Erreur de chargement" msg={error}/></div>
@@ -2605,25 +2737,75 @@ function VueFR({user,onLogout,onRetour}){
         ? [{k:'destinataires',v:String((digest?.destinataires||[]).length||'—')}]
         : temps==='plan'
           ? [{k:'modules',v:String(nbModApercu)},{k:'compétences',v:String(nbCompApercu)}]
-          : [{k:'séances',v:String(ecarts.length)},{k:'à traiter',v:String(nbAlertes),warn:nbAlertes>0}])
+          : [{k:'séances',v:String(journal.length)},{k:'tenues',v:String(tenues.length)}])
     : temps==='digest'
-      ? [{k:'destinataires',v:String((digest?.destinataires||[]).length||'—')},{k:'anomalies',v:String(nbAlertes),warn:nbAlertes>0}]
+      ? [{k:'destinataires',v:String((digest?.destinataires||[]).length||'—')},{k:'redites',v:String(redites.length),warn:redites.length>0}]
       : temps==='plan'
-        ? [{k:'blocs',v:totauxTitre.blocsOption?`${totauxTitre.blocsOblig} + ${totauxTitre.blocsOption} au choix`:String(totauxTitre.blocsOblig)},{k:'compétences',v:String(blocs.reduce((n,b)=>n+b.comp,0))},{k:'modules par étudiant',v:totauxTitre.modulesAttendus!==totauxTitre.modulesTotal?`${totauxTitre.modulesAttendus} sur ${totauxTitre.modulesTotal}`:String(totauxTitre.modulesTotal)}]
-        : [{k:'séances',v:String(ecarts.length)},{k:'conformes',v:String(ecarts.filter(e=>e.etat==='nominal').length)},{k:'anomalies',v:String(nbAlertes),warn:nbAlertes>0}]
+        ? [{k:'blocs',v:totauxTitre.blocsOption?`${totauxTitre.blocsOblig} + ${totauxTitre.blocsOption} au choix`:String(totauxTitre.blocsOblig)},
+           {k:'compétences',v:String(blocs.reduce((n,b)=>n+b.comp,0))},
+           {k:'sans créneau',v:String(compAbsentes.length),warn:compAbsentes.length>0}]
+        : [{k:'séances tenues',v:String(tenues.length)},
+           {k:'non émargées',v:String(nonEmargees.length),warn:nonEmargees.length>0},
+           {k:'signaux',v:String(nbSignaux),warn:nbSignaux>0}]
 
   const pageTitlesFR = {
-    plan:['Le titre tel qu\u2019il a été planifié',"Cartographie des blocs de compétences du titre, avant toute séance déclarée ce mois-ci."],
-    deploiement:['Ce que la promo a réellement couvert',"La même cartographie, remplie par les déclarations de séances. L\u2019anneau mesure la couverture réelle."],
+    plan:['Le titre tel qu\u2019il a été planifié',"Cartographie des blocs, et ce que le calendrier de l\u2019année ne couvre pas."],
+    deploiement:['Ce que la promo a réellement couvert',"La même cartographie, remplie par l\u2019émargement. L\u2019anneau mesure la couverture réelle."],
     digest:['La synthèse envoyée aux intervenants',"Écran verrouillé : UI de production, seule la note de coordination est éditable."],
   }
   const pageTitlesInt = {
     plan:['Aperçu — modules du titre, tels que prévus',"Vue que vous consultez pour vérifier ce que les intervenants voient — tous modules confondus, arborescence dépliée."],
-    deploiement:['Aperçu — modules, séance après séance',"Même arborescence, augmentée du réel déclaré par les intervenants."],
+    deploiement:['Aperçu — modules, séance après séance',"Même arborescence, augmentée des séances réellement émargées."],
     digest:['Aperçu du digest tel que reçu par les intervenants',"Écran verrouillé, lecture seule dans cet aperçu — repassez sur « Responsable pédagogique » pour valider et envoyer."],
   }
   const [pageTitle,pageSub] = (viewRole==='intervenant'?pageTitlesInt:pageTitlesFR)[temps]
   const roleLabelHeader = viewRole==='intervenant' ? 'Aperçu intervenant' : 'Formateur référent'
+
+  const footerRail = deploy
+    ? `${nbSignaux} signal${nbSignaux>1?'aux':''} à arbitrer${nonEmargees.length?` · ${nonEmargees.length} séance${nonEmargees.length>1?'s':''} non émargée${nonEmargees.length>1?'s':''}`:''}`
+    : `${compAbsentes.length} compétence${compAbsentes.length>1?'s':''} sans créneau${jamaisProgrammes.length?` · ${jamaisProgrammes.length} module${jamaisProgrammes.length>1?'s':''} jamais programmé${jamaisProgrammes.length>1?'s':''}`:''}`
+
+  /* Panneau sombre réutilisé par les deux temps : un titre, des entrées
+     cliquables, un message quand il n'y a rien à montrer. */
+  const PanneauSignaux = ({label,entrees,vide})=>(
+    <div style={{background:P.abysse,borderRadius:16,padding:'18px 20px 20px'}}>
+      <div style={{fontSize:11,fontWeight:600,letterSpacing:'.1em',textTransform:'uppercase',color:P.menthe,marginBottom:14}}>{label}</div>
+      {entrees.length===0?<div style={{fontSize:12,color:'rgba(227,255,240,.4)'}}>{vide}</div>:(
+        <div style={{display:'flex',flexDirection:'column',gap:10}}>
+          {entrees.map(e=>(
+            <button key={e.cle} onClick={e.go}
+              style={{display:'block',width:'100%',textAlign:'left',padding:'13px 14px',borderRadius:12,cursor:'pointer',border:'1px solid',
+                background:e.actif?'rgba(93,226,152,.10)':'rgba(227,255,240,.05)',
+                borderColor:e.actif?'rgba(93,226,152,.35)':'rgba(227,255,240,.08)'}}>
+              <span style={{display:'flex',alignItems:'center',gap:8,marginBottom:6}}>
+                <span style={{width:6,height:6,borderRadius:'50%',background:P.saumon}}/>
+                <span style={{fontSize:9.5,fontWeight:700,letterSpacing:'.11em',textTransform:'uppercase',color:P.saumon}}>{e.categorie}</span>
+              </span>
+              <span style={{display:'block',fontSize:12.5,color:P.givre,lineHeight:1.45}}>{e.titre}</span>
+              <span style={{display:'block',fontSize:11,color:'rgba(227,255,240,.45)',marginTop:5}}>{e.sous}</span>
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+
+  const entreesTemps2 = [
+    ...ecartsVolume.map(d=>({cle:'d'+d.module, categorie:distLabel(d.etat), titre:d.module,
+      sous:`${d.bloc_id} · ${d.detail}`, actif:sel.kind==='distorsion'&&sel.id===d.module,
+      go:()=>setSel({kind:'distorsion',id:d.module,data:d})})),
+    ...redites.map(r=>({cle:'r'+r.famille, categorie:'Redite', titre:r.famille,
+      sous:(r.intervenants||[]).join(' · '), actif:sel.kind==='redite'&&sel.id===r.famille,
+      go:()=>setSel({kind:'redite',id:r.famille,data:r})})),
+  ]
+  const entreesTemps1 = [
+    ...jamaisProgrammes.map(d=>({cle:'j'+d.module, categorie:'Jamais programmé', titre:d.module,
+      sous:`${d.bloc_id} · ${d.detail}`, actif:sel.kind==='distorsion'&&sel.id===d.module,
+      go:()=>setSel({kind:'distorsion',id:d.module,data:d})})),
+    ...compAbsentes.map(c=>({cle:'c'+c.code, categorie:'Compétence sans créneau', titre:c.code+' — '+(c.libelle||''),
+      sous:`${c.bloc_id} — ${c.bloc_titre}`, actif:sel.kind==='comp'&&sel.id===c.code,
+      go:()=>setSel({kind:'comp',id:c.code,data:{...c,label:c.libelle},bloc:c.bloc_id})})),
+  ]
 
   return (
     <div style={{display:'grid',gridTemplateColumns:'252px minmax(0,1fr) 336px',height:'100vh',width:'100%',minWidth:1280,background:P.abysse,overflow:'hidden',fontFamily:"'DM Sans',sans-serif"}}>
@@ -2635,7 +2817,7 @@ function VueFR({user,onLogout,onRetour}){
           {id:'fr',active:viewRole==='fr',label:'Responsable pédagogique',sub:`${user.prenom} ${user.nom} · cartographie du titre`,go:()=>{setViewRole('fr');setSel({kind:null,id:null})}},
           {id:'intervenant',active:viewRole==='intervenant',label:'Intervenant',sub:'Aperçu · tous modules',go:()=>{setViewRole('intervenant');setSel({kind:null,id:null})}},
         ]}
-        anomalieFooter={`${nbAlertes} anomalie${nbAlertes>1?'s':''} à arbitrer${nbNonDeclarees?` · ${nbNonDeclarees} non déclarée${nbNonDeclarees>1?'s':''}`:''}`}/>
+        anomalieFooter={footerRail}/>
 
       <main style={{background:'#F4FBF7',overflowY:'auto',display:'flex',flexDirection:'column'}}>
         <HeaderAtelier tempsNum={TEMPS_DEFS.find(t=>t.id===temps).num} roleLabel={roleLabelHeader} pageTitle={pageTitle} pageSub={pageSub} stats={stats}/>
@@ -2643,7 +2825,7 @@ function VueFR({user,onLogout,onRetour}){
         <div key={temps+viewRole} style={{padding:'26px 34px 46px',animation:'fadeIn .28s ease'}} className="fi">
           {viewRole==='intervenant'&&temps!=='digest'&&(
             arbreApercu.length===0?(
-              <Empty icon="📋" titre="Aucun module ce mois-ci" msg="Aucune séance prévisionnelle sur la période en cours pour ce titre."/>
+              <Empty icon="📋" titre="Aucun module ce mois-ci" msg="Aucune séance sur la période en cours pour ce titre."/>
             ):(
               <Arbre2 arbre={arbreApercu} mode={temps} open={openApercuState} toggle={toggleApercu} sel={sel} onSelect={setSel}/>
             )
@@ -2653,14 +2835,14 @@ function VueFR({user,onLogout,onRetour}){
             {/* Enseignements rattachés à aucun bloc : hors de la rosace, parce
                 qu'aucune épreuve ne les sanctionne — mais bien dans la
                 formation, donc listés juste en dessous. */}
-            {(f?.modules_hors_bloc||[]).length>0&&(
+            {horsBlocRaw.length>0&&(
               <div style={{marginTop:'0.75rem',background:P.surface,border:`1px solid ${P.border}`,borderRadius:14,padding:'12px 18px'}}>
                 <div style={{fontSize:11,fontWeight:600,letterSpacing:'.08em',textTransform:'uppercase',color:AT.idleText,marginBottom:6}}>
-                  Modules hors bloc · {(f.modules_hors_bloc).reduce((n,m)=>n+(m.volume||0),0)} h
+                  Modules hors bloc · {horsBlocRaw.reduce((n,m)=>n+(m.volume||0),0)} h
                 </div>
                 <div style={{fontSize:12,color:P.textm,marginBottom:8,lineHeight:1.55}}>Enseignements sans épreuve de certification rattachée. Ils ne constituent pas un bloc.</div>
                 <div style={{display:'flex',flexWrap:'wrap',gap:'0.35rem'}}>
-                  {f.modules_hors_bloc.map((m,i)=>(
+                  {horsBlocRaw.map((m,i)=>(
                     <span key={i} title={(m.competences_liees||[]).join(', ')}
                       style={{padding:'4px 12px',borderRadius:20,border:`1px solid ${P.border}`,background:P.surface,fontSize:12,color:P.abysse}}>
                       {m.titre}<span style={{color:AT.idleText,marginLeft:6}}>{m.volume} h</span>
@@ -2673,57 +2855,48 @@ function VueFR({user,onLogout,onRetour}){
             {deploy&&(
               <div style={{display:'grid',gridTemplateColumns:'minmax(0,1.45fr) minmax(0,1fr)',gap:18,marginTop:20}}>
                 <div style={{background:P.surface,border:`1px solid ${P.border}`,borderRadius:16,overflow:'hidden'}}>
-                  <div style={{padding:'13px 18px',borderBottom:`1px solid ${P.border}`,fontSize:11,fontWeight:600,letterSpacing:'.1em',textTransform:'uppercase',color:P.petrole}}>Journal des séances déclarées</div>
+                  <div style={{padding:'13px 18px',borderBottom:`1px solid ${P.border}`,fontSize:11,fontWeight:600,letterSpacing:'.1em',textTransform:'uppercase',color:P.petrole}}>Journal des séances</div>
                   {seancesJournal.length===0?<div style={{padding:'2rem',textAlign:'center',color:P.textm,fontSize:13}}>Aucune séance ce mois-ci.</div>:
                     seancesJournal.map(s=>(
-                      <button key={s.previsionnel_id} onClick={()=>setSel({kind:'seance',id:s.previsionnel_id,data:s})}
+                      <button key={(s.declaration_id?'d':'p')+(s.declaration_id||s.previsionnel_id)} onClick={()=>setSel({kind:'seance',id:s.declaration_id||s.previsionnel_id,data:s})}
                         style={{width:'100%',display:'flex',alignItems:'center',gap:12,padding:'11px 18px',borderBottom:`1px solid ${P.border}`,cursor:'pointer',border:'none',
-                          background:sel.kind==='seance'&&sel.id===s.previsionnel_id?'#F1FCF6':'transparent'}}>
-                        <span style={{fontSize:11,color:AT.idleText,width:52,flexShrink:0,textAlign:'left'}}>{fmtCourt(s.date_prevue)}</span>
+                          background:sel.kind==='seance'&&sel.id===(s.declaration_id||s.previsionnel_id)?'#F1FCF6':'transparent'}}>
+                        <span style={{fontSize:11,color:AT.idleText,width:52,flexShrink:0,textAlign:'left'}}>{s.dateAffichee}</span>
                         <span style={{fontSize:10,fontWeight:700,color:P.petrole,background:P.givre,padding:'3px 7px',borderRadius:6,flexShrink:0}}>{s.blocId}</span>
-                        <span style={{flex:1,textAlign:'left',fontSize:12.5,color:P.abysse,lineHeight:1.4}}>{s.titre}</span>
+                        <span style={{flex:1,textAlign:'left',fontSize:12.5,color:P.abysse,lineHeight:1.4}}>
+                          {s.titre}
+                          {s.hors_previsionnel&&<span style={{color:AT.idleText,marginLeft:6,fontSize:11}}>hors prév.</span>}
+                        </span>
                         <span style={{fontSize:11,color:P.textm,flexShrink:0}}>{s.intervenant_nom}</span>
                         <span style={atTag(s.st)}>{s.etatLabel}</span>
                       </button>
                     ))}
                 </div>
-                <div style={{background:P.abysse,borderRadius:16,padding:'18px 20px 20px'}}>
-                  <div style={{fontSize:11,fontWeight:600,letterSpacing:'.1em',textTransform:'uppercase',color:P.menthe,marginBottom:14}}>Anomalies à arbitrer</div>
-                  {anomalies.length===0?<div style={{fontSize:12,color:'rgba(227,255,240,.4)'}}>Aucune anomalie ce mois-ci.</div>:(
-                    <div style={{display:'flex',flexDirection:'column',gap:10}}>
-                      {anomalies.map(a=>(
-                        <button key={a.previsionnel_id} onClick={()=>setSel({kind:'seance',id:a.previsionnel_id,data:a})}
-                          style={{display:'block',width:'100%',textAlign:'left',padding:'13px 14px',borderRadius:12,cursor:'pointer',border:'1px solid',
-                            background:sel.id===a.previsionnel_id?'rgba(93,226,152,.10)':'rgba(227,255,240,.05)',
-                            borderColor:sel.id===a.previsionnel_id?'rgba(93,226,152,.35)':'rgba(227,255,240,.08)'}}>
-                          <span style={{display:'flex',alignItems:'center',gap:8,marginBottom:6}}>
-                            <span style={{width:6,height:6,borderRadius:'50%',background:P.saumon}}/>
-                            <span style={{fontSize:9.5,fontWeight:700,letterSpacing:'.11em',textTransform:'uppercase',color:P.saumon}}>{a.etatLabel}</span>
-                          </span>
-                          <span style={{display:'block',fontSize:12.5,color:P.givre,lineHeight:1.45}}>{a.titre}</span>
-                          <span style={{display:'block',fontSize:11,color:'rgba(227,255,240,.45)',marginTop:5}}>{fmtCourt(a.date_prevue)} · {a.intervenant_nom} · {a.blocId}</span>
-                        </button>
-                      ))}
-                    </div>
-                  )}
-                </div>
+                <PanneauSignaux label="Signaux à arbitrer" entrees={entreesTemps2}
+                  vide="Aucun écart de volume ni redite ce mois-ci."/>
               </div>
             )}
 
             {!deploy&&(
-              <div style={{background:P.surface,border:`1px solid ${P.border}`,borderRadius:16,marginTop:20,overflow:'hidden'}}>
-                <div style={{padding:'13px 18px',borderBottom:`1px solid ${P.border}`,fontSize:11,fontWeight:600,letterSpacing:'.1em',textTransform:'uppercase',color:P.petrole}}>Ce qui est prévu — répartition des intervenants</div>
-                {blocs.map(b=>(
-                  <button key={b.id} onClick={()=>setSel({kind:'bloc',id:b.id})}
-                    style={{width:'100%',display:'flex',alignItems:'center',gap:14,padding:'12px 18px',borderBottom:`1px solid ${P.border}`,cursor:'pointer',border:'none',
-                      background:sel.kind==='bloc'&&sel.id===b.id?'#F1FCF6':'transparent'}}>
-                    <span style={{fontSize:11,fontWeight:700,color:P.petrole,background:P.givre,padding:'4px 9px',borderRadius:7,flexShrink:0}}>{b.id}</span>
-                    <span style={{flex:1,textAlign:'left',fontSize:12.5,color:P.abysse}}>{b.titre}</span>
-                    <span style={{fontSize:11,color:P.textm,width:104,textAlign:'left'}}>{b.comp} compétences</span>
-                    <span style={{fontSize:11,color:P.textm,width:96,textAlign:'left'}}>{b.mods} modules</span>
-                    <span style={{fontSize:11,color:P.petrole,flexShrink:0}}>{b.qui}</span>
-                  </button>
-                ))}
+              <div style={{display:'grid',gridTemplateColumns:'minmax(0,1.45fr) minmax(0,1fr)',gap:18,marginTop:20}}>
+                <div style={{background:P.surface,border:`1px solid ${P.border}`,borderRadius:16,overflow:'hidden'}}>
+                  <div style={{padding:'13px 18px',borderBottom:`1px solid ${P.border}`,fontSize:11,fontWeight:600,letterSpacing:'.1em',textTransform:'uppercase',color:P.petrole}}>Ce qui est prévu — répartition des intervenants</div>
+                  {blocs.map(b=>(
+                    <button key={b.id} onClick={()=>setSel({kind:'bloc',id:b.id})}
+                      style={{width:'100%',display:'flex',alignItems:'center',gap:14,padding:'12px 18px',borderBottom:`1px solid ${P.border}`,cursor:'pointer',border:'none',
+                        background:sel.kind==='bloc'&&sel.id===b.id?'#F1FCF6':'transparent'}}>
+                      <span style={{fontSize:11,fontWeight:700,color:P.petrole,background:P.givre,padding:'4px 9px',borderRadius:7,flexShrink:0}}>{b.id}</span>
+                      <span style={{flex:1,textAlign:'left',fontSize:12.5,color:P.abysse}}>{b.titre}</span>
+                      <span style={{fontSize:11,color:P.textm,width:104,textAlign:'left'}}>{b.comp} compétences</span>
+                      <span style={{fontSize:11,color:P.textm,width:96,textAlign:'left'}}>{b.mods} modules</span>
+                      <span style={{fontSize:11,color:b.absentes?AT.warnText:P.petrole,flexShrink:0,width:92,textAlign:'right'}}>
+                        {b.absentes?b.absentes+' sans créneau':'couvert'}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+                <PanneauSignaux label="Ce que le plan ne couvre pas" entrees={entreesTemps1}
+                  vide="Chaque compétence et chaque module du plan a au moins un créneau à l'année."/>
               </div>
             )}
           </>}
@@ -2738,7 +2911,7 @@ function VueFR({user,onLogout,onRetour}){
               </div>}
               {genError&&<div style={{...card(),border:`1px solid ${P.red}`,color:'#8B1A1A',fontSize:12,marginBottom:16}}>⚠ {genError}</div>}
               {!digest?(
-                <Empty icon="✉" titre="Aucun digest généré" msg="Générez le digest du mois pour ce titre — il s'appuie sur les séances déclarées de la période en cours."/>
+                <Empty icon="✉" titre="Aucun digest généré" msg="Générez le digest du mois pour ce titre — il s'appuie sur les séances émargées de la période en cours."/>
               ):(
                 <DigestPreview digest={digest} titre={titre} campus={campus} fr={`${user.prenom} ${user.nom}`} onValiderEnvoyer={validerEnvoyer} readOnly={viewRole==='intervenant'}/>
               )}
@@ -2752,7 +2925,6 @@ function VueFR({user,onLogout,onRetour}){
     </div>
   )
 }
-
 /* ── Aperçu digest — reproduit la maquette validée, alimenté par digest.contenu_genere ── */
 function DigestPreview({digest,titre,campus,fr,onValiderEnvoyer,readOnly=false}){
   const c=digest.contenu_genere||{}
