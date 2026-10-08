@@ -7,6 +7,9 @@
 //      -> declenche par Vercel Cron (1er lundi du mois, cf vercel.json).
 //         Auth: header Authorization: Bearer <CRON_SECRET> (auto Vercel).
 //         Genere (sans envoyer) le digest de tous les titres ayant un FR.
+// POST ?action=arbitrer      { formation_id, type, cle, empreinte, decision, note?, periode? }
+//      -> decision du FR sur un signal : 'classe', 'digest' ou 'annule'.
+//         Aucun envoi : le seul canal vers les intervenants est le digest.
 // POST ?action=generate      { formation_id, campus, annee_scolaire? }
 //      -> (re)genere le digest du mois en cours pour ce titre. Role: dir, fr.
 // POST ?action=valider-envoyer  { digest_id, note_fr? }
@@ -316,6 +319,21 @@ function calculerCompetences(blocs, prevCumul, declCumul) {
   return out;
 }
 
+// ── Identite d'un signal ───────────────────────────────────────────────────
+//
+// `cle` identifie le signal dans la duree ; `empreinte` fige son etat chiffre.
+// Un signal classe se tait tant que son empreinte ne bouge pas : ajouter un
+// creneau au module, ou un troisieme intervenant sur la meme famille, le fait
+// reapparaitre. C'est le serveur qui fabrique les deux — l'interface se
+// contente de les renvoyer tels quels, de sorte que l'identite d'un signal ne
+// depende jamais de ce qu'un ecran a bien voulu en retenir.
+function empreinteDistorsion(d) {
+  return [d.etat, d.volume_annonce == null ? '' : d.volume_annonce, d.heures_programmees].join('|');
+}
+function empreinteRedite(r) {
+  return [(r.modules || []).join(','), (r.intervenants || []).join(',')].join('|');
+}
+
 // ── 3. Distorsion au grain du module ───────────────────────────────────────
 //
 // Le plan de formation annonce un volume horaire par module. CESAR dit ce qui
@@ -373,11 +391,14 @@ function calculerDistorsions(blocs, horsBloc, prevCumul, declCumul) {
       }
     }
     if (etat === 'conforme') return;
-    out.push({ module: m.titre, bloc_id: m.bloc_id, bloc_titre: m.bloc_titre, nature: m.nature,
+    const sig = { module: m.titre, bloc_id: m.bloc_id, bloc_titre: m.bloc_titre, nature: m.nature,
       competences: m.competences_liees || [], volume_annonce: annonce,
       heures_programmees: hProg, heures_faites: hFaites,
       seances_programmees: e.prog_seances, seances_faites: e.faites,
-      intervenants: Array.from(e.intervenants).sort(), etat, detail });
+      intervenants: Array.from(e.intervenants).sort(), etat, detail,
+      type: 'distorsion', cle: m.titre };
+    sig.empreinte = empreinteDistorsion(sig);
+    out.push(sig);
   });
 
   const ordre = { jamais_programme: 0, sous_volume: 1, sur_volume: 2 };
@@ -420,16 +441,51 @@ function detecterRedites(blocs, horsBloc, declarationsPeriode) {
     .filter(e => e.modules.size > 1 && e.intervenants.size > 1)
     .map(e => {
       const dates = e.dates.sort();
-      return {
-        titre: `${e.famille} — reprise par ${e.intervenants.size} intervenants`,
-        detail: `Traitée ce mois-ci dans ${Array.from(e.modules).join(' et ')}, par ${Array.from(e.intervenants).join(', ')}`
-          + (dates.length ? ` (du ${dates[0]} au ${dates[dates.length - 1]}).` : '.'),
-        famille: e.famille,
-        modules: Array.from(e.modules).sort(),
-        intervenants: Array.from(e.intervenants).sort(),
+      const modules = Array.from(e.modules).sort();
+      const intervenants = Array.from(e.intervenants).sort();
+      const r = {
+        titre: `${e.famille} — reprise par ${intervenants.length} intervenants`,
+        detail: `Traitée ce mois-ci dans ${modules.map(titreLisible).join(' et ')}, par ${intervenants.join(', ')}`
+          + (dates.length ? ` (${periodeCourte(dates)}).` : '.'),
+        famille: e.famille, modules, intervenants,
+        type: 'redite',
+        // La redite se calcule sur un mois : sa clé le porte, sinon classer la
+        // redite d'octobre ferait taire celle de mars.
+        cle: `${e.famille}@${String(dates[0] || '').slice(0, 7)}`,
       };
+      r.empreinte = empreinteRedite(r);
+      return r;
     })
     .sort((a, b) => b.intervenants.length - a.intervenants.length);
+}
+
+// ── Application des arbitrages ─────────────────────────────────────────────
+//
+// Un signal porte sa decision s'il en a une ET si son empreinte n'a pas bouge
+// depuis. Sinon il redevient un signal neuf : `arbitrage` reste nul et
+// `rouvert` dit pourquoi, pour que le FR comprenne qu'il l'avait deja vu.
+function appliquerArbitrages(signaux, lignes) {
+  const par = {};
+  (lignes || []).forEach(a => { par[`${a.type}|${a.cle}`] = a; });
+  return (signaux || []).map(sig => {
+    const a = par[`${sig.type}|${sig.cle}`];
+    if (!a) return { ...sig, arbitrage: null, rouvert: false };
+    if (String(a.empreinte || '') !== String(sig.empreinte || '')) {
+      return { ...sig, arbitrage: null, rouvert: true,
+               rouvert_detail: 'Les chiffres ont changé depuis votre arbitrage.' };
+    }
+    return { ...sig, rouvert: false,
+             arbitrage: { decision: a.decision, note: a.note || '', decide_at: a.decide_at } };
+  });
+}
+
+async function lireArbitrages(db, formationId, anneeScolaire) {
+  const r = await db.execute({
+    sql: `SELECT type, cle, decision, empreinte, note, periode, decide_at
+          FROM arbitrage WHERE formation_id = ? AND annee_scolaire = ?`,
+    args: [formationId, anneeScolaire],
+  });
+  return r.rows;
 }
 
 // ── Compatibilite ascendante ───────────────────────────────────────────────
@@ -538,9 +594,26 @@ async function genererContenuDigest(db, apiKey, formationId, campus, anneeScolai
 
   const avancementBlocs = calculerAvancementBlocs(blocs, declarationsCumul);
   const quiAEnseigne = calculerQuiAEnseigne(declarationsPeriode, idxBlocs);
-  // Le point de coordination du digest n'est plus un doublon de competence
-  // mais une redite de famille de notions (cf. detecterRedites).
-  const coordination = detecterRedites(blocs, horsBloc, declarationsPeriode);
+  // Le point de coordination n'est plus un doublon de competence mais une
+  // redite de famille de notions (cf. detecterRedites). Le point du mois : les redites que le FR n'a pas classées,
+  // plus les écarts de volume qu'il a explicitement portés au digest.
+  const lignesArb = await lireArbitrages(db, formationId, anneeScolaire);
+  const redites = appliquerArbitrages(detecterRedites(blocs, horsBloc, declarationsPeriode), lignesArb);
+  const [prevAnnee, declAnnee] = await Promise.all([
+    db.execute({ sql: `SELECT module_ref, intervenant_nom, duree_minutes FROM previsionnel_seance
+                       WHERE formation_id=? AND annee_scolaire=?`, args: [formationId, anneeScolaire] }),
+    db.execute({ sql: `SELECT module_ref, intervenant_nom, duree_minutes FROM declaration
+                       WHERE formation_id=? AND annee_scolaire=?`, args: [formationId, anneeScolaire] }),
+  ]);
+  const distorsions = appliquerArbitrages(
+    calculerDistorsions(blocs, horsBloc, prevAnnee.rows, declAnnee.rows), lignesArb);
+
+  const coordination = [
+    ...redites.filter(r => !r.arbitrage || r.arbitrage.decision === 'digest'),
+    ...distorsions.filter(d => d.arbitrage && d.arbitrage.decision === 'digest')
+      .map(d => ({ titre: `${titreLisible(d.module)} — point de volume`,
+                   detail: (d.arbitrage.note || d.detail || '') })),
+  ].map(x => ({ titre: x.titre, detail: x.detail }));
 
   // Le mois prochain : une ligne par module, avec sa periode, et non une ligne
   // par creneau. Une semaine de hackathon produisait dix lignes identiques.
@@ -863,6 +936,49 @@ module.exports = async function handler(req, res) {
       return res.status(200).json({ ok: true, digest_id: up.id, statut: up.statut, contenu_genere: contenu, destinataires });
     }
 
+    // ── POST ?action=arbitrer — décision du FR sur un signal ──────────────
+    // Deux décisions, et aucune n'envoie de mail : le seul canal vers les
+    // intervenants reste le digest mensuel. 'annule' revient en arrière.
+    if (req.method === 'POST' && action === 'arbitrer') {
+      const user = await requireRole(req, ROLES_DIGEST);
+      if (!user) return res.status(403).json({ error: 'Accès réservé.' });
+      const { formation_id, type, cle, empreinte, decision, note, periode, annee_scolaire } = req.body || {};
+      if (!formation_id || !type || !cle) {
+        return res.status(400).json({ error: 'formation_id, type et cle requis.' });
+      }
+      if (!['distorsion', 'redite'].includes(String(type))) {
+        return res.status(400).json({ error: 'Type de signal inconnu.' });
+      }
+      if (!['classe', 'digest', 'annule'].includes(String(decision))) {
+        return res.status(400).json({ error: "Décision attendue : 'classe', 'digest' ou 'annule'." });
+      }
+      const perim = await verifierPerimetre(db, user, formation_id);
+      if (!perim.ok) return res.status(403).json({ error: perim.error });
+
+      const annee = annee_scolaire || '2026-27';
+      if (decision === 'annule') {
+        await db.execute({
+          sql: `DELETE FROM arbitrage WHERE formation_id=? AND annee_scolaire=? AND type=? AND cle=?`,
+          args: [formation_id, annee, type, cle],
+        });
+        return res.status(200).json({ ok: true, decision: null });
+      }
+
+      // Un nouvel arbitrage remplace le precedent : le FR peut passer de
+      // 'classe' a 'digest' sans avoir a annuler d'abord.
+      await db.execute({
+        sql: `INSERT INTO arbitrage (formation_id, annee_scolaire, type, cle, decision,
+                empreinte, note, periode, decide_par, decide_at)
+              VALUES (?,?,?,?,?,?,?,?,?,datetime('now'))
+              ON CONFLICT(formation_id, annee_scolaire, type, cle) DO UPDATE SET
+                decision=excluded.decision, empreinte=excluded.empreinte, note=excluded.note,
+                periode=excluded.periode, decide_par=excluded.decide_par, decide_at=datetime('now')`,
+        args: [formation_id, annee, type, cle, decision, String(empreinte || ''),
+               String(note || ''), periode ? bornesMois(periode).debut : null, user.id],
+      });
+      return res.status(200).json({ ok: true, decision });
+    }
+
     // ── POST ?action=valider-envoyer — 1 clic : note FR + envoi Resend ─────
     if (req.method === 'POST' && action === 'valider-envoyer') {
       const user = await requireRole(req, ROLES_DIGEST);
@@ -1007,8 +1123,11 @@ module.exports = async function handler(req, res) {
 
       const avancementBlocs = calculerAvancementBlocs(blocs, declarationsCumul);
       const competences = calculerCompetences(blocs, previsionnelCumul, declarationsCumul);
-      const distorsions = calculerDistorsions(blocs, horsBloc, previsionnelCumul, declarationsCumul);
-      const redites = detecterRedites(blocs, horsBloc, declRows);
+      const lignesArb = await lireArbitrages(db, formation_id, annee);
+      const distorsions = appliquerArbitrages(
+        calculerDistorsions(blocs, horsBloc, previsionnelCumul, declarationsCumul), lignesArb);
+      const redites = appliquerArbitrages(
+        detecterRedites(blocs, horsBloc, declRows), lignesArb);
 
       // Pour l'arborescence intervenant : quelles compétences (parmi les
       // siennes) ont déjà été déclarées couvertes, tous mois confondus.

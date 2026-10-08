@@ -465,6 +465,38 @@ module.exports = async function handler(req, res) {
     await db.execute(`CREATE INDEX IF NOT EXISTS idx_digest_fr ON digest_fr(fr_id, statut)`);
     await db.execute(`CREATE UNIQUE INDEX IF NOT EXISTS idx_digest_semaine ON digest_fr(formation_id, campus, semaine_debut)`);
 
+    // ─── Arbitrage des signaux (Bloc 3, 07/10/2026) ─────────────────────────
+    // L'Atelier annonçait « signaux à arbitrer » sans offrir d'arbitrage : les
+    // mêmes écarts seraient revenus chaque mois, identiques, jusqu'à ce que le
+    // panneau devienne du bruit qu'on cesse de lire.
+    //
+    // Deux décisions seulement, et aucune qui envoie quoi que ce soit : le mail
+    // part une fois par mois, par le digest, et c'est le seul canal.
+    //   'classe'  le FR a vu, c'est normal, le signal se tait
+    //   'digest'  le signal devient un point de coordination du mois
+    //
+    // `empreinte` est l'état chiffré du signal au moment de la décision. Si les
+    // chiffres bougent — un créneau ajouté, un troisième intervenant sur la même
+    // famille — l'empreinte ne correspond plus et le signal réapparaît. Classer
+    // n'est donc jamais définitif : c'est classer CE signal-là, pas le sujet.
+    await db.execute(`CREATE TABLE IF NOT EXISTS arbitrage (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      formation_id INTEGER NOT NULL,
+      annee_scolaire TEXT NOT NULL DEFAULT '2026-27',
+      type TEXT NOT NULL,
+      cle TEXT NOT NULL,
+      decision TEXT NOT NULL,
+      empreinte TEXT NOT NULL DEFAULT '',
+      note TEXT NOT NULL DEFAULT '',
+      periode TEXT,
+      decide_par INTEGER,
+      decide_at TEXT DEFAULT (datetime('now'))
+    )`);
+    await db.execute(`CREATE UNIQUE INDEX IF NOT EXISTS idx_arbitrage_cle
+      ON arbitrage(formation_id, annee_scolaire, type, cle)`);
+    await db.execute(`CREATE INDEX IF NOT EXISTS idx_arbitrage_periode
+      ON arbitrage(formation_id, annee_scolaire, periode)`);
+
     // ─── Table v3 inscription ────────────────────────────────────────────────
     await db.execute(`CREATE TABLE IF NOT EXISTS inscription (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
