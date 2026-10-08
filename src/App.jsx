@@ -2152,9 +2152,68 @@ function Inspecteur({insp}){
           </div>
         )}
 
+        {insp.arbitrage&&<BlocArbitrage key={insp.key} arb={insp.arbitrage}/>}
+
         {insp.toast&&<div style={{marginTop:14,background:P.abysse,color:P.menthe,fontSize:11.5,padding:'10px 13px',borderRadius:10,lineHeight:1.5}}>{insp.toast}</div>}
       </div>
     </aside>
+  )
+}
+
+/* Arbitrage d'un signal — deux décisions, aucun envoi.
+   « Classer » fait taire CE signal tant que ses chiffres ne bougent pas ;
+   « Porter au digest » en fait un point de coordination du mail du mois. Le
+   mail part une fois par mois et c'est le seul canal : aucun bouton d'ici
+   n'écrit à qui que ce soit. */
+function BlocArbitrage({arb}){
+  const [note,setNote]=useState(arb.courant?.note||'')
+  const [occupe,setOccupe]=useState('')
+  const [err,setErr]=useState('')
+  async function go(decision){
+    setOccupe(decision);setErr('')
+    try{ await arb.onDecision(decision,note) }
+    catch(e){ setErr(e.message) }
+    finally{ setOccupe('') }
+  }
+  const bouton=(primary)=>({width:'100%',fontSize:12,fontWeight:600,padding:11,borderRadius:10,
+    cursor:occupe?'default':'pointer',border:'none',opacity:occupe?0.6:1,
+    background:primary?P.abysse:P.givre,color:primary?P.menthe:P.petrole})
+
+  if(arb.courant) return (
+    <div style={{marginTop:18,borderTop:`1px solid ${P.border}`,paddingTop:16}}>
+      <div style={{fontSize:9.5,fontWeight:600,letterSpacing:'.13em',textTransform:'uppercase',color:AT.idleText,marginBottom:9}}>Arbitré</div>
+      <div style={{background:P.givre,borderRadius:10,padding:'12px 14px',fontSize:12,color:P.abysse,lineHeight:1.6}}>
+        {arb.courant.decision==='classe'?'Classé — ce signal se taira tant que ses chiffres ne bougeront pas.':'Porté au digest du mois comme point de coordination.'}
+        {arb.courant.note&&<div style={{marginTop:8,color:P.textm,whiteSpace:'pre-wrap'}}>{arb.courant.note}</div>}
+      </div>
+      <button onClick={()=>go('annule')} disabled={!!occupe} style={{...bouton(false),marginTop:9}}>
+        {occupe?'…':'Revenir sur cet arbitrage'}
+      </button>
+      {err&&<div style={{fontSize:11,color:P.red,marginTop:8}}>⚠ {err}</div>}
+    </div>
+  )
+
+  return (
+    <div style={{marginTop:18,borderTop:`1px solid ${P.border}`,paddingTop:16}}>
+      <div style={{fontSize:9.5,fontWeight:600,letterSpacing:'.13em',textTransform:'uppercase',color:AT.idleText,marginBottom:9}}>Arbitrer</div>
+      <textarea value={note} onChange={e=>setNote(e.target.value)}
+        placeholder="Note — reprise telle quelle dans le digest si vous l'y portez."
+        style={{width:'100%',minHeight:62,background:'#F7FBF9',border:`1px solid ${P.border}`,borderRadius:10,
+          padding:'9px 11px',fontSize:12,color:P.abysse,resize:'vertical',outline:'none',lineHeight:1.55,
+          fontFamily:"'DM Sans',sans-serif",marginBottom:9}}/>
+      <div style={{display:'flex',flexDirection:'column',gap:7}}>
+        <button onClick={()=>go('digest')} disabled={!!occupe} style={bouton(true)}>
+          {occupe==='digest'?'…':'Porter au digest du mois'}
+        </button>
+        <button onClick={()=>go('classe')} disabled={!!occupe} style={bouton(false)}>
+          {occupe==='classe'?'…':'Classer — rien à signaler'}
+        </button>
+      </div>
+      <div style={{fontSize:10.5,color:AT.idleText,marginTop:9,lineHeight:1.5}}>
+        Aucun mail n'est envoyé ici. Le digest du mois est le seul canal vers les intervenants.
+      </div>
+      {err&&<div style={{fontSize:11,color:P.red,marginTop:8}}>⚠ {err}</div>}
+    </div>
   )
 }
 
@@ -2539,12 +2598,36 @@ function VueFR({user,onLogout,onRetour}){
   /* Compteurs. Une séance encore à venir n'est pas une anomalie : c'était le
      second faux signal de l'ancienne version, qui mettait en alerte tout ce
      qui n'avait simplement pas encore eu lieu. */
+  /* Un signal arbitré « classé » ne disparaît pas : il est rangé derrière un
+     dépliant, parce que le FR doit pouvoir revenir sur sa décision et parce
+     qu'un signal qu'on ne retrouve plus est un signal qu'on ne peut plus
+     annuler. */
+  const [voirClasses,setVoirClasses]=useState(false)
+  async function arbitrer(sig,decision,note){
+    await api.arbitrerSignal({formationId, type:sig.type, cle:sig.cle, empreinte:sig.empreinte,
+      decision, note, periode, annee:undefined})
+    const d=await reload()
+    /* La sélection pointe sur un objet figé : on la rafraîchit depuis les
+       données rechargées, sinon l'inspecteur continuerait d'afficher l'état
+       d'avant la décision. */
+    if(d){
+      const source = sig.type==='redite' ? (d.redites||[]) : (d.distorsions||[])
+      const maj = source.find(x=>x.cle===sig.cle)
+      if(maj) setSel(s=>({...s,data:maj}))
+    }
+  }
+  const estClasse = s => !!(s.arbitrage && s.arbitrage.decision==='classe')
+
   const nonEmargees = journal.filter(j=>j.etat==='manquante')
   const tenues = journal.filter(j=>j.etat==='tenue'||j.etat==='tenue_cr')
   const jamaisProgrammes = distorsions.filter(d=>d.etat==='jamais_programme')
   const ecartsVolume = distorsions.filter(d=>d.etat!=='jamais_programme')
   const compAbsentes = competences.filter(c=>c.etat==='absente')
-  const nbSignaux = ecartsVolume.length + redites.length
+  /* Le compteur ne compte que ce qui reste à traiter : un signal classé ou
+     déjà porté au digest a été vu, il ne doit plus réclamer d'attention. */
+  const signauxOuverts = [...ecartsVolume,...redites].filter(s=>!s.arbitrage)
+  const signauxTraites = [...ecartsVolume,...redites].filter(s=>!!s.arbitrage)
+  const nbSignaux = signauxOuverts.length
 
   async function genererDigest(){
     setGenerating(true);setGenError('')
@@ -2679,7 +2762,8 @@ function VueFR({user,onLogout,onRetour}){
     }
     if(sel.kind==='distorsion'){
       const d=sel.data||{}
-      return {kind:'Distorsion de volume', st:'warn', titre:d.module, desc:d.detail||'',
+      return {kind:'Distorsion de volume', st:d.arbitrage?'idle':'warn', titre:d.module, desc:d.detail||'',
+        arbitrage:{courant:d.arbitrage||null,onDecision:(dec,note)=>arbitrer(d,dec,note)},
         lignes:[
           {k:'Bloc',v:(d.bloc_id||'—')+(d.bloc_titre?' — '+d.bloc_titre:'')},
           {k:'Plan de formation',v:d.volume_annonce==null?'non chiffré':d.volume_annonce+' h'},
@@ -2688,17 +2772,21 @@ function VueFR({user,onLogout,onRetour}){
           {k:'Intervenants',v:(d.intervenants||[]).join(' · ')||'Non affecté'},
         ],
         chipsLabel:'Compétences portées', chips:d.competences||[],
-        key:'dist'+d.module}
+        alerte: d.rouvert?{titre:'Signal rouvert',txt:d.rouvert_detail||"Les chiffres ont changé depuis votre arbitrage."}:null,
+        key:'dist'+d.cle+(d.arbitrage?d.arbitrage.decision:'')}
     }
     if(sel.kind==='redite'){
       const r=sel.data||{}
-      return {kind:'Redite', st:'warn', titre:r.famille, desc:r.detail||'',
+      return {kind:'Redite', st:r.arbitrage?'idle':'warn', titre:r.famille, desc:r.detail||'',
         lignes:[
           {k:'Modules',v:(r.modules||[]).join(' · ')},
           {k:'Intervenants',v:(r.intervenants||[]).join(' · ')},
         ],
-        alerte:{titre:'Point de coordination', txt:"Une même famille de notions traitée le même mois par deux intervenants. À confirmer avec eux : complémentarité voulue, ou répétition subie."},
-        key:'redite'+r.famille}
+        arbitrage:{courant:r.arbitrage||null,onDecision:(dec,note)=>arbitrer(r,dec,note)},
+        alerte: r.rouvert
+          ? {titre:'Signal rouvert',txt:r.rouvert_detail||"Les chiffres ont changé depuis votre arbitrage."}
+          : {titre:'Point de coordination', txt:"Une même famille de notions traitée le même mois par deux intervenants. À confirmer avec eux : complémentarité voulue, ou répétition subie."},
+        key:'redite'+r.cle+(r.arbitrage?r.arbitrage.decision:'')}
     }
     if(sel.kind==='module'){
       const m=sel.data
@@ -2763,49 +2851,80 @@ function VueFR({user,onLogout,onRetour}){
 
   const footerRail = deploy
     ? `${nbSignaux} signal${nbSignaux>1?'aux':''} à arbitrer${nonEmargees.length?` · ${nonEmargees.length} séance${nonEmargees.length>1?'s':''} non émargée${nonEmargees.length>1?'s':''}`:''}`
-    : `${compAbsentes.length} compétence${compAbsentes.length>1?'s':''} sans créneau${jamaisProgrammes.length?` · ${jamaisProgrammes.length} module${jamaisProgrammes.length>1?'s':''} jamais programmé${jamaisProgrammes.length>1?'s':''}`:''}`
+    : (()=>{ const n=jamaisProgrammes.filter(d=>!d.arbitrage).length
+        return `${compAbsentes.length} compétence${compAbsentes.length>1?'s':''} sans créneau${n?` · ${n} module${n>1?'s':''} jamais programmé${n>1?'s':''}`:''}` })()
 
   /* Panneau sombre réutilisé par les deux temps : un titre, des entrées
      cliquables, un message quand il n'y a rien à montrer. */
-  const PanneauSignaux = ({label,entrees,vide})=>(
+  const EntreeSignal = ({e})=>{
+    const teinte = e.traite?'rgba(227,255,240,.45)':P.saumon
+    return (
+      <button onClick={e.go}
+        style={{display:'block',width:'100%',textAlign:'left',padding:'13px 14px',borderRadius:12,cursor:'pointer',border:'1px solid',
+          opacity:e.traite?0.72:1,
+          background:e.actif?'rgba(93,226,152,.10)':'rgba(227,255,240,.05)',
+          borderColor:e.actif?'rgba(93,226,152,.35)':'rgba(227,255,240,.08)'}}>
+        <span style={{display:'flex',alignItems:'center',gap:8,marginBottom:6}}>
+          <span style={{width:6,height:6,borderRadius:'50%',background:teinte}}/>
+          <span style={{fontSize:9.5,fontWeight:700,letterSpacing:'.11em',textTransform:'uppercase',color:teinte}}>{e.categorie}</span>
+          {e.marque&&<span style={{fontSize:9,fontWeight:700,letterSpacing:'.08em',textTransform:'uppercase',color:P.menthe,background:'rgba(93,226,152,.12)',padding:'2px 7px',borderRadius:20}}>{e.marque}</span>}
+        </span>
+        <span style={{display:'block',fontSize:12.5,color:P.givre,lineHeight:1.45}}>{e.titre}</span>
+        <span style={{display:'block',fontSize:11,color:'rgba(227,255,240,.45)',marginTop:5}}>{e.sous}</span>
+      </button>
+    )
+  }
+
+  const PanneauSignaux = ({label,entrees,vide,traites})=>(
     <div style={{background:P.abysse,borderRadius:16,padding:'18px 20px 20px'}}>
       <div style={{fontSize:11,fontWeight:600,letterSpacing:'.1em',textTransform:'uppercase',color:P.menthe,marginBottom:14}}>{label}</div>
       {entrees.length===0?<div style={{fontSize:12,color:'rgba(227,255,240,.4)'}}>{vide}</div>:(
         <div style={{display:'flex',flexDirection:'column',gap:10}}>
-          {entrees.map(e=>(
-            <button key={e.cle} onClick={e.go}
-              style={{display:'block',width:'100%',textAlign:'left',padding:'13px 14px',borderRadius:12,cursor:'pointer',border:'1px solid',
-                background:e.actif?'rgba(93,226,152,.10)':'rgba(227,255,240,.05)',
-                borderColor:e.actif?'rgba(93,226,152,.35)':'rgba(227,255,240,.08)'}}>
-              <span style={{display:'flex',alignItems:'center',gap:8,marginBottom:6}}>
-                <span style={{width:6,height:6,borderRadius:'50%',background:P.saumon}}/>
-                <span style={{fontSize:9.5,fontWeight:700,letterSpacing:'.11em',textTransform:'uppercase',color:P.saumon}}>{e.categorie}</span>
-              </span>
-              <span style={{display:'block',fontSize:12.5,color:P.givre,lineHeight:1.45}}>{e.titre}</span>
-              <span style={{display:'block',fontSize:11,color:'rgba(227,255,240,.45)',marginTop:5}}>{e.sous}</span>
-            </button>
-          ))}
+          {entrees.map(e=><EntreeSignal key={e.cle} e={e}/>)}
+        </div>
+      )}
+      {(traites||[]).length>0&&(
+        <div style={{marginTop:14,borderTop:'1px solid rgba(227,255,240,.08)',paddingTop:12}}>
+          <button onClick={()=>setVoirClasses(v=>!v)}
+            style={{background:'none',border:'none',padding:0,cursor:'pointer',fontSize:11,color:'rgba(227,255,240,.55)'}}>
+            {voirClasses?'▾':'▸'} {traites.length} signal{traites.length>1?'aux':''} déjà arbitré{traites.length>1?'s':''}
+          </button>
+          {voirClasses&&(
+            <div style={{display:'flex',flexDirection:'column',gap:10,marginTop:10}}>
+              {traites.map(e=><EntreeSignal key={e.cle} e={e}/>)}
+            </div>
+          )}
         </div>
       )}
     </div>
   )
 
-  const entreesTemps2 = [
-    ...ecartsVolume.map(d=>({cle:'d'+d.module, categorie:distLabel(d.etat), titre:d.module,
-      sous:`${d.bloc_id} · ${d.detail}`, actif:sel.kind==='distorsion'&&sel.id===d.module,
-      go:()=>setSel({kind:'distorsion',id:d.module,data:d})})),
-    ...redites.map(r=>({cle:'r'+r.famille, categorie:'Redite', titre:r.famille,
-      sous:(r.intervenants||[]).join(' · '), actif:sel.kind==='redite'&&sel.id===r.famille,
-      go:()=>setSel({kind:'redite',id:r.famille,data:r})})),
-  ]
+  const marqueDe = s => !s.arbitrage ? '' : (s.arbitrage.decision==='classe'?'Classé':'Au digest')
+  const entreeDistorsion = d=>({cle:'d'+d.cle, categorie:distLabel(d.etat), titre:d.module,
+    sous:`${d.bloc_id} · ${d.detail}`, actif:sel.kind==='distorsion'&&sel.id===d.cle,
+    traite:!!d.arbitrage, marque:marqueDe(d),
+    go:()=>setSel({kind:'distorsion',id:d.cle,data:d})})
+  const entreeRedite = r=>({cle:'r'+r.cle, categorie:'Redite', titre:r.famille,
+    sous:(r.intervenants||[]).join(' · '), actif:sel.kind==='redite'&&sel.id===r.cle,
+    traite:!!r.arbitrage, marque:marqueDe(r),
+    go:()=>setSel({kind:'redite',id:r.cle,data:r})})
+  const entree = s => s.type==='redite'?entreeRedite(s):entreeDistorsion(s)
+
+  const entreesTemps2 = signauxOuverts.map(entree)
+  const traitesTemps2 = signauxTraites.map(entree)
+  /* Un module jamais programmé s'arbitre comme un écart de volume : c'est la
+     même nature de signal, vu depuis le plan plutôt que depuis le réel. Une
+     compétence sans créneau, en revanche, ne s'arbitre pas — elle se corrige
+     dans le plan de formation ou dans le calendrier, pas dans Atlas. */
+  const entreeCompetence = c=>({cle:'c'+c.code, categorie:'Compétence sans créneau',
+    titre:c.code+' — '+(c.libelle||''), sous:`${c.bloc_id} — ${c.bloc_titre}`,
+    actif:sel.kind==='comp'&&sel.id===c.code,
+    go:()=>setSel({kind:'comp',id:c.code,data:{...c,label:c.libelle},bloc:c.bloc_id})})
   const entreesTemps1 = [
-    ...jamaisProgrammes.map(d=>({cle:'j'+d.module, categorie:'Jamais programmé', titre:d.module,
-      sous:`${d.bloc_id} · ${d.detail}`, actif:sel.kind==='distorsion'&&sel.id===d.module,
-      go:()=>setSel({kind:'distorsion',id:d.module,data:d})})),
-    ...compAbsentes.map(c=>({cle:'c'+c.code, categorie:'Compétence sans créneau', titre:c.code+' — '+(c.libelle||''),
-      sous:`${c.bloc_id} — ${c.bloc_titre}`, actif:sel.kind==='comp'&&sel.id===c.code,
-      go:()=>setSel({kind:'comp',id:c.code,data:{...c,label:c.libelle},bloc:c.bloc_id})})),
+    ...jamaisProgrammes.filter(d=>!d.arbitrage).map(entreeDistorsion),
+    ...compAbsentes.map(entreeCompetence),
   ]
+  const traitesTemps1 = jamaisProgrammes.filter(d=>!!d.arbitrage).map(entreeDistorsion)
 
   return (
     <div style={{display:'grid',gridTemplateColumns:'252px minmax(0,1fr) 336px',height:'100vh',width:'100%',minWidth:1280,background:P.abysse,overflow:'hidden',fontFamily:"'DM Sans',sans-serif"}}>
@@ -2872,8 +2991,8 @@ function VueFR({user,onLogout,onRetour}){
                       </button>
                     ))}
                 </div>
-                <PanneauSignaux label="Signaux à arbitrer" entrees={entreesTemps2}
-                  vide="Aucun écart de volume ni redite ce mois-ci."/>
+                <PanneauSignaux label="Signaux à arbitrer" entrees={entreesTemps2} traites={traitesTemps2}
+                  vide="Rien à arbitrer ce mois-ci."/>
               </div>
             )}
 
@@ -2895,7 +3014,7 @@ function VueFR({user,onLogout,onRetour}){
                     </button>
                   ))}
                 </div>
-                <PanneauSignaux label="Ce que le plan ne couvre pas" entrees={entreesTemps1}
+                <PanneauSignaux label="Ce que le plan ne couvre pas" entrees={entreesTemps1} traites={traitesTemps1}
                   vide="Chaque compétence et chaque module du plan a au moins un créneau à l'année."/>
               </div>
             )}
