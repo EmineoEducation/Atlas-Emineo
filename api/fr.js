@@ -479,12 +479,38 @@ function appliquerArbitrages(signaux, lignes) {
   });
 }
 
-async function lireArbitrages(db, formationId, anneeScolaire) {
-  const r = await db.execute({
+// ── Lectures tolerantes ────────────────────────────────────────────────────
+//
+// Le 08/10/2026, L'Atelier est tombe en entier sur « no such table: arbitrage »
+// parce que /api/setup n'avait pas encore ete rejoue apres le deploiement. Un
+// ecran complet perdu pour une table optionnelle absente, c'est une fragilite
+// qu'on ne peut pas garder : la DSI va rejouer cette sequence sur ses propres
+// serveurs, et le decalage entre le code deploye et le schema en base se
+// reproduira.
+//
+// `tolerer` n'avale QUE le schema manquant — table ou colonne. Toute autre
+// erreur (connexion, syntaxe, contrainte) remonte normalement : masquer une
+// panne reelle serait pire que l'ecran blanc.
+function schemaManquant(e) {
+  const m = String((e && e.message) || e).toLowerCase();
+  return m.includes('no such table') || m.includes('no such column');
+}
+
+async function tolerer(promesse, repli, degradations, quoi) {
+  try { return await promesse; }
+  catch (e) {
+    if (!schemaManquant(e)) throw e;
+    if (degradations) degradations.push({ quoi, raison: String((e && e.message) || e) });
+    return repli;
+  }
+}
+
+async function lireArbitrages(db, formationId, anneeScolaire, degradations) {
+  const r = await tolerer(db.execute({
     sql: `SELECT type, cle, decision, empreinte, note, periode, decide_at
           FROM arbitrage WHERE formation_id = ? AND annee_scolaire = ?`,
     args: [formationId, anneeScolaire],
-  });
+  }), { rows: [] }, degradations, 'arbitrage');
   return r.rows;
 }
 
@@ -597,7 +623,7 @@ async function genererContenuDigest(db, apiKey, formationId, campus, anneeScolai
   // Le point de coordination n'est plus un doublon de competence mais une
   // redite de famille de notions (cf. detecterRedites). Le point du mois : les redites que le FR n'a pas classées,
   // plus les écarts de volume qu'il a explicitement portés au digest.
-  const lignesArb = await lireArbitrages(db, formationId, anneeScolaire);
+  const lignesArb = await lireArbitrages(db, formationId, anneeScolaire, null);
   const redites = appliquerArbitrages(detecterRedites(blocs, horsBloc, declarationsPeriode), lignesArb);
   const [prevAnnee, declAnnee] = await Promise.all([
     db.execute({ sql: `SELECT module_ref, intervenant_nom, duree_minutes FROM previsionnel_seance
@@ -957,15 +983,16 @@ module.exports = async function handler(req, res) {
 
       const annee = annee_scolaire || '2026-27';
       if (decision === 'annule') {
-        await db.execute({
+        await tolerer(db.execute({
           sql: `DELETE FROM arbitrage WHERE formation_id=? AND annee_scolaire=? AND type=? AND cle=?`,
           args: [formation_id, annee, type, cle],
-        });
+        }), null, null, 'arbitrage');
         return res.status(200).json({ ok: true, decision: null });
       }
 
       // Un nouvel arbitrage remplace le precedent : le FR peut passer de
       // 'classe' a 'digest' sans avoir a annuler d'abord.
+      try {
       await db.execute({
         sql: `INSERT INTO arbitrage (formation_id, annee_scolaire, type, cle, decision,
                 empreinte, note, periode, decide_par, decide_at)
@@ -976,6 +1003,11 @@ module.exports = async function handler(req, res) {
         args: [formation_id, annee, type, cle, decision, String(empreinte || ''),
                String(note || ''), periode ? bornesMois(periode).debut : null, user.id],
       });
+      } catch (e) {
+        if (!schemaManquant(e)) throw e;
+        return res.status(503).json({ error:
+          "La table des arbitrages n'existe pas encore en base. Un compte direction doit rejouer /api/setup (POST) ; aucune donnée existante n'est touchée." });
+      }
       return res.status(200).json({ ok: true, decision });
     }
 
@@ -1123,7 +1155,8 @@ module.exports = async function handler(req, res) {
 
       const avancementBlocs = calculerAvancementBlocs(blocs, declarationsCumul);
       const competences = calculerCompetences(blocs, previsionnelCumul, declarationsCumul);
-      const lignesArb = await lireArbitrages(db, formation_id, annee);
+      const degradations = [];
+      const lignesArb = await lireArbitrages(db, formation_id, annee, degradations);
       const distorsions = appliquerArbitrages(
         calculerDistorsions(blocs, horsBloc, previsionnelCumul, declarationsCumul), lignesArb);
       const redites = appliquerArbitrages(
@@ -1138,7 +1171,7 @@ module.exports = async function handler(req, res) {
         mesCompetencesCouvertes = Array.from(set);
       }
 
-      const digest = await db.execute({
+      const digest = await tolerer(db.execute({
         sql: `SELECT id, semaine_debut, semaine_fin, contenu_genere, statut,
                      valide_at, envoye_at, destinataires, created_at
               FROM digest_fr
@@ -1146,11 +1179,14 @@ module.exports = async function handler(req, res) {
               ORDER BY created_at DESC
               LIMIT 1`,
         args: [formation_id, annee, debut],
-      });
+      }), { rows: [] }, degradations, 'digest_fr');
       const digestRow = digest.rows[0] || null;
 
       return res.status(200).json({
         periode: { debut, fin, label: labelMois(debut) },
+        // Non vide = l'écran s'affiche mais amputé d'une fonction, faute d'une
+        // table absente en base. /api/setup la crée.
+        degradations,
         seances_prevues: prevRows,
         seances_realisees: declRows,
         journal,
