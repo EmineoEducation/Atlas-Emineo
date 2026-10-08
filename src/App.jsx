@@ -26,6 +26,39 @@ function Bar({pct,color='blue',h=4}){
 }
 function Spinner({size=20}){return <div style={{width:size,height:size,border:`2px solid ${P.borderm}`,borderTopColor:P.menthe,borderRadius:'50%',animation:'spin 0.7s linear infinite',flexShrink:0}}/>}
 function card(x={}){return{background:P.surface,borderRadius:12,border:`1px solid ${P.border}`,padding:'1.25rem 1.4rem',marginBottom:'0.8rem',boxShadow:'0 1px 6px rgba(11,43,45,0.06)',...x}}
+/* Un écran amputé d'une fonction doit le dire sans se taire ni tomber.
+   Cas vécu le 08/10/2026 : la table des arbitrages n'existait pas encore en
+   base après déploiement, et L'Atelier entier affichait « Erreur de
+   chargement ». Le serveur répond désormais quand même, et signale ce qui
+   manque ici. */
+function BandeauDegradation({degradations}){
+  if(!degradations||!degradations.length) return null
+  return (
+    <div style={{background:AT.warnBg,border:'1px solid rgba(232,155,119,.45)',borderRadius:12,
+      padding:'11px 15px',margin:'0 34px 0',fontSize:12,color:P.abysse,lineHeight:1.55}}>
+      <strong style={{color:AT.warnText}}>Fonction indisponible.</strong>{' '}
+      {degradations.map(d=>d.quoi).join(', ')} — la base n'a pas encore le schéma correspondant.
+      Un compte direction doit rejouer <code>/api/setup</code> en POST. Le reste de l'écran est à jour.
+    </div>
+  )
+}
+
+/* Écran d'erreur avec reprise : une panne transitoire ne doit pas obliger à
+   se reconnecter pour réessayer. */
+function ErreurEcran({msg,onRetry}){
+  return (
+    <div style={{minHeight:'100vh',display:'flex',alignItems:'center',justifyContent:'center',padding:'2rem'}}>
+      <div style={{textAlign:'center',maxWidth:420}}>
+        <div style={{fontSize:32,marginBottom:'0.6rem'}}>⚠</div>
+        <div style={{fontFamily:"'DM Serif Display',serif",fontSize:20,color:P.abysse,marginBottom:'0.5rem'}}>Erreur de chargement</div>
+        <div style={{fontSize:12.5,color:P.textm,lineHeight:1.6,marginBottom:'1.1rem'}}>{msg}</div>
+        {onRetry&&<button onClick={onRetry} style={{background:P.abysse,color:P.menthe,border:'none',borderRadius:10,
+          padding:'10px 20px',fontSize:12.5,fontWeight:600,cursor:'pointer'}}>Réessayer</button>}
+      </div>
+    </div>
+  )
+}
+
 function Empty({icon,titre,msg,action,onClick}){
   return <div style={{padding:'4rem 2rem',textAlign:'center'}}><div style={{fontSize:40,opacity:0.35,marginBottom:'0.75rem'}}>{icon}</div><div style={{fontSize:15,fontWeight:600,color:P.petrole,marginBottom:'0.3rem'}}>{titre}</div><div style={{fontSize:13,color:P.textm,lineHeight:1.6,maxWidth:320,margin:'0 auto'}}>{msg}</div>{action&&<button onClick={onClick} style={{marginTop:'1.25rem',background:P.petrole,color:P.givre,border:'none',borderRadius:8,padding:'8px 20px',fontSize:13,cursor:'pointer'}}>{action}</button>}</div>
 }
@@ -2426,7 +2459,7 @@ function VueIntervenant({user,onLogout}){
   const insp = buildInsp()
 
   if(loading&&!data) return <div style={{minHeight:'100vh',background:P.abysse,display:'flex',alignItems:'center',justifyContent:'center'}}><Spinner/></div>
-  if(error) return <div style={{minHeight:'100vh',display:'flex',alignItems:'center',justifyContent:'center'}}><Empty icon="⚠" titre="Erreur de chargement" msg={error}/></div>
+  if(error) return <ErreurEcran msg={error} onRetry={reload}/>
   if(!f) return <div style={{minHeight:'100vh',display:'flex',alignItems:'center',justifyContent:'center'}}><Empty icon="📋" titre="Aucun titre" msg="Aucun titre ne vous est rattaché."/></div>
 
   const nbMod=arbre.reduce((n,b)=>n+b.modules.length,0)
@@ -2814,7 +2847,7 @@ function VueFR({user,onLogout,onRetour}){
   const insp = buildInsp()
 
   if(loading&&!data) return <div style={{minHeight:'100vh',background:P.abysse,display:'flex',alignItems:'center',justifyContent:'center'}}><Spinner/></div>
-  if(error) return <div style={{minHeight:'100vh',display:'flex',alignItems:'center',justifyContent:'center'}}><Empty icon="⚠" titre="Erreur de chargement" msg={error}/></div>
+  if(error) return <ErreurEcran msg={error} onRetry={reload}/>
   if(!f) return <div style={{minHeight:'100vh',display:'flex',alignItems:'center',justifyContent:'center'}}><Empty icon="📋" titre="Aucun titre" msg="Aucun titre ne vous est rattaché. Contactez la Direction des programmes."/></div>
 
   const nbModApercu=arbreApercu.reduce((n,b)=>n+b.modules.length,0)
@@ -2940,6 +2973,7 @@ function VueFR({user,onLogout,onRetour}){
 
       <main style={{background:'#F4FBF7',overflowY:'auto',display:'flex',flexDirection:'column'}}>
         <HeaderAtelier tempsNum={TEMPS_DEFS.find(t=>t.id===temps).num} roleLabel={roleLabelHeader} pageTitle={pageTitle} pageSub={pageSub} stats={stats}/>
+        <div style={{paddingTop:18}}><BandeauDegradation degradations={data?.degradations}/></div>
 
         <div key={temps+viewRole} style={{padding:'26px 34px 46px',animation:'fadeIn .28s ease'}} className="fi">
           {viewRole==='intervenant'&&temps!=='digest'&&(
