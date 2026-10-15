@@ -25,6 +25,7 @@
 
 const { getDB } = require('./_lib/db');
 const { requireAuth, requireRole } = require('./_lib/auth');
+const { EPREUVES } = require('./_lib/referentiels');
 
 const MODEL = 'claude-haiku-4-5-20251001';
 const MAX_TOKENS = 2000;
@@ -583,6 +584,201 @@ function ecartsRetrocompatibles(journal) {
   }));
 }
 
+// ════════════════════════════════════════════════════════════════════════════
+// ANCRAGE CERTIFICATION
+// ----------------------------------------------------------------------------
+// Ce que le digest disait jusqu'ici : qui a enseigne quoi, combien d'heures,
+// quel pourcentage de bloc. Un intervenant y lisait l'activite de la promo,
+// pas ce que ses heures preparent. Il manquait le seul lien qui justifie
+// l'existence d'un referentiel : entre la seance de la semaine derniere et
+// l'epreuve de juin.
+//
+// Trois sources, et aucune n'est devinee :
+//   - les competences couvertes ce mois-ci viennent du plan de formation, via
+//     le module arbitre de chaque seance ;
+//   - ce qui a ete travaille vient des comptes rendus de seance, ecrits par
+//     les intervenants eux-memes ;
+//   - ce qui sera attendu vient des criteres MyCertif, lus dans
+//     referentiels/epreuves/.
+//
+// Claude ne fait que rapprocher ces trois matieres et les dire en deux phrases.
+// Il ne formule aucun attendu de son cru : si l'epreuve est inconnue, la carte
+// sort sans la partie « attendu » plutot qu'avec une partie inventee.
+
+// « B04-II », « B4-II » et « B05 » doivent se reconnaitre entre eux : le plan
+// de formation numerote ses blocs sur deux chiffres, les guides sur un.
+function cleBloc(v) {
+  return String(v || '').toUpperCase().replace(/[^A-Z0-9]/g, '').replace(/^B0+/, 'B');
+}
+// Le numero d'une competence, independamment de la nomenclature : C13, C.13
+// et C.20-II donnent 13, 13 et 20. Le suffixe de specialite est porte par le
+// bloc, jamais par le code — B05 et B06 portent tous deux C20 a C22.
+function numCompetence(v) {
+  const m = String(v || '').match(/(\d+)/);
+  return m ? m[1] : '';
+}
+
+// La promotion d'un titre, telle que le referentiel la nomme : « M2 MSMC »
+// donne m2-msmc, qui est la cle de rattachement du fichier d'epreuves.
+function clePromotion(titreCourt) {
+  return String(titreCourt || '').toLowerCase().trim().replace(/\s+/g, '-');
+}
+
+// Index (bloc, numero de competence) -> epreuve + criteres, pour un titre.
+function indexEpreuves(titreCourt) {
+  const promo = clePromotion(titreCourt);
+  for (const cle of Object.keys(EPREUVES)) {
+    const ref = EPREUVES[cle];
+    const millesime = (ref.rattachement_promotions || {})[promo];
+    if (!millesime) continue;
+    const index = new Map();
+    for (const ep of ref.epreuves || []) {
+      const decl = (ep.declinaisons || {})[millesime];
+      if (!decl) continue;   // epreuve d'une autre annee du cycle
+      const reperes = decl.reperes || {};
+      const echeance = reperes.rendu || reperes.ecrit_collectif || reperes.date_rendu
+                    || reperes.semaine_intensive || reperes.oral || '';
+      // Deux cles par competence. Les guides designent les blocs par leur
+      // numero de referentiel (B3, B4-III), le plan de formation par son
+      // propre numero de bloc (B03, B06) — et c'est le plan de formation que
+      // porte la base. Indexer les deux evite de dependre de celui que le
+      // fichier de titre expose.
+      const clesBloc = [cleBloc(ep.bloc_race), cleBloc(String(ep.code || '').replace(/^BC/, 'B'))];
+      for (const comp of ep.competences || []) {
+        const valeur = {
+          epreuve: ep.code, epreuve_nom: ep.nom, epreuve_intitule: ep.intitule_bloc,
+          annee: ep.annee, echeance, oral: reperes.oral || '',
+          competence_mycertif: comp.code_mycertif, competence_libelle: comp.libelle,
+          criteres: comp.criteres || [],
+          vigilance: (decl.vigilance || []).slice(0, 3),
+        };
+        for (const cb of clesBloc) {
+          if (!cb) continue;
+          const cle = `${cb}|${numCompetence(comp.code_race)}`;
+          if (!index.has(cle)) index.set(cle, valeur);
+        }
+      }
+    }
+    return { titre: ref.titre, rncp: ref.rncp, promotion: millesime, index };
+  }
+  return null;
+}
+
+// Ce que la promo a travaille ce mois-ci, competence par competence, avec de
+// quoi l'etayer : les modules concernes et les comptes rendus des seances.
+function ancragesDuMois(blocs, declarationsPeriode, epreuves, maxCartes) {
+  if (!epreuves) return [];
+  const libelles = new Map();   // 'B03|13' -> { libelle, bloc_id, bloc_titre }
+  (blocs || []).forEach(b => {
+    (b.competences || []).forEach(c => {
+      libelles.set(`${cleBloc(b.bloc_race || b.id)}|${numCompetence(c.id || c)}`,
+        { code: c.id || String(c), libelle: c.libelle || '', bloc_id: b.id, bloc_titre: b.titre || '' });
+    });
+  });
+
+  const par = new Map();
+  declarationsPeriode.forEach(d => {
+    const mod = String(d.module_ref || '');
+    (d.competences || []).forEach(code => {
+      // Le bloc du module tranche le suffixe de specialite : une seance de
+      // B06 portant C20 vise le PPC, la meme competence en B05 vise le PPI.
+      for (const [cle, info] of libelles) {
+        if (numCompetence(cle.split('|')[1]) !== numCompetence(code)) continue;
+        if (!(blocs || []).some(b => cleBloc(b.bloc_race || b.id) === cle.split('|')[0]
+              && (b.modules || []).some(m => normCle(m.titre) === normCle(mod)))) continue;
+        const e = par.get(cle) || { ...info, cle, seances: 0, modules: new Set(), comptes_rendus: [] };
+        e.seances++;
+        if (mod) e.modules.add(mod);
+        const cr = String(d.compte_rendu || '').trim();
+        if (cr && e.comptes_rendus.length < 3) e.comptes_rendus.push(cr.slice(0, 600));
+        par.set(cle, e);
+      }
+    });
+  });
+
+  return [...par.values()]
+    .sort((a, b) => b.seances - a.seances || b.comptes_rendus.length - a.comptes_rendus.length)
+    .slice(0, maxCartes || 6)
+    .map(e => {
+      const ep = epreuves.index.get(e.cle) || null;
+      return {
+        code: e.code, libelle: e.libelle, bloc: e.bloc_id,
+        seances: e.seances, modules: [...e.modules],
+        comptes_rendus: e.comptes_rendus,
+        epreuve: ep ? ep.epreuve : '', epreuve_nom: ep ? ep.epreuve_nom : '',
+        echeance: ep ? ep.echeance : '', oral: ep ? ep.oral : '',
+        criteres: ep ? ep.criteres : [],
+        competence_mycertif: ep ? ep.competence_mycertif : '',
+      };
+    });
+}
+
+function normCle(v) {
+  return String(v || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+}
+
+// ── Appel Claude : deux phrases par competence, ancrees sur du verifiable ──
+async function redigerAncrages(apiKey, faits) {
+  const schema = {
+    type: 'object',
+    properties: {
+      cartes: {
+        type: 'array',
+        items: {
+          type: 'object',
+          properties: {
+            code: { type: 'string' },
+            assimile: { type: 'string' },
+            attendu: { type: 'string' },
+          },
+          required: ['code', 'assimile', 'attendu'],
+          additionalProperties: false,
+        },
+      },
+    },
+    required: ['cartes'],
+    additionalProperties: false,
+  };
+
+  const prompt =
+    "Tu rediges, pour un digest mensuel adresse aux intervenants d'un titre RNCP, " +
+    "deux phrases par competence travaillee ce mois-ci.\n\n" +
+    "REGLES ABSOLUES :\n" +
+    "- N'utilise QUE les faits ci-dessous. N'invente aucun attendu, aucune date, aucun nom.\n" +
+    "- `assimile` : ce que les etudiants ont pu travailler, deduit UNIQUEMENT des comptes " +
+    "rendus de seance fournis. 1 a 2 phrases. Si aucun compte rendu n'est fourni pour la " +
+    "competence, ecris exactement : \"Aucun compte rendu de seance n'a ete saisi ce mois-ci " +
+    "pour cette competence.\"\n" +
+    "- `attendu` : ce que l'epreuve exigera, reformule a partir des criteres d'evaluation " +
+    "fournis — jamais au-dela. 1 a 2 phrases. Si aucun critere n'est fourni, renvoie une " +
+    "chaine vide.\n" +
+    "- Ton factuel, adresse a un professionnel. Jamais de jugement sur l'intervenant, jamais " +
+    "sur le niveau des etudiants, jamais de consigne pedagogique.\n" +
+    "- Une carte par competence fournie, meme ordre, meme code.\n\n" +
+    'FAITS :\n' + JSON.stringify(faits, null, 2);
+
+  const r = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-api-key': apiKey,
+      'anthropic-version': '2023-06-01',
+    },
+    body: JSON.stringify({
+      model: MODEL,
+      max_tokens: 3000,
+      messages: [{ role: 'user', content: prompt }],
+      output_config: { format: { type: 'json_schema', schema } },
+    }),
+  });
+  const raw = await r.json();
+  if (!r.ok) throw new Error((raw && raw.error && raw.error.message) || ('Claude HTTP ' + r.status));
+  const text = (raw.content || []).filter(b => b.type === 'text').map(b => b.text).join('');
+  const out = JSON.parse(text);
+  return Array.isArray(out.cartes) ? out.cartes : [];
+}
+
 // Destinataires du digest : intervenants inscrits sur ce titre.
 async function getDestinataires(db, formationId, anneeScolaire) {
   const r = await db.execute({
@@ -643,7 +839,7 @@ async function genererContenuDigest(db, apiKey, formationId, campus, anneeScolai
   const { debut, fin } = bornesMois(periodeRef);
   const { debut: debutSuivant, fin: finSuivant } = bornesMoisSuivant(periodeRef);
 
-  const formationRow = await db.execute({ sql: 'SELECT titre, data_json FROM formations WHERE id = ?', args: [formationId] });
+  const formationRow = await db.execute({ sql: 'SELECT titre, titre_court, data_json FROM formations WHERE id = ?', args: [formationId] });
   if (!formationRow.rows.length) throw new Error('Formation introuvable.');
   const formationData = parseJSON(formationRow.rows[0].data_json, {});
   const blocs = formationData.blocs || [];
@@ -654,7 +850,7 @@ async function genererContenuDigest(db, apiKey, formationId, campus, anneeScolai
                         FROM previsionnel_seance WHERE formation_id=? AND annee_scolaire=? AND date_prevue>=? AND date_prevue<=?
                           AND COALESCE(statut,'planifiee') <> 'annulee'`,
       args: [formationId, anneeScolaire, debut, fin] }),
-    db.execute({ sql: `SELECT id, previsionnel_id, module_ref, intervenant_nom, intervenants, date_seance, duree_minutes, competences
+    db.execute({ sql: `SELECT id, previsionnel_id, module_ref, intervenant_nom, intervenants, date_seance, duree_minutes, competences, compte_rendu
                         FROM declaration WHERE formation_id=? AND annee_scolaire=? AND date_seance>=? AND date_seance<=?`,
       args: [formationId, anneeScolaire, debut, fin] }),
     db.execute({ sql: `SELECT competences FROM declaration WHERE formation_id=? AND annee_scolaire=?`,
@@ -726,6 +922,15 @@ async function genererContenuDigest(db, apiKey, formationId, campus, anneeScolai
     coordination: coordination.length,
   };
 
+  // Ancrage certification : la partie deterministe d'abord — competences
+  // couvertes, epreuve visee, echeance, criteres. Elle se tient seule : si la
+  // cle API manque ou si Claude echoue, la section reste exacte, simplement
+  // plus seche.
+  const titreCourtFormation = formationRow.rows[0].titre_court
+    || (formationData.formation && formationData.formation.titre_court) || '';
+  const epreuvesTitre = indexEpreuves(titreCourtFormation);
+  const ancrages = ancragesDuMois(blocs, declarationsPeriode, epreuvesTitre, 6);
+
   let redaction = { titre: `Digest — ${labelMois(debut)}`, note_fr_suggestion: '' };
   if (apiKey) {
     try {
@@ -734,6 +939,41 @@ async function genererContenuDigest(db, apiKey, formationId, campus, anneeScolai
       });
     } catch (_) { /* on garde le fallback deterministe si Claude echoue */ }
   }
+
+  if (apiKey && ancrages.length) {
+    try {
+      const cartes = await redigerAncrages(apiKey, {
+        titre_formation: titreFormation, mois: labelMois(debut),
+        competences: ancrages.map(a => ({
+          code: a.code, libelle: a.libelle, modules: a.modules,
+          seances_ce_mois: a.seances, comptes_rendus: a.comptes_rendus,
+          epreuve: a.epreuve_nom, echeance: a.echeance,
+          criteres_evaluation: a.criteres,
+        })),
+      });
+      const parCode = {};
+      cartes.forEach(c => { parCode[String(c.code)] = c; });
+      ancrages.forEach(a => {
+        const c = parCode[String(a.code)];
+        if (!c) return;
+        a.assimile = String(c.assimile || '');
+        a.attendu = String(c.attendu || '');
+      });
+    } catch (_) { /* la partie deterministe suffit */ }
+  }
+  // Les comptes rendus bruts ne quittent pas le serveur : ils ont servi a
+  // rediger, ils n'ont pas a etre recopies dans un mail ni stockes deux fois.
+  const certification = {
+    titre: epreuvesTitre ? epreuvesTitre.titre : '',
+    promotion: epreuvesTitre ? epreuvesTitre.promotion : '',
+    competences: ancrages.map(a => ({
+      code: a.code, libelle: a.libelle, bloc: a.bloc, modules: a.modules,
+      seances: a.seances, epreuve: a.epreuve, epreuve_nom: a.epreuve_nom,
+      echeance: a.echeance, assimile: a.assimile || '', attendu: a.attendu || '',
+      criteres: (a.criteres || []).slice(0, 4),
+      sans_compte_rendu: a.comptes_rendus.length === 0,
+    })),
+  };
 
   const destinataires = await getDestinataires(db, formationId, anneeScolaire);
 
@@ -747,6 +987,7 @@ async function genererContenuDigest(db, apiKey, formationId, campus, anneeScolai
       coordination,
       note_fr_suggestion: redaction.note_fr_suggestion,
       note_fr: redaction.note_fr_suggestion,
+      certification,
       sequences_a_venir: sequencesAVenir,
     },
     destinataires,
@@ -850,6 +1091,24 @@ function renderDigestHTML(c, titreFormation, campus, frNom) {
     </td></tr>`;
   }).join('');
 
+  // Ancrage certification. Une carte par competence : ce que les comptes
+  // rendus montrent, puis ce que l'epreuve exigera. Les deux parties sont
+  // facultatives — une competence sans compte rendu garde sa partie attendu,
+  // une competence hors epreuve garde sa partie travail.
+  const certif = ((c.certification || {}).competences || []).map(k => {
+    const entete = [k.code, k.libelle].filter(Boolean).join(' — ');
+    const vise = k.epreuve_nom
+      ? `${k.epreuve_nom}${k.echeance ? ' · ' + k.echeance : ''}`
+      : '';
+    return `
+    <tr><td style="padding:0 0 16px 0;font-family:Arial,Helvetica,sans-serif;border-bottom:1px solid ${C.ligne}">
+      <div style="font-size:13px;color:${C.texte};line-height:1.4;padding-bottom:3px">${esc(entete)}</div>
+      ${vise ? `<div style="font-size:10px;color:${C.menthe};text-transform:uppercase;letter-spacing:.06em;padding-bottom:7px">${esc(vise)}</div>` : ''}
+      ${k.assimile ? `<div style="font-size:12px;color:${C.texteAtt};line-height:1.6;padding-bottom:6px">${esc(k.assimile)}</div>` : ''}
+      ${k.attendu ? `<div style="font-size:12px;color:${C.givre};line-height:1.6;border-left:2px solid ${C.saumon};padding-left:10px">${esc(k.attendu)}</div>` : ''}
+    </td></tr>`;
+  }).join('');
+
   const coord = (c.coordination || []).map(co => `
     <tr><td style="padding:0 0 10px 0;font-family:Arial,Helvetica,sans-serif">
       <div style="font-size:12px;color:${C.saumon};font-weight:600">${esc(co.titre)}</div>
@@ -908,6 +1167,7 @@ function renderDigestHTML(c, titreFormation, campus, frNom) {
 
   ${section('Avancement RNCP par bloc', blocs || vide('Aucun bloc de compétences sur ce titre.'))}
   ${section('Qui a enseigné quoi ce mois-ci', qui || vide('Aucune séance déclarée sur la période.'))}
+  ${certif ? section('Ce que ça prépare — compétences et épreuves', certif) : ''}
 
   <tr><td bgcolor="${C.abysse}" style="padding:20px 26px;border-bottom:1px solid ${C.ligne}">
     <div style="font-family:Arial,Helvetica,sans-serif;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:${C.label};padding-bottom:14px">Point de coordination — ${esc(frNom || 'FR')}</div>
