@@ -188,7 +188,11 @@ function nettoyerHtml(html) {
 export function seanceDepuisCesar(l) {
   const debut = String(l.lesson_start_date || '')
   const fin = String(l.lesson_end_date || '')
-  const noms = String(l.teachers || '').split(/\s*[;,/]\s*/).filter(Boolean)
+  // Une séance peut être ouverte à plusieurs formateurs — co-animation, ou
+  // jury d'oral à trois. CESAR les met dans un seul champ, séparés par des
+  // virgules. On transmet les deux formes : la liste, et la chaîne jointe que
+  // tout l'affichage existant attend.
+  const noms = String(l.teachers || '').split(/\s*[;,/]\s*/).map(x => x.trim()).filter(Boolean)
   return {
     ref_cesar: l.lesson_id || l.id || '',
     code_groupe_cesar: l.planning_group_id || l.planning_group || '',
@@ -198,9 +202,26 @@ export function seanceDepuisCesar(l) {
     heure_fin: fin.slice(11, 16),
     matiere: l.school_subject || '',
     intervenant_nom: noms.join(', '),
+    intervenants: noms,
     intervenant_email: l.teacher_email || l.teachers_email || '',
     compte_rendu: texteCompteRendu(l.lesson_report),
   }
+}
+
+/* Les groupes planning déduits du fichier de séances lui-même.
+
+   L'écran d'import demandait un second fichier, la liste des groupes, pour une
+   information que les séances portent déjà : chacune nomme son groupe. Le
+   rattachement du groupe à une promotion, lui, est lu côté serveur dans la
+   table versionnée du dépôt. Un fichier suffit donc. */
+export function groupesDepuisSeances(liste) {
+  const par = new Map()
+  for (const l of liste || []) {
+    const code = String(l.planning_group || l.code_groupe_cesar || '').trim()
+    if (!code || par.has(code)) continue
+    par.set(code, { code_cesar: code, libelle: code, groupe_formation: String(l.training || '') })
+  }
+  return [...par.values()]
 }
 
 // Les groupes planning : un enregistrement par groupe, ses sous-groupes réunis.
@@ -231,8 +252,12 @@ export const api = {
   cesarRattacher:  (code, titre)     => apiFetch('/api/cesar-sync?action=rattacher', { method: 'POST', body: { code_cesar: code, titre_court: titre } }),
   cesarArbitrer:   (formation_id, libelle_cesar, module_ref) =>
                                         apiFetch('/api/cesar-sync?action=matiere', { method: 'POST', body: { formation_id, libelle_cesar, module_ref } }),
-  cesarImporter:   (flux, seances, dry) =>
-                                        apiFetch('/api/cesar-sync?action=' + flux + (dry ? '&dry=1' : ''), { method: 'POST', body: { seances } }),
+  // `reconcilier` n'a de sens que sur le prévisionnel, et seulement quand le
+  // lot décrit tout le planning des groupes qu'il contient : ce qui est en base
+  // et absent du lot est alors annulé. Un lot partiel annulerait tout le reste.
+  cesarImporter:   (flux, seances, dry, reconcilier) =>
+                                        apiFetch('/api/cesar-sync?action=' + flux + (dry ? '&dry=1' : '') + (reconcilier ? '&reconcilier=1' : ''),
+                                                 { method: 'POST', body: { seances } }),
   createFormation: (campus, data)    => apiFetch('/api/formations',  { method: 'POST',   body: { campus, data } }),
   // Alimente une promotion existante depuis une ingestion PF / syllabi / RACE.
   // Preserve l'identite de la promotion, ne remplace que le contenu pedagogique.
