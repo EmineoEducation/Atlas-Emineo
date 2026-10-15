@@ -637,6 +637,20 @@ module.exports = async function handler(req, res) {
       "ALTER TABLE declaration ADD COLUMN code_groupe_cesar TEXT DEFAULT ''",
       "ALTER TABLE declaration ADD COLUMN duree_minutes INTEGER",
       "ALTER TABLE declaration ADD COLUMN libelle_cesar TEXT DEFAULT ''",
+      // statut / annulee_le : une seance annulee ou deplacee dans CESAR
+      //   disparait de l'export. Sans trace, le digest continuait d'annoncer
+      //   aux intervenants un cours qui n'aurait pas lieu. L'import rapproche
+      //   desormais le lot recu de ce qui est en base sur la meme periode et
+      //   le meme groupe planning : ce qui a disparu passe en 'annulee', ce
+      //   qui reapparait repasse en 'planifiee'. Rien n'est jamais supprime.
+      // intervenants : une seance peut etre ouverte a plusieurs formateurs —
+      //   co-animation, ou jury d'oral a trois. CESAR les donne dans un seul
+      //   champ separe par des virgules ; les garder en liste evite de traiter
+      //   « A, B, C » comme un intervenant inconnu de plus.
+      "ALTER TABLE previsionnel_seance ADD COLUMN statut TEXT DEFAULT 'planifiee'",
+      "ALTER TABLE previsionnel_seance ADD COLUMN annulee_le TEXT DEFAULT ''",
+      "ALTER TABLE previsionnel_seance ADD COLUMN intervenants TEXT DEFAULT '[]'",
+      "ALTER TABLE declaration ADD COLUMN intervenants TEXT DEFAULT '[]'",
     ]) {
       try { await db.execute(col); } catch (_) {}
     }
@@ -646,6 +660,7 @@ module.exports = async function handler(req, res) {
     await db.execute(`CREATE UNIQUE INDEX IF NOT EXISTS idx_prev_ref_cesar ON previsionnel_seance(ref_cesar) WHERE ref_cesar <> ''`);
     await db.execute(`CREATE UNIQUE INDEX IF NOT EXISTS idx_decl_ref_cesar ON declaration(ref_cesar) WHERE ref_cesar <> ''`);
     await db.execute(`CREATE INDEX IF NOT EXISTS idx_prev_groupe ON previsionnel_seance(code_groupe_cesar, annee_scolaire)`);
+    await db.execute(`CREATE INDEX IF NOT EXISTS idx_prev_statut ON previsionnel_seance(statut, annee_scolaire)`);
     await db.execute(`CREATE INDEX IF NOT EXISTS idx_decl_groupe ON declaration(code_groupe_cesar, annee_scolaire)`);
 
     // ─── Seed formations Le Mans (idempotent par titre_court+campus) ────────

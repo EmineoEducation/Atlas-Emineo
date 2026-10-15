@@ -204,6 +204,22 @@ function calculerQuiAEnseigne(declarationsPeriode, idxBlocs) {
     .sort((a, b) => a.module.localeCompare(b.module));
 }
 
+// Les noms d'une seance ouverte a plusieurs formateurs. CESAR livre « A, B, C »
+// dans un seul champ ; l'import en garde la liste. Sert a COMPTER et a NOMMER
+// des personnes — jamais a juger une coordination : voir detecterRedites, ou
+// l'equipe qui co-anime doit rester une seule signature.
+function nomsIntervenants(row) {
+  const brut = row && row.intervenants;
+  if (Array.isArray(brut) && brut.length) return brut.map(String).filter(Boolean);
+  if (typeof brut === 'string' && brut.trim().startsWith('[')) {
+    const l = parseJSON(brut, []);
+    if (Array.isArray(l) && l.length) return l.map(String).filter(Boolean);
+  }
+  const nom = String((row && row.intervenant_nom) || '').trim();
+  if (!nom || nom === '—') return [];
+  return nom.split(/\s*[;,/]\s*/).map(x => x.trim()).filter(Boolean);
+}
+
 // ── 1. Journal des seances ─────────────────────────────────────────────────
 //
 // Quatre etats, tous factuels. Aucun ne porte de jugement sur le contenu :
@@ -268,6 +284,15 @@ function calculerJournal(prevRows, declRows, arreteAu) {
       const cr = String(d.compte_rendu || '').trim();
       return { ...base, etat: cr ? 'tenue_cr' : 'tenue', compte_rendu: cr,
         detail: cr ? 'Séance tenue, compte rendu saisi.' : "Séance passée, aucun compte rendu n'est remonté de CESAR." };
+    }
+    // Annulee dans CESAR : la seance a disparu du planning entre deux imports.
+    // Elle reste au journal — un creneau qui s'efface sans laisser de trace est
+    // exactement ce qui faisait annoncer au digest des cours qui n'auraient pas
+    // lieu — mais elle ne compte plus ni comme manque ni comme programme.
+    // Un emargement l'emporte : si le cours a finalement eu lieu, il a eu lieu.
+    if (String(p.statut || 'planifiee') === 'annulee') {
+      return { ...base, etat: 'annulee', compte_rendu: '',
+        detail: 'Séance annulée ou déplacée dans CESAR : elle a disparu du planning.' };
     }
     const passee = p.date_prevue && new Date(p.date_prevue).getTime() < limite;
     return passee
@@ -380,13 +405,13 @@ function calculerDistorsions(blocs, horsBloc, prevCumul, declCumul) {
     const k = String(p.module_ref || ''); if (!k) return;
     const e = (par[k] = par[k] || vide());
     e.prog_seances++; e.prog_minutes += Number(p.duree_minutes || 0);
-    if (p.intervenant_nom) e.intervenants.add(String(p.intervenant_nom));
+    nomsIntervenants(p).forEach(n => e.intervenants.add(n));
   });
   declCumul.forEach(d => {
     const k = String(d.module_ref || ''); if (!k) return;
     const e = (par[k] = par[k] || vide());
     e.faites++; e.minutes_faites += Number(d.duree_minutes || 0);
-    if (d.intervenant_nom) e.intervenants.add(String(d.intervenant_nom));
+    nomsIntervenants(d).forEach(n => e.intervenants.add(n));
   });
 
   const modules = (blocs || []).flatMap(b => (b.modules || []).map(m => ({ ...m, bloc_id: b.id, bloc_titre: b.titre, nature: b.nature || 'obligatoire' })))
@@ -457,6 +482,10 @@ function detecterRedites(blocs, horsBloc, declarationsPeriode) {
     (famillesParModule[mod] || []).forEach(f => {
       const e = (par[f] = par[f] || { famille: f, modules: new Set(), intervenants: new Set(), dates: [] });
       e.modules.add(mod);
+      // Volontairement la chaine entiere, pas la liste : une redite est le
+      // signal que DEUX enseignements distincts se recouvrent. Un binome qui
+      // co-anime les deux seances est une seule signature ; le decouper ferait
+      // apparaitre une redite la ou il n'y a qu'une equipe.
       if (d.intervenant_nom) e.intervenants.add(String(d.intervenant_nom));
       if (d.date_seance) e.dates.push(String(d.date_seance).slice(0, 10));
     });
@@ -621,16 +650,21 @@ async function genererContenuDigest(db, apiKey, formationId, campus, anneeScolai
   const titreFormation = formationRow.rows[0].titre || formationData.formation && formationData.formation.titre || 'Formation';
 
   const [prevPeriode, declPeriode, declCumul, prevSuivant] = await Promise.all([
-    db.execute({ sql: `SELECT id, module_ref, titre, intervenant_nom, numero, date_prevue, modalite, concepts
-                        FROM previsionnel_seance WHERE formation_id=? AND annee_scolaire=? AND date_prevue>=? AND date_prevue<=?`,
+    db.execute({ sql: `SELECT id, module_ref, titre, intervenant_nom, intervenants, numero, date_prevue, modalite, concepts
+                        FROM previsionnel_seance WHERE formation_id=? AND annee_scolaire=? AND date_prevue>=? AND date_prevue<=?
+                          AND COALESCE(statut,'planifiee') <> 'annulee'`,
       args: [formationId, anneeScolaire, debut, fin] }),
-    db.execute({ sql: `SELECT id, previsionnel_id, module_ref, intervenant_nom, date_seance, duree_minutes, competences
+    db.execute({ sql: `SELECT id, previsionnel_id, module_ref, intervenant_nom, intervenants, date_seance, duree_minutes, competences
                         FROM declaration WHERE formation_id=? AND annee_scolaire=? AND date_seance>=? AND date_seance<=?`,
       args: [formationId, anneeScolaire, debut, fin] }),
     db.execute({ sql: `SELECT competences FROM declaration WHERE formation_id=? AND annee_scolaire=?`,
       args: [formationId, anneeScolaire] }),
+    // Le mois prochain n'annonce que des seances encore au planning. Une
+    // seance annulee dans CESAR ne doit jamais etre annoncee aux intervenants :
+    // c'est tout l'objet de la reconciliation faite a l'import.
     db.execute({ sql: `SELECT module_ref, titre, intervenant_nom, date_prevue, duree_minutes
                         FROM previsionnel_seance WHERE formation_id=? AND annee_scolaire=? AND date_prevue>=? AND date_prevue<=?
+                          AND COALESCE(statut,'planifiee') <> 'annulee'
                         ORDER BY date_prevue ASC`,
       args: [formationId, anneeScolaire, debutSuivant, finSuivant] }),
   ]);
@@ -651,9 +685,10 @@ async function genererContenuDigest(db, apiKey, formationId, campus, anneeScolai
   const lignesArb = await lireArbitrages(db, formationId, anneeScolaire, null);
   const redites = appliquerArbitrages(detecterRedites(blocs, horsBloc, declarationsPeriode), lignesArb);
   const [prevAnnee, declAnnee] = await Promise.all([
-    db.execute({ sql: `SELECT module_ref, intervenant_nom, duree_minutes FROM previsionnel_seance
-                       WHERE formation_id=? AND annee_scolaire=?`, args: [formationId, anneeScolaire] }),
-    db.execute({ sql: `SELECT module_ref, intervenant_nom, duree_minutes FROM declaration
+    db.execute({ sql: `SELECT module_ref, intervenant_nom, intervenants, duree_minutes FROM previsionnel_seance
+                       WHERE formation_id=? AND annee_scolaire=? AND COALESCE(statut,'planifiee') <> 'annulee'`,
+      args: [formationId, anneeScolaire] }),
+    db.execute({ sql: `SELECT module_ref, intervenant_nom, intervenants, duree_minutes FROM declaration
                        WHERE formation_id=? AND annee_scolaire=?`, args: [formationId, anneeScolaire] }),
   ]);
   const distorsions = appliquerArbitrages(
@@ -685,7 +720,7 @@ async function genererContenuDigest(db, apiKey, formationId, campus, anneeScolai
     .slice(0, 10);
 
   const kpis = {
-    intervenants: new Set(declarationsPeriode.map(d => d.intervenant_nom).filter(Boolean)).size,
+    intervenants: new Set(declarationsPeriode.flatMap(d => nomsIntervenants(d))).size,
     seances: declarationsPeriode.length,
     heures: heures(declarationsPeriode.reduce((n, d) => n + Number(d.duree_minutes || 0), 0)),
     coordination: coordination.length,
@@ -1128,7 +1163,7 @@ module.exports = async function handler(req, res) {
       const prevu = await db.execute({
         sql: `SELECT id, module_ref, campus, intervenant_id, intervenant_nom,
                      numero, titre, date_prevue, modalite, contenu, concepts, competences,
-                     duree_minutes, libelle_cesar
+                     duree_minutes, libelle_cesar, statut, annulee_le, intervenants
               FROM previsionnel_seance
               WHERE formation_id = ? AND annee_scolaire = ?
                 AND date_prevue >= ? AND date_prevue <= ?${scopeSql}
@@ -1160,15 +1195,16 @@ module.exports = async function handler(req, res) {
       const [formationRow, declCumulRows, prevCumulRows] = await Promise.all([
         db.execute({ sql: 'SELECT data_json FROM formations WHERE id = ?', args: [formation_id] }),
         db.execute({
-          sql: `SELECT module_ref, intervenant_nom, date_seance, duree_minutes, competences
+          sql: `SELECT module_ref, intervenant_nom, intervenants, date_seance, duree_minutes, competences
                 FROM declaration
                 WHERE formation_id = ? AND annee_scolaire = ? AND date_seance <= ?${scopeSql}`,
           args: [formation_id, annee, fin, ...scopeArgs],
         }),
         db.execute({
-          sql: `SELECT module_ref, intervenant_nom, date_prevue, duree_minutes, competences
+          sql: `SELECT module_ref, intervenant_nom, intervenants, date_prevue, duree_minutes, competences
                 FROM previsionnel_seance
-                WHERE formation_id = ? AND annee_scolaire = ?${scopeSql}`,
+                WHERE formation_id = ? AND annee_scolaire = ?
+                  AND COALESCE(statut,'planifiee') <> 'annulee'${scopeSql}`,
           args: [formation_id, annee, ...scopeArgs],
         }),
       ]);
