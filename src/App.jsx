@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { api, apiFetch, setToken, clearToken, getToken, apparierIntervenants,
-         seanceDepuisCesar, groupesDepuisCesar } from './api.js'
+         seanceDepuisCesar, groupesDepuisSeances } from './api.js'
 
 const P = {
   abysse:'#0B2B2D',petrole:'#134547',menthe:'#5DE298',givre:'#E3FFF0',eau:'#9DF0C4',saumon:'#E89B77',
@@ -1195,139 +1195,121 @@ function ArbitrageMatieres(){
 
 /* ═══ IMPORT DE L'ÉMARGEMENT CESAR ══════════════════════════════════════════
    Le réalisé factuel — qui a enseigné quoi, quand, combien d'heures — est la
-   seule source qui ne demande rien à personne. Elle arrive aujourd'hui en deux
-   fichiers produits par la DSI : la liste des groupes planning, et les séances
-   d'un groupe avec leur compte rendu.
+   seule source qui ne demande rien à personne.
 
-   Trois temps, dans cet ordre, parce qu'aucun ne vaut sans le précédent :
+   UN SEUL FICHIER, DEPUIS LE 15/10/2026
+   Cet écran en demandait trois : la liste des groupes planning, les séances
+   d'un groupe, et la table de rattachement. La DSI ramène son export à un
+   fichier unique — le planning d'un groupe, séances et comptes rendus —, et
+   les deux autres n'avaient pas lieu d'être déposés à la main : les groupes se
+   lisent dans les séances elles-mêmes, et la table de rattachement est
+   versionnée dans le dépôt, donc lue par le serveur.
 
-     1. les groupes planning entrent en base et sont rattachés à une promotion.
-        Une séance dont le groupe n'est pas rattaché est rejetée — c'est voulu :
-        mieux vaut un rejet lisible qu'un rattachement deviné.
-     2. un essai à blanc montre exactement ce qui serait écrit, sans rien
-        écrire. À faire systématiquement sur un export qu'on voit pour la
-        première fois.
-     3. l'écriture, idempotente : rejouer le même export met à jour, ne
-        duplique pas.
+   Reste un geste : déposer le fichier. Puis deux boutons, dans cet ordre.
 
-   Le prévisionnel reçoit toutes les séances de l'année, y compris celles qui
-   n'ont pas encore eu lieu — c'est lui qui permettra d'alerter un intervenant
-   avant sa séance. Le réalisé ne reçoit que les séances déjà tenues.
+     1. ANALYSER — rien n'est écrit. L'écran répond à la seule question qui
+        compte avant d'importer : qu'est-ce qui change ? Nouvelles séances,
+        séances modifiées, séances inchangées, et séances disparues du
+        planning.
+     2. IMPORTER — idempotent. Rejouer le même fichier ne duplique rien.
 
-   Ce flux restera manuel tant que la DSI n'expose pas son API de lecture ;
-   l'endpoint et les tables sont les mêmes dans les deux cas. */
+   CE QUI A DISPARU
+   CESAR n'annonce pas les annulations : une séance annulée ou déplacée sort
+   simplement de l'export. L'import rapproche donc le fichier de ce qui est en
+   base, sur le même groupe et sur la période couverte par le fichier, et passe
+   en « annulée » ce qui n'y est plus. Rien n'est supprimé, et une séance qui
+   réapparaît redevient planifiée. Sans identifiant de séance côté CESAR, un
+   déplacement se lit comme une annulation suivie d'une création — le bilan le
+   dit tel quel. */
 function ImportCesar({onFini}){
-  const [groupes,setGroupes]=useState(null)        // contenu de planning_groups
-  const [table,setTable]=useState(null)            // table de rattachement
-  const [nomT,setNomT]=useState('')
-  const [seances,setSeances]=useState(null)        // contenu de l'export de séances
-  const [nomG,setNomG]=useState(''); const [nomS,setNomS]=useState('')
+  const [seances,setSeances]=useState(null)
+  const [nomS,setNomS]=useState('')
   const [etat,setEtat]=useState(null)
   const [bilan,setBilan]=useState(null)
   const [occupe,setOccupe]=useState('')
   const [erreur,setErreur]=useState('')
-  const [formations,setFormations]=useState([])
 
-  useEffect(()=>{
-    api.getFormations().then(d=>setFormations(d.formations||[])).catch(()=>{})
-    rafraichir()
-  },[])
+  useEffect(()=>{ rafraichir() },[])
   function rafraichir(){ api.cesarEtat().then(setEtat).catch(()=>setEtat(null)) }
 
-  function lire(fichier,quoi){
+  function lire(fichier){
     const fr=new FileReader()
     fr.onload=()=>{
       try{
         const d=JSON.parse(fr.result)
-        if(quoi==='table'){
-          if(!d||!Array.isArray(d.groupes))throw new Error('table de rattachement attendue')
-          setTable(d);setNomT(fichier.name);setErreur('');setBilan(null);return
-        }
-        if(!Array.isArray(d))throw new Error('le fichier doit contenir une liste')
-        if(quoi==='groupes'){setGroupes(d);setNomG(fichier.name)}
-        else{setSeances(d);setNomS(fichier.name)}
-        setErreur('');setBilan(null)
-      }catch(e){setErreur(fichier.name+' : '+e.message)}
+        // On accepte la liste brute comme la forme enveloppée : la DSI peut
+        // livrer l'une ou l'autre, et refuser sur la forme serait une friction
+        // inutile là où la structure parle d'elle-même.
+        const liste=Array.isArray(d)?d:(Array.isArray(d.seances)?d.seances:(Array.isArray(d.lessons)?d.lessons:null))
+        if(!liste) throw new Error('fichier non reconnu — une liste de séances est attendue')
+        if(!liste.length) throw new Error('aucune séance dans le fichier')
+        const t=liste[0]||{}
+        if(!t.lesson_start_date&&!t.date&&!t.planning_group)
+          throw new Error("ce fichier ne ressemble pas à un planning de séances (ni lesson_start_date, ni planning_group)")
+        setSeances(liste);setNomS(fichier.name);setErreur('');setBilan(null)
+      }catch(e){ setErreur(fichier.name+' : '+e.message); setSeances(null); setNomS('') }
     }
     fr.readAsText(fichier)
   }
 
-  // Le rattachement d'un groupe à une promotion ne se devine pas : il se lit
-  // dans referentiels/groupes-planning-<campus>.json, table produite par
-  // l'outil de rattachement et relue à la main. Une première version de cet
-  // écran reconnaissait le libellé CESAR par motifs — « mastere 2 » et
-  // « ressources humaines » donnant M2 MRH. Ça marchait sur les onze groupes
-  // du Mans et aurait échoué au premier libellé tordu, sans rien signaler.
-  // Un groupe absent de la table reste à rattacher : c'est un fait à constater,
-  // pas un trou à combler par un motif.
-  function titreCourtPour(codeCesar){
-    if(!table)return ''
-    const g=(table.groupes||[]).find(x=>x.code_cesar===codeCesar)
-    return g&&g.statut==='rattache'?g.titre_court:''
-  }
+  // Lecture locale du fichier, avant tout appel : ce qu'il contient, dit par
+  // lui-même. Un fichier déposé par erreur se voit ici, pas après l'import.
+  const apercu=(()=>{
+    if(!seances) return null
+    const conv=seances.map(seanceDepuisCesar).filter(s=>s.date)
+    const groupes=[...new Set(conv.map(s=>s.code_groupe_cesar).filter(Boolean))]
+    const dates=conv.map(s=>s.date).sort()
+    const avecCR=conv.filter(s=>(s.compte_rendu||'').trim()).length
+    const multi=conv.filter(s=>(s.intervenants||[]).length>1).length
+    return {total:conv.length,groupes,debut:dates[0]||'',fin:dates[dates.length-1]||'',avecCR,multi}
+  })()
 
-  async function poserGroupes(){
-    if(!groupes||!table)return
-    setOccupe('groupes');setErreur('')
-    try{
-      // Le rattachement se fait au dépôt, pas après : l'endpoint accepte un
-      // titre court avec chaque groupe et le résout lui-même. Une première
-      // version enchaînait un second appel par groupe, protégé par un test
-      // comparant le titre court à un champ absent de /api/formations — le
-      // test échouait toujours, aucun groupe n'était rattaché, et les 145
-      // séances étaient rejetées pour « groupe non rattaché à un titre ».
-      const liste=groupesDepuisCesar(groupes).map(g=>({...g,titre_court:titreCourtPour(g.code_cesar)}))
-      const r=await api.cesarPoserGroupes(liste)
-      const vises=liste.filter(g=>g.titre_court).length
-      const rattaches=r&&typeof r.rattaches==='number'?r.rattaches:vises
-      setBilan({titre:'Groupes planning',lignes:[
-        ['Groupes déposés',liste.length],
-        ['Visés par la table',vises],
-        ['Rattachés par le serveur',rattaches],
-        ['Hors périmètre',liste.length-vises],
-      ],rejets:(r&&r.rejets||[]).slice(0,6).map(x=>({ligne:x.code_cesar||'—',motif:x.motif}))})
-      rafraichir()
-    }catch(e){setErreur(e.message)}
-    setOccupe('')
-  }
-
-  async function importer(dry){
+  async function lancer(dry){
     if(!seances)return
     setOccupe(dry?'essai':'ecriture');setErreur('')
     try{
       const aujourdhui=new Date().toISOString().slice(0,10)
       const toutes=seances.map(seanceDepuisCesar).filter(s=>s.date)
       const passees=toutes.filter(s=>s.date<=aujourdhui)
-      const prev=await api.cesarImporter('previsionnel',toutes,dry)
+
+      // Les groupes planning sont déduits des séances et rattachés par le
+      // serveur depuis la table du dépôt. C'est une écriture de référentiel,
+      // idempotente, et elle doit précéder l'analyse : sans groupe en base,
+      // toutes les séances seraient rejetées et le différentiel vide.
+      const groupes=groupesDepuisSeances(seances)
+      const g=await api.cesarPoserGroupes(groupes)
+      const aRattacher=(g&&g.a_rattacher||[]).map(x=>x.code_cesar)
+
+      // Le prévisionnel porte l'année entière et déclenche la réconciliation.
+      // Le réalisé ne reçoit que les séances déjà passées, et n'annule rien.
+      const prev=await api.cesarImporter('previsionnel',toutes,dry,true)
       const real=await api.cesarImporter('realise',passees,dry)
       const b=x=>x&&x.bilan?x.bilan:x||{}
       const p=b(prev),r=b(real)
-      setBilan({titre:dry?'Essai à blanc — rien n’a été écrit':'Import effectué',lignes:[
-        ['Séances de l’année',toutes.length],
-        ['Dont déjà tenues',passees.length],
-        ['Prévisionnel — créées',p.creees||0],
-        ['Prévisionnel — mises à jour',p.mises_a_jour||0],
-        ['Prévisionnel — rejetées',p.rejetees||0],
-        ['Réalisé — créées',r.creees||0],
-        ['Réalisé — avec compte rendu',r.avec_compte_rendu||0],
-        ['Intitulés de matière nouveaux',(p.nouveaux_intitules||[]).length],
-        ['Groupes inconnus',(p.groupes_inconnus||[]).join(', ')||'aucun'],
-      ],rejets:(p.rejets||[]).slice(0,6)})
+      setBilan({
+        titre:dry?'Analyse — rien n’a été écrit':'Import effectué',
+        lignes:[
+          ['Séances dans le fichier',toutes.length],
+          ['Nouvelles',p.creees||0],
+          ['Mises à jour',p.mises_a_jour||0],
+          ['Inchangées',p.inchangees||0],
+          ['Disparues du planning → annulées',p.annulees||0],
+          ['Réapparues → replanifiées',p.reactivees||0],
+          ['Rejetées',p.rejetees||0],
+          ['Dont déjà tenues (réalisé)',passees.length],
+          ['Réalisé — avec compte rendu',r.avec_compte_rendu||0],
+          ['Intitulés de matière nouveaux',(p.nouveaux_intitules||[]).length],
+          ['Groupes à rattacher',aRattacher.join(', ')||'aucun'],
+          ['Groupes inconnus',(p.groupes_inconnus||[]).join(', ')||'aucun'],
+        ],
+        disparues:(p.disparues||[]).slice(0,8),
+        suspendue:p.reconciliation_suspendue||null,
+        rejets:(p.rejets||[]).slice(0,6),
+      })
       if(!dry){rafraichir();onFini&&onFini()}
     }catch(e){setErreur(e.message)}
     setOccupe('')
   }
-
-  const zone=(id,label,nom,quoi)=>(
-    <div onClick={()=>document.getElementById(id).click()}
-      style={{flex:1,minWidth:230,border:`2px dashed ${nom?P.borderm:P.border}`,borderRadius:12,padding:'1.1rem',
-        textAlign:'center',cursor:'pointer',background:nom?'rgba(93,226,152,0.06)':'transparent'}}>
-      <input id={id} type="file" accept=".json" style={{display:'none'}}
-        onChange={e=>e.target.files[0]&&lire(e.target.files[0],quoi)}/>
-      <div style={{fontSize:12.5,fontWeight:600,color:P.abysse}}>{label}</div>
-      <div style={{fontSize:11.5,color:nom?P.petrole:P.textm,marginTop:3}}>{nom||'Aucun fichier'}</div>
-    </div>
-  )
 
   return(
     <div className="fi">
@@ -1355,26 +1337,39 @@ function ImportCesar({onFini}){
       )}
 
       <div style={{fontSize:11,fontWeight:700,letterSpacing:'.08em',textTransform:'uppercase',color:P.textm,marginBottom:'0.5rem'}}>
-        1 · Les deux fichiers de la DSI, et la table de rattachement
+        1 · Le planning du groupe
       </div>
-      <div style={{display:'flex',gap:'0.6rem',flexWrap:'wrap',marginBottom:'0.9rem'}}>
-        {zone('f-groupes','Groupes planning (.json)',nomG,'groupes')}
-        {zone('f-seances','Séances du groupe (.json)',nomS,'seances')}
-        {zone('f-table','Table de rattachement (.json)',nomT,'table')}
+      <div onClick={()=>document.getElementById('f-planning').click()}
+        style={{border:`2px dashed ${nomS?P.borderm:P.border}`,borderRadius:12,padding:'1.4rem',
+          textAlign:'center',cursor:'pointer',background:nomS?'rgba(93,226,152,0.06)':'transparent',marginBottom:'0.9rem'}}>
+        <input id="f-planning" type="file" accept=".json" style={{display:'none'}}
+          onChange={e=>e.target.files[0]&&lire(e.target.files[0])}/>
+        <div style={{fontSize:13,fontWeight:600,color:P.abysse}}>Déposer le planning du groupe (.json)</div>
+        <div style={{fontSize:11.5,color:nomS?P.petrole:P.textm,marginTop:4}}>
+          {nomS||'Un seul fichier — l’export CESAR du groupe, séances et comptes rendus'}
+        </div>
       </div>
 
+      {apercu&&(
+        <div style={{...card(),marginBottom:'0.9rem'}}>
+          <div style={{fontSize:12.5,color:P.abysse,lineHeight:1.8}}>
+            <b>{apercu.total}</b> séance(s) · du <b>{apercu.debut}</b> au <b>{apercu.fin}</b> ·{' '}
+            <b>{apercu.avecCR}</b> avec compte rendu
+            {apercu.multi>0&&<> · <b>{apercu.multi}</b> à plusieurs formateurs</>}
+            <div style={{color:P.textm,fontSize:11.5,marginTop:4}}>
+              Groupe(s) planning : {apercu.groupes.join(' · ')||'—'}
+            </div>
+          </div>
+        </div>
+      )}
+
       <div style={{display:'flex',gap:'0.5rem',flexWrap:'wrap',marginBottom:'1.5rem'}}>
-        <button onClick={poserGroupes} disabled={!groupes||!table||!!occupe}
-          style={{background:groupes?P.surface:P.surface2,border:`1px solid ${P.border}`,borderRadius:9,
-            padding:'8px 16px',fontSize:13,fontWeight:500,opacity:groupes&&table&&!occupe?1:0.5,cursor:groupes&&table?'pointer':'not-allowed'}}>
-          {occupe==='groupes'?'Dépôt en cours…':'Déposer et rattacher les groupes'}
-        </button>
-        <button onClick={()=>importer(true)} disabled={!seances||!!occupe}
+        <button onClick={()=>lancer(true)} disabled={!seances||!!occupe}
           style={{background:P.surface,border:`1px solid ${P.border}`,borderRadius:9,padding:'8px 16px',
             fontSize:13,fontWeight:500,opacity:seances&&!occupe?1:0.5,cursor:seances?'pointer':'not-allowed'}}>
-          {occupe==='essai'?'Essai en cours…':'Essai à blanc'}
+          {occupe==='essai'?'Analyse en cours…':'Analyser — sans rien écrire'}
         </button>
-        <button onClick={()=>importer(false)} disabled={!seances||!!occupe}
+        <button onClick={()=>lancer(false)} disabled={!seances||!!occupe}
           style={{background:P.petrole,color:P.menthe,border:'none',borderRadius:9,padding:'8px 18px',
             fontSize:13,fontWeight:600,opacity:seances&&!occupe?1:0.5,cursor:seances?'pointer':'not-allowed'}}>
           {occupe==='ecriture'?'Import en cours…':'Importer'}
@@ -1395,6 +1390,33 @@ function ImportCesar({onFini}){
               <span style={{fontSize:12.5,fontWeight:600,color:P.abysse}}>{String(v)}</span>
             </div>
           ))}
+          {(bilan.suspendue||[]).length>0&&(
+            <div style={{marginTop:'0.75rem',padding:'0.7rem 0.9rem',background:P.amberbg,border:`1px solid ${P.amber}`,borderRadius:10}}>
+              <div style={{fontSize:12.5,fontWeight:600,color:'#7A4A00',marginBottom:'0.25rem'}}>Aucune annulation enregistrée</div>
+              {bilan.suspendue.map((x,i)=>(
+                <div key={i} style={{fontSize:11.5,color:'#7A4A00',lineHeight:1.6}}>
+                  {x.disparues} séance(s) sur {x.seances_en_base} manquent à ce fichier pour {x.groupe}.
+                  Par sécurité, rien n’a été annulé — un fichier partiel annulerait tout le reste du planning.
+                  Vérifiez qu’il couvre bien l’année entière du groupe.
+                </div>
+              ))}
+            </div>
+          )}
+          {(bilan.disparues||[]).length>0&&(
+            <div style={{marginTop:'0.75rem'}}>
+              <div style={{fontSize:10,fontWeight:700,letterSpacing:'.08em',textTransform:'uppercase',color:P.textm,marginBottom:'0.3rem'}}>
+                Séances qui ont disparu du planning
+              </div>
+              {bilan.disparues.map((d,i)=>(
+                <div key={i} style={{fontSize:11.5,color:'#7A4A00'}}>
+                  {d.date} — {d.matiere||'matière inconnue'}{d.intervenant?' · '+d.intervenant:''}
+                </div>
+              ))}
+              <div style={{fontSize:11,color:P.textm,marginTop:'0.3rem',lineHeight:1.6}}>
+                Une séance déplacée apparaît ici, et de nouveau dans les nouvelles séances, à sa nouvelle date.
+              </div>
+            </div>
+          )}
           {(bilan.rejets||[]).length>0&&(
             <div style={{marginTop:'0.75rem'}}>
               <div style={{fontSize:10,fontWeight:700,letterSpacing:'.08em',textTransform:'uppercase',color:P.textm,marginBottom:'0.3rem'}}>Premiers rejets</div>
@@ -1408,6 +1430,7 @@ function ImportCesar({onFini}){
     </div>
   )
 }
+
 
 /* ═══ VUE DIRECTION DES PROGRAMMES ════════════════════════════════════════ */
 function VueDir({user,onLogout}){
@@ -1717,6 +1740,7 @@ const ETATS_SEANCE={
   tenue:{label:'CR non rempli',st:'warn'},
   a_venir:{label:'À venir',st:'idle'},
   manquante:{label:'CR non rempli',st:'warn'},
+  annulee:{label:'Annulée',st:'idle'},
   nominal:{label:'Tenue · CR',st:'ok'},
   alerte:{label:'CR non rempli',st:'warn'},
 }
