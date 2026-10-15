@@ -39,6 +39,15 @@ const RACES = {};
 // pas confondre, pour une information qui ne bouge qu'une fois par an et qui
 // est deja dans le depot. Le serveur la lit donc lui-meme.
 const RATTACHEMENTS = {};
+// Les epreuves de certification d'un titre : commande, livrables, criteres
+// MyCertif, reperes de dates — lus dans referentiels/epreuves/<titre>.json,
+// extraits des guides methodologiques diffuses aux RP et aux intervenants.
+//
+// Le plan de formation dit quelles competences un module porte. Il ne dit rien
+// de ce sur quoi le candidat sera juge. Sans cette source, un digest qui
+// parlerait d'attendus d'epreuve les inventerait : c'est le seul endroit du
+// systeme ou le modele ecrirait quelque chose d'inverifiable.
+const EPREUVES = {};
 const DIAGNOSTIC = { dossier: null, essais: CHEMINS_CANDIDATS, lus: [], erreurs: [] };
 
 for (const dossier of CHEMINS_CANDIDATS) {
@@ -105,6 +114,25 @@ for (const dossier of CHEMINS_CANDIDATS) {
 // dédoublée entre deux parcours au choix suit le même enseignement.
 const SYLLABI = {};      // clé de titre -> Map('bloc§intitulé module' -> contenu)
 DIAGNOSTIC.syllabi = { dossier: null, titres: [], erreurs: [] };
+
+(function chargerEpreuves() {
+  if (!DIAGNOSTIC.dossier) return;
+  const dossier = path.join(DIAGNOSTIC.dossier, 'epreuves');
+  DIAGNOSTIC.epreuves = { dossier, titres: [], erreurs: [] };
+  let fichiers;
+  try { fichiers = fs.readdirSync(dossier).filter(f => f.endsWith('.json')); }
+  catch (_) { DIAGNOSTIC.epreuves.dossier = null; return; }
+  for (const f of fichiers) {
+    try {
+      const contenu = JSON.parse(fs.readFileSync(path.join(dossier, f), 'utf-8'));
+      const cle = String(contenu.titre || f.replace(/\.json$/, '')).toLowerCase();
+      EPREUVES[cle] = contenu;
+      DIAGNOSTIC.epreuves.titres.push({ fichier: f, titre: cle, epreuves: (contenu.epreuves || []).length });
+    } catch (e) {
+      DIAGNOSTIC.epreuves.erreurs.push({ fichier: f, raison: e.message });
+    }
+  }
+})();
 
 (function chargerSyllabi() {
   if (!DIAGNOSTIC.dossier) return;
@@ -501,4 +529,4 @@ function versFormatApplication(ref) {
   };
 }
 
-module.exports = { REFERENTIELS, RACES, SYLLABI, FAMILLES, RATTACHEMENTS, versFormatApplication, DIAGNOSTIC };
+module.exports = { REFERENTIELS, RACES, SYLLABI, FAMILLES, RATTACHEMENTS, EPREUVES, versFormatApplication, DIAGNOSTIC };
