@@ -22,6 +22,12 @@
   "functions": {
     "api/formations.js": {
       "includeFiles": "referentiels/**"
+    },
+    "api/fr.js": {
+      "includeFiles": "referentiels/**"
+    },
+    "api/cesar-sync.js": {
+      "includeFiles": "referentiels/**"
     }
   }
 }
