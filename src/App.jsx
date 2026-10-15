@@ -3131,6 +3131,10 @@ function DigestPreview({digest,titre,campus,fr,onValiderEnvoyer,readOnly=false})
   const quiAEnseigne=c.qui_a_enseigne||[]
   const coordination=c.coordination||[]
   const sequencesAVenir=c.sequences_a_venir||[]
+  /* Ancrage certification : ce que les séances du mois préparent. La section
+     ne s'affiche que si le titre a un référentiel d'épreuves — sans lui, il n'y
+     aurait rien d'autre à écrire qu'une approximation. */
+  const certification=(c.certification||{}).competences||[]
   const kpis=c.kpis||{intervenants:0,seances:0,heures:0,coordination:coordination.length}
   const periodeLabel=c.periode?.label||''
   const sectStyle={padding:'1.25rem 1.75rem',borderBottom:'1px solid rgba(255,255,255,0.06)',background:D.abysse}
@@ -3210,6 +3214,26 @@ function DigestPreview({digest,titre,campus,fr,onValiderEnvoyer,readOnly=false})
             </div>
           ))}
         </div>
+
+        {certification.length>0&&(
+          <div style={sectStyle}>
+            <div style={labelStyle}>Ce que ça prépare — compétences et épreuves</div>
+            {certification.map((k,i)=>(
+              <div key={i} style={{padding:'0.6rem 0',borderBottom:'1px solid rgba(255,255,255,0.04)'}}>
+                <div style={itTitle}>{[k.code,k.libelle].filter(Boolean).join(' — ')}</div>
+                {k.epreuve_nom&&(
+                  <div style={{fontSize:10,letterSpacing:'0.06em',textTransform:'uppercase',color:D.menthe,margin:'3px 0 6px'}}>
+                    {k.epreuve_nom}{k.echeance?` · ${k.echeance}`:''}
+                  </div>
+                )}
+                {k.assimile&&<div style={{fontSize:12,color:'rgba(255,255,255,0.55)',lineHeight:1.65,marginBottom:6}}>{k.assimile}</div>}
+                {k.attendu&&(
+                  <div style={{fontSize:12,color:'rgba(255,255,255,0.78)',lineHeight:1.65,borderLeft:`2px solid ${D.saumon}`,paddingLeft:'0.6rem'}}>{k.attendu}</div>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
 
         <div style={sectStyle}>
           <div style={labelStyle}>Point de coordination — {fr}, FR</div>
