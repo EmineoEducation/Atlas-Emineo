@@ -207,12 +207,19 @@ function calculerQuiAEnseigne(declarationsPeriode, idxBlocs) {
 // ── 1. Journal des seances ─────────────────────────────────────────────────
 //
 // Quatre etats, tous factuels. Aucun ne porte de jugement sur le contenu :
-//   tenue_cr   seance emargee, compte rendu present
-//   tenue      seance emargee, sans compte rendu
+//   tenue_cr   seance passee, compte rendu present
+//   tenue      seance passee, reprise a l'import, sans compte rendu
 //   a_venir    seance programmee, date encore devant nous
-//   manquante  seance programmee, date passee, aucun emargement
+//   manquante  seance programmee, date passee, pas encore reprise a l'import
 //
-// Seul `manquante` est un signal. C'est le seul que l'emargement produise
+// Depuis le 15/10/2026, `tenue` et `manquante` s'affichent sous un seul
+// libelle, « CR non rempli ». L'export CESAR unifie ne porte aucun champ
+// d'emargement : le compte rendu est le seul signal qu'une seance ait eu lieu,
+// et la difference entre les deux etats ne tient qu'a la date du dernier
+// import. Les noms d'etat restent distincts ici — ils redeviendront deux
+// signaux le jour ou la DSI expose la presence.
+//
+// Seul l'absence de compte rendu est un signal. C'est le seul que l'emargement produise
 // honnetement au grain de la seance : soit le cours n'a pas eu lieu, soit il
 // n'a pas ete emarge, et dans les deux cas quelqu'un doit le savoir.
 //
@@ -260,12 +267,12 @@ function calculerJournal(prevRows, declRows, arreteAu) {
     if (d) {
       const cr = String(d.compte_rendu || '').trim();
       return { ...base, etat: cr ? 'tenue_cr' : 'tenue', compte_rendu: cr,
-        detail: cr ? 'Séance tenue, compte rendu saisi.' : 'Séance tenue, aucun compte rendu saisi.' };
+        detail: cr ? 'Séance tenue, compte rendu saisi.' : "Séance passée, aucun compte rendu n'est remonté de CESAR." };
     }
     const passee = p.date_prevue && new Date(p.date_prevue).getTime() < limite;
     return passee
       ? { ...base, etat: 'manquante', compte_rendu: '',
-          detail: 'Séance programmée à une date passée, sans émargement.' }
+          detail: "Séance passée, aucun compte rendu n'est remonté de CESAR." }
       : { ...base, etat: 'a_venir', compte_rendu: '', detail: 'Séance programmée, à venir.' };
   });
 
