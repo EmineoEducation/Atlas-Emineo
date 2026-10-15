@@ -1714,12 +1714,21 @@ function normCode(c){ return String(c||'').toUpperCase().replace(/[^A-Z0-9]/g,''
    ou un digest déjà généré finisse de s'écouler. */
 const ETATS_SEANCE={
   tenue_cr:{label:'Tenue · CR',st:'ok'},
-  tenue:{label:'Tenue',st:'ok'},
+  tenue:{label:'CR non rempli',st:'warn'},
   a_venir:{label:'À venir',st:'idle'},
-  manquante:{label:'Non émargée',st:'warn'},
-  nominal:{label:'Tenue',st:'ok'},
-  alerte:{label:'Non émargée',st:'warn'},
+  manquante:{label:'CR non rempli',st:'warn'},
+  nominal:{label:'Tenue · CR',st:'ok'},
+  alerte:{label:'CR non rempli',st:'warn'},
 }
+/* Pourquoi `tenue` et `manquante` portent le MÊME libellé depuis le
+   15/10/2026. L'export CESAR unifié (planning.json) ne contient aucun champ
+   d'émargement : le compte rendu est le seul signal qu'une séance ait eu lieu.
+   Les deux états décrivent donc le même fait — un créneau passé sans compte
+   rendu — et leur différence ne tient qu'à la date du dernier import, pas à la
+   séance. Les distinguer à l'écran laissait croire à une information que
+   l'Atlas n'a pas. « Non émargée » était en outre faux : la séance a presque
+   toujours eu lieu, c'est le compte rendu qui manque. Si la DSI ajoute un jour
+   un champ de présence, les deux états se rouvrent ici même. */
 function etatLabel(etat){ return (ETATS_SEANCE[etat]||{}).label||'—' }
 function etatSt(etat){ return (ETATS_SEANCE[etat]||{}).st||'idle' }
 
@@ -2407,7 +2416,7 @@ function VueIntervenant({user,onLogout}){
       meta: deploy ? mods.length+' module(s) · '+mods.reduce((n,m)=>n+(m.competences_liees||[]).length,0)+' compétence(s)' : mods.length+' module(s) prévu(s)',
       modules: mods.map(m=>{
         const seancesM = journal.filter(j=>memeModule(j.module_ref,m))
-        const manquantes = seancesM.filter(j=>j.etat==='manquante').length
+        const sansCR = seancesM.filter(j=>j.etat==='manquante'||j.etat==='tenue').length
         const faites = seancesM.filter(j=>j.etat==='tenue'||j.etat==='tenue_cr').length
         const competences = (b.competences||[]).filter(c=>(m.competences_liees||[]).some(cl=>norm(cl)===norm(c.id))).map(c=>{
           const etat = (compParCode[norm(c.id)]||{}).etat || (couvertes.has(norm(c.id))?'couverte':'programmee')
@@ -2415,8 +2424,8 @@ function VueIntervenant({user,onLogout}){
         })
         return {
           id:m.id, titre:m.titre, meta: seancesM.length+' séance(s) ce mois-ci',
-          etat: manquantes?'Séance non émargée':(faites?'En cours':'Planifié'),
-          st: manquantes?'warn':(faites?'ok':'idle'),
+          etat: sansCR?'CR non rempli':(faites?'En cours':'Planifié'),
+          st: sansCR?'warn':(faites?'ok':'idle'),
           competences,
           seances: seancesM.map(j=>({date:fmtCourt(j.date_seance||j.date_prevue), titre:j.titre,
             etat: etatLabel(j.etat), st: etatSt(j.etat), data:j})),
@@ -2452,8 +2461,8 @@ function VueIntervenant({user,onLogout}){
         lignes:[{k:'État',v:s.etat,warn:s.st==='warn'},
                 {k:'Durée',v:s.data?.duree_minutes?Math.round(s.data.duree_minutes/60*10)/10+' h':'—'}],
         texte:s.data?.compte_rendu||'', texteLabel:'Compte rendu de séance',
-        alerte: s.data?.etat==='manquante'
-          ? {titre:'Séance non émargée',txt:"Le créneau est passé et aucun émargement ne lui correspond."}
+        alerte: (s.data?.etat==='manquante'||s.data?.etat==='tenue')
+          ? {titre:'CR non rempli',txt:"Le créneau est passé et aucun compte rendu n'est remonté de CESAR."}
           : null, key:'seance'+sel.id}
     }
     return {kind:'Mes modules', st:'ok', titre, desc:'Sélectionnez un module, une compétence ou une séance.', lignes:[], key:'root'}
@@ -2466,13 +2475,13 @@ function VueIntervenant({user,onLogout}){
 
   const nbMod=arbre.reduce((n,b)=>n+b.modules.length,0)
   const nbComp=arbre.reduce((n,b)=>n+b.modules.reduce((m,mo)=>m+mo.competences.length,0),0)
-  const nbNonEmargeesInt=journal.filter(j=>j.etat==='manquante').length
+  const nbSansCRInt=journal.filter(j=>j.etat==='manquante'||j.etat==='tenue').length
   const nbTenuesInt=journal.filter(j=>j.etat==='tenue'||j.etat==='tenue_cr').length
   const stats = temps==='digest'
     ? [{k:'statut',v:digest?.statut==='envoye'?'Envoyé':'En attente'}]
     : temps==='plan'
       ? [{k:'modules',v:String(nbMod)},{k:'compétences',v:String(nbComp)}]
-      : [{k:'séances tenues',v:String(nbTenuesInt)},{k:'non émargées',v:String(nbNonEmargeesInt),warn:nbNonEmargeesInt>0}]
+      : [{k:'séances tenues',v:String(nbTenuesInt)},{k:'CR non remplis',v:String(nbSansCRInt),warn:nbSansCRInt>0}]
 
   const pageTitles={
     plan:['Mes modules, tels qu\u2019ils sont prévus',"Vos blocs, modules et compétences associées — l\u2019arborescence est dépliée sur la page, rien n\u2019est caché derrière un clic."],
@@ -2653,7 +2662,7 @@ function VueFR({user,onLogout,onRetour}){
   }
   const estClasse = s => !!(s.arbitrage && s.arbitrage.decision==='classe')
 
-  const nonEmargees = journal.filter(j=>j.etat==='manquante')
+  const sansCR = journal.filter(j=>j.etat==='manquante'||j.etat==='tenue')
   const tenues = journal.filter(j=>j.etat==='tenue'||j.etat==='tenue_cr')
   const jamaisProgrammes = distorsions.filter(d=>d.etat==='jamais_programme')
   const ecartsVolume = distorsions.filter(d=>d.etat!=='jamais_programme')
@@ -2733,7 +2742,7 @@ function VueFR({user,onLogout,onRetour}){
       meta: deploy ? mods.length+' module(s) · '+(b.competences||[]).length+' compétence(s)' : mods.length+' module(s) prévu(s)',
       modules: mods.map(m=>{
         const seancesM = seancesJournal.filter(s=>cleModule(s.module_ref)===cleModule(m.titre)||cleModule(s.module_ref)===cleModule(m.id))
-        const manquantes = seancesM.filter(s=>s.etat==='manquante').length
+        const sansCRm = seancesM.filter(s=>s.etat==='manquante'||s.etat==='tenue').length
         const faites = seancesM.filter(s=>s.etat==='tenue'||s.etat==='tenue_cr').length
         const comps = (b.competences||[])
           .filter(c=>(m.competences_liees||[]).some(cl=>normCode(cl)===normCode(c.id)))
@@ -2743,8 +2752,8 @@ function VueFR({user,onLogout,onRetour}){
           })
         return {
           id:m.id, titre:m.titre, meta: seancesM.length+' séance(s) ce mois-ci',
-          etat: manquantes?'Séance non émargée':(faites?'En cours':'Planifié'),
-          st: manquantes?'warn':(faites?'ok':'idle'),
+          etat: sansCRm?'CR non rempli':(faites?'En cours':'Planifié'),
+          st: sansCRm?'warn':(faites?'ok':'idle'),
           competences: comps,
           seances: seancesM.map(s=>({date:s.dateAffichee, titre:s.titre, etat:s.etatLabel, st:s.st, data:s})),
         }
@@ -2761,7 +2770,7 @@ function VueFR({user,onLogout,onRetour}){
         lignes:[
           {k:'Statut',v:digest?.statut==='envoye'?'Envoyé':digest?'Prêt à valider':'Non généré', warn:digest?.statut!=='envoye'},
           {k:'Redites citées',v:String(redites.length),warn:redites.length>0},
-          {k:'Séances non émargées',v:String(nonEmargees.length),warn:nonEmargees.length>0},
+          {k:'CR non remplis',v:String(sansCR.length),warn:sansCR.length>0},
         ], key:'digest'}
     }
     if(sel.kind==='bloc'){
@@ -2796,8 +2805,8 @@ function VueFR({user,onLogout,onRetour}){
           {k:'Durée',v:s.duree_minutes?Math.round(s.duree_minutes/60*10)/10+' h':'—'},
           {k:'État',v:s.etatLabel||'—',warn:s.st==='warn'},
         ],
-        alerte: s.etat==='manquante'
-          ? {titre:'Séance non émargée', txt:"Le créneau est passé et aucun émargement ne lui correspond : soit le cours n'a pas eu lieu, soit il n'a pas été saisi."}
+        alerte: (s.etat==='manquante'||s.etat==='tenue')
+          ? {titre:'CR non rempli', txt:"Le créneau est passé et aucun compte rendu n'est remonté de CESAR. L'Atlas ne sait pas dire si la séance a eu lieu : il n'a que le compte rendu pour le savoir."}
           : s.hors_previsionnel
             ? {titre:'Hors prévisionnel', txt:"Séance émargée sans créneau correspondant au plan. Souvent un intitulé de matière arbitré après l'import."}
             : null,
@@ -2877,7 +2886,7 @@ function VueFR({user,onLogout,onRetour}){
            {k:'compétences',v:String(blocs.reduce((n,b)=>n+b.comp,0))},
            {k:'sans créneau',v:String(compAbsentes.length),warn:compAbsentes.length>0}]
         : [{k:'séances tenues',v:String(tenues.length)},
-           {k:'non émargées',v:String(nonEmargees.length),warn:nonEmargees.length>0},
+           {k:'CR non remplis',v:String(sansCR.length),warn:sansCR.length>0},
            {k:'signaux',v:String(nbSignaux),warn:nbSignaux>0}]
 
   const pageTitlesFR = {
@@ -2894,7 +2903,7 @@ function VueFR({user,onLogout,onRetour}){
   const roleLabelHeader = viewRole==='intervenant' ? 'Aperçu intervenant' : 'Formateur référent'
 
   const footerRail = deploy
-    ? `${nbSignaux} signal${nbSignaux>1?'aux':''} à arbitrer${nonEmargees.length?` · ${nonEmargees.length} séance${nonEmargees.length>1?'s':''} non émargée${nonEmargees.length>1?'s':''}`:''}`
+    ? `${nbSignaux} signal${nbSignaux>1?'aux':''} à arbitrer${sansCR.length?` · ${sansCR.length} CR non rempli${sansCR.length>1?'s':''}`:''}`
     : (()=>{ const n=jamaisProgrammes.filter(d=>!d.arbitrage).length
         const opt=blocsHorsParcours.length?` · ${blocsHorsParcours.length} option non suivie`:''
         return `${compAbsentes.length} compétence${compAbsentes.length>1?'s':''} sans créneau${n?` · ${n} module${n>1?'s':''} jamais programmé${n>1?'s':''}`:''}${opt}` })()
