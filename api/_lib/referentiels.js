@@ -32,6 +32,13 @@ const CHEMINS_CANDIDATS = [
 
 const REFERENTIELS = {};
 const RACES = {};
+// Table de rattachement groupe planning -> titre, versionnee dans le depot
+// (referentiels/groupes-planning-<campus>.json, produite par l'outil de
+// rattachement et relue a la main). Elle etait auparavant deposee a la main a
+// chaque import, en meme temps que l'export CESAR : deux fichiers de plus a ne
+// pas confondre, pour une information qui ne bouge qu'une fois par an et qui
+// est deja dans le depot. Le serveur la lit donc lui-meme.
+const RATTACHEMENTS = {};
 const DIAGNOSTIC = { dossier: null, essais: CHEMINS_CANDIDATS, lus: [], erreurs: [] };
 
 for (const dossier of CHEMINS_CANDIDATS) {
@@ -52,6 +59,21 @@ for (const dossier of CHEMINS_CANDIDATS) {
         Object.defineProperty(contenu, '_cle', { value: cle, enumerable: false });
         REFERENTIELS[cle] = contenu;
         DIAGNOSTIC.lus.push({ fichier: f, type: 'titre', promotion: contenu.formation.titre_court });
+      } else if (Array.isArray(contenu.groupes)) {
+        for (const g of contenu.groupes) {
+          const code = g && String(g.code_cesar || '').trim();
+          if (!code) continue;
+          RATTACHEMENTS[code] = {
+            code_cesar: code,
+            titre_court: String(g.titre_court || ''),
+            promotion: String(g.promotion || ''),
+            campus: String(g.campus || contenu.campus || ''),
+            groupe_formation: String(g.libelle_cesar_formation || ''),
+            statut: String(g.statut || ''),
+            sous_groupes: Array.isArray(g.sous_groupes) ? g.sous_groupes : [],
+          };
+        }
+        DIAGNOSTIC.lus.push({ fichier: f, type: 'rattachement', groupes: contenu.groupes.length });
       } else {
         DIAGNOSTIC.erreurs.push({ fichier: f, raison: 'ni RACE ni référentiel de titre' });
       }
@@ -479,4 +501,4 @@ function versFormatApplication(ref) {
   };
 }
 
-module.exports = { REFERENTIELS, RACES, SYLLABI, FAMILLES, versFormatApplication, DIAGNOSTIC };
+module.exports = { REFERENTIELS, RACES, SYLLABI, FAMILLES, RATTACHEMENTS, versFormatApplication, DIAGNOSTIC };
