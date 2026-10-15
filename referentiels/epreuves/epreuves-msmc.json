@@ -1,0 +1,675 @@
+{
+  "titre": "MSMC",
+  "titre_long": "Manager des stratégies marketing et communication",
+  "rncp": "38504",
+  "certificateur": "Mediaschool",
+  "genere_le": "2026-10-15",
+  "source": "Guides méthodologiques à l'attention des RP et des intervenants — éminéo, documents internes",
+  "note_codes": "Deux nomenclatures coexistent. Les guides et la grille MyCertif numérotent C01.1 à C06.3. Le RACE, les plans de formation et les intitulés de matière CESAR numérotent C.1 à C.22. La correspondance est positionnelle et confirmée par les guides eux-mêmes (critère ⊕ de C01.3 rattaché au RACE C.3 ; critère ⊕ de C03.7 rattaché au RACE C.19).",
+  "rattachement_promotions": {
+    "m1-msmc": "2026-2028",
+    "m2-msmc": "2025-2027"
+  },
+  "rattachement_specialite": {
+    "CREA": "BC06",
+    "MARQUE": "BC05",
+    "note": "La spécialité se lit dans le code du groupe planning CESAR : MSMC 5-27 CREA → BC06 (PPC), MSMC 5-27 MARQUE → BC05 (PPI). Un candidat ne passe qu'un seul bloc de spécialité."
+  },
+  "regle_titre": "Le titre exige la validation cumulative des blocs 1, 2 et 3 et d'un seul bloc de spécialité (BC05 ou BC06).",
+  "regle_evaluation": {
+    "degres": [
+      "Insuffisante — le livrable ne répond pas du tout au critère, voire ne peut pas être évalué.",
+      "Moyenne — le livrable répond partiellement au critère, incomplet.",
+      "Haute — le livrable répond totalement au critère.",
+      "Maximale — le livrable répond totalement au critère et correspond au niveau attendu supérieur."
+    ],
+    "agregation": "Compétence non acquise si plus de 50 % de ses critères évalués sont « Insuffisante », acquise sinon. Bloc validé si plus de 50 % de ses compétences sont acquises. Un attendu non réalisé, alors que le sujet et les moyens permettaient de le couvrir, est évalué par défaut en « Insuffisante ». Ni note chiffrée, ni moyenne.",
+    "non_mobilisee": "Une compétence peut être portée « non mobilisée » — exemptée pour situation de handicap, sur décision du certificateur : elle n'entre alors dans aucun décompte.",
+    "ecrit_et_oral": "Une seule grille couvre l'écrit et l'oral. L'écrit est renseigné en premier, puis revu lors de la soutenance dans une logique de revalorisation.",
+    "depot": "MyCertif, accompagné par le RP campus. Remise des livrables au jury au moins une semaine avant l'oral."
+  },
+
+  "epreuves": [
+    {
+      "code": "BC01",
+      "nom": "Pack Marque",
+      "bloc_referentiel": "Bloc 1",
+      "bloc_race": "B1",
+      "statut": "tronc commun",
+      "annee": "M1",
+      "poids": "100 % du bloc",
+      "modalite": "Étude de cas · travail individuel · deux écrits et un oral",
+      "intitule_bloc": "Diagnostiquer le positionnement et la proposition de valeur distinctive de la marque",
+      "competences": [
+        {
+          "code_mycertif": "C01.1",
+          "code_race": "C.1",
+          "libelle": "Organiser un système de veille stratégique sur l'environnement de la marque",
+          "enonce": "Organiser un système de veille stratégique sur l'environnement de la marque, afin de disposer des informations concernant les évolutions touchant aux technologies, à la règlementation, aux tendances socio-comportementales et aux pratiques de communication.",
+          "criteres": [
+            "Les différents périmètres de la veille opérée sont clairement délimités et en adéquation avec les enjeux (économiques, technologiques, sociaux, sociétaux, règlementaires…) de la marque.",
+            "Les sources d'information exploitées sont garantes de données fiables, complémentaires et actualisées.",
+            "La sélection des informations est justifiée au regard de leur intérêt et de leur portée.",
+            "Les outils de collecte, voire d'automatisation de la collecte, d'information sont présentés et leur gain d'optimisation démontré."
+          ]
+        },
+        {
+          "code_mycertif": "C01.2",
+          "code_race": "C.2",
+          "libelle": "Évaluer l'impact des tendances repérées dans l'environnement de la marque",
+          "enonce": "Évaluer l'impact des tendances repérées dans l'environnement de la marque, afin de qualifier leur potentiel d'opportunité ou de risque et de déterminer leurs modalités de prise en compte pour la marque concernant son positionnement, son offre produits/services et sa stratégie de communication.",
+          "criteres": [
+            "Le schéma de diffusion de la veille (émetteur, récepteur, format de partage) est cohérent et permet de rationnaliser la transmission de l'information.",
+            "Le produit de la veille opérée restitue de façon claire et synthétique les tendances environnementales, les qualifie et les hiérarchise.",
+            "Les gisements d'opportunité et facteurs de risque portés par l'environnement de la marque sont mis en exergue.",
+            "La formalisation de la veille respecte les standards professionnels et permet une consultation commode et utile."
+          ]
+        },
+        {
+          "code_mycertif": "C01.3",
+          "code_race": "C.3",
+          "libelle": "Piloter la réalisation d'études qualitatives et quantitatives",
+          "enonce": "Piloter la réalisation d'études qualitatives et quantitatives associant l'exploitation de données massives internes ou externes, en définissant leur objet, périmètre, cadre méthodologique et objectifs, afin de disposer des éléments d'analyse fiables et objectifs nécessaires à la prise de décision stratégique de la marque.",
+          "criteres": [
+            "Les études conduites sont problématisées, en cohérence avec les objectifs et enjeux marketing et communication de la marque.",
+            "L'objet d'études conduites est clairement défini.",
+            "Le plan de recherche des études conduites est réaliste et adapté au regard du temps et des moyens à disposition.",
+            "Le choix de la nature et du type d'études à mener est justifié au regard des objectifs poursuivis.",
+            "⊕ Le choix des méthodologies d'étude retenues est cohérent et justifié."
+          ],
+          "note": "Le critère ⊕ est absent de la grille MyCertif ; il a été réintégré par arbitrage, au titre du RACE (C.3)."
+        },
+        {
+          "code_mycertif": "C01.4",
+          "code_race": "C.4",
+          "libelle": "Interpréter les résultats des études produites",
+          "enonce": "Interpréter les résultats des études produites, en mobilisant les méthodes, matrices et modèles d'analyse adéquats, afin de préconiser les orientations présidant à l'élaboration et/ou à l'amélioration de la stratégie marketing de la marque au regard de son marché et des attentes et aspirations évolutives de son public cible, incluant les dimensions éthiques, sociétales et environnementales.",
+          "criteres": [
+            "Les données à mobiliser, en interne ou externe, sont identifiées au regard de leur intérêt compte tenu des problématiques posées.",
+            "Les modalités d'acquisition et de traitement des données sont présentées.",
+            "Les analyses opérées permettent de qualifier le positionnement de la marque sur son marché, d'évaluer la concurrence et de définir les principaux insights de sa cible."
+          ]
+        },
+        {
+          "code_mycertif": "C01.5",
+          "code_race": "C.5",
+          "libelle": "Analyser le positionnement et l'identité de la marque",
+          "enonce": "Analyser le positionnement et l'identité de la marque, en s'appuyant sur une méthode d'investigation associant matériaux documentaires, entretiens, ateliers ou observations directes et engageant une démarche collaborative associant ses parties prenantes internes, afin d'identifier ses caractères distinctifs.",
+          "criteres": [
+            "La méthode d'investigation sur l'environnement interne de la marque est présentée et justifiée au regard du contexte, des objectifs poursuivis et des moyens à disposition.",
+            "La vision de la marque est correctement restituée et son identité singulière est définie.",
+            "Les valeurs, incluant les dimensions sociétales et environnementales, véhiculées et défendues par la marque sont identifiées."
+          ]
+        },
+        {
+          "code_mycertif": "C01.6",
+          "code_race": "C.6",
+          "libelle": "Clarifier le positionnement et la proposition de valeur de la marque",
+          "enonce": "Clarifier le positionnement et la proposition de valeur de la marque incluant ses engagements sur les plans éthique, sociétal et environnemental, en définissant ses caractères distinctifs et avantages concurrentiels au regard de son offre produit/service et son public cible, afin d'élaborer la plateforme de marque constituant le référentiel de sa stratégie marketing et communication.",
+          "criteres": [
+            "Le rôle de la marque et, le cas échéant, sa raison d'être sont correctement retranscrits.",
+            "Les atouts et éléments différenciants de la marque dans son secteur sont établis de façon exhaustive.",
+            "Les caractères distinctifs de la marque sont identifiés et valorisés.",
+            "Les cibles de la marque sont définies et caractérisées, selon leurs diversités, profils et attentes.",
+            "La présentation de la plateforme de marque est claire et emporte l'adhésion de ses destinataires."
+          ]
+        }
+      ],
+      "declinaisons": {
+        "2026-2028": {
+          "commande": "Le candidat conduit, sur une marque de son choix validée par le formateur, un travail complet de diagnostic. Il organise un système de veille stratégique sur l'environnement de la marque et en consigne les résultats dans une note de synthèse. Il pilote ensuite des études qualitatives et quantitatives sur son marché et son public cible, conduit une démarche d'investigation sur son environnement interne, et élabore la plateforme de marque constituant le référentiel de sa stratégie marketing et communication. Deux écrits déclarés, un seul jalon : la note de synthèse porte C01.1 et C01.2, la plateforme de marque porte C01.3 à C01.6.",
+          "reperes": {
+            "lancement": "Janvier 2027 — choix de la marque validé par le formateur",
+            "rendu": "Fin mai / début juin 2027",
+            "oral": "Début juillet 2027 — 30 min par candidat (15 min de présentation + 15 min de questions)"
+          },
+          "livrables": [
+            {
+              "intitule": "Écrit 1 — Note de synthèse sur les évolutions et tendances de l'environnement d'une marque ciblée",
+              "cadre": "Individuel, hors les murs · production 3 à 6 mois · ≈ 15 pages (indicatif) · porte C01.1 et C01.2",
+              "contenu": [
+                "Présentation de la marque et problématique de veille.",
+                "Méthodologie de veille : périmètres délimités et justifiés, sources et fiabilité, outils de collecte et d'automatisation avec démonstration du gain obtenu.",
+                "Schéma de diffusion de la veille : émetteur, récepteur, format de partage.",
+                "Synthèse des tendances environnementales, qualifiées et hiérarchisées.",
+                "Gisements d'opportunité et facteurs de risque pour la marque.",
+                "Conclusion et transition vers la plateforme de marque."
+              ]
+            },
+            {
+              "intitule": "Écrit 2 — Plateforme de marque conçue à partir d'études sur son marché et d'une démarche d'investigation sur son environnement interne",
+              "cadre": "Individuel, hors les murs · production 4 mois · ≈ 25 pages annexes comprises (indicatif) · porte C01.3 à C01.6",
+              "contenu": [
+                "Méthodologie obligatoire : études documentaires, études terrain (entretiens, quanti, quali, observations in situ), démarche d'investigation interne associant les parties prenantes, tests des recommandations auprès de consommateurs. La démarche s'appuie nécessairement et pour partie sur des données acquises et traitées de façon digitale.",
+                "Diagnostic interne : ADN, identité, vision, offre, stratégie actuelle, valeurs incluant les dimensions sociétales et environnementales.",
+                "Diagnostic externe : marché, concurrence, publics, résultats des études terrain, modalités d'acquisition et de traitement des données.",
+                "Plateforme de marque : rôle et raison d'être, vision, mission, promesse, valeurs incluant la RSE, positionnement, caractères distinctifs, avantages concurrentiels, cibles, personnalité.",
+                "Recommandations stratégiques et restitution des tests conduits auprès des consommateurs.",
+                "Restitution des études conduites : la plateforme de marque est un document concis, elle ne tient pas lieu de restitution."
+              ]
+            }
+          ],
+          "vigilance": [
+            "Deux écrits déclarés, un seul jalon. Ne produire qu'un des deux écrits rend ineffective la moitié des critères du bloc, sans compensation possible.",
+            "Choix de la marque à valider par le formateur au lancement. Une marque ne peut être retenue qu'une fois par promotion : le travail est strictement individuel.",
+            "Un dossier exclusivement documentaire rend ineffectifs la plupart des critères de C01.3 et C01.4. Les études terrain et les tests consommateurs sont la valeur ajoutée scrutée par le jury.",
+            "Tracer les outils de veille : le critère porte sur les outils de collecte et d'automatisation et sur le gain démontré, pas sur la seule liste des sources."
+          ],
+          "hors_criteres": [
+            "Les tests des recommandations auprès de consommateurs : exigés par la commande, restitués dans l'écrit 2, ils nourrissent le dernier critère de C01.6 sans faire l'objet d'un critère propre.",
+            "Le support de présentation de l'oral."
+          ]
+        }
+      }
+    },
+
+    {
+      "code": "BC02",
+      "nom": "Mégaka",
+      "bloc_referentiel": "Bloc 2",
+      "bloc_race": "B2",
+      "statut": "tronc commun",
+      "annee": "M1",
+      "poids": "100 % du bloc",
+      "modalite": "Étude de cas · travail individuel · un écrit hors les murs et un oral",
+      "intitule_bloc": "Élaborer une stratégie marketing communication alignée avec les valeurs de la marque",
+      "competences": [
+        {
+          "code_mycertif": "C02.1",
+          "code_race": "C.7",
+          "libelle": "Fixer les objectifs assignés à la stratégie marketing communication",
+          "enonce": "Fixer les objectifs assignés à la stratégie marketing communication sur les plans qualitatifs et quantitatifs (notoriété, génération de leads ou de vente…), en précisant leur nature et en prenant en considération les projets de développement de l'entreprise et les opportunités portées par son marché, afin de disposer de repères spécifiques, mesurables, réalistes, pertinents et limités dans le temps pour cadrer son pilotage et son évaluation.",
+          "criteres": [
+            "Les orientations sous-tendant la stratégie proposée s'appuient de façon cohérente sur le diagnostic marketing de la marque.",
+            "Les orientations sous-tendant la stratégie proposée s'appuient de façon cohérente sur la politique et les objectifs de développement de la marque.",
+            "Les orientations sous-tendant la stratégie proposée s'appuient de façon cohérente sur les évènements et facteurs internes/externes à venir et leurs impacts potentiels.",
+            "Les orientations sous-tendant la stratégie proposée s'appuient de façon cohérente sur les évolutions des modes de communication et des insights consommateurs.",
+            "Les objectifs poursuivis sont établis selon une méthode éprouvée (par exemple SMART)."
+          ]
+        },
+        {
+          "code_mycertif": "C02.2",
+          "code_race": "C.8",
+          "libelle": "Déterminer le cœur de cible et les cibles secondaires",
+          "enonce": "Déterminer le cœur de cible et les cibles secondaires de la marque, en les caractérisant selon des critères descriptifs, socio-comportementaux, intentionnistes et affinitaires, et en établissant la segmentation de son marché, afin de définir une approche adaptée – voire personnalisée – pour chacune d'elles.",
+          "criteres": [
+            "Les cibles de la stratégie sont définies, caractérisées et hiérarchisées, en s'appuyant sur une segmentation du marché.",
+            "Les orientations stratégiques tiennent compte et valorisent la proposition et l'engagement de la marque, notamment sur le plan sociétal et environnemental (RSE).",
+            "Les orientations stratégiques répondent de façon adéquate, voire anticipée, aux enjeux sociétaux, sociaux, économiques et environnementaux repérés."
+          ]
+        },
+        {
+          "code_mycertif": "C02.3",
+          "code_race": "C.9",
+          "libelle": "Définir les axes de communication à privilégier",
+          "enonce": "Définir le ou les axe(s) de communication à privilégier exprimant la proposition de valeur de la marque et déclinant ses engagements sur le plan de la RSE, en s'assurant de leur adaptation à son public et à ses attentes et aspirations, afin de favoriser son adhésion et son engagement.",
+          "criteres": [
+            "Les cibles de la stratégie sont définies, caractérisées et hiérarchisées, en s'appuyant sur une segmentation du marché.",
+            "Le ou les axes de communication expriment de façon convaincante la proposition de la marque, sont adaptés au public ciblé et sont porteurs d'adhésion et d'engagement."
+          ],
+          "note": "Le premier critère reprend mot pour mot le premier critère de C02.2 : les cibles sont évaluées deux fois. La grille est reproduite en l'état ; le point relève d'un arbitrage avec le certificateur."
+        },
+        {
+          "code_mycertif": "C02.4",
+          "code_race": "C.10",
+          "libelle": "Choisir les canaux et modalités selon une approche omnicanal",
+          "enonce": "Choisir les canaux, modalités de communication et outils associés selon une approche omnicanal et favorisant l'exploitation des nouvelles technologies, en s'appuyant sur l'analyse et la prise en compte des usages du public cible et de ses points de contact avec la marque, afin de toucher de façon efficiente son public cible.",
+          "criteres": [
+            "Les canaux et modalités d'adresse au public cible sont choisis dans une logique omnicanal réfléchie.",
+            "Les canaux et modalités d'adresse au public cible intègrent les possibilités renouvelées offertes par les technologies en matière de formats et de personnalisation."
+          ]
+        },
+        {
+          "code_mycertif": "C02.5",
+          "code_race": "C.11",
+          "libelle": "Évaluer l'opportunité et l'intérêt des actions (ROI)",
+          "enonce": "Évaluer l'opportunité et l'intérêt des actions déclinant la stratégie marketing communication, en produisant l'estimation de leur ROI et en tenant compte des objectifs poursuivis, afin de déterminer lesquelles choisir.",
+          "criteres": [
+            "Le choix des actions déclinant la stratégie est rationnel et justifié par la démonstration de leur pertinence (ROI).",
+            "Les moyens financiers nécessaires au déploiement de la stratégie sont correctement évalués, sur le fondement d'une identification exhaustive et d'une mesure juste des coûts générés.",
+            "Les actions potentielles déclinant la stratégie proposée sont évaluées au regard de leur coût et de leurs bénéfices escomptés."
+          ]
+        },
+        {
+          "code_mycertif": "C02.6",
+          "code_race": "C.12",
+          "libelle": "Établir la projection financière de la stratégie",
+          "enonce": "Établir la projection financière de la stratégie marketing communication à conduire, en estimant le coût global des différentes actions associées, afin de négocier avec sa direction l'allocation de moyens suffisants pour sa mise en œuvre.",
+          "criteres": [
+            "La stratégie et ses moyens associés sont présentés de façon convaincante et argumentée.",
+            "Les objections éventuelles sont traitées et contre-argumentées ou prises en compte."
+          ]
+        }
+      ],
+      "declinaisons": {
+        "2026-2028": {
+          "commande": "À partir d'une marque annoncée à la remise du sujet, le candidat élabore une proposition complète de stratégie marketing communication. Il fixe les objectifs assignés à la stratégie, détermine le cœur de cible et les cibles secondaires, définit les axes de communication déclinant les engagements RSE de la marque, choisit les canaux dans une logique omnicanal, évalue le ROI des actions envisagées et établit la projection financière.",
+          "reperes": {
+            "remise_sujet": "Vendredi 26 mars 2027, 18 h — sujet national remis en fin de journée",
+            "rendu": "Vendredi 21 mai 2027, 18 h — 8 semaines pleines après la remise du sujet",
+            "oral": "Début juillet 2027 — 30 min par candidat (15 min de présentation + 15 min de questions)"
+          },
+          "livrables": [
+            {
+              "intitule": "Une proposition de stratégie marketing communication",
+              "cadre": "Écrit individuel, hors les murs · production 8 semaines pleines · 10 à 30 pages (indicatif) · porte C02.1 à C02.6",
+              "contenu": [
+                "Présentation et diagnostic — identité de l'entreprise et de la marque, plateforme de marque formalisée, analyse de l'environnement, diagnostic stratégique (SWOT, problématiques). [C02.1]",
+                "Axes stratégiques — objectifs SMART, politique de développement de la marque, évènements et facteurs internes/externes à venir, évolutions des modes de communication et insights consommateurs. [C02.1]",
+                "Cibles — cœur de cible et cibles secondaires définis, caractérisés et hiérarchisés sur la base d'une segmentation. [C02.2 · C02.3]",
+                "RSE intégrée — les orientations tiennent compte et valorisent l'engagement de la marque et répondent, voire anticipent, les enjeux sociétaux, sociaux, économiques et environnementaux. [C02.2 · C02.3]",
+                "Déclinaison en actions — actions par objectif, canaux et modalités en logique omnicanal, formats et personnalisation, contenus, messages, calendrier de déploiement. [C02.4]",
+                "ROI et projection financière — indicateurs, retombées estimées, ROI calculé avec méthodologie explicitée et données sourcées ; coûts, budget ventilé par poste et par phase, budget global consolidé, traitement des objections. [C02.5 · C02.6]"
+              ]
+            }
+          ],
+          "vigilance": [
+            "RSE et ROI sont les deux exigences les plus discriminantes. La RSE doit être intégrée aux orientations, jamais traitée en section séparée. Le ROI doit être démontré action par action, avec indicateurs, retombées estimées et données sourcées — c'est l'exigence la plus négligée d'une promotion à l'autre.",
+            "Aucun critère n'est éliminatoire à lui seul, mais un dossier qui laisse un pan entier de la grille sans matière (RSE, ROI, projection financière) ne peut pas atteindre le niveau attendu : les critères correspondants restent non évalués et ne se compensent pas.",
+            "Un critère est dupliqué dans la grille MyCertif : le premier critère de C02.3 reprend celui de C02.2.",
+            "Le temps de correction sépare le rendu de l'oral : les grilles MyCertif doivent être renseignées avant la convocation des jurys."
+          ],
+          "hors_criteres": [
+            "Le support de présentation de l'oral.",
+            "Aucun autre composant attendu de l'écrit n'est hors critère : les six exigences du dossier couvrent l'intégralité de la grille."
+          ]
+        }
+      }
+    },
+
+    {
+      "code": "BC03",
+      "nom": "PiloPlan",
+      "bloc_referentiel": "Bloc 3",
+      "bloc_race": "B3",
+      "statut": "tronc commun",
+      "annee": "M2",
+      "poids": "100 % du bloc",
+      "modalite": "Mise en situation professionnelle · écrit collectif, note réflexive individuelle et oral",
+      "intitule_bloc": "Piloter le déploiement d'une stratégie marketing communication responsable",
+      "competences": [
+        {
+          "code_mycertif": "C03.1",
+          "code_race": "C.13",
+          "libelle": "Élaborer ou valider les documents de cadrage",
+          "enonce": "Élaborer ou valider l'élaboration des documents de référence – cahier des charges, brief… – cadrant la réalisation des actions déclinant la stratégie marketing communication, en veillant à leur qualité formelle ainsi qu'à la présence de critères sociaux (inclusion, conditions de travail…) et environnementaux, afin de déployer des supports multiformats et des messages en cohérence avec le positionnement de la marque et ses engagements RSE.",
+          "criteres": [
+            "Les cahiers des charges des productions attendues sont complets.",
+            "Les spécifications sont détaillées et les objectifs visés explicités.",
+            "Les critères de qualité, coût et délai sont précisés.",
+            "Des critères sociaux et environnementaux sont inclus, en cohérence et dans le respect de la politique RSE de la marque."
+          ]
+        },
+        {
+          "code_mycertif": "C03.2",
+          "code_race": "C.14",
+          "libelle": "Organiser globalement la mise en œuvre des actions",
+          "enonce": "Organiser globalement la mise en œuvre des actions déclinant la stratégie marketing communication, en déterminant les méthodes de conduite de projet à mobiliser, en s'assurant de la cohérence de leur calendrier de réalisation et en définissant les outils permettant leur planification, leur suivi et leur évaluation, afin d'en maîtriser le déploiement et de minorer les risques de non respect des critères de coût, de qualité, de délai et de RSE.",
+          "criteres": [
+            "Le choix de la méthode de conduite de projet associée à la mise en œuvre des actions est présenté et défendu ; la méthode est adaptée au contexte et contribue à la sécurisation du déploiement, en matière de qualité et de tenue des délais.",
+            "Le calendrier de réalisations des actions est structuré, cohérent et réaliste ; il tient compte des objectifs de délai et des paramètres internes et externes (lancement de produit ; événements en lien avec le marché concerné…).",
+            "Les outils de communication et de pilotage associés à la mise en œuvre des actions sont adaptés et dimensionnés au contexte ; ils sont digitalisés et optimisent le partage et la diffusion de l'information utile auprès de destinataires identifiés."
+          ]
+        },
+        {
+          "code_mycertif": "C03.3",
+          "code_race": "C.15",
+          "libelle": "Constituer les équipes internes impliquées",
+          "enonce": "Constituer les équipes internes impliquées dans la réalisation des actions déclinant la stratégie marketing communication, en veillant à leur bon dimensionnement au regard des besoins de chaque projet et en veillant aux conditions d'inclusion des salariés en situation de handicap, afin de disposer de moyens humains nécessaires à leur réalisation.",
+          "criteres": [
+            "L'évaluation qualitative et quantitative des compétences internes et externes à mobiliser est juste et réaliste ; elle permet de disposer de ressources humaines à la fois suffisantes et bien dimensionnées au regard du besoin des actions à conduire.",
+            "L'équipe dédiée à la mise en œuvre des actions à conduire est cohérente, ses compétences sont complémentaires et adaptées aux besoins.",
+            "Les rôles, missions, attributions et responsabilités des membres de l'équipe sont clairement définis.",
+            "Les adaptations nécessaires aux collaborateurs en situation de handicap permettent leur intégration et leur maintien dans le collectif en toute autonomie possible."
+          ]
+        },
+        {
+          "code_mycertif": "C03.4",
+          "code_race": "C.16",
+          "libelle": "Animer l'écosystème des parties prenantes",
+          "enonce": "Animer l'écosystème des parties prenantes impliquées dans la réalisation des actions marketing communication, en mettant en œuvre un management de type collaboratif propice à l'innovation et contribuant à l'expression des talents individuels et à l'émergence de l'intelligence collective, afin de favoriser l'agilité et la réactivité nécessaires à la réussite des actions conduites.",
+          "criteres": [
+            "Le mode de management relationnel utilisé est adapté au contexte et aux divers profils des membres de l'équipe.",
+            "Les méthodes et techniques favorisant l'intelligence collective et l'expression des talents individuels sont déployées."
+          ]
+        },
+        {
+          "code_mycertif": "C03.5",
+          "code_race": "C.17",
+          "libelle": "Gérer le portefeuille de prestataires et fournisseurs",
+          "enonce": "Gérer le portefeuille de prestataires et fournisseurs participant à la réalisation des actions de communication, en vérifiant l'alignement de leurs pratiques avec les engagements RSE de la marque et en entretenant avec eux des relations pérennes et équilibrées, afin de garantir la cohérence de la stratégie déployée sur le plan des valeurs sociales et environnementales.",
+          "criteres": [
+            "L'analyse de propositions prestataires et leur sélection est présentée et justifiée ; l'alignement des caractéristiques et propositions des prestataires avec les exigences qualité et le positionnement de la marque, notamment en matière de RSE, est démontré de façon objective.",
+            "Le mode de relation et de contractualisation avec le prestataire est équilibré et favorise une collaboration respectueuse et durable ; un plan d'évaluation et d'amélioration du prestataire est élaboré et vise l'atteinte d'objectifs RSE atteignables."
+          ]
+        },
+        {
+          "code_mycertif": "C03.6",
+          "code_race": "C.18",
+          "libelle": "Organiser la mesure de l'impact de la stratégie",
+          "enonce": "Organiser la mesure de l'impact de la stratégie marketing communication entreprise, en déterminant les données, critères et indicateurs de performance clés permettant d'en mesurer la portée (taux d'engagement, ROI…), ainsi que les outils digitaux associés, afin d'évaluer son efficacité en continu et de disposer d'éléments d'analyse objectifs pour l'optimiser.",
+          "criteres": [
+            "Les critères d'évaluation de la stratégie déployée sont cohérents avec les objectifs définis et permettent l'objectivation de la mesure de la performance.",
+            "Les critères d'évaluation intègrent les dimensions qualitative et quantitative ; ils comprennent les dimensions RSE et certains portent sur le caractère « responsable » des actions déployées.",
+            "Les critères d'évaluation sont alignés avec les indicateurs de performance clés."
+          ]
+        },
+        {
+          "code_mycertif": "C03.7",
+          "code_race": "C.19",
+          "libelle": "Interpréter les métriques restituant les résultats",
+          "enonce": "Interpréter les métriques restituant les résultats de la stratégie marketing communication entreprise, en utilisant des outils d'analyse et de visualisation digitalisés, afin de vérifier l'atteinte des objectifs définis ou d'en mesurer les écarts et, le cas échéant, de décider des mesures correctives à mettre en œuvre.",
+          "criteres": [
+            "Le choix des outils et solutions digitales permettant le traitement des informations et la restitution visuelle des données est justifié.",
+            "⊕ L'analyse des données est cohérente et l'interprétation des métriques est correcte.",
+            "Les écarts avec les résultats escomptés et les objectifs initialement définis sont identifiés et qualifiés.",
+            "Les hypothèses émises concernant les causes d'insuffisance sont crédibles et étayées.",
+            "Les propositions de réorientation stratégique ou opérationnelle sont cohérentes avec les causes identifiées et leur pertinence est argumentée et démontrée."
+          ],
+          "note": "Le critère ⊕ est absent de la grille MyCertif ; il a été réintégré par arbitrage, au titre du RACE (C.19)."
+        }
+      ],
+      "livrables_communs": [
+        {
+          "intitule": "Écrit collectif — La réalisation d'un projet marketing communication",
+          "cadre": "Groupe de 2 à 3 · produit pendant la semaine intensive, rendu à la fin de celle-ci · 25 à 40 pages (indicatif)",
+          "contenu": [
+            "Les cahiers des charges à destination des équipes internes et des fournisseurs : spécifications détaillées, objectifs explicités, critères de qualité, coût et délai, critères sociaux et environnementaux cohérents avec la politique RSE de la marque.",
+            "Le rétroplanning de réalisation : jalons, planning détaillé, chemin critique, paramètres internes et externes.",
+            "L'organigramme de l'écosystème et de l'équipe projet, avec rôles, missions et attributions, et la cartographie intérêt / pouvoir des parties prenantes.",
+            "Les outils de pilotage du projet, digitalisés : tableau de bord, indicateurs, reporting, et la justification de la méthode de conduite de projet retenue.",
+            "Les outils de sélection et d'évaluation des fournisseurs, avec le mode de contractualisation et le plan d'amélioration visant des objectifs RSE atteignables.",
+            "Le rapport d'expérience et d'étonnement sur la dimension managériale — méthodologique et relationnelle — de la conduite du projet.",
+            "Le système d'évaluation de la performance de l'action réalisée et l'interprétation des résultats obtenus, y compris les écarts et les mesures correctives."
+          ]
+        },
+        {
+          "intitule": "Écrit individuel — Note réflexive",
+          "cadre": "Individuel, hors les murs · rendu une semaine après l'écrit collectif · 8 à 12 pages (indicatif) · rédigée à la première personne",
+          "contenu": [
+            "Contexte du projet, rôle du candidat, problématique personnelle.",
+            "Contribution : actions menées, apport spécifique, décisions prises.",
+            "Difficultés rencontrées : obstacles managériaux, situations de tension, gestion des imprévus.",
+            "Analyse critique : écarts entre intentions et réalisations, compétences développées.",
+            "Plan d'action personnel et projection professionnelle.",
+            "Admettre ses difficultés est valorisé ; le ton complaisant ou trop général est pénalisant, les exemples précis sont attendus."
+          ]
+        }
+      ],
+      "hors_criteres": [
+        "Le rapport d'expérience et d'étonnement : exigé dans l'écrit collectif, il nourrit les critères de C03.4 et C03.7 sans faire l'objet d'un critère propre.",
+        "La note réflexive individuelle : aucun des critères ne lui est propre, elle est évaluée avec la même grille que l'écrit collectif.",
+        "Le support de présentation de l'oral."
+      ],
+      "declinaisons": {
+        "2025-2027": {
+          "commande": "PiloPlan est l'épreuve de pilotage d'un projet marketing communication : c'est la partie management du titre. En binôme ou trinôme, les candidats conduisent un projet de bout en bout dans les conditions réelles d'une agence — cadrage, management des parties prenantes, évaluation continue et ajustement. Les candidats tutorent une équipe de Bachelor 3 CDC pendant sa compétition régionale : ils la briefent, l'accompagnent au quotidien, la débriefent et évaluent sa performance. Ce qui est évalué est le travail de pilotage et de management, non la production de l'équipe accompagnée.",
+          "reperes": {
+            "semaine_intensive": "Février 2027 — 5 jours consécutifs, calée sur les dates de la compétition régionale des Bachelor 3 CDC",
+            "ecrit_collectif": "Rendu à la fin de la semaine intensive",
+            "note_reflexive": "Rendue une semaine après l'écrit collectif",
+            "oral": "Juin / juillet 2027 — 30 min par candidat"
+          },
+          "vigilance": [
+            "Le jury évalue le management, pas la campagne. Ne pas surpondérer la production créative de l'équipe accompagnée : ce qui compte est le processus de gestion et l'analyse des choix opérés.",
+            "Documenter en continu : notes de réunion, comptes rendus de points d'étape, décisions et arbitrages, photos des sessions de travail, archivage des échanges. L'intensive se tient en février et l'oral en juin ou juillet — sans traces, il ne reste rien à démontrer.",
+            "Posture professionnelle : simulation d'agence, pas exercice académique.",
+            "Deux critères sont régulièrement oubliés : les adaptations handicap (C03.3) et le plan d'évaluation et d'amélioration des prestataires visant des objectifs RSE atteignables (C03.5).",
+            "La constitution du groupe est une obligation du référentiel : 2 à 3 candidats, le travail strictement individuel n'est pas autorisé."
+          ]
+        },
+        "2026-2028": {
+          "commande": "PiloPlan est l'épreuve de pilotage d'un projet marketing communication : c'est la partie management du titre. En binôme ou trinôme, les candidats conduisent un projet de bout en bout dans les conditions réelles d'une agence — cadrage, management des parties prenantes, évaluation continue et ajustement. Les candidats travaillent sur un sujet fourni par la direction des programmes, remis au lancement de l'intensive. Ce qui est évalué est le travail de pilotage et de management, non la production livrée.",
+          "reperes": {
+            "semaine_intensive": "Février 2028 — 5 jours consécutifs, sujet fourni par la direction des programmes au lancement",
+            "ecrit_collectif": "Rendu à la fin de la semaine intensive",
+            "note_reflexive": "Rendue une semaine après l'écrit collectif",
+            "oral": "Juin / juillet 2028 — 30 min par candidat"
+          },
+          "vigilance": [
+            "Le jury évalue le pilotage, pas la production. Ce qui compte est le processus de gestion et l'analyse des choix opérés.",
+            "Documenter en continu : notes de réunion, comptes rendus de points d'étape, décisions et arbitrages, archivage des échanges. L'intensive se tient en février 2028 et l'oral en juin ou juillet — sans traces, il ne reste rien à démontrer.",
+            "Posture professionnelle : simulation d'agence, pas exercice académique.",
+            "Deux critères sont régulièrement oubliés : les adaptations handicap (C03.3) et le plan d'évaluation et d'amélioration des prestataires visant des objectifs RSE atteignables (C03.5).",
+            "La constitution du groupe est une obligation du référentiel : 2 à 3 candidats, le travail strictement individuel n'est pas autorisé."
+          ]
+        }
+      }
+    },
+
+    {
+      "code": "BC05",
+      "nom": "PPI · Projet professionnel innovant",
+      "bloc_referentiel": "Bloc 5 (4-II)",
+      "bloc_race": "B4-II",
+      "statut": "spécialité",
+      "specialite": "Stratégie de marque et transformation digitale (MARQUE)",
+      "annee": "M2",
+      "poids": "100 % du bloc",
+      "modalite": "Mise en situation professionnelle · adossée au brief de la compétition nationale CESACOM",
+      "intitule_bloc": "Engager l'innovation et la transformation digitale de la communication de la marque",
+      "competences": [
+        {
+          "code_mycertif": "C05.1",
+          "code_race": "C.20-II",
+          "libelle": "Identifier les facteurs de rupture et d'innovation",
+          "enonce": "Identifier les facteurs de rupture et d'innovation principalement liés aux technologies digitales et aux modèles économiques émergents qui leur sont associés, en s'appuyant sur une veille prospective, afin de définir une stratégie d'innovation porteuse de développement pour la marque et optimisant sa visibilité et son positionnement au sein de son écosystème.",
+          "criteres": [
+            "L'impact des innovations identifiées sur le positionnement de la marque au sein de son écosystème est mesuré.",
+            "Un prototype ou une preuve de concept pour l'innovation identifiée est élaborée, démontrant sa faisabilité et son potentiel.",
+            "La veille prospective repose sur des sources diversifiées et la méthode d'analyse est présentée."
+          ]
+        },
+        {
+          "code_mycertif": "C05.2",
+          "code_race": "C.21-II",
+          "libelle": "Déterminer les innovations à implémenter",
+          "enonce": "Déterminer les innovations à implémenter dans la stratégie marketing et communication de la marque et ses outils associés, en établissant leur processus de développement avec les différentes directions de l'entreprise et en identifiant les facteurs de risque devant être anticipés (cybersécurité, obligations règlementaires, dimension RSE…), afin de les mettre en place en toute sécurité et dans le respect de l'éthique.",
+          "criteres": [
+            "L'innovation proposée est en accord avec l'éthique et les valeurs de la marque et ne compromet pas la réputation de l'entreprise.",
+            "Un plan de gestion des risques est conçu pour anticiper les facteurs de risque associés à l'innovation, tels que la cybersécurité, les obligations règlementaires, la responsabilité sociale et environnementale (RSE), etc.",
+            "Le processus de développement est clair et structuré, en impliquant les différentes directions de l'entreprise concernées."
+          ]
+        },
+        {
+          "code_mycertif": "C05.3",
+          "code_race": "C.22-II",
+          "libelle": "Définir les stratégies d'accompagnement des acteurs internes",
+          "enonce": "Définir les stratégies d'accompagnement des acteurs internes à mettre en place, en choisissant les modalités permettant de les impliquer et de surmonter les éventuelles résistances pouvant être rencontrées, afin d'optimiser la mise en œuvre de l'innovation et de conduire le changement.",
+          "criteres": [
+            "Les acteurs internes clés concernés par l'innovation et le changement, ainsi que leurs rôles et responsabilités, sont identifiés.",
+            "Les éventuelles résistances et oppositions des acteurs internes face à l'innovation et au changement sont anticipées.",
+            "Des modalités d'implication des acteurs internes dans le processus d'innovation et de changement sont définies. Elles incluent des formations, des ateliers de cocréation, des réunions d'information, etc."
+          ]
+        }
+      ],
+      "livrables_communs": [
+        {
+          "intitule": "Écrit collectif — Proposition de mise en place d'une transformation induite par une innovation de rupture",
+          "cadre": "Groupe de 2 à 3 · produit sur le campus pendant la semaine intensive · rendu en fin d'intensive",
+          "contenu": [
+            "Analyse du brief et du contexte : présentation synthétique de la marque, de ses enjeux et de sa problématique.",
+            "Veille prospective et facteur de rupture : présentation argumentée d'un facteur de rupture économique, technologique ou stratégique, sources diversifiées, méthode d'analyse présentée.",
+            "Impact mesuré des innovations identifiées sur le positionnement de la marque au sein de son écosystème.",
+            "Diagnostic de maturité digitale : position actuelle de la marque face à cette rupture, écarts à combler.",
+            "Prototype ou preuve de concept — maquette, wireframe, démonstrateur, pilote chiffré.",
+            "Plan de transformation sur 2 à 5 ans : feuille de route, jalons, ressources, investissements, indicateurs de suivi, processus de développement impliquant les directions concernées.",
+            "Plan de gestion des risques : cybersécurité, obligations réglementaires, RSE, éthique et réputation de la marque.",
+            "Plan d'accompagnement au changement : acteurs internes clés, rôles et responsabilités, résistances anticipées, modalités d'implication.",
+            "Annexes : sources, données complémentaires, maquettes, wireframes."
+          ]
+        },
+        {
+          "intitule": "Écrit individuel — Note réflexive (RETEX)",
+          "cadre": "Individuel, hors les murs · rendu la semaine suivant l'écrit collectif",
+          "contenu": [
+            "Contribution personnelle au projet : missions, responsabilités, livrables produits.",
+            "Difficultés rencontrées et solutions mises en œuvre.",
+            "Apprentissages tirés de l'expérience et compétences développées.",
+            "Propositions d'amélioration pour dépasser les difficultés identifiées.",
+            "Réflexion sur la posture professionnelle adoptée et son évolution."
+          ]
+        }
+      ],
+      "hors_criteres": [
+        "Trois composants attendus de l'écrit collectif ne correspondent à aucun critère explicite : l'analyse du brief et du contexte, le diagnostic de maturité digitale et les annexes. Ils nourrissent C05.1 à C05.3 sans être évalués pour eux-mêmes.",
+        "La note réflexive individuelle : aucun des 9 critères ne lui est propre.",
+        "Le support de présentation de l'oral."
+      ],
+      "vigilance_communes": [
+        "Le prototype ou la preuve de concept est un critère à part entière (C05.1). Un dossier limité à une analyse prospective laisse ce critère non satisfait.",
+        "Le plan de gestion des risques est exigé explicitement (C05.2) : cybersécurité, obligations réglementaires, RSE.",
+        "L'innovation doit être compatible avec l'éthique et les valeurs de la marque et ne pas compromettre sa réputation.",
+        "La constitution du groupe est une obligation du référentiel : 2 à 3 candidats.",
+        "Le choix de la spécialité est arrêté en début de M1 et engage le candidat jusqu'à l'obtention du titre."
+      ],
+      "declinaisons": {
+        "2025-2027": {
+          "commande": "À partir du brief de la compétition nationale CESACOM, les candidats de la spécialisation Stratégie de marque et transformation digitale proposent la mise en place d'une transformation d'outils ou de canaux marketing communication induite par une innovation de rupture. Les M2 ne participent pas à la compétition en tant qu'agence : ils en reprennent le brief comme support de leur propre semaine intensive, avec une commande de niveau 7.",
+          "reperes": {
+            "brief": "Jeudi 3 juin 2027 — compétition nationale CESACOM",
+            "semaine_intensive": "7 → 11 juin 2027",
+            "ecrit_collectif": "Vendredi 11 juin 2027, fin de l'intensive",
+            "note_reflexive": "Vendredi 18 juin 2027",
+            "oral": "À compter du 25 juin 2027 — 30 min par candidat, date arrêtée au calendrier campus"
+          },
+          "vigilance_specifique": [
+            "Cinq jours de production, cinq jours seulement. Le brief tombe le jeudi 3 juin : le cadrage se fait avant l'intensive, l'intensive est réservée à la production."
+          ]
+        },
+        "2026-2028": {
+          "commande": "À partir du brief de la compétition nationale CESACOM, les candidats de la spécialisation Stratégie de marque et transformation digitale proposent la mise en place d'une transformation d'outils ou de canaux marketing communication induite par une innovation de rupture. Les M2 ne participent pas à la compétition en tant qu'agence : ils en reprennent le brief comme support de leur propre semaine intensive, avec une commande de niveau 7.",
+          "reperes": {
+            "brief": "Lundi 12 juin 2028, au matin — délivré au lancement de l'intensive",
+            "semaine_intensive": "Lundi 12 → vendredi 16 juin 2028",
+            "ecrit_collectif": "Vendredi 16 juin 2028, fin de l'intensive",
+            "note_reflexive": "Vendredi 23 juin 2028",
+            "oral": "Juillet 2028 — 30 min par candidat, date arrêtée au calendrier campus"
+          },
+          "vigilance_specifique": [
+            "Cinq jours de production, cinq jours seulement. Le brief est délivré le lundi matin, au lancement de l'intensive : les cinq jours couvrent le cadrage comme la production."
+          ]
+        }
+      }
+    },
+
+    {
+      "code": "BC06",
+      "nom": "PPC · Projet professionnel créatif",
+      "bloc_referentiel": "Bloc 6 (4-III)",
+      "bloc_race": "B4-III",
+      "statut": "spécialité",
+      "specialite": "Stratégie créative (CREA)",
+      "annee": "M2",
+      "poids": "100 % du bloc",
+      "modalite": "Mise en situation professionnelle · adossée au brief de la compétition nationale CESACOM",
+      "intitule_bloc": "Développer la stratégie créative de la marque dans des supports et contenus originaux",
+      "competences": [
+        {
+          "code_mycertif": "C06.1",
+          "code_race": "C.20-III",
+          "libelle": "Définir les axes générateurs des contenus de la marque",
+          "enonce": "Définir les axes générateurs des contenus de la marque, en traduisant l'expression de sa proposition de valeur et de son message en concepts créatifs tenant compte des caractéristiques, besoins et aspirations de son public cible, afin de canaliser le travail des équipes créatives.",
+          "criteres": [
+            "Les axes générateurs des contenus sont en ligne avec la proposition de valeur de la marque et le message qu'elle souhaite communiquer.",
+            "Les axes générateurs des contenus s'inscrivent dans une stratégie globale.",
+            "Les axes générateurs des contenus sont adaptés aux différents supports et canaux de communication utilisés par la marque (site web, réseaux sociaux, publicités, etc.).",
+            "Les concepts proposés sont originaux et créatifs.",
+            "Les concepts créatifs tiennent compte des caractéristiques, besoins et aspirations du public cible de la marque, en répondant à ses attentes."
+          ]
+        },
+        {
+          "code_mycertif": "C06.2",
+          "code_race": "C.21-III",
+          "libelle": "Générer des idées originales et innovantes",
+          "enonce": "Générer des idées originales et innovantes de contenus de marque et de nouveaux formats, en s'assurant de l'adéquation des propositions des équipes créatives avec l'identité de la marque, les attentes de la cible et les canaux et supports utilisés, afin de capter l'attention et d'engager l'audience du public visé.",
+          "criteres": [
+            "Les concepts créatifs tiennent compte des caractéristiques, besoins et aspirations du public cible de la marque en suscitant son intérêt.",
+            "Les concepts proposés se démarquent des concurrents et suscitent l'attention du public.",
+            "Les nouvelles idées de formats proposées explorent des voies innovantes, telles que l'utilisation de nouvelles technologies, des approches interactives, etc.",
+            "Les axes générateurs assurent une cohérence entre les différentes initiatives créatives de la marque."
+          ]
+        },
+        {
+          "code_mycertif": "C06.3",
+          "code_race": "C.22-III",
+          "libelle": "Concrétiser les idées dans les canaux et supports",
+          "enonce": "Concrétiser les idées générées dans les différents canaux et supports de communication de la marque, en déployant des techniques narratives et de design privilégiant l'interactivité et favorisant la réussite et l'empreinte durable de l'expérience utilisateur, afin de susciter l'engagement et l'adhésion du public cible.",
+          "criteres": [
+            "L'exécution des idées de contenus dans les différents canaux et supports de communication de la marque, donne lieu à des réalisations professionnelles et répondant aux normes de qualité attendues.",
+            "Les techniques narratives et de design utilisées sont en cohérence avec l'identité de la marque, son positionnement et ses valeurs.",
+            "Les techniques narratives et de design utilisées favorisent l'interactivité avec le public, permettant une participation active et une expérience utilisateur enrichissante.",
+            "Les contenus déployés créent une expérience utilisateur durable et mémorable, capable de laisser une empreinte positive."
+          ]
+        }
+      ],
+      "livrables_communs": [
+        {
+          "intitule": "Écrit collectif — Proposition d'une stratégie créative de marque répondant à un brief client",
+          "cadre": "Groupe de 2 à 3 · produit sur le campus pendant la semaine intensive · rendu en fin d'intensive",
+          "contenu": [
+            "Pitch de la problématique : la marque, son ADN, ses valeurs, sa problématique créative issue du brief.",
+            "Axes générateurs de contenus : territoires d'expression identifiés et argumentés, en ligne avec la proposition de valeur et le message de la marque, inscrits dans une stratégie globale et adaptés aux supports et canaux utilisés.",
+            "Benchmark créatif : tendances du secteur, pratiques innovantes inspirantes, démonstration de ce qui démarque la proposition.",
+            "Concepts créatifs : présentation détaillée, déclinaison narrative et visuelle, prise en compte des caractéristiques, besoins et aspirations du public cible.",
+            "Nouveaux formats : idées explorant des voies innovantes — nouvelles technologies, approches interactives.",
+            "Production de supports : plusieurs supports réellement produits, de formats différents et destinés à des canaux différents (print, digital, vidéo, audio, expérientiel), mobilisant des techniques de narration originales.",
+            "Cohérence et déclinaison : démonstration de la cohérence de la stratégie créative à travers les canaux et formats proposés.",
+            "Annexes : sources, références visuelles, croquis préparatoires, déclinaisons complémentaires."
+          ]
+        },
+        {
+          "intitule": "Écrit individuel — Note réflexive (RETEX)",
+          "cadre": "Individuel, hors les murs · rendu la semaine suivant l'écrit collectif",
+          "contenu": [
+            "Contribution personnelle : recherches, concepts proposés, productions réalisées.",
+            "Analyse du processus créatif et des choix artistiques effectués.",
+            "Difficultés rencontrées et solutions créatives mises en œuvre.",
+            "Apprentissages tirés de l'expérience et compétences développées.",
+            "Réflexion sur la posture de créatif et son évolution au cours du projet."
+          ]
+        }
+      ],
+      "hors_criteres": [
+        "Deux composants attendus de l'écrit collectif ne correspondent à aucun critère explicite : le benchmark créatif et les annexes. Le benchmark sert à établir l'originalité évaluée en C06.2 sans être évalué pour lui-même.",
+        "La note réflexive individuelle : aucun des 13 critères ne lui est propre.",
+        "Le support de présentation de l'oral."
+      ],
+      "vigilance_communes": [
+        "Les supports doivent être réellement exécutés. C06.3 évalue des réalisations professionnelles répondant aux normes de qualité attendues : des intentions créatives, des moodboards ou des descriptions de campagne ne suffisent pas.",
+        "Plusieurs formats, plusieurs canaux. Une déclinaison uniquement sociale ou uniquement print ne permet pas de démontrer la cohérence multicanal attendue.",
+        "L'interactivité est un critère : les techniques narratives et de design doivent permettre une participation active et une expérience utilisateur enrichissante.",
+        "La constitution du groupe est une obligation du référentiel : 2 à 3 candidats.",
+        "Le choix de la spécialité est arrêté en début de M1 et engage le candidat jusqu'à l'obtention du titre."
+      ],
+      "declinaisons": {
+        "2025-2027": {
+          "commande": "À partir du brief de la compétition nationale CESACOM, les candidats de la spécialisation Stratégie créative proposent une stratégie créative de marque répondant au brief client. Ils définissent les axes générateurs des contenus, génèrent des idées originales de contenus et de nouveaux formats, et les concrétisent dans plusieurs supports. Les M2 ne participent pas à la compétition en tant qu'agence : ils en reprennent le brief comme support de leur propre semaine intensive, avec une commande de niveau 7.",
+          "reperes": {
+            "brief": "Jeudi 3 juin 2027 — compétition nationale CESACOM",
+            "semaine_intensive": "7 → 11 juin 2027",
+            "ecrit_collectif": "Vendredi 11 juin 2027, fin de l'intensive",
+            "note_reflexive": "Vendredi 18 juin 2027",
+            "oral": "À compter du 25 juin 2027 — 30 min par candidat, date arrêtée au calendrier campus"
+          },
+          "vigilance_specifique": [
+            "Cinq jours de production. Le brief tombe le jeudi 3 juin : le concept se cadre avant l'intensive, l'intensive est réservée à la production et à la finition des supports."
+          ]
+        },
+        "2026-2028": {
+          "commande": "À partir du brief de la compétition nationale CESACOM, les candidats de la spécialisation Stratégie créative proposent une stratégie créative de marque répondant au brief client. Ils définissent les axes générateurs des contenus, génèrent des idées originales de contenus et de nouveaux formats, et les concrétisent dans plusieurs supports. Les M2 ne participent pas à la compétition en tant qu'agence : ils en reprennent le brief comme support de leur propre semaine intensive, avec une commande de niveau 7.",
+          "reperes": {
+            "brief": "Lundi 12 juin 2028, au matin — délivré au lancement de l'intensive",
+            "semaine_intensive": "Lundi 12 → vendredi 16 juin 2028",
+            "ecrit_collectif": "Vendredi 16 juin 2028, fin de l'intensive",
+            "note_reflexive": "Vendredi 23 juin 2028",
+            "oral": "Juillet 2028 — 30 min par candidat, date arrêtée au calendrier campus"
+          },
+          "vigilance_specifique": [
+            "Cinq jours de production. Le brief est délivré le lundi matin, au lancement de l'intensive : le concept se cadre dès le premier jour, la fin de semaine est réservée à la finition des supports."
+          ]
+        }
+      }
+    }
+  ]
+}
