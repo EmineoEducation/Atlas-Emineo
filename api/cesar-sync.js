@@ -50,6 +50,7 @@
 const crypto = require('crypto');
 const { getDB } = require('./_lib/db');
 const { requireRole } = require('./_lib/auth');
+const { RATTACHEMENTS } = require('./_lib/referentiels');
 
 const ANNEE_DEFAUT = '2026-27';
 const MAX_SEANCES = 5000;
@@ -392,8 +393,15 @@ async function actionUpsertGroupes(db, annee, groupes, ecrire) {
     const code = String(g.code_cesar || g.code || '').trim();
     if (!code) { resultat.rejets.push({ groupe: g, motif: 'code_cesar manquant' }); continue; }
 
-    const titre = String(g.titre_court || '').trim();
+    // Le titre d'un groupe planning n'est plus demande a l'appelant : il est
+    // lu dans la table versionnee du depot. L'appelant peut toujours le
+    // fournir — il l'emporte alors sur la table, pour un rattrapage ponctuel.
+    const duDepot = RATTACHEMENTS[code] || null;
+    const titreDepot = duDepot && duDepot.statut === 'rattache' ? String(duDepot.titre_court || '') : '';
+    const titre = (String(g.titre_court || '').trim() || titreDepot).trim();
     const fid = titre ? (parTitre[normaliserCle(titre)] || null) : null;
+    const campusG = String(g.campus || (duDepot && duDepot.campus) || 'Le Mans');
+    const formationG = String(g.groupe_formation || (duDepot && duDepot.groupe_formation) || '');
     if (titre && !fid) {
       resultat.rejets.push({ code_cesar: code, motif: `titre_court inconnu : ${titre}` });
     }
@@ -418,8 +426,7 @@ async function actionUpsertGroupes(db, annee, groupes, ecrire) {
                      effectif = ?, formation_id = ?, statut = ?, updated_at = datetime('now')
               WHERE id = ?`,
         args: [
-          String(g.libelle || ''), String(g.groupe_formation || ''),
-          String(g.campus || 'Le Mans'),
+          String(g.libelle || ''), formationG, campusG,
           Number.isFinite(Number(g.effectif)) ? Number(g.effectif) : null,
           retenu, retenu ? 'rattache' : 'a_rattacher', ex.rows[0].id,
         ],
@@ -431,8 +438,7 @@ async function actionUpsertGroupes(db, annee, groupes, ecrire) {
                 campus, effectif, statut, annee_scolaire)
               VALUES (?,?,?,?,?,?,?,?)`,
         args: [
-          code, String(g.libelle || ''), String(g.groupe_formation || ''), fid,
-          String(g.campus || 'Le Mans'),
+          code, String(g.libelle || ''), formationG, fid, campusG,
           Number.isFinite(Number(g.effectif)) ? Number(g.effectif) : null,
           statut, annee,
         ],
@@ -713,7 +719,7 @@ class CompetencesParModule {
 
 // ── Import des seances ──────────────────────────────────────────────────────
 
-async function importerSeances(db, { annee, seances, flux, ecrire, perimetre }) {
+async function importerSeances(db, { annee, seances, flux, ecrire, perimetre, reconcilier }) {
   const groupes = await chargerGroupes(db, annee);
   const resolveur = new ResolveurMatieres(db, annee, ecrire);
   const apparieur = new ApparieurPrevisionnel(db, annee);
@@ -726,13 +732,23 @@ async function importerSeances(db, { annee, seances, flux, ecrire, perimetre }) 
     lues: seances.length,
     creees: 0,
     mises_a_jour: 0,
+    inchangees: 0,
+    annulees: 0,
+    reactivees: 0,
     rejetees: 0,
     sans_previsionnel: 0,
     avec_compte_rendu: 0,
     rejets: [],
+    disparues: [],
     nouveaux_intitules: [],
     groupes_inconnus: [],
   };
+
+  // Rapprochement : les references de seance presentes dans le lot, groupe
+  // planning par groupe planning. La reconciliation ne touchera que ces
+  // groupes — importer le planning d'un seul groupe ne doit jamais annuler
+  // les seances d'un autre.
+  const couverture = {};
 
   // Numerotation du previsionnel : les seances d'un meme module dans un meme
   // groupe sont numerotees dans l'ordre chronologique du lot. Le previsionnel
@@ -779,6 +795,14 @@ async function importerSeances(db, { annee, seances, flux, ecrire, perimetre }) 
 
     const ref = String(s.ref_cesar || '').trim() || refAuto(codeGroupe, dateISO, libelleMatiere);
     const nom = String(s.intervenant_nom || '').trim();
+    // Une seance peut porter plusieurs formateurs. CESAR les livre dans un
+    // seul champ, separes par des virgules ; le front les a deja decoupes
+    // quand il le pouvait. On garde les deux formes : la liste pour compter et
+    // nommer, la chaine jointe pour tout l'affichage existant.
+    const listeNoms = Array.isArray(s.intervenants) && s.intervenants.length
+      ? s.intervenants.map(x => String(x).trim()).filter(Boolean)
+      : (nom ? nom.split(/\s*[;,/]\s*/).map(x => x.trim()).filter(Boolean) : []);
+    const intervenantsJSON = JSON.stringify(listeNoms);
     const intervenantId = await trouverIntervenant(db, s.intervenant_email, cacheIntervenants);
     const duree = calculerDuree(s);
 
@@ -787,9 +811,33 @@ async function importerSeances(db, { annee, seances, flux, ecrire, perimetre }) 
       compteurs[cle] = (compteurs[cle] || 0) + 1;
       const numero = Number.isInteger(s.numero) ? s.numero : compteurs[cle];
 
-      if (!ecrire) { bilan.creees++; continue; }
+      // Ce que le lot couvre, pour la reconciliation.
+      const cv = couverture[codeGroupe] || (couverture[codeGroupe] = { refs: new Set() });
+      cv.refs.add(ref);
 
-      const ex = await db.execute({ sql: 'SELECT id FROM previsionnel_seance WHERE ref_cesar = ?', args: [ref] });
+      // L'existant est lu AVANT le test d'ecriture : c'est lui qui permet
+      // d'annoncer un differentiel juste en essai a blanc — creations, mises a
+      // jour, inchangees. Le bilan precedent comptait tout en creation tant
+      // qu'on n'ecrivait pas, ce qui rendait l'essai inutilisable pour decider.
+      const ex = await db.execute({
+        sql: `SELECT id, module_ref, intervenant_nom, date_prevue, duree_minutes,
+                     libelle_cesar, statut
+              FROM previsionnel_seance WHERE ref_cesar = ?`,
+        args: [ref],
+      });
+      const avant = ex.rows[0] || null;
+      const etaitAnnulee = !!avant && String(avant.statut || 'planifiee') === 'annulee';
+      const identique = !!avant && !etaitAnnulee
+        && String(avant.date_prevue || '') === dateISO
+        && String(avant.intervenant_nom || '') === (nom || '—')
+        && String(avant.libelle_cesar || '') === libelleMatiere
+        && String(avant.module_ref || '') === String(moduleRef || '')
+        && Number(avant.duree_minutes || 0) === Number(duree || 0);
+      if (!avant) bilan.creees++;
+      else if (identique) { bilan.inchangees++; continue; }
+      else { bilan.mises_a_jour++; if (etaitAnnulee) bilan.reactivees++; }
+      if (!ecrire) continue;
+
       const args = [
         formationId, moduleRef, groupe.campus, intervenantId, nom || '—', numero,
         String(s.titre || libelleMatiere || `Séance ${numero}`), dateISO,
@@ -797,29 +845,31 @@ async function importerSeances(db, { annee, seances, flux, ecrire, perimetre }) 
         JSON.stringify(tableau(s.concepts)),
         JSON.stringify(tableau(s.competences).length ? tableau(s.competences)
           : await competencesDuModule.pour(formationId, moduleRef)),
-        duree, codeGroupe, libelleMatiere, ref, annee,
+        duree, codeGroupe, libelleMatiere, ref, annee, intervenantsJSON,
       ];
-      if (ex.rows.length) {
+      // Une seance presente dans le lot est, par definition, au planning :
+      // si elle avait ete annulee et qu'elle reapparait, elle redevient
+      // planifiee ici meme.
+      if (avant) {
         await db.execute({
           sql: `UPDATE previsionnel_seance SET formation_id=?, module_ref=?, campus=?,
                   intervenant_id=?, intervenant_nom=?, numero=?, titre=?, date_prevue=?,
                   modalite=?, contenu=?, concepts=?, competences=?, duree_minutes=?,
                   code_groupe_cesar=?, libelle_cesar=?, ref_cesar=?, annee_scolaire=?,
+                  intervenants=?, statut='planifiee', annulee_le='',
                   updated_at=datetime('now')
                 WHERE id=?`,
-          args: args.concat([ex.rows[0].id]),
+          args: args.concat([avant.id]),
         });
-        bilan.mises_a_jour++;
       } else {
         await db.execute({
           sql: `INSERT INTO previsionnel_seance (formation_id, module_ref, campus, intervenant_id,
                   intervenant_nom, numero, titre, date_prevue, modalite, contenu, concepts,
                   competences, duree_minutes, code_groupe_cesar, libelle_cesar, ref_cesar,
-                  annee_scolaire)
-                VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+                  annee_scolaire, intervenants, statut)
+                VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,'planifiee')`,
           args,
         });
-        bilan.creees++;
       }
       continue;
     }
@@ -836,18 +886,31 @@ async function importerSeances(db, { annee, seances, flux, ecrire, perimetre }) 
     // L'existant est lu AVANT l'appariement : un rejeu doit conserver le
     // rattachement deja etabli, pas en chercher un nouveau.
     const ex = await db.execute({
-      sql: 'SELECT id, previsionnel_id FROM declaration WHERE ref_cesar = ?',
+      sql: `SELECT id, previsionnel_id, module_ref, intervenant_nom, date_seance,
+                   duree_minutes, libelle_cesar, compte_rendu
+            FROM declaration WHERE ref_cesar = ?`,
       args: [ref],
     });
-    const reserve = ex.rows.length && ex.rows[0].previsionnel_id != null
-      ? Number(ex.rows[0].previsionnel_id) : null;
+    const avantD = ex.rows[0] || null;
+    const reserve = avantD && avantD.previsionnel_id != null
+      ? Number(avantD.previsionnel_id) : null;
 
     const prevId = await apparieur.apparier({
       codeGroupe, moduleRef, cleMatiere: normaliserCle(libelleMatiere), dateISO, reserve,
     });
     if (!prevId) bilan.sans_previsionnel++;
 
-    if (!ecrire) { bilan.creees++; continue; }
+    const identiqueD = !!avantD
+      && String(avantD.date_seance || '') === dateISO
+      && String(avantD.intervenant_nom || '') === nom
+      && String(avantD.libelle_cesar || '') === libelleMatiere
+      && String(avantD.module_ref || '') === String(moduleRef || '')
+      && String(avantD.compte_rendu || '') === compteRendu
+      && Number(avantD.duree_minutes || 0) === Number(duree || 0);
+    if (!avantD) bilan.creees++;
+    else if (identiqueD) { bilan.inchangees++; continue; }
+    else bilan.mises_a_jour++;
+    if (!ecrire) continue;
 
     const args = [
       formationId, moduleRef, prevId, groupe.campus, intervenantId, nom,
@@ -855,27 +918,95 @@ async function importerSeances(db, { annee, seances, flux, ecrire, perimetre }) 
       JSON.stringify(tableau(s.couvert)),
       JSON.stringify(await competencesDuModule.pour(formationId, moduleRef)),
       compteRendu, statutCR, duree, codeGroupe, libelleMatiere, ref, annee,
+      intervenantsJSON,
     ];
-    if (ex.rows.length) {
+    if (avantD) {
       await db.execute({
         sql: `UPDATE declaration SET formation_id=?, module_ref=?, previsionnel_id=?, campus=?,
                 intervenant_id=?, intervenant_nom=?, seance_numero=?, date_seance=?, source=?,
                 couvert=?, competences=?, compte_rendu=?, statut_cr=?, duree_minutes=?,
-                code_groupe_cesar=?, libelle_cesar=?, ref_cesar=?, annee_scolaire=?
+                code_groupe_cesar=?, libelle_cesar=?, ref_cesar=?, annee_scolaire=?,
+                intervenants=?
               WHERE id=?`,
-        args: args.concat([ex.rows[0].id]),
+        args: args.concat([avantD.id]),
       });
-      bilan.mises_a_jour++;
     } else {
       await db.execute({
         sql: `INSERT INTO declaration (formation_id, module_ref, previsionnel_id, campus,
                 intervenant_id, intervenant_nom, seance_numero, date_seance, source, couvert,
                 competences, compte_rendu, statut_cr, duree_minutes, code_groupe_cesar,
-                libelle_cesar, ref_cesar, annee_scolaire)
-              VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+                libelle_cesar, ref_cesar, annee_scolaire, intervenants)
+              VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
         args,
       });
-      bilan.creees++;
+    }
+  }
+
+  // ── Reconciliation : ce qui a disparu du planning ────────────────────────
+  //
+  // CESAR n'annonce pas les annulations : une seance annulee ou deplacee sort
+  // simplement de l'export. Un import purement additif laissait donc en base
+  // une seance fantome, que le digest annoncait ensuite aux intervenants comme
+  // si elle allait avoir lieu.
+  //
+  // On rapproche donc le lot de ce qui est en base, strictement sur les
+  // groupes planning du lot et sur la periode qu'il couvre. Ce qui n'y est
+  // plus passe en 'annulee' — jamais supprime : une seance annulee reste
+  // lisible dans le journal, et redevient planifiee si elle reapparait.
+  //
+  // Faute d'identifiant de seance cote CESAR, une seance deplacee se lit comme
+  // une annulation suivie d'une creation. C'est le prix du rapprochement par
+  // groupe + horaire + matiere, et c'est dit tel quel dans le bilan.
+  if (flux === 'previsionnel' && reconcilier) {
+    for (const code of Object.keys(couverture)) {
+      const cv = couverture[code];
+      // Portee : toute l'annee scolaire du groupe, pas seulement l'intervalle
+      // du lot. Se limiter aux dates presentes dans le fichier laissait passer
+      // exactement les cas qui comptent — une seance annulee en debut ou en
+      // fin de periode sort de l'intervalle en meme temps qu'elle sort du
+      // fichier, et devenait indetectable.
+      const enBase = await db.execute({
+        sql: `SELECT id, ref_cesar, date_prevue, libelle_cesar, intervenant_nom, statut
+              FROM previsionnel_seance
+              WHERE code_groupe_cesar = ? AND annee_scolaire = ?`,
+        args: [code, annee],
+      });
+      const candidates = enBase.rows.filter(r =>
+        !cv.refs.has(String(r.ref_cesar || '')) && String(r.statut || 'planifiee') !== 'annulee');
+
+      // Garde-fou. Un lot partiel — un seul mois depose par erreur a la place
+      // de l'annee — annulerait tout le reste du planning en un clic. Au-dela
+      // d'un quart du groupe, on ne touche a rien et on le dit : c'est presque
+      // toujours le signe que le fichier ne decrit pas ce qu'on croit.
+      const total = enBase.rows.length;
+      const plafond = Math.max(10, Math.round(total * 0.25));
+      if (candidates.length > plafond) {
+        bilan.reconciliation_suspendue = bilan.reconciliation_suspendue || [];
+        bilan.reconciliation_suspendue.push({
+          groupe: code, disparues: candidates.length, seances_en_base: total,
+          motif: `${candidates.length} seances sur ${total} manquent a ce fichier : aucune annulation n'a ete enregistree. Verifiez que le fichier couvre bien toute l'annee du groupe.`,
+        });
+        continue;
+      }
+
+      for (const row of candidates) {
+        bilan.annulees++;
+        if (bilan.disparues.length < 50) {
+          bilan.disparues.push({
+            date: String(row.date_prevue || '').slice(0, 10),
+            matiere: String(row.libelle_cesar || ''),
+            intervenant: String(row.intervenant_nom || ''),
+            groupe: code,
+          });
+        }
+        if (!ecrire) continue;
+        await db.execute({
+          sql: `UPDATE previsionnel_seance
+                SET statut = 'annulee', annulee_le = datetime('now'), updated_at = datetime('now')
+                WHERE id = ?`,
+          args: [row.id],
+        });
+      }
     }
   }
 
@@ -971,8 +1102,14 @@ module.exports = async function handler(req, res) {
           conseil: 'Découper l\'export par titre ou par période.',
         });
       }
+      // ?reconcilier=1 — reserve au flux previsionnel. A n'activer que quand le
+      // lot decrit l'integralite du planning des groupes qu'il contient, ce qui
+      // est le cas d'un export annuel par groupe. Un lot partiel annulerait
+      // tout ce qu'il ne mentionne pas.
+      const reconcilier = !!(req.query && (req.query.reconcilier === '1' || req.query.reconcilier === 'true'))
+        || body.reconcilier === true;
       const bilan = await importerSeances(db, {
-        annee, seances, flux: action, ecrire: !simulation, perimetre,
+        annee, seances, flux: action, ecrire: !simulation, perimetre, reconcilier,
       });
       return res.status(200).json({ ok: true, simulation, bilan });
     }
