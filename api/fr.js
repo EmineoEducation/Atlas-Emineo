@@ -284,7 +284,7 @@ function calculerJournal(prevRows, declRows, arreteAu) {
     if (d) {
       const cr = String(d.compte_rendu || '').trim();
       return { ...base, etat: cr ? 'tenue_cr' : 'tenue', compte_rendu: cr,
-        detail: cr ? 'Séance tenue, compte rendu saisi.' : "Séance passée, aucun compte rendu n'est remonté de CESAR." };
+        detail: cr ? 'Séance tenue, compte rendu saisi.' : 'Séance émargée, compte rendu non rempli.' };
     }
     // Annulee dans CESAR : la seance a disparu du planning entre deux imports.
     // Elle reste au journal — un creneau qui s'efface sans laisser de trace est
@@ -298,7 +298,7 @@ function calculerJournal(prevRows, declRows, arreteAu) {
     const passee = p.date_prevue && new Date(p.date_prevue).getTime() < limite;
     return passee
       ? { ...base, etat: 'manquante', compte_rendu: '',
-          detail: "Séance passée, aucun compte rendu n'est remonté de CESAR." }
+          detail: "Créneau passé, aucun émargement lancé dans CESAR." }
       : { ...base, etat: 'a_venir', compte_rendu: '', detail: 'Séance programmée, à venir.' };
   });
 

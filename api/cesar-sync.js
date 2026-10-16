@@ -396,7 +396,16 @@ async function actionUpsertGroupes(db, annee, groupes, ecrire) {
     // Le titre d'un groupe planning n'est plus demande a l'appelant : il est
     // lu dans la table versionnee du depot. L'appelant peut toujours le
     // fournir — il l'emporte alors sur la table, pour un rattrapage ponctuel.
-    const duDepot = RATTACHEMENTS[code] || null;
+    // Un sous-groupe (« MSMC 4-28 CREA CESACOM LE MANS ») n'a pas d'entree a
+    // lui dans la table : il figure dans les sous_groupes de son groupe parent
+    // (« MSMC 4-28 SPE CESACOM LE MANS »). Il porte pourtant son propre
+    // planning, et CESAR l'exporte comme un groupe a part entiere. Sans cette
+    // resolution, toutes ses seances seraient rejetees pour groupe non
+    // rattache — c'est le cas des options de specialite, soit une bonne part
+    // des seances de M1.
+    const duDepot = RATTACHEMENTS[code]
+      || Object.values(RATTACHEMENTS).find(g => (g.sous_groupes || []).includes(code))
+      || null;
     const titreDepot = duDepot && duDepot.statut === 'rattache' ? String(duDepot.titre_court || '') : '';
     const titre = (String(g.titre_court || '').trim() || titreDepot).trim();
     const fid = titre ? (parTitre[normaliserCle(titre)] || null) : null;
@@ -734,6 +743,8 @@ async function importerSeances(db, { annee, seances, flux, ecrire, perimetre, re
     mises_a_jour: 0,
     inchangees: 0,
     annulees: 0,
+    annulees_cesar: 0,
+    identites_reprises: 0,
     reactivees: 0,
     rejetees: 0,
     sans_previsionnel: 0,
@@ -794,6 +805,16 @@ async function importerSeances(db, { annee, seances, flux, ecrire, perimetre, re
     const moduleRef = r.module_ref;
 
     const ref = String(s.ref_cesar || '').trim() || refAuto(codeGroupe, dateISO, libelleMatiere);
+    // L'identifiant de seance de CESAR (`lesson_id`) est arrive le 16/10/2026.
+    // Les lignes deja en base portent la cle de substitution calculee avant
+    // lui. Sans reprise, le premier import post-DSI recreerait tout en double.
+    // On garde donc l'ancienne cle sous la main : si l'identifiant n'est pas
+    // connu, on cherche la ligne a l'ancienne adresse et on la fait changer
+    // d'identite. Une fois, silencieusement.
+    const refHerite = refAuto(codeGroupe, dateISO, libelleMatiere);
+    const refAChercher = ref === refHerite ? null : refHerite;
+    // CESAR declare desormais l'annulation des seances passees.
+    const annuleeCesar = s.annulee === true;
     const nom = String(s.intervenant_nom || '').trim();
     // Une seance peut porter plusieurs formateurs. CESAR les livre dans un
     // seul champ, separes par des virgules ; le front les a deja decoupes
@@ -825,9 +846,24 @@ async function importerSeances(db, { annee, seances, flux, ecrire, perimetre, re
               FROM previsionnel_seance WHERE ref_cesar = ?`,
         args: [ref],
       });
-      const avant = ex.rows[0] || null;
-      const etaitAnnulee = !!avant && String(avant.statut || 'planifiee') === 'annulee';
-      const identique = !!avant && !etaitAnnulee
+      let avant = ex.rows[0] || null;
+      let reprise = false;   // trouvee a son ancienne adresse : son identifiant doit etre reecrit
+      if (!avant && refAChercher) {
+        const herite = await db.execute({
+          sql: `SELECT id, module_ref, intervenant_nom, date_prevue, duree_minutes,
+                       libelle_cesar, statut
+                FROM previsionnel_seance WHERE ref_cesar = ?`,
+          args: [refAChercher],
+        });
+        if (herite.rows.length) { avant = herite.rows[0]; reprise = true; bilan.identites_reprises++; }
+      }
+      const statutAvant = avant ? String(avant.statut || 'planifiee') : '';
+      const statutCible = annuleeCesar ? 'annulee' : 'planifiee';
+      const etaitAnnulee = statutAvant === 'annulee' && statutCible === 'planifiee';
+      // Une ligne retrouvee par son ancienne cle n'est JAMAIS « inchangee » :
+      // son contenu l'est peut-etre, son identifiant non. La sauter ici
+      // laisserait la reprise a refaire a chaque import, indefiniment.
+      const identique = !!avant && !reprise && statutAvant === statutCible
         && String(avant.date_prevue || '') === dateISO
         && String(avant.intervenant_nom || '') === (nom || '—')
         && String(avant.libelle_cesar || '') === libelleMatiere
@@ -836,6 +872,7 @@ async function importerSeances(db, { annee, seances, flux, ecrire, perimetre, re
       if (!avant) bilan.creees++;
       else if (identique) { bilan.inchangees++; continue; }
       else { bilan.mises_a_jour++; if (etaitAnnulee) bilan.reactivees++; }
+      if (annuleeCesar && statutAvant !== 'annulee') bilan.annulees_cesar++;
       if (!ecrire) continue;
 
       const args = [
@@ -856,19 +893,19 @@ async function importerSeances(db, { annee, seances, flux, ecrire, perimetre, re
                   intervenant_id=?, intervenant_nom=?, numero=?, titre=?, date_prevue=?,
                   modalite=?, contenu=?, concepts=?, competences=?, duree_minutes=?,
                   code_groupe_cesar=?, libelle_cesar=?, ref_cesar=?, annee_scolaire=?,
-                  intervenants=?, statut='planifiee', annulee_le='',
+                  intervenants=?, statut=?, annulee_le=?,
                   updated_at=datetime('now')
                 WHERE id=?`,
-          args: args.concat([avant.id]),
+          args: args.concat([statutCible, annuleeCesar ? dateISO.slice(0, 10) : '', avant.id]),
         });
       } else {
         await db.execute({
           sql: `INSERT INTO previsionnel_seance (formation_id, module_ref, campus, intervenant_id,
                   intervenant_nom, numero, titre, date_prevue, modalite, contenu, concepts,
                   competences, duree_minutes, code_groupe_cesar, libelle_cesar, ref_cesar,
-                  annee_scolaire, intervenants, statut)
-                VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,'planifiee')`,
-          args,
+                  annee_scolaire, intervenants, statut, annulee_le)
+                VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+          args: args.concat([statutCible, annuleeCesar ? dateISO.slice(0, 10) : '']),
         });
       }
       continue;
@@ -891,7 +928,17 @@ async function importerSeances(db, { annee, seances, flux, ecrire, perimetre, re
             FROM declaration WHERE ref_cesar = ?`,
       args: [ref],
     });
-    const avantD = ex.rows[0] || null;
+    let avantD = ex.rows[0] || null;
+    let repriseD = false;
+    if (!avantD && refAChercher) {
+      const herite = await db.execute({
+        sql: `SELECT id, previsionnel_id, module_ref, intervenant_nom, date_seance,
+                     duree_minutes, libelle_cesar, compte_rendu
+              FROM declaration WHERE ref_cesar = ?`,
+        args: [refAChercher],
+      });
+      if (herite.rows.length) { avantD = herite.rows[0]; repriseD = true; bilan.identites_reprises++; }
+    }
     const reserve = avantD && avantD.previsionnel_id != null
       ? Number(avantD.previsionnel_id) : null;
 
@@ -900,7 +947,7 @@ async function importerSeances(db, { annee, seances, flux, ecrire, perimetre, re
     });
     if (!prevId) bilan.sans_previsionnel++;
 
-    const identiqueD = !!avantD
+    const identiqueD = !!avantD && !repriseD
       && String(avantD.date_seance || '') === dateISO
       && String(avantD.intervenant_nom || '') === nom
       && String(avantD.libelle_cesar || '') === libelleMatiere
