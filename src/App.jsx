@@ -1261,7 +1261,11 @@ function ImportCesar({onFini}){
     const dates=conv.map(s=>s.date).sort()
     const avecCR=conv.filter(s=>(s.compte_rendu||'').trim()).length
     const multi=conv.filter(s=>(s.intervenants||[]).length>1).length
-    return {total:conv.length,groupes,debut:dates[0]||'',fin:dates[dates.length-1]||'',avecCR,multi}
+    const emargees=conv.filter(s=>s.emargee).length
+    const annulees=conv.filter(s=>s.annulee).length
+    const avecId=conv.filter(s=>(s.ref_cesar||'').length>20).length
+    return {total:conv.length,groupes,debut:dates[0]||'',fin:dates[dates.length-1]||'',
+            avecCR,multi,emargees,annulees,avecId}
   })()
 
   async function lancer(dry){
@@ -1270,7 +1274,14 @@ function ImportCesar({onFini}){
     try{
       const aujourdhui=new Date().toISOString().slice(0,10)
       const toutes=seances.map(seanceDepuisCesar).filter(s=>s.date)
-      const passees=toutes.filter(s=>s.date<=aujourdhui)
+      /* Le réalisé ne reçoit plus toutes les séances passées, mais seulement
+         celles dont l'émargement a été lancé — ou qui portent déjà un compte
+         rendu, par sécurité si le champ venait à manquer. C'est ce filtre qui
+         redonne son sens à « Non émargée » : une séance passée sans émargement
+         ne crée pas de déclaration, donc reste visiblement non émargée.
+         Une séance annulée dans CESAR n'y entre jamais. */
+      const passees=toutes.filter(s=>s.date<=aujourdhui && !s.annulee
+        && (s.emargee || String(s.compte_rendu||'').trim()))
 
       // Les groupes planning sont déduits des séances et rattachés par le
       // serveur depuis la table du dépôt. C'est une écriture de référentiel,
@@ -1293,10 +1304,12 @@ function ImportCesar({onFini}){
           ['Nouvelles',p.creees||0],
           ['Mises à jour',p.mises_a_jour||0],
           ['Inchangées',p.inchangees||0],
+          ['Annulées dans CESAR',p.annulees_cesar||0],
           ['Disparues du planning → annulées',p.annulees||0],
           ['Réapparues → replanifiées',p.reactivees||0],
+          ['Reprises sur l’identifiant CESAR',p.identites_reprises||0],
           ['Rejetées',p.rejetees||0],
-          ['Dont déjà tenues (réalisé)',passees.length],
+          ['Émargées, versées au réalisé',passees.length],
           ['Réalisé — avec compte rendu',r.avec_compte_rendu||0],
           ['Intitulés de matière nouveaux',(p.nouveaux_intitules||[]).length],
           ['Groupes à rattacher',aRattacher.join(', ')||'aucun'],
@@ -1354,10 +1367,14 @@ function ImportCesar({onFini}){
         <div style={{...card(),marginBottom:'0.9rem'}}>
           <div style={{fontSize:12.5,color:P.abysse,lineHeight:1.8}}>
             <b>{apercu.total}</b> séance(s) · du <b>{apercu.debut}</b> au <b>{apercu.fin}</b> ·{' '}
-            <b>{apercu.avecCR}</b> avec compte rendu
+            <b>{apercu.emargees}</b> émargée(s) · <b>{apercu.avecCR}</b> avec compte rendu
+            {apercu.annulees>0&&<> · <b>{apercu.annulees}</b> annulée(s)</>}
             {apercu.multi>0&&<> · <b>{apercu.multi}</b> à plusieurs formateurs</>}
             <div style={{color:P.textm,fontSize:11.5,marginTop:4}}>
               Groupe(s) planning : {apercu.groupes.join(' · ')||'—'}
+              {apercu.avecId<apercu.total&&(
+                <> · <span style={{color:P.amber}}>{apercu.total-apercu.avecId} séance(s) sans identifiant CESAR</span></>
+              )}
             </div>
           </div>
         </div>
@@ -1739,20 +1756,26 @@ const ETATS_SEANCE={
   tenue_cr:{label:'Tenue · CR',st:'ok'},
   tenue:{label:'CR non rempli',st:'warn'},
   a_venir:{label:'À venir',st:'idle'},
-  manquante:{label:'CR non rempli',st:'warn'},
+  manquante:{label:'Non émargée',st:'warn'},
   annulee:{label:'Annulée',st:'idle'},
   nominal:{label:'Tenue · CR',st:'ok'},
   alerte:{label:'CR non rempli',st:'warn'},
 }
-/* Pourquoi `tenue` et `manquante` portent le MÊME libellé depuis le
-   15/10/2026. L'export CESAR unifié (planning.json) ne contient aucun champ
-   d'émargement : le compte rendu est le seul signal qu'une séance ait eu lieu.
-   Les deux états décrivent donc le même fait — un créneau passé sans compte
-   rendu — et leur différence ne tient qu'à la date du dernier import, pas à la
-   séance. Les distinguer à l'écran laissait croire à une information que
-   l'Atlas n'a pas. « Non émargée » était en outre faux : la séance a presque
-   toujours eu lieu, c'est le compte rendu qui manque. Si la DSI ajoute un jour
-   un champ de présence, les deux états se rouvrent ici même. */
+/* Deux états, deux faits distincts — rouverts le 16/10/2026.
+
+   Le 15, faute de champ d'émargement dans l'export, les deux portaient le même
+   libellé : rien ne permettait de distinguer une séance tenue dont le compte
+   rendu n'était pas saisi d'un créneau passé sans trace. « Non émargée »
+   était alors un abus de langage, puisque la séance avait presque toujours eu
+   lieu.
+
+   La DSI expose maintenant `attendance_sheet`. L'import ne verse au réalisé
+   que les séances dont l'émargement a été lancé, ce qui rend les deux états
+   vrais à nouveau :
+     tenue      émargement lancé, compte rendu absent   → « CR non rempli »
+     manquante  créneau passé, aucun émargement lancé   → « Non émargée »
+   Le premier est un oubli de saisie, le second un cours qui n'a probablement
+   pas eu lieu. Ce ne sont pas les mêmes conversations à avoir. */
 function etatLabel(etat){ return (ETATS_SEANCE[etat]||{}).label||'—' }
 function etatSt(etat){ return (ETATS_SEANCE[etat]||{}).st||'idle' }
 

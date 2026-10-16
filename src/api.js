@@ -203,7 +203,27 @@ export function seanceDepuisCesar(l) {
     matiere: l.school_subject || '',
     intervenant_nom: noms.join(', '),
     intervenants: noms,
-    intervenant_email: l.teacher_email || l.teachers_email || '',
+    /* Trois champs ajoutés par la DSI le 16/10/2026, et qui changent ce que
+       l'Atlas sait d'une séance.
+
+       `is_cancelled` : l'annulation devient explicite au lieu d'être déduite
+       d'une absence. CESAR ne le pose que sur les séances passées — une séance
+       future annulée sort simplement de l'export, et c'est la réconciliation
+       qui la rattrape. Les deux mécanismes se complètent.
+
+       `attendance_sheet` : l'émargement a été lancé. C'est le champ qui
+       manquait pour distinguer « le cours a eu lieu, le compte rendu n'est pas
+       saisi » de « le créneau est passé et rien ne dit qu'il a eu lieu ». Les
+       deux appelaient le même libellé faute de donnée ; ils redeviennent deux
+       signaux.
+
+       `teachers_school_emails` : l'adresse de chaque formateur, dans le même
+       ordre que les noms. Transmise, pas encore utilisée pour l'envoi. */
+    annulee: l.is_cancelled === true,
+    emargee: l.attendance_sheet === true,
+    intervenants_emails: String(l.teachers_school_emails || '')
+      .split(/\s*[;,/]\s*/).map(x => x.trim()).filter(Boolean),
+    intervenant_email: String(l.teachers_school_emails || l.teacher_email || l.teachers_email || '').split(/\s*[;,/]\s*/)[0] || '',
     compte_rendu: texteCompteRendu(l.lesson_report),
   }
 }
@@ -219,7 +239,11 @@ export function groupesDepuisSeances(liste) {
   for (const l of liste || []) {
     const code = String(l.planning_group || l.code_groupe_cesar || '').trim()
     if (!code || par.has(code)) continue
-    par.set(code, { code_cesar: code, libelle: code, groupe_formation: String(l.training || '') })
+    par.set(code, {
+      code_cesar: code, libelle: code,
+      id_cesar: String(l.planning_group_id || ''),
+      groupe_formation: String(l.training || ''),
+    })
   }
   return [...par.values()]
 }
