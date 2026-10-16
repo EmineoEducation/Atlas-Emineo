@@ -498,9 +498,19 @@ function detecterRedites(blocs, horsBloc, declarationsPeriode) {
       const dates = e.dates.sort();
       const modules = Array.from(e.modules).sort();
       const intervenants = Array.from(e.intervenants).sort();
+      // Deux formulations du MEME signal, et c'est volontaire.
+      //
+      // `detail` nomme : il s'affiche dans L'Atelier, devant le seul formateur
+      // référent, qui a besoin de savoir à qui parler. `detail_public` ne
+      // nomme pas : c'est lui qui part dans le digest, lu par tous les
+      // intervenants du titre. Nommer deux collègues sous un libellé de signal,
+      // dans un mail collectif, c'est les désigner — alors que le fait qui
+      // compte est qu'une notion a été abordée deux fois, pas qui l'a abordée.
       const r = {
-        titre: `${e.famille} — reprise par ${intervenants.length} intervenants`,
+        titre: `${e.famille} — abordée dans deux modules`,
         detail: `Traitée ce mois-ci dans ${modules.map(titreLisible).join(' et ')}, par ${intervenants.join(', ')}`
+          + (dates.length ? ` (${periodeCourte(dates)}).` : '.'),
+        detail_public: `Abordée ce mois-ci dans ${modules.map(titreLisible).join(' et ')}`
           + (dates.length ? ` (${periodeCourte(dates)}).` : '.'),
         famille: e.famille, modules, intervenants,
         type: 'redite',
@@ -696,9 +706,20 @@ function ancragesDuMois(blocs, declarationsPeriode, epreuves, maxCartes) {
     });
   });
 
+  // Une compétence sans compte rendu ne produit PAS de carte.
+  //
+  // La première version en produisait une quand même : les attendus de
+  // l'épreuve d'un côté, « aucun compte rendu saisi » de l'autre. Résultat,
+  // cinq paragraphes de langue de référentiel sur des notions dont personne ne
+  // savait si elles avaient été traitées — illisible, et décourageant pour qui
+  // ouvre le mail. Toute la valeur de cette section tient dans le RAPPROCHEMENT
+  // entre ce qui a été fait et ce qui sera demandé : sans la première moitié,
+  // il n'y a rien à rapprocher, et mieux vaut une section absente qu'une
+  // section creuse.
   return [...par.values()]
-    .sort((a, b) => b.seances - a.seances || b.comptes_rendus.length - a.comptes_rendus.length)
-    .slice(0, maxCartes || 6)
+    .filter(e => e.comptes_rendus.length > 0)
+    .sort((a, b) => b.comptes_rendus.length - a.comptes_rendus.length || b.seances - a.seances)
+    .slice(0, maxCartes || 3)
     .map(e => {
       const ep = epreuves.index.get(e.cle) || null;
       return {
@@ -741,22 +762,35 @@ async function redigerAncrages(apiKey, faits) {
     additionalProperties: false,
   };
 
+  // Le lecteur est un intervenant qui donne trois heures de cours par mois et
+  // qui ouvre ce mail entre deux rendez-vous. Il ne connaît pas le référentiel
+  // et n'a aucune raison de le connaître. Recopier les critères MyCertif le
+  // ferait décrocher à la deuxième ligne — c'est ce qu'avait produit la
+  // première version. On lui doit donc du français ordinaire : ce qui a été
+  // vu, et ce que les étudiants devront savoir en faire le jour de l'épreuve.
   const prompt =
-    "Tu rediges, pour un digest mensuel adresse aux intervenants d'un titre RNCP, " +
-    "deux phrases par competence travaillee ce mois-ci.\n\n" +
-    "REGLES ABSOLUES :\n" +
-    "- N'utilise QUE les faits ci-dessous. N'invente aucun attendu, aucune date, aucun nom.\n" +
-    "- `assimile` : ce que les etudiants ont pu travailler, deduit UNIQUEMENT des comptes " +
-    "rendus de seance fournis. 1 a 2 phrases. Si aucun compte rendu n'est fourni pour la " +
-    "competence, ecris exactement : \"Aucun compte rendu de seance n'a ete saisi ce mois-ci " +
-    "pour cette competence.\"\n" +
-    "- `attendu` : ce que l'epreuve exigera, reformule a partir des criteres d'evaluation " +
-    "fournis — jamais au-dela. 1 a 2 phrases. Si aucun critere n'est fourni, renvoie une " +
-    "chaine vide.\n" +
-    "- Ton factuel, adresse a un professionnel. Jamais de jugement sur l'intervenant, jamais " +
-    "sur le niveau des etudiants, jamais de consigne pedagogique.\n" +
-    "- Une carte par competence fournie, meme ordre, meme code.\n\n" +
-    'FAITS :\n' + JSON.stringify(faits, null, 2);
+    "Tu rédiges deux phrases courtes par compétence, pour la synthèse mensuelle qu'un " +
+    "formateur référent envoie à l'équipe pédagogique de son titre.\n\n" +
+    "Ton lecteur intervient quelques heures par mois. Il ne connaît pas le référentiel " +
+    "de certification et n'a pas à l'apprendre : écris en français courant, comme on " +
+    "parlerait à un collègue, phrases courtes, zéro jargon.\n\n" +
+    "N'utilise QUE les faits fournis plus bas.\n\n" +
+    "INTERDITS :\n" +
+    "- Aucun nom de personne, aucun code de compétence ou de bloc dans le texte.\n" +
+    "- Ne recopie pas les critères d'évaluation : ils sont écrits pour un jury, pas pour " +
+    "un lecteur. Dis ce qu'ils impliquent concrètement, avec tes mots.\n" +
+    "- Aucun jugement sur l'enseignement reçu, aucune consigne à l'intervenant, aucune " +
+    "appréciation du niveau des étudiants.\n\n" +
+    "ATTENDU, pour chaque compétence :\n" +
+    "- `assimile` : une phrase sur ce que les étudiants ont travaillé, tirée uniquement " +
+    "des comptes rendus de séance fournis. Reste concret : ce qui a été fait, pas ce que " +
+    "ça vaut.\n" +
+    "- `attendu` : une phrase sur ce que les étudiants devront être capables de produire " +
+    "ou de démontrer le jour de l'épreuve, sur ce point précis. Appuie-toi sur les critères " +
+    "fournis sans les citer. Mentionne l'épreuve par son nom si c'est utile. Si aucun " +
+    "critère n'est fourni, renvoie une chaîne vide.\n" +
+    "- Une carte par compétence fournie, même ordre, même code.\n\n" +
+    "FAITS :\n" + JSON.stringify(faits, null, 2);
 
   const r = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
@@ -803,15 +837,31 @@ async function suggererTitreEtNote(apiKey, faits) {
     additionalProperties: false,
   };
 
+  // Ce texte est signé par le formateur référent et lu par toute l'équipe
+  // pédagogique du titre. Il fédère ou il divise ; il n'y a pas de milieu.
+  // D'où trois interdits, appris d'une première version qui les violait tous :
+  // pas de nom propre — nommer deux collègues dans un mail collectif, sous un
+  // intitulé de coordination, les désigne ; pas de code de bloc ni de
+  // pourcentage — « le bloc B03 atteint 86 % » ne veut rien dire pour qui
+  // enseigne trois heures par mois ; et pas de langue de référentiel.
   const prompt =
-    'Tu rediges 2 elements courts pour un digest mensuel envoye a des intervenants d\'un titre RNCP. ' +
-    'Utilise UNIQUEMENT les faits fournis ci-dessous — n\'invente aucun chiffre, aucun nom absent des faits.\n\n' +
-    'FAITS :\n' + JSON.stringify(faits, null, 2) + '\n\n' +
-    'titre : 4-8 mots, ton factuel, ex "Ce que la promo a traverse en <mois>".\n' +
-    'note_fr_suggestion : 1-2 phrases, ton positif et factuel (jamais culpabilisant), ' +
-    'signalant si besoin un point de coordination a venir entre 2 intervenants nommes dans les faits. ' +
-    'Si aucun point de coordination notable, propose une phrase neutre de synthese. ' +
-    'Cette note sera relue et modifiable par le Formateur Referent avant envoi.';
+    "Tu rédiges deux textes courts pour la synthèse mensuelle qu'un formateur référent " +
+    "envoie à l'équipe pédagogique de son titre.\n\n" +
+    "N'utilise QUE les faits fournis plus bas. N'invente rien.\n\n" +
+    "INTERDITS ABSOLUS :\n" +
+    "- Aucun nom de personne, jamais, même s'il figure dans les faits.\n" +
+    "- Aucun code de bloc (B03, C12…), aucun pourcentage, aucun jargon de référentiel.\n" +
+    "- Aucune évaluation, aucun reproche, aucune injonction : ni sur un intervenant, " +
+    "ni sur les étudiants, ni sur le groupe.\n\n" +
+    "ATTENDU :\n" +
+    "titre : 4 à 8 mots, simple et concret, sur ce que la promo a travaillé ce mois-ci.\n" +
+    "note_fr_suggestion : 2 à 3 phrases adressées à l'équipe, à la première personne du " +
+    "pluriel quand c'est naturel. Elle dit ce que le mois a permis d'avancer, en nommant " +
+    "des sujets et non des personnes, et elle ouvre sur ce qui vient. Si une notion a été " +
+    "abordée dans deux modules, dis-le comme une occasion de se caler entre collègues, " +
+    "jamais comme un doublon à corriger. Ton chaleureux et professionnel, phrases courtes, " +
+    "mots de tous les jours.\n\n" +
+    'FAITS :\n' + JSON.stringify(faits, null, 2);
 
   const r = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
@@ -890,8 +940,10 @@ async function genererContenuDigest(db, apiKey, formationId, campus, anneeScolai
   const distorsions = appliquerArbitrages(
     calculerDistorsions(blocs, horsBloc, prevAnnee.rows, declAnnee.rows), lignesArb);
 
+  // Ce qui part aux intervenants ne nomme personne : voir detecterRedites.
   const coordination = [
-    ...redites.filter(r => !r.arbitrage || r.arbitrage.decision === 'digest'),
+    ...redites.filter(r => !r.arbitrage || r.arbitrage.decision === 'digest')
+      .map(r => ({ ...r, detail: r.detail_public || r.detail })),
     ...distorsions.filter(d => d.arbitrage && d.arbitrage.decision === 'digest')
       .map(d => ({ titre: `${titreLisible(d.module)} — point de volume`,
                    detail: (d.arbitrage.note || d.detail || '') })),
@@ -929,13 +981,21 @@ async function genererContenuDigest(db, apiKey, formationId, campus, anneeScolai
   const titreCourtFormation = formationRow.rows[0].titre_court
     || (formationData.formation && formationData.formation.titre_court) || '';
   const epreuvesTitre = indexEpreuves(titreCourtFormation);
-  const ancrages = ancragesDuMois(blocs, declarationsPeriode, epreuvesTitre, 6);
+  const ancrages = ancragesDuMois(blocs, declarationsPeriode, epreuvesTitre, 3);
 
   let redaction = { titre: `Digest — ${labelMois(debut)}`, note_fr_suggestion: '' };
   if (apiKey) {
     try {
+      // On ne transmet ni code de bloc ni pourcentage : ce qui n'est pas
+      // fourni ne peut pas etre recopie dans le texte.
       redaction = await suggererTitreEtNote(apiKey, {
-        titre_formation: titreFormation, mois: labelMois(debut), kpis, coordination, avancement_blocs: avancementBlocs,
+        titre_formation: titreFormation,
+        mois: labelMois(debut),
+        seances_tenues: kpis.seances,
+        heures: kpis.heures,
+        modules_travailles: [...new Set(quiAEnseigne.map(q => titreLisible(q.module)))].slice(0, 12),
+        points_de_coordination: coordination.map(co => co.titre),
+        modules_du_mois_prochain: sequencesAVenir.map(sq => sq.module).slice(0, 6),
       });
     } catch (_) { /* on garde le fallback deterministe si Claude echoue */ }
   }
@@ -971,7 +1031,6 @@ async function genererContenuDigest(db, apiKey, formationId, campus, anneeScolai
       seances: a.seances, epreuve: a.epreuve, epreuve_nom: a.epreuve_nom,
       echeance: a.echeance, assimile: a.assimile || '', attendu: a.attendu || '',
       criteres: (a.criteres || []).slice(0, 4),
-      sans_compte_rendu: a.comptes_rendus.length === 0,
     })),
   };
 
