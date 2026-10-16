@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { api, apiFetch, setToken, clearToken, getToken, apparierIntervenants,
-         seanceDepuisCesar, groupesDepuisSeances } from './api.js'
+         seanceDepuisCesar, groupesDepuisSeances, formateurReferent } from './api.js'
 
 const P = {
   abysse:'#0B2B2D',petrole:'#134547',menthe:'#5DE298',givre:'#E3FFF0',eau:'#9DF0C4',saumon:'#E89B77',
@@ -1636,7 +1636,7 @@ function VueDir({user,onLogout}){
                 !digestData?.digest?(
                   <Empty icon="✉" titre="Aucun digest généré" msg="Générez le digest du mois pour ce titre — il s'appuie sur les séances déclarées de la période en cours."/>
                 ):(
-                  <DigestPreview digest={digestData.digest} titre={fCarto?.formation?.titre||''} campus={premierCampus(fCarto)} fr={`${user.prenom} ${user.nom} (Direction)`} onValiderEnvoyer={validerEnvoyerDir}/>
+                  <DigestPreview digest={digestData.digest} titre={fCarto?.formation?.titre||''} campus={premierCampus(fCarto)} fr={formateurReferent(fCarto?.formation?.titre_court,fCarto?.formation?.titre)} onValiderEnvoyer={validerEnvoyerDir}/>
                 )
               }
             </>}
@@ -3037,7 +3037,7 @@ function VueFR({user,onLogout,onRetour}){
         onFormation={id=>{setFormationId(id);setSel({kind:null,id:null})}} tempsDefs={TEMPS_DEFS} temps={temps} setTemps={setTemps}
         user={user} onLogout={onLogout} onRetour={onRetour}
         roleButtons={[
-          {id:'fr',active:viewRole==='fr',label:'Responsable pédagogique',sub:`${user.prenom} ${user.nom} · cartographie du titre`,go:()=>{setViewRole('fr');setSel({kind:null,id:null})}},
+          {id:'fr',active:viewRole==='fr',label:'Responsable pédagogique',sub:`${formateurReferent(titre)} · cartographie du titre`,go:()=>{setViewRole('fr');setSel({kind:null,id:null})}},
           {id:'intervenant',active:viewRole==='intervenant',label:'Intervenant',sub:'Aperçu · tous modules',go:()=>{setViewRole('intervenant');setSel({kind:null,id:null})}},
         ]}
         anomalieFooter={footerRail}/>
@@ -3137,7 +3137,7 @@ function VueFR({user,onLogout,onRetour}){
               {!digest?(
                 <Empty icon="✉" titre="Aucun digest généré" msg="Générez le digest du mois pour ce titre — il s'appuie sur les séances émargées de la période en cours."/>
               ):(
-                <DigestPreview digest={digest} titre={titre} campus={campus} fr={`${user.prenom} ${user.nom}`} onValiderEnvoyer={validerEnvoyer} readOnly={viewRole==='intervenant'}/>
+                <DigestPreview digest={digest} titre={titre} campus={campus} fr={formateurReferent(titre)} onValiderEnvoyer={validerEnvoyer} readOnly={viewRole==='intervenant'}/>
               )}
               <p style={{fontSize:11,color:AT.idleText,textAlign:'center',marginTop:14,lineHeight:1.6}}>Écran verrouillé — UI de production reprise telle quelle.</p>
             </div>
@@ -3243,7 +3243,7 @@ function DigestPreview({digest,titre,campus,fr,onValiderEnvoyer,readOnly=false})
 
         {certification.length>0&&(
           <div style={sectStyle}>
-            <div style={labelStyle}>Ce que ça prépare — compétences et épreuves</div>
+            <div style={labelStyle}>Ce que ça prépare</div>
             {certification.map((k,i)=>(
               <div key={i} style={{padding:'0.6rem 0',borderBottom:'1px solid rgba(255,255,255,0.04)'}}>
                 <div style={itTitle}>{[k.code,k.libelle].filter(Boolean).join(' — ')}</div>
@@ -3252,9 +3252,9 @@ function DigestPreview({digest,titre,campus,fr,onValiderEnvoyer,readOnly=false})
                     {k.epreuve_nom}{k.echeance?` · ${k.echeance}`:''}
                   </div>
                 )}
-                {k.assimile&&<div style={{fontSize:12,color:'rgba(255,255,255,0.55)',lineHeight:1.65,marginBottom:6}}>{k.assimile}</div>}
+                {k.assimile&&<div style={{fontSize:15,color:'rgba(255,255,255,0.86)',lineHeight:1.55,marginBottom:9}}>{k.assimile}</div>}
                 {k.attendu&&(
-                  <div style={{fontSize:12,color:'rgba(255,255,255,0.78)',lineHeight:1.65,borderLeft:`2px solid ${D.saumon}`,paddingLeft:'0.6rem'}}>{k.attendu}</div>
+                  <div style={{fontSize:15,color:'rgba(255,255,255,0.86)',lineHeight:1.55,borderLeft:`3px solid ${D.saumon}`,paddingLeft:'0.75rem'}}>{k.attendu}</div>
                 )}
               </div>
             ))}
@@ -3291,6 +3291,24 @@ function DigestPreview({digest,titre,campus,fr,onValiderEnvoyer,readOnly=false})
             ))}
           </div>
         )}
+
+        {/* L'avancement par bloc ferme le digest au lieu de l'ouvrir : en tête,
+            ces barres étaient la première chose qu'un intervenant voyait — une
+            mesure globale, qui ne lui dit rien de ses heures et se lit comme un
+            tableau de bord de direction. */}
+        <div style={sectStyle}>
+          <div style={labelStyle}>Où en est la promotion</div>
+          {avancementBlocs.length===0?<div style={itSub}>Aucun bloc de compétences sur ce titre.</div>:avancementBlocs.map(b=>(
+            <div key={b.id} style={{marginBottom:'0.55rem'}}>
+              <div style={{display:'flex',justifyContent:'space-between',fontSize:12,color:'rgba(255,255,255,0.75)',marginBottom:3}}>
+                <span>{b.titre}</span><span style={{color:D.menthe,fontWeight:600}}>{b.pct==null?'—':`${b.pct}%`}</span>
+              </div>
+              <div style={{background:'rgba(255,255,255,0.08)',borderRadius:99,height:4,overflow:'hidden'}}>
+                <div style={{width:`${b.pct||0}%`,height:'100%',background:D.menthe,borderRadius:99}}/>
+              </div>
+            </div>
+          ))}
+        </div>
 
         <div style={{background:D.petrole,padding:'1.25rem 1.75rem',display:'flex',alignItems:'center',justifyContent:'space-between',gap:'1rem'}}>
           <div style={{fontSize:11,color:'rgba(255,255,255,0.3)',lineHeight:1.5}}>Répondre à ce mail = contacter {fr} directement.<br/>Atlas des compétences · Éminéo · {titre}</div>

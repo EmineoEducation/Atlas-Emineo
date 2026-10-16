@@ -256,6 +256,19 @@ export function groupesDepuisSeances(liste) {
   return [...par.values()]
 }
 
+/* Le formateur référent qui signe le digest d'un titre.
+
+   Il n'est pas l'utilisateur connecté : le digest est signé de la personne qui
+   suit réellement la promotion, celle que les intervenants reconnaissent et à
+   qui ils répondent. La même table existe côté serveur dans api/fr.js, qui fait
+   foi à l'envoi — celle-ci ne sert qu'à l'aperçu. */
+export function formateurReferent(...libelles) {
+  const t = libelles.filter(Boolean).join(' ')
+  if (/msmc|strat[ée]gies marketing|charg[ée] de communication|bach ?cdc|\bcdc\b/i.test(t)) return 'Etienne AZERAD'
+  if (/mdec|d[ée]veloppement d'entreprise|mrh|ressources humaines/i.test(t)) return 'Johnny NICOLAS'
+  return 'le formateur référent'
+}
+
 // Les groupes planning : un enregistrement par groupe, ses sous-groupes réunis.
 export function groupesDepuisCesar(liste) {
   const par = new Map()
