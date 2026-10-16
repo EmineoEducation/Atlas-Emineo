@@ -259,6 +259,7 @@ class ApparieurPrevisionnel {
                    (SELECT COUNT(*) FROM declaration d WHERE d.previsionnel_id = p.id) AS lie
             FROM previsionnel_seance p
             WHERE p.annee_scolaire = ? AND p.code_groupe_cesar = ?
+              AND COALESCE(p.statut, 'planifiee') <> 'annulee'
             ORDER BY p.date_prevue ASC, p.numero ASC`,
       args: [this.annee, codeGroupe],
     });
@@ -804,15 +805,33 @@ async function importerSeances(db, { annee, seances, flux, ecrire, perimetre, re
     const r = await resolveur.resoudre(formationId, libelleMatiere);
     const moduleRef = r.module_ref;
 
-    const ref = String(s.ref_cesar || '').trim() || refAuto(codeGroupe, dateISO, libelleMatiere);
-    // L'identifiant de seance de CESAR (`lesson_id`) est arrive le 16/10/2026.
-    // Les lignes deja en base portent la cle de substitution calculee avant
-    // lui. Sans reprise, le premier import post-DSI recreerait tout en double.
-    // On garde donc l'ancienne cle sous la main : si l'identifiant n'est pas
-    // connu, on cherche la ligne a l'ancienne adresse et on la fait changer
-    // d'identite. Une fois, silencieusement.
+    // La cle d'une seance : son identifiant CESAR, DANS UNE FORMATION.
+    //
+    // Un `lesson_id` n'appartient pas a un groupe. Une meme seance CESAR peut
+    // etre suivie par plusieurs groupes planning : les hackathons, le business
+    // game et les epreuves sont communs aux deux specialites d'un M2, la
+    // competition regionale reunit M1 et M2, un projet est partage entre MSMC
+    // et MDEC. Le premier usage de `lesson_id` comme cle (16/10/2026, matin)
+    // l'ignorait : la seance etait rangee sous le premier groupe importe, et le
+    // second la croyait deja vue — ou, a l'inverse, chaque groupe la stockait
+    // pour son compte et la promotion la comptait deux fois.
+    //
+    // La bonne granularite est la formation. Deux specialites d'un meme titre
+    // qui assistent au meme hackathon ont eu UNE seance, pas deux : elle est
+    // stockee une fois et comptee une fois. Un projet commun a deux titres
+    // differents existe en revanche pour chacun : chaque formation a la sienne,
+    // parce que chacune doit le voir dans sa couverture.
+    const idCesar = String(s.ref_cesar || '').trim();
+    const ref = idCesar ? `${idCesar}|f${formationId}` : refAuto(codeGroupe, dateISO, libelleMatiere);
+    // Les adresses anterieures d'une meme seance, de la plus recente a la plus
+    // ancienne. Une ligne retrouvee a l'une d'elles change d'identite, une fois.
+    //   - l'identifiant brut, pose entre le matin du 16/10 et cette correction,
+    //     cherche dans la meme formation seulement ;
+    //   - la cle calculee d'avant `lesson_id`, deja propre au groupe.
     const refHerite = refAuto(codeGroupe, dateISO, libelleMatiere);
-    const refAChercher = ref === refHerite ? null : refHerite;
+    const anciennes = [];
+    if (idCesar) anciennes.push({ ref: idCesar, formation: formationId });
+    if (ref !== refHerite) anciennes.push({ ref: refHerite, formation: null });
     // CESAR declare desormais l'annulation des seances passees.
     const annuleeCesar = s.annulee === true;
     const nom = String(s.intervenant_nom || '').trim();
@@ -841,29 +860,33 @@ async function importerSeances(db, { annee, seances, flux, ecrire, perimetre, re
       // ne les reconnaissait dans aucun identifiant du lot et les declarait
       // toutes disparues. Le garde-fou bloquait l'annulation, mais le
       // differentiel annoncait un desastre qui n'existait pas.
-      if (refAChercher) cv.refs.add(refAChercher);
+      anciennes.forEach(a => cv.refs.add(a.ref));
 
       // L'existant est lu AVANT le test d'ecriture : c'est lui qui permet
       // d'annoncer un differentiel juste en essai a blanc — creations, mises a
       // jour, inchangees. Le bilan precedent comptait tout en creation tant
       // qu'on n'ecrivait pas, ce qui rendait l'essai inutilisable pour decider.
+      const COLS_P = `id, module_ref, intervenant_nom, date_prevue, duree_minutes,
+                      libelle_cesar, statut, code_groupe_cesar`;
       const ex = await db.execute({
-        sql: `SELECT id, module_ref, intervenant_nom, date_prevue, duree_minutes,
-                     libelle_cesar, statut
-              FROM previsionnel_seance WHERE ref_cesar = ?`,
+        sql: `SELECT ${COLS_P} FROM previsionnel_seance WHERE ref_cesar = ?`,
         args: [ref],
       });
       let avant = ex.rows[0] || null;
-      let reprise = false;   // trouvee a son ancienne adresse : son identifiant doit etre reecrit
-      if (!avant && refAChercher) {
+      let reprise = false;   // trouvee a une ancienne adresse : son identifiant doit etre reecrit
+      for (const a of avant ? [] : anciennes) {
         const herite = await db.execute({
-          sql: `SELECT id, module_ref, intervenant_nom, date_prevue, duree_minutes,
-                       libelle_cesar, statut
-                FROM previsionnel_seance WHERE ref_cesar = ?`,
-          args: [refAChercher],
+          sql: a.formation == null
+            ? `SELECT ${COLS_P} FROM previsionnel_seance WHERE ref_cesar = ?`
+            : `SELECT ${COLS_P} FROM previsionnel_seance WHERE ref_cesar = ? AND formation_id = ?`,
+          args: a.formation == null ? [a.ref] : [a.ref, a.formation],
         });
-        if (herite.rows.length) { avant = herite.rows[0]; reprise = true; bilan.identites_reprises++; }
+        if (herite.rows.length) { avant = herite.rows[0]; reprise = true; bilan.identites_reprises++; break; }
       }
+      // Une seance partagee reste au groupe qui l'a importee le premier : un
+      // second groupe qui la mentionne ne la lui reprend pas. Sans cette regle,
+      // chaque import la ferait passer d'un groupe a l'autre.
+      const groupeEcrit = avant && avant.code_groupe_cesar ? String(avant.code_groupe_cesar) : codeGroupe;
       const statutAvant = avant ? String(avant.statut || 'planifiee') : '';
       const statutCible = annuleeCesar ? 'annulee' : 'planifiee';
       const etaitAnnulee = statutAvant === 'annulee' && statutCible === 'planifiee';
@@ -889,7 +912,7 @@ async function importerSeances(db, { annee, seances, flux, ecrire, perimetre, re
         JSON.stringify(tableau(s.concepts)),
         JSON.stringify(tableau(s.competences).length ? tableau(s.competences)
           : await competencesDuModule.pour(formationId, moduleRef)),
-        duree, codeGroupe, libelleMatiere, ref, annee, intervenantsJSON,
+        duree, groupeEcrit, libelleMatiere, ref, annee, intervenantsJSON,
       ];
       // Une seance presente dans le lot est, par definition, au planning :
       // si elle avait ete annulee et qu'elle reapparait, elle redevient
@@ -929,25 +952,41 @@ async function importerSeances(db, { annee, seances, flux, ecrire, perimetre, re
 
     // L'existant est lu AVANT l'appariement : un rejeu doit conserver le
     // rattachement deja etabli, pas en chercher un nouveau.
+    const COLS_D = `id, previsionnel_id, module_ref, intervenant_nom, date_seance,
+                    duree_minutes, libelle_cesar, compte_rendu, code_groupe_cesar`;
     const ex = await db.execute({
-      sql: `SELECT id, previsionnel_id, module_ref, intervenant_nom, date_seance,
-                   duree_minutes, libelle_cesar, compte_rendu
-            FROM declaration WHERE ref_cesar = ?`,
+      sql: `SELECT ${COLS_D} FROM declaration WHERE ref_cesar = ?`,
       args: [ref],
     });
     let avantD = ex.rows[0] || null;
     let repriseD = false;
-    if (!avantD && refAChercher) {
+    for (const a of avantD ? [] : anciennes) {
       const herite = await db.execute({
-        sql: `SELECT id, previsionnel_id, module_ref, intervenant_nom, date_seance,
-                     duree_minutes, libelle_cesar, compte_rendu
-              FROM declaration WHERE ref_cesar = ?`,
-        args: [refAChercher],
+        sql: a.formation == null
+          ? `SELECT ${COLS_D} FROM declaration WHERE ref_cesar = ?`
+          : `SELECT ${COLS_D} FROM declaration WHERE ref_cesar = ? AND formation_id = ?`,
+        args: a.formation == null ? [a.ref] : [a.ref, a.formation],
       });
-      if (herite.rows.length) { avantD = herite.rows[0]; repriseD = true; bilan.identites_reprises++; }
+      if (herite.rows.length) { avantD = herite.rows[0]; repriseD = true; bilan.identites_reprises++; break; }
     }
-    const reserve = avantD && avantD.previsionnel_id != null
-      ? Number(avantD.previsionnel_id) : null;
+    const groupeEcritD = avantD && avantD.code_groupe_cesar ? String(avantD.code_groupe_cesar) : codeGroupe;
+
+    // Le realise se rattache d'abord au previsionnel de LA MEME seance — meme
+    // identifiant CESAR. L'appariement par module et par jour ne sert plus que
+    // de repli. Sans cela, quand une seance annulee est remplacee sur le meme
+    // creneau par la meme matiere, la declaration de la remplacante pouvait se
+    // rattacher a l'annulee : l'annulee paraissait tenue et la vraie seance
+    // non emargee.
+    let prevParRef = null;
+    for (const r of [ref, ...anciennes.map(a => a.ref)]) {
+      const q = await db.execute({
+        sql: `SELECT id FROM previsionnel_seance WHERE ref_cesar = ? AND formation_id = ? AND annee_scolaire = ?`,
+        args: [r, formationId, annee],
+      });
+      if (q.rows.length) { prevParRef = Number(q.rows[0].id); break; }
+    }
+    const reserve = prevParRef || (avantD && avantD.previsionnel_id != null
+      ? Number(avantD.previsionnel_id) : null);
 
     const prevId = await apparieur.apparier({
       codeGroupe, moduleRef, cleMatiere: normaliserCle(libelleMatiere), dateISO, reserve,
@@ -971,7 +1010,7 @@ async function importerSeances(db, { annee, seances, flux, ecrire, perimetre, re
       Number.isInteger(s.numero) ? s.numero : null, dateISO, 'cesar',
       JSON.stringify(tableau(s.couvert)),
       JSON.stringify(await competencesDuModule.pour(formationId, moduleRef)),
-      compteRendu, statutCR, duree, codeGroupe, libelleMatiere, ref, annee,
+      compteRendu, statutCR, duree, groupeEcritD, libelleMatiere, ref, annee,
       intervenantsJSON,
     ];
     if (avantD) {
@@ -1142,6 +1181,42 @@ module.exports = async function handler(req, res) {
     if (action === 'matiere') {
       const out = await actionArbitrerMatiere(db, annee, body, user);
       return res.status(out.error ? 400 : 200).json(out);
+    }
+
+    // ── Purge de l'import CESAR d'une annee ──────────────────────────────────
+    //
+    // Efface les seances venues de CESAR — previsionnel et realise — pour
+    // l'annee demandee, et rien d'autre. Les groupes planning et leur
+    // rattachement, les intitules de matiere et leurs arbitrages, les
+    // arbitrages de signaux, les comptes, les digests : tout cela reste. Les
+    // seances saisies dans Atlas (sans identifiant CESAR) aussi.
+    //
+    // Sert a repartir propre quand la cle des seances a change en cours de
+    // route, comme le 16/10/2026. Reserve a la direction, et seulement avec
+    // confirmer=oui : un appel nu ne fait que compter.
+    if (action === 'purge') {
+      if (machine || !user || user.role !== 'dir') {
+        return res.status(403).json({ error: 'Purge réservée à un compte direction.' });
+      }
+      const compterP = await db.execute({
+        sql: `SELECT COUNT(*) AS n FROM previsionnel_seance WHERE annee_scolaire = ? AND ref_cesar <> ''`,
+        args: [annee],
+      });
+      const compterD = await db.execute({
+        sql: `SELECT COUNT(*) AS n FROM declaration WHERE annee_scolaire = ? AND ref_cesar <> ''`,
+        args: [annee],
+      });
+      const aEffacer = {
+        previsionnel: Number(compterP.rows[0].n || 0),
+        realise: Number(compterD.rows[0].n || 0),
+      };
+      if (String(body.confirmer || req.query.confirmer || '') !== 'oui') {
+        return res.status(200).json({ ok: true, simulation: true, annee_scolaire: annee, a_effacer: aEffacer,
+          message: 'Rien n’a été effacé. Rejouer avec confirmer=oui pour purger.' });
+      }
+      await db.execute({ sql: `DELETE FROM declaration WHERE annee_scolaire = ? AND ref_cesar <> ''`, args: [annee] });
+      await db.execute({ sql: `DELETE FROM previsionnel_seance WHERE annee_scolaire = ? AND ref_cesar <> ''`, args: [annee] });
+      return res.status(200).json({ ok: true, annee_scolaire: annee, efface: aEffacer });
     }
 
     // ── Import de seances ───────────────────────────────────────────────────
