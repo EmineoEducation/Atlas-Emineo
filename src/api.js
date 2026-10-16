@@ -195,7 +195,15 @@ export function seanceDepuisCesar(l) {
   const noms = String(l.teachers || '').split(/\s*[;,/]\s*/).map(x => x.trim()).filter(Boolean)
   return {
     ref_cesar: l.lesson_id || l.id || '',
-    code_groupe_cesar: l.planning_group_id || l.planning_group || '',
+    /* Le code d'un groupe, pour l'Atlas, c'est son LIBELLÉ — « MSMC 5-27 CREA
+       CESACOM LE MANS - planning ». C'est lui qui identifie le groupe en base
+       et dans la table de rattachement du dépôt, et lui seul est lisible à
+       l'écran. L'export ayant gagné un `planning_group_id` le 16/10/2026, la
+       préférence historique pour un identifiant technique faisait soudain
+       passer un UUID pour un code de groupe : plus aucun rattachement ne
+       tombait juste. L'identifiant est conservé à part, sans rien piloter. */
+    code_groupe_cesar: l.planning_group || '',
+    id_groupe_cesar: String(l.planning_group_id || ''),
     groupe_planning: l.planning_group || '',
     date: debut.slice(0, 10),
     heure_debut: debut.slice(11, 16),

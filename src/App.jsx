@@ -1292,9 +1292,12 @@ function ImportCesar({onFini}){
       const aRattacher=(g&&g.a_rattacher||[]).map(x=>x.code_cesar)
 
       // Le prévisionnel porte l'année entière et déclenche la réconciliation.
-      // Le réalisé ne reçoit que les séances déjà passées, et n'annule rien.
+      // Le réalisé ne reçoit que les séances émargées, et n'annule rien. Il
+      // peut n'y en avoir aucune — un planning d'année déposé avant la rentrée
+      // du groupe, par exemple — et le serveur refuse un lot vide : on ne
+      // l'appelle donc que s'il y a quelque chose à lui dire.
       const prev=await api.cesarImporter('previsionnel',toutes,dry,true)
-      const real=await api.cesarImporter('realise',passees,dry)
+      const real=passees.length?await api.cesarImporter('realise',passees,dry):null
       const b=x=>x&&x.bilan?x.bilan:x||{}
       const p=b(prev),r=b(real)
       setBilan({
