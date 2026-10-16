@@ -1250,18 +1250,25 @@ function renderDigestHTML(c, titreFormation, campus, frNom) {
     </table>
   </td></tr>
 
-  ${section('Qui a enseigné quoi ce mois-ci', qui || vide('Aucune séance déclarée sur la période.'))}
-  ${certif ? section('Ce que ça prépare', certif) : ''}
-
   <tr><td bgcolor="${C.abysse}" style="padding:20px 26px;border-bottom:1px solid ${C.ligne}">
     <div style="font-family:Arial,Helvetica,sans-serif;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:${C.label};padding-bottom:14px">Point de coordination — ${esc(frNom || 'FR')}</div>
     ${c.note_fr ? `<table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:${coord ? '14px' : '0'}">
-      <tr><td bgcolor="#2A2320" style="padding:14px 16px;border-left:3px solid ${C.saumon};font-family:Arial,Helvetica,sans-serif;font-size:12.5px;color:${C.givre};line-height:1.65">${esc(c.note_fr)}</td></tr>
+      <tr><td bgcolor="#2A2320" style="padding:14px 16px;border-left:3px solid ${C.saumon};font-family:Arial,Helvetica,sans-serif;font-size:14.5px;color:${C.givre};line-height:1.6">${esc(c.note_fr)}</td></tr>
     </table>` : ''}
     ${coord ? `<table width="100%" cellpadding="0" cellspacing="0" border="0">${coord}</table>` : (c.note_fr ? '' : vide('Aucun point de coordination ce mois-ci.'))}
   </td></tr>
 
+  ${section('Qui a enseigné quoi ce mois-ci', qui || vide('Aucune séance déclarée sur la période.'))}
+  ${certif ? section('Ce que ça prépare', certif) : ''}
+
   ${suite ? section('Ce qui arrive le mois prochain', suite) : ''}
+
+  <!-- ORDRE DES SECTIONS, arrete le 16/10/2026. Le digest s'ouvre sur le mot
+       du formateur referent, comme une lettre : c'est la seule partie ecrite
+       par un humain pour cette promotion-la. Viennent ensuite ce qui a ete
+       enseigne, puis ce que ca prepare, puis ce qui arrive. Les mesures
+       globales ferment la lecture. Ouvrir sur des listes ou des pourcentages,
+       c'etait faire lire un tableau de bord avant une adresse. -->
 
   <!-- L'avancement par bloc ferme le digest au lieu de l'ouvrir. En tete, ces
        barres de pourcentage etaient la premiere chose qu'un intervenant voyait
