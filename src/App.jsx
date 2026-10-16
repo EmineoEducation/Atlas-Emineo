@@ -3227,6 +3227,29 @@ function DigestPreview({digest,titre,campus,fr,onValiderEnvoyer,readOnly=false})
           ))}
         </div>
 
+        {/* ORDRE DES SECTIONS, arrêté le 16/10/2026. Le digest s'ouvre sur le
+            mot du formateur référent, comme une lettre : c'est la seule partie
+            écrite par un humain pour cette promotion-là. Viennent ensuite ce
+            qui a été enseigné, puis ce que ça prépare, puis ce qui arrive. Les
+            mesures globales ferment la lecture. */}
+        <div style={sectStyle}>
+          <div style={labelStyle}>Point de coordination — {fr}, FR</div>
+          {!dejaEnvoye&&!readOnly?(
+            <textarea value={note} onChange={e=>setNote(e.target.value)} placeholder="Note de coordination (modifiable avant envoi)…"
+              style={{width:'100%',minHeight:70,background:'rgba(255,255,255,0.05)',border:'1px solid rgba(255,255,255,0.12)',borderRadius:8,padding:'0.75rem',fontSize:14.5,color:'#fff',resize:'vertical',outline:'none',lineHeight:1.6,marginBottom:coordination.length?'0.75rem':0}}/>
+          ):note&&(
+            <div style={{background:'rgba(232,155,119,0.08)',border:'1px solid rgba(232,155,119,0.2)',borderRadius:8,padding:'0.85rem 1rem',marginBottom:coordination.length?'0.75rem':0}}>
+              <div style={{fontSize:14.5,color:'rgba(255,255,255,0.88)',lineHeight:1.6}}>{note}</div>
+            </div>
+          )}
+          {coordination.map((co,i)=>(
+            <div key={i} style={{...item,padding:'0.4rem 0'}}>
+              <div style={{width:7,height:7,borderRadius:'50%',background:D.saumon,flexShrink:0,marginTop:4}}/>
+              <div><div style={{...itTitle,fontSize:12}}>{co.titre}</div><div style={itSub}>{co.detail}</div></div>
+            </div>
+          ))}
+        </div>
+
         <div style={sectStyle}>
           <div style={labelStyle}>Qui a enseigné quoi ce mois-ci</div>
           {quiAEnseigne.length===0?<div style={itSub}>Aucune séance réalisée cette période.</div>:quiAEnseigne.map((t,i)=>(
@@ -3260,24 +3283,6 @@ function DigestPreview({digest,titre,campus,fr,onValiderEnvoyer,readOnly=false})
             ))}
           </div>
         )}
-
-        <div style={sectStyle}>
-          <div style={labelStyle}>Point de coordination — {fr}, FR</div>
-          {!dejaEnvoye&&!readOnly?(
-            <textarea value={note} onChange={e=>setNote(e.target.value)} placeholder="Note de coordination (modifiable avant envoi)…"
-              style={{width:'100%',minHeight:70,background:'rgba(255,255,255,0.05)',border:'1px solid rgba(255,255,255,0.12)',borderRadius:8,padding:'0.6rem',fontSize:12,color:'#fff',resize:'vertical',outline:'none',lineHeight:1.6,marginBottom:coordination.length?'0.75rem':0}}/>
-          ):note&&(
-            <div style={{background:'rgba(232,155,119,0.08)',border:'1px solid rgba(232,155,119,0.2)',borderRadius:8,padding:'0.85rem 1rem',marginBottom:coordination.length?'0.75rem':0}}>
-              <div style={{fontSize:12,color:'rgba(255,255,255,0.62)',lineHeight:1.65}}>{note}</div>
-            </div>
-          )}
-          {coordination.map((co,i)=>(
-            <div key={i} style={{...item,padding:'0.4rem 0'}}>
-              <div style={{width:7,height:7,borderRadius:'50%',background:D.saumon,flexShrink:0,marginTop:4}}/>
-              <div><div style={{...itTitle,fontSize:12}}>{co.titre}</div><div style={itSub}>{co.detail}</div></div>
-            </div>
-          ))}
-        </div>
 
         {sequencesAVenir.length>0&&(
           <div style={sectStyle}>
