@@ -781,14 +781,17 @@ async function redigerAncrages(apiKey, faits) {
     "un lecteur. Dis ce qu'ils impliquent concrètement, avec tes mots.\n" +
     "- Aucun jugement sur l'enseignement reçu, aucune consigne à l'intervenant, aucune " +
     "appréciation du niveau des étudiants.\n\n" +
+    "LONGUEUR — c'est la contrainte principale. Le digest entier doit se lire en moins " +
+    "d'une minute. Chaque texte fait UNE phrase de 20 mots au maximum. Pas deux phrases, " +
+    "pas d'énumération, pas de subordonnées empilées. Si tu hésites, coupe.\n\n" +
     "ATTENDU, pour chaque compétence :\n" +
     "- `assimile` : une phrase sur ce que les étudiants ont travaillé, tirée uniquement " +
-    "des comptes rendus de séance fournis. Reste concret : ce qui a été fait, pas ce que " +
-    "ça vaut.\n" +
-    "- `attendu` : une phrase sur ce que les étudiants devront être capables de produire " +
-    "ou de démontrer le jour de l'épreuve, sur ce point précis. Appuie-toi sur les critères " +
-    "fournis sans les citer. Mentionne l'épreuve par son nom si c'est utile. Si aucun " +
-    "critère n'est fourni, renvoie une chaîne vide.\n" +
+    "des comptes rendus de séance fournis. Le fait, rien d'autre. Commence directement par " +
+    "le contenu, sans « les étudiants ont ».\n" +
+    "- `attendu` : une phrase sur ce qu'ils devront savoir faire le jour de l'épreuve, sur " +
+    "ce point précis. Appuie-toi sur les critères fournis sans les citer ni les énumérer : " +
+    "retiens-en l'essentiel, un seul attendu, le plus structurant. Si aucun critère n'est " +
+    "fourni, renvoie une chaîne vide.\n" +
     "- Une carte par compétence fournie, même ordre, même code.\n\n" +
     "FAITS :\n" + JSON.stringify(faits, null, 2);
 
@@ -811,6 +814,26 @@ async function redigerAncrages(apiKey, faits) {
   const text = (raw.content || []).filter(b => b.type === 'text').map(b => b.text).join('');
   const out = JSON.parse(text);
   return Array.isArray(out.cartes) ? out.cartes : [];
+}
+
+/* Le formateur référent qui signe le digest.
+
+   Il était jusqu'ici l'utilisateur connecté, par commodité de prototype : le
+   digest partait donc signé de qui l'avait généré, sans rapport avec la
+   personne qui suit réellement la promotion. Le FR est attaché au TITRE, et à
+   rien d'autre — c'est lui que les intervenants doivent reconnaître en
+   ouvrant le mail, et c'est à lui qu'ils répondent.
+
+   Les titres se reconnaissent sur leur libellé, court ou long, pour ne pas
+   dépendre d'un identifiant de référentiel qui peut changer. */
+const FORMATEURS_REFERENTS = [
+  { motif: /msmc|strat[ée]gies marketing|charg[ée] de communication|bach ?cdc|\bcdc\b/i, nom: 'Etienne AZERAD' },
+  { motif: /mdec|d[ée]veloppement d'entreprise|mrh|ressources humaines/i, nom: 'Johnny NICOLAS' },
+];
+function formateurReferent(...libelles) {
+  const texte = libelles.filter(Boolean).join(' ');
+  for (const f of FORMATEURS_REFERENTS) if (f.motif.test(texte)) return f.nom;
+  return '';
 }
 
 // Destinataires du digest : intervenants inscrits sur ce titre.
@@ -1159,12 +1182,15 @@ function renderDigestHTML(c, titreFormation, campus, frNom) {
     const vise = k.epreuve_nom
       ? `${k.epreuve_nom}${k.echeance ? ' · ' + k.echeance : ''}`
       : '';
+    // Corps a 15px, pas 12 : ce bloc se lit en diagonale, entre deux
+    // rendez-vous. Deux phrases courtes, grandes et aerees valent mieux que
+    // quatre lignes denses que personne ne finit.
     return `
-    <tr><td style="padding:0 0 16px 0;font-family:Arial,Helvetica,sans-serif;border-bottom:1px solid ${C.ligne}">
-      <div style="font-size:13px;color:${C.texte};line-height:1.4;padding-bottom:3px">${esc(entete)}</div>
-      ${vise ? `<div style="font-size:10px;color:${C.menthe};text-transform:uppercase;letter-spacing:.06em;padding-bottom:7px">${esc(vise)}</div>` : ''}
-      ${k.assimile ? `<div style="font-size:12px;color:${C.texteAtt};line-height:1.6;padding-bottom:6px">${esc(k.assimile)}</div>` : ''}
-      ${k.attendu ? `<div style="font-size:12px;color:${C.givre};line-height:1.6;border-left:2px solid ${C.saumon};padding-left:10px">${esc(k.attendu)}</div>` : ''}
+    <tr><td style="padding:0 0 20px 0;font-family:Arial,Helvetica,sans-serif;border-bottom:1px solid ${C.ligne}">
+      <div style="font-size:13.5px;color:${C.texte};line-height:1.45;padding-bottom:3px">${esc(entete)}</div>
+      ${vise ? `<div style="font-size:10px;color:${C.menthe};text-transform:uppercase;letter-spacing:.06em;padding-bottom:9px">${esc(vise)}</div>` : ''}
+      ${k.assimile ? `<div style="font-size:15px;color:${C.givre};line-height:1.55;padding-bottom:9px">${esc(k.assimile)}</div>` : ''}
+      ${k.attendu ? `<div style="font-size:15px;color:${C.givre};line-height:1.55;border-left:3px solid ${C.saumon};padding-left:12px">${esc(k.attendu)}</div>` : ''}
     </td></tr>`;
   }).join('');
 
@@ -1224,9 +1250,8 @@ function renderDigestHTML(c, titreFormation, campus, frNom) {
     </table>
   </td></tr>
 
-  ${section('Avancement RNCP par bloc', blocs || vide('Aucun bloc de compétences sur ce titre.'))}
   ${section('Qui a enseigné quoi ce mois-ci', qui || vide('Aucune séance déclarée sur la période.'))}
-  ${certif ? section('Ce que ça prépare — compétences et épreuves', certif) : ''}
+  ${certif ? section('Ce que ça prépare', certif) : ''}
 
   <tr><td bgcolor="${C.abysse}" style="padding:20px 26px;border-bottom:1px solid ${C.ligne}">
     <div style="font-family:Arial,Helvetica,sans-serif;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:${C.label};padding-bottom:14px">Point de coordination — ${esc(frNom || 'FR')}</div>
@@ -1237,6 +1262,13 @@ function renderDigestHTML(c, titreFormation, campus, frNom) {
   </td></tr>
 
   ${suite ? section('Ce qui arrive le mois prochain', suite) : ''}
+
+  <!-- L'avancement par bloc ferme le digest au lieu de l'ouvrir. En tete, ces
+       barres de pourcentage etaient la premiere chose qu'un intervenant voyait
+       en ouvrant le mail : une mesure globale, qui ne lui dit rien de ses
+       heures et se lit comme un tableau de bord de direction. En fin de
+       lecture, elles situent le mois dans l'annee — c'est leur place. -->
+  ${section('Où en est la promotion', blocs || vide('Aucun bloc de compétences sur ce titre.'))}
 
   <tr><td bgcolor="${C.petrole}" style="padding:18px 26px;font-family:Arial,Helvetica,sans-serif;font-size:11px;color:${C.texteAtt};line-height:1.6">
     Répondre à ce mail = contacter ${esc(frNom || 'le Formateur Référent')} directement.<br>
@@ -1414,9 +1446,11 @@ module.exports = async function handler(req, res) {
       const destinataires = parseJSON(digest.destinataires, []);
       if (!destinataires.length) return res.status(422).json({ error: 'Aucun destinataire (aucun intervenant inscrit sur ce titre).' });
 
-      const formationRow = await db.execute({ sql: 'SELECT titre FROM formations WHERE id = ?', args: [digest.formation_id] });
+      const formationRow = await db.execute({ sql: 'SELECT titre, titre_court FROM formations WHERE id = ?', args: [digest.formation_id] });
       const titreFormation = (formationRow.rows[0] && formationRow.rows[0].titre) || '';
-      const frNom = `${user.prenom || ''} ${user.nom || ''}`.trim();
+      const titreCourt = (formationRow.rows[0] && formationRow.rows[0].titre_court) || '';
+      // Le signataire vient du titre, jamais du compte qui déclenche l'envoi.
+      const frNom = formateurReferent(titreCourt, titreFormation);
 
       // ── Garde-fou d'envoi (audit Le Mans, bug B03) ────────────────────────
       // Tant que ATLAS_MAIL_REDIRECT est renseignee dans Vercel, AUCUN mail ne
