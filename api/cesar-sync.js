@@ -835,6 +835,13 @@ async function importerSeances(db, { annee, seances, flux, ecrire, perimetre, re
       // Ce que le lot couvre, pour la reconciliation.
       const cv = couverture[codeGroupe] || (couverture[codeGroupe] = { refs: new Set() });
       cv.refs.add(ref);
+      // L'ancienne cle compte aussi comme « presente ». Pendant la bascule vers
+      // l'identifiant CESAR, les lignes en base portent encore leur cle
+      // calculee : en essai a blanc, ou rien n'est reecrit, la reconciliation
+      // ne les reconnaissait dans aucun identifiant du lot et les declarait
+      // toutes disparues. Le garde-fou bloquait l'annulation, mais le
+      // differentiel annoncait un desastre qui n'existait pas.
+      if (refAChercher) cv.refs.add(refAChercher);
 
       // L'existant est lu AVANT le test d'ecriture : c'est lui qui permet
       // d'annoncer un differentiel juste en essai a blanc — creations, mises a
